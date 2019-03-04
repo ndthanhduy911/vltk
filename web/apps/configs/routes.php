@@ -9,6 +9,6 @@ $router->notFound(array(
 ));
 /*---------------------------------include_routes_backend-----------------*/
 include APP_DIR . '/websites/frontend/modules/physics/routes.php';
-include APP_DIR . '/websites/backend/modules/admin/routes.php';
-include APP_DIR . '/websites/backend/modules/user/routes.php';
+include APP_DIR . '/websites/backend/modules/account/routes.php';
+include APP_DIR . '/websites/backend/modules/users/routes.php';
 return $router;

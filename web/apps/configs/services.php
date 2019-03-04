@@ -17,14 +17,8 @@ use Phalcon\Flash\Direct as Flash;
 use Phalcon\Queue\Beanstalk;
 use Phalcon\Cache\Frontend\None as FrontendNone;
 use Phalcon\Mvc\Collection\Manager as CollectionManager;
-use Library\Acl\Acl;
-use Library\RoleMaster\RoleMaster;
-use Library\ML\ML;
-use Library\Auth\Auth;
-use Library\Common;
 use Library\Helper\Helper;
-use Library\Constant\Constant;
-use Models\Language\Language;
+
 use Phalcon\Mvc\Model\Query;
 
 $di = new FactoryDefault();
@@ -168,50 +162,9 @@ $di['collectionManager'] = function() {
         return new CollectionManager();
 };
 
-$di->set('acl' , function(){
-    return new Acl();
-});
-
-$di->set('auth' , function(){
-    return new Auth();
-});
-
-$di->set('rolemaster' , function(){
-    return new RoleMaster();
-});
-
-/**
- * Mail service uses AmazonSES
- */
-$di->set('mail', function () {
-    return null;//new Mail();
-});
-
 /*
  * Helper
  */
 $di->set('helper',function(){
     return new Helper();
-});
-
-/*
- * Multiple Languge
- */
-$di->set('ml',function(){
-    return new ML();
-});
-
-/*
- * Menu Category
- */
-$di->set('constant',function(){
-    return new Constant();
-});
-
-
-/*
- * Advertise
- */
-$di->set('common',function(){
-    return new Common();
 });

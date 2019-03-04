@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
-    <title>ADMIN SUPPORT</title>
+    <title>ADMIN</title>
 
     <link href="/assets/backend/css/lib/sweetalert/sweetalert.css" rel="stylesheet">
     <link href="/assets/backend/css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
