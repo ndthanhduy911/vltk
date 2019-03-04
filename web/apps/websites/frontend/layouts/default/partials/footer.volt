@@ -1,55 +1,18 @@
 <!-- footer top start -->
 <!-- ================ -->
-<div class="pv-40 footer-top">
+<div class="dark-bg footer-top animated-text default-hovered">
     <div class="container">
         <div class="row">
-            <div class="col-12">
-                <h3 class="logo-font">The <span class="text-default">College</span></h3>
-                <div class="separator-2"></div>
-            </div>
-        </div>
-        <div class="row mb-20">
-            <div class="col-xl-6">
-                <img src="/assets/frontend/images/education-about.jpg" alt="">
-            </div>
-            <div class="col-xl-6">
-                <h3 class="mt-3">Since <span class="text-default">1910</span></h3>
-                <p><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente unde id porro saepe enim
-                        ipsam, architecto dicta iste adipisci eligendi aliquid cupiditate molestias corrupti, suscipit
-                        corporis exercitationem quis alias dolor.</em></p>
-                <p><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo culpa cupiditate iure deserunt
-                        eveniet reprehenderit placeat, magnam voluptas magni maiores numquam cum veritatis enim quam
-                        deleniti repudiandae perferendis! Dolores, illo.</em></p>
-                <h3>Connect with <span class="text-default">us</span></h3>
-                <ul class="social-links default circle animated-effect-1">
-                    <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                    <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                    <li class="googleplus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                    <li class="skype"><a href="#"><i class="fa fa-skype"></i></a></li>
-                    <li class="instagram"><a href="#"><i class="fa fa-instagram"></i></a></li>
-                    <li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                    <li class="pinterest"><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                    <li class="flickr"><a href="#"><i class="fa fa-flickr"></i></a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <div class="call-to-action pv-40 text-center">
-                    <div class="row justify-content-lg-center">
-                        <div class="col-lg-8">
-                            <h2 class="title">Get the latest College news.</h2>
-                            <div class="separator mb-20"></div>
-                            <form class="form-inline margin-clear d-flex justify-content-center">
-                                <div class="form-group has-feedback">
-                                    <label class="sr-only" for="subscribe3">Email address</label>
-                                    <input type="email" class="form-control form-control-lg" id="subscribe3"
-                                        placeholder="Enter email" required="">
-                                    <i class="fa fa-envelope form-control-feedback"></i>
-                                </div>
-                                <button type="submit" class="btn btn-lg btn-default btn-animated margin-clear ml-3">Subscribe
-                                    <i class="fa fa-send"></i></button>
-                            </form>
+            <div class="col-md-12">
+                <div class="call-to-action text-center">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h2 class="mt-4">Powerful Bootstrap Template</h2>
+                            <h2 class="mt-4">Waste no more time</h2>
+                        </div>
+                        <div class="col-md-4">
+                            <p class="mt-3"><a href="#" class="btn btn-animated btn-lg btn-gray-transparent">Purchase<i
+                                        class="fa fa-cart-arrow-down pl-20"></i></a></p>
                         </div>
                     </div>
                 </div>
