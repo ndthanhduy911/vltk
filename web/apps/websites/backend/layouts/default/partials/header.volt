@@ -1,222 +1,78 @@
-<?php $userObj = $this->auth->getIdentity() ?>
-<div id="login_user_id" style="display: none"><?php echo $userObj['id'] ?></div>
-<div class="header">
-    <nav class="navbar top-navbar navbar-expand-md navbar-light">
-        <!-- Logo -->
-        <div class="navbar-header">
-            <a class="navbar-brand" href="{url('/adcp')}">
-                <!-- Logo icon -->
-                <!-- <b>
-                    <img src="http://physics.vn/templates/physics/favicon.ico" alt="homepage" class="dark-logo" />
-                </b> -->
-                <!--End Logo icon -->
-                <!-- Logo text -->
-                <span>
-                    <img width="60%" src="/images/physics.png" alt="HNN" class="dark-logo" />
-                </span>
-            </a>
-        </div>
-        <!-- End Logo -->
-        <div class="navbar-collapse">
-            <!-- toggle and nav items -->
-            <ul class="navbar-nav mr-auto mt-md-0">
-                <!-- This is  -->
-                <li class="nav-item">
-                    <a class="nav-link nav-toggler hidden-md-up text-muted  " href="javascript:void(0)">
-                        <i class="mdi mdi-menu"></i>
-                    </a>
-                </li>
-                <li class="nav-item m-l-10">
-                    <a class="nav-link sidebartoggler hidden-sm-down text-muted  " href="javascript:void(0)">
-                        <i class="ti-menu"></i>
-                    </a>
-                </li>
-            </ul>
-            <!-- User profile and search -->
-            <ul class="navbar-nav my-lg-0">
-
-                <!-- Search -->
-                <li class="nav-item hidden-sm-down search-box">
-                    <a class="nav-link hidden-sm-down text-muted  " href="javascript:void(0)">
-                        <i class="ti-search"></i>
-                    </a>
-                    <form class="app-search">
-                        <input type="text" class="form-control" placeholder="Search here">
-                        <a class="srh-btn">
-                            <i class="ti-close"></i>
-                        </a>
-                    </form>
-                </li>
-                <!-- Comment -->
-                <!-- <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-muted text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-bell"></i>
-                        <div class="notify">
-                            <span class="heartbit"></span>
-                            <span class="point"></span>
-                        </div>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right mailbox animated zoomIn">
-                        <ul>
-                            <li>
-                                <div class="drop-title">Notifications</div>
-                            </li>
-                            <li>
-                                <div class="message-center">
-                                    <a href="#">
-                                        <div class="btn btn-danger btn-circle m-r-10">
-                                            <i class="fa fa-link"></i>
-                                        </div>
-                                        <div class="mail-contnet">
-                                            <h5>This is title</h5>
-                                            <span class="mail-desc">Just see the my new admin!</span>
-                                            <span class="time">9:30 AM</span>
-                                        </div>
-                                    </a>
-                                    <a href="#">
-                                        <div class="btn btn-success btn-circle m-r-10">
-                                            <i class="ti-calendar"></i>
-                                        </div>
-                                        <div class="mail-contnet">
-                                            <h5>This is another title</h5>
-                                            <span class="mail-desc">Just a reminder that you have event</span>
-                                            <span class="time">9:10 AM</span>
-                                        </div>
-                                    </a>
-                                    <a href="#">
-                                        <div class="btn btn-info btn-circle m-r-10">
-                                            <i class="ti-settings"></i>
-                                        </div>
-                                        <div class="mail-contnet">
-                                            <h5>This is title</h5>
-                                            <span class="mail-desc">You can customize this template as you want</span>
-                                            <span class="time">9:08 AM</span>
-                                        </div>
-                                    </a>
-                                    <a href="#">
-                                        <div class="btn btn-primary btn-circle m-r-10">
-                                            <i class="ti-user"></i>
-                                        </div>
-                                        <div class="mail-contnet">
-                                            <h5>This is another title</h5>
-                                            <span class="mail-desc">Just see the my admin!</span>
-                                            <span class="time">9:02 AM</span>
-                                        </div>
-                                    </a>
+<header class="app-header"><a class="app-header__logo" href="index.html">Vali</a>
+    <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
+    <!-- Navbar Right Menu-->
+    <ul class="app-nav">
+        <li class="app-search">
+            <input class="app-search__input" type="search" placeholder="Search">
+            <button class="app-search__button"><i class="fa fa-search"></i></button>
+        </li>
+        <!--Notification Menu-->
+        <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Show notifications"><i
+                    class="fa fa-bell-o fa-lg"></i></a>
+            <ul class="app-notification dropdown-menu dropdown-menu-right">
+                <li class="app-notification__title">You have 4 new notifications.</li>
+                <div class="app-notification__content">
+                    <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><span
+                                    class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-primary"></i><i
+                                        class="fa fa-envelope fa-stack-1x fa-inverse"></i></span></span>
+                            <div>
+                                <p class="app-notification__message">Lisa sent you a mail</p>
+                                <p class="app-notification__meta">2 min ago</p>
+                            </div>
+                        </a></li>
+                    <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><span
+                                    class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-danger"></i><i class="fa fa-hdd-o fa-stack-1x fa-inverse"></i></span></span>
+                            <div>
+                                <p class="app-notification__message">Mail server not working</p>
+                                <p class="app-notification__meta">5 min ago</p>
+                            </div>
+                        </a></li>
+                    <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><span
+                                    class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-success"></i><i
+                                        class="fa fa-money fa-stack-1x fa-inverse"></i></span></span>
+                            <div>
+                                <p class="app-notification__message">Transaction complete</p>
+                                <p class="app-notification__meta">2 days ago</p>
+                            </div>
+                        </a></li>
+                    <div class="app-notification__content">
+                        <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><span
+                                        class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-primary"></i><i
+                                            class="fa fa-envelope fa-stack-1x fa-inverse"></i></span></span>
+                                <div>
+                                    <p class="app-notification__message">Lisa sent you a mail</p>
+                                    <p class="app-notification__meta">2 min ago</p>
                                 </div>
-                            </li>
-                            <li>
-                                <a class="nav-link text-center" href="javascript:void(0);">
-                                    <strong>Check all notifications</strong>
-                                    <i class="fa fa-angle-right"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li> -->
-                <!-- End Comment -->
-                <!-- Messages -->
-                <!-- <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-muted  " href="#" id="2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-envelope"></i>
-                        <div class="notify">
-                            <span class="heartbit"></span>
-                            <span class="point"></span>
-                        </div>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right mailbox animated zoomIn" aria-labelledby="2">
-                        <ul>
-                            <li>
-                                <div class="drop-title">You have 4 new messages</div>
-                            </li>
-                            <li>
-                                <div class="message-center">
-                                    <a href="#">
-                                        <div class="user-img">
-                                            <img src="/assets/backend/images/users/5.jpg" alt="user" class="img-circle">
-                                            <span class="profile-status online pull-right"></span>
-                                        </div>
-                                        <div class="mail-contnet">
-                                            <h5>Michael Qin</h5>
-                                            <span class="mail-desc">Just see the my admin!</span>
-                                            <span class="time">9:30 AM</span>
-                                        </div>
-                                    </a>
-                                    <a href="#">
-                                        <div class="user-img">
-                                            <img src="/assets/backend/images/users/2.jpg" alt="user" class="img-circle">
-                                            <span class="profile-status busy pull-right"></span>
-                                        </div>
-                                        <div class="mail-contnet">
-                                            <h5>John Doe</h5>
-                                            <span class="mail-desc">I've sung a song! See you at</span>
-                                            <span class="time">9:10 AM</span>
-                                        </div>
-                                    </a>
-                                    <a href="#">
-                                        <div class="user-img">
-                                            <img src="/assets/backend/images/users/3.jpg" alt="user" class="img-circle">
-                                            <span class="profile-status away pull-right"></span>
-                                        </div>
-                                        <div class="mail-contnet">
-                                            <h5>Mr. John</h5>
-                                            <span class="mail-desc">I am a singer!</span>
-                                            <span class="time">9:08 AM</span>
-                                        </div>
-                                    </a>
-                                    <a href="#">
-                                        <div class="user-img">
-                                            <img src="/assets/backend/images/users/4.jpg" alt="user" class="img-circle">
-                                            <span class="profile-status offline pull-right"></span>
-                                        </div>
-                                        <div class="mail-contnet">
-                                            <h5>Michael Qin</h5>
-                                            <span class="mail-desc">Just see the my admin!</span>
-                                            <span class="time">9:02 AM</span>
-                                        </div>
-                                    </a>
+                            </a></li>
+                        <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><span
+                                        class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-danger"></i><i
+                                            class="fa fa-hdd-o fa-stack-1x fa-inverse"></i></span></span>
+                                <div>
+                                    <p class="app-notification__message">Mail server not working</p>
+                                    <p class="app-notification__meta">5 min ago</p>
                                 </div>
-                            </li>
-                            <li>
-                                <a class="nav-link text-center" href="javascript:void(0);">
-                                    <strong>See all e-Mails</strong>
-                                    <i class="fa fa-angle-right"></i>
-                                </a>
-                            </li>
-                        </ul>
+                            </a></li>
+                        <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><span
+                                        class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-success"></i><i
+                                            class="fa fa-money fa-stack-1x fa-inverse"></i></span></span>
+                                <div>
+                                    <p class="app-notification__message">Transaction complete</p>
+                                    <p class="app-notification__meta">2 days ago</p>
+                                </div>
+                            </a></li>
                     </div>
-                </li> -->
-                <!-- Profile -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="/files/avatar/{{userObj['avatar']?userObj['avatar']:'hnn-avatar.png'}}" alt="user" class="profile-pic" />
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right animated zoomIn">
-                        <ul class="dropdown-user">
-                            <li>
-                                <a href="/adcp/user/profile">
-                                    <i class="ti-user"></i>Trang cá nhân</a>
-                            </li>
-                            <!-- <li>
-                                <a href="#">
-                                    <i class="ti-wallet"></i> Balance</a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="ti-email"></i> Inbox</a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="ti-settings"></i> Setting</a>
-                            </li> -->
-                            <li>
-                                <a href="/adcp/user/logout">
-                                    <i class="fa fa-power-off"></i> Đăng xuất</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+                </div>
+                <li class="app-notification__footer"><a href="#">See all notifications.</a></li>
             </ul>
-        </div>
-    </nav>
-</div>
+        </li>
+        <!-- User Menu-->
+        <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i
+                    class="fa fa-user fa-lg"></i></a>
+            <ul class="dropdown-menu settings-menu dropdown-menu-right">
+                <li><a class="dropdown-item" href="page-user.html"><i class="fa fa-cog fa-lg"></i> Settings</a></li>
+                <li><a class="dropdown-item" href="page-user.html"><i class="fa fa-user fa-lg"></i> Profile</a></li>
+                <li><a class="dropdown-item" href="page-login.html"><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
+            </ul>
+        </li>
+    </ul>
+</header>

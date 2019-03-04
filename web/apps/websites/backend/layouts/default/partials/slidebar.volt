@@ -1,146 +1,62 @@
-<div class="left-sidebar">
-    <!-- Sidebar scroll-->
-    <div class="scroll-sidebar">
-        <!-- Sidebar navigation-->
-        <nav class="sidebar-nav">
-            <ul id="sidebarnav">
-                <li class="nav-devider"></li>
-                <li class="nav-label">BẢNG ĐIỀU KHIỂN</li>
-                <li class="{% if dispatcher.getControllerName() == 'dashboard' %} {{ 'active' }} {% endif %}">
-                    <a class="" href="{{ url('/adcp/dashboard') }}" aria-expanded="false">
-                        <i class="fa fa-bar-chart"></i>
-                        <span class="hide-menu">Bảng điều khiển
-                            <span class="label label-rouded"></span>
-                        </span>
-                    </a>
-                </li>
-                <li class="nav-label">Quản lý</li>
-                <?php if($this->rolemaster::isPermission($this->session->get("permission"),'client','index')){ ?>
-                <li class="{% if dispatcher.getControllerName() == 'client' %} {{ 'active' }} {% endif %}">
-                    <a class="" href="{{ url('/adcp/client') }}" aria-expanded="false">
-                        <i class="fa fa-users"></i>
-                        <span class="hide-menu">Danh sách người yêu cầu
-                            <span class="label label-rouded"></span>
-                        </span>
-                    </a>
-                </li>
-                <?php } ?>
-                <?php if($this->rolemaster::isPermission($this->session->get("permission"),'department','index')){ ?>
-                <li class="{% if dispatcher.getControllerName() == 'department' %} {{ 'active' }} {% endif %}">
-                    <a class="" href="{{ url('/adcp/department') }}" aria-expanded="false">
-                        <i class="fa fa-building-o"></i>
-                        <span class="hide-menu">Đơn vị
-                            <span class="label label-rouded"></span>
-                        </span>
-                    </a>
-                </li>
-                <?php } ?>
-                <?php if($this->rolemaster::isPermission($this->session->get("permission"),'support','index')){ ?>
-                <li class="{% if dispatcher.getControllerName() == 'support' %} {{ 'active' }} {% endif %}">
-                    <a class="has-arrow {% if dispatcher.getControllerName() == 'support' %} {{ 'changed' }} {% endif %}" href="javascript:;">
-                        <i class="fa fa-handshake-o"></i>
-                        <span class="hide-menu">Xử lý yêu cầu hỗ trợ<span class="label label-rouded"></span></span>
-                    </a>
-                    <ul aria-expanded="false" class="collapse {% if dispatcher.getControllerName() == 'support' %} {{ 'show' }} {% endif %}">
-                        <li><a class="{% if dispatcher.getControllerName() == 'support' AND dispatcher.getActionName() == 'index' %} {{ 'active' }} {% endif %}" href="{{ url('/adcp/support') }}">Danh sách yêu cầu</a></li>
-                        <li><a class="{% if dispatcher.getControllerName() == 'support' AND dispatcher.getActionName() == 'mysupport' %} {{ 'active' }} {% endif %}" href="{{ url('/adcp/support/mysupport') }}">Yêu cầu được giao</a></li>
-                        <!-- <li><a class="{% if dispatcher.getControllerName() == 'support' AND dispatcher.getActionName() == 'report' %} {{ 'active' }} {% endif %}" href="{{ url('/adcp/report') }}">Thống kê</a></li> -->
-                    </ul>
-                </li>
-                <?php } ?>
-                <?php if($this->rolemaster::isPermission($this->session->get("permission"),'method','index')){ ?>
-                <li class="{% if dispatcher.getControllerName() == 'method' %} {{ 'active' }} {% endif %}">
-                    <a class="" href="{{ url('/adcp/method') }}" aria-expanded="false">
-                        <i class="fa fa-archive"></i>
-                        <span class="hide-menu">Phương thức xử lý
-                            <span class="label label-rouded"></span>
-                        </span>
-                    </a>
-                </li>
-                <?php } ?>
-                <!-- <li class="{% if dispatcher.getControllerName() == 'mail' %} {{ 'active' }} {% endif %}">
-                    <a class="" href="{{ url('/adcp/mail') }}" aria-expanded="false">
-                        <i class="fa fa-envelope"></i>
-                        <span class="hide-menu">Thư điện tử
-                            <span class="label label-rouded"></span>
-                        </span>
-                    </a>
-                </li> -->
-                
-                <li id="settingManager" class="{% if dispatcher.getControllerName() == 'setting' %} {{ 'active' }} {% endif %}">
-                    <a class="has-arrow {% if dispatcher.getControllerName() == 'setting' %} {{ 'changed' }} {% endif %}" href="javascript:;">
-                        <i class="fa fa-cog"></i>
-                        <span class="hide-menu">Quản lý hệ thống<span class="label label-rouded"></span></span>
-                    </a>
-                    <ul aria-expanded="false" class="collapse {% if dispatcher.getControllerName() == 'setting' %} {{ 'show' }} {% endif %}">
-                        <?php if($this->rolemaster::isPermission($this->session->get("permission"),'user','index')){ ?>
-                        <li><a class="{% if dispatcher.getControllerName() == 'user' AND dispatcher.getActionName() == 'index' %} {{ 'active' }} {% endif %}" href="{{ url('/adcp/user') }}">Quản trị tài khoản</a></li>
-                        <?php } ?>
-                        <?php if($this->rolemaster::isPermission($this->session->get("permission"),'package','index')){ ?>
-                        <li><a class="{% if dispatcher.getControllerName() == 'package' AND dispatcher.getActionName() == 'index' %} {{ 'active' }} {% endif %}" href="{{ url('/adcp/package') }}">Mô tả nội dung dịch vụ</a></li>
-                        <?php } ?>
-                        <?php if($this->rolemaster::isPermission($this->session->get("permission"),'setting','')){ ?>
-                        <li><a class="{% if dispatcher.getControllerName() == 'setting' AND dispatcher.getActionName() == 'index' %} {{ 'active' }} {% endif %}" href="{{ url('/adcp/setting') }}">Thiết lập chung</a></li>
-                        <li><a class="{% if dispatcher.getControllerName() == 'setting' AND dispatcher.getActionName() == 'faq' %} {{ 'active' }} {% endif %}" href="{{ url('/adcp/setting/faq') }}">Câu hỏi thường gặp</a></li>
-                        <li><a class="{% if dispatcher.getControllerName() == 'emailsms' AND dispatcher.getActionName() == 'index' %} {{ 'active' }} {% endif %}" href="{{ url('/adcp/emailsms') }}">SMS/EMAIL</a></li>
-                        <li><a class="{% if dispatcher.getControllerName() == 'language' AND dispatcher.getActionName() == 'index' %} {{ 'active' }} {% endif %}" href="{{ url('/adcp/language') }}">Ngôn ngữ</a></li>
-                        <?php } ?>
-                        <?php if($this->rolemaster::isPermission($this->session->get("permission"),'permission','index')){ ?>
-                        <li><a class="{% if dispatcher.getControllerName() == 'permission' AND dispatcher.getActionName() == 'index' %} {{ 'active' }} {% endif %}" href="{{ url('/adcp/permission') }}">Nhóm phân quyền</a></li>
-                        <?php } ?>
-                        <?php if($this->rolemaster::isPermission($this->session->get("permission"),'permission','list')){ ?>
-                        <li><a class="{% if dispatcher.getControllerName() == 'permission' AND dispatcher.getActionName() == 'list' %} {{ 'active' }} {% endif %}" href="{{ url('/adcp/permission/list') }}">Danh sách phân quyền</a></li>
-                        <?php } ?>
-                        <?php if($this->rolemaster::isPermission($this->session->get("permission"),'setting','')){ ?>
-                        <li><a class="{% if dispatcher.getControllerName() == 'log' AND dispatcher.getActionName() == 'index' %} {{ 'active' }} {% endif %}" href="{{ url('/adcp/log') }}">Xem LOG quản trị</a></li>
-                        <li><a class="{% if dispatcher.getControllerName() == 'log' AND dispatcher.getActionName() == 'client' %} {{ 'active' }} {% endif %}" href="{{ url('/adcp/log/client') }}">Xem LOG người dùng</a></li>
-                        <?php } ?>
-                    </ul>
-                </li>
-                
-                <li class="{% if dispatcher.getControllerName() == 'about' %} {{ 'active' }} {% endif %}">
-                    <a class="" href="{{ url('/adcp/about') }}" aria-expanded="false">
-                        <i class="fa fa-comment"></i>
-                        <span class="hide-menu">Hotline
-                            <span class="label label-rouded"></span>
-                        </span>
-                    </a>
-                </li>
-                <li class="{% if dispatcher.getControllerName() == 'policy' %} {{ 'active' }} {% endif %}">
-                    <a class="" href="{{ url('/adcp/policy') }}" aria-expanded="false">
-                        <i class="fa fa-bookmark-o"></i>
-                        <span class="hide-menu">Chính sách
-                            <span class="label label-rouded"></span>
-                        </span>
-                    </a>
-                </li>
-                <li class="{% if dispatcher.getControllerName() == 'faq' %} {{ 'active' }} {% endif %}">
-                    <a class="" href="{{ url('/adcp/faq') }}" aria-expanded="false">
-                        <i class="fa fa-question-circle-o"></i>
-                        <span class="hide-menu">Câu hỏi thường gặp
-                            <span class="label label-rouded"></span>
-                        </span>
-                    </a>
-                </li>
-                <li class="{% if dispatcher.getControllerName() == 'help' %} {{ 'active' }} {% endif %}">
-                    <a class="" href="{{ url('/adcp/help') }}" aria-expanded="false">
-                        <i class="fa fa-question-circle"></i>
-                        <span class="hide-menu">Hướng dẫn
-                            <span class="label label-rouded"></span>
-                        </span>
-                    </a>
-                </li>
-                <li class="">
-                    <a class="logout" link-out="{{ url('/adcp/logout') }}" href="javascript:;" aria-expanded="false">
-                        <i class="fa fa-power-off"></i>
-                        <span class="hide-menu">Đăng xuất
-                            <span class="label label-rouded"></span>
-                        </span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        <!-- End Sidebar navigation -->
+<!-- Sidebar menu-->
+<div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+<aside class="app-sidebar">
+    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg"
+            alt="User Image">
+        <div>
+            <p class="app-sidebar__user-name">John Doe</p>
+            <p class="app-sidebar__user-designation">Frontend Developer</p>
+        </div>
     </div>
-    <!-- End Sidebar scroll-->
-</div>
+    <ul class="app-menu">
+        <li><a class="app-menu__item active" href="index.html"><i class="app-menu__icon fa fa-dashboard"></i><span
+                    class="app-menu__label">Dashboard</span></a></li>
+        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span
+                    class="app-menu__label">UI Elements</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+            <ul class="treeview-menu">
+                <li><a class="treeview-item" href="bootstrap-components.html"><i class="icon fa fa-circle-o"></i>
+                        Bootstrap Elements</a></li>
+                <li><a class="treeview-item" href="https://fontawesome.com/v4.7.0/icons/" target="_blank" rel="noopener"><i
+                            class="icon fa fa-circle-o"></i> Font Icons</a></li>
+                <li><a class="treeview-item" href="ui-cards.html"><i class="icon fa fa-circle-o"></i> Cards</a></li>
+                <li><a class="treeview-item" href="widgets.html"><i class="icon fa fa-circle-o"></i> Widgets</a></li>
+            </ul>
+        </li>
+        <li><a class="app-menu__item" href="charts.html"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">Charts</span></a></li>
+        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-edit"></i><span
+                    class="app-menu__label">Forms</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+            <ul class="treeview-menu">
+                <li><a class="treeview-item" href="form-components.html"><i class="icon fa fa-circle-o"></i> Form
+                        Components</a></li>
+                <li><a class="treeview-item" href="form-custom.html"><i class="icon fa fa-circle-o"></i> Custom
+                        Components</a></li>
+                <li><a class="treeview-item" href="form-samples.html"><i class="icon fa fa-circle-o"></i> Form Samples</a></li>
+                <li><a class="treeview-item" href="form-notifications.html"><i class="icon fa fa-circle-o"></i> Form
+                        Notifications</a></li>
+            </ul>
+        </li>
+        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-th-list"></i><span
+                    class="app-menu__label">Tables</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+            <ul class="treeview-menu">
+                <li><a class="treeview-item" href="table-basic.html"><i class="icon fa fa-circle-o"></i> Basic Tables</a></li>
+                <li><a class="treeview-item" href="table-data-table.html"><i class="icon fa fa-circle-o"></i> Data
+                        Tables</a></li>
+            </ul>
+        </li>
+        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-file-text"></i><span
+                    class="app-menu__label">Pages</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+            <ul class="treeview-menu">
+                <li><a class="treeview-item" href="blank-page.html"><i class="icon fa fa-circle-o"></i> Blank Page</a></li>
+                <li><a class="treeview-item" href="page-login.html"><i class="icon fa fa-circle-o"></i> Login Page</a></li>
+                <li><a class="treeview-item" href="page-lockscreen.html"><i class="icon fa fa-circle-o"></i> Lockscreen
+                        Page</a></li>
+                <li><a class="treeview-item" href="page-user.html"><i class="icon fa fa-circle-o"></i> User Page</a></li>
+                <li><a class="treeview-item" href="page-invoice.html"><i class="icon fa fa-circle-o"></i> Invoice Page</a></li>
+                <li><a class="treeview-item" href="page-calendar.html"><i class="icon fa fa-circle-o"></i> Calendar
+                        Page</a></li>
+                <li><a class="treeview-item" href="page-mailbox.html"><i class="icon fa fa-circle-o"></i> Mailbox</a></li>
+                <li><a class="treeview-item" href="page-error.html"><i class="icon fa fa-circle-o"></i> Error Page</a></li>
+            </ul>
+        </li>
+    </ul>
+</aside>

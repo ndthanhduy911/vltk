@@ -2,161 +2,112 @@
 <html lang="en">
 
 <head>
+    <meta name="description" content="Admin">
+    <!-- Twitter meta-->
+    <meta property="twitter:card" content="admin">
+    <meta property="twitter:site" content="@admin">
+    <meta property="twitter:creator" content="@admin">
+    <!-- Open Graph Meta-->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Admin">
+    <meta property="og:title" content="Admin">
+    <meta property="og:url" content="/">
+    <meta property="og:image" content="/">
+    <meta property="og:description" content="">
+    <title>ADMIN</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <!-- Favicon icon -->
+
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
-    <title>ADMIN</title>
 
-    <link href="/assets/backend/css/lib/sweetalert/sweetalert.css" rel="stylesheet">
-    <link href="/assets/backend/css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
-    <link href="/assets/backend/js/lib/datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
-    <link href="/assets/backend/js/lib/datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/backend/uploadfile/css/jquery.fileupload.css">
-    <link href="/assets/backend/css/lib/select2/select2.min.css" rel="stylesheet">
-    <link href="/assets/backend/js/lib/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet"> 
+    <!-- Font-icon css-->
+    <link rel="stylesheet" type="text/css" href="/assets/backend/fonts/font-awesome/css/font-awesome.min.css">
+    <!-- Main CSS-->
+    <link rel="stylesheet" type="text/css" href="/assets/backend/css/main.css">
     {{ assets.outputCss() }}
-    <link href="/assets/backend/css/helper.css" rel="stylesheet">
-    <link href="/assets/backend/css/style.css" rel="stylesheet">
-
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:** -->
-    <!--[if lt IE 9]>
-    <script src="https:**oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https:**oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
 </head>
 
-<body class="fix-header fix-sidebar">
-    <!-- Preloader - style you can find in spinners.css -->
-    <div class="preloader" id="preloader">
-        <svg class="circular" viewBox="25 25 50 50">
-            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
-    </div>
-    <div id="main-wrapper">
-        <!-- header header  -->
-        {{ partial('header') }}
-        <!-- Left Sidebar  -->
-        {{ partial('slidebar') }}
-        <!-- Page wrapper  -->
-        <div class="page-wrapper">
-            {{ content() }}
-        </div>
-        {{ partial('footer') }}
-    </div>
-    <script id="template-upload" type="text/x-tmpl">
-    <?php echo '{'.'%'; ?> for (var i=0, file; file=o.files[i]; i++) { <?php echo '%'.'}'; ?>
-        <tr class="template-upload fade">
-            <td style="min-width: 100px">
-                <span class="preview"></span>
-            </td>
-            <td style="min-width: 100px">
-                <?php echo '{'.'%'; ?>=file.name<?php echo '%'.'}'; ?>
-                <strong class="error text-danger"></strong>
-            </td>
-            <td style="width: 100px" class="text-center">
-                <?php echo '{'.'%'; ?> if (!i) { <?php echo '%'.'}'; ?>
-                    <button class="btn btn-warning btn-sm btn-cancel2">
-                        Hủy
-                    </button>
-                <?php echo '{'.'%'; ?> } <?php echo '%'.'}'; ?>
-            </td>
-        </tr>
-    <?php echo '{'.'%'; ?> } <?php echo '%'.'}'; ?>
-    </script>
-    
-    <script id="template-download" type="text/x-tmpl">
-    <?php echo '{'.'%'; ?> for (var i=0, file; file=o.files[i]; i++) { <?php echo '%'.'}'; ?>
-        <tr class="template-download fade">
-            <td>
-                <span class="preview">
-                    <?php echo '{'.'%'; ?> if (file.thumbnailUrl) { <?php echo '%'.'}'; ?>
-                        <a href="<?php echo '{'.'%'; ?>=file.url<?php echo '%'.'}'; ?>" title="<?php echo '{'.'%'; ?>=file.name<?php echo '%'.'}'; ?>" download="<?php echo '{'.'%'; ?>=file.name<?php echo '%'.'}'; ?>" data-gallery><img src="<?php echo '{'.'%'; ?>=file.thumbnailUrl<?php echo '%'.'}'; ?>"></a>
-                    <?php echo '{'.'%'; ?> } <?php echo '%'.'}'; ?>
-                </span>
-            </td>
-            <td>
-                <p class="name">
-                    <?php echo '{'.'%'; ?> if (file.url) { <?php echo '%'.'}'; ?>
-                        <a href="<?php echo '{'.'%'; ?>=file.url<?php echo '%'.'}'; ?>" title="<?php echo '{'.'%'; ?>=file.name<?php echo '%'.'}'; ?>" download="<?php echo '{'.'%'; ?>=file.name<?php echo '%'.'}'; ?>" <?php echo '{'.'%'; ?>=file.thumbnailUrl?'data-gallery':''<?php echo '%'.'}'; ?>><?php echo '{'.'%'; ?>=file.name<?php echo '%'.'}'; ?></a>
-                    <?php echo '{'.'%'; ?> } else { <?php echo '%'.'}'; ?>
-                        <span><?php echo '{'.'%'; ?>=file.name<?php echo '%'.'}'; ?></span>
-                    <?php echo '{'.'%'; ?> } <?php echo '%'.'}'; ?>
-                </p>
-                <?php echo '{'.'%'; ?> if (file.error) { <?php echo '%'.'}'; ?>
-                    <div><span class="label label-danger">Error</span> <?php echo '{'.'%'; ?>=file.error<?php echo '%'.'}'; ?></div>
-                <?php echo '{'.'%'; ?> } <?php echo '%'.'}'; ?>
-            </td>
-            <td>
-                <span class="size"><?php echo '{'.'%'; ?>=o.formatFileSize(file.size)<?php echo '%'.'}'; ?></span>
-            </td>
-            <td>
-                <?php echo '{'.'%'; ?> if (file.deleteUrl) { <?php echo '%'.'}'; ?>
-                    <button class="btn btn-danger delete" data-type="<?php echo '{'.'%'; ?>=file.deleteType<?php echo '%'.'}'; ?>" data-url="<?php echo '{'.'%'; ?>=file.deleteUrl<?php echo '%'.'}'; ?>"<?php echo '{'.'%'; ?> if (file.deleteWithCredentials) { <?php echo '%'.'}'; ?> data-xhr-fields='{"withCredentials":true}'<?php echo '{'.'%'; ?> } <?php echo '%'.'}'; ?>>
-                        <i class="glyphicon glyphicon-trash"></i>
-                        <span>Delete</span>
-                    </button>
-                    <input type="checkbox" name="delete" value="1" class="toggle">
-                <?php echo '{'.'%'; ?> } else { <?php echo '%'.'}'; ?>
-                    <button class="btn btn-warning btn-cancel2" style="min-width: 50px">
-                        <span>Hủy</span>
-                    </button>
-                <?php echo '{'.'%'; ?> } <?php echo '%'.'}'; ?>
-            </td>
-        </tr>
-    <?php echo '{'.'%'; ?> } <?php echo '%'.'}'; ?>
-    </script>
-    <!-- Inclue Javascript -->
-    <script type="text/javascript" src="/assets/backend/js/lib/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="/assets/backend/js/lib/bootstrap/js/popper.min.js"></script>
-    <script type="text/javascript" src="/assets/backend/js/lib/bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/assets/backend/js/lib/sweetalert/sweetalert.min.js"></script>
-    <script type="text/javascript" src="/assets/backend/js/lib/moment/moment.js"></script>
-    <script type="text/javascript" src="/assets/backend/js/lib/number/jquery.number.min.js"></script>
-    <script type="text/javascript" src="/assets/backend/js/lib/form-validation/validator.min.js"></script>
-    <script type="text/javascript" src="/assets/backend/js/lib/datepicker/bootstrap-datepicker.min.js"></script>
-    <script type="text/javascript" src="/assets/backend/js/lib/datetimepicker/bootstrap-datetimepicker.min.js"></script>
-    <script type="text/javascript" src="/assets/backend/js/lib/chart-js/Chart.bundle.js"></script>
-    <script type="text/javascript" src="/assets/backend/js/lib/owl-carousel/owl.carousel.min.js"></script>
-    <script type="text/javascript" src="/assets/backend/js/lib/datatables/datatables.min.js"></script>
-    <script type="text/javascript" src="/assets/backend/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
-    <script type="text/javascript" src="/assets/backend/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
-    <script type="text/javascript" src="/assets/backend/js/lib/datatables/cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
-    <script type="text/javascript" src="/assets/backend/js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
-    <script type="text/javascript" src="/assets/backend/js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
-    <script type="text/javascript" src="/assets/backend/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
-    <script type="text/javascript" src="/assets/backend/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
-    <script type="text/javascript" src="/assets/backend/js/lib/select2/select2.js"></script>
-    <script type="text/javascript" src="/assets/backend/js/lib/bootstrap-select/js/bootstrap-select.min.js"></script>
-    <script type="text/javascript" src="/assets/backend/js/lib/tinymce/jquery.tinymce.min.js"></script>
-    <script type="text/javascript" src="/assets/backend/js/lib/tinymce/tinymce.min.js"></script>
-    <script src="/assets/backend/uploadfile/js/vendor/jquery.ui.widget.js"></script>
-    <script src="https://blueimp.github.io/JavaScript-Templates/js/tmpl.min.js"></script>
-    <script src="https://blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>
-    <script src="https://blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
-    <script src="https://blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
-    <script src="/assets/backend/uploadfile/js/jquery.iframe-transport.js"></script>
-    <script src="/assets/backend/uploadfile/js/jquery.fileupload.js"></script>
-    <script src="/assets/backend/uploadfile/js/jquery.fileupload-process.js"></script>
-    <script src="/assets/backend/uploadfile/js/jquery.fileupload-image.js"></script>
-    <script src="/assets/backend/uploadfile/js/jquery.fileupload-audio.js"></script>
-    <script src="/assets/backend/uploadfile/js/jquery.fileupload-video.js"></script>
-    <script src="/assets/backend/uploadfile/js/jquery.fileupload-validate.js"></script>
-    <script src="/assets/backend/uploadfile/js/jquery.fileupload-ui.js"></script>
-    <script type="text/javascript" src="/assets/backend/js/define.js"></script>
-    <script src="/assets/backend/faq/js/main.js"></script>
+<body class="app sidebar-mini rtl">
 
-    <!-- Main Javascript -->
-    <script type="text/javascript" src="/assets/backend/js/load.script.js"></script>
-    <script type="text/javascript" src="/assets/backend/js/singlepage.js"></script>
-    <script type="text/javascript" src="/assets/backend/js/jquery.slimscroll.js"></script>
-    <script type="text/javascript" src="/assets/backend/js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
-    <script type="text/javascript" src="/assets/backend/js/custom.min.js"></script>
+    <!-- header header  -->
+    {{ partial('header') }}
+    <!-- Left Sidebar  -->
+    {{ partial('slidebar') }}
+
+    {{ content() }}
+
+    {{ partial('footer') }}
+
+
+    <!-- Inclue Javascript -->
+    <!-- Essential javascripts for application to work-->
+    <script src="/assets/backend/js/jquery-3.2.1.min.js"></script>
+    <script src="/assets/backend/js/popper.min.js"></script>
+    <script src="/assets/backend/js/bootstrap.min.js"></script>
+    <script src="/assets/backend/js/main.js"></script>
+    <!-- The javascript plugin to display page loading on top-->
+    <script src="/assets/backend/js/plugins/pace.min.js"></script>
+    <!-- Page specific javascripts-->
+    <script type="text/javascript" src="/assets/backend/js/plugins/chart.js"></script>
+    <script type="text/javascript">
+      var data = {
+      	labels: ["January", "February", "March", "April", "May"],
+      	datasets: [
+      		{
+      			label: "My First dataset",
+      			fillColor: "rgba(220,220,220,0.2)",
+      			strokeColor: "rgba(220,220,220,1)",
+      			pointColor: "rgba(220,220,220,1)",
+      			pointStrokeColor: "#fff",
+      			pointHighlightFill: "#fff",
+      			pointHighlightStroke: "rgba(220,220,220,1)",
+      			data: [65, 59, 80, 81, 56]
+      		},
+      		{
+      			label: "My Second dataset",
+      			fillColor: "rgba(151,187,205,0.2)",
+      			strokeColor: "rgba(151,187,205,1)",
+      			pointColor: "rgba(151,187,205,1)",
+      			pointStrokeColor: "#fff",
+      			pointHighlightFill: "#fff",
+      			pointHighlightStroke: "rgba(151,187,205,1)",
+      			data: [28, 48, 40, 19, 86]
+      		}
+      	]
+      };
+      var pdata = [
+      	{
+      		value: 300,
+      		color: "#46BFBD",
+      		highlight: "#5AD3D1",
+      		label: "Complete"
+      	},
+      	{
+      		value: 50,
+      		color:"#F7464A",
+      		highlight: "#FF5A5E",
+      		label: "In-Progress"
+      	}
+      ]
+      
+      var ctxl = $("#lineChartDemo").get(0).getContext("2d");
+      var lineChart = new Chart(ctxl).Line(data);
+      
+      var ctxp = $("#pieChartDemo").get(0).getContext("2d");
+      var pieChart = new Chart(ctxp).Pie(pdata);
+    </script>
+    <!-- Google analytics script-->
+    <script type="text/javascript">
+      if(document.location.hostname == 'pratikborsadiya.in') {
+      	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      	ga('create', 'UA-72504830-1', 'auto');
+      	ga('send', 'pageview');
+      }
+    </script>
 </body>
 
 </html>
