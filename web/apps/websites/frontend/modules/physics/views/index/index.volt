@@ -27,7 +27,8 @@
                             <h2 class="title">Fast Shipping Everywhere</h2>
                             <div class="separator-2 clearfix"></div>
                             <p>Voluptatem ad provident non repudiandae beatae cupiditate amet reiciendis lorem ipsum
-                                dolor sit amet, consectetur.</p>
+                                dolor sit
+                                amet, consectetur.</p>
                             <div class="text-right"><a class="btn btn-small btn-default margin-clear" href="page-services.html">Read
                                     More</a></div>
                         </div>
@@ -51,7 +52,8 @@
                             <h2 class="title">Shipping Services</h2>
                             <div class="separator-2 clearfix"></div>
                             <p>Voluptatem ad provident non repudiandae beatae cupiditate amet reiciendis lorem ipsum
-                                dolor sit amet, consectetur.</p>
+                                dolor sit
+                                amet, consectetur.</p>
                             <div class="text-right"><a class="btn btn-small btn-default margin-clear" href="page-services.html">Read
                                     More</a></div>
                         </div>
@@ -91,7 +93,8 @@
                             <h5 class="media-heading"><a href="blog-post.html">Lorem ipsum dolor sit amet</a></h5>
                             <p class="small"><i class="fa fa-calendar pr-10"></i>Mar 23, 2017</p>
                             <p class="margin-clear small">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Incidunt corrupti, cum exercitationem.</p>
+                                Incidunt
+                                corrupti, cum exercitationem.</p>
                             <a href="#">Read More</a>
                         </div>
                     </div>
@@ -107,7 +110,8 @@
                             <h5 class="media-heading"><a href="blog-post.html">Perspiciatis laborum necess</a></h5>
                             <p class="small"><i class="fa fa-calendar pr-10"></i>Mar 22, 2017</p>
                             <p class="margin-clear small">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Incidunt corrupti, cum exercitationem.</p>
+                                Incidunt
+                                corrupti, cum exercitationem.</p>
                             <a href="#">Read More</a>
                         </div>
                     </div>
@@ -123,7 +127,8 @@
                             <h5 class="media-heading"><a href="blog-post.html">Cum eligendi nisi rerum porro</a></h5>
                             <p class="small"><i class="fa fa-calendar pr-10"></i>Mar 21, 2017</p>
                             <p class="margin-clear small">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Incidunt corrupti, cum exercitationem.</p>
+                                Incidunt
+                                corrupti, cum exercitationem.</p>
                             <a href="#">Read More</a>
                         </div>
                     </div>
@@ -211,92 +216,214 @@
 
 <!-- section start -->
 <!-- ================ -->
-<section class="section pv-40 light-gray-bg clearfix">
-    <div class="container">
-        <div class="row justify-content-lg-center">
-            <div class="col-lg-8">
-                <h3 class="title text-center">Studying at <span class="text-default">College</span></h3>
-                <div class="separator"></div>
-                <p class="lead text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo
-                    dignissimos, adipisci ipsa aut.</p>
+<section class="pv-40 stats padding-bottom-clear dark-translucent-bg hovered background-img-6">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3 col-6 text-center">
+                <div class="feature-box">
+                    <span class="icon without-bg"><i class="fa fa-diamond"></i></span>
+                    <h3><strong>Projects</strong></h3>
+                    <span class="counter" data-to="1525" data-speed="5000">0</span>
+                </div>
+            </div>
+            <div class="col-lg-3 col-6 text-center">
+                <div class="feature-box">
+                    <span class="icon without-bg"><i class="fa fa-users"></i></span>
+                    <h3><strong>Clients</strong></h3>
+                    <span class="counter" data-to="1225" data-speed="5000">0</span>
+                </div>
+            </div>
+            <div class="col-lg-3 col-6 text-center">
+                <div class="feature-box">
+                    <span class="icon without-bg"><i class="fa fa-cloud-download"></i></span>
+                    <h3><strong>Downloads</strong></h3>
+                    <span class="counter" data-to="6532" data-speed="5000">0</span>
+                </div>
+            </div>
+            <div class="col-lg-3 col-6 text-center">
+                <div class="feature-box">
+                    <span class="icon without-bg"><i class="fa fa-share"></i></span>
+                    <h3><strong>Sherot</strong></h3>
+                    <span class="counter" data-to="15002" data-speed="5000">0</span>
+                </div>
             </div>
         </div>
     </div>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-6 col-lg-4 col-xl-2">
-                <div class="image-box shadow text-center mb-20">
-                    <div class="overlay-container overlay-visible">
-                        <img src="/assets/frontend/images/education-4.jpg" alt="">
-                        <a href="#" class="overlay-link"><i class="fa fa-link"></i></a>
-                        <div class="overlay-bottom">
-                            <div class="text">
-                                <p class="lead margin-clear mobile-visible">Admissions</p>
+</section>
+<!-- section end -->
+
+<!-- section start -->
+<!-- ================ -->
+<section class="clearfix pv-40">
+    <div class="container">
+        <div class="row justify-content-lg-center">
+
+            <div class="col-lg-8 text-center">
+                <h2 class="page-title text-center"><strong>CHUYÊN NGÀNH</strong></h2>
+                <div class="separator"></div>
+            </div>
+
+            <div class="col-12">
+                <!-- isotope filters start -->
+                <div class="filters">
+                    <ul class="nav nav-pills">
+                        <li class="nav-item"><a class="nav-link active" href="#" data-filter="*">All</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" data-filter=".interior-design">Interior
+                                design</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" data-filter=".construction-management">Construction
+                                Management</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" data-filter=".architecture-plans">Architecture
+                                Plans</a></li>
+                    </ul>
+                </div>
+                <!-- isotope filters end -->
+
+                <div class="isotope-container row grid-space-10">
+                    <div class="col-lg-3 col-md-6 isotope-item construction-management">
+                        <div class="image-box shadow bordered text-center mb-20">
+                            <div class="overlay-container">
+                                <img src="/assets/frontend/images/portfolio-2.jpg" alt="">
+                                <div class="overlay-top">
+                                    <div class="text">
+                                        <h3><a href="portfolio-item.html">Project Title</a></h3>
+                                        <p class="small">Lorem ipsum dolor sit amet.</p>
+                                    </div>
+                                </div>
+                                <div class="overlay-bottom">
+                                    <div class="links">
+                                        <a href="portfolio-item.html" class="btn btn-gray-transparent btn-animated">View
+                                            Details <i class="pl-2 fa fa-arrow-right"></i></a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 col-xl-2">
-                <div class="image-box shadow text-center mb-20">
-                    <div class="overlay-container overlay-visible">
-                        <img src="/assets/frontend/images/education-5.jpg" alt="">
-                        <a href="#" class="overlay-link"><i class="fa fa-link"></i></a>
-                        <div class="overlay-bottom">
-                            <div class="text">
-                                <p class="lead margin-clear mobile-visible">Education</p>
+                    <div class="col-lg-3 col-md-6 isotope-item construction-management">
+                        <div class="image-box shadow bordered text-center mb-20">
+                            <div class="overlay-container">
+                                <img src="/assets/frontend/images/portfolio-2.jpg" alt="">
+                                <div class="overlay-top">
+                                    <div class="text">
+                                        <h3><a href="portfolio-item.html">Project Title</a></h3>
+                                        <p class="small">Lorem ipsum dolor sit amet.</p>
+                                    </div>
+                                </div>
+                                <div class="overlay-bottom">
+                                    <div class="links">
+                                        <a href="portfolio-item.html" class="btn btn-gray-transparent btn-animated">View
+                                            Details <i class="pl-2 fa fa-arrow-right"></i></a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 col-xl-2">
-                <div class="image-box shadow text-center mb-20">
-                    <div class="overlay-container overlay-visible">
-                        <img src="/assets/frontend/images/education-6.jpg" alt="">
-                        <a href="#" class="overlay-link"><i class="fa fa-link"></i></a>
-                        <div class="overlay-bottom">
-                            <div class="text">
-                                <p class="lead margin-clear mobile-visible">Departments</p>
+                    <div class="col-lg-3 col-md-6 isotope-item construction-management">
+                        <div class="image-box shadow bordered text-center mb-20">
+                            <div class="overlay-container">
+                                <img src="/assets/frontend/images/construction-portfolio-3.jpg" alt="">
+                                <div class="overlay-top">
+                                    <div class="text">
+                                        <h3><a href="portfolio-item.html">Project Title</a></h3>
+                                    </div>
+                                </div>
+                                <div class="overlay-bottom">
+                                    <p class="small">Construction Management</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 col-xl-2">
-                <div class="image-box shadow text-center mb-20">
-                    <div class="overlay-container overlay-visible">
-                        <img src="/assets/frontend/images/education-7.jpg" alt="">
-                        <a href="#" class="overlay-link"><i class="fa fa-link"></i></a>
-                        <div class="overlay-bottom">
-                            <div class="text">
-                                <p class="lead margin-clear mobile-visible">Library</p>
+                    <div class="col-lg-3 col-md-6 isotope-item interior-design">
+                        <div class="image-box shadow bordered text-center mb-20">
+                            <div class="overlay-container">
+                                <img src="/assets/frontend/images/portfolio-2.jpg" alt="">
+                                <div class="overlay-top">
+                                    <div class="text">
+                                        <h3><a href="portfolio-item.html">Project Title</a></h3>
+                                        <p class="small">Lorem ipsum dolor sit amet.</p>
+                                    </div>
+                                </div>
+                                <div class="overlay-bottom">
+                                    <div class="links">
+                                        <a href="portfolio-item.html" class="btn btn-gray-transparent btn-animated">View
+                                            Details <i class="pl-2 fa fa-arrow-right"></i></a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 col-xl-2">
-                <div class="image-box shadow text-center mb-20">
-                    <div class="overlay-container overlay-visible">
-                        <img src="/assets/frontend/images/education-8.jpg" alt="">
-                        <a href="#" class="overlay-link"><i class="fa fa-link"></i></a>
-                        <div class="overlay-bottom">
-                            <div class="text">
-                                <p class="lead margin-clear mobile-visible">Staff/Faculty</p>
+                    <div class="col-lg-3 col-md-6 isotope-item architecture-plans">
+                        <div class="image-box shadow bordered text-center mb-20">
+                            <div class="overlay-container">
+                                <img src="/assets/frontend/images/portfolio-2.jpg" alt="">
+                                <div class="overlay-top">
+                                    <div class="text">
+                                        <h3><a href="portfolio-item.html">Project Title</a></h3>
+                                        <p class="small">Lorem ipsum dolor sit amet.</p>
+                                    </div>
+                                </div>
+                                <div class="overlay-bottom">
+                                    <div class="links">
+                                        <a href="portfolio-item.html" class="btn btn-gray-transparent btn-animated">View
+                                            Details <i class="pl-2 fa fa-arrow-right"></i></a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 col-xl-2">
-                <div class="image-box shadow text-center mb-20">
-                    <div class="overlay-container overlay-visible">
-                        <img src="/assets/frontend/images/education-9.jpg" alt="">
-                        <a href="#" class="overlay-link"><i class="fa fa-link"></i></a>
-                        <div class="overlay-bottom">
-                            <div class="text">
-                                <p class="lead margin-clear mobile-visible">Alumni</p>
+                    <div class="col-lg-3 col-md-6 isotope-item construction-management">
+                        <div class="image-box shadow bordered text-center mb-20">
+                            <div class="overlay-container">
+                                <img src="/assets/frontend/images/portfolio-2.jpg" alt="">
+                                <div class="overlay-top">
+                                    <div class="text">
+                                        <h3><a href="portfolio-item.html">Project Title</a></h3>
+                                        <p class="small">Lorem ipsum dolor sit amet.</p>
+                                    </div>
+                                </div>
+                                <div class="overlay-bottom">
+                                    <div class="links">
+                                        <a href="portfolio-item.html" class="btn btn-gray-transparent btn-animated">View
+                                            Details <i class="pl-2 fa fa-arrow-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 isotope-item architecture-plans">
+                        <div class="image-box shadow bordered text-center mb-20">
+                            <div class="overlay-container">
+                                <img src="/assets/frontend/images/portfolio-2.jpg" alt="">
+                                <div class="overlay-top">
+                                    <div class="text">
+                                        <h3><a href="portfolio-item.html">Project Title</a></h3>
+                                        <p class="small">Lorem ipsum dolor sit amet.</p>
+                                    </div>
+                                </div>
+                                <div class="overlay-bottom">
+                                    <div class="links">
+                                        <a href="portfolio-item.html" class="btn btn-gray-transparent btn-animated">View
+                                            Details <i class="pl-2 fa fa-arrow-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 isotope-item interior-design">
+                        <div class="image-box shadow bordered text-center mb-20">
+                            <div class="overlay-container">
+                                <img src="/assets/frontend/images/portfolio-2.jpg" alt="">
+                                <div class="overlay-top">
+                                    <div class="text">
+                                        <h3><a href="portfolio-item.html">Project Title</a></h3>
+                                        <p class="small">Lorem ipsum dolor sit amet.</p>
+                                    </div>
+                                </div>
+                                <div class="overlay-bottom">
+                                    <div class="links">
+                                        <a href="portfolio-item.html" class="btn btn-gray-transparent btn-animated">View
+                                            Details <i class="pl-2 fa fa-arrow-right"></i></a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -306,3 +433,121 @@
     </div>
 </section>
 <!-- section end -->
+
+<!-- section start -->
+<!-- ================ -->
+<section class="section background-img-1 dark-translucent-bg" style="background-position: 50% 42%;">
+    <div class="container pv-20">
+        <div class="row justify-content-lg-center">
+            <div class="col-lg-8">
+                <h2 class="page-title text-center"><strong>ĐỘI NGỦ</strong></h2>
+                <div class="separator"></div>
+                <p class="lead text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo
+                    dignissimos, adipisci ipsa aut voluptate consequuntur ad minus rerum reprehenderit fuga quis eum
+                    eveniet
+                    eligendi, fugit neque laboriosam unde quae incidunt.</p>
+            </div>
+        </div>
+    </div>
+    <div class="slick-carousel carousel-autoplay">
+        <div class="col-md-3">
+            <div class="image-box team-member shadow mb-20">
+                <div class="overlay-container overlay-visible">
+                    <img src="/assets/frontend/images/medical-team-member-1.jpg" alt="">
+                    <a href="#" class="overlay-link" title="Jane Doe - CEO"><i class="fa fa-link"></i></a>
+                    <div class="overlay-bottom">
+                        <div class="text">
+                            <h3 class="title">Dr. Jane Doe</h3>
+                            <div class="separator light"></div>
+                            <p class="small margin-clear"><em>Diabetologists‎ <br> Lorem ipsum dolor sit</em></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="image-box team-member shadow mb-20">
+                <div class="overlay-container overlay-visible">
+                    <img src="/assets/frontend/images/medical-team-member-2.jpg" alt="">
+                    <a href="#" class="overlay-link" title="Jane Doe - CEO"><i class="fa fa-link"></i></a>
+                    <div class="overlay-bottom">
+                        <div class="text">
+                            <h3 class="title">Prof. Jane Doe</h3>
+                            <div class="separator light"></div>
+                            <p class="small margin-clear"><em>Dermatologists‎ <br> Lorem ipsum dolor sit</em></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="image-box team-member shadow mb-20">
+                <div class="overlay-container overlay-visible">
+                    <img src="/assets/frontend/images/medical-team-member-3.jpg" alt="">
+                    <a href="#" class="overlay-link" title="Jane Doe - CEO"><i class="fa fa-link"></i></a>
+                    <div class="overlay-bottom">
+                        <div class="text">
+                            <h3 class="title">Dr. Jane Doe</h3>
+                            <div class="separator light"></div>
+                            <p class="small margin-clear"><em>Gastroenterologists <br> Lorem ipsum dolor sit</em></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="image-box team-member shadow mb-20">
+                <div class="overlay-container overlay-visible">
+                    <img src="/assets/frontend/images/medical-team-member-4.jpg" alt="">
+                    <a href="#" class="overlay-link" title="Jane Doe - CEO"><i class="fa fa-link"></i></a>
+                    <div class="overlay-bottom">
+                        <div class="text">
+                            <h3 class="title">Prof. Jooly Doe</h3>
+                            <div class="separator light"></div>
+                            <p class="small margin-clear"><em>Gynaecologists‎ <br> Lorem ipsum dolor sit</em></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="image-box team-member shadow mb-20">
+                <div class="overlay-container overlay-visible">
+                    <img src="/assets/frontend/images/medical-team-member-4.jpg" alt="">
+                    <a href="#" class="overlay-link" title="Jane Doe - CEO"><i class="fa fa-link"></i></a>
+                    <div class="overlay-bottom">
+                        <div class="text">
+                            <h3 class="title">Prof. Jooly Doe</h3>
+                            <div class="separator light"></div>
+                            <p class="small margin-clear"><em>Gynaecologists‎ <br> Lorem ipsum dolor sit</em></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- section end -->
+
+<section class="section default-bg clearfix">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="call-to-action text-center">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <h1 class="title">Don't Miss Out Our Offers</h1>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem quasi explicabo
+                                consequatur
+                                consectetur, a atque voluptate officiis eligendi nostrum.</p>
+                        </div>
+                        <div class="col-lg-4">
+                            <br>
+                            <p><a href="#" class="btn btn-lg btn-gray-transparent btn-animated">Learn More<i class="fa fa-arrow-right pl-20"></i></a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

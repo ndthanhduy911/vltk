@@ -1,26 +1,3 @@
-<!-- footer top start -->
-<!-- ================ -->
-<div class="dark-bg footer-top animated-text default-hovered">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="call-to-action text-center">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <h2 class="mt-4">Powerful Bootstrap Template</h2>
-                            <h2 class="mt-4">Waste no more time</h2>
-                        </div>
-                        <div class="col-md-4">
-                            <p class="mt-3"><a href="#" class="btn btn-animated btn-lg btn-gray-transparent">Purchase<i
-                                        class="fa fa-cart-arrow-down pl-20"></i></a></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- footer top end -->
 <!-- footer start (Add "dark" class to #footer in order to enable dark footer) -->
 <!-- ================ -->
 <footer id="footer" class="clearfix">
