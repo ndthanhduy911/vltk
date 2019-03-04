@@ -1,0 +1,64 @@
+<?php
+session_start();
+error_reporting(E_ALL);
+
+use Phalcon\Mvc\Application;
+try
+{
+    header('Access-Control-Allow-Origin: *');
+    /**
+     * Define some useful constants
+     */
+    define('BASE_DIR', dirname(__DIR__));
+    define('APP_DIR', BASE_DIR . '/apps');
+
+    date_default_timezone_set('Asia/Ho_Chi_Minh');
+
+    $define = include APP_DIR . '/configs/define.php';
+    /**
+     * Read the configuration
+     */
+    $config = include APP_DIR . '/configs/config.php';
+
+    /**
+     * Read auto-loader
+     */
+    include APP_DIR . '/configs/loader.php';
+
+    /**
+     * Include services
+     */
+    require APP_DIR . '/configs/services.php';
+
+    
+    
+    /**
+     * Handle the request
+     */
+    $application = new Application();
+    /**
+     * Assign the DI
+     */
+    $application->setDI($di);
+    
+    /**
+     * Include modules
+     */
+    require APP_DIR . '/configs/modules.php';
+    echo $application->handle()->getContent();
+}
+catch (Phalcon\Exception $e)
+{
+   echo $e->getMessage();
+    require ERROR_FILE;
+}
+catch (PDOException $e)
+{
+    echo $e->getMessage();
+    //  require ERROR_FILE;
+}
+catch (Exception $e)
+{
+    echo $e->getMessage();
+     require ERROR_FILE;
+}
