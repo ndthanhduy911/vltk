@@ -699,6 +699,46 @@
 					}
 				]
 			});
+			
+			$(".slick-carousel.carousel-5").slick({
+				arrows: false,
+				slidesToShow: 5,
+				slidesToScroll: 5,
+				autoplay: true,
+				autoplaySpeed: 5000,
+				responsive: [
+					{
+						breakpoint: 1200,
+						settings: {
+							slidesToShow: 5,
+							slidesToScroll: 5
+						}
+					},
+					{
+						breakpoint: 992,
+						settings: {
+							slidesToShow: 4,
+							slidesToScroll: 4
+						}
+					},
+					{
+						breakpoint: 768,
+						settings: {
+							slidesToShow: 3,
+							slidesToScroll: 3
+						}
+					},
+					{
+						breakpoint: 575,
+						settings: {
+							slidesToShow: 2,
+							slidesToScroll: 2
+						}
+					}
+				]
+			});
+
+
 			$(".slick-carousel.content-slider").slick({
 				autoplay: true,
 				autoplaySpeed: 5000,
