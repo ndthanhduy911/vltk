@@ -1,9 +1,8 @@
 <?php
+namespace Backend\Modules\Users\Models;
 
 class Users extends \Phalcon\Mvc\Model
 {
-
-
     public $id;
 
     public $name;
@@ -12,7 +11,7 @@ class Users extends \Phalcon\Mvc\Model
 
     public $password;
 
-    public $mail;
+    public $email;
 
     public $phone;
 
@@ -60,5 +59,9 @@ class Users extends \Phalcon\Mvc\Model
             "bind" => array('username' => $username),
             "columns" => $columns
         ]);
+    }
+
+    public static function getNamepace (){
+        return 'Backend\Modules\Users\Models\Users';
     }
 }

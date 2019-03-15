@@ -17,7 +17,10 @@ use Phalcon\Flash\Direct as Flash;
 use Phalcon\Queue\Beanstalk;
 use Phalcon\Cache\Frontend\None as FrontendNone;
 use Phalcon\Mvc\Collection\Manager as CollectionManager;
-use Library\Helper\Helper;
+use Library\Helper\Helper as Helper;
+use Library\SSP\SSP as SSP;
+use Library\ML\ML as ML;
+use Library\RoleMaster\RoleMaster as RoleMaster;
 
 use Phalcon\Mvc\Model\Query;
 
@@ -168,3 +171,24 @@ $di['collectionManager'] = function() {
 $di->set('helper',function(){
     return new Helper();
 });
+
+$di->set(
+    "ssp",
+    function() {
+        return new SSP();
+    }
+);
+
+$di->set(
+    "rmt",
+    function() {
+        return new RoleMaster();
+    }
+);
+
+$di->set(
+    "ml",
+    function() {
+        return new ML();
+    }
+);

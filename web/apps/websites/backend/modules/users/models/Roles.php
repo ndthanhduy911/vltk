@@ -1,5 +1,5 @@
 <?php
-namespace Models;
+namespace Backend\Modules\Users\Models;
 
 class Roles extends \Phalcon\Mvc\Model
 {
@@ -26,4 +26,7 @@ class Roles extends \Phalcon\Mvc\Model
         ]);
     }
 
+    public static function getNamepace (){
+        return 'Backend\Modules\Users\Models\Roles';
+    }
 }

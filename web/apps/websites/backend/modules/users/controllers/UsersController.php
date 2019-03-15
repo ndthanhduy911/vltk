@@ -1,40 +1,42 @@
 <?php
 namespace Backend\Modules\Users\Controllers;
 use Phalcon\Mvc\View;
+use Backend\Modules\Users\Models\Users;
+use Backend\Modules\Users\Models\Roles;
+use Backend\Modules\Users\Forms\UserForm;
 
 class UsersController  extends \BackendController {
 
     public function indexAction(){
+        $this->view->form = new UserForm();
     }
 
     public function getdataAction(){
+        $npUsers = Users::getNamepace();
         $data = $this->modelsManager->createBuilder()
         ->columns(array(
-            'Users.id',
-            'Users.name',
-            'Users.username',
-            'Users.mail',
-            'Users.phone',
-            'Users.status',
-            'Users.avatar',
-            'Users.role',
-            'Users.department_id',
+            $npUsers.'.id',
+            $npUsers.'.name',
+            $npUsers.'.username',
+            $npUsers.'.email',
+            $npUsers.'.phone',
+            $npUsers.'.status',
+            $npUsers.'.avatar',
+            $npUsers.'.role',
+            $npUsers.'.department_id',
             'D.name dept_name',
             'R.name role_name',
-            'S.name status_name'
         ))
-        ->from('Users')
-        ->join('Departments', 'D.id = Users.department_id','D')
-        ->join('CatStatus', 'S.id = Users.status','S')
-        ->join('Models\Roles', 'R.id = Users.role','R')
-        ->orderBy('Users.name DESC')
-        ->where("username != :username: AND Users.status != 4",['username' => $this->session->get('user')]);
-        
-        if($this->session->get('role') !== 1){
-            $data = $data->andWhere("department_id IN (".implode(',',$this->session->get('department_mg')).")");
-        }
+        ->from($npUsers)
+        ->join('Models\Departments', 'D.id = '.$npUsers.'.department_id','D')
+        ->join(Roles::getNamepace(), 'R.id = '.$npUsers.'.role','R')
+        ->orderBy($npUsers.'.name DESC')
+        ->where("1 = 1");
+        // if($this->session->get('role') !== 1){
+        //     $data = $data->andWhere("department_id IN (".implode(',',$this->session->get('department_mg')).")");
+        // }
 
-        $search = 'Users.phone LIKE :search: OR Managers.name LIKE :search:';
+        $search = $npUsers.'.name LIKE :search:';
         $this->response->setStatusCode(200, 'OK');
         $this->response->setJsonContent($this->ssp->data_output($this->request->get(), $data,$search));
         return $this->response->send();
