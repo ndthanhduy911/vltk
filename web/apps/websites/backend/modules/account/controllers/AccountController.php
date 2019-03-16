@@ -4,6 +4,7 @@ namespace Backend\Modules\Account\Controllers;
 use Models\Users;
 
 use Phalcon\Mvc\View;
+use Backend\Modules\Account\Forms\LoginForm;
 
 class AccountController extends \Phalcon\Mvc\Controller
 {
@@ -12,7 +13,12 @@ class AccountController extends \Phalcon\Mvc\Controller
         if(!empty($this->session->get('user_id'))){
             return $this->response->redirect("/admin");
         }
+        $post = [];
         if ($this->request->isPost()) {
+            $post = [
+                'username' => $this->request->getPost('username'),
+                'password'  => $this->request->getPost('password'),
+            ];
             if ($this->security->checkToken()) {
                 if($this->session->has("captcha")){
                     if($this->request->getPost("captcha") === $this->session->get("captcha")) {
@@ -43,9 +49,11 @@ class AccountController extends \Phalcon\Mvc\Controller
                 }                
             }
         } 
+        $form = new LoginForm((object)$post);
         $this->view->setRenderLevel(
             View::LEVEL_ACTION_VIEW
         );
+        $this->view->form = $form;
     }
 
     public function captchaAction()
@@ -74,9 +82,9 @@ class AccountController extends \Phalcon\Mvc\Controller
         imagedestroy($jpg_image);
     }
 
-    public function logutAction()
+    public function logoutAction()
     {
         $this->session->destroy();
-        $this->response->redirect("account");
+        $this->response->redirect("/admin/account/login");
     }
 }

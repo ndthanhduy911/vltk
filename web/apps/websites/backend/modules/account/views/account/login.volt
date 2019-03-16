@@ -24,7 +24,7 @@
                 <div class="form-group">
                     <label class="control-label">Tài khoản</label>
                     <div class="input-group">
-                        <input name="username" type="text" class="form-control" placeholder="Tài khoản" required>
+                        {{form.render('username')}}
                         <div class="invalid-tooltip"></div>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
                 <div class="form-group">
                     <label class="control-label">Mật khẩu</label>
                     <div class="input-group">
-                        <input name="password" type="password" class="form-control" placeholder="Mật khẩu" required>
+                        {{form.render('password')}}
                         <div class="invalid-tooltip"></div>
                     </div>
                 </div>
@@ -41,7 +41,7 @@
                     <label class="control-label">Mã xác thực</label>
                     <img class="mb-3 border rounded" src="/admin/account/captcha" alt="captcha" width="100%">
                     <div class="input-group">
-                        <input name="captcha" type="text" class="form-control" placeholder="Vui lòng nhập mã xác thực" required>
+                        <input name="captcha" type="text" maxlength="6" class="form-control" placeholder="Vui lòng nhập mã xác thực" required>
                         <div class="invalid-tooltip"></div>
                     </div>
                 </div>
