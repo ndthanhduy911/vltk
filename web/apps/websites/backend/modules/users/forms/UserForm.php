@@ -8,7 +8,7 @@ use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\Hidden;
 use Phalcon\Validation\Validator\PresenceOf;
 
-use Backend\Modules\Users\Models\Roles;
+use Models\Roles;
 use Models\Departments;
 
 class UserForm extends \Phalcon\Forms\Form

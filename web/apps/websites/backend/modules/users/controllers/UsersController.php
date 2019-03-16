@@ -1,8 +1,7 @@
 <?php
 namespace Backend\Modules\Users\Controllers;
-use Phalcon\Mvc\View;
-use Backend\Modules\Users\Models\Users;
-use Backend\Modules\Users\Models\Roles;
+use Models\Users;
+use Models\Roles;
 use Backend\Modules\Users\Forms\UserForm;
 
 class UsersController  extends \BackendController {

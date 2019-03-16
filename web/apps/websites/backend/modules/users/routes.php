@@ -17,3 +17,22 @@ $router->add($config->application->backendUri . '/users/:action/:int', array(
     'action'  => 1,
     'id' => 2
 ));
+
+/***********************ProfileController***********************/
+$router->add($config->application->backendUri . '/profile', array(
+    'module' => 'backend_users',
+    'controller' => 'profile',
+    'action' => 'index',
+));
+
+$router->add($config->application->backendUri . '/profile/:action', array(
+    'module' => 'backend_users',
+    'controller' => 'profile',
+    'action' => 1,
+));
+$router->add($config->application->backendUri . '/profile/:action/:int', array(
+    'module' => 'backend_users',
+    'controller' => 'profile',
+    'action'  => 1,
+    'id' => 2
+));
