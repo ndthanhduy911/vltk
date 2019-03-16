@@ -1,26 +1,39 @@
 <?php
-
-class Notification extends \Phalcon\Mvc\Model
+class CatAssets extends \Phalcon\Mvc\Model
 {
-
     public $id;
 
-    public $type;
+    public $code;
 
-    public $content;
+    public $name;
 
-    public $link;
+    public $unit_price;
 
-    public $viewed;
+    public $class_id;
+
+    public $species_id;
+
+    public $made_id;
+
+    public $producer_id;
+
+    public $unit_id;
+
+    public $currencies_id;
+
+    public $specification;
+
+    public $note;
 
     public $status;
 
     public $created_at;
 
+    public $updated_at;
 
     public function getSource()
     {
-        return 'notification';
+        return 'cat_assets';
     }
 
     public static function findFirstId($id, $columns = "*")

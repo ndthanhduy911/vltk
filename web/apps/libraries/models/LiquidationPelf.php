@@ -1,32 +1,33 @@
 <?php
 
-class Notification extends \Phalcon\Mvc\Model
+class LiquidationPelf extends \Phalcon\Mvc\Model
 {
 
     public $id;
 
-    public $type;
+    public $liquidation_id;
 
-    public $content;
+    public $properties_id;
 
-    public $link;
-
-    public $viewed;
+    public $note;
 
     public $status;
 
+    public $pelf_quantity;
+
     public $created_at;
 
+    public $updated_at;
 
     public function getSource()
     {
-        return 'notification';
+        return 'liquidation_pelf';
     }
 
     public static function findFirstId($id, $columns = "*")
     {
         return parent::findFirst([
-            "conditions" => "id = :id: AND status !=4",
+            "conditions" => "id = :id:",
             "bind" => array('id' => $id),
             "columns" => $columns
         ]);

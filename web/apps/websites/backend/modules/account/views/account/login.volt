@@ -19,12 +19,12 @@
     </section>
     <section class="login-content">
         <div class="login-box">
-            <form id="loginForm" class="login-form" data-toggle="validator" role="form">
+            <form id="loginForm" class="login-form" data-toggle="validator" role="form" method="POST">
                 <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>ĐĂNG NHẬP</h3>
                 <div class="form-group">
                     <label class="control-label">Tài khoản</label>
                     <div class="input-group">
-                        <input name="username" type="text" class="form-control" placeholder="Username" required>
+                        <input name="username" type="text" class="form-control" placeholder="Tài khoản" required>
                         <div class="invalid-tooltip"></div>
                     </div>
                 </div>
@@ -32,23 +32,24 @@
                 <div class="form-group">
                     <label class="control-label">Mật khẩu</label>
                     <div class="input-group">
-                        <input name="password" type="password" class="form-control" placeholder="Password" required>
+                        <input name="password" type="password" class="form-control" placeholder="Mật khẩu" required>
                         <div class="invalid-tooltip"></div>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label">Mã xác thực</label>
-                    <img class="mb-3 border rounded" src="/assets/backend/captcha/img/cbg2.png" alt="captcha" width="100%">
+                    <img class="mb-3 border rounded" src="/admin/account/captcha" alt="captcha" width="100%">
                     <div class="input-group">
                         <input name="captcha" type="text" class="form-control" placeholder="Vui lòng nhập mã xác thực" required>
                         <div class="invalid-tooltip"></div>
                     </div>
                 </div>
-
-                <div class="form-group btn-container">
-                    <button class="btn btn-primary btn-block" type="submit"><i class="fa fa-sign-in fa-lg fa-fw"></i>SIGN IN</button>
+                <input type="hidden" name="<?php echo $this->security->getTokenKey() ?>" value="<?php echo $this->security->getToken() ?>"/>
+                <div class="form-group btn-container mb-2">
+                    <button class="btn btn-primary btn-block" type="submit"><i class="fa fa-sign-in fa-lg fa-fw"></i>ĐĂNG NHẬP</button>
                 </div>
+                <?php echo $this->flashSession->output(); ?>
             </form>
         </div>
     </section>

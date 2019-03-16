@@ -1,7 +1,7 @@
 <?php
 namespace Library\RoleMaster;
-use Backend\Modules\Users\Models\Roles;
-use Backend\Modules\Users\Models\Permission;
+use Models\Roles;
+use Models\Permission;
 
 
 class RoleMaster

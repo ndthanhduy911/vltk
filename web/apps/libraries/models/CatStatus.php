@@ -1,34 +1,24 @@
 <?php
 
-class Notification extends \Phalcon\Mvc\Model
+class CatStatus extends \Phalcon\Mvc\Model
 {
 
     public $id;
 
-    public $type;
-
-    public $content;
-
-    public $link;
-
-    public $viewed;
-
-    public $status;
-
-    public $created_at;
-
+    public $name;
 
     public function getSource()
     {
-        return 'notification';
+        return 'cat_status';
     }
 
     public static function findFirstId($id, $columns = "*")
     {
         return parent::findFirst([
-            "conditions" => "id = :id: AND status !=4",
+            "conditions" => "id = :id:",
             "bind" => array('id' => $id),
             "columns" => $columns
         ]);
     }
+
 }

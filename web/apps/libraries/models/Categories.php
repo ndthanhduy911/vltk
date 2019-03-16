@@ -1,26 +1,20 @@
 <?php
-
-class Notification extends \Phalcon\Mvc\Model
+use Phalcon\Mvc\Model\Manager as ModelsManager;
+class Categories extends \Phalcon\Mvc\Model
 {
 
     public $id;
 
-    public $type;
+    public $cat_id;
 
-    public $content;
-
-    public $link;
-
-    public $viewed;
+    public $name;
 
     public $status;
-
-    public $created_at;
 
 
     public function getSource()
     {
-        return 'notification';
+        return 'categories';
     }
 
     public static function findFirstId($id, $columns = "*")

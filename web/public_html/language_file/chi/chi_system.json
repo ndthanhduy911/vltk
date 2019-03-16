@@ -1,0 +1,22 @@
+{
+    "dashboard": {
+        "default": "Bảng điều khiển",
+        "trans": "仪表板",
+        "key": "dashboard"
+    },
+    "home": {
+        "default": "Trang chủ",
+        "trans": "家",
+        "key": "home"
+    },
+    "pelf": {
+        "default": "Tài sản\/ Thiết bị",
+        "trans": "Tài sản\/ Thiết bị",
+        "key": "pelf"
+    },
+    "detail": {
+        "default": "Chi tiết",
+        "trans": "Chi tiết",
+        "key": "detail"
+    }
+}

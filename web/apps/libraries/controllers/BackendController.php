@@ -1,18 +1,47 @@
 <?php
 
+use Library\RoleMaster\RoleMaster;
+use Models\Language;
 use Phalcon\Mvc\Controller;
 use Phalcon\Mvc\Dispatcher;
-use Library\RoleMaster\RoleMaster;
-use Models\Permission;
 
 class BackendController extends Controller
-{    
+{
+
+    public function getBackendUrl()
+    {
+        return $this->getDi()->get('config')->application->backendUrl;
+    }
+
     public function beforeExecuteRoute(Dispatcher $dispatcher)
     {
-        try {
+        if (!$this->session->has("short_name")) {
+            $lang_short = Language::findFirst(["actived = 1"]);
+            $this->session->set("short_name", $lang_short ? strtolower($lang_short->short_name) : 'vie');
+            $this->session->set("lang_id", $lang_short ? strtolower($lang_short->id) : 1);
+        }
+        if ($this->session->has("user_id")) {
+            if ($this->session->has("private")) {
+                $private = $this->session->get("private");
+            } else {
+                $private = RoleMaster::getPrivate();
+                $this->session->set("private", $private);
+            }
+            if ($this->session->has("permission")) {
+                $permission = $this->session->get("permission");
+            } else {
+                $permission = RoleMaster::getUserPermission($this->session->get('role'));
+                $this->session->set("permission", $permission);
+            }
+            $roleMaster = new RoleMaster($permission, $private, $dispatcher->getControllerName(), $dispatcher->getActionName());
+            if ($roleMaster->isPrivate()) {
 
-        } catch (\Exception $e) {
-            $this->flash->error($e->getMessage());
+            } else {
+                echo "Không có quyền truy cập";
+                die;
+            }
+        } else {
+            return $this->response->redirect($this->getBackendUrl().'/account/login');
         }
     }
 }

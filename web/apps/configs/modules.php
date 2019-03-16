@@ -16,6 +16,10 @@ $application->registerModules(array(
         'className' => 'Backend\Modules\Users\Module',
         'path' => APP_DIR . '/websites/backend/modules/users/module.php'
     ),
+    'backend_setting' => array(
+        'className' => 'Backend\Modules\Setting\Module',
+        'path' => APP_DIR . '/websites/backend/modules/setting/module.php'
+    ),
     'frontend_physics' => array(
         'className' => 'Frontend\Modules\Physics\Module',
         'path' => APP_DIR . '/websites/frontend/modules/physics/module.php'

@@ -1,7 +1,4 @@
 <?php
-namespace Models;
-use Phalcon\Mvc\Model\Manager as ModelsManager;
-
 class Departments extends \Phalcon\Mvc\Model
 {
 
