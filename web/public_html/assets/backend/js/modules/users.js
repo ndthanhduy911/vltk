@@ -33,7 +33,7 @@ const loadTableUsers = () => {
                     "data": "username"
                 },
                 {
-                    "data": "email"
+                    "data": "mail"
                 },
                 {
                     "data": "phone"
@@ -106,7 +106,6 @@ const loadTableUsers = () => {
                 $('#move_id').parents('.col-md-6').removeClass('hidden');
                 $('#move_id').attr('disabled', false);
                 $('#move_id').attr('required', true);
-                getDataTypeMove(data.move_type, data.move_id);
             }
         },(data,row)=>{
             dt.draw();

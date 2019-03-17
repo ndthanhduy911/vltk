@@ -16,7 +16,7 @@ class BackendController extends Controller
     public function beforeExecuteRoute(Dispatcher $dispatcher)
     {
         if (!$this->session->has("short_name")) {
-            $lang_short = Language::findFirst(["actived = 1"]);
+            $lang_short = Language::findFirst(["actived = 1 AND status = 1",'columns' => 'id, name']);
             $this->session->set("short_name", $lang_short ? strtolower($lang_short->short_name) : 'vie');
             $this->session->set("lang_id", $lang_short ? strtolower($lang_short->id) : 1);
         }

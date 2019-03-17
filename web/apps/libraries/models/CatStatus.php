@@ -1,4 +1,5 @@
 <?php
+namespace Models;
 
 class CatStatus extends \Phalcon\Mvc\Model
 {

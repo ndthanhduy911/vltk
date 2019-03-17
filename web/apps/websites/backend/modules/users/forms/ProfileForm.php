@@ -29,7 +29,7 @@ class ProfileForm extends Form
         }
 
         $username = new Text('username');
-        $username->setLabel('Username:');
+        $username->setLabel('Tài khoản:');
         $username->setAttributes(array(
             'class' => 'form-control',
             'placeholder' => 'Tên đăng nhập',

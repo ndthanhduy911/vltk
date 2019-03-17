@@ -1,5 +1,6 @@
 <?php
-use Phalcon\Mvc\Model\Manager as ModelsManager;
+namespace Models;
+
 class CatPosition extends \Phalcon\Mvc\Model
 {
 

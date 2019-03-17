@@ -1,5 +1,6 @@
 <?php
-use Phalcon\Mvc\Model\Manager as ModelsManager;
+namespace Models;
+
 class CatUnits extends \Phalcon\Mvc\Model
 {
 

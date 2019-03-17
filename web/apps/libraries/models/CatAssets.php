@@ -1,4 +1,5 @@
 <?php
+namespace Models;
 class CatAssets extends \Phalcon\Mvc\Model
 {
     public $id;

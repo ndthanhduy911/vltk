@@ -17,7 +17,7 @@ class UsersController  extends \BackendController {
             $npUsers.'.id',
             $npUsers.'.name',
             $npUsers.'.username',
-            $npUsers.'.email',
+            $npUsers.'.mail',
             $npUsers.'.phone',
             $npUsers.'.status',
             $npUsers.'.avatar',
@@ -257,81 +257,6 @@ class UsersController  extends \BackendController {
             }
         }else{
             return $this->response->redirect('/users');
-        }
-    }
-
-    public function profileAction(){
-        $user = Users::findFirstId($this->session->get("user_id"));
-        if ($user) {
-            if ($this->request->isPost()) {
-                $password = $this->request->getPost('password');
-                $check = Users::findFirstId($this->session->get("user_id"));
-                if ($this->security->checkHash($password,$check->password)) {
-                    $checkMail = Users::findFirst([
-                        "mail = :mail: AND id != :id: AND status != 4",
-                        "bind" => [
-                            "mail" => $this->request->getPost('mail'),
-                            "id" => $user->id,
-                        ]
-                    ]);
-                    $checkPhone = Users::findFirst([
-                        "phone = :phone: AND id != :id: AND status != 4",
-                        "bind" => [
-                            "phone" => $this->request->getPost('phone'),
-                            "id" => $user->id,
-                        ]
-                    ]);
-                    if($checkMail){
-                        $this->flash->error('Địa chỉ mail đã được sử dụng.');
-                    }else if($checkMail){
-                        $this->flash->error('Số điện thoại đã được sử dụng.');
-                    }
-                    $user->name = $this->request->getPost('name');
-                    $user->phone = $this->request->getPost('phone');
-                    $user->mail = $this->request->getPost('mail');
-                    if (!$user->save()) {
-                        foreach ($user->getMessages() as $message) {
-                            $this->flashSession->error($message);
-                        }
-                    } else {
-                        $this->flashSession->success("Cập nhật thành công");
-                        return $this->response->redirect('/users/profile');
-                    }
-                }
-            }
-            $form = new ProfileForm($user);
-            $this->view->form = $form;
-            $this->view->formPW =  new ChangePWForm() ;
-        } else {
-            return $this->response->redirect('/');
-        }
-    }
-
-    public function changepasswordAction(){
-        if ($this->request->isPost()) {
-            $user_id = $this->session->get("user_id");
-            $password = $this->request->getPost('oldPassword');
-            $newpassword = $this->request->getPost('password');
-
-            $user = Users::findFirstId($user_id);
-            if (!$user) {
-                $this->flashSession->error("Không tìm thấy tài khoản này.");
-                return $this->response->redirect('/users/profile');
-            } else {
-                if ($this->security->checkHash($password,$user->password)) {
-                    $user->password = $this->security->hash($newpassword);
-                    if (!$user->update()) {
-                        $this->flashSession->error("Đổi mật khẩu thất bại.");
-                        return $this->response->redirect('/users/profile');
-                    } else {
-                        $this->flashSession->success("Đổi mật khẩu thành công.");
-                        return $this->response->redirect('/users/profile');
-                    }
-                }else{
-                    $this->flashSession->error("Mật khẩu hiện tại không chính xác.");
-                    return $this->response->redirect('/users/profile');
-                }
-            }
         }
     }
 

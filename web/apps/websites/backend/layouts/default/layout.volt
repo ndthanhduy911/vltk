@@ -34,7 +34,7 @@
     <!-- header header  -->
     {{ partial('header') }}
     <!-- Left Sidebar  -->
-    {{ partial('slidebar') }}
+    {{ partial('sidebar') }}
 
     {{ content() }}
 

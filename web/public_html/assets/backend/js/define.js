@@ -91,6 +91,7 @@ const showModalForm = (button, modal, typeAjax = 'GET', confirm = false, cb = ()
             form.validator('destroy');
             form.attr('action','');
             $(modal).off();
+            form.off();
             cbHite();
         })
 

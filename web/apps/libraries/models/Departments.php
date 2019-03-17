@@ -1,4 +1,6 @@
 <?php
+namespace Models;
+
 class Departments extends \Phalcon\Mvc\Model
 {
 

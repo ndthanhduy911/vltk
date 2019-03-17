@@ -11,7 +11,7 @@ class Users extends \Phalcon\Mvc\Model
 
     public $password;
 
-    public $email;
+    public $mail;
 
     public $phone;
 

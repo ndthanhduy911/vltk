@@ -9,3 +9,8 @@
 .dataTables_scrollHeadInner table {
     width: 100% !important;
 }
+
+.treeview-item.actived {
+    color: #1976D2;
+    font-weight: bold;
+}

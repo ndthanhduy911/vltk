@@ -1,5 +1,5 @@
 <?php
-use Phalcon\Mvc\Model\Manager as ModelsManager;
+namespace Models;
 class CatEmployees extends \Phalcon\Mvc\Model
 {
 
