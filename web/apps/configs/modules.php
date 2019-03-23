@@ -20,8 +20,14 @@ $application->registerModules(array(
         'className' => 'Backend\Modules\Setting\Module',
         'path' => APP_DIR . '/websites/backend/modules/setting/module.php'
     ),
-    'frontend_physics' => array(
-        'className' => 'Frontend\Modules\Physics\Module',
-        'path' => APP_DIR . '/websites/frontend/modules/physics/module.php'
+
+    'frontend_homepage' => array(
+        'className' => 'Frontend\Modules\HomePage\Module',
+        'path' => APP_DIR . '/websites/frontend/modules/homepage/module.php'
+    ),
+
+    'frontend_pages' => array(
+        'className' => 'Frontend\Modules\Pages\Module',
+        'path' => APP_DIR . '/websites/frontend/modules/pages/module.php'
     ),
 ));

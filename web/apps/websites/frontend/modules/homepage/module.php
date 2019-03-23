@@ -1,11 +1,10 @@
 <?php
 
-namespace Frontend\Modules\Physics;
+namespace Frontend\Modules\HomePage;
 
 use Phalcon\Loader;
 use Phalcon\Mvc\View;
 use Phalcon\Mvc\View\Engine\Volt as VoltEngine;
-use Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
 use Phalcon\Mvc\ModuleDefinitionInterface;
 
 
@@ -19,9 +18,9 @@ class Module implements ModuleDefinitionInterface
         $loader = new Loader();
 
         $loader->registerNamespaces(array(
-            'Frontend\Modules\Physics\Controllers' => __DIR__ . '/controllers/',
-            'Frontend\Modules\Physics\Models' => __DIR__ . '/models/',
-            'Frontend\Modules\Physics\Forms' => __DIR__ . '/forms/',
+            'Frontend\Modules\HomePage\Controllers' => __DIR__ . '/controllers/',
+            'Frontend\Modules\HomePage\Models' => __DIR__ . '/models/',
+            'Frontend\Modules\HomePage\Forms' => __DIR__ . '/forms/',
         ));
         $loader->register();
     }
@@ -46,8 +45,8 @@ class Module implements ModuleDefinitionInterface
             $config = include APP_DIR . '/configs/config.php';
             $view = new View();
             $view->setViewsDir(__DIR__ . '/views/');
-            $view->setLayoutsDir('../../../layouts/' . $config->application->backendTheme . '/');
-            $view->setPartialsDir('../../../layouts/' . $config->application->backendTheme . '/partials/');
+            $view->setLayoutsDir('../../../layouts/' . $config->application->frontendTheme . '/');
+            $view->setPartialsDir('../../../layouts/' . $config->application->frontendTheme . '/partials/');
             $view->setTemplateAfter('layout');
 
             $view->registerEngines(array(
@@ -69,7 +68,7 @@ class Module implements ModuleDefinitionInterface
 
         $di->set('dispatcher' , function(){
             $dispatcher = new \Phalcon\Mvc\Dispatcher();
-            $dispatcher->setDefaultNamespace("Frontend\Modules\Physics\Controllers\\");
+            $dispatcher->setDefaultNamespace("Frontend\Modules\HomePage\Controllers\\");
             return $dispatcher;
         });
 

@@ -92,8 +92,7 @@
                             <!-- logo -->
                             <div id="logo" class="logo">
                                 <a href="index.html"><img id="logo_img"
-                                        src="/assets/frontend/images/logo-khoa-single-1-96x96.png"
-                                        alt="VL-VLKT"></a>
+                                        src="/assets/frontend/images/logo-khoa-single-1-96x96.png" alt="VL-VLKT"></a>
                             </div>
 
                             <!-- name-and-slogan -->
@@ -144,48 +143,48 @@
                                         <!-- main-menu -->
                                         <ul class="navbar-nav ml-xl-auto">
 
-                                            <!-- mega-menu start home-->
-                                            <!-- <li class="nav-item dropdown active mega-menu mega-menu--wide">
-                                                <a href="index.html" class="nav-link dropdown-toggle"
-                                                    id="first-dropdown" data-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false">Home</a>
-                                            </li> -->
+                                            <!-- mega-menu start trang chủ-->
+                                            <li class="nav-item dropdown ">
+                                                <a href="index-shop.html" class="nav-link dropdown-toggle"
+                                                    id="third-dropdown" data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false">Trang chủ</a>
+                                                <ul class="dropdown-menu" aria-labelledby="third-dropdown">
+                                                    <li><a href="index-shop.html">Giới thiệu Khoa</a></li>
+                                                    <li><a href="page-about.html"></i>Tổ chức cán bộ</a></li>
+                                                    <li><a href="page-about-2.html"></i>Nhân sự</a></li>
+                                                    <li><a href="page-about-3.html"></i>Hợp tác đào tạo</a></li>
+                                                    <li><a href="page-about-4.html"></i>Nghiên cứu khoa học</a></li>
+                                                    <li><a href="page-about-me.html">Phòng thí nghiệm</a></li>
+                                                    <li><a href="page-about-me.html">Sản phẩm nghiên cứu</a></li>
+                                                    <li><a href="page-about-me.html">Đoàn hội</a></li>
+
+                                                </ul>
+                                            </li>
+                                            <!-- mega-menu end trang chủ-->
                                             <!-- mega-menu start Giới thiệu-->
                                             <li class="nav-item dropdown ">
                                                 <a href="portfolio-grid-2-3-col.html" class="nav-link dropdown-toggle"
                                                     id="fifth-dropdown" data-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false">Giới thiệu</a>
+                                                    aria-expanded="false">Bộ môn</a>
                                                 <ul class="dropdown-menu" aria-labelledby="fifth-dropdown">
-                                                    <li class="dropdown ">
-                                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Các
-                                                            bộ môn</a>
-                                                        <ul class="dropdown-menu">
-                                                            <li><a href="features-headers-default.html">Vật
-                                                                    lý tin học</a></li>
-                                                            <li><a href="features-headers-default-dark.html">Vật
-                                                                    lý ứng dụng</a></li>
-                                                            <li><a href="features-headers-default.html">Vật
-                                                                    lý tin học</a></li>
-                                                            <li><a href="features-headers-default-dark.html">Vật
-                                                                    lý ứng dụng</a></li>
-                                                            <li><a href="features-headers-default.html">Vật
-                                                                    lý tin học</a></li>
-                                                            <li><a href="features-headers-default-dark.html">Vật
-                                                                    lý ứng dụng</a></li>
-                                                            <li><a href="features-headers-default.html">Vật
-                                                                    lý tin học</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li><a href="page-about.html"></i>Cơ cấu tổ
-                                                            chức</a></li>
-                                                    <li><a href="page-about-2.html"></i>Nhân
-                                                            sự</a></li>
-                                                    <li><a href="page-about-3.html"></i>Đẳng
-                                                            bộ</a></li>
-                                                    <li><a href="page-about-4.html"></i>Công
-                                                            đoàn</a></li>
-                                                    <li><a href="page-about-me.html">Đoàn
-                                                            Hội</a></li>
+                                                    <li><a href="features-headers-default.html">Vật
+                                                            lý tin học</a></li>
+                                                    <li><a href="features-headers-default-dark.html">Vật
+                                                            Lý Lý Thuyết</a></li>
+                                                    <li><a href="features-headers-default.html">Vật
+                                                            Lý Hạt Nhân - KTHN</a></li>
+                                                    <li><a href="features-headers-default-dark.html">Vật
+                                                            Lý Chất Rắn</a></li>
+                                                    <li><a href="features-headers-default.html">Vật
+                                                            Lý tin học</a></li>
+                                                    <li><a href="features-headers-default-dark.html">Vật
+                                                            Lý Ứng Dụng</a></li>
+                                                    <li><a href="features-headers-default.html">Vật
+                                                            Lý Điện Tử</a></li>
+                                                    <li><a href="features-headers-default.html">Vật
+                                                            Lý Địa Cầu</a></li>
+                                                    <li><a href="features-headers-default.html">Vật
+                                                            Lý Hải Dương</a></li>
                                                 </ul>
                                             </li>
                                             <!-- mega-menu end giới thiệu-->
@@ -194,10 +193,12 @@
                                             <li class="nav-item dropdown ">
                                                 <a href="index-shop.html" class="nav-link dropdown-toggle"
                                                     id="third-dropdown" data-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false">Tuyển sinh</a>
+                                                    aria-expanded="false">Bản tin khoa</a>
                                                 <ul class="dropdown-menu" aria-labelledby="third-dropdown">
-                                                    <li><a href="index-shop.html">Đại học</a></li>
-                                                    <li><a href="index-shop-2.html">Sau đại học</a></li>
+                                                    <li><a href="index-shop.html">Tin giáo dụ</a></li>
+                                                    <li><a href="index-shop-2.html">Tin NCKH - Seminar</a></li>
+                                                    <li><a href="index-shop-2.html">Tin CB - VC Khoa</a></li>
+                                                    <li><a href="index-shop-2.html">Tin Tuyển Dụng</a></li>
                                                 </ul>
                                             </li>
                                             <!-- mega-menu end tuyển sinh-->
@@ -216,14 +217,13 @@
                                             <!-- mega-menu end đào tạo-->
 
                                             <!-- mega-menu start nghiên cứu-->
-
                                             <li class="nav-item dropdown ">
                                                 <a href="index-shop.html" class="nav-link dropdown-toggle"
-                                                    id="fourth-dropdown" data-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false">Nghiên cứu</a>
+                                                    id="sixth-dropdown" data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false">Tuyển sinh</a>
                                                 <ul class="dropdown-menu" aria-labelledby="fourth-dropdown">
-                                                    <li><a href="index-shop.html">Hoạt động nghiên cứu</a></li>
-                                                    <li><a href="index-shop-2.html">Công trình</a></li>
+                                                    <li><a href="index-shop.html">Đại học</a></li>
+                                                    <li><a href="index-shop-2.html">Sau đại học</a></li>
                                                 </ul>
                                             </li>
                                             <!-- mega-menu end nghiên cứu-->
@@ -244,6 +244,13 @@
                                     class="fa fa-hospital-o pl-1"></i></a>
                         </div>
                         <!-- header dropdown buttons end -->
+                    </div>
+                    <div class="col-auto hidden-md-down p-0">
+                        <div class="header-dropdown-buttons">
+                            <a href="#">
+                                <img src="/language_file/vie/vietnam.png" class="user-image" alt="VIET NAM" width="36px">
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

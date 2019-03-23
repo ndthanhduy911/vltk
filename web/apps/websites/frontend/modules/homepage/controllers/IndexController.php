@@ -1,6 +1,6 @@
 <?php
 
-namespace Frontend\Modules\Physics\Controllers;
+namespace Frontend\Modules\HomePage\Controllers;
 
 use Phalcon\Mvc\View;
 
