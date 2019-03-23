@@ -69,9 +69,9 @@
         <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i
                     class="fa fa-user fa-us"></i></a>
             <ul class="dropdown-menu settings-menu dropdown-menu-right">
-                <li><a class="dropdown-item" href=""><i class="fa fa-cog fa-lg"></i> Cài đặt</a></li>
-                <li><a class="dropdown-item" href=""><i class="fa fa-user fa-lg"></i> Cá nhân</a></li>
-                <li><a class="dropdown-item" href=""><i class="fa fa-sign-out fa-lg"></i> Đăng xuất</a></li>
+                <li><a class="dropdown-item" href="<?php echo BACKEND_URL; ?>"><i class="fa fa-cog fa-lg"></i> Cài đặt</a></li>
+                <li><a class="dropdown-item" href="<?php echo BACKEND_URL; ?>/profile"><i class="fa fa-user fa-lg"></i> Cá nhân</a></li>
+                <li><a class="dropdown-item" href="<?php echo BACKEND_URL; ?>"><i class="fa fa-sign-out fa-lg"></i> Đăng xuất</a></li>
             </ul>
         </li>
     </ul>

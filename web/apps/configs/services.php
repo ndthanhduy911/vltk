@@ -1,28 +1,21 @@
 <?php
 
 use Phalcon\DI\FactoryDefault;
-use Phalcon\Mvc\View;
-use Phalcon\Crypt;
-use Phalcon\Mvc\Dispatcher;
 use Phalcon\Mvc\Url as UrlResolver;
 use Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
-use Phalcon\Mvc\View\Engine\Volt as VoltEngine;
 use Phalcon\Mvc\Model\Metadata\Files as MetaDataAdapter;
 use Phalcon\Mvc\Model\Metadata\Memory as MemoryMetaDataAdapter;
 use Phalcon\Session\Adapter\Files as SessionAdapter;
-use Phalcon\Cache\Backend\File as FileCache;
-use Phalcon\Events\Manager as EventsManager;
-use Phalcon\Logger\Adapter\File as FileLogger;
 use Phalcon\Flash\Direct as Flash;
-use Phalcon\Queue\Beanstalk;
-use Phalcon\Cache\Frontend\None as FrontendNone;
 use Phalcon\Mvc\Collection\Manager as CollectionManager;
 use Library\Helper\Helper as Helper;
 use Library\SSP\SSP as SSP;
 use Library\ML\ML as ML;
 use Library\RoleMaster\RoleMaster as RoleMaster;
+use Library\LogManager\LogManager as LogManager;
 
-use Phalcon\Mvc\Model\Query;
+
+date_default_timezone_set("Asia/Bangkok");
 
 $di = new FactoryDefault();
 
@@ -190,5 +183,12 @@ $di->set(
     "ml",
     function() {
         return new ML();
+    }
+);
+
+$di->set(
+    "logs",
+    function() {
+        return new LogManager();
     }
 );

@@ -2,11 +2,9 @@
 namespace Library\Helper;
 use Phalcon\Mvc\User\Component;
 use Library\PHPMailer\PHPMailer;
-use Library\PHPMailer\SMTP;
 use Models\Logs as Logs;
 use Models\Emails;
 use Models\GenaralSetting;
-use Models\User;
 use Models\Notification;
 
 
@@ -403,10 +401,6 @@ class Helper extends Component
                 <p>Bạn hãy vào <a href="https://support.physics.vn/adcp">TRANG QUẢN TRỊ</a> để xử lý.</p>                
             </div>
         </div>';
-    }
-
-    public function random_code($limit){
-        return substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0, $limit);
     }
 
     public function getExcerpt($str, $startPos=0, $maxLength=100) {

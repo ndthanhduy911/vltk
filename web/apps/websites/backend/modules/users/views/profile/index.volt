@@ -38,7 +38,7 @@
                                 </div>
                             </div>
                             {% endfor %}
-
+                            <input class="tokenCSRF" type="hidden" name="{{ security.getTokenKey() }}" value="{{ security.getToken() }}">
                             <div class="col-md-12 p-0">
                                 <button type="submit" class="btn btn-primary"><span>Cập nhật</span></button>
                             </div>
@@ -63,6 +63,7 @@
                             </div>
                         </div>
                         {% endfor %}
+                        <input class="tokenCSRF" type="hidden" name="{{ security.getTokenKey() }}" value="{{ security.getToken() }}">
                         <div class="col-md-12 p-0">
                             <button type="submit" class="btn btn-primary">Cập nhật</button>
                         </div>
