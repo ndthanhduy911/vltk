@@ -24,4 +24,5 @@
 	//Activate bootstrip tooltips
 	$("[data-toggle='tooltip']").tooltip();
 
+	$('.select2-basic').select2();
 })();

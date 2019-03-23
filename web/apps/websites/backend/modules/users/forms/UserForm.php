@@ -112,7 +112,7 @@ class UserForm extends \Phalcon\Forms\Form
             'useEmpty' => true,
             'emptyText' => 'Vui lòng chọn đơn vị',
             'emptyValue' => '',
-            'class' => 'form-control',
+            'class' => 'form-control select2-basic',
             'required' => '',
             'data-required-error' => "Vui lòng điền đầy đủ thông tin.",
             'data-error' => "Chưa đúng định dạng",

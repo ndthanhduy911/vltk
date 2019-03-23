@@ -10244,7 +10244,7 @@ body.stop-scrolling {
   position: relative;
   margin: 15px 0 0 0;
   padding: 0;
-  line-height: 40px;
+  line-height: 37px;
   display: block;
 }
 
@@ -10357,7 +10357,7 @@ body.stop-scrolling {
 .sweet-alert input {
   display: none;
   width: 100%;
-  height: 40px;
+  height: 37px;
   padding: 8px 12px 4px;
   font-size: 14px;
   font-weight: 500;
@@ -11204,7 +11204,7 @@ body.stop-scrolling {
           box-sizing: border-box;
   cursor: pointer;
   display: block;
-  height: 40px;
+  height: 37px;
   -moz-user-select: none;
    -ms-user-select: none;
        user-select: none;
@@ -11308,18 +11308,7 @@ body.stop-scrolling {
 
 .select2-container--open .select2-dropdown {
   left: 0;
-}
-
-.select2-container--open .select2-dropdown--above {
-  border-bottom: none;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
-.select2-container--open .select2-dropdown--below {
-  border-top: none;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+  top: 10px;
 }
 
 .select2-search--dropdown {
@@ -11381,7 +11370,7 @@ body.stop-scrolling {
 
 .select2-container--default .select2-selection--single .select2-selection__rendered {
   color: #444;
-  line-height: 37px;
+  line-height: 35px;
 }
 
 .select2-container--default .select2-selection--single .select2-selection__clear {
@@ -11395,7 +11384,7 @@ body.stop-scrolling {
 }
 
 .select2-container--default .select2-selection--single .select2-selection__arrow {
-  height: 40px;
+  height: 370px;
   position: absolute;
   top: 1px;
   right: 5px;

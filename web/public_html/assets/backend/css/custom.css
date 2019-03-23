@@ -14,3 +14,110 @@
     color: #1976D2;
     font-weight: bold;
 }
+
+@media (min-width: 1360px) {
+    .select2-container{
+        width: 92.5% !important;
+    }
+}
+
+@media (max-width: 1360px) {
+    .select2-container{
+        width: 92% !important;
+    }
+}
+
+@media (max-width: 1260px) {
+    .select2-container{
+        width: 91.5% !important;
+    }
+}
+
+@media (max-width: 1200px) {
+    .select2-container{
+        width: 91% !important;
+    }
+}
+
+@media (max-width: 1135px) {
+    .select2-container{
+        width: 90.5% !important;
+    }
+}
+
+@media (max-width: 1073px) {
+    .select2-container{
+        width: 90% !important;
+    }
+}
+
+@media (max-width: 1022px) {
+    .select2-container{
+        width: 89.5% !important;
+    }
+}
+
+@media (max-width: 978px) {
+    .select2-container{
+        width: 89% !important;
+    }
+}
+
+@media (max-width: 937px) {
+    .select2-container{
+        width: 88% !important;
+    }
+}
+
+@media (max-width: 870px) {
+    .select2-container{
+        width: 87% !important;
+    }
+}
+
+@media (max-width: 804px) {
+    .select2-container{
+        width: 86% !important;
+    }
+}
+
+@media (max-width: 780px) {
+    .select2-container{
+        width: 93% !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .select2-container{
+        width: 89.5% !important;
+    }
+}
+
+@media (max-width:480px) {
+    .select2-container{
+        width: 89% !important;
+    }
+}
+@media (max-width:400px) {
+    .select2-container{
+        width: 88% !important;
+    }
+}
+
+@media (max-width:360px) {
+    .select2-container{
+        width: 87% !important;
+    }
+}
+
+@media (max-width:320px) {
+    .select2-container{
+        width: 85% !important;
+    }
+}
+
+
+
+
+
+

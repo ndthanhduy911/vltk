@@ -48,6 +48,7 @@
     <script src="/assets/backend/js/bootstrap.min.js"></script>
     <script src="/assets/backend/js/plugins/jquery.dataTables.min.js"></script>
     <script src="/assets/backend/js/plugins/dataTables.bootstrap.min.js"></script>
+    <script src="/assets/backend/js/plugins/select2.min.js"></script>
     <script src="/assets/backend/js/plugins/validator.min.js"></script>
     <script src="/assets/backend/js/define.js"></script>
     <script src="/assets/backend/js/modules/users.js"></script>
