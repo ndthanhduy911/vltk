@@ -85,7 +85,7 @@ class ProfileController extends \BackendController
                                 } else {
                                     $this->logs->write_log(2, 1, 'Cập nhật tài khoản ID: ' . $save->id, json_encode($save->toArray()), $this->session->get("user_id"));
                                     $this->flashSession->success("Cập nhật tài khoản thành công");
-                                    return $this->response->redirect('profile');
+                                    return $this->response->redirect(BACKEND_URL.'/profile');
                                 }
                             }
                         }else{
@@ -123,6 +123,7 @@ class ProfileController extends \BackendController
                 // }
             }
             $this->view->form = new ProfileForm($profile);
+            $this->view->formPW = new ChangePWForm();
         } else {
             array_push($error, "Tài khoản không tồn tại");
             if ($this->request->isAjax()) {
@@ -134,36 +135,58 @@ class ProfileController extends \BackendController
                 foreach ($error as $value) {
                     $this->flashSession->error($value . ". ");
                 }
-                return $this->response->redirect('profile');
+                return $this->response->redirect(BACKEND_URL.'/profile');
             }
         }
     }
 
     public function changepasswordAction()
     {
-        if ($profile = Users::findFirstId($this->session->get("profile_id"))) {
+        $error = [];
+        if ($profile = Users::findFirstId($this->session->get("user_id"))) {
             if ($this->request->isPost()) {
-                $profile_id = $this->session->get("profile_id");
-                $password = $this->request->getPost('oldPassword');
-                $newpassword = $this->request->getPost('password');
-
-                $profile = Users::findFirstId($profile_id);
+                $user_id = $this->session->get("user_id");
+                $profile = Users::findFirstId($user_id);
                 if (!$profile) {
-                    $this->flashSession->error("Không tìm thấy tài khoản này.");
-                    return $this->response->redirect(BACKEND_URL.'/profile/changepassword');
+                    array_push($error, "Tài khoản không tồn tại");
+                    if ($this->request->isAjax()) {
+                        $data['error'] = $error;
+                        $this->response->setStatusCode(400, 'error');
+                        $this->response->setJsonContent($data);
+                        return $this->response->send();
+                    } else {
+                        foreach ($error as $value) {
+                            $this->flashSession->error($value . ". ");
+                        }
+                        return $this->response->redirect(BACKEND_URL.'/profile');
+                    }
                 } else {
-                    if ($this->security->checkHash($password, $profile->password)) {
-                        $profile->password = $this->security->hash($newpassword);
-                        if (!$profile->update()) {
-                            $this->flashSession->error("Đổi mật khẩu thất bại.");
-                            return $this->response->redirect('/profile/changepassword');
+                    if ($this->security->checkToken()) {
+                        $password = $this->request->getPost('oldPassword');
+                        $newpassword = $this->request->getPost('password');
+                        if ($this->security->checkHash($password, $profile->password)) {
+                            $profile->password = $this->security->hash($newpassword);
+                            if (!$profile->update()) {
+                                $this->flashSession->error("Đổi mật khẩu thất bại.");
+                                return $this->response->redirect('/profile/changepassword');
+                            } else {
+                                $this->flashSession->success("Đổi mật khẩu thành công.");
+                                return $this->response->redirect(BACKEND_URL.'/profile/changepassword');
+                            }
                         } else {
-                            $this->flashSession->success("Đổi mật khẩu thành công.");
+                            $this->flashSession->error("Mật khẩu hiện tại không chính xác.");
                             return $this->response->redirect(BACKEND_URL.'/profile/changepassword');
                         }
-                    } else {
-                        $this->flashSession->error("Mật khẩu hiện tại không chính xác.");
-                        return $this->response->redirect(BACKEND_URL.'/profile/changepassword');
+                    }else {
+                        if ($this->request->isAjax()) {
+                            $data['token'] = ['key' => $this->security->getTokenKey(), 'value' => $this->security->getToken()];
+                            $data['error'] = ['Token không chính xác'];
+                            $this->response->setStatusCode(400, 'error');
+                            $this->response->setJsonContent($data);
+                            return $this->response->send();
+                        } else {
+                            $this->flashSession->error("Token không chính xác");
+                        }
                     }
                 }
             }
