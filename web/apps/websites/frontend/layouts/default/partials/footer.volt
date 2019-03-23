@@ -10,31 +10,15 @@
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="footer-content">
-                            <h2 class="title logo-font text-default">The Project</h2>
+
+                            <div class="media-wrap">
+                                <a href="https://mobirise.com/">
+                                    <img src="/assets/frontend/images/logo-khoa-single-1-96x96.png " title=" Khoa">
+                                </a>
+                            </div>
+
+                            <h2 class="title logo-font text-default">Khoa Vật lí</h2>
                             <div class="separator-2"></div>
-                            <nav class="mb-20">
-                                <ul class="nav flex-column list-style-icons">
-                                    <li class="nav-item"><a class="nav-link" href="components-social-icons.html"><i
-                                                class="fa fa-chevron-circle-right"></i> Lorem ipsum dolor sit</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="components-buttons.html"><i class="fa fa-chevron-circle-right"></i>
-                                            Consectetur adipisicing elit</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="components-buttons.html"><i class="fa fa-chevron-circle-right"></i>
-                                            Rerum iure temporibus</a></li>
-                                </ul>
-                            </nav>
-                            <h4 class="title text-default"><i class="fa fa-wechat pr-10"></i> Consectetur adipisicing</h4>
-                            <nav class="mb-20">
-                                <ul class="nav flex-column list-style-icons">
-                                    <li class="nav-item"><a class="nav-link" href="components-forms.html"><i class="fa fa-chevron-circle-right"></i>
-                                            Repudiandae porro doloribus</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="components-tabs-and-pills.html"><i
-                                                class="fa fa-chevron-circle-right"></i> Amet culpa</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-chevron-circle-right"></i>
-                                            Atque vero laudantium</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-chevron-circle-right"></i>
-                                            Loat dolot aspree</a></li>
-                                </ul>
-                            </nav>
                         </div>
                     </div>
                     <div class="col-lg-3">
@@ -43,56 +27,33 @@
                             <nav class="mb-20">
                                 <ul class="nav flex-column list-style-icons">
                                     <li class="nav-item"><a class="nav-link" href="components-social-icons.html"><i
-                                                class="fa fa-chevron-circle-right"></i> Vel consequatur</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="components-buttons.html"><i class="fa fa-chevron-circle-right"></i>
-                                            Provident obcaecati</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="components-buttons.html"><i class="fa fa-chevron-circle-right"></i>
-                                            Illo perspiciatis</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="components-forms.html"><i class="fa fa-chevron-circle-right"></i>
-                                            acilis maiores</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="components-tabs-and-pills.html"><i
-                                                class="fa fa-chevron-circle-right"></i> Enim modi</a></li>
+                                                class="fa fa-chevron-circle-right"></i>
+                                            Email</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="components-buttons.html"><i
+                                                class="fa fa-chevron-circle-right"></i>
+                                            Fanpage</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="components-buttons.html"><i
+                                                class="fa fa-chevron-circle-right"></i>
+                                            Liên hệ</a></li>
+
                                 </ul>
                             </nav>
-                            <h4 class="title text-default"><i class="fa fa-users pr-10"></i> Staff/Faculty</h4>
-                            <nav class="mb-20">
-                                <ul class="nav flex-column list-style-icons">
-                                    <li class="nav-item"><a class="nav-link" href="components-forms.html"><i class="fa fa-chevron-circle-right"></i>
-                                            acilis maiores</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="components-tabs-and-pills.html"><i
-                                                class="fa fa-chevron-circle-right"></i> Enim modi</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-chevron-circle-right"></i>
-                                            Support</a></li>
-                                </ul>
-                            </nav>
+
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="footer-content">
-                            <h4 class="title text-default"><i class="fa fa-file-text-o pr-10"></i> Admission</h4>
-                            <nav class="mb-20">
-                                <ul class="nav flex-column list-style-icons">
-                                    <li class="nav-item"><a class="nav-link" href="components-forms.html"><i class="fa fa-chevron-circle-right"></i>
-                                            Facilis maiores</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="components-buttons.html"><i class="fa fa-chevron-circle-right"></i>
-                                            Provident obcaecati</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="components-social-icons.html"><i
-                                                class="fa fa-chevron-circle-right"></i> Vel consequatur</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-chevron-circle-right"></i>
-                                            Support</a></li>
-                                </ul>
-                            </nav>
+
                             <h4 class="title text-default"><i class="fa fa-child pr-10"></i> Students</h4>
                             <nav class="mb-20">
                                 <ul class="nav flex-column list-style-icons">
-                                    <li class="nav-item"><a class="nav-link" href="components-buttons.html"><i class="fa fa-chevron-circle-right"></i>
-                                            Illo perspiciatis</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="components-buttons.html"><i
+                                                class="fa fa-chevron-circle-right"></i>
+                                            Cựu sinh viên</a></li>
                                     <li class="nav-item"><a class="nav-link" href="components-tabs-and-pills.html"><i
-                                                class="fa fa-chevron-circle-right"></i> Enim modi</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-chevron-circle-right"></i>
-                                            Lorem</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="components-social-icons.html"><i
-                                                class="fa fa-chevron-circle-right"></i> Vel consequatur</a></li>
+                                                class="fa fa-chevron-circle-right"></i>
+                                            Hình ảnh hoạt động</a></li>
+
                                 </ul>
                             </nav>
                         </div>
@@ -102,29 +63,16 @@
                             <h4 class="title text-default"><i class="fa fa-institution pr-10"></i> Schools</h4>
                             <nav class="mb-20">
                                 <ul class="nav flex-column list-style-icons">
-                                    <li class="nav-item"><a class="nav-link" href="components-buttons.html"><i class="fa fa-chevron-circle-right"></i>
-                                            Consectetur adipisicing elit</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="components-buttons.html"><i
+                                                class="fa fa-chevron-circle-right"></i>
+                                            trường đại học Khoa Học Tự Nhiên</a></li>
                                     <li class="nav-item"><a class="nav-link" href="components-social-icons.html"><i
-                                                class="fa fa-chevron-circle-right"></i> Lorem ipsum dolor sit</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="components-tabs-and-pills.html"><i
-                                                class="fa fa-chevron-circle-right"></i> Amet culpa</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="components-forms.html"><i class="fa fa-chevron-circle-right"></i>
-                                            Repudiandae porro doloribus</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="components-buttons.html"><i class="fa fa-chevron-circle-right"></i>
-                                            Rerum iure temporibus</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-chevron-circle-right"></i>
-                                            Atque vero laudantium</a></li>
+                                                class="fa fa-chevron-circle-right"></i>
+                                            Portal</a></li>
+
                                 </ul>
                             </nav>
-                            <h4 class="title text-default"><i class="fa fa-info-circle pr-10"></i> Information</h4>
-                            <nav class="mb-20">
-                                <ul class="nav flex-column list-style-icons">
-                                    <li class="nav-item"><a class="nav-link" href="components-buttons.html"><i class="fa fa-chevron-circle-right"></i>
-                                            Consectetur adipisicing elit</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="components-social-icons.html"><i
-                                                class="fa fa-chevron-circle-right"></i> Lorem ipsum dolor sit</a></li>
-                                </ul>
-                            </nav>
+
                         </div>
                     </div>
                 </div>
@@ -140,8 +88,9 @@
             <div class="subfooter-inner">
                 <div class="row">
                     <div class="col-12">
-                        <p class="text-center"><span class="logo-font pr-10">The Project</span> Copyright © 2018 The
-                            Project. All Rights Reserved</p>
+                        <p class="text-center"><span class="logo-font pr-10">VL-VLKT</span> Copyright © 2018 The
+                            Project.
+                            All Rights Reserved</p>
                     </div>
                 </div>
             </div>

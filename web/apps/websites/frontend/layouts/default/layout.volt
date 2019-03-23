@@ -55,10 +55,10 @@
     <link href="/assets/frontend/css/animations.css" rel="stylesheet">
     <link href="/assets/frontend/plugins/slick/slick.css" rel="stylesheet">
 
-    <!-- The Project's core CSS file -->
+    <!-- VL-VLKT's core CSS file -->
     <!-- Use css/rtl_style.css for RTL version -->
     <link href="/assets/frontend/css/style.css" rel="stylesheet">
-    <!-- The Project's Typography CSS file, includes used fonts -->
+    <!-- VL-VLKT's Typography CSS file, includes used fonts -->
     <!-- Used font for body: Roboto -->
     <!-- Used font for headings: Raleway -->
     <!-- Use css/rtl_typography-default.css for RTL version -->
@@ -71,7 +71,7 @@
     <link href="/assets/frontend/css/custom.css" rel="stylesheet">
 </head>
 
-<body class="front-page page-loader-2">
+<body class="front-page">
     <!-- scrollToTop -->
     <!-- ================ -->
     <div class="scrollToTop circle"><i class="fa fa-angle-up"></i></div>

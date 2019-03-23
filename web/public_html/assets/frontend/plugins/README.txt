@@ -1,7 +1,7 @@
 All the files in this folder are third-party code, that are externally
 maintained by their own authors or contributors and have their own
 licenses. We are using these plugins into our template in order to
-support various features (e.g. sliders). The Project template includes
+support various features (e.g. sliders). VL-VLKT template includes
 2 Premium plugins (Isotope, Slider Revolution) and several Open Source
 plugins.
 
@@ -13,7 +13,7 @@ plugins.
 
   The Slider Revolution plugin is used for the main sliders (in banner
   section) of the template. Slider revolution plugin has its own license,
-  the slider-revolution plugin must only be used within the Project template.
+  the slider-revolution plugin must only be used within VL-VLKT template.
   It is not permitted to extract and use the slider-revolution plugin outside
   of the template.
 
@@ -40,7 +40,7 @@ our support.
 
   2-a) UPDATE A PLUGIN
 
-    The Project template is a static HTML template so you have to update
+    VL-VLKT template is a static HTML template so you have to update
     or maintain the plugins manually if you want to keep your website updated.
     We highly recommend you check (or watch) the repositories of the third-party
     plugins for updates, bug fixes etc, and use the updated versions of the plugins
@@ -74,7 +74,7 @@ our support.
 
   2-c) PLUGINS LIST
 
-    You will find the detailed list of plugins that are used in the project template
+    You will find the detailed list of plugins that are used in VL-VLKT template
     into the documentation of the template.
 
 ------------------------------------------------------------------------
