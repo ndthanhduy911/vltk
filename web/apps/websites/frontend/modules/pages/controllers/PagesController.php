@@ -1,19 +1,10 @@
 <?php
 
-namespace Backend\Modules\Pages\Controllers;
-use Models\Users;
-
+namespace Frontend\Modules\Pages\Controllers;
 use Phalcon\Mvc\View;
-use Backend\Modules\Pages\Forms\LoginForm;
-
-class PagesController extends \Phalcon\Mvc\Controller
+class PagesController extends \FrontendController
 {
-    public function indexAction()
-    {
-
-    }
-
-    public function pageAction()
-    {
+    public function indexAction(){
+        // $this->view->render('index');
     }
 }

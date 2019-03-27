@@ -30,4 +30,9 @@ $application->registerModules(array(
         'className' => 'Frontend\Modules\Pages\Module',
         'path' => APP_DIR . '/websites/frontend/modules/pages/module.php'
     ),
+
+    'frontend_dept' => array(
+        'className' => 'Frontend\Modules\Dept\Module',
+        'path' => APP_DIR . '/websites/frontend/modules/dept/module.php'
+    ),
 ));
