@@ -11,13 +11,13 @@
                     <div class="col-lg-3">
                         <div class="footer-content">
 
-                            <div class="media-wrap">
+                            <!-- <div class="media-wrap">
                                 <a href="https://mobirise.com/">
                                     <img src="/assets/frontend/images/logo-khoa-single-1-96x96.png " title=" Khoa">
                                 </a>
-                            </div>
+                            </div> -->
 
-                            <h2 class="title logo-font text-default">Khoa Vật lí</h2>
+                            <h2 class="title logo-font text-default">Khoa Vật lý</h2>
                             <div class="separator-2"></div>
                         </div>
                     </div>
@@ -88,8 +88,7 @@
             <div class="subfooter-inner">
                 <div class="row">
                     <div class="col-12">
-                        <p class="text-center"><span class="logo-font pr-10">VL-VLKT</span> Copyright © 2018 The
-                            Project.
+                        <p class="text-center"><span class="logo-font pr-10">VL-VLKT</span> Copyright © 2018 VL-VLKT.
                             All Rights Reserved</p>
                     </div>
                 </div>

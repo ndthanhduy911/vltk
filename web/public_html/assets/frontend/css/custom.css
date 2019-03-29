@@ -3,10 +3,85 @@
  * File Description: Place here your custom CSS styles
  */
 
+ html::-webkit-scrollbar-track
+ {
+     box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+     border-radius: 10px;
+     background-color: #F5F5F5;
+ }
+ 
+ html::-webkit-scrollbar
+ {
+     width: 12px;
+     background-color: #F5F5F5;
+ }
+ 
+ html::-webkit-scrollbar-thumb
+ {
+     border-radius: 10px;
+     box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+     background-color: #09afdf;
+ }
+
+ a {
+     text-decoration: none !important;
+ }
+
  h1, h2, h3, h4, h5, h6, .navbar .navbar-nav {
     font-family: "Roboto", sans-serif
 }
 
+h2 {
+    font-size: 36px;
+    text-transform: initial;
+}
+
 .header .navbar-nav .dropdown-toggle::after {
     content: "";
+}
+
+.header .navbar-nav li ul.dropdown-menu,
+ul.dropdown-menu > li,
+ul.dropdown-menu > li > a  
+{
+    border-radius: 3px;
+}
+
+.transparent-header .dark.header .navbar-nav li .nav-link {
+    color: #ffffff;
+}
+
+#section1 .overlay-container {
+    background: #ffffff;
+    margin-right: 10px;
+}
+
+#section1 .media-body {
+    height: 50px;
+}
+
+#section1 .overlay-container img {
+    height: 45px;
+}
+
+#section1 .media-heading a {
+    text-transform: initial;
+}
+
+@media (max-width:480px) {
+    .caption-box p.slider-content {
+        font-size: 13px;
+        margin-bottom: 5px;
+    }
+    .caption-box h2.slider-title {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    .caption-box .btn {
+        font-size: 13px;
+        padding: 5px 10px;
+    }
 }
