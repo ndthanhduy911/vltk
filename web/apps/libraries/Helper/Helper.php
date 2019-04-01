@@ -306,51 +306,51 @@ class Helper extends Component
         }
     }
 
-    public function send_multiple_email($emailAddAddress = [], $emailAddCC = [], $title = null, $body=null, $content = null) {
-        $email_setting = json_decode(GenaralSetting::findFirstByName('email_setting')->value);
-        $nFrom = $email_setting->form_name;
-        $mFrom = $email_setting->email_name;
-        $mPass = $email_setting->password_email;
-        $mail  = new PHPMailer();
-        // idzidrtajyaiegul
-        $mail->IsSMTP();             
-        $mail->CharSet  = "utf-8";
-        $mail->SMTPDebug  = 0;
-        $mail->SMTPAuth   = true;
-        $mail->SMTPSecure = "ssl";
-        $mail->Host       = $email_setting->smtp_name;
-        $mail->Port       = 465;
+    // public function send_multiple_email($emailAddAddress = [], $emailAddCC = [], $title = null, $body=null, $content = null) {
+    //     $email_setting = json_decode(GenaralSetting::findFirstByName('email_setting')->value);
+    //     $nFrom = $email_setting->form_name;
+    //     $mFrom = $email_setting->email_name;
+    //     $mPass = $email_setting->password_email;
+    //     $mail  = new PHPMailer();
+    //     // idzidrtajyaiegul
+    //     $mail->IsSMTP();             
+    //     $mail->CharSet  = "utf-8";
+    //     $mail->SMTPDebug  = 0;
+    //     $mail->SMTPAuth   = true;
+    //     $mail->SMTPSecure = "ssl";
+    //     $mail->Host       = $email_setting->smtp_name;
+    //     $mail->Port       = 465;
 
-        $mail->Username   = $mFrom;
-        $mail->Password   = $mPass;
-        $mail->SetFrom($mFrom, $nFrom);
-        $mail->AddReplyTo($mFrom, $nFrom);
-        $mail->Subject    = $title;
-        $mail->MsgHTML($body);
-        foreach ($emailAddAddress as $key => $value) {
-            $mail->AddAddress($value['email'], $value['fullname']);
-        }
-        foreach ($emailAddCC as $key => $value) {
-            $mail->AddCC($value['email'], $value['fullname']);
-        }
-        die;
-        // $mail->AddCC('person1@domain.com', 'Person One');
-        $email = new Emails();
-        $email->type = 1;
-        $email->person_from = $nFrom.'<br>('.$mFrom.')';
-        $email->person_to = $nTo.'<br>('.$mTo.')';
-        $email->title = $title;
-        $email->content = $content;
-        if(!$mail->Send()) {
-            $email->status = 0;
-            $email->save();
-            return false;
-        } else {
-            $email->status = 1;
-            $email->save();
-            return true;
-        }
-    }
+    //     $mail->Username   = $mFrom;
+    //     $mail->Password   = $mPass;
+    //     $mail->SetFrom($mFrom, $nFrom);
+    //     $mail->AddReplyTo($mFrom, $nFrom);
+    //     $mail->Subject    = $title;
+    //     $mail->MsgHTML($body);
+    //     foreach ($emailAddAddress as $key => $value) {
+    //         $mail->AddAddress($value['email'], $value['fullname']);
+    //     }
+    //     foreach ($emailAddCC as $key => $value) {
+    //         $mail->AddCC($value['email'], $value['fullname']);
+    //     }
+    //     die;
+    //     // $mail->AddCC('person1@domain.com', 'Person One');
+    //     $email = new Emails();
+    //     $email->type = 1;
+    //     $email->person_from = $nFrom.'<br>('.$mFrom.')';
+    //     $email->person_to = $nTo.'<br>('.$mTo.')';
+    //     $email->title = $title;
+    //     $email->content = $content;
+    //     if(!$mail->Send()) {
+    //         $email->status = 0;
+    //         $email->save();
+    //         return false;
+    //     } else {
+    //         $email->status = 1;
+    //         $email->save();
+    //         return true;
+    //     }
+    // }
 
     public function getTextEmailPassword($name=null, $eamil=null, $password = null) {
         return 

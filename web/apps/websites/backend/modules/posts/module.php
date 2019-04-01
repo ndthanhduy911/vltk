@@ -1,11 +1,10 @@
 <?php
 
-namespace Backend\Modules\Admin;
+namespace Backend\Modules\Posts;
 
 use Phalcon\Loader;
 use Phalcon\Mvc\View;
 use Phalcon\Mvc\View\Engine\Volt as VoltEngine;
-use Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
 use Phalcon\Mvc\ModuleDefinitionInterface;
 
 
@@ -19,9 +18,9 @@ class Module implements ModuleDefinitionInterface
         $loader = new Loader();
 
         $loader->registerNamespaces(array(
-            'Backend\Modules\Admin\Controllers' => __DIR__ . '/controllers/',
-            'Backend\Modules\Admin\Models' => __DIR__ . '/models/',
-            'Backend\Modules\Admin\Forms' => __DIR__ . '/forms/',
+            'Backend\Modules\Posts\Controllers' => __DIR__ . '/controllers/',
+            'Backend\Modules\Posts\Models' => __DIR__ . '/models/',
+            'Backend\Modules\Posts\Forms' => __DIR__ . '/forms/',
         ));
         $loader->register();
     }
@@ -69,7 +68,7 @@ class Module implements ModuleDefinitionInterface
 
         $di->set('dispatcher' , function(){
             $dispatcher = new \Phalcon\Mvc\Dispatcher();
-            $dispatcher->setDefaultNamespace("Backend\Modules\Admin\Controllers\\");
+            $dispatcher->setDefaultNamespace("Backend\Modules\Posts\Controllers\\");
             return $dispatcher;
         });
 

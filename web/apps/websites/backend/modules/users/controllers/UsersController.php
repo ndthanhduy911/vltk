@@ -68,7 +68,6 @@ class UsersController  extends \BackendController {
                             array_push($error, $message->getMessage());
                         }
                         $this->flashSession->error(implode(', ', $error));
-                        return $this->response->redirect('properties/edit/' . $id);
                     }
 
                     $checkUsename = Users::findFirst([

@@ -8,6 +8,10 @@ $application->registerModules(array(
         'className' => 'Backend\Modules\Account\Module',
         'path' => APP_DIR . '/websites/backend/modules/account/module.php'
     ),
+    'backend_posts' => array(
+        'className' => 'Backend\Modules\Posts\Module',
+        'path' => APP_DIR . '/websites/backend/modules/posts/module.php'
+    ),
     'backend_dashboard' => array(
         'className' => 'Backend\Modules\Dashboard\Module',
         'path' => APP_DIR . '/websites/backend/modules/dashboard/module.php'

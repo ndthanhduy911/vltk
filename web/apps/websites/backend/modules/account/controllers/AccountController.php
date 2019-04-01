@@ -10,6 +10,7 @@ class AccountController extends \Phalcon\Mvc\Controller
 {
     public function loginAction()
     {
+        // var_dump($_SESSION); die;
         if(!empty($this->session->get('user_id'))){
             return $this->response->redirect("/admin");
         }

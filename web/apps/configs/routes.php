@@ -11,7 +11,10 @@ $router->notFound(array(
 include APP_DIR . '/websites/frontend/modules/pages/routes.php';
 include APP_DIR . '/websites/frontend/modules/homepage/routes.php';
 include APP_DIR . '/websites/frontend/modules/dept/routes.php';
+
+
 include APP_DIR . '/websites/backend/modules/account/routes.php';
+include APP_DIR . '/websites/backend/modules/posts/routes.php';
 include APP_DIR . '/websites/backend/modules/dashboard/routes.php';
 include APP_DIR . '/websites/backend/modules/users/routes.php';
 return $router;

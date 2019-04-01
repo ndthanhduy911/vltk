@@ -8,4 +8,6 @@
 
 define('LIB_DIR', APP_DIR . '/libraries');
 define('ERROR_FILE', APP_DIR . '/libraries/Error/404.php');
+define('PUBLIC_URL', BASE_DIR . '/public_html');
+
 define('BACKEND_URL',  '/admin');
