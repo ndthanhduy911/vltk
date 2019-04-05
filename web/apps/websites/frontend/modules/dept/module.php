@@ -45,8 +45,8 @@ class Module implements ModuleDefinitionInterface
             $config = include APP_DIR . '/configs/config.php';
             $view = new View();
             $view->setViewsDir(__DIR__ . '/views/');
-            $view->setLayoutsDir('../../../layouts/' . $config->application->frontendTheme . '/');
-            $view->setPartialsDir('../../../layouts/' . $config->application->frontendTheme . '/partials/');
+            $view->setLayoutsDir('../../../layouts/dept/');
+            $view->setPartialsDir('../../../layouts/dept/partials/');
             $view->setTemplateAfter('layout');
 
             $view->registerEngines(array(

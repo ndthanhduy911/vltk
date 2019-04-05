@@ -10934,7 +10934,7 @@ elFinder.prototype._options = {
 			// ViewerJS (https://viewerjs.org/) Options
 			// To enable this you need to place ViewerJS on the same server as elFinder and specify that URL in `url`.
 			viewerjs : {
-				url: '', // Example '/ViewerJS/index.html'
+				url: '', // Example '/ViewerJS//'
 				mimes: ['application/pdf', 'application/vnd.oasis.opendocument.text', 'application/vnd.oasis.opendocument.spreadsheet', 'application/vnd.oasis.opendocument.presentation']
 			},
 			// MIME types to CAD-Files and 3D-Models online viewer on sharecad.org

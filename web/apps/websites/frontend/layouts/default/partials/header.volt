@@ -91,7 +91,7 @@
 
                         <!-- logo -->
                         <div id="logo" class="logo">
-                            <a href="index.html">
+                            <a href="<?php echo FRONTEND_URL ?>/">
                                 <h3 class="title text-default mb-0">VL-VLKT</h3>
                                 <!-- <img id="logo_img" src="/assets/frontend/images/logo-khoa-single-1-96x96.png" alt="VL-VLKT"> -->
                             </a>
@@ -123,7 +123,7 @@
 
                                     <!-- logo -->
                                     <div id="logo-mobile" class="logo">
-                                        <!-- <a href="index.html"><img id="logo-img-mobile"
+                                        <!-- <a href="<?php echo FRONTEND_URL ?>/"><img id="logo-img-mobile"
                                                 src="/assets/frontend/images/logo-khoa-single-1-96x96.png"
                                                 alt="VL-VLKT"></a> -->
                                         <h3 class="title text-default mb-0">VL-VLKT</h3>
@@ -153,7 +153,7 @@
                                                 aria-expanded="false">Trang chủ</a>
                                             <ul class="dropdown-menu" aria-labelledby="third-dropdown">
                                                 <li><a href="/gioi-thieu">Giới thiệu Khoa</a></li>
-                                                <li><a href="/to-chuc-can-bo"></i>Tổ chức cán bộ</a></li>
+                                                <li><a href="/to-chuc-nhan-su"></i>Tổ chức - Nhân sự</a></li>
                                                 <li><a href="/hop-tac-dao-tao"></i>Hợp tác đào tạo</a></li>
                                                 <li><a href="/nghien-cuu-khoa-hoc"></i>Nghiên cứu khoa học</a></li>
                                                 <li><a href="/phong-thi-nghiem">Phòng thí nghiệm</a></li>
@@ -170,7 +170,7 @@
                                                 aria-expanded="false">Bộ môn</a>
                                             <ul class="dropdown-menu" aria-labelledby="fifth-dropdown">
                                                 <li><a href="/vat-ly-tin-hoc">Vật
-                                                        lý tin học</a></li>
+                                                        Lý Tin Học</a></li>
                                                 <li><a href="/vat-ly-ly-thuyet">Vật
                                                         Lý Lý Thuyết</a></li>
                                                 <li><a href="/vat-ly-hat-nhan">Vật
@@ -236,14 +236,6 @@
                     </div>
                     <!-- header-second end -->
 
-                </div>
-                <div class="col-auto hidden-md-down pl-0 pl-md-1">
-                    <!-- header dropdown buttons -->
-                    <div class="header-dropdown-buttons">
-                        <a href="/lien-he" class="btn btn-sm hidden-xs btn-default">Liên hệ <i
-                                class="fa fa-hospital-o pl-1"></i></a>
-                    </div>
-                    <!-- header dropdown buttons end -->
                 </div>
                 <div class="col-auto hidden-md-down p-0">
                     <div class="header-dropdown-buttons">

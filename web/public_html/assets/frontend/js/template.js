@@ -215,6 +215,46 @@
 					}
 				}
 			});
+
+			$('.slider-revolution-5-container .slider-banner-fullwidth-big-height').revolution({
+				sliderType:"standard",
+				sliderLayout:"fullwidth",
+				delay:8000,
+				gridwidth:1140,
+				gridheight:650,
+				responsiveLevels:[1199,991,767,480],
+				navigation: {
+					onHoverStop: "off",
+					arrows: {
+						style: "hebe",
+						enable:true,
+						tmp: '',
+						left : {
+							h_align:"left",
+							v_align:"center",
+							h_offset:0,
+							v_offset:0,
+						},
+						right : {
+							h_align:"right",
+							v_align:"center",
+							h_offset:0,
+							v_offset:0
+						}
+					},
+					bullets:{
+						style:"",
+						enable:true,
+						hide_onleave:true,
+						direction:"horizontal",
+						space: 3,
+						h_align:"center",
+						v_align:"bottom",
+						h_offset:0,
+						v_offset:20
+					}
+				}
+			});
 		};
 
 		//Full Page
@@ -260,8 +300,8 @@
 					{
 						breakpoint: 992,
 						settings: {
-							slidesToShow: 4,
-							slidesToScroll: 4
+							slidesToShow: 3,
+							slidesToScroll: 3
 						}
 					},
 					{
@@ -282,30 +322,23 @@
 			});
 			$(".slick-carousel.carousel-autoplay").slick({
 				arrows: false,
-				slidesToShow: 4,
-				slidesToScroll: 4,
+				slidesToShow: 3,
+				slidesToScroll: 1,
 				autoplay: true,
 				autoplaySpeed: 5000,
 				responsive: [
 					{
 						breakpoint: 1200,
 						settings: {
-							slidesToShow: 4,
-							slidesToScroll: 4
-						}
-					},
-					{
-						breakpoint: 992,
-						settings: {
-							slidesToShow: 4,
-							slidesToScroll: 4
+							slidesToShow: 3,
+							slidesToScroll: 3
 						}
 					},
 					{
 						breakpoint: 768,
 						settings: {
-							slidesToShow: 2,
-							slidesToScroll: 2
+							slidesToShow: 1,
+							slidesToScroll: 1
 						}
 					},
 					{
@@ -341,15 +374,15 @@
 					{
 						breakpoint: 768,
 						settings: {
-							slidesToShow: 4,
-							slidesToScroll: 4
+							slidesToShow: 2,
+							slidesToScroll: 2
 						}
 					},
 					{
 						breakpoint: 575,
 						settings: {
-							slidesToShow: 3,
-							slidesToScroll: 3
+							slidesToShow: 1,
+							slidesToScroll: 1
 						}
 					}
 				]
@@ -379,8 +412,8 @@
 					{
 						breakpoint: 768,
 						settings: {
-							slidesToShow: 3,
-							slidesToScroll: 3
+							slidesToShow: 2,
+							slidesToScroll: 2
 						}
 					},
 					{

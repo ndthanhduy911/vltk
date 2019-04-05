@@ -25,7 +25,7 @@
 	$("[data-toggle='tooltip']").tooltip();
 
 	$('.select2-basic').select2();
-	// ...
+
 	if($('#editor').length) {
 		initSample();
 	}

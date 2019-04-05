@@ -7,9 +7,10 @@ $router->add($config->application->frontendUri."/:params/", array(
     'params' => 1
 ));
 
-$router->add($config->application->frontendUri."/tin-tuc/:params", array(
+/***********************IndexController***********************/
+$router->add($config->application->frontendUri."/:params", array(
     'module' => 'frontend_pages',
-    'controller' => 'posts',
+    'controller' => 'pages',
     'action' => 'index',
     'params' => 1
 ));

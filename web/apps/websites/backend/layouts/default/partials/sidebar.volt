@@ -16,9 +16,12 @@
                     class="app-menu__icon fa fa-tags"></i><span class="app-menu__label">Bài viết</span><i
                     class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
-                <li><a class="treeview-item {% if dispatcher.getControllerName()=='posts' AND (dispatcher.getActionName() in ['index','add','edit']) %} {{ 'actived' }} {% endif %}" href="{{ config.application.backendUri }}/posts"><i
+                <li><a class="treeview-item {% if dispatcher.getControllerName()=='posts' AND (dispatcher.getActionName() in ['index','edit']) %} {{ 'actived' }} {% endif %}" href="{{ config.application.backendUri }}/posts"><i
                             class="icon fa fa-circle-o"></i>
                         Tất cả</a></li>
+                <li><a class="treeview-item {% if dispatcher.getControllerName()=='posts' AND (dispatcher.getActionName() in ['add']) %} {{ 'actived' }} {% endif %}" href="{{ config.application.backendUri }}/posts/add"><i
+                        class="icon fa fa-circle-o"></i>
+                        Bài viết mới</a></li>
                 <li><a class="treeview-item {% if dispatcher.getControllerName()=='categories' AND (dispatcher.getActionName() in ['index','add','edit']) %} {{ 'actived' }} {% endif %}" href="{{ config.application.backendUri }}/categories" target="_blank"
                         rel="noopener"><i class="icon fa fa-circle-o"></i> Danh mục</a></li>
                 <li><a class="treeview-item" href="{{ config.application.backendUri }}/tag"><i

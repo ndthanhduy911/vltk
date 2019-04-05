@@ -42,11 +42,21 @@ h2 {
     content: "";
 }
 
-.header .navbar-nav li ul.dropdown-menu,
-ul.dropdown-menu > li,
-ul.dropdown-menu > li > a  
-{
+.header .navbar-nav li ul.dropdown-menu {
     border-radius: 3px;
+}
+
+ul.dropdown-menu > li:first-of-type > a
+{
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+ul.dropdown-menu > li:last-of-type > a
+{
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border: none !important;
 }
 
 .transparent-header .dark.header .navbar-nav li .nav-link {
@@ -84,4 +94,26 @@ ul.dropdown-menu > li > a
         font-size: 13px;
         padding: 5px 10px;
     }
+}
+
+.transparent-header .dark.header .navbar-nav li .nav-link {
+    font-weight: 400;
+    color: #ffffff;
+    text-shadow: none;
+}
+
+.dark.header .dropdown-menu > li > a, .dark.header .navbar-nav .mega-menu .menu > li > a {
+    color: #000;
+    text-shadow: none;    
+    font-weight: 400;
+    border-color: #09afdf;
+}
+
+.dark.header .dropdown-menu > li > a:hover {
+    color: #ffffff;
+    background-color: #09afdf;
+}
+
+.dark.header .dropdown-menu {
+    background-color: #ffffff;
 }

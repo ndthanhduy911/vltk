@@ -111,6 +111,8 @@ class PostsController  extends \BackendController {
             }
         }
         $this->view->form = $form;
+
+        $this->get_js_css();
     }
 
     public function editAction($id = null){
@@ -252,5 +254,10 @@ class PostsController  extends \BackendController {
                 return $this->response->redirect('users');
             }
         }
+    }
+
+    private function get_js_css (){
+        // And some local JavaScript resources
+        $this->assets->addJs($this->config->application->baseUri.'assets/backend/js/modules/posts.js');
     }
 }

@@ -8,7 +8,8 @@
         <!-- slider revolution start -->
         <!-- ================ -->
         <div class="slider-revolution-5-container">
-            <div id="slider-banner-fullwidth" class="slider-banner-fullwidth rev_slider" data-version="5.0">
+            <div id="slider-banner-fullwidth" class="slider-banner-fullwidth rev_slider"
+                data-version="5.0">
                 <ul class="slides">
                     <!-- slide 1 start -->
                     <!-- ================ -->
@@ -16,11 +17,17 @@
                         data-title="Title 1">
 
                         <!-- main image -->
-                        <img src="/assets/frontend/images/banner1.png" alt="slidebg1" data-bgposition="center top"
+                        <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/banner1.png" alt="slidebg1" data-bgposition="center top"
                             data-bgrepeat="no-repeat" data-bgfit="cover" class="rev-slidebg">
 
+                        <!-- Transparent Background -->
+                        <div class="tp-caption" data-x="center" data-y="center" data-start="0"
+                            data-transform_idle="o:1;" data-transform_in="o:0;s:600;e:Power2.easeInOut;"
+                            data-transform_out="o:0;s:600;" data-width="5000" data-height="5000" style="background-color: rgba(0, 0, 0, 0.2);">
+                        </div>
+
                         <!-- LAYER NR. 1 -->
-                        <div class="tp-caption sfb fadeout dark-translucent-bg caption-box text-left rounded"
+                        <div class="tp-caption sfb fadeout caption-box text-left rounded"
                             style="background-color: rgba(0, 0, 0, 0.8);" data-x="right" data-y="center"
                             data-start="600" data-whitespace="normal" data-transform_idle="o:1;"
                             data-transform_in="y:[100%];sX:1;sY:1;o:0;s:1150;e:Power4.easeInOut;"
@@ -29,7 +36,8 @@
                             data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;">
                             <h2 class="title slider-title">Vật Lý - Vật Lý Kỹ Thuật</h2>
                             <div class="separator-2 clearfix"></div>
-                            <p class="slider-content">Voluptatem ad provident non repudiandae beatae cupiditate amet reiciendis lorem ipsum
+                            <p class="slider-content">Voluptatem ad provident non repudiandae beatae cupiditate amet
+                                reiciendis lorem ipsum
                                 dolor sit
                                 amet, consectetur.</p>
                             <div class="text-right"><a class="btn btn-small btn-default margin-clear" href="#">Chi
@@ -45,8 +53,14 @@
                         data-title="Title 2">
 
                         <!-- main image -->
-                        <img src="/assets/frontend/images/banner1.png" alt="slidebg2" data-bgposition="center top"
+                        <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/banner1.png" alt="slidebg2" data-bgposition="center top"
                             data-bgrepeat="no-repeat" data-bgfit="cover" class="rev-slidebg">
+
+                        <!-- Transparent Background -->
+                        <div class="tp-caption dark-translucent-bg" data-x="center" data-y="center" data-start="0"
+                            data-transform_idle="o:1;" data-transform_in="o:0;s:600;e:Power2.easeInOut;"
+                            data-transform_out="o:0;s:600;" data-width="5000" data-height="5000" style="background-color: rgba(0, 0, 0, 0.2);">
+                        </div>
 
                         <!-- LAYER NR. 1 -->
                         <div class="tp-caption sfb fadeout dark-translucent-bg caption-box text-left rounded"
@@ -58,7 +72,8 @@
                             data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;">
                             <h2 class="title slider-title">Vật Lý - Vật Lý Kỹ Thuật</h2>
                             <div class="separator-2 clearfix"></div>
-                            <p class="slider-content">Voluptatem ad provident non repudiandae beatae cupiditate amet reiciendis lorem ipsum
+                            <p class="slider-content">Voluptatem ad provident non repudiandae beatae cupiditate amet
+                                reiciendis lorem ipsum
                                 dolor sit
                                 amet, consectetur.</p>
                             <div class="text-right"><a class="btn btn-small btn-default margin-clear" href="#">Chi
@@ -74,8 +89,14 @@
                         data-title="Title 3">
 
                         <!-- main image -->
-                        <img src="/assets/frontend/images/banner1.png" alt="slidebg2" data-bgposition="center top"
+                        <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/banner1.png" alt="slidebg2" data-bgposition="center top"
                             data-bgrepeat="no-repeat" data-bgfit="cover" class="rev-slidebg">
+
+                        <!-- Transparent Background -->
+                        <div class="tp-caption dark-translucent-bg" data-x="center" data-y="center" data-start="0"
+                            data-transform_idle="o:1;" data-transform_in="o:0;s:600;e:Power2.easeInOut;"
+                            data-transform_out="o:0;s:600;" data-width="5000" data-height="5000" style="background-color: rgba(0, 0, 0, 0.2);">
+                        </div>
 
                         <!-- LAYER NR. 1 -->
                         <div class="tp-caption sfb fadeout dark-translucent-bg caption-box text-left rounded"
@@ -87,7 +108,8 @@
                             data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;">
                             <h2 class="title slider-title">Vật Lý - Vật Lý Kỹ Thuật</h2>
                             <div class="separator-2 clearfix"></div>
-                            <p class="slider-content">Voluptatem ad provident non repudiandae beatae cupiditate amet reiciendis lorem ipsum
+                            <p class="slider-content">Voluptatem ad provident non repudiandae beatae cupiditate amet
+                                reiciendis lorem ipsum
                                 dolor sit
                                 amet, consectetur.</p>
                             <div class="text-right"><a class="btn btn-small btn-default margin-clear" href="#">Chi
@@ -120,7 +142,7 @@
                 <div class="block">
                     <div class="media margin-clear">
                         <div class="overlay-container rounded">
-                            <img class="media-object" src="/assets/frontend/images/medical-blog-thumb-1.jpg"
+                            <img class="media-object" src="<?php echo FRONTEND_URL ?>/assets/frontend/images/medical-blog-thumb-1.jpg"
                                 alt="blog-thumb">
                             <a href="blog-post.html" class="overlay-link small"><i class="fa fa-graduation-cap"></i></a>
                         </div>
@@ -133,7 +155,7 @@
                     <hr>
                     <div class="media margin-clear">
                         <div class="overlay-container rounded">
-                            <img class="media-object" src="/assets/frontend/images/medical-blog-thumb-2.jpg"
+                            <img class="media-object" src="<?php echo FRONTEND_URL ?>/assets/frontend/images/medical-blog-thumb-2.jpg"
                                 alt="blog-thumb">
                             <a href="blog-post.html" class="overlay-link small"><i class="fa fa-graduation-cap"></i></a>
                         </div>
@@ -147,7 +169,7 @@
                     <hr>
                     <div class="media margin-clear">
                         <div class="overlay-container rounded">
-                            <img class="media-object" src="/assets/frontend/images/medical-blog-thumb-3.jpg"
+                            <img class="media-object" src="<?php echo FRONTEND_URL ?>/assets/frontend/images/medical-blog-thumb-3.jpg"
                                 alt="blog-thumb">
                             <a href="blog-post.html" class="overlay-link small"><i class="fa fa-graduation-cap"></i></a>
                         </div>
@@ -170,7 +192,7 @@
                 <div class="block">
                     <div class="media margin-clear">
                         <div class="overlay-container rounded">
-                            <img class="media-object" src="/assets/frontend/images/medical-blog-thumb-1.jpg"
+                            <img class="media-object" src="<?php echo FRONTEND_URL ?>/assets/frontend/images/medical-blog-thumb-1.jpg"
                                 alt="blog-thumb">
                             <a href="blog-post.html" class="overlay-link small"><i class="fa fa-graduation-cap"></i></a>
                         </div>
@@ -184,7 +206,7 @@
                     <hr>
                     <div class="media margin-clear">
                         <div class="overlay-container rounded">
-                            <img class="media-object" src="/assets/frontend/images/medical-blog-thumb-2.jpg"
+                            <img class="media-object" src="<?php echo FRONTEND_URL ?>/assets/frontend/images/medical-blog-thumb-2.jpg"
                                 alt="blog-thumb">
                             <a href="blog-post.html" class="overlay-link small"><i class="fa fa-graduation-cap"></i></a>
                         </div>
@@ -198,7 +220,7 @@
                     <hr>
                     <div class="media margin-clear">
                         <div class="overlay-container rounded">
-                            <img class="media-object" src="/assets/frontend/images/medical-blog-thumb-3.jpg"
+                            <img class="media-object" src="<?php echo FRONTEND_URL ?>/assets/frontend/images/medical-blog-thumb-3.jpg"
                                 alt="blog-thumb">
                             <a href="blog-post.html" class="overlay-link small"><i class="fa fa-graduation-cap"></i></a>
                         </div>
@@ -221,7 +243,7 @@
                 <div class="block">
                     <div class="media margin-clear">
                         <div class="overlay-container rounded">
-                            <img class="media-object" src="/assets/frontend/images/medical-blog-thumb-1.jpg"
+                            <img class="media-object" src="<?php echo FRONTEND_URL ?>/assets/frontend/images/medical-blog-thumb-1.jpg"
                                 alt="blog-thumb">
                             <a href="blog-post.html" class="overlay-link small"><i class="fa fa-graduation-cap"></i></a>
                         </div>
@@ -236,7 +258,7 @@
                     <hr>
                     <div class="media margin-clear">
                         <div class="overlay-container rounded">
-                            <img class="media-object" src="/assets/frontend/images/medical-blog-thumb-2.jpg"
+                            <img class="media-object" src="<?php echo FRONTEND_URL ?>/assets/frontend/images/medical-blog-thumb-2.jpg"
                                 alt="blog-thumb">
                             <a href="blog-post.html" class="overlay-link small"><i class="fa fa-graduation-cap"></i></a>
                         </div>
@@ -251,7 +273,7 @@
                     <hr>
                     <div class="media margin-clear">
                         <div class="overlay-container rounded">
-                            <img class="media-object" src="/assets/frontend/images/medical-blog-thumb-3.jpg"
+                            <img class="media-object" src="<?php echo FRONTEND_URL ?>/assets/frontend/images/medical-blog-thumb-3.jpg"
                                 alt="blog-thumb">
                             <a href="blog-post.html" class="overlay-link small"><i class="fa fa-graduation-cap"></i></a>
                         </div>
@@ -290,7 +312,7 @@
         <div class="col-lg-3 col-md-6 isotope-item">
             <div class="image-box shadow-2 bordered text-center mb-20">
                 <div class="overlay-container rounded overlay-visible">
-                    <img src="/assets/frontend/images/section-image-3.jpg" alt="">
+                    <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/section-image-3.jpg" alt="">
                     <a href="#" class="overlay-link"><i class="fa fa-graduation-cap"></i></a>
                     <div class="overlay-bottom hidden-xs">
                         <div class="text">
@@ -303,7 +325,7 @@
         <div class="col-lg-3 col-md-6 isotope-item">
             <div class="image-box shadow-2 bordered text-center mb-20">
                 <div class="overlay-container rounded overlay-visible">
-                    <img src="/assets/frontend/images/section-image-3.jpg" alt="">
+                    <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/section-image-3.jpg" alt="">
                     <a href="#" class="overlay-link"><i class="fa fa-graduation-cap"></i></a>
                     <div class="overlay-bottom hidden-xs">
                         <div class="text">
@@ -316,7 +338,7 @@
         <div class="col-lg-3 col-md-6 isotope-item">
             <div class="image-box shadow-2 bordered text-center mb-20">
                 <div class="overlay-container rounded overlay-visible">
-                    <img src="/assets/frontend/images/section-image-3.jpg" alt="">
+                    <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/section-image-3.jpg" alt="">
                     <a href="#" class="overlay-link"><i class="fa fa-graduation-cap"></i></a>
                     <div class="overlay-bottom hidden-xs">
                         <div class="text">
@@ -329,7 +351,7 @@
         <div class="col-lg-3 col-md-6 isotope-item interior-design">
             <div class="image-box shadow-2 bordered text-center mb-20">
                 <div class="overlay-container rounded overlay-visible">
-                    <img src="/assets/frontend/images/section-image-3.jpg" alt="">
+                    <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/section-image-3.jpg" alt="">
                     <a href="#" class="overlay-link"><i class="fa fa-graduation-cap"></i></a>
                     <div class="overlay-bottom hidden-xs">
                         <div class="text">
@@ -342,7 +364,7 @@
         <div class="col-lg-3 col-md-6 isotope-item architecture-plans">
             <div class="image-box shadow-2 bordered text-center mb-20">
                 <div class="overlay-container rounded overlay-visible">
-                    <img src="/assets/frontend/images/section-image-3.jpg" alt="">
+                    <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/section-image-3.jpg" alt="">
                     <a href="#" class="overlay-link"><i class="fa fa-graduation-cap"></i></a>
                     <div class="overlay-bottom hidden-xs">
                         <div class="text">
@@ -355,7 +377,7 @@
         <div class="col-lg-3 col-md-6 isotope-item construction-management">
             <div class="image-box shadow-2 bordered text-center mb-20">
                 <div class="overlay-container rounded overlay-visible">
-                    <img src="/assets/frontend/images/section-image-3.jpg" alt="">
+                    <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/section-image-3.jpg" alt="">
                     <a href="#" class="overlay-link"><i class="fa fa-graduation-cap"></i></a>
                     <div class="overlay-bottom hidden-xs">
                         <div class="text">
@@ -368,7 +390,7 @@
         <div class="col-lg-3 col-md-6 isotope-item architecture-plans">
             <div class="image-box shadow-2 bordered text-center mb-20">
                 <div class="overlay-container rounded overlay-visible">
-                    <img src="/assets/frontend/images/section-image-3.jpg" alt="">
+                    <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/section-image-3.jpg" alt="">
                     <a href="#" class="overlay-link"><i class="fa fa-graduation-cap"></i></a>
                     <div class="overlay-bottom hidden-xs">
                         <div class="text">
@@ -381,7 +403,7 @@
         <div class="col-lg-3 col-md-6 isotope-item interior-design">
             <div class="image-box shadow-2 bordered text-center mb-20">
                 <div class="overlay-container rounded overlay-visible">
-                    <img src="/assets/frontend/images/section-image-3.jpg" alt="">
+                    <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/section-image-3.jpg" alt="">
                     <a href="#" class="overlay-link"><i class="fa fa-graduation-cap"></i></a>
                     <div class="overlay-bottom hidden-xs">
                         <div class="text">
@@ -411,14 +433,14 @@
             </div>
         </div>
         <div class="slick-carousel carousel-autoplay pv-20">
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="image-box team-member shadow-2 mb-20">
                     <div class="overlay-container rounded overlay-visible">
-                        <img src="/assets/frontend/images/education-4.jpg" alt="">
+                        <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/education-4.jpg" alt="">
                         <a href="#" class="overlay-link" title="Jane Doe - CEO"><i class="fa fa-graduation-cap"></i></a>
                         <div class="overlay-bottom">
-                            <div class="text">
-                                <h3 class="title">PGS.TS. Lê Vũ Tuấn Hùng</h3>
+                            <div class="text p-0">
+                                <h4 class="title text-white text-uppercase">PGS.TS. Lê Vũ Tuấn Hùng</h4>
                                 <div class="separator light"></div>
                                 <p class="small margin-clear"><em>Trưởng khoa <br> Trưởng bộ môn vật lý ứng dụng</em>
                                 </p>
@@ -427,64 +449,32 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="image-box team-member shadow-2 mb-20">
                     <div class="overlay-container rounded overlay-visible">
-                        <img src="/assets/frontend/images/education-4.jpg" alt="">
+                        <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/education-4.jpg" alt="">
                         <a href="#" class="overlay-link" title="Jane Doe - CEO"><i class="fa fa-graduation-cap"></i></a>
                         <div class="overlay-bottom">
-                            <div class="text">
-                                <h3 class="title">PGS.TS. Lê Vũ Tuấn Hùng</h3>
+                            <div class="text p-0">
+                                <h4 class="title text-white text-uppercase">PGS.TS. HUỲNH TRÚC PHƯƠNG</h4>
                                 <div class="separator light"></div>
-                                <p class="small margin-clear"><em>Trưởng khoa <br> Trưởng bộ môn vật lý ứng dụng</em>
+                                <p class="small margin-clear"><em>Phó trưởng khoa <br> Trưởng bộ môn vật lý ứng dụng</em>
                                 </p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="image-box team-member shadow-2 mb-20">
                     <div class="overlay-container rounded overlay-visible">
-                        <img src="/assets/frontend/images/education-4.jpg" alt="">
+                        <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/education-4.jpg" alt="">
                         <a href="#" class="overlay-link" title="Jane Doe - CEO"><i class="fa fa-graduation-cap"></i></a>
                         <div class="overlay-bottom">
-                            <div class="text">
-                                <h3 class="title">PGS.TS. Lê Vũ Tuấn Hùng</h3>
+                            <div class="text p-0">
+                                <h4 class="title text-white text-uppercase">PGS.TS. HUỲNH VĂN TUẤN</h4>
                                 <div class="separator light"></div>
-                                <p class="small margin-clear"><em>Trưởng khoa <br> Trưởng bộ môn vật lý ứng dụng</em>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="image-box team-member shadow-2 mb-20">
-                    <div class="overlay-container rounded overlay-visible">
-                        <img src="/assets/frontend/images/education-4.jpg" alt="">
-                        <a href="#" class="overlay-link" title="Jane Doe - CEO"><i class="fa fa-graduation-cap"></i></a>
-                        <div class="overlay-bottom">
-                            <div class="text">
-                                <h3 class="title">PGS.TS. Lê Vũ Tuấn Hùng</h3>
-                                <div class="separator light"></div>
-                                <p class="small margin-clear"><em>Trưởng khoa <br> Trưởng bộ môn vật lý ứng dụng</em>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="image-box team-member shadow-2 mb-20">
-                    <div class="overlay-container rounded overlay-visible">
-                        <img src="/assets/frontend/images/education-4.jpg" alt="">
-                        <a href="#" class="overlay-link" title="Jane Doe - CEO"><i class="fa fa-graduation-cap"></i></a>
-                        <div class="overlay-bottom">
-                            <div class="text">
-                                <h3 class="title">PGS.TS. Lê Vũ Tuấn Hùng</h3>
-                                <div class="separator light"></div>
-                                <p class="small margin-clear"><em>Trưởng khoa <br> Trưởng bộ môn vật lý ứng dụng</em>
+                                <p class="small margin-clear"><em>Phó trưởng khoa <br> Trưởng bộ môn vật lý ứng dụng</em>
                                 </p>
                             </div>
                         </div>
@@ -515,7 +505,7 @@
                 <div class="ph-20 feature-box text-center object-non-visible" data-animation-effect="fadeInDownSmall"
                     data-effect-delay="100">
                     <span class="icon large circle"><img class="rounded-circle" alt="beauty"
-                            src="/assets/frontend/images/beauty-1.jpg"></span>
+                            src="<?php echo FRONTEND_URL ?>/assets/frontend/images/beauty-1.jpg"></span>
                     <h3>Logo liên kết 1</h3>
                 </div>
             </div>
@@ -523,7 +513,7 @@
                 <div class="ph-20 feature-box text-center object-non-visible" data-animation-effect="fadeInDownSmall"
                     data-effect-delay="200">
                     <span class="icon large circle"><img class="rounded-circle" alt="beauty"
-                            src="/assets/frontend/images/beauty-2.jpg"></span>
+                            src="<?php echo FRONTEND_URL ?>/assets/frontend/images/beauty-2.jpg"></span>
                     <h3>Logo liên kết 1</h3>
                 </div>
             </div>
@@ -531,7 +521,7 @@
                 <div class="ph-20 feature-box text-center object-non-visible" data-animation-effect="fadeInDownSmall"
                     data-effect-delay="300">
                     <span class="icon large circle"><img class="rounded-circle" alt="beauty"
-                            src="/assets/frontend/images/beauty-3.jpg"></span>
+                            src="<?php echo FRONTEND_URL ?>/assets/frontend/images/beauty-3.jpg"></span>
                     <h3>Logo liên kết 1</h3>
                 </div>
             </div>
@@ -539,7 +529,7 @@
                 <div class="ph-20 feature-box text-center object-non-visible" data-animation-effect="fadeInDownSmall"
                     data-effect-delay="100">
                     <span class="icon large circle"><img class="rounded-circle" alt="beauty"
-                            src="/assets/frontend/images/beauty-4.jpg"></span>
+                            src="<?php echo FRONTEND_URL ?>/assets/frontend/images/beauty-4.jpg"></span>
                     <h3>Logo liên kết 1</h3>
                 </div>
             </div>
@@ -547,7 +537,7 @@
                 <div class="ph-20 feature-box text-center object-non-visible" data-animation-effect="fadeInDownSmall"
                     data-effect-delay="200">
                     <span class="icon large circle"><img class="rounded-circle" alt="beauty"
-                            src="/assets/frontend/images/beauty-5.jpg"></span>
+                            src="<?php echo FRONTEND_URL ?>/assets/frontend/images/beauty-5.jpg"></span>
                     <h3>Logo liên kết 1</h3>
                 </div>
             </div>
@@ -555,7 +545,7 @@
                 <div class="ph-20 feature-box text-center object-non-visible" data-animation-effect="fadeInDownSmall"
                     data-effect-delay="300">
                     <span class="icon large circle"><img class="rounded-circle" alt="beauty"
-                            src="/assets/frontend/images/beauty-6.jpg"></span>
+                            src="<?php echo FRONTEND_URL ?>/assets/frontend/images/beauty-6.jpg"></span>
                     <h3>Logo liên kết 1</h3>
                 </div>
             </div>

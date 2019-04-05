@@ -10,8 +10,8 @@
             <li class="breadcrumb-item">Thêm mới</li>
         </ul>
     </div>
-    <div class="row">
-        <form class="col-md-12 row" id="frmUser" method="post" enctype="multipart/form-data" data-toggle="validator"
+    <div class="row m-0">
+        <form class="col-md-12 row p-0 m-0" id="frmGalary" method="post" enctype="multipart/form-data" data-toggle="validator"
             role="form">
             <div class="col-md-9 p-0">
                 <h5 class="font-weight-normal text-primary">Tiêu đề</h5>
@@ -111,7 +111,6 @@
                         </div>
 
                     </div>
-
                 </div>
 
                 <h5 class="font-weight-normal text-primary">Danh mục</h5>
@@ -146,11 +145,34 @@
                 <div class="tile">
                     <div class="row m-0">
                         <div class="col-md-12 p-0">
-                            <input type="file" class="form-control-sm">
+                            <img id="showImg" src="" alt="">
+                            <input name="file" type="file" hidden>
+                            <a href="#" class="link" data-toggle="modal" data-target="#modalImg">Đặt ảnh đại diện</a>
                         </div>
                     </div>
                 </div>
             </div>
+
         </form>
     </div>
 </main>
+
+<div class="modal" id="modalImg" id="modalImg" tabindex="-1" role="dialog" aria-labelledby="modalImgLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="min-width: 90%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Ảnh đại diện</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            </div>
+            <form id="frmImg" method="post" enctype="multipart/form-data" data-toggle="validator" role="form">
+                <div class="modal-body">
+                    <div id="elfinder"></div>
+                </div>
+                <div class="modal-footer">
+                    <button id="btnSummitImg" type="submit" class="btn btn-success">Chọn</button>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Đóng</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

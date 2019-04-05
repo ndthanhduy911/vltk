@@ -960,7 +960,7 @@ body input.navigation-b ul li a:hover:hover {
 .icon-toggler-collapsed:after {
   background-position: bottom left;
 }
-.modal {
+/* .modal {
   padding: 20px;
   border-radius: 3px;
   background-color: white;
@@ -993,7 +993,7 @@ body input.navigation-b ul li a:hover:hover {
   text-align: center;
   line-height: 19px;
   background: #cccccc;
-}
+} */
 main .grid-container,
 header .grid-container,
 .navigation-a > div,

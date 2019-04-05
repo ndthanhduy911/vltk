@@ -155,7 +155,6 @@ class elFinderConnector
         if ($hasFiles) {
             $args['FILES'] = $_FILES;
         }
-
         try {
             $this->output($this->elFinder->exec($cmd, $args));
         } catch (elFinderAbortException $e) {
@@ -183,7 +182,7 @@ class elFinderConnector
     protected function output(array $data)
     {
         // unlock session data for multiple access
-        $this->elFinder->getSession()->close();
+        // $this->elFinder->getSession()->close();
         // client disconnect should abort
         ignore_user_abort(false);
 

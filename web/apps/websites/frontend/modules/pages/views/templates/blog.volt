@@ -3,7 +3,7 @@
       <div class="breadcrumb-container">
           <div class="container">
               <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><i class="fa fa-home pr-2"></i><a href="index.html">Home</a></li>
+                  <li class="breadcrumb-item"><i class="fa fa-home pr-2"></i><a href="<?php echo FRONTEND_URL ?>/">Home</a></li>
                   <li class="breadcrumb-item active">Blog Right Sidebar</li>
               </ol>
           </div>
@@ -43,21 +43,21 @@
                                       <div class="carousel-inner" role="listbox">
                                           <div class="carousel-item active">
                                               <div class="overlay-container">
-                                                  <img src="/assets/frontend/images/blog-1.jpg" alt="">
+                                                  <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/blog-1.jpg" alt="">
                                                   <a class="overlay-link" href="blog-post.html"><i
                                                           class="fa fa-link"></i></a>
                                               </div>
                                           </div>
                                           <div class="carousel-item">
                                               <div class="overlay-container">
-                                                  <img src="/assets/frontend/images/blog-3.jpg" alt="">
+                                                  <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/blog-3.jpg" alt="">
                                                   <a class="overlay-link" href="blog-post.html"><i
                                                           class="fa fa-link"></i></a>
                                               </div>
                                           </div>
                                           <div class="carousel-item">
                                               <div class="overlay-container">
-                                                  <img src="/assets/frontend/images/blog-4.jpg" alt="">
+                                                  <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/blog-4.jpg" alt="">
                                                   <a class="overlay-link" href="blog-post.html"><i
                                                           class="fa fa-link"></i></a>
                                               </div>
@@ -132,7 +132,7 @@
                           <div class="row grid-space-10">
                               <div class="col-lg-6">
                                   <div class="overlay-container">
-                                      <img src="/assets/frontend/images/blog-2.jpg" alt="">
+                                      <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/blog-2.jpg" alt="">
                                       <a class="overlay-link" href="blog-post.html"><i class="fa fa-link"></i></a>
                                   </div>
                               </div>
@@ -173,7 +173,7 @@
                           <div class="row grid-space-10">
                               <div class="col-lg-6">
                                   <div class="overlay-container">
-                                      <img src="/assets/frontend/images/page-about-2.jpg" alt="">
+                                      <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/page-about-2.jpg" alt="">
                                       <a class="overlay-link" href="blog-post.html"><i class="fa fa-link"></i></a>
                                   </div>
                               </div>
@@ -274,7 +274,7 @@
                               <div class="separator-2"></div>
                               <nav>
                                   <ul class="nav flex-column">
-                                      <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                                      <li class="nav-item"><a class="nav-link" href="<?php echo FRONTEND_URL ?>/">Home</a></li>
                                       <li class="nav-item"><a class="nav-link active"
                                               href="blog-large-image-right-sidebar.html">Blog</a></li>
                                       <li class="nav-item"><a class="nav-link"
@@ -301,7 +301,7 @@
                                       <div class="carousel-item active">
                                           <div class="image-box shadow bordered text-center mb-20">
                                               <div class="overlay-container">
-                                                  <img src="/assets/frontend/images/portfolio-4.jpg" alt="">
+                                                  <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/portfolio-4.jpg" alt="">
                                                   <a href="portfolio-item.html" class="overlay-link">
                                                       <i class="fa fa-link"></i>
                                                   </a>
@@ -311,7 +311,7 @@
                                       <div class="carousel-item">
                                           <div class="image-box shadow bordered text-center mb-20">
                                               <div class="overlay-container">
-                                                  <img src="/assets/frontend/images/portfolio-1-2.jpg" alt="">
+                                                  <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/portfolio-1-2.jpg" alt="">
                                                   <a href="portfolio-item.html" class="overlay-link">
                                                       <i class="fa fa-link"></i>
                                                   </a>
@@ -321,7 +321,7 @@
                                       <div class="carousel-item">
                                           <div class="image-box shadow bordered text-center mb-20">
                                               <div class="overlay-container">
-                                                  <img src="/assets/frontend/images/portfolio-1-3.jpg" alt="">
+                                                  <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/portfolio-1-3.jpg" alt="">
                                                   <a href="portfolio-item.html" class="overlay-link">
                                                       <i class="fa fa-link"></i>
                                                   </a>
@@ -434,7 +434,7 @@
                               <div class="media margin-clear">
                                   <div class="d-flex pr-2">
                                       <div class="overlay-container">
-                                          <img class="media-object" src="/assets/frontend/images/blog-thumb-1.jpg" alt="blog-thumb">
+                                          <img class="media-object" src="<?php echo FRONTEND_URL ?>/assets/frontend/images/blog-thumb-1.jpg" alt="blog-thumb">
                                           <a href="blog-post.html" class="overlay-link small"><i
                                                   class="fa fa-link"></i></a>
                                       </div>
@@ -449,7 +449,7 @@
                               <div class="media margin-clear">
                                   <div class="d-flex pr-2">
                                       <div class="overlay-container">
-                                          <img class="media-object" src="/assets/frontend/images/blog-thumb-2.jpg" alt="blog-thumb">
+                                          <img class="media-object" src="<?php echo FRONTEND_URL ?>/assets/frontend/images/blog-thumb-2.jpg" alt="blog-thumb">
                                           <a href="blog-post.html" class="overlay-link small"><i
                                                   class="fa fa-link"></i></a>
                                       </div>
@@ -464,7 +464,7 @@
                               <div class="media margin-clear">
                                   <div class="d-flex pr-2">
                                       <div class="overlay-container">
-                                          <img class="media-object" src="/assets/frontend/images/blog-thumb-3.jpg" alt="blog-thumb">
+                                          <img class="media-object" src="<?php echo FRONTEND_URL ?>/assets/frontend/images/blog-thumb-3.jpg" alt="blog-thumb">
                                           <a href="blog-post.html" class="overlay-link small"><i
                                                   class="fa fa-link"></i></a>
                                       </div>
@@ -479,7 +479,7 @@
                               <div class="media margin-clear">
                                   <div class="d-flex pr-2">
                                       <div class="overlay-container">
-                                          <img class="media-object" src="/assets/frontend/images/blog-thumb-4.jpg" alt="blog-thumb">
+                                          <img class="media-object" src="<?php echo FRONTEND_URL ?>/assets/frontend/images/blog-thumb-4.jpg" alt="blog-thumb">
                                           <a href="blog-post.html" class="overlay-link small"><i
                                                   class="fa fa-link"></i></a>
                                       </div>

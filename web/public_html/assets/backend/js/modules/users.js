@@ -79,38 +79,6 @@ const loadTableUsers = () => {
                 }
             }
         });
-
-        // Show modal User Add
-        showModalForm('#addUser', '#modalUser', 'GET', false, () => {
-            $('#modalUser .modal-title').html('THÊM TÀI KHOẢN');
-            $('#btnSummitUser').html('Thêm mới');
-        },(data,row)=>{
-            dt.draw();
-            swal("Thành công !!", "Thêm mới tài khoản thành công", "success");
-        });
-
-        // Show modal User Update
-        showModalForm('.editUser', '#modalUser', 'GET', false, (data) => {
-            $('#btnSummitUser span').html('Cập nhật');
-            $('#modalUser .modal-title').html('CẬP NHẬT NHẬP KHO');
-            if ($('#move_type').val() == 4) {
-                $('#move').parents('.row').removeClass('hidden');
-                $('#move').attr('required', true);
-                $('#move_id').parents('.col-md-6').addClass('hidden');
-                $('#move_id').attr('disabled', true);
-                $('#move_id').attr('required', false);
-            } else {
-                $('#move').val('');
-                $('#move').parents('.row').addClass('hidden');
-                $('#move').attr('required', false);
-                $('#move_id').parents('.col-md-6').removeClass('hidden');
-                $('#move_id').attr('disabled', false);
-                $('#move_id').attr('required', true);
-            }
-        },(data,row)=>{
-            dt.draw();
-            swal("Thành công !!", "Cập nhật nhập kho thành công", "success");
-        });
     }
 }
 

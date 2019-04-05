@@ -158,7 +158,7 @@
 
                                 <!-- logo -->
                                 <div id="logo" class="logo">
-                                    <a href="index.html"><img id="logo_img"
+                                    <a href="/"><img id="logo_img"
                                             src="/assets/frontend/images/logo-khoa-single-1-96x96.png"
                                             alt="VL-VLKT"></a>
                                 </div>
@@ -189,7 +189,7 @@
 
                                             <!-- logo -->
                                             <div id="logo-mobile" class="logo">
-                                                <a href="index.html"><img id="logo-img-mobile"
+                                                <a href="/"><img id="logo-img-mobile"
                                                         src="/assets/frontend/images/logo-khoa-single-1-96x96.png"
                                                         alt="VL-VLKT"></a>
                                             </div>
@@ -334,7 +334,7 @@
             <div class="container">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><i class="fa fa-home pr-2"></i><a class="link-dark"
-                            href="index.html">Home</a></li>
+                            href="/">Home</a></li>
                     <li class="breadcrumb-item active">Page 404</li>
                 </ol>
             </div>
@@ -361,7 +361,7 @@
                                 <i class="fa fa-search form-control-feedback"></i>
                             </div>
                         </form>
-                        <a href="index.html" class="btn btn-default btn-animated btn-lg">Return Home <i
+                        <a href="/" class="btn btn-default btn-animated btn-lg">Return Home <i
                                 class="fa fa-home"></i></a>
                     </div>
                     <!-- main end -->

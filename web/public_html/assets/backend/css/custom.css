@@ -116,6 +116,9 @@
     }
 }
 
+#modalImg .modal-body {
+    min-height: 520px
+}
 
 
 
