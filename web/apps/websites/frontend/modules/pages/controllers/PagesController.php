@@ -6,6 +6,7 @@ use Models\Attributes;
 class PagesController extends \FrontendController
 {
     public function indexAction($params = null){
+        $params = $this->helper->slugify($params);
         $page = Pages::findFirst(['slug = :slug:', 'bind' => ['slug' => $params]]);
         if($page){
             $this->view->title = $page->title;
@@ -14,9 +15,7 @@ class PagesController extends \FrontendController
                     $this->view->pick('templates/'.$attribute->path);
                 }
             }else{
-                if(($attribute = Attributes::findFirst($page->attribute_id))){
-                    $this->view->pick('templates/default');
-                }
+                $this->view->pick('templates/default');
             }            
         }else{
             $this->view->title = '404';

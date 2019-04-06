@@ -93,7 +93,7 @@
                         <div id="logo" class="logo">
                             <a href="<?php echo FRONTEND_URL ?>/">
                                 <h3 class="title text-default mb-0">VL-VLKT</h3>
-                                <!-- <img id="logo_img" src="/assets/frontend/images/logo-khoa-single-1-96x96.png" alt="VL-VLKT"> -->
+                                <!-- <img id="logo_img" src="<?php echo FRONTEND_URL ?>/assets/frontend/images/logo-khoa-single-1-96x96.png" alt="VL-VLKT"> -->
                             </a>
                         </div>
 
@@ -124,7 +124,7 @@
                                     <!-- logo -->
                                     <div id="logo-mobile" class="logo">
                                         <!-- <a href="<?php echo FRONTEND_URL ?>/"><img id="logo-img-mobile"
-                                                src="/assets/frontend/images/logo-khoa-single-1-96x96.png"
+                                                src="<?php echo FRONTEND_URL ?>/assets/frontend/images/logo-khoa-single-1-96x96.png"
                                                 alt="VL-VLKT"></a> -->
                                         <h3 class="title text-default mb-0">VL-VLKT</h3>
                                     </div>
@@ -152,13 +152,13 @@
                                                 id="third-dropdown" data-toggle="dropdown" aria-haspopup="true"
                                                 aria-expanded="false">Trang chủ</a>
                                             <ul class="dropdown-menu" aria-labelledby="third-dropdown">
-                                                <li><a href="/gioi-thieu">Giới thiệu Khoa</a></li>
-                                                <li><a href="/to-chuc-nhan-su"></i>Tổ chức - Nhân sự</a></li>
-                                                <li><a href="/hop-tac-dao-tao"></i>Hợp tác đào tạo</a></li>
-                                                <li><a href="/nghien-cuu-khoa-hoc"></i>Nghiên cứu khoa học</a></li>
-                                                <li><a href="/phong-thi-nghiem">Phòng thí nghiệm</a></li>
-                                                <li><a href="/san-pham-nghien-cuu">Sản phẩm nghiên cứu</a></li>
-                                                <li><a href="/doan-hoi">Đoàn hội</a></li>
+                                                <li><a href="<?php echo FRONTEND_URL ?>/gioi-thieu">Giới thiệu Khoa</a></li>
+                                                <li><a href="<?php echo FRONTEND_URL ?>/to-chuc-nhan-su"></i>Tổ chức - Nhân sự</a></li>
+                                                <li><a href="<?php echo FRONTEND_URL ?>/hop-tac-dao-tao"></i>Hợp tác đào tạo</a></li>
+                                                <li><a href="<?php echo FRONTEND_URL ?>/nghien-cuu-khoa-hoc"></i>Nghiên cứu khoa học</a></li>
+                                                <li><a href="<?php echo FRONTEND_URL ?>/phong-thi-nghiem">Phòng thí nghiệm</a></li>
+                                                <li><a href="<?php echo FRONTEND_URL ?>/san-pham-nghien-cuu">Sản phẩm nghiên cứu</a></li>
+                                                <li><a href="<?php echo FRONTEND_URL ?>/doan-hoi">Đoàn hội</a></li>
 
                                             </ul>
                                         </li>
@@ -169,21 +169,21 @@
                                                 id="fifth-dropdown" data-toggle="dropdown" aria-haspopup="true"
                                                 aria-expanded="false">Bộ môn</a>
                                             <ul class="dropdown-menu" aria-labelledby="fifth-dropdown">
-                                                <li><a href="/vat-ly-tin-hoc">Vật
+                                                <li><a href="<?php echo FRONTEND_URL ?>/vat-ly-tin-hoc">Vật
                                                         Lý Tin Học</a></li>
-                                                <li><a href="/vat-ly-ly-thuyet">Vật
+                                                <li><a href="<?php echo FRONTEND_URL ?>/vat-ly-ly-thuyet">Vật
                                                         Lý Lý Thuyết</a></li>
-                                                <li><a href="/vat-ly-hat-nhan">Vật
+                                                <li><a href="<?php echo FRONTEND_URL ?>/vat-ly-hat-nhan">Vật
                                                         Lý Hạt Nhân - KTHN</a></li>
-                                                <li><a href="/vat-ly-chat-ran">Vật
+                                                <li><a href="<?php echo FRONTEND_URL ?>/vat-ly-chat-ran">Vật
                                                         Lý Chất Rắn</a></li>
-                                                <li><a href="/vat-ly-ung-ung">Vật
+                                                <li><a href="<?php echo FRONTEND_URL ?>/vat-ly-ung-ung">Vật
                                                         Lý Ứng Dụng</a></li>
-                                                <li><a href="/vat-ly-dien-tu">Vật
+                                                <li><a href="<?php echo FRONTEND_URL ?>/vat-ly-dien-tu">Vật
                                                         Lý Điện Tử</a></li>
-                                                <li><a href="/vat-ly-dia-cau">Vật
+                                                <li><a href="<?php echo FRONTEND_URL ?>/vat-ly-dia-cau">Vật
                                                         Lý Địa Cầu</a></li>
-                                                <li><a href="/vat-ly-hai-duong">Vật
+                                                <li><a href="<?php echo FRONTEND_URL ?>/vat-ly-hai-duong">Vật
                                                         Lý Hải Dương</a></li>
                                             </ul>
                                         </li>
@@ -195,10 +195,10 @@
                                                 id="third-dropdown" data-toggle="dropdown" aria-haspopup="true"
                                                 aria-expanded="false">Bản tin khoa</a>
                                             <ul class="dropdown-menu" aria-labelledby="third-dropdown">
-                                                <li><a href="/tin-giao-vu">Tin giáo dụ</a></li>
-                                                <li><a href="/tin-nckh-serminar">Tin NCKH - Serminar</a></li>
-                                                <li><a href="/tin-cb-vc-khoa">Tin CB - VC Khoa</a></li>
-                                                <li><a href="/tin-tuyen-dung">Tin Tuyển Dụng</a></li>
+                                                <li><a href="<?php echo FRONTEND_URL ?>/tin-tuc/tin-giao-vu">Tin giáo dụ</a></li>
+                                                <li><a href="<?php echo FRONTEND_URL ?>/tin-tuc/tin-nckh-serminar">Tin NCKH - Serminar</a></li>
+                                                <li><a href="<?php echo FRONTEND_URL ?>/tin-tuc/tin-cb-vc-khoa">Tin CB - VC Khoa</a></li>
+                                                <li><a href="<?php echo FRONTEND_URL ?>/tin-tuc/tin-tuyen-dung">Tin Tuyển Dụng</a></li>
                                             </ul>
                                         </li>
                                         <!-- mega-menu end tuyển sinh-->
@@ -210,8 +210,8 @@
                                                 id="fourth-dropdown" data-toggle="dropdown" aria-haspopup="true"
                                                 aria-expanded="false">Đào tạo</a>
                                             <ul class="dropdown-menu" aria-labelledby="fourth-dropdown">
-                                                <li><a href="/dao-tao-dai-hoc">Đại học</a></li>
-                                                <li><a href="/dao-tao-sau-dai-hoc">Sau đại học</a></li>
+                                                <li><a href="<?php echo FRONTEND_URL ?>/dao-tao-dai-hoc">Đại học</a></li>
+                                                <li><a href="<?php echo FRONTEND_URL ?>/dao-tao-sau-dai-hoc">Sau đại học</a></li>
                                             </ul>
                                         </li>
                                         <!-- mega-menu end đào tạo-->
@@ -222,8 +222,8 @@
                                                 id="sixth-dropdown" data-toggle="dropdown" aria-haspopup="true"
                                                 aria-expanded="false">Tuyển sinh</a>
                                             <ul class="dropdown-menu" aria-labelledby="fourth-dropdown">
-                                                <li><a href="/tuyen-sinh-dai-hoc">Đại học</a></li>
-                                                <li><a href="/tuyen-sinh-sau-dai-hoc">Sau đại học</a></li>
+                                                <li><a href="<?php echo FRONTEND_URL ?>/tuyen-sinh-dai-hoc">Đại học</a></li>
+                                                <li><a href="<?php echo FRONTEND_URL ?>/tuyen-sinh-sau-dai-hoc">Sau đại học</a></li>
                                             </ul>
                                         </li>
                                         <!-- mega-menu end nghiên cứu-->
@@ -240,7 +240,7 @@
                 <div class="col-auto hidden-md-down p-0">
                     <div class="header-dropdown-buttons">
                         <a href="#">
-                            <img src="/language_file/vie/vietnam.png" class="user-image" alt="VIET NAM" width="36px">
+                            <img src="<?php echo FRONTEND_URL ?>/language_file/vie/vietnam.png" class="user-image" alt="VIET NAM" width="36px">
                         </a>
                     </div>
                 </div>

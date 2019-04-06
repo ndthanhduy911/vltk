@@ -4,15 +4,7 @@
     style="background-image:url('<?php echo FRONTEND_URL ?>/assets/frontend/images/page-about-banner-1.jpg'); background-position: 50% 27%;">
     <!-- breadcrumb start -->
     <!-- ================ -->
-    <div class="breadcrumb-container">
-        <div class="container">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><i class="fa fa-home pr-2"></i><a class="link-dark" href="<?php echo FRONTEND_URL ?>/">Trang chủ</a>
-                </li>
-                <li class="breadcrumb-item active"><?php echo isset($title) ? $title : 'Mặc định'; ?></li>
-            </ol>
-        </div>
-    </div>
+    {{ partial('breadcrumb') }}
     <!-- breadcrumb end -->
     <div class="container">
         <div class="row justify-content-lg-center">

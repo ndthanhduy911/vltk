@@ -258,6 +258,6 @@ class PostsController  extends \BackendController {
 
     private function get_js_css (){
         // And some local JavaScript resources
-        $this->assets->addJs($this->config->application->baseUri.'assets/backend/js/modules/posts.js');
+        $this->assets->addJs($this->config->application->baseUri.'/assets/backend/js/modules/posts.js');
     }
 }
