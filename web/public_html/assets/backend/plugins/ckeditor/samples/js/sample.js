@@ -22,10 +22,7 @@ var initSample = ( function() {
 
 		// :(((
 		if ( isBBCodeBuiltIn ) {
-			editorElement.setHtml(
-				'Hello world!\n\n' +
-				'I\'m an instance of [url=https://ckeditor.com]CKEditor[/url].'
-			);
+			editorElement.setHtml();
 		}
 
 		// Depending on the wysiwygarea plugin availability initialize classic or inline editor.

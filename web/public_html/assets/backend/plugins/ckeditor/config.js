@@ -23,5 +23,85 @@ CKEDITOR.editorConfig = function( config ) {
 			'-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','BidiLtr','BidiRtl' ] },
 		{ name: 'links', items : [ 'Unlink','Anchor','Link' ] },
     ],
-	config.filebrowserBrowseUrl =  '/admin/media/elfinder'
+		config.filebrowserBrowseUrl =  '/admin/media/elfinder'
 };
+
+CKEDITOR.on('dialogDefinition', function (event) {
+	var editor = event.editor;
+	var dialogDefinition = event.data.definition;
+	var tabCount = dialogDefinition.contents.length;
+	for (var i = 0; i < tabCount; i++) { // cycle to replace the click of button "View on the server"
+			var browseButton = dialogDefinition.contents[i].get('browse');
+			if (browseButton !== null) {
+					browseButton.hidden = false;
+					browseButton.onClick = function (dialog, i) {
+							var dialogName = CKEDITOR.dialog.getCurrent()._.name;
+							console.log(editor.config);
+							var elfNode = $('<div \>');
+							elfNode.dialog({
+									modal: true,
+									width: '80%',
+									title: 'File Manager',
+									create: function (event, ui) {
+											var startPathHash = '';
+											elfInsrance = $(this).elfinder({
+													startPathHash: startPathHash,
+													useBrowserHistory: false,
+													resizable: false,
+													width: '100%',
+													onlyMimes: ['image'],
+													url: '/elfinder/php/connector.minimal.php',
+													lang:'vi',
+													getFileCallback: function (file) {
+															var url = file.url;
+															var dialog = CKEDITOR.dialog.getCurrent();
+															if (dialogName == 'image') {
+																	var urlObj = 'txtUrl'
+															}else if (dialogName == 'image2') {
+																	var urlObj = 'src'
+															}else if (dialogName == 'video' || dialogName == 'audio') {
+																	var urlObj = 'poster'
+															} else if (dialogName == 'flash') {
+																	var urlObj = 'src'
+															} else if (dialogName == 'files' || dialogName == 'link') {
+																	var urlObj = 'url'
+															} else {
+																	return;
+															}
+															dialog.setValueOf(dialog._.currentTabId, urlObj, url);
+															elfNode.dialog('close');
+															elfInsrance.disable();
+													}
+											}).elfinder('instance');
+									},
+									open: function() {
+											elfNode.find('div.elfinder-toolbar input').blur();
+											setTimeout(function(){
+													elfInsrance.enable();
+											}, 100);
+									},
+									resizeStop: function() {
+											elfNode.trigger('resize');
+									}
+							}).parent().css({'zIndex':'11000'});
+					}
+			}
+	}
+});
+
+
+	// // Remove some buttons provided by the standard plugins, which are
+	// // not needed in the Standard(s) toolbar.
+	// config.skin = 'office2013';
+	// config.removeButtons = 'Subscript,Superscript';
+
+	// // Set the most common block elements.
+	// config.format_tags = 'p;h1;h2;h3;pre';
+  //   config.extraPlugins = 'video,youtube,image2,audio,docs';
+	// // Simplify the dialog windows.
+	// config.removeDialogTabs = 'image:advanced;link:advanced';
+  //   config.enterMode = CKEDITOR.ENTER_P;
+  //   config.autoParagraph = false;
+  //   config.entities = false;
+  //   config.allowedContent = true;
+  //   config.removePlugins = 'forms,save,print,newpage,templates,preview,about';

@@ -1,7 +1,7 @@
 <main class="app-content">
     <div class="app-title">
         <div>
-            <h1><i class="fa fa-th-list"></i> BÀI VIẾT</h1>
+            <h1><i class="fa fa-th-list"></i> THÊM BÀI VIẾT</h1>
             <p>Thêm mới bài viết</p>
         </div>
         <ul class="app-breadcrumb breadcrumb side">
