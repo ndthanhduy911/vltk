@@ -60,8 +60,6 @@
     <script src="/assets/backend/plugins/ckeditor/samples/js/sample.js"></script>
 
     <script src="/assets/backend/js/define.js"></script>
-
-    <script src="/assets/backend/js/modules/users.js"></script>
     <script src="/assets/backend/js/main.js"></script>
 
     {{ assets.outputJs() }}

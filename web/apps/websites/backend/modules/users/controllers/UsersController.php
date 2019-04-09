@@ -2,12 +2,14 @@
 namespace Backend\Modules\Users\Controllers;
 use Models\Users;
 use Models\Roles;
+use Models\Departments;
 use Backend\Modules\Users\Forms\UserForm;
 
 class UsersController  extends \BackendController {
 
     public function indexAction(){
         $this->view->form = new UserForm();
+        $this->get_js_css();
     }
 
     public function getdataAction(){
@@ -17,7 +19,7 @@ class UsersController  extends \BackendController {
             $npUsers.'.id',
             $npUsers.'.name',
             $npUsers.'.username',
-            $npUsers.'.mail',
+            $npUsers.'.email',
             $npUsers.'.phone',
             $npUsers.'.status',
             $npUsers.'.avatar',
@@ -42,26 +44,35 @@ class UsersController  extends \BackendController {
     }
 
     public function addAction(){
-        $form = new CreateUserForm();
-        $form_checked = [];
+        $form = new UserForm();
         if ($this->request->isPost()) {
             if ($this->security->checkToken()) {
-                $post = $this->request->getPost();
-                $password = $this->request->getPost('password');
+                // $post = $this->request->getPost();
+                // $password = $this->request->getPost('password');
                 $form_checked = $this->request->getPost('department_mg') ;
                 $form_checked = is_array($form_checked) ? $form_checked : [];
-                $check = Users::findFirstId($this->session->get("user_id"));
-                if ($this->security->checkHash($password,$check->password)) {
+                // $check = Users::findFirstId($this->session->get("user_id"));
+                // if ($this->security->checkHash($password,$check->password)) {
                     
                     //Kiem tra khu vuc
                     if(!$this->rmt->checkDeptList($form_checked, $this->session->get('department_mg'))){
-                        $this->flashSession->error('Khu vực/ Đơn vị không cho phép.');
+                        $this->flashSession->error('Đơn vị/ phòng ban không cho phép.');
                         return $this->response->redirect('/users/add');
                     }
 
+                    $post = [
+                        'name'  => $this->request->getPost('name'),
+                        'username' => $this->request->getPost('username'),
+                        'email'  => $this->request->getPost('email'),
+                        'phone' => $this->request->getPost('phone'),
+                        'role'  => $this->request->getPost('role'),
+                        'status'    => $this->request->getPost('status'),
+                        'department_id' => $this->request->getPost('department_id'),
+                    ];
+
                     $user = new Users();
                     $post['password'] = $this->security->hash($this->request->getPost('addpassword'));
-                    $form->bind($post,$user);
+                    $form->bind($post, $user);
                     if (!$form->isValid()) {
                         $error = [];
                         foreach ($form->getMessages() as $message) {
@@ -77,9 +88,9 @@ class UsersController  extends \BackendController {
                         ]
                     ]);
                     $checkMail = Users::findFirst([
-                        "mail = :mail: AND status != 4",
+                        "email = :email: AND status != 4",
                         "bind" => [
-                            "mail" => $this->request->getPost('mail'),
+                            "email" => $this->request->getPost('email'),
                         ]
                     ]);
                     $checkPhone = Users::findFirst([
@@ -90,14 +101,12 @@ class UsersController  extends \BackendController {
                     ]);
 
                     if($checkUsename){
-                        $this->flash->error('username đã được sử dụng.');
+                        $this->flashSession->error('username đã được sử dụng.');
                     }else if($checkMail){
-                        $this->flash->error('email đã được sử dụng.');
-                    }else if($checkMail){
-                        $this->flash->error('Số điện thoại đã được sử dụng.');
+                        $this->flashSession->error('email đã được sử dụng.');
+                    }else if($checkPhone){
+                        $this->flashSession->error('Số điện thoại đã được sử dụng.');
                     }else{
-                        $user->created_at = date("Y-m-d H:i:s");
-                        $user->updated_at = $user->created_at;
                         $user->department_mg = json_encode($form_checked);
                         if (!$user->save()) {
                             foreach ($user->getMessages() as $message) {
@@ -109,104 +118,107 @@ class UsersController  extends \BackendController {
                             return $this->response->redirect('/users/add');
                         }
                     }
-                }
+                // }else{
+                //     $this->flash->error('Mật khẩu không chính xác.');
+                // }
+            }else{
+                $this->flashSession->error('Token không chính xác.');
             }
         }
-        
-        $form_check_dept = Departments::getAllListDept();
-        $this->view->form_check_dept = $form_check_dept;
-        $this->view->form_checked = $form_checked;
         $this->view->form = $form;
+
+        $this->get_js_css();
     }
 
     public function editAction($id = null){
         $user = Users::findFirstId($id);
         $form_checked = [];
+        if ($this->session->get('role') !== 1) {
+            if(!in_array($user->department_id, $this->session->get('department_mg'))){
+                $this->flashSession->error("Không tìm thấy dữ liệu");
+                return $this->response->redirect('users');
+            }
+        }
         if($user){
             $form_checked = json_decode($user->department_mg);
             $form_checked = $form_checked ? $form_checked : [];
-            $form = new CreateUserForm($user);
+            $form = new UserForm($user);
             if ($this->request->isPost()) {
                 if ($this->security->checkToken()) {
                     $save = $user;
                     $post = [
                         'name' => $this->request->getPost('name'),
-                        'mail' => $this->request->getPost('mail'),
+                        'email' => $this->request->getPost('email'),
                         'phone' => $this->request->getPost('phone'),
-                        'updated_at' => $this->request->getPost('name'),
                         'status' => $this->request->getPost('status'),
                         'avatar' => $this->request->getPost('avatar'),
-                        'password' => $this->request->getPost('password'),
                         'role' => $this->request->getPost('role'),
                         'username' => $this->request->getPost('username'),
+                        'department_id' => $this->request->getPost('department_id'),
                     ];
-                    $password = $post['password'];
-                    $check = Users::findFirstId($this->session->get("user_id"));
-                    if ($this->security->checkHash($password,$check->password)) {
-                        $form_checked = $this->request->getPost('department_mg');
-                        $form_checked = is_array($form_checked) ? $form_checked : [];
-                        
-                        //Kiem tra khu vuc
-                        if(!$this->rmt->checkDeptList($form_checked, $this->session->get('department_mg'))){
-                            $this->flash->error('Khu vực/ Đơn vị không cho phép.');
+
+                    $form_checked = $this->request->getPost('department_mg');
+                    $form_checked = is_array($form_checked) ? $form_checked : [];
+                    
+                    //Kiem tra khu vuc
+                    if(!$this->rmt->checkDeptList($form_checked, $this->session->get('department_mg'))){
+                        $this->flash->error('Đơn vị/ phòng ban không cho phép.');
+                        return $this->response->redirect('/users/edit/'.$id);
+                    }
+
+                    $checkUsename = Users::findFirst([
+                        "username = :username: AND id != :id:",
+                        "bind" => [
+                            "username" => $post['username'],
+                            'id'    => $id,
+                        ]
+                    ]);
+
+                    $checkMail = Users::findFirst([
+                        "email = :email: AND id != :id:",
+                        "bind" => [
+                            "email" => $post['email'],
+                            'id'    => $id,
+                        ]
+                    ]);
+
+                    $checkPhone = Users::findFirst([
+                        "phone = :phone: AND id != :id:",
+                        "bind" => [
+                            "phone" => $post['phone'],
+                            'id'    => $id,
+                        ]
+                    ]);
+
+                    $form->bind($post, $user);
+                    if (!$form->isValid()) {
+                        $error = [];
+                        foreach ($form->getMessages() as $message) {
+                            array_push($error, $message->getMessage());
+                        }
+                        $this->flashSession->error(implode(', ', $error));
+                    }
+
+                    if($checkUsename){
+                        $this->flash->error('Tài khoản đã được sử dụng.');
+                    }else if($checkMail){
+                        $this->flash->error('E-mail đã được sử dụng.');
+                    }else if($checkPhone){
+                        $this->flash->error('Số điện thoại đã được sử dụng.');
+                    }else{
+                        $user->department_mg = json_encode($form_checked);
+                        $user->updated_at = date('YYYY-MM-DD H:i:s');
+                        if (!$user->save()) {
+                            foreach ($user->getMessages() as $message) {
+                                $this->flashSession->error($message);
+                            }
+                        } else {
+                            $this->logs->write_log(2, 1, 'Cập nhật tài khoản ID: '.$save->id,json_encode($save->toArray()),$this->session->get("user_id"));
+                            $this->flashSession->success("Cập nhật tài khoản thành công.");
                             return $this->response->redirect('/users/edit/'.$id);
                         }
-
-                        $user->assign(array(
-                            'name' => $post['name'],
-                            'mail' => $post['mail'],
-                            'phone' => $post['phone'],
-                            'updated_at' => $post['name'],
-                            'status' => $post['status'],
-                            'avatar' => $post['avatar'],
-                            'role'  => $post['role'],
-                            'username'  => $post['username'],
-                        ));
-
-                        $checkUsename = Users::findFirst([
-                            "username = :username: AND id != :id: AND status != 4",
-                            "bind" => [
-                                "username" => $post['username'],
-                                'id'    => $id,
-                            ]
-                        ]);
-
-                        $checkMail = Users::findFirst([
-                            "mail = :mail: AND id != :id: AND status != 4",
-                            "bind" => [
-                                "mail" => $post['mail'],
-                                'id'    => $id,
-                            ]
-                        ]);
-
-                        $checkPhone = Users::findFirst([
-                            "phone = :phone: AND id != :id: AND status != 4",
-                            "bind" => [
-                                "phone" => $post['phone'],
-                                'id'    => $id,
-                            ]
-                        ]);
-
-                        if($checkUsename){
-                            $this->flash->error('username đã được sử dụng.');
-                        }else if($checkMail){
-                            $this->flash->error('mail đã được sử dụng.');
-                        }else if($checkMail){
-                            $this->flash->error('Số điện thoại đã được sử dụng.');
-                        }else{
-                            $user->department_mg = json_encode($form_checked);
-                            $user->updated_at = date('YYYY-MM-DD H:i:s');
-                            if (!$user->save()) {
-                                foreach ($user->getMessages() as $message) {
-                                    $this->flash->error($message);
-                                }
-                            } else {
-                                $this->logs->write_log(2, 1, 'Cập nhật tài khoản ID: '.$save->id,json_encode($save->toArray()),$this->session->get("user_id"));
-                                $this->flashSession->success("Cập nhật tài khoản thành công.");
-                                return $this->response->redirect('/users/edit/'.$id);
-                            }
-                        }
                     }
+                    
                 }
             }
             $form_check_dept = Departments::getAllListDept();
@@ -216,16 +228,16 @@ class UsersController  extends \BackendController {
             $this->view->form = $form;
         }else{
             $this->flashSession->error("Không tìm thấy tài khoản.");
-            return $this->response->redirect('/users');
+            return $this->response->redirect('users');
         }
-
+        $this->get_js_css();
     }
 
     public function changepwAction($id = null){
         if ($this->request->isPost()) {
             $user = Users::findFirstId($id);
             if($user){
-                $form = new CreateUserForm($user);
+                $form = new UserForm($user);
                 if($this->security->checkToken()) {
                     $password = $this->request->getPost('password');
                     $check = Users::findFirstId($this->session->get("user_id"));
@@ -317,5 +329,9 @@ class UsersController  extends \BackendController {
                 $this->response->send();
             }
         }
+    }
+
+    private function get_js_css (){
+        $this->assets->addJs($this->config->application->baseUri.'/assets/backend/js/modules/users.js');
     }
 }

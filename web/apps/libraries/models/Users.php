@@ -11,7 +11,7 @@ class Users extends \Phalcon\Mvc\Model
 
     public $password;
 
-    public $mail;
+    public $email;
 
     public $phone;
 
@@ -44,7 +44,7 @@ class Users extends \Phalcon\Mvc\Model
             ]);
         }else{
             return parent::findFirst([
-                "conditions" => "id = :id: AND status !=4 AND department_id IN (".implode(',',$_SESSION['department_mg']).")",
+                "conditions" => "id = :id: AND department_id IN (".implode(',',$_SESSION['department_mg']).")",
                 "bind" => array('id' => $id),
                 "columns" => $columns
             ]);

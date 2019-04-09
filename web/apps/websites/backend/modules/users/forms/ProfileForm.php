@@ -56,7 +56,7 @@ class ProfileForm extends Form
         ));
         $this->add($name);
 
-        $email = new Email('mail');
+        $email = new Email('email');
         $email->setLabel('E-mail:');
         $email->setAttributes(array(
             'class' => 'form-control',

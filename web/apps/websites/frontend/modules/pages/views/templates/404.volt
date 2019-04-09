@@ -17,7 +17,7 @@
           style="background-image:url('<?php echo FRONTEND_URL ?>/assets/frontend/images/shop-banner.jpg');background-position: 50% 32%;">
           <div class="container">
               <div class="row justify-content-lg-center">
-                  <div class="main col-lg-6">
+                  <div class="main col-lg-6 text-center">
                       <h1 class="page-title extra-large"><span class="text-default">404</span></h1>
                       <h2>Không tìm thấy</h2>
                       <p class="lead">URL được yêu cầu không tìm thấy trên máy chủ này. Đảm bảo rằng địa chỉ trang Web

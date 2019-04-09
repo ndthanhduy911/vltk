@@ -10,7 +10,10 @@
             <li class="breadcrumb-item">Thêm mới</li>
         </ul>
     </div>
-    <div class="row m-0">
+    <div class="body-message">
+        <?php echo $this->flashSession->output(); ?>
+    </div>
+    <div class="row">
         <form class="col-md-12 row p-0 m-0" id="frmGalary" method="post" enctype="multipart/form-data" data-toggle="validator"
             role="form">
             <div class="col-md-9 p-0">
@@ -89,22 +92,28 @@
                         </div>
 
                         <div class="col-md-12 p-0">
-                            <p class="small"><i class="fa fa-key  mr-1"></i>Trạng thái:
+                            <div class="d-inline-block w-100 mb-2">
+                                <i class="fa fa-key mr-1"></i>
+                                <span class="f-s-90">Trạng thái:</span>
                                 <select name="status" id="status" class="ml-1 form-control-sm pull-right">
                                     <option value="1">Chờ duyệt</option>
                                     <option value="2">Bản nháp</option>
                                 </select>
-                            </p>
-                            <p class="small"><i class="fa fa-eye  mr-1"></i>Hiển thị:
+                            </div>
+                            <div class="d-inline-block w-100 mb-2">
+                                <i class="fa fa-eye  mr-1"></i>
+                                <span class="f-s-90">Hiển thị:</span>
                                 <select name="visibility" id="visibility" class="ml-1 form-control-sm pull-right">
                                     <option value="1">Công khai</option>
                                     <option value="2">Có mật khẩu</option>
                                     <option value="3">Riêng tư</option>
                                 </select>
-                            </p>
-                            <p class="small d-flex"><i class="fa fa-calendar mr-1 mt-1"></i>Lịch:
-                                <input type="text" class="form-control-sm" name="calendar">
-                            </p>
+                            </div>
+                            <div class="d-inline-block w-100 mb-2">
+                                <i class="fa fa-calendar"></i>
+                                <span class="f-s-90">Lịch:</span>
+                                <input type="text" class="form-control-sm pull-right" name="calendar">
+                            </div>
                         </div>
                         <div class="col-md-12 p-0">
                             <a href="#" class="btn btn-success float-right btn-sm">Đăng bài</a>
@@ -127,7 +136,7 @@
                     </div>
                 </div>
 
-                <h5 class="font-weight-normal text-primary">Thẻ</h5>
+                <!-- <h5 class="font-weight-normal text-primary">Thẻ</h5>
                 <div class="tile">
                     <div class="row m-0">
                         <div class="col-md-12 p-0">
@@ -139,7 +148,7 @@
                             </select>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <h5 class="font-weight-normal text-primary">Ảnh đại diện</h5>
                 <div class="tile">
@@ -147,7 +156,7 @@
                         <div class="col-md-12 p-0">
                             <img id="showImg" src="" alt="">
                             <input name="file" type="file" hidden>
-                            <a href="#" class="link" data-toggle="modal" data-target="#modalImg">Đặt ảnh đại diện</a>
+                            <a href="#" class="link">Đặt ảnh đại diện</a>
                         </div>
                     </div>
                 </div>
@@ -156,23 +165,3 @@
         </form>
     </div>
 </main>
-
-<div class="modal" id="modalImg" id="modalImg" tabindex="-1" role="dialog" aria-labelledby="modalImgLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document" style="min-width: 90%">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Ảnh đại diện</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-            </div>
-            <form id="frmImg" method="post" enctype="multipart/form-data" data-toggle="validator" role="form">
-                <div class="modal-body">
-                    <div id="elfinder"></div>
-                </div>
-                <div class="modal-footer">
-                    <button id="btnSummitImg" type="submit" class="btn btn-success">Chọn</button>
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Đóng</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>

@@ -12,6 +12,10 @@ $application->registerModules(array(
         'className' => 'Backend\Modules\Posts\Module',
         'path' => APP_DIR . '/websites/backend/modules/posts/module.php'
     ),
+    'backend_pages' => array(
+        'className' => 'Backend\Modules\Pages\Module',
+        'path' => APP_DIR . '/websites/backend/modules/pages/module.php'
+    ),
     'backend_dashboard' => array(
         'className' => 'Backend\Modules\Dashboard\Module',
         'path' => APP_DIR . '/websites/backend/modules/dashboard/module.php'

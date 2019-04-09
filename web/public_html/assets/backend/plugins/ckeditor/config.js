@@ -13,7 +13,7 @@ CKEDITOR.editorConfig = function( config ) {
 		{ name: 'editing', items : [ 'Find','Replace','-','SelectAll','-','SpellChecker', 'Scayt' ] },
 		{ name: 'tools', items : [ 'Maximize', 'ShowBlocks','-','About' ] },
 		{ name: 'colors', items : [ 'TextColor','BGColor' ] },
-		{ name: 'insert', items : [ 'Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak','Iframe'] },
+		{ name: 'insert', items : [ 'Image','Flash','Video','Table','HorizontalRule','Smiley','SpecialChar','PageBreak','Iframe'] },
 		{ name: 'basicstyles', items : [ 'Bold','Italic','Underline','Strike','Subscript','Superscript','-','RemoveFormat' ] },
 		{ name: 'forms', items : [ 'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton',
 		'HiddenField' ] },
@@ -24,6 +24,8 @@ CKEDITOR.editorConfig = function( config ) {
 		{ name: 'links', items : [ 'Unlink','Anchor','Link' ] },
     ],
 		config.filebrowserBrowseUrl =  '/admin/media/elfinder'
+		config.image_previewText = ' ';
+		config.extraPlugins = 'video,youtube,audio,docs';
 };
 
 CKEDITOR.on('dialogDefinition', function (event) {
@@ -36,7 +38,6 @@ CKEDITOR.on('dialogDefinition', function (event) {
 					browseButton.hidden = false;
 					browseButton.onClick = function (dialog, i) {
 							var dialogName = CKEDITOR.dialog.getCurrent()._.name;
-							console.log(editor.config);
 							var elfNode = $('<div \>');
 							elfNode.dialog({
 									modal: true,
@@ -53,6 +54,7 @@ CKEDITOR.on('dialogDefinition', function (event) {
 													url: '/elfinder/php/connector.minimal.php',
 													lang:'vi',
 													getFileCallback: function (file) {
+															file.url = file.url.replace("/elfinder/php/../../", fontendUrl+'/');
 															var url = file.url;
 															var dialog = CKEDITOR.dialog.getCurrent();
 															if (dialogName == 'image') {
@@ -97,7 +99,7 @@ CKEDITOR.on('dialogDefinition', function (event) {
 
 	// // Set the most common block elements.
 	// config.format_tags = 'p;h1;h2;h3;pre';
-  //   config.extraPlugins = 'video,youtube,image2,audio,docs';
+  
 	// // Simplify the dialog windows.
 	// config.removeDialogTabs = 'image:advanced;link:advanced';
   //   config.enterMode = CKEDITOR.ENTER_P;

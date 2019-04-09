@@ -1,4 +1,5 @@
 const backendUrl = '/admin';
+const fontendUrl = '';
 
 //Format number money
 const number_format = (number, decimals, dec_point, thousands_sep, unit = "") => {

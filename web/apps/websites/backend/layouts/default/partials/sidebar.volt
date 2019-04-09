@@ -28,20 +28,12 @@
                             class="icon fa fa-circle-o"></i> Thẻ</a></li>
             </ul>
         </li>
-        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
+        <li class="treeview {% if dispatcher.getControllerName() in ['pages'] %} {{ 'is-expanded' }}{% endif %}"><a class="app-menu__item" href="#" data-toggle="treeview"><i
                     class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">Trang</span><i
                     class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
-                <li><a class="treeview-item" href="blank-page.html"><i class="icon fa fa-circle-o"></i> Trang chủ</a>
-                </li>
-                <li><a class="treeview-item" href="page-login.html"><i class="icon fa fa-circle-o"></i> Bài viết</a>
-                </li>
-                <li><a class="treeview-item" href="page-lockscreen.html"><i class="icon fa fa-circle-o"></i> Sự kiện</a>
-                </li>
-                <li><a class="treeview-item" href="page-user.html"><i class="icon fa fa-circle-o"></i> User Page</a>
-                </li>
-                <li><a class="treeview-item" href="page-invoice.html"><i class="icon fa fa-circle-o"></i> Invoice
-                        Page</a></li>
+                <li><a class="treeview-item {% if dispatcher.getControllerName()=='pages' AND (dispatcher.getActionName() in ['index','edit']) %} {{ 'actived' }} {% endif %}" href="{{ config.application.backendUri }}/pages"><i class="icon fa fa-circle-o"></i> Danh sách</a></li>
+                <li><a class="treeview-item {% if dispatcher.getControllerName()=='pages' AND (dispatcher.getActionName() in ['add']) %} {{ 'actived' }} {% endif %}" href="{{ config.application.backendUri }}/pages/add"><i class="icon fa fa-circle-o"></i> Trang mới</a></li>
             </ul>
         </li>
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
@@ -62,11 +54,10 @@
             <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-users"></i><span
                     class="app-menu__label">Tài khoản</span><i class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
-                <li><a class="treeview-item {% if dispatcher.getControllerName()=='users' AND (dispatcher.getActionName() in ['index','add','edit']) %} {{ 'actived' }} {% endif %}"
+                <li><a class="treeview-item {% if dispatcher.getControllerName()=='users' AND (dispatcher.getActionName() in ['index','edit']) %} {{ 'actived' }} {% endif %}"
                         href="<?php echo BACKEND_URL.'/users' ?>"><i class="icon fa fa-circle-o"></i> Danh sách</a></li>
-                <li><a class="treeview-item {% if dispatcher.getControllerName()=='roles' AND (dispatcher.getActionName() in ['index','add','edit']) %} {{ 'actived' }} {% endif %}"
-                        href="<?php echo BACKEND_URL.'/users/roles' ?>"><i class="icon fa fa-circle-o"></i> Phân
-                        quyền</a></li>
+                <li><a class="treeview-item {% if dispatcher.getControllerName()=='users' AND (dispatcher.getActionName() in ['add']) %} {{ 'actived' }} {% endif %}"
+                        href="<?php echo BACKEND_URL.'/users/add' ?>"><i class="icon fa fa-circle-o"></i> Thêm mới</a></li>
             </ul>
         </li>
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i

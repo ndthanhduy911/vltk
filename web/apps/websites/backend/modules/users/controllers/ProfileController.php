@@ -25,14 +25,14 @@ class ProfileController extends \BackendController
 
                         $post = [
                             'name' => $this->request->getPost('name'),
-                            'mail' => $this->request->getPost('mail'),
+                            'email' => $this->request->getPost('email'),
                             'phone' => $this->request->getPost('phone'),
                         ];
 
                         $checkMail = Users::findFirst([
-                            "mail = :mail: AND id != :id:",
+                            "email = :email: AND id != :id:",
                             "bind" => [
-                                "mail" => $post['mail'],
+                                "email" => $post['email'],
                                 "id" => $profile->id,
                             ],
                         ]);
