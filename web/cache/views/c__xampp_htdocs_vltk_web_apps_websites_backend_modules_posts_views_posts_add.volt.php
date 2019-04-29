@@ -26,7 +26,7 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text fa fa-header"></div>
                                     </div>
-                                    {{form.render('title')}}
+                                    <?= $form->render('title') ?>
                                     <div class="invalid-tooltip"></div>
                                 </div>
                             </div>
@@ -53,7 +53,7 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text fa fa-list-alt"></div>
                                     </div>
-                                    {{form.render('except')}}
+                                    <?= $form->render('except') ?>
                                     <div class="invalid-tooltip"></div>
                                 </div>
                             </div>
@@ -70,7 +70,7 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text fa fa-link"></div>
                                     </div>
-                                    {{form.render('title')}}
+                                    <?= $form->render('title') ?>
                                     <div class="invalid-tooltip"></div>
                                 </div>
                             </div>
