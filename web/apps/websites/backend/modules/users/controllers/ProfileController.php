@@ -140,7 +140,7 @@ class ProfileController extends \BackendController
         }
     }
 
-    public function changepasswordAction()
+    public function changepwAction()
     {
         $error = [];
         if ($profile = Users::findFirstId($this->session->get("user_id"))) {

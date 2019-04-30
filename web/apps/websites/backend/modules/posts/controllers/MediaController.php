@@ -25,17 +25,17 @@ class MediaController  extends \BackendController {
             $npPosts.'.status',
             $npPosts.'.avatar',
             $npPosts.'.role',
-            $npPosts.'.department_id',
+            $npPosts.'.dept_id',
             'D.name dept_name',
             'R.name role_name',
         ))
         ->from($npPosts)
-        ->join('Models\Departments', 'D.id = '.$npPosts.'.department_id','D')
+        ->join('Models\Departments', 'D.id = '.$npPosts.'.dept_id','D')
         ->join(Roles::getNamepace(), 'R.id = '.$npPosts.'.role','R')
         ->orderBy($npPosts.'.name DESC')
         ->where("1 = 1");
         // if($this->session->get('role') !== 1){
-        //     $data = $data->andWhere("department_id IN (".implode(',',$this->session->get('department_mg')).")");
+        //     $data = $data->andWhere("dept_id IN (".implode(',',$this->session->get('department_mg')).")");
         // }
 
         $search = $npPosts.'.name LIKE :search:';
@@ -234,7 +234,7 @@ class MediaController  extends \BackendController {
                     $this->flash->error("Không tìm thấy tài khoản");
                     return $this->response->redirect('users');
                 }else{
-                    if(!$this->rmt->checkDeptId($post->department_id, $this->session->get('department_mg'))){
+                    if(!$this->rmt->checkDeptId($post->dept_id, $this->session->get('department_mg'))){
                         $this->flash->error('Khu vực/ Đơn vị không cho phép.');
                         return $this->response->redirect('/users');
                     }

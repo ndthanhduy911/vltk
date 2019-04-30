@@ -55,6 +55,8 @@
     <script src="/assets/backend/js/plugins/jquery.dataTables.min.js"></script>
     <script src="/assets/backend/js/plugins/dataTables.bootstrap.min.js"></script>
     <script src="/assets/backend/js/plugins/select2.min.js"></script>
+    <script src="/assets/backend/js/plugins/moment.min.js"></script>
+    <script src="/assets/backend/js/plugins/sweetalert.min.js"></script>
     <script src="/assets/backend/js/plugins/validator.min.js"></script>
     <script src="/assets/backend/plugins/ckeditor/ckeditor.js"></script>
     <script src="/assets/backend/plugins/ckeditor/samples/js/sample.js"></script>
@@ -63,8 +65,12 @@
     <script src="/assets/backend/js/main.js"></script>
 
     <?= $this->assets->outputJs() ?>
-    <script src="/assets/backend/js/plugins/pace.min.js"></script>
+    <?php if ($this->dispatcher->getControllerName() == 'media' && ($this->isIncluded($this->dispatcher->getActionName(), ['index']))) { ?> 
     <script data-main="/elfinder/main.js" src="/elfinder/js/require.min.js"></script>
+    <?php } ?>
+    
+    <script src="/assets/backend/js/plugins/pace.min.js"></script>
+
 </body>
 
 </html>

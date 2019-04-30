@@ -60,35 +60,14 @@
                         </div>
                     </div>
                 </div>
-
-                <h5 class="font-weight-normal text-primary">URL</h5>
-                <div class="tile p-0">
-                    <div class="modal-body pb-0">
-                        <div class="form-row">
-                            <div class="form-group col-md-12">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text fa fa-link"></div>
-                                    </div>
-                                    {{form.render('title')}}
-                                    <div class="invalid-tooltip"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <div class="col-md-3 pr-0">
                 <h5 class="font-weight-normal text-primary">Đăng bài</h5>
                 <div class="tile">
                     <div class="row m-0">
-                        <div class="col-md-6 p-0 mb-2">
-                            <a href="#" class="btn btn-warning btn-sm pull-left">Lưu nháp</a>
-                        </div>
-
-                        <div class="col-md-6 p-0 mb-2">
-                            <a href="#" class="btn btn-info btn-sm pull-right">Xem trước</a>
+                        <div class="col-md-12 p-0 mb-2">
+                            <a href="#" class="btn btn-info btn-sm pull-left">Xem trước</a>
                         </div>
 
                         <div class="col-md-12 p-0">
@@ -116,7 +95,7 @@
                             </div>
                         </div>
                         <div class="col-md-12 p-0">
-                            <a href="#" class="btn btn-success float-right btn-sm">Đăng bài</a>
+                            <button type="submit" class="btn btn-success float-right btn-sm">Đăng bài</button>
                         </div>
 
                     </div>
@@ -154,14 +133,13 @@
                 <div class="tile">
                     <div class="row m-0">
                         <div class="col-md-12 p-0">
-                            <img id="showImg" src="" alt="">
-                            <input name="file" type="file" hidden>
+                            <img id="showImg" src="" alt="" width="100%">
+                            <input id="uploadImageValue" name="file" type="text" hidden>
                             <a id="uploadImage" href="#" class="link">Đặt ảnh đại diện</a>
                         </div>
                     </div>
                 </div>
             </div>
-
         </form>
     </div>
 </main>

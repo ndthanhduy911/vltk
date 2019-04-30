@@ -16,7 +16,7 @@ class ProfileForm extends Form
     {
         $roles = Roles::findFirstId($_SESSION['user_id']);
         if ($this->session->get('role') !== 1) {
-            $department = Roles::findFirstId($_SESSION['department_id']);
+            $department = Roles::findFirstId($_SESSION['dept_id']);
         } else {
             $department = false;
         }

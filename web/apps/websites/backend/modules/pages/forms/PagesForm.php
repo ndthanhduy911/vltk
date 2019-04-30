@@ -5,11 +5,12 @@ namespace Backend\Modules\Pages\Forms;
 use Phalcon\Forms\Element\Email;
 use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\Textarea;
+use Phalcon\Forms\Element\Select;
 use Phalcon\Forms\Form;
 use Phalcon\Validation\Validator\StringLength as StringLength;
-use Phalcon\Validation\Validator\Email as EmailValidator;
 use Phalcon\Validation\Validator\PresenceOf;
-use Phalcon\Validation\Validator\Regex as RegexValidator;
+
+use Models\Attributes;
 
 class PagesForm extends Form
 {
@@ -51,76 +52,54 @@ class PagesForm extends Form
         ));
         $this->add($except);
 
-        $email = new Email('mail');
-        $email->setLabel('E-mail:');
-        $email->setAttributes(array(
+        $slug = new Text('slug');
+        $slug->setAttributes(array(
             'class' => 'form-control',
-            'placeholder' => "E-mail",
-            'data-required-error' => "Vui lòng nhập e-mail.",
-            'maxlength' => "100",
+            'placeholder' => 'Url',
+            'maxlength' => "200",
+            'data-error' => "Url không đúng quy định.",
             'required' => '',
-            'data-error' => "Vui lòng nhập đúng e-mail.",
+            'data-required-error' => "Url không được để trống.",
         ));
-        $email->addValidators(array(
-            new PresenceOf(array(
-                'message' => 'E-mail không được bỏ trống.',
-            )),
+        $slug->addValidators(array(
             new StringLength([
-                "max" => 100,
-                "messageMaximum" => "E-mail không được dài quá 100 ký tự",
+                "max" => 200,
+                "messageMaximum" => "Tóm tắt không được dài quá 255 ký tự",
             ]),
-            new EmailValidator(
-                [
-                    "message" => "E-mail không đúng định dạng",
-                ]
-            ),
         ));
-        $this->add($email);
+        $this->add($slug);
 
-        $phone = new Text('phone');
-        $phone->setLabel('Số điện thoại:');
-        $phone->setAttributes(array(
-            'class' => 'form-control',
-            'maxlength' => "15",
-            'data-minlength' => '10',
-            'data-error' => "Số điện thoại không đúng quy định.",
-            'pattern' => "^(01[23689]|09|02|08)[0-9]{8}$",
+        $attribute_id = new Select('attribute_id', Attributes::find(), array(
+            'using' => array('id', 'name'),
+            'useEmpty' => true,
+            'emptyText' => 'Mặc định',
+            'emptyValue' => 0,
+            'class' => 'ml-1 form-control-sm pull-right w-100',
+            'data-error' => "Chưa đúng định dạng",
+        ));
+        $attribute_id->addValidators(array(
+            new PresenceOf(array(
+                'message' => 'Đơn vị không được để trống',
+            )),
+        ));
+        $this->add($attribute_id);
+
+        $status = new Select('status', [
+            1 => "Sử dụng",
+            0 => "Dừng",
+        ], [
+            'useEmpty' => true,
+            'emptyText' => 'Vui lòng chọn trạng thái',
+            'emptyValue' => '',
+            'class' => 'ml-1 form-control-sm pull-right w-100',
             'required' => '',
-            'data-required-error' => "Vui lòng nhập số điện thoại.",
-        ));
-        $phone->addValidators(array(
+            'data-required-error' => 'Vui lòng điền đầy đủ thông tin.',
+        ]);
+        $status->addValidators(array(
             new PresenceOf(array(
-                'message' => 'E-mail không được bỏ trống.',
+                'message' => 'Trạng thái không được để trống.',
             )),
-            new StringLength([
-                "max" => 15,
-                "messageMaximum" => "E-mail không được dài quá 15 ký tự",
-            ]),
-            new RegexValidator(
-                [
-                    "pattern" => "/^(01[23689]|09|02|08)[0-9]{8}$/",
-                    "message" => "Số điện thoại chưa đúng",
-                ]
-            ),
         ));
-        $this->add($phone);
-
-        $dept = new Text('dept_name');
-        $dept->setLabel('Đơn vị:');
-        $dept->setAttributes([
-            'class' => "form-control",
-            'value' => $department ? $department->name : 'ADMIN',
-            'disabled' => true,
-        ]);
-        $this->add($dept);
-
-        $role = new Text('role_name');
-        $role->setLabel('Quyền:');
-        $role->setAttributes([
-            'class' => "form-control",
-            'value' => $roles->name,
-            'disabled' => true,
-        ]);
-        $this->add($role);
+        $this->add($status);
     }
 }

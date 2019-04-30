@@ -7,6 +7,10 @@ body {
     font-size: 90%;
 }
 
+.w-70-px {
+    width: 70px;
+}
+
 .body-message {
     margin: 0 -15px;
     padding: 0;
@@ -134,3 +138,13 @@ body {
     min-height: 470px
 }
 
+
+.ui-dialog.ui-corner-all {
+    min-width: 700px;
+}
+
+
+.control-label {
+    color: #1976D2;
+    font-weight: 600;
+}

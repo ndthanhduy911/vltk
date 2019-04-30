@@ -71,7 +71,7 @@
             <ul class="dropdown-menu settings-menu dropdown-menu-right">
                 <li><a class="dropdown-item" href="<?php echo BACKEND_URL; ?>"><i class="fa fa-cog fa-lg"></i> Cài đặt</a></li>
                 <li><a class="dropdown-item" href="<?php echo BACKEND_URL; ?>/profile"><i class="fa fa-user fa-lg"></i> Cá nhân</a></li>
-                <li><a class="dropdown-item" href="<?php echo BACKEND_URL; ?>"><i class="fa fa-sign-out fa-lg"></i> Đăng xuất</a></li>
+                <li><a class="dropdown-item" href="<?php echo BACKEND_URL; ?>/account/logout"><i class="fa fa-sign-out fa-lg"></i> Đăng xuất</a></li>
             </ul>
         </li>
     </ul>

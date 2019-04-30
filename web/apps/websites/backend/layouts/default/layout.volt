@@ -55,6 +55,8 @@
     <script src="/assets/backend/js/plugins/jquery.dataTables.min.js"></script>
     <script src="/assets/backend/js/plugins/dataTables.bootstrap.min.js"></script>
     <script src="/assets/backend/js/plugins/select2.min.js"></script>
+    <script src="/assets/backend/js/plugins/moment.min.js"></script>
+    <script src="/assets/backend/js/plugins/sweetalert.min.js"></script>
     <script src="/assets/backend/js/plugins/validator.min.js"></script>
     <script src="/assets/backend/plugins/ckeditor/ckeditor.js"></script>
     <script src="/assets/backend/plugins/ckeditor/samples/js/sample.js"></script>
@@ -63,8 +65,12 @@
     <script src="/assets/backend/js/main.js"></script>
 
     {{ assets.outputJs() }}
-    <script src="/assets/backend/js/plugins/pace.min.js"></script>
+    {% if dispatcher.getControllerName()=='media' AND (dispatcher.getActionName() in ['index']) %} 
     <script data-main="/elfinder/main.js" src="/elfinder/js/require.min.js"></script>
+    {% endif %}
+    
+    <script src="/assets/backend/js/plugins/pace.min.js"></script>
+
 </body>
 
 </html>

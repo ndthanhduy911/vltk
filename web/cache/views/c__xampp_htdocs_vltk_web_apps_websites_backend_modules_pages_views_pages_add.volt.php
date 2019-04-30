@@ -23,7 +23,23 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text fa fa-header"></div>
                                     </div>
-                                    {{form.render('title')}}
+                                    <?= $form->render('title') ?>
+                                    <div class="invalid-tooltip"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h5 class="font-weight-normal text-primary">URL</h5>
+                <div class="tile p-0">
+                    <div class="modal-body pb-0">
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text fa fa-link"></div>
+                                    </div>
+                                    <?= $form->render('slug') ?>
                                     <div class="invalid-tooltip"></div>
                                 </div>
                             </div>
@@ -36,23 +52,6 @@
                         <div class="grid-width-100 p-0 rounded">
                             <div id="editor" class="rounded">
 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <h5 class="font-weight-normal text-primary">URL</h5>
-                <div class="tile p-0">
-                    <div class="modal-body pb-0">
-                        <div class="form-row">
-                            <div class="form-group col-md-12">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text fa fa-link"></div>
-                                    </div>
-                                    {{form.render('title')}}
-                                    <div class="invalid-tooltip"></div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -79,38 +78,12 @@
                             </p>
                         </div>
                         <div class="col-md-12 p-0">
-                            <a href="#" class="btn btn-success float-right btn-sm">Thêm trang</a>
+                            <button type="submit" class="btn btn-success float-right btn-sm">Thêm trang</button>
                         </div>
 
-                    </div>
-                </div>
-
-                <h5 class="font-weight-normal text-primary">Bản mẫu</h5>
-                <div class="tile">
-                    <div class="row m-0">
-                        <div class="col-md-12 p-0">
-                            <select name="visibility" id="visibility" class="ml-1 form-control-sm pull-right w-100">
-                                <option value="1">Khác</option>
-                                <option value="2">Tin giáo vụ</option>
-                                <option value="3">Tin serminar</option>
-                                <option value="4">Tin CB-NV</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <h5 class="font-weight-normal text-primary">Ảnh đại diện</h5>
-                <div class="tile">
-                    <div class="row m-0">
-                        <div class="col-md-12 p-0">
-                            <img id="showImg" src="" alt="">
-                            <input name="file" type="file" hidden>
-                            <a href="#" class="link">Đặt ảnh đại diện</a>
-                        </div>
                     </div>
                 </div>
             </div>
-
         </form>
     </div>
 </main>

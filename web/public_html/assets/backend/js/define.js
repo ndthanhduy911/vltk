@@ -136,83 +136,68 @@ const showModalForm = (button, modal, typeAjax = 'GET', confirm = false, cb = ()
     })
 }
 
+// Show Confirm delete
+const showConfrimDelete = (button, cb = () => {}) => {
+    $('body').off('clcik').on('click', button, function (e) {
+        e.preventDefault();
+        let href = $(this).attr('data-href');
+        showSweetAlert(() => {
+            $.ajax({
+                type: "GET",
+                url: href,
+                data: '',
+                dataType: "json",
+                success: function (response) {
+                    // swal("Thành công !!", "Xoá thành công", "success");
+                    cb();
+                },
+                error: function (error) {
+                    if (error.responseJSON == undefined) {
+                        swal("Thất bại", 'Không xác định', "error");
+                    } else {
+                        if (Array.isArray(error.responseJSON.error)) {
+                            swal("Thất bại", Array.isArray(error.responseJSON.error) ? error.responseJSON.error.join('\n') : 'Không xác định', "error");
+                        } else {
+                            swal("Thất bại", 'Không xác định', "error");
+                        }
+                    }
+                }
+            });
+        });
+    })
+}
+
+// Show modal basic
+const showModalBasic = (option, dt = false, add = () => {}, update = () => {}, remove = () => {}) => {
+
+    showModalForm(`#add${option.element}`, option.modal, 'GET', false, () => {
+        $(option.modal).find('.modal-title').html(`Thêm ${option.title}`);
+        $(`#btnSummit${option.element}`).html('Thêm mới');
+        add()
+    }, (data, row) => {
+        dt !== false ? dt.draw() : '';
+        swal("Thành công !!", "Thêm thành công", "success");
+    });
+
+    // Show modal Update
+    showModalForm(`.edit${option.element}`, option.modal, 'GET', false, (data) => {
+        $(option.modal).find('.modal-title').html(`Cập nhật ${option.title}`);
+        $(`#btnSummit${option.element}`).html('Cập nhật');
+        update(data);
+    }, (data, row) => {
+        dt !== false ? dt.draw() : '';
+        swal("Thành công !!", "Cập nhật thành công", "success");
+    });
+
+    showConfrimDelete(`.delete${option.element}`, () => {
+        dt !== false ? dt.draw() : '';
+        remove();
+    });
+}
+
 const showSelectImage = (button, show, modal) => {
     $('body').on('click', button, function (e) {
         e.preventDefault();
         $(modal).addClass('show');
     });
-}
-
-const initElfinder = (elfinder = 'elfinder' ,height = 420) => {
-    // define('elFinderConfig', {
-    //     defaultOpts: {
-    //         url: '/elfinder/php/connector.minimal.php',
-    //         height: height,
-    //         commandsOptions: {
-    //             edit: {
-    //                 extraOptions: {
-    //                     // set API key to enable Creative Cloud image editor
-    //                     // see https://console.adobe.io/
-    //                     creativeCloudApiKey: '',
-    //                     // browsing manager URL for CKEditor, TinyMCE
-    //                     // uses self location with the empty value
-    //                     managerUrl: ''
-    //                 }
-    //             },
-    //             quicklook: {
-    //                 // to enable CAD-Files and 3D-Models preview with sharecad.org
-    //                 sharecadMimes: ['image/vnd.dwg', 'image/vnd.dxf', 'model/vnd.dwf',
-    //                     'application/vnd.hp-hpgl', 'application/plt', 'application/step', 'model/iges',
-    //                     'application/vnd.ms-pki.stl', 'application/sat', 'image/cgm',
-    //                     'application/x-msmetafile'
-    //                 ],
-    //                 // to enable preview with Google Docs Viewer
-    //                 googleDocsMimes: ['application/pdf', 'image/tiff', 'application/vnd.ms-office',
-    //                     'application/msword', 'application/vnd.ms-word', 'application/vnd.ms-excel',
-    //                     'application/vnd.ms-powerpoint',
-    //                     'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-    //                     'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-    //                     'application/vnd.openxmlformats-officedocument.presentationml.presentation',
-    //                     'application/postscript', 'application/rtf'
-    //                 ],
-    //                 // to enable preview with Microsoft Office Online Viewer
-    //                 // these MIME types override "googleDocsMimes"
-    //                 officeOnlineMimes: ['application/vnd.ms-office', 'application/msword',
-    //                     'application/vnd.ms-word', 'application/vnd.ms-excel',
-    //                     'application/vnd.ms-powerpoint',
-    //                     'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-    //                     'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-    //                     'application/vnd.openxmlformats-officedocument.presentationml.presentation',
-    //                     'application/vnd.oasis.opendocument.text',
-    //                     'application/vnd.oasis.opendocument.spreadsheet',
-    //                     'application/vnd.oasis.opendocument.presentation'
-    //                 ]
-    //             }
-    //         }
-    //         // bootCalback calls at before elFinder boot up 
-    //         ,
-    //         bootCallback: function (fm, extraObj) {
-    //             /* any bind functions etc. */
-    //             fm.bind('init', function () {
-    //                 // any your code
-    //             });
-    //             // for example set document.title dynamically.
-    //             var title = document.title;
-    //             fm.bind('open', function () {
-    //                 var path = '',
-    //                     cwd = fm.cwd();
-    //                 if (cwd) {
-    //                     path = fm.path(cwd.hash) || null;
-    //                 }
-    //                 document.title = path ? path + ':' + title : title;
-    //             }).bind('destroy', function () {
-    //                 document.title = title;
-    //             });
-    //         }
-    //     },
-    //     managers: {
-    //         // 'DOM Element ID': { /* elFinder options of this DOM Element */ }
-    //         elfinder: {}
-    //     }
-    // });
 }

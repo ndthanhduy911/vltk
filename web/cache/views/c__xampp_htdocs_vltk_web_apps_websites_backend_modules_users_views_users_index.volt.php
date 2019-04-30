@@ -13,7 +13,7 @@
         <div class="col-md-12 p-0">
             <div class="tile">
                 <div class="col-12 p-0 mb-2">
-                    <a id="addUser" href="{{ config.application.backendUri }}/users/update" title="Tạo" class="btn btn-success fa fa-plus"></a>
+                    <a id="addUser" href="<?= $this->config->application->backendUri ?>/users/update" title="Tạo" class="btn btn-success fa fa-plus"></a>
                 </div>
                 <div class="tile-body">
                     <table id="users" class="table table-bordered table-hover">
@@ -57,7 +57,7 @@
                                 <div class="input-group-prepend">
                                     <div class="input-group-text fa fa-user"></div>
                                 </div>
-                                {{form.render('name')}}
+                                <?= $form->render('name') ?>
                                 <div class="invalid-tooltip"></div>
                             </div>
                         </div>
@@ -67,7 +67,7 @@
                                 <div class="input-group-prepend">
                                     <div class="input-group-text fa fa-building"></div>
                                 </div>
-                                {{form.render('dept_id')}}
+                                <?= $form->render('dept_id') ?>
                                 <div class="invalid-tooltip"></div>
                             </div>
                         </div>
@@ -79,7 +79,7 @@
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">@</div>
                                 </div>
-                                {{form.render('email')}}
+                                <?= $form->render('email') ?>
                                 <div class="invalid-tooltip"></div>
                             </div>
                         </div>
@@ -89,7 +89,7 @@
                                 <div class="input-group-prepend">
                                     <div class="input-group-text fa fa-phone"></div>
                                 </div>
-                                {{form.render('phone')}}
+                                <?= $form->render('phone') ?>
                                 <div class="invalid-tooltip"></div>
                             </div>
                         </div>
@@ -101,7 +101,7 @@
                                 <div class="input-group-prepend">
                                     <div class="input-group-text fa fa-lock"></div>
                                 </div>
-                                {{form.render('password')}}
+                                <?= $form->render('password') ?>
                                 <div class="invalid-tooltip"></div>
                             </div>
                         </div>
@@ -111,7 +111,7 @@
                                 <div class="input-group-prepend">
                                     <div class="input-group-text fa fa-lock"></div>
                                 </div>
-                                {{form.render('confirm_password')}}
+                                <?= $form->render('confirm_password') ?>
                                 <div class="invalid-tooltip"></div>
                             </div>
                         </div>
@@ -123,7 +123,7 @@
                                 <div class="input-group-prepend">
                                     <div class="input-group-text fa fa-user-o"></div>
                                 </div>
-                                {{form.render('role')}}
+                                <?= $form->render('role') ?>
                                 <div class="invalid-tooltip"></div>
                             </div>
                         </div>
@@ -133,13 +133,13 @@
                                 <div class="input-group-prepend">
                                     <div class="input-group-text fa fa-check-circle"></div>
                                 </div>
-                                {{form.render('status')}}
+                                <?= $form->render('status') ?>
                                 <div class="invalid-tooltip"></div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <input class="tokenCSRF" type="hidden" name="{{ security.getTokenKey() }}" value="{{ security.getToken() }}">
+                <input class="tokenCSRF" type="hidden" name="<?= $this->security->getTokenKey() ?>" value="<?= $this->security->getToken() ?>">
                 <div class="modal-footer">
                     <button id="btnSummitUser" type="submit" class="btn btn-success">Thêm mới</button>
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Đóng</button>

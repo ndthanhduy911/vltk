@@ -33,7 +33,7 @@ class AccountController extends \Phalcon\Mvc\Controller
                                 $this->session->set("name", $user->name);
                                 $this->session->set("role", (int)$user->role);
                                 $this->session->set("department_mg", $department_mg ? $department_mg : []);
-                                $this->session->set("department_id", (int)$user->department_id);
+                                $this->session->set("dept_id", (int)$user->dept_id);
                                 // $this->logs->write_log(4, 1, 'Tài khoản đã đăng nhập',null,$this->session->get("user_id"));
                                 return $this->response->redirect("/admin");
                             }else{

@@ -1,6 +1,7 @@
 <?php
 namespace Backend\Modules\Users\Forms;
 
+use Library\Helper\Helper as Helper;
 use Phalcon\Forms\Element\Email;
 use Phalcon\Forms\Element\Password;
 use Phalcon\Forms\Element\Select;
@@ -8,6 +9,7 @@ use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\File;
 use Phalcon\Validation\Validator\PresenceOf;
 use Phalcon\Validation\Validator\StringLength;
+use Phalcon\Validation\Validator\InclusionIn;
 
 use Models\Roles;
 use Models\Departments;
@@ -18,7 +20,7 @@ class UserForm extends \Phalcon\Forms\Form
     {
         if((int)$this->session->get('role') !== 1){
             $departments = Departments::find(["id IN (".implode(',',$this->session->get('department_mg')).")"]);
-            $roles = Roles::find(["id >= 3"]);
+            $roles = Roles::find(["id != 1"]);
         }else{
             $roles = Roles::find();
             $departments = Departments::find();
@@ -68,11 +70,11 @@ class UserForm extends \Phalcon\Forms\Form
         $email = new Email('email');
         $email->setAttributes(array(
             'class' => 'form-control',
-            'placeholder' => "Email",
+            'placeholder' => "E-mail",
             'data-required-error' => "Vui lòng điền đầy đủ thông tin",
             'maxlength' => "100",
             'required' => '',
-            'data-error' => "Chưa đúng định dạng",
+            'data-error' => "Chưa đúng định dạng e-mail",
         ));
         $email->addValidators(array(
             new PresenceOf(array(
@@ -121,7 +123,8 @@ class UserForm extends \Phalcon\Forms\Form
             'required' => '',
             'data-required-error' => "Vui lòng điền đầy đủ thông tin",
             'maxlength' => "100",
-            'data-error' => "Mật khẩu không đúng quy định",
+            'minlength' => "6",
+            'data-error' => "Mật khẩu có trên 6 ký tự",
         ));
         $password->addValidators(array(
             new PresenceOf(array(
@@ -129,6 +132,8 @@ class UserForm extends \Phalcon\Forms\Form
             )),
             new StringLength([
                 "max" => 100,
+                "min" => 6,
+                "messageMinimum" => "Mật khẩu phải dài hơn 5 ký tự",
                 "messageMaximum" => "Mật khẩu không được dài quá 100 ký tự",
             ]),
         ));
@@ -147,7 +152,7 @@ class UserForm extends \Phalcon\Forms\Form
         ));
         $this->add($confirm_password);
 
-        $department_id = new Select('department_id', $departments, array(
+        $dept_id = new Select('dept_id', $departments, array(
             'using' => array('id', 'name'),
             'useEmpty' => true,
             'emptyText' => 'Vui lòng chọn đơn vị',
@@ -157,12 +162,12 @@ class UserForm extends \Phalcon\Forms\Form
             'data-required-error' => "Vui lòng điền đầy đủ thông tin",
             'data-error' => "Chưa đúng định dạng",
         ));
-        $department_id->addValidators(array(
+        $dept_id->addValidators(array(
             new PresenceOf(array(
                 'message' => 'Đơn vị không được để trống',
             )),
         ));
-        $this->add($department_id);
+        $this->add($dept_id);
 
         $status = new Select('status', [
             1 => "Sử dụng",
@@ -179,6 +184,10 @@ class UserForm extends \Phalcon\Forms\Form
             new PresenceOf(array(
                 'message' => 'Trạng thái không được để trống.',
             )),
+            new InclusionIn([
+                'message'   => 'Trạng thái không hợp lệ',
+                'domain'    => [0 , 1, 4]
+            ])
         ));
         $this->add($status);
 
@@ -196,6 +205,10 @@ class UserForm extends \Phalcon\Forms\Form
             new PresenceOf(array(
                 'message' => 'Quyền không được để trống',
             )),
+            new InclusionIn([
+                'message'   => 'Quyền không hợp lệ',
+                'domain'    => Helper::flatten($roles->toArray())
+            ])
         ));
         $this->add($role);
     }

@@ -56,8 +56,8 @@
             <ul class="treeview-menu">
                 <li><a class="treeview-item <?php if ($this->dispatcher->getControllerName() == 'users' && ($this->isIncluded($this->dispatcher->getActionName(), ['index', 'edit']))) { ?> <?= 'actived' ?> <?php } ?>"
                         href="<?php echo BACKEND_URL.'/users' ?>"><i class="icon fa fa-circle-o"></i> Danh sách</a></li>
-                <li><a class="treeview-item <?php if ($this->dispatcher->getControllerName() == 'users' && ($this->isIncluded($this->dispatcher->getActionName(), ['add']))) { ?> <?= 'actived' ?> <?php } ?>"
-                        href="<?php echo BACKEND_URL.'/users/add' ?>"><i class="icon fa fa-circle-o"></i> Thêm mới</a></li>
+                <li><a class="treeview-item <?php if ($this->dispatcher->getControllerName() == 'users' && ($this->isIncluded($this->dispatcher->getActionName(), ['update']))) { ?> <?= 'actived' ?> <?php } ?>"
+                        href="<?php echo BACKEND_URL.'/users/update' ?>"><i class="icon fa fa-circle-o"></i> Thêm mới</a></li>
             </ul>
         </li>
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i

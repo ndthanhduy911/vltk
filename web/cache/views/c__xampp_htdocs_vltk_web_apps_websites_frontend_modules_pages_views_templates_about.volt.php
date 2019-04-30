@@ -4,7 +4,7 @@
     style="background-image:url('<?php echo FRONTEND_URL ?>/assets/frontend/images/page-about-banner-1.jpg'); background-position: 50% 27%;">
     <!-- breadcrumb start -->
     <!-- ================ -->
-    {{ partial('breadcrumb') }}
+    <?= $this->partial('breadcrumb') ?>
     <!-- breadcrumb end -->
     <div class="container">
         <div class="row justify-content-lg-center">

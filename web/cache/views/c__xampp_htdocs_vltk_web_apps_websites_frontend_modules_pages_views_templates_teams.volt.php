@@ -1,4 +1,4 @@
-{{ partial('breadcrumb') }}
+<?= $this->partial('breadcrumb') ?>
 
 <section class="main-container pt-4">
     <div class="container">
@@ -305,7 +305,7 @@
                 </div>
             </div>
             <div class="col-md-3">
-                {{ partial('sidebar') }}
+                <?= $this->partial('sidebar') ?>
             </div>
         </div>
     </div>

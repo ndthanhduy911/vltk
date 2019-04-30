@@ -10,6 +10,7 @@ class PagesController extends \FrontendController
         $page = Pages::findFirst(['slug = :slug:', 'bind' => ['slug' => $params]]);
         if($page){
             $this->view->title = $page->title;
+            $this->view->page = $page;
             if($page->attribute_id){
                 if(($attribute = Attributes::findFirst($page->attribute_id))){
                     $this->view->pick('templates/'.$attribute->path);

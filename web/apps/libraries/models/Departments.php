@@ -10,11 +10,17 @@ class Departments extends \Phalcon\Mvc\Model
 
     public $name;
 
+    public $slug;
+
     public $parent_id;
 
     public $level;
 
     public $status;
+
+    public $created_at;
+
+    public $updated_at;
 
     public function getSource()
     {
@@ -32,19 +38,14 @@ class Departments extends \Phalcon\Mvc\Model
 
     public static function getChilds($parent_id = null){
         $result = [];
-        $data = Departments::query()
-        ->columns(array(
-            'Departments.id',
-            'Departments.code',
-            'Departments.name',
-            'Departments.parent_id',
-            'Departments.level',
-            'Departments.status',
-        ))
-        ->orderBy('Departments.name ASC')
-        ->where("Departments.parent_id = {$parent_id}")
-        ->andWhere("Departments.status = 1")
-        ->execute();
+        $data = Departments::find([
+            'parent_id = :parent_id: AND status = 1',
+            'columns' => 'id, code, name, parent_id, level, status, slug',
+            'order' => 'name ASC',
+            'bind' => [
+                'parent_id' => $parent_id
+            ]
+        ]);
         if($data->count()){
             $result = $data;
         }else{
@@ -81,10 +82,12 @@ class Departments extends \Phalcon\Mvc\Model
     public static function getListDept($dept_id = null){
         $data = Departments::findFirst([
             'id = :id: AND status = 1',
-            'columns'           =>  ['id','code','name','parent_id','level','status'],
+            'columns'           =>  ['id','code','name','parent_id','level','slug','status'],
             'bind'              =>  ['id'    =>  $dept_id]
         ]);
+        
         $data = $data ? [$data->toArray()] : [];
+
         if($temp = Departments::getChilds($dept_id)){
             foreach ($temp as $key => $value) {
                 if($temp_two = Departments::getListDept($value->id)){
@@ -94,6 +97,7 @@ class Departments extends \Phalcon\Mvc\Model
                 }
             }
         }
+
         return $data;
     }
 

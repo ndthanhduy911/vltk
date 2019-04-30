@@ -35,45 +35,28 @@
 		var elfNode = $('<div \>');
 		elfNode.dialog({
 			modal: true,
-			width: '80%',
-			top: '50px',
-			title: 'Thư viện',
+			width: "80%",
+			title: "Thư viện",
+			zIndex: 99999,
 			create: function (event, ui) {
-				var startPathHash = '';
-				let elfInsrance = $(this).elfinder({
-					startPathHash: startPathHash,
-					useBrowserHistory: false,
+				$(this).elfinder({
 					resizable: false,
-					width: '100%',
-					onlyMimes: ['image'],
-					url: '/elfinder/php/connector.minimal.php',
-					lang: 'vi',
-					getFileCallback: function (file) {
-						file.url = file.url.replace("/elfinder/php/../../", fontendUrl + '/');
-						var url = file.url;
-						var dialog = CKEDITOR.dialog.getCurrent();
-						if (dialogName == 'image') {
-							var urlObj = 'txtUrl'
+					url: "/elfinder/php/connector.minimal.php",
+					commandsOptions: {
+						getfile: {
+							oncomplete: 'destroy'
 						}
-						dialog.setValueOf(dialog._.currentTabId, urlObj, url);
+					},
+					getFileCallback: function (file) {
+						file.url = file.url.replace("/elfinder/php/../../", fontendUrl+'/');
+						let url = file.url;
+						$('#showImg').attr('src' , url);
+						$('#uploadImageValue').val(url);
 						elfNode.dialog('close');
 						elfInsrance.disable();
 					}
-				}).elfinder('instance');
-			},
-			// open: function () {
-			// 	elfNode.find('div.elfinder-toolbar input').blur();
-			// 	setTimeout(function () {
-			// 		elfInsrance.enable();
-			// 	}, 100);
-			// },
-			// resizeStop: function () {
-			// 	elfNode.trigger('resize');
-			// }
-		}).parent().css({
-			'zIndex': '11000',
-			'top'	: '100px',
-			'position': 'fixed'
-		});
+				}).elfinder('instance')
+			}
+		}).parent().css({'zIndex':'11000','top':'100px', 'position' : 'fixed'});
 	});
 })();

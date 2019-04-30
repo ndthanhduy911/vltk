@@ -19,7 +19,7 @@ class Users extends \Phalcon\Mvc\Model
 
     public $role;
 
-    public $department_id;
+    public $dept_id;
 
     public $department_mg;
 
@@ -44,7 +44,7 @@ class Users extends \Phalcon\Mvc\Model
             ]);
         }else{
             return parent::findFirst([
-                "conditions" => "id = :id: AND department_id IN (".implode(',',$_SESSION['department_mg']).")",
+                "conditions" => "id = :id: AND dept_id IN (".implode(',',$_SESSION['department_mg']).")",
                 "bind" => array('id' => $id),
                 "columns" => $columns
             ]);

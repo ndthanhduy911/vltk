@@ -26,7 +26,7 @@ class Properties extends \Phalcon\Mvc\Model
 
     public $status;
 
-    public $department_id;
+    public $dept_id;
 
     public $manager_id;
 

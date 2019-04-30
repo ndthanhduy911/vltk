@@ -9,7 +9,7 @@ class Managers extends \Phalcon\Mvc\Model
 
     public $name;
 
-    public $department_id;
+    public $dept_id;
 
     public $note;
 
@@ -30,7 +30,7 @@ class Managers extends \Phalcon\Mvc\Model
             ]);
         }else{
             return parent::findFirst([
-                "conditions" => "id = :id: AND status !=4 AND department_id IN (".implode(',',$_SESSION['department_mg']).")",
+                "conditions" => "id = :id: AND status !=4 AND dept_id IN (".implode(',',$_SESSION['department_mg']).")",
                 "bind" => array('id' => $id),
                 "columns" => $columns
             ]);

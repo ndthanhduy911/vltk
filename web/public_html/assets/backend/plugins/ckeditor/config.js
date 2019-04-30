@@ -7,6 +7,7 @@ CKEDITOR.editorConfig = function( config ) {
 	// Define changes to default configuration here. For example:
 	// config.language = 'fr';
 	// config.uiColor = '#AADC6E';
+	config.height = 720; 
 	config.toolbar =  [
 		{ name: 'document', items : [ 'Source','-','Save','NewPage','DocProps','Preview','Print','-','Templates' ] },
 		{ name: 'clipboard', items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ] },
@@ -94,20 +95,3 @@ CKEDITOR.on('dialogDefinition', function (event) {
 			}
 	}
 });
-
-
-	// // Remove some buttons provided by the standard plugins, which are
-	// // not needed in the Standard(s) toolbar.
-	
-	// config.removeButtons = 'Subscript,Superscript';
-
-	// // Set the most common block elements.
-	// config.format_tags = 'p;h1;h2;h3;pre';
-  
-	// // Simplify the dialog windows.
-	// config.removeDialogTabs = 'image:advanced;link:advanced';
-  //   config.enterMode = CKEDITOR.ENTER_P;
-  //   config.autoParagraph = false;
-  //   config.entities = false;
-  //   config.allowedContent = true;
-  //   config.removePlugins = 'forms,save,print,newpage,templates,preview,about';
