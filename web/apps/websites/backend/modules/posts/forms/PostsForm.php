@@ -5,11 +5,12 @@ namespace Backend\Modules\Posts\Forms;
 use Phalcon\Forms\Element\Email;
 use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\Textarea;
+use Phalcon\Forms\Element\Select;
 use Phalcon\Forms\Form;
 use Phalcon\Validation\Validator\StringLength as StringLength;
-use Phalcon\Validation\Validator\Email as EmailValidator;
 use Phalcon\Validation\Validator\PresenceOf;
-use Phalcon\Validation\Validator\Regex as RegexValidator;
+
+use Models\Categories;
 
 class PostsForm extends Form
 {
@@ -50,5 +51,55 @@ class PostsForm extends Form
             ]),
         ));
         $this->add($except);
+
+        $slug = new Text('slug');
+        $slug->setAttributes(array(
+            'class' => 'form-control',
+            'placeholder' => 'Url',
+            'maxlength' => "200",
+            'data-error' => "Url không đúng quy định.",
+            'required' => '',
+            'data-required-error' => "Url không được để trống.",
+        ));
+        $slug->addValidators(array(
+            new StringLength([
+                "max" => 200,
+                "messageMaximum" => "Tóm tắt không được dài quá 255 ký tự",
+            ]),
+        ));
+        $this->add($slug);
+
+        $cat_id = new Select('cat_id', Categories::find(), array(
+            'using' => array('id', 'name'),
+            'useEmpty' => true,
+            'emptyText' => 'Mặc định',
+            'emptyValue' => 0,
+            'class' => 'ml-1 form-control-sm pull-right w-100',
+            'data-error' => "Chưa đúng định dạng",
+        ));
+        $cat_id->addValidators(array(
+            new PresenceOf(array(
+                'message' => 'Đơn vị không được để trống',
+            )),
+        ));
+        $this->add($cat_id);
+
+        $status = new Select('status', [
+            1 => "Sử dụng",
+            0 => "Dừng",
+        ], [
+            'useEmpty' => true,
+            'emptyText' => 'Vui lòng chọn trạng thái',
+            'emptyValue' => '',
+            'class' => 'form-control-sm pull-right w-100',
+            'required' => '',
+            'data-required-error' => 'Vui lòng điền đầy đủ thông tin.',
+        ]);
+        $status->addValidators(array(
+            new PresenceOf(array(
+                'message' => 'Trạng thái không được để trống.',
+            )),
+        ));
+        $this->add($status);
     }
 }

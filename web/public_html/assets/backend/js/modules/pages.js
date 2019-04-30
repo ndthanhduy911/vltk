@@ -10,7 +10,7 @@ const showStatus = (id = '') => {
     }
 }
 
-const loadTableUsers = () => {
+const loadTablePages = () => {
     if ($('#pages').length) {
         let dt = $('#pages').DataTable({
             "scrollX": true,
@@ -71,4 +71,4 @@ const loadTableUsers = () => {
     }
 }
 
-loadTableUsers();
+loadTablePages();

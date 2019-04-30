@@ -5,9 +5,11 @@ class Categories extends \Phalcon\Mvc\Model
 
     public $id;
 
-    public $cat_id;
+    public $slug;
 
     public $name;
+
+    public $description;
 
     public $status;
 
@@ -20,7 +22,7 @@ class Categories extends \Phalcon\Mvc\Model
     public static function findFirstId($id, $columns = "*")
     {
         return parent::findFirst([
-            "conditions" => "id = :id: AND status !=4",
+            "conditions" => "id = :id:",
             "bind" => array('id' => $id),
             "columns" => $columns
         ]);

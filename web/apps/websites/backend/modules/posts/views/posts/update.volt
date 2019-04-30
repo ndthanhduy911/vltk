@@ -1,8 +1,8 @@
 <main class="app-content">
     <div class="app-title">
         <div>
-            <h1><i class="fa fa-th-list"></i> CẬP NHẬT TRANG</h1>
-            <p><?php echo $page->title ? 'Cập nhật trang': 'Thêm trang mới' ?></p>
+            <h1><i class="fa fa-th-list"></i> CẬP NHẬT BÀI VIẾT</h1>
+            <p><?php echo $page->title ? 'Cập nhật bài viết': 'Thêm bài viết mới' ?></p>
         </div>
         <ul class="app-breadcrumb breadcrumb side">
             <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
@@ -90,27 +90,43 @@
                                     <div class="invalid-tooltip"></div>
                                 </div>
                             </div>
+                            <div class="d-inline-block w-100 mb-2">
+                                <i class="fa fa-calendar"></i>
+                                <span class="f-s-90">Lịch:</span>
+                                <input type="text" class="form-control-sm pull-right" name="calendar">
+                            </div>
                         </div>
+
                         <div class="col-md-12 p-0">
                             <button type="submit" class="btn btn-success float-right btn-sm"><?php echo $page->title ? 'Cập nhật' : 'Thêm mới' ?></button>
                         </div> 
                     </div>
                 </div>
-                <h5 class="font-weight-normal text-primary">Sử dụng mẫu</h5>
+                <h5 class="font-weight-normal text-primary">Danh mục</h5>
                 <div class="tile">
                     <div class="row m-0">
                         <div class="col-md-12 p-0">
                             <div class="form-group mb-0">
                                 <div class="input-group">
-                                    {{form.render('attribute_id')}}
+                                    {{form.render('cat_id')}}
                                     <div class="invalid-tooltip"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
+                <h5 class="font-weight-normal text-primary">Ảnh đại diện</h5>
+                <div class="tile">
+                    <div class="row m-0">
+                        <div class="col-md-12 p-0">
+                            <img id="showImg" src="" alt="" width="100%">
+                            <input id="uploadImageValue" name="file" type="text" hidden>
+                            <a id="uploadImage" href="#" class="link">Đặt ảnh đại diện</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <input class="tokenCSRF" type="hidden" name="{{ security.getTokenKey() }}" value="{{ security.getToken() }}">
         </form>
     </div>
