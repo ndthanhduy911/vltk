@@ -10,7 +10,7 @@ class Posts extends \Phalcon\Mvc\Model
     
     public $slug;
 
-    public $attribute_id;
+    public $cat_id;
 
     public $content;
 
@@ -19,6 +19,10 @@ class Posts extends \Phalcon\Mvc\Model
     public $status;
 
     public $dept_id;
+
+    public $calendar;
+
+    public $featured_image;
 
     public $created_at;
 

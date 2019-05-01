@@ -59,4 +59,10 @@
 			}
 		}).parent().css({'zIndex':'11000','top':'100px', 'position' : 'fixed'});
 	});
+
+	$('.date-basic').datepicker({
+		format: "dd/mm/yyyy",
+		autoclose: true,
+		todayHighlight: true
+	});
 })();

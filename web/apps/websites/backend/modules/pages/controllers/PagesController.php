@@ -53,6 +53,8 @@ class PagesController  extends \BackendController {
             $page->updated_at = date('Y-m-d H:i:s');
         }else{
             $page = new Pages();
+            $page->author = $this->session->get('user_id');
+            $page->dept_id = $this->session->get('dept_id');
             $page->created_at = date('Y-m-d H:i:s');
             $page->updated_at = $page->created_at;
         }
@@ -69,8 +71,6 @@ class PagesController  extends \BackendController {
                     'content' => $this->request->getPost('content'),
                     'status' => $this->request->getPost('status'),
                     'except' => $this->request->getPost('except'),
-                    'author' => $this->session->get('user_id'),
-                    'dept_id' => $this->session->get('dept_id'),
                 ];
 
                 $form->bind($post, $page);

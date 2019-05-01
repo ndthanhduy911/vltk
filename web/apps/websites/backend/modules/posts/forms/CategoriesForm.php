@@ -16,8 +16,8 @@ class CategoriesForm extends Form
 {
     public function initialize($entity = null, $options = null)
     {
-        $title = new Text('title');
-        $title->setAttributes(array(
+        $name = new Text('name');
+        $name->setAttributes(array(
             'class' => 'form-control',
             'placeholder' => 'Tiêu đề',
             'required' => '',
@@ -25,7 +25,7 @@ class CategoriesForm extends Form
             'maxlength' => "255",
             'data-error' => "Tiêu đề không đúng quy định.",
         ));
-        $title->addValidators(array(
+        $name->addValidators(array(
             new PresenceOf(array(
                 'message' => 'Tiêu đề không được bỏ trống.',
             )),
@@ -34,7 +34,7 @@ class CategoriesForm extends Form
                 "messageMaximum" => "Tiêu đề không được dài quá 255 ký tự",
             ]),
         ));
-        $this->add($title);
+        $this->add($name);
 
         $description = new Textarea('description');
         $description->setAttributes(array(
@@ -68,21 +68,6 @@ class CategoriesForm extends Form
             ]),
         ));
         $this->add($slug);
-
-        $cat_id = new Select('cat_id', Categories::find(), array(
-            'using' => array('id', 'name'),
-            'useEmpty' => true,
-            'emptyText' => 'Mặc định',
-            'emptyValue' => 0,
-            'class' => 'ml-1 form-control-sm pull-right w-100',
-            'data-error' => "Chưa đúng định dạng",
-        ));
-        $cat_id->addValidators(array(
-            new PresenceOf(array(
-                'message' => 'Đơn vị không được để trống',
-            )),
-        ));
-        $this->add($cat_id);
 
         $status = new Select('status', [
             1 => "Sử dụng",

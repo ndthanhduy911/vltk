@@ -69,12 +69,25 @@ class PostsForm extends Form
         ));
         $this->add($slug);
 
+        $calendar = new Text('calendar');
+        $calendar->setAttributes(array(
+            'class' => 'form-control-sm date-basic w-100',
+            'placeholder' => 'dd/mm/yyyy',
+            'maxlength' => "10",
+            'pattern' =>"^(0[1-9]|1\d|2\d|3[01])\/(0[1-9]|1[0-2])\/(19|20)\d{2}$",
+            'data-pattern-error' => "Định đạng không đúng. Chỉ cho phép ngày theo định dạng dd/mm/yyyy"
+        ));
+        $calendar->addValidators(array(
+            new StringLength([
+                "max" => 10,
+                "messageMaximum" => "Tóm tắt không được dài quá 10 ký tự",
+            ]),
+        ));
+        $this->add($calendar);
+
         $cat_id = new Select('cat_id', Categories::find(), array(
             'using' => array('id', 'name'),
-            'useEmpty' => true,
-            'emptyText' => 'Mặc định',
-            'emptyValue' => 0,
-            'class' => 'ml-1 form-control-sm pull-right w-100',
+            'class' => 'form-control-sm pull-right w-100',
             'data-error' => "Chưa đúng định dạng",
         ));
         $cat_id->addValidators(array(

@@ -24,12 +24,17 @@ class PostsController  extends \BackendController {
                 $npPosts.'.except',
                 $npPosts.'.dept_id',
                 $npPosts.'.created_at',
+                $npPosts.'.calendar',
+                $npPosts.'.featured_image',
                 'D.name dept_name',
+                'D.slug dept_slug',
                 'U.name author_name',
+                'C.name cat_name',
             ))
             ->from($npPosts)
             ->join('Models\Departments', 'D.id = '.$npPosts.'.dept_id','D')
             ->join('Models\Users', 'U.id = '.$npPosts.'.author','U')
+            ->join('Models\Categories', 'C.id = '.$npPosts.'.cat_id','C')
             ->orderBy($npPosts.'.title DESC')
             ->where("1 = 1");
             // if($this->session->get('role') !== 1){
@@ -51,10 +56,14 @@ class PostsController  extends \BackendController {
         if($id){
             $post = Posts::findFirstId($id);
             $post->updated_at = date('Y-m-d H:i:s');
+            $title = 'Cập nhật';
         }else{
             $post = new Posts();
+            $post->author = $this->session->get('user_id');
+            $post->dept_id = $this->session->get('dept_id');
             $post->created_at = date('Y-m-d H:i:s');
             $post->updated_at = $post->created_at;
+            $title = 'Thêm mới';
         }
 
         $form = new PostsForm($post);
@@ -68,9 +77,7 @@ class PostsController  extends \BackendController {
                     'cat_id' => $this->request->getPost('cat_id'),
                     'content' => $this->request->getPost('content'),
                     'status' => $this->request->getPost('status'),
-                    'except' => $this->request->getPost('except'),
-                    'author' => $this->session->get('user_id'),
-                    'dept_id' => $this->session->get('dept_id'),
+                'except' => $this->request->getPost('except'),
                 ];
 
                 $form->bind($req, $post);
@@ -103,8 +110,8 @@ class PostsController  extends \BackendController {
                             return $this->response->send();
                         } else {
                             // $this->logs->write_log(1, 1, 'Thêm dây chuyền ID: ' . $post->id, json_encode($post->toArray()), $this->session->get("user_id"));
-                            $this->flashSession->success("Cập nhật thành công");
-                            // return $this->response->redirect('page');
+                            $this->flashSession->success($title." thành công");
+                            return $this->response->redirect(BACKEND_URL.'/posts');
                         }
                     }
                 }else{
@@ -132,7 +139,9 @@ class PostsController  extends \BackendController {
             }
         }
         $this->view->form = $form;
-        $this->view->page = $post;
+        $this->view->post = $post;
+        $this->view->title = $title;
+        $this->assets->addJs('/elfinder/js/require.min.js');
     }
 
     public function deleteAction($id = null){

@@ -2,12 +2,12 @@
     <div class="app-title">
         <div>
             <h1><i class="fa fa-th-list"></i> CẬP NHẬT BÀI VIẾT</h1>
-            <p><?php echo $page->title ? 'Cập nhật bài viết': 'Thêm bài viết mới' ?></p>
+            <p><?php echo $post->title ? 'Cập nhật bài viết': 'Thêm bài viết mới' ?></p>
         </div>
         <ul class="app-breadcrumb breadcrumb side">
             <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
             <li class="breadcrumb-item">Trang</li>
-            <li class="breadcrumb-item">Cập nhật</li>
+            <li class="breadcrumb-item">{{title}}</li>
         </ul>
     </div>
 
@@ -58,7 +58,7 @@
                     <div class="grid-container rounded">
                         <div class="grid-width-100 p-0 rounded">
                             <div id="editor" class="rounded">
-                                {{page.content}}
+                                {{post.content}}
                             </div>
                         </div>
                     </div>
@@ -83,8 +83,9 @@
                 <div class="tile">
                     <div class="row m-0">
                         <div class="col-md-12 p-0">
-                            <p class="small mb-2">Trạng thái:</p>
-                            <div class="form-group">
+                            <i class="fa fa-key"></i>
+                            <span class="f-s-90">Trạng thái:</span>
+                            <div class="form-group mt-1">
                                 <div class="input-group">
                                     {{form.render('status')}}
                                     <div class="invalid-tooltip"></div>
@@ -93,12 +94,17 @@
                             <div class="d-inline-block w-100 mb-2">
                                 <i class="fa fa-calendar"></i>
                                 <span class="f-s-90">Lịch:</span>
-                                <input type="text" class="form-control-sm pull-right" name="calendar">
+                                <div class="form-group mt-1">
+                                    <div class="input-group">
+                                        {{form.render('calendar')}}
+                                        <div class="invalid-tooltip"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
                         <div class="col-md-12 p-0">
-                            <button type="submit" class="btn btn-success float-right btn-sm"><?php echo $page->title ? 'Cập nhật' : 'Thêm mới' ?></button>
+                            <button type="submit" class="btn btn-success float-right btn-sm">{{title}}</button>
                         </div> 
                     </div>
                 </div>

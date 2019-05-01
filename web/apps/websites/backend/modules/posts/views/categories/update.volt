@@ -28,7 +28,7 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text fa fa-header"></div>
                                     </div>
-                                    {{form.render('title')}}
+                                    {{form.render('name')}}
                                     <div class="invalid-tooltip"></div>
                                 </div>
                             </div>
@@ -56,7 +56,7 @@
 
             <div class="col-md-3 pr-0">
                 <h5 class="font-weight-normal text-primary">URL</h5>
-                <div class="tile">
+                <div class="tile p-3">
                     <div class="row m-0">
                         <div class="col-md-12 p-0">
                             <div class="form-group mb-0">
@@ -68,11 +68,10 @@
                         </div>
                     </div>
                 </div>
-                <h5 class="font-weight-normal text-primary">Đăng bài</h5>
-                <div class="tile">
+                <h5 class="font-weight-normal text-primary">Trạng thái</h5>
+                <div class="tile p-3">
                     <div class="row m-0">
                         <div class="col-md-12 p-0">
-                            <p class="small mb-2">Trạng thái:</p>
                             <div class="form-group">
                                 <div class="input-group">
                                     {{form.render('status')}}

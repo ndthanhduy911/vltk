@@ -24,7 +24,13 @@ const loadTablePosts = () => {
                     "data": "no"
                 },
                 {
+                    "data": "featured_image"
+                },
+                {
                     "data": "title"
+                },
+                {
+                    "data": "cat_name"
                 },
                 {
                     "data": "author_name"
@@ -40,11 +46,13 @@ const loadTablePosts = () => {
                 }
             ],
             'createdRow': function (row, item, dataIndex) {
+                let image = item.featured_image ? `<a src="${fontendUrl}/upload/${item.dept_slug}/${item.featured_image}" width="100%"></a>` : '';
                 $(row).addClass('text-center');
                 $('td', row).addClass('align-middle');
-                $('td:eq(3)', row).html(vi_moment(item.created_at, 'DD/MM/YYYY HH:mm'));
-                $('td:eq(4)', row).html(showStatus(item.status));
-                $('td:eq(5)', row).html(`
+                $('td:eq(1)', row).html(image);
+                $('td:eq(5)', row).html(vi_moment(item.created_at, 'DD/MM/YYYY HH:mm'));
+                $('td:eq(6)', row).html(showStatus(item.status));
+                $('td:eq(7)', row).html(`
                     <a href="${backendUrl}/posts/update/${item.id}" class="fa fa-pencil btn btn-info btn-sm editUser" title="Cập nhật"></a>
                     <a href="${backendUrl}/posts/delete/${item.id}" class="fa fa-trash btn btn-danger btn-sm" title="Xóa"></a>
                 `);

@@ -19,7 +19,7 @@
                 <li><a class="treeview-item {% if dispatcher.getControllerName()=='posts' AND (dispatcher.getActionName() in ['index','edit']) %} {{ 'actived' }} {% endif %}" href="{{ config.application.backendUri }}/posts"><i
                             class="icon fa fa-circle-o"></i>
                         Tất cả</a></li>
-                <li><a class="treeview-item {% if dispatcher.getControllerName()=='posts' AND (dispatcher.getActionName() in ['add']) %} {{ 'actived' }} {% endif %}" href="{{ config.application.backendUri }}/posts/add"><i
+                <li><a class="treeview-item {% if dispatcher.getControllerName()=='posts' AND (dispatcher.getActionName() in ['add']) %} {{ 'actived' }} {% endif %}" href="{{ config.application.backendUri }}/posts/update"><i
                         class="icon fa fa-circle-o"></i>
                         Bài viết mới</a></li>
                 <li><a class="treeview-item {% if dispatcher.getControllerName()=='categories' AND (dispatcher.getActionName() in ['index','add','edit']) %} {{ 'actived' }} {% endif %}" href="{{ config.application.backendUri }}/categories" target="_blank"
@@ -32,8 +32,8 @@
                     class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">Trang</span><i
                     class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
-                <li><a class="treeview-item {% if dispatcher.getControllerName()=='pages' AND (dispatcher.getActionName() in ['index','edit']) %} {{ 'actived' }} {% endif %}" href="{{ config.application.backendUri }}/pages"><i class="icon fa fa-circle-o"></i> Danh sách</a></li>
-                <li><a class="treeview-item {% if dispatcher.getControllerName()=='pages' AND (dispatcher.getActionName() in ['add']) %} {{ 'actived' }} {% endif %}" href="{{ config.application.backendUri }}/pages/add"><i class="icon fa fa-circle-o"></i> Trang mới</a></li>
+                <li><a class="treeview-item {% if dispatcher.getControllerName()=='pages' AND (dispatcher.getActionName() in ['index','edit']) %} {{ 'actived' }} {% endif %}" href="{{ config.application.backendUri }}/pages"><i class="icon fa fa-circle-o"></i> Tất cả</a></li>
+                <li><a class="treeview-item {% if dispatcher.getControllerName()=='pages' AND (dispatcher.getActionName() in ['add']) %} {{ 'actived' }} {% endif %}" href="{{ config.application.backendUri }}/pages/update"><i class="icon fa fa-circle-o"></i> Trang mới</a></li>
             </ul>
         </li>
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i

@@ -44,31 +44,29 @@ class CategoriesController  extends \BackendController {
 
     public function updateAction($id = null){
         if($id){
-            $post = Categories::findFirstId($id);
-            $post->updated_at = date('Y-m-d H:i:s');
+            $category = Categories::findFirstId($id);
+            $category->updated_at = date('Y-m-d H:i:s');
         }else{
-            $post = new Categories();
-            $post->created_at = date('Y-m-d H:i:s');
-            $post->updated_at = $post->created_at;
+            $category = new Categories();
+            $category->author = $this->session->get('user_id');
+            $category->created_at = date('Y-m-d H:i:s');
+            $category->updated_at = $category->created_at;
+            
         }
 
-        $form = new CategoriesForm($post);
+        $form = new CategoriesForm($category);
         if ($this->request->isPost()) {
             if ($this->security->checkToken()) {
                 $data['token'] = ['key' => $this->security->getTokenKey(), 'value' => $this->security->getToken()];
                 $error = [];
                 $req = [
-                    'title' => $this->request->getPost('title'),
+                    'name' => $this->request->getPost('name'),
                     'slug' => $this->request->getPost('slug'),
-                    'cat_id' => $this->request->getPost('cat_id'),
-                    'content' => $this->request->getPost('content'),
                     'status' => $this->request->getPost('status'),
-                    'except' => $this->request->getPost('except'),
-                    'author' => $this->session->get('user_id'),
-                    'dept_id' => $this->session->get('dept_id'),
+                    'description' => $this->request->getPost('description'),
                 ];
 
-                $form->bind($req, $post);
+                $form->bind($req, $category);
                 if (!$form->isValid()) {
                     foreach ($form->getMessages() as $message) {
                         array_push($error, $message->getMessage());
@@ -76,9 +74,9 @@ class CategoriesController  extends \BackendController {
                 }
 
                 if (!count($error)) {
-                    if (!$post->save()) {
+                    if (!$category->save()) {
                         if ($this->request->isAjax()) {
-                            foreach ($post->getMessages() as $message) {
+                            foreach ($category->getMessages() as $message) {
                                 array_push($error, $message->getMessage());
                             }
                             $data['error'] = $error;
@@ -86,18 +84,18 @@ class CategoriesController  extends \BackendController {
                             $this->response->setJsonContent($data);
                             return $this->response->send();
                         } else {
-                            foreach ($post->getMessages() as $message) {
+                            foreach ($category->getMessages() as $message) {
                                 $this->flashSession->error($message);
                             }
                         }
                     } else {
                         if ($this->request->isAjax()) {
-                            $data['data'] = $post->toArray();
+                            $data['data'] = $category->toArray();
                             $this->response->setStatusCode(200, 'OK');
                             $this->response->setJsonContent($data);
                             return $this->response->send();
                         } else {
-                            // $this->logs->write_log(1, 1, 'Thêm dây chuyền ID: ' . $post->id, json_encode($post->toArray()), $this->session->get("user_id"));
+                            // $this->logs->write_log(1, 1, 'Thêm dây chuyền ID: ' . $category->id, json_encode($category->toArray()), $this->session->get("user_id"));
                             $this->flashSession->success("Cập nhật thành công");
                             // return $this->response->redirect('page');
                         }
@@ -127,15 +125,15 @@ class CategoriesController  extends \BackendController {
             }
         }
         $this->view->form = $form;
-        $this->view->cat = $post;
+        $this->view->cat = $category;
     }
 
     public function deleteAction($id = null){
 
-        if ($post = Categories::findFirstId($id)) {
-            $post->status = 4;
-            if (!$post->save()) {
-                foreach ($post->getMessages() as $message) {
+        if ($category = Categories::findFirstId($id)) {
+            $category->status = 4;
+            if (!$category->save()) {
+                foreach ($category->getMessages() as $message) {
                     $this->flashSession->error($message);
                 }
                 return $this->response->redirect('page');
