@@ -11,6 +11,10 @@ body {
     width: 70px;
 }
 
+.w-20-px {
+    width: 20px !important;
+}
+
 .body-message {
     margin: 0 -15px;
     padding: 0;

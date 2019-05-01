@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 01, 2019 lúc 03:43 AM
+-- Thời gian đã tạo: Th5 01, 2019 lúc 04:12 AM
 -- Phiên bản máy phục vụ: 10.1.38-MariaDB
 -- Phiên bản PHP: 7.3.3
 
@@ -421,6 +421,37 @@ INSERT INTO `status` (`code`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `username` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `phone` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
+  `avatar` text COLLATE utf8_unicode_ci,
+  `role` int(5) NOT NULL,
+  `dept_id` int(11) NOT NULL,
+  `dept_mg` text COLLATE utf8_unicode_ci NOT NULL,
+  `status` int(1) NOT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `username`, `password`, `email`, `phone`, `avatar`, `role`, `dept_id`, `dept_mg`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'admin', 'admin', '$2y$10$6moLqgMmAji7Z3fYUTvzm.A1jj0WY.tF88bTQBwVVm4LlFCGTtPLq', 'admin@phys.hcmus.edu.vn', '0236547890', NULL, 1, 1, '[1]', 1, '2019-05-01 00:00:00', '2019-05-01 00:00:00');
+
+--
+-- Chỉ mục cho các bảng đã đổ
+--
+
+--
 -- Chỉ mục cho bảng `attributes`
 --
 ALTER TABLE `attributes`
@@ -504,6 +535,12 @@ ALTER TABLE `status`
   ADD PRIMARY KEY (`code`);
 
 --
+-- Chỉ mục cho bảng `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT cho các bảng đã đổ
 --
 
@@ -578,6 +615,12 @@ ALTER TABLE `posts`
 --
 ALTER TABLE `roles`
   MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT cho bảng `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
