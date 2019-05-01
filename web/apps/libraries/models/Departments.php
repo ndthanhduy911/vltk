@@ -118,7 +118,7 @@ class Departments extends \Phalcon\Mvc\Model
         }
 
         $temp = Departments::find([
-            "status = 1 AND id IN (".implode(',',$_SESSION['department_mg']).")",
+            "status = 1 AND id IN (".implode(',',$_SESSION['dept_mg']).")",
             'columns'           =>  ['id','code','name','parent_id','level','status'],
             'order'             =>  'level ASC',
         ]);

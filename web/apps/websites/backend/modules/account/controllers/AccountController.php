@@ -27,12 +27,12 @@ class AccountController extends \Phalcon\Mvc\Controller
                         if ($user) {
                             $password = $this->request->getPost('password');
                             if ($this->security->checkHash($password,$user->password)) {
-                                $department_mg = json_decode($user->department_mg);
+                                $dept_mg = json_decode($user->dept_mg);
                                 $this->session->set("user_id", $user->id);
                                 $this->session->set("username", $user->username);
                                 $this->session->set("name", $user->name);
                                 $this->session->set("role", (int)$user->role);
-                                $this->session->set("department_mg", $department_mg ? $department_mg : []);
+                                $this->session->set("dept_mg", $dept_mg ? $dept_mg : []);
                                 $this->session->set("dept_id", (int)$user->dept_id);
                                 // $this->logs->write_log(4, 1, 'Tài khoản đã đăng nhập',null,$this->session->get("user_id"));
                                 return $this->response->redirect("/admin");

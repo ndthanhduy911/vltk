@@ -13,10 +13,18 @@ class Categories extends \Phalcon\Mvc\Model
 
     public $status;
 
+    public $created_at;
+
+    public $updated_at;
+
 
     public function getSource()
     {
         return 'categories';
+    }
+
+    public static function getNamepace (){
+        return 'Models\Categories';
     }
 
     public static function findFirstId($id, $columns = "*")

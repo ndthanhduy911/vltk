@@ -35,7 +35,7 @@ class MediaController  extends \BackendController {
         ->orderBy($npPosts.'.name DESC')
         ->where("1 = 1");
         // if($this->session->get('role') !== 1){
-        //     $data = $data->andWhere("dept_id IN (".implode(',',$this->session->get('department_mg')).")");
+        //     $data = $data->andWhere("dept_id IN (".implode(',',$this->session->get('dept_mg')).")");
         // }
 
         $search = $npPosts.'.name LIKE :search:';
@@ -50,13 +50,13 @@ class MediaController  extends \BackendController {
             if ($this->security->checkToken()) {
                 $post = $this->request->getPost();
                 $password = $this->request->getPost('password');
-                $form_checked = $this->request->getPost('department_mg') ;
+                $form_checked = $this->request->getPost('dept_mg') ;
                 $form_checked = is_array($form_checked) ? $form_checked : [];
                 $check = Posts::findFirstId($this->session->get("user_id"));
                 if ($this->security->checkHash($password,$check->password)) {
                     
                     //Kiem tra khu vuc
-                    if(!$this->rmt->checkDeptList($form_checked, $this->session->get('department_mg'))){
+                    if(!$this->rmt->checkDeptList($form_checked, $this->session->get('dept_mg'))){
                         $this->flashSession->error('Khu vực/ Đơn vị không cho phép.');
                         return $this->response->redirect('/users/add');
                     }
@@ -100,7 +100,7 @@ class MediaController  extends \BackendController {
                     }else{
                         $post->created_at = date("Y-m-d H:i:s");
                         $post->updated_at = $post->created_at;
-                        $post->department_mg = json_encode($form_checked);
+                        $post->dept_mg = json_encode($form_checked);
                         if (!$post->save()) {
                             foreach ($post->getMessages() as $message) {
                                 $this->flash->error($message);
@@ -121,7 +121,7 @@ class MediaController  extends \BackendController {
         $post = Posts::findFirstId($id);
         $form_checked = [];
         if($post){
-            $form_checked = json_decode($post->department_mg);
+            $form_checked = json_decode($post->dept_mg);
             $form_checked = $form_checked ? $form_checked : [];
             $form = new PostsForm($post);
             if ($this->request->isPost()) {
@@ -141,11 +141,11 @@ class MediaController  extends \BackendController {
                     $password = $post['password'];
                     $check = Posts::findFirstId($this->session->get("user_id"));
                     if ($this->security->checkHash($password,$check->password)) {
-                        $form_checked = $this->request->getPost('department_mg');
+                        $form_checked = $this->request->getPost('dept_mg');
                         $form_checked = is_array($form_checked) ? $form_checked : [];
                         
                         //Kiem tra khu vuc
-                        if(!$this->rmt->checkDeptList($form_checked, $this->session->get('department_mg'))){
+                        if(!$this->rmt->checkDeptList($form_checked, $this->session->get('dept_mg'))){
                             $this->flash->error('Khu vực/ Đơn vị không cho phép.');
                             return $this->response->redirect('/users/edit/'.$id);
                         }
@@ -192,7 +192,7 @@ class MediaController  extends \BackendController {
                         }else if($checkMail){
                             $this->flash->error('Số điện thoại đã được sử dụng.');
                         }else{
-                            $post->department_mg = json_encode($form_checked);
+                            $post->dept_mg = json_encode($form_checked);
                             $post->updated_at = date('YYYY-MM-DD H:i:s');
                             if (!$post->save()) {
                                 foreach ($post->getMessages() as $message) {
@@ -234,7 +234,7 @@ class MediaController  extends \BackendController {
                     $this->flash->error("Không tìm thấy tài khoản");
                     return $this->response->redirect('users');
                 }else{
-                    if(!$this->rmt->checkDeptId($post->dept_id, $this->session->get('department_mg'))){
+                    if(!$this->rmt->checkDeptId($post->dept_id, $this->session->get('dept_mg'))){
                         $this->flash->error('Khu vực/ Đơn vị không cho phép.');
                         return $this->response->redirect('/users');
                     }

@@ -19,7 +19,7 @@ class UserForm extends \Phalcon\Forms\Form
     public function initialize($entity = null, $options = null)
     {
         if((int)$this->session->get('role') !== 1){
-            $departments = Departments::find(["id IN (".implode(',',$this->session->get('department_mg')).")"]);
+            $departments = Departments::find(["id IN (".implode(',',$this->session->get('dept_mg')).")"]);
             $roles = Roles::find(["id != 1"]);
         }else{
             $roles = Roles::find();

@@ -33,10 +33,10 @@ class PagesController  extends \BackendController {
             ->orderBy($npPages.'.title DESC')
             ->where("1 = 1");
             // if($this->session->get('role') !== 1){
-            //     $data = $data->andWhere("dept_id IN (".implode(',',$this->session->get('department_mg')).")");
+            //     $data = $data->andWhere("dept_id IN (".implode(',',$this->session->get('dept_mg')).")");
             // }
     
-            $search = $npPages.'.name LIKE :search:';
+            $search = $npPages.'.title LIKE :search:';
             $this->response->setStatusCode(200, 'OK');
             $this->response->setJsonContent($this->ssp->data_output($this->request->get(), $data,$search));
             return $this->response->send();

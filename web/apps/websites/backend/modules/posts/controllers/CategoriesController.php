@@ -1,9 +1,9 @@
 <?php
 namespace Backend\Modules\Posts\Controllers;
-use Models\Posts;
-use Backend\Modules\Posts\Forms\PostsForm;
+use Models\Categories;
+use Backend\Modules\Posts\Forms\CategoriesForm;
 
-class PostsController  extends \BackendController {
+class CategoriesController  extends \BackendController {
 
     public function indexAction(){
         $this->get_js_css();
@@ -12,31 +12,26 @@ class PostsController  extends \BackendController {
 
     public function getdataAction(){
         if($this->request->isAjax()){
-            $npPosts = Posts::getNamepace();
+            $npCat = Categories::getNamepace();
             $data = $this->modelsManager->createBuilder()
             ->columns(array(
-                $npPosts.'.id',
-                $npPosts.'.title',
-                $npPosts.'.slug',
-                $npPosts.'.cat_id',
-                $npPosts.'.content',
-                $npPosts.'.status',
-                $npPosts.'.except',
-                $npPosts.'.dept_id',
-                $npPosts.'.created_at',
-                'D.name dept_name',
+                $npCat.'.id',
+                $npCat.'.name',
+                $npCat.'.slug',
+                $npCat.'.description',
+                $npCat.'.status',
+                $npCat.'.created_at',
                 'U.name author_name',
             ))
-            ->from($npPosts)
-            ->join('Models\Departments', 'D.id = '.$npPosts.'.dept_id','D')
-            ->join('Models\Users', 'U.id = '.$npPosts.'.author','U')
-            ->orderBy($npPosts.'.title DESC')
+            ->from($npCat)
+            ->join('Models\Users', 'U.id = '.$npCat.'.author','U')
+            ->orderBy($npCat.'.name DESC')
             ->where("1 = 1");
             // if($this->session->get('role') !== 1){
             //     $data = $data->andWhere("dept_id IN (".implode(',',$this->session->get('dept_mg')).")");
             // }
     
-            $search = $npPosts.'.title LIKE :search:';
+            $search = $npCat.'.name LIKE :search:';
             $this->response->setStatusCode(200, 'OK');
             $this->response->setJsonContent($this->ssp->data_output($this->request->get(), $data,$search));
             return $this->response->send();
@@ -49,15 +44,15 @@ class PostsController  extends \BackendController {
 
     public function updateAction($id = null){
         if($id){
-            $post = Posts::findFirstId($id);
+            $post = Categories::findFirstId($id);
             $post->updated_at = date('Y-m-d H:i:s');
         }else{
-            $post = new Posts();
+            $post = new Categories();
             $post->created_at = date('Y-m-d H:i:s');
             $post->updated_at = $post->created_at;
         }
 
-        $form = new PostsForm($post);
+        $form = new CategoriesForm($post);
         if ($this->request->isPost()) {
             if ($this->security->checkToken()) {
                 $data['token'] = ['key' => $this->security->getTokenKey(), 'value' => $this->security->getToken()];
@@ -132,12 +127,12 @@ class PostsController  extends \BackendController {
             }
         }
         $this->view->form = $form;
-        $this->view->page = $post;
+        $this->view->cat = $post;
     }
 
     public function deleteAction($id = null){
 
-        if ($post = Posts::findFirstId($id)) {
+        if ($post = Categories::findFirstId($id)) {
             $post->status = 4;
             if (!$post->save()) {
                 foreach ($post->getMessages() as $message) {
@@ -156,6 +151,6 @@ class PostsController  extends \BackendController {
     }
 
     private function get_js_css (){
-        $this->assets->addJs($this->config->application->baseUri.'/assets/backend/js/modules/posts.js');
+        $this->assets->addJs($this->config->application->baseUri.'/assets/backend/js/modules/categories.js');
     }
 }

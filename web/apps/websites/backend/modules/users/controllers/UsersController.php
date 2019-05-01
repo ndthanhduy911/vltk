@@ -91,7 +91,7 @@ class UsersController  extends \BackendController {
                     if(count($error)) {
                         $this->flashSession->error(implode(', ', $error));
                     }else{
-                        $user->department_mg = json_encode([$user->dept_id]);
+                        $user->dept_mg = json_encode([$user->dept_id]);
                         if (!$user->save()) {
                             foreach ($user->getMessages() as $message) {
                                 $this->flashSession->error($message);
@@ -125,7 +125,7 @@ class UsersController  extends \BackendController {
                 if($user = Users::findFirstId($id)){
                     $form = new UserForm();
                     $password = $this->request->getPost('password');
-                    if(!$this->rmt->checkDeptId($user->dept_id, $this->session->get('department_mg'))){
+                    if(!$this->rmt->checkDeptId($user->dept_id, $this->session->get('dept_mg'))){
                         $this->flash->error('Khu vực/ Đơn vị không cho phép.');
                         return $this->response->redirect('/users/edit/'.$id);
                     }
@@ -233,7 +233,7 @@ class UsersController  extends \BackendController {
         ->orderBy($npUsers.'.name ASC')
         ->where("1 = 1");
         // if($this->session->get('role') !== 1){
-        //     $data = $data->andWhere("dept_id IN (".implode(',',$this->session->get('department_mg')).")");
+        //     $data = $data->andWhere("dept_id IN (".implode(',',$this->session->get('dept_mg')).")");
         // }
 
         $search = $npUsers.'.name LIKE :search:';

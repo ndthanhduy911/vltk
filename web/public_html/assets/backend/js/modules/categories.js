@@ -1,4 +1,4 @@
-//Datatable cho bảng users
+//Datatable cho bảng categories
 const showStatus = (id = '') => {
     switch (parseInt(id)) {
         case 0:
@@ -10,15 +10,15 @@ const showStatus = (id = '') => {
     }
 }
 
-const loadTableUsers = () => {
-    if ($('#users').length) {
-        let dt = $('#users').DataTable({
+const loadTableCategories = () => {
+    if ($('#categories').length) {
+        let dt = $('#categories').DataTable({
             "scrollX": true,
             "ordering": false,
             "processing": true,
             "serverSide": true,
             "autoWidth": false,
-            "ajax": backendUrl+"/users/getdata",
+            "ajax": backendUrl+"/categories/getdata",
             "columns": [
                 {
                     "data": "no"
@@ -27,25 +27,13 @@ const loadTableUsers = () => {
                     "data": "name"
                 },
                 {
-                    "data": "avatar"
+                    "data": "author_name"
                 },
                 {
-                    "data": "username"
+                    "data": "created_at"
                 },
                 {
-                    "data": "email"
-                },
-                {
-                    "data": "phone"
-                },
-                {
-                    "data": "dept_name"
-                },
-                {
-                    "data": "role_name",
-                },
-                {
-                    "data": "status",
+                    "data": "status"
                 },
                 {
                     "data": null
@@ -54,13 +42,12 @@ const loadTableUsers = () => {
             'createdRow': function (row, item, dataIndex) {
                 $(row).addClass('text-center');
                 $('td', row).addClass('align-middle');
-                $('td:eq(8)', row).html(showStatus(item.status));
-                $('td:eq(9)', row).html(`
-                    <a href="${backendUrl}/users/update/${item.id}" data-get="" class="fa fa-pencil btn btn-info btn-sm editUser" title="Cập nhật"></a>
+                $('td:eq(3)', row).html(vi_moment(item.created_at, 'DD/MM/YYYY HH:mm'));
+                $('td:eq(4)', row).html(showStatus(item.status));
+                $('td:eq(5)', row).html(`
+                    <a href="${backendUrl}/categories/update/${item.id}" class="fa fa-pencil btn btn-info btn-sm editUser" title="Cập nhật"></a>
+                    <a href="${backendUrl}/categories/delete/${item.id}" class="fa fa-trash btn btn-danger btn-sm" title="Xóa"></a>
                 `);
-                if(parseInt(item.id) !== 1){
-                    $('td:eq(9)', row).append(`<a href="#" data-href="${backendUrl}/users/delete/${item.id}" class="fa fa-trash btn btn-danger btn-sm deleteUser" title="Xóa"></a>`);
-                }
             },
             "deferRender": true,
             "language": {
@@ -81,13 +68,7 @@ const loadTableUsers = () => {
                 }
             }
         });
-
-        // showModalBasic({element : 'User', modal : '#modalUser', title : 'tài khoản'}, dt)
-        
-        showConfrimDelete('.deleteUser',()=>{
-            dt.draw();
-        })
     }
 }
 
-loadTableUsers();
+loadTableCategories();
