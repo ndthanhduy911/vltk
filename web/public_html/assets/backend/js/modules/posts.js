@@ -156,13 +156,6 @@ const loadTablePostsTrash = () => {
     }
 }
 
-const changeTitleToSlug = (title, slug) => {
-    $(title).change(function (e) { 
-        e.preventDefault();
-        $(slug).val(changeToSlug($(this).val()));
-    });
-}
-
 loadTablePosts();
 loadTablePostsTrash();
 changeTitleToSlug('#title', '#slug');

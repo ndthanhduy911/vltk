@@ -77,3 +77,5 @@ const loadTableCategories = () => {
 }
 
 loadTableCategories();
+
+changeTitleToSlug('#title', '#slug');

@@ -75,3 +75,5 @@ const loadTablePages = () => {
 }
 
 loadTablePages();
+
+changeTitleToSlug('#title', '#slug');

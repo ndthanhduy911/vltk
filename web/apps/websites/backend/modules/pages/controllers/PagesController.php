@@ -64,9 +64,11 @@ class PagesController  extends \BackendController {
             if ($this->security->checkToken()) {
                 $data['token'] = ['key' => $this->security->getTokenKey(), 'value' => $this->security->getToken()];
                 $error = [];
+                $p_title = $this->request->getPost('title');
+                $p_slug = $this->request->getPost('slug');
                 $post = [
-                    'title' => $this->request->getPost('title'),
-                    'slug' => $this->request->getPost('slug'),
+                    'title' => $p_title,
+                    'slug' => $this->request->getPost('slug') ? $c_slug : $this->helper->slugify($c_name),
                     'attribute_id' => $this->request->getPost('attribute_id'),
                     'content' => $this->request->getPost('content'),
                     'status' => $this->request->getPost('status'),
@@ -78,6 +80,18 @@ class PagesController  extends \BackendController {
                     foreach ($form->getMessages() as $message) {
                         array_push($error, $message->getMessage());
                     }
+                }
+
+                $check_slug = Pages::findFirst([
+                    "slug = :slug: AND id != :id:",
+                    "bind" => [
+                        "slug" => $req['slug'],
+                        'id'    => $id,
+                    ]
+                ]);
+
+                if($check_slug){
+                    array_push($error, 'Slug đã tồn tại');
                 }
 
                 if (!count($error)) {
@@ -133,6 +147,8 @@ class PagesController  extends \BackendController {
         }
         $this->view->form = $form;
         $this->view->page = $page;
+
+        $this->get_js_css();
     }
 
     public function deleteAction($id = null){

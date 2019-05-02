@@ -59,8 +59,9 @@ class CategoriesController  extends \BackendController {
             if ($this->security->checkToken()) {
                 $data['token'] = ['key' => $this->security->getTokenKey(), 'value' => $this->security->getToken()];
                 $error = [];
+                $c_name = $this->request->getPost('name');
                 $req = [
-                    'name' => $this->request->getPost('name'),
+                    'name' => $c_name,
                     'slug' => $this->request->getPost('slug'),
                     'status' => $this->request->getPost('status'),
                     'description' => $this->request->getPost('description'),
@@ -71,6 +72,18 @@ class CategoriesController  extends \BackendController {
                     foreach ($form->getMessages() as $message) {
                         array_push($error, $message->getMessage());
                     }
+                }
+
+                $check_slug = Categories::findFirst([
+                    "slug = :slug: AND id != :id:",
+                    "bind" => [
+                        "slug" => $req['slug'],
+                        'id'    => $id,
+                    ]
+                ]);
+
+                if($check_slug){
+                    array_push($error, 'Slug đã tồn tại');
                 }
 
                 if (!count($error)) {
@@ -126,6 +139,7 @@ class CategoriesController  extends \BackendController {
         }
         $this->view->form = $form;
         $this->view->cat = $category;
+        $this->get_js_css();
     }
 
     public function deleteAction($id = null){

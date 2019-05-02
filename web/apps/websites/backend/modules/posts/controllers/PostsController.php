@@ -37,7 +37,7 @@ class PostsController  extends \BackendController {
                 $p_slug = $this->request->getPost('slug');
                 $p_calendar = $this->request->getPost('calendar');
                 $req = [
-                    'title' => $this->request->getPost('title'),
+                    'title' => $p_title,
                     'slug' => $this->request->getPost('slug') ? $p_slug : $this->helper->slugify($p_title),
                     'cat_id' => $this->request->getPost('cat_id'),
                     'content' => $this->request->getPost('content'),
@@ -52,6 +52,18 @@ class PostsController  extends \BackendController {
                     foreach ($form->getMessages() as $message) {
                         array_push($error, $message->getMessage());
                     }
+                }
+
+                $check_slug = Posts::findFirst([
+                    "slug = :slug: AND id != :id:",
+                    "bind" => [
+                        "slug" => $req['slug'],
+                        'id'    => $id,
+                    ]
+                ]);
+
+                if($check_slug){
+                    array_push($error, 'Slug đã tồn tại');
                 }
 
                 if (!count($error)) {

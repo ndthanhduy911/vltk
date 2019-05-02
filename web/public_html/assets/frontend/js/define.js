@@ -32,3 +32,10 @@ const getDatePost = ($date = null, calendar = null) => {
 const getTimePost = ($date = null, calendar = null) => {
     return calendar ? vi_moment(calendar , 'HH:mm') : vi_moment(date , 'HH:mm');
 }
+
+const changeTitleToSlug = (title, slug) => {
+    $(title).change(function (e) { 
+        e.preventDefault();
+        $(slug).val(changeToSlug($(this).val()));
+    });
+}

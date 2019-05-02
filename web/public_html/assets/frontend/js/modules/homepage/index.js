@@ -25,3 +25,7 @@ const showPosts = (block , cat_id = null) => {
 }
 
 showPosts('#posts2', 2);
+
+showPosts('#posts3', 3);
+
+showPosts('#posts5', 5);
