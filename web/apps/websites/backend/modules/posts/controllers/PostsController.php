@@ -17,6 +17,7 @@ class PostsController  extends \BackendController {
         if($id){
             $post = Posts::findFirstId($id);
             $post->updated_at = date('Y-m-d H:i:s');
+            $post->calendar = $this->helper->datetime_vn($post->calendar);
             $title = 'Cập nhật';
         }else{
             $post = new Posts();
@@ -32,12 +33,16 @@ class PostsController  extends \BackendController {
             if ($this->security->checkToken()) {
                 $data['token'] = ['key' => $this->security->getTokenKey(), 'value' => $this->security->getToken()];
                 $error = [];
+                $p_title = $this->request->getPost('title');
+                $p_slug = $this->request->getPost('slug');
+                $p_calendar = $this->request->getPost('calendar');
                 $req = [
                     'title' => $this->request->getPost('title'),
-                    'slug' => $this->request->getPost('slug'),
+                    'slug' => $this->request->getPost('slug') ? $p_slug : $this->helper->slugify($p_title),
                     'cat_id' => $this->request->getPost('cat_id'),
                     'content' => $this->request->getPost('content'),
                     'status' => $this->request->getPost('status'),
+                    'calendar' => $p_calendar ? $p_calendar : date('d/m/Y H:i'),
                     'except' => $this->request->getPost('except'),
                     'featured_image' => $this->request->getPost('featured_image'),
                 ];
@@ -50,6 +55,7 @@ class PostsController  extends \BackendController {
                 }
 
                 if (!count($error)) {
+                    $post->calendar = $this->helper->datetime_mysql($post->calendar);
                     if (!$post->save()) {
                         if ($this->request->isAjax()) {
                             foreach ($post->getMessages() as $message) {

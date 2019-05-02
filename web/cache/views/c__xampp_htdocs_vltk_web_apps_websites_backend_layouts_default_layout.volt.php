@@ -28,8 +28,9 @@
     <link rel="stylesheet" type="text/css" href="/assets/backend/css/main.css">
 
     <link rel="stylesheet" type="text/css" href="/assets/backend/plugins/ckeditor/samples/css/samples.css">
-    <link rel="stylesheet" type="text/css"
-        href="/assets/backend/plugins/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">
+    <link rel="stylesheet" type="text/css" href="/assets/backend/plugins/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">
+
+    <link rel="stylesheet" type="text/css" href="/assets/backend/css/boostrap-datetimepicker.min.css">
 
     <link rel="stylesheet" type="text/css" href="/assets/backend/css/custom.css">
     <?= $this->assets->outputCss() ?>
@@ -55,8 +56,9 @@
     <script src="/assets/backend/js/plugins/jquery.dataTables.min.js"></script>
     <script src="/assets/backend/js/plugins/dataTables.bootstrap.min.js"></script>
     <script src="/assets/backend/js/plugins/select2.min.js"></script>
-    <script src="/assets/backend/js/plugins/bootstrap-datepicker.min.js"></script>
     <script src="/assets/backend/js/plugins/moment.min.js"></script>
+    <!-- <script src="/assets/backend/js/plugins/bootstrap-datepicker.min.js"></script> -->
+    <script src="/assets/backend/js/plugins/boostrap-datetimepicker.min.js"></script>
     <script src="/assets/backend/js/plugins/sweetalert.min.js"></script>
     <script src="/assets/backend/js/plugins/validator.min.js"></script>
     <script src="/assets/backend/plugins/ckeditor/ckeditor.js"></script>

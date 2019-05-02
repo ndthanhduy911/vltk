@@ -14,14 +14,27 @@ $router->add($config->application->frontendUri."/:params", array(
 ));
 
 
-/***********************PagesController***********************/
-$router->add($config->application->frontendUri . '/bang-tin', array(
+/***********************PostsController***********************/
+$router->add($config->application->frontendUri . '/api-posts/:action', array(
+    'module' => 'frontend_pages',
+    'controller' => 'posts',
+    'action' => 1,
+));
+
+$router->add($config->application->frontendUri . '/api-posts/:action/:int', array(
+    'module' => 'frontend_pages',
+    'controller' => 'posts',
+    'action'  => 1,
+    'id' => 2
+));
+
+$router->add($config->application->frontendUri . '/posts', array(
     'module' => 'frontend_pages',
     'controller' => 'posts',
     'action' => 'index',
 ));
 
-$router->add($config->application->frontendUri . '/nd-tin-tuc/:params', array(
+$router->add($config->application->frontendUri . '/posts/:params', array(
     'module' => 'frontend_pages',
     'controller' => 'posts',
     'action' => 'single',

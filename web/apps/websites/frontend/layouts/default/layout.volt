@@ -109,11 +109,21 @@
 <script src="<?php echo FRONTEND_URL ?>/assets/frontend/plugins/countTo/jquery.countTo.js"></script>
 <!-- Slick carousel javascript -->
 <script src="<?php echo FRONTEND_URL ?>/assets/frontend/plugins/slick/slick.min.js"></script>
-<!-- Pace javascript -->
-<script src="<?php echo FRONTEND_URL ?>/assets/frontend/plugins/pace/pace.min.js"></script>
+<!-- Moment function -->
+<script src="<?php echo FRONTEND_URL ?>/assets/frontend/plugins/moment.min.js"></script>
+<!-- Define function -->
+<script src="<?php echo FRONTEND_URL ?>/assets/frontend/js/define.js"></script>
+<!-- Call API -->
+<script src="<?php echo FRONTEND_URL ?>/assets/frontend/js/apicall.js"></script>
 <!-- Initialization of Plugins -->
 <script src="<?php echo FRONTEND_URL ?>/assets/frontend/js/template.js"></script>
+
+{{ assets.outputJs() }}
+
 <!-- Custom Scripts -->
 <script src="<?php echo FRONTEND_URL ?>/assets/frontend/js/custom.js"></script>
+
+<!-- Pace javascript -->
+<script src="<?php echo FRONTEND_URL ?>/assets/frontend/plugins/pace/pace.min.js"></script>
 
 </html>

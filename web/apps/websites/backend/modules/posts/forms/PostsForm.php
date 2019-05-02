@@ -10,6 +10,7 @@ use Phalcon\Forms\Element\Hidden;
 use Phalcon\Forms\Form;
 use Phalcon\Validation\Validator\StringLength as StringLength;
 use Phalcon\Validation\Validator\PresenceOf;
+use Phalcon\Validation\Validator\Date as DateValidator;
 
 use Models\Categories;
 
@@ -56,11 +57,8 @@ class PostsForm extends Form
         $slug = new Text('slug');
         $slug->setAttributes(array(
             'class' => 'form-control',
-            'placeholder' => 'Url',
+            'placeholder' => 'Slug',
             'maxlength' => "200",
-            'data-error' => "Url không đúng quy định.",
-            'required' => '',
-            'data-required-error' => "Url không được để trống.",
         ));
         $slug->addValidators(array(
             new StringLength([
@@ -72,17 +70,23 @@ class PostsForm extends Form
 
         $calendar = new Text('calendar');
         $calendar->setAttributes(array(
-            'class' => 'form-control-sm date-basic w-100',
-            'placeholder' => 'dd/mm/yyyy',
-            'maxlength' => "10",
-            'pattern' =>"^(0[1-9]|1\d|2\d|3[01])\/(0[1-9]|1[0-2])\/(19|20)\d{2}$",
-            'data-pattern-error' => "Định đạng không đúng. Chỉ cho phép ngày theo định dạng dd/mm/yyyy"
+            'class' => 'form-control-sm datetime-basic w-100',
+            'placeholder' => 'dd/mm/yyyy hh:mm',
+            'maxlength' => "16",
+            // 'pattern' =>"^(0[1-9]|1\d|2\d|3[01])\/(0[1-9]|1[0-2])\/(19|20)\d{2}$",
+            // 'data-pattern-error' => "Định đạng không đúng. Chỉ cho phép ngày theo định dạng dd/mm/yyyy"
         ));
         $calendar->addValidators(array(
             new StringLength([
-                "max" => 10,
-                "messageMaximum" => "Tóm tắt không được dài quá 10 ký tự",
+                "max" => 16,
+                "messageMaximum" => "Tóm tắt không được dài quá 16 ký tự",
             ]),
+            new DateValidator(
+                [
+                    "format"  => "d/m/Y H:i",
+                    "message" => "Không đúng định dạng thời gian",
+                ]
+            )
         ));
         $this->add($calendar);
 

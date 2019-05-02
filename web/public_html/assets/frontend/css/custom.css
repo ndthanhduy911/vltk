@@ -117,3 +117,7 @@ ul.dropdown-menu > li:last-of-type > a
 .dark.header .dropdown-menu {
     background-color: #ffffff;
 }
+
+.media-object {
+    object-fit: contain;
+}

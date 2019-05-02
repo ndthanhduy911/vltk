@@ -139,7 +139,7 @@
             <div class="col-lg-4">
                 <h3><span class="text-default">Tin Giáo Vụ</span></h3>
                 <div class="separator-2"></div>
-                <div class="block">
+                <div class="block" id="posts2">
                     <div class="media margin-clear">
                         <div class="overlay-container rounded">
                             <img class="media-object" src="<?php echo FRONTEND_URL ?>/assets/frontend/images/medical-blog-thumb-1.jpg"
@@ -189,7 +189,7 @@
             <div class="col-lg-4">
                 <h3><span class="text-default">Tin NCKH - Seminar</span></h3>
                 <div class="separator-2"></div>
-                <div class="block">
+                <div class="block" id="posts3">
                     <div class="media margin-clear">
                         <div class="overlay-container rounded">
                             <img class="media-object" src="<?php echo FRONTEND_URL ?>/assets/frontend/images/medical-blog-thumb-1.jpg"
@@ -240,7 +240,7 @@
             <div class="col-lg-4">
                 <h3><span class="text-default">Thông Báo Tuyển Dụng</span></h3>
                 <div class="separator-2"></div>
-                <div class="block">
+                <div class="block" id="posts5">
                     <div class="media margin-clear">
                         <div class="overlay-container rounded">
                             <img class="media-object" src="<?php echo FRONTEND_URL ?>/assets/frontend/images/medical-blog-thumb-1.jpg"

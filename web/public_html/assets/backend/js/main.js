@@ -30,9 +30,11 @@
 		initSample();
 	}
 
-	$('.date-basic').datepicker({
-		format: "dd/mm/yyyy",
-		autoclose: true,
-		todayHighlight: true
+	$('.date-basic').datetimepicker({
+		format: "DD/MM/YYYY",
+	});
+
+	$('.datetime-basic').datetimepicker({
+		format: 'DD/MM/YYYY HH:mm',
 	});
 })();
