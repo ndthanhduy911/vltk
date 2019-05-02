@@ -6,6 +6,7 @@ use Phalcon\Forms\Element\Email;
 use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\Textarea;
 use Phalcon\Forms\Element\Select;
+use Phalcon\Forms\Element\Hidden;
 use Phalcon\Forms\Form;
 use Phalcon\Validation\Validator\StringLength as StringLength;
 use Phalcon\Validation\Validator\PresenceOf;
@@ -114,5 +115,11 @@ class PostsForm extends Form
             )),
         ));
         $this->add($status);
+
+        $featured_image = new Hidden('featured_image');
+        $this->add($featured_image);
+
+        $content = new Hidden('content');
+        $this->add($content);
     }
 }

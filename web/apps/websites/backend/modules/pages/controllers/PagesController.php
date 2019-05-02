@@ -143,11 +143,11 @@ class PagesController  extends \BackendController {
                 foreach ($page->getMessages() as $message) {
                     $this->flashSession->error($message);
                 }
-                return $this->response->redirect('page');
+                return $this->response->redirect(BACKEND_URL.'/pages');
             }else{
                 // $this->logs->write_log(3, 1, 'Xóa trang', json_encode($save),$this->session->get("user_id"));
-                $this->flashSession->success("Xóa trang thành công");
-                return $this->response->redirect('pages');
+                // $this->flashSession->success("Xóa trang thành công");
+                return $this->response->redirect(BACKEND_URL.'/pages');
             }
         }else{
 

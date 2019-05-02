@@ -9,6 +9,11 @@
             <li class="breadcrumb-item">Trang</li>
         </ul>
     </div>
+
+    <div class="body-message m-0">
+        <?php echo $this->flashSession->output(); ?>
+    </div>
+
     <div class="row">
         <div class="col-md-12">
             <div class="tile">

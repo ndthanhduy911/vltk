@@ -45,9 +45,11 @@ const loadTableCategories = () => {
                 $('td:eq(3)', row).html(vi_moment(item.created_at, 'DD/MM/YYYY HH:mm'));
                 $('td:eq(4)', row).html(showStatus(item.status));
                 $('td:eq(5)', row).html(`
-                    <a href="${backendUrl}/categories/update/${item.id}" class="fa fa-pencil btn btn-info btn-sm editUser" title="Cập nhật"></a>
-                    <a href="${backendUrl}/categories/delete/${item.id}" class="fa fa-trash btn btn-danger btn-sm" title="Xóa"></a>
+                    <a href="${backendUrl}/categories/update/${item.id}" class="fa fa-pencil btn btn-info btn-sm editCat" title="Cập nhật"></a>
                 `);
+                if(![1, 2, 3, 4, 5].includes(parseInt(item.id))){
+                    $('td:eq(5)', row).append(`<a href="#" data-href="${backendUrl}/categories/delete/${item.id}" class="fa fa-trash btn btn-danger btn-sm deleteCat" title="Xóa"></a>`);
+                }
             },
             "deferRender": true,
             "language": {
@@ -68,6 +70,9 @@ const loadTableCategories = () => {
                 }
             }
         });
+        showConfrimDelete('.deleteCat',()=>{
+            dt.draw();
+        })
     }
 }
 

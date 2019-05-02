@@ -195,9 +195,36 @@ const showModalBasic = (option, dt = false, add = () => {}, update = () => {}, r
     });
 }
 
-const showSelectImage = (button, show, modal) => {
-    $('body').on('click', button, function (e) {
-        e.preventDefault();
-        $(modal).addClass('show');
-    });
+const showSelectImage = (button, showImg, uploadImageValue) => {
+    if($(button).length){
+        $('body').on('click', button ,function (e) {
+            e.preventDefault();
+            let elfNode = $('<div \>');
+            elfNode.dialog({
+                modal: true,
+                width: "80%",
+                title: "Thư viện",
+                zIndex: 99999,
+                create: function (event, ui) {
+                    $(this).elfinder({
+                        resizable: false,
+                        url: "/elfinder/php/connector.minimal.php",
+                        commandsOptions: {
+                            getfile: {
+                                oncomplete: 'destroy'
+                            }
+                        },
+                        getFileCallback: function (file) {
+                            file.url = file.url.replace("/elfinder/php/../../", fontendUrl+'/');
+                            let url = file.url;
+                            $(showImg).attr('src' , url);
+                            $(uploadImageValue).val(url);
+                            elfNode.dialog('close');
+                            elfInsrance.disable();
+                        }
+                    }).elfinder('instance')
+                }
+            }).parent().css({'zIndex':'11000','top':'100px', 'position' : 'fixed'});
+        });
+    }
 }

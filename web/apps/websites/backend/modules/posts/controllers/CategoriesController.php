@@ -129,21 +129,47 @@ class CategoriesController  extends \BackendController {
     }
 
     public function deleteAction($id = null){
-
-        if ($category = Categories::findFirstId($id)) {
-            $category->status = 4;
-            if (!$category->save()) {
-                foreach ($category->getMessages() as $message) {
-                    $this->flashSession->error($message);
+        
+        if ($cat = Categories::findFirstId($id) && !in_array((int)$id, [1,2,3,4,5])) {
+            $cat->status = 4;
+            if (!$cat->save()) {
+                if ($this->request->isAjax()) {
+                    foreach ($cat->getMessages() as $message) {
+                        array_push($error, $message->getMessage());
+                    }
+                    $data['error'] = $error;
+                    $this->response->setStatusCode(400, 'error');
+                    $this->response->setJsonContent($data);
+                    return $this->response->send();
+                } else {
+                    foreach ($cat->getMessages() as $message) {
+                        $this->flashSession->error($message);
+                    }
+                    return $this->response->redirect(BACKEND_URL.'/trashs');
                 }
-                return $this->response->redirect('page');
             }else{
-                // $this->logs->write_log(3, 1, 'Xóa trang', json_encode($save),$this->session->get("user_id"));
-                $this->flashSession->success("Xóa trang thành công");
-                return $this->response->redirect('posts');
+                if ($this->request->isAjax()) {
+                    $data['data'] = $cat->toArray();
+                    $this->response->setStatusCode(200, 'OK');
+                    $this->response->setJsonContent($data);
+                    return $this->response->send();
+                } else {
+                    // $this->logs->write_log(3, 1, 'Xóa trang', json_encode($save),$this->session->get("user_id"));
+                    $this->flashSession->success("Chuyển bài viết đến thùng rác thành công");
+                    return $this->response->redirect(BACKEND_URL.'/posts');
+                }
             }
         }else{
-
+            if ($this->request->isAjax()) {
+                $data['error'] = 'Không tìm thấy bài viết';
+                $this->response->setStatusCode(404, 'Not found');
+                $this->response->setJsonContent($data);
+                return $this->response->send();
+            } else {
+                // $this->logs->write_log(3, 1, 'Xóa trang', json_encode($save),$this->session->get("user_id"));
+                $this->flashSession->error("Không tìm thấy bài viết");
+                return $this->response->redirect(BACKEND_URL.'/posts');
+            }
         }
         
     }

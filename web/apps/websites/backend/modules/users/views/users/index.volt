@@ -9,6 +9,11 @@
             <li class="breadcrumb-item">Tài khoản</li>
         </ul>
     </div>
+
+    <div class="body-message">
+        <?php echo $this->flashSession->output(); ?>
+    </div>
+
     <div class="row">
         <div class="col-md-12 p-0">
             <div class="tile">

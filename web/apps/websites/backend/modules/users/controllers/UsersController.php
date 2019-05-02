@@ -178,7 +178,7 @@ class UsersController  extends \BackendController {
         if ($user !== false && (int)$id !== 1) {
             if (!$user->delete()) {
                 if ($this->request->isAjax()) {
-                    foreach ($page->getMessages() as $message) {
+                    foreach ($user->getMessages() as $message) {
                         array_push($error, $message->getMessage());
                     }
                     $data['error'] = $error;
@@ -193,13 +193,13 @@ class UsersController  extends \BackendController {
                 }
             }else{
                 if ($this->request->isAjax()) {
-                    $data['data'] = $page->toArray();
+                    $data['data'] = $user->toArray();
                     $this->response->setStatusCode(200, 'OK');
                     $this->response->setJsonContent($data);
                     return $this->response->send();
                 } else {
                     // $this->logs->write_log(3, 1, 'Xóa trang', json_encode($save),$this->session->get("user_id"));
-                    $this->flashSession->success("Xóa tài khoản thành công");
+                    // $this->flashSession->success("Xóa tài khoản thành công");
                     return $this->response->redirect(BACKEND_URL.'/users');
                 }
 

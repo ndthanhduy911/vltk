@@ -19,10 +19,10 @@
                 <li><a class="treeview-item <?php if ($this->dispatcher->getControllerName() == 'posts' && ($this->isIncluded($this->dispatcher->getActionName(), ['index', 'edit']))) { ?> <?= 'actived' ?> <?php } ?>" href="<?= $this->config->application->backendUri ?>/posts"><i
                             class="icon fa fa-circle-o"></i>
                         Tất cả</a></li>
-                <li><a class="treeview-item <?php if ($this->dispatcher->getControllerName() == 'posts' && ($this->isIncluded($this->dispatcher->getActionName(), ['add']))) { ?> <?= 'actived' ?> <?php } ?>" href="<?= $this->config->application->backendUri ?>/posts/update"><i
+                <li><a class="treeview-item <?php if ($this->dispatcher->getControllerName() == 'posts' && ($this->isIncluded($this->dispatcher->getActionName(), ['update']))) { ?> <?= 'actived' ?> <?php } ?>" href="<?= $this->config->application->backendUri ?>/posts/update"><i
                         class="icon fa fa-circle-o"></i>
                         Bài viết mới</a></li>
-                <li><a class="treeview-item <?php if ($this->dispatcher->getControllerName() == 'categories' && ($this->isIncluded($this->dispatcher->getActionName(), ['index', 'add', 'edit']))) { ?> <?= 'actived' ?> <?php } ?>" href="<?= $this->config->application->backendUri ?>/categories" target="_blank"
+                <li><a class="treeview-item <?php if ($this->dispatcher->getControllerName() == 'categories') { ?> <?= 'actived' ?> <?php } ?>" href="<?= $this->config->application->backendUri ?>/categories" target="_blank"
                         rel="noopener"><i class="icon fa fa-circle-o"></i> Danh mục</a></li>
                 <li><a class="treeview-item" href="<?= $this->config->application->backendUri ?>/tag"><i
                             class="icon fa fa-circle-o"></i> Thẻ</a></li>
@@ -32,8 +32,8 @@
                     class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">Trang</span><i
                     class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
-                <li><a class="treeview-item <?php if ($this->dispatcher->getControllerName() == 'pages' && ($this->isIncluded($this->dispatcher->getActionName(), ['index', 'edit']))) { ?> <?= 'actived' ?> <?php } ?>" href="<?= $this->config->application->backendUri ?>/pages"><i class="icon fa fa-circle-o"></i> Tất cả</a></li>
-                <li><a class="treeview-item <?php if ($this->dispatcher->getControllerName() == 'pages' && ($this->isIncluded($this->dispatcher->getActionName(), ['add']))) { ?> <?= 'actived' ?> <?php } ?>" href="<?= $this->config->application->backendUri ?>/pages/update"><i class="icon fa fa-circle-o"></i> Trang mới</a></li>
+                <li><a class="treeview-item <?php if ($this->dispatcher->getControllerName() == 'pages' && ($this->isIncluded($this->dispatcher->getActionName(), ['index']))) { ?> <?= 'actived' ?> <?php } ?>" href="<?= $this->config->application->backendUri ?>/pages"><i class="icon fa fa-circle-o"></i> Tất cả</a></li>
+                <li><a class="treeview-item <?php if ($this->dispatcher->getControllerName() == 'pages' && ($this->isIncluded($this->dispatcher->getActionName(), ['update']))) { ?> <?= 'actived' ?> <?php } ?>" href="<?= $this->config->application->backendUri ?>/pages/update"><i class="icon fa fa-circle-o"></i> Trang mới</a></li>
             </ul>
         </li>
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
