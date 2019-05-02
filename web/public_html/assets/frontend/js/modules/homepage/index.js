@@ -1,5 +1,3 @@
-
-
 const showPosts = (block , cat_id = null) => {
     getPostByCatId(cat_id).then((data)=>{
         $(block).html('');
