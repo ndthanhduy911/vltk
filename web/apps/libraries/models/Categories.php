@@ -35,4 +35,22 @@ class Categories extends \Phalcon\Mvc\Model
             "columns" => $columns
         ]);
     }
+
+    public static function getUrlById($id = null)
+    {
+        if($cat = parent::findFirst($id)){
+            return FRONTEND_URL.'/'.$cat->slug;
+        }else{
+            return null;
+        }
+    }
+
+    public static function getTitleById($id = null)
+    {
+        if($cat = parent::findFirst($id)){
+            return $cat->name;
+        }else{
+            return null;
+        }
+    }
 }

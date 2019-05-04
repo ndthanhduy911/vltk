@@ -17,7 +17,7 @@
 
                         <!-- main image -->
                         <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/banner1.png" alt="slidebg1"
-                            data-bgposition="center top" data-bgrepeat="no-repeat" data-bgfit="cover"
+                            data-bgposition="center center" data-bgrepeat="no-repeat" data-bgfit="cover"
                             class="rev-slidebg">
 
                         <!-- Transparent Background -->
@@ -37,10 +37,7 @@
                             data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;">
                             <h2 class="title slider-title">Vật Lý - Vật Lý Kỹ Thuật</h2>
                             <div class="separator-2 clearfix"></div>
-                            <p class="slider-content">Voluptatem ad provident non repudiandae beatae cupiditate amet
-                                reiciendis lorem ipsum
-                                dolor sit
-                                amet, consectetur.</p>
+                            <p class="slider-content">Là một trong những khoa ra đời từ những ngày Trường Cao đẳng Khoa học (Viện đại học Đông Dương) – Đại học Khoa học Sài Gòn được thành lập năm 1940- 1941. Khoa đã đạo tạo được rất nhiều nhân tài cho đất nước trên nhiều lĩnh vực.</p>
                             <div class="text-right"><a class="btn btn-small btn-default margin-clear" href="#">Chi
                                     tiết</a></div>
                         </div>
@@ -55,7 +52,7 @@
 
                         <!-- main image -->
                         <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/banner1.png" alt="slidebg2"
-                            data-bgposition="center top" data-bgrepeat="no-repeat" data-bgfit="cover"
+                            data-bgposition="center center" data-bgrepeat="no-repeat" data-bgfit="cover"
                             class="rev-slidebg">
 
                         <!-- Transparent Background -->
@@ -73,12 +70,11 @@
                             data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;"
                             data-mask_in="x:0px;y:[100%];s:inherit;e:inherit;"
                             data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;">
-                            <h2 class="title slider-title">Vật Lý - Vật Lý Kỹ Thuật</h2>
+                            <h2 class="title slider-title">Cơ hội nghề nghiệp sau khi ra trường</h2>
                             <div class="separator-2 clearfix"></div>
-                            <p class="slider-content">Voluptatem ad provident non repudiandae beatae cupiditate amet
-                                reiciendis lorem ipsum
-                                dolor sit
-                                amet, consectetur.</p>
+                            <p class="slider-content">Sinh viên có cơ hội làm việc tại các công ty trong và ngoài nước, viện nghiên cứu, sở khoa học công nghệ liên quan tới lĩnh vực Vật lý, kỹ thuật và khoa học.
+                                Cơ hội được học tiếp chương trình sau đại học (thạc sĩ, tiến sĩ) tại các trường đại học danh tiếng trong và ngoài nước.
+                                </p>
                             <div class="text-right"><a class="btn btn-small btn-default margin-clear" href="#">Chi
                                     tiết</a></div>
                         </div>
@@ -92,8 +88,8 @@
                         data-title="Title 3">
 
                         <!-- main image -->
-                        <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/banner1.png" alt="slidebg2"
-                            data-bgposition="center top" data-bgrepeat="no-repeat" data-bgfit="cover"
+                        <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/banner3.jpg" alt="slidebg2"
+                            data-bgposition="center center" data-bgrepeat="no-repeat" data-bgfit="cover"
                             class="rev-slidebg">
 
                         <!-- Transparent Background -->
@@ -111,12 +107,9 @@
                             data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;"
                             data-mask_in="x:0px;y:[100%];s:inherit;e:inherit;"
                             data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;">
-                            <h2 class="title slider-title">Vật Lý - Vật Lý Kỹ Thuật</h2>
+                            <h2 class="title slider-title">Sinh Viên</h2>
                             <div class="separator-2 clearfix"></div>
-                            <p class="slider-content">Voluptatem ad provident non repudiandae beatae cupiditate amet
-                                reiciendis lorem ipsum
-                                dolor sit
-                                amet, consectetur.</p>
+                            <p class="slider-content">Năng động, sang tạo, tự tin, bản lĩnh, làm chủ kiến thức rộng bước tương lai.</p>
                             <div class="text-right"><a class="btn btn-small btn-default margin-clear" href="#">Chi
                                     tiết</a></div>
                         </div>

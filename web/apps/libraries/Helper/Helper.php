@@ -3,9 +3,9 @@ namespace Library\Helper;
 use Phalcon\Mvc\User\Component;
 use Library\PHPMailer\PHPMailer;
 use Models\Logs as Logs;
-use Models\Emails;
-use Models\GenaralSetting;
-use Models\Notification;
+// use Models\Emails;
+// use Models\GenaralSetting;
+// use Models\Notification;
 
 
 class Helper extends Component
@@ -84,44 +84,44 @@ class Helper extends Component
         }
     }
 
-    public function send_email($nTo=null, $mTo=null, $title = null, $body=null, $content = null) {
-        $email_setting = json_decode(GenaralSetting::findFirstByName('email_setting')->value);
-        $nFrom = $email_setting->form_name;
-        $mFrom = $email_setting->email_name;
-        $mPass = $email_setting->password_email;
-        $mail  = new PHPMailer();
-        // idzidrtajyaiegul
-        $mail->IsSMTP();             
-        $mail->CharSet  = "utf-8";
-        $mail->SMTPDebug  = 0;
-        $mail->SMTPAuth   = true;
-        $mail->SMTPSecure = "ssl";
-        $mail->Host       = $email_setting->smtp_name;
-        $mail->Port       = 465;
+    // public function send_email($nTo=null, $mTo=null, $title = null, $body=null, $content = null) {
+    //     $email_setting = json_decode(GenaralSetting::findFirstByName('email_setting')->value);
+    //     $nFrom = $email_setting->form_name;
+    //     $mFrom = $email_setting->email_name;
+    //     $mPass = $email_setting->password_email;
+    //     $mail  = new PHPMailer();
+    //     // idzidrtajyaiegul
+    //     $mail->IsSMTP();             
+    //     $mail->CharSet  = "utf-8";
+    //     $mail->SMTPDebug  = 0;
+    //     $mail->SMTPAuth   = true;
+    //     $mail->SMTPSecure = "ssl";
+    //     $mail->Host       = $email_setting->smtp_name;
+    //     $mail->Port       = 465;
 
-        $mail->Username   = $mFrom;
-        $mail->Password   = $mPass;
-        $mail->SetFrom($mFrom, $nFrom);
-        $mail->AddReplyTo($mFrom, $nFrom);
-        $mail->Subject    = $title;
-        $mail->MsgHTML($body);
-        $mail->AddAddress($mTo, $nTo);
-        $email = new Emails();
-        $email->type = 1;
-        $email->person_from = $nFrom.'<br>('.$mFrom.')';
-        $email->person_to = $nTo.'<br>('.$mTo.')';
-        $email->title = $title;
-        $email->content = $content;
-        if(!$mail->Send()) {
-            $email->status = 0;
-            $email->save();
-            return false;
-        } else {
-            $email->status = 1;
-            $email->save();
-            return true;
-        }
-    }
+    //     $mail->Username   = $mFrom;
+    //     $mail->Password   = $mPass;
+    //     $mail->SetFrom($mFrom, $nFrom);
+    //     $mail->AddReplyTo($mFrom, $nFrom);
+    //     $mail->Subject    = $title;
+    //     $mail->MsgHTML($body);
+    //     $mail->AddAddress($mTo, $nTo);
+    //     $email = new Emails();
+    //     $email->type = 1;
+    //     $email->person_from = $nFrom.'<br>('.$mFrom.')';
+    //     $email->person_to = $nTo.'<br>('.$mTo.')';
+    //     $email->title = $title;
+    //     $email->content = $content;
+    //     if(!$mail->Send()) {
+    //         $email->status = 0;
+    //         $email->save();
+    //         return false;
+    //     } else {
+    //         $email->status = 1;
+    //         $email->save();
+    //         return true;
+    //     }
+    // }
 
     public function getExcerpt($str, $startPos=0, $maxLength=100) {
         if(strlen($str) > $maxLength) {
@@ -135,9 +135,9 @@ class Helper extends Component
         return $excerpt;
     }
 
-    public function getShowNotify(){
-        return  Notification::find(['type_user= 2 AND user_id ='.$this->session->get('user_id'), 'order' => 'created_at DESC', 'limit' => array('number' => 20, 'offset' => 0)])->toArray();
-    }
+    // public function getShowNotify(){
+    //     return  Notification::find(['type_user= 2 AND user_id ='.$this->session->get('user_id'), 'order' => 'created_at DESC', 'limit' => array('number' => 20, 'offset' => 0)])->toArray();
+    // }
 
     static function flatten($arrayToFlatten) {
         $flatArray = array();
@@ -159,5 +159,27 @@ class Helper extends Component
     public function datetime_vn($date = null)
     {
         return $date ? date_format(date_create($date), "d/m/Y H:i") : NULL;
+    }
+
+    public function getPaging($total_records, $current_page, $limit = 10)
+    {
+        if($total_records <= $limit){
+            return false;
+        }
+
+        $total_page = CEIL($total_records / $limit);
+
+        if ($current_page > $total_page){
+            $current_page = $total_page;
+        }
+        else if ($current_page < 1){
+            $current_page = 1;
+        }
+
+        $paging = [
+            'total_page' => $total_page,
+            'current_page' => $current_page,
+        ];
+        return $paging;
     }
 }

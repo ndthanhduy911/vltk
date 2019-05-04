@@ -14,7 +14,7 @@ class Posts extends \Phalcon\Mvc\Model
 
     public $content;
 
-    public $except;
+    public $excerpt;
 
     public $status;
 
@@ -51,6 +51,24 @@ class Posts extends \Phalcon\Mvc\Model
                 "bind" => array('id' => $id),
                 "columns" => $columns
             ]);
+        }
+    }
+
+    public static function getUrlById($id = null)
+    {
+        if($post = parent::findFirst($id)){
+            return FRONTEND_URL.'/'.$post->slug;
+        }else{
+            return null;
+        }
+    }
+
+    public static function getTitleById($id = null)
+    {
+        if($post = parent::findFirst($id)){
+            return $post->name;
+        }else{
+            return null;
         }
     }
 }

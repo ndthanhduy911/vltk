@@ -1,3 +1,8 @@
+<?php
+    use Models\Pages;
+    use Models\Departments;
+    use Models\Categories;
+?>
 <!-- header-container start -->
 <div class="header-container">
     <!-- header-top start -->
@@ -26,8 +31,7 @@
                             <div class="btn-group dropdown">
                                 <button id="header-top-drop-1" type="button"
                                     class="btn dropdown-toggle dropdown-toggle--no-caret" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false"><i
-                                        class="fa fa-share-alt"></i></button>
+                                    aria-haspopup="true" aria-expanded="false"><i class="fa fa-share-alt"></i></button>
                                 <ul class="dropdown-menu dropdown-animation" aria-labelledby="header-top-drop-1">
                                     <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
                                     <li class="skype"><a href="#"><i class="fa fa-skype"></i></a></li>
@@ -148,57 +152,67 @@
 
                                         <!-- mega-menu start trang chủ-->
                                         <li class="nav-item dropdown ">
-                                            <a href="#" class="nav-link dropdown-toggle"
-                                                id="third-dropdown" data-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="false">Trang chủ</a>
+                                            <a href="#" class="nav-link dropdown-toggle" id="third-dropdown"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Trang
+                                                chủ</a>
                                             <ul class="dropdown-menu" aria-labelledby="third-dropdown">
-                                                <li><a href="<?php echo FRONTEND_URL ?>/gioi-thieu">Giới thiệu Khoa</a></li>
-                                                <li><a href="<?php echo FRONTEND_URL ?>/to-chuc-nhan-su"></i>Tổ chức - Nhân sự</a></li>
-                                                <li><a href="<?php echo FRONTEND_URL ?>/hop-tac-dao-tao"></i>Hợp tác đào tạo</a></li>
-                                                <li><a href="<?php echo FRONTEND_URL ?>/nghien-cuu-khoa-hoc"></i>Nghiên cứu khoa học</a></li>
-                                                <li><a href="<?php echo FRONTEND_URL ?>/phong-thi-nghiem">Phòng thí nghiệm</a></li>
-                                                <li><a href="<?php echo FRONTEND_URL ?>/san-pham-nghien-cuu">Sản phẩm nghiên cứu</a></li>
-                                                <li><a href="<?php echo FRONTEND_URL ?>/doan-hoi">Đoàn hội</a></li>
-
+                                                <?php $page_1 = Pages::findFirst(["id = 1 AND dept_id = 1","columns" => "slug, title"]) ?>
+                                                <li><a href="<?php echo $page_1 ? FRONTEND_URL.'/'.$page_1->slug : null ?>"><?php echo $page_1 ? $page_1->title : null ?></a></li>
+                                                <?php $page_2 = Pages::findFirst(["id = 2 AND dept_id = 1","columns" => "slug, title"]) ?>
+                                                <li><a href="<?php echo $page_2 ? FRONTEND_URL.'/'.$page_2->slug : null ?>"><?php echo $page_2 ? $page_2->title : null ?></a></li>
+                                                <?php $page_3 = Pages::findFirst(["id = 3 AND dept_id = 1","columns" => "slug, title"]) ?>
+                                                <li><a href="<?php echo $page_3 ? FRONTEND_URL.'/'.$page_3->slug : null ?>"><?php echo $page_3 ? $page_3->title : null ?></a></li>
+                                                <?php $page_4 = Pages::findFirst(["id = 4 AND dept_id = 1","columns" => "slug, title"]) ?>
+                                                <li><a href="<?php echo $page_4 ? FRONTEND_URL.'/'.$page_4->slug : null ?>"><?php echo $page_4 ? $page_4->title : null ?></a></li>
+                                                <?php $page_5 = Pages::findFirst(["id = 5 AND dept_id = 1","columns" => "slug, title"]) ?>
+                                                <li><a href="<?php echo $page_5 ? FRONTEND_URL.'/'.$page_5->slug : null ?>"><?php echo $page_5 ? $page_5->title : null ?></a></li>
+                                                <?php $page_6 = Pages::findFirst(["id = 6 AND dept_id = 1","columns" => "slug, title"]) ?>
+                                                <li><a href="<?php echo $page_6 ? FRONTEND_URL.'/'.$page_6->slug : null ?>"><?php echo $page_6 ? $page_6->title : null ?></a></li>
+                                                <?php $page_7 = Pages::findFirst(["id = 7 AND dept_id = 1","columns" => "slug, title"]) ?>
+                                                <li><a href="<?php echo $page_7 ? FRONTEND_URL.'/'.$page_7->slug : null ?>"><?php echo $page_7 ? $page_7->title : null ?></a></li>
                                             </ul>
                                         </li>
                                         <!-- mega-menu end trang chủ-->
                                         <!-- mega-menu start Giới thiệu-->
                                         <li class="nav-item dropdown ">
-                                            <a href="#" class="nav-link dropdown-toggle"
-                                                id="fifth-dropdown" data-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="false">Bộ môn</a>
+                                            <a href="#" class="nav-link dropdown-toggle" id="fifth-dropdown"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Bộ
+                                                môn</a>
                                             <ul class="dropdown-menu" aria-labelledby="fifth-dropdown">
-                                                <li><a href="<?php echo FRONTEND_URL ?>/vat-ly-tin-hoc">Vật
-                                                        Lý Tin Học</a></li>
-                                                <li><a href="<?php echo FRONTEND_URL ?>/vat-ly-ly-thuyet">Vật
-                                                        Lý Lý Thuyết</a></li>
-                                                <li><a href="<?php echo FRONTEND_URL ?>/vat-ly-hat-nhan">Vật
-                                                        Lý Hạt Nhân - KTHN</a></li>
-                                                <li><a href="<?php echo FRONTEND_URL ?>/vat-ly-chat-ran">Vật
-                                                        Lý Chất Rắn</a></li>
-                                                <li><a href="<?php echo FRONTEND_URL ?>/vat-ly-ung-ung">Vật
-                                                        Lý Ứng Dụng</a></li>
-                                                <li><a href="<?php echo FRONTEND_URL ?>/vat-ly-dien-tu">Vật
-                                                        Lý Điện Tử</a></li>
-                                                <li><a href="<?php echo FRONTEND_URL ?>/vat-ly-dia-cau">Vật
-                                                        Lý Địa Cầu</a></li>
-                                                <li><a href="<?php echo FRONTEND_URL ?>/vat-ly-hai-duong">Vật
-                                                        Lý Hải Dương</a></li>
+                                                <?php $dept_2 = Departments::findFirst(["id = 2","columns" => "slug, name"]) ?>
+                                                <li><a href="<?php echo $dept_2 ? FRONTEND_URL.'/dept/'.$dept_2->slug : null ?>"><?php echo $dept_2 ? $dept_2->name : null ?></a></li>
+                                                <?php $dept_3 = Departments::findFirst(["id = 3","columns" => "slug, name"]) ?>
+                                                <li><a href="<?php echo $dept_3 ? FRONTEND_URL.'/dept/'.$dept_3->slug : null ?>"><?php echo $dept_3 ? $dept_3->name : null ?></a></li>
+                                                <?php $dept_4 = Departments::findFirst(["id = 4","columns" => "slug, name"]) ?>
+                                                <li><a href="<?php echo $dept_4 ? FRONTEND_URL.'/dept/'.$dept_4->slug : null ?>"><?php echo $dept_4 ? $dept_4->name : null ?></a></li>
+                                                <?php $dept_5 = Departments::findFirst(["id = 5","columns" => "slug, name"]) ?>
+                                                <li><a href="<?php echo $dept_5 ? FRONTEND_URL.'/dept/'.$dept_5->slug : null ?>"><?php echo $dept_5 ? $dept_5->name : null ?></a></li>
+                                                <?php $dept_6 = Departments::findFirst(["id = 6","columns" => "slug, name"]) ?>
+                                                <li><a href="<?php echo $dept_6 ? FRONTEND_URL.'/dept/'.$dept_6->slug : null ?>"><?php echo $dept_6 ? $dept_6->name : null ?></a></li>
+                                                <?php $dept_7 = Departments::findFirst(["id = 7","columns" => "slug, name"]) ?>
+                                                <li><a href="<?php echo $dept_7 ? FRONTEND_URL.'/dept/'.$dept_7->slug : null ?>"><?php echo $dept_7 ? $dept_7->name : null ?></a></li>
+                                                <?php $dept_8 = Departments::findFirst(["id = 8","columns" => "slug, name"]) ?>
+                                                <li><a href="<?php echo $dept_8 ? FRONTEND_URL.'/dept/'.$dept_8->slug : null ?>"><?php echo $dept_8 ? $dept_8->name : null ?></a></li>
+                                                <?php $dept_9 = Departments::findFirst(["id = 9","columns" => "slug, name"]) ?>
+                                                <li><a href="<?php echo $dept_9 ? FRONTEND_URL.'/dept/'.$dept_1->slug : null ?>"><?php echo $dept_9 ? $dept_9->name : null ?></a></li>
                                             </ul>
                                         </li>
                                         <!-- mega-menu end giới thiệu-->
 
                                         <!-- mega-menu start Tuyển sinh-->
                                         <li class="nav-item dropdown ">
-                                            <a href="#" class="nav-link dropdown-toggle"
-                                                id="third-dropdown" data-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="false">Bản tin khoa</a>
+                                            <a href="#" class="nav-link dropdown-toggle" id="third-dropdown"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Bản
+                                                tin khoa</a>
                                             <ul class="dropdown-menu" aria-labelledby="third-dropdown">
-                                                <li><a href="<?php echo FRONTEND_URL ?>/tin-tuc/tin-giao-vu">Tin giáo dụ</a></li>
-                                                <li><a href="<?php echo FRONTEND_URL ?>/tin-tuc/tin-nckh-serminar">Tin NCKH - Serminar</a></li>
-                                                <li><a href="<?php echo FRONTEND_URL ?>/tin-tuc/tin-cb-vc-khoa">Tin CB - VC Khoa</a></li>
-                                                <li><a href="<?php echo FRONTEND_URL ?>/tin-tuc/tin-tuyen-dung">Tin Tuyển Dụng</a></li>
+                                                <?php $cat_2 = Categories::findFirst(["id = 2","columns" => "slug, name"]) ?>
+                                                <li><a href="<?php echo $cat_2 ? FRONTEND_URL.'/category/'.$cat_2->slug : null ?>"><?php echo $cat_2 ? $cat_2->name : null ?></a></li>
+                                                <?php $cat_3 = Categories::findFirst(["id = 3","columns" => "slug, name"]) ?>
+                                                <li><a href="<?php echo $cat_3 ? FRONTEND_URL.'/category/'.$cat_3->slug : null ?>"><?php echo $cat_3 ? $cat_3->name : null ?></a></li>
+                                                <?php $cat_4 = Categories::findFirst(["id = 4","columns" => "slug, name"]) ?>
+                                                <li><a href="<?php echo $cat_4 ? FRONTEND_URL.'/category/'.$cat_4->slug : null ?>"><?php echo $cat_4 ? $cat_4->name : null ?></a></li>
+                                                <?php $cat_5 = Categories::findFirst(["id = 5","columns" => "slug, name"]) ?>
+                                                <li><a href="<?php echo $cat_5 ? FRONTEND_URL.'/category/'.$cat_5->slug : null ?>"><?php echo $cat_5 ? $cat_5->name : null ?></a></li>
                                             </ul>
                                         </li>
                                         <!-- mega-menu end tuyển sinh-->
@@ -206,24 +220,28 @@
                                         <!-- mega-menu start Đào tạo-->
 
                                         <li class="nav-item dropdown ">
-                                            <a href="#" class="nav-link dropdown-toggle"
-                                                id="fourth-dropdown" data-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="false">Đào tạo</a>
+                                            <a href="#" class="nav-link dropdown-toggle" id="fourth-dropdown"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Đào
+                                                tạo</a>
                                             <ul class="dropdown-menu" aria-labelledby="fourth-dropdown">
-                                                <li><a href="<?php echo FRONTEND_URL ?>/dao-tao-dai-hoc">Đại học</a></li>
-                                                <li><a href="<?php echo FRONTEND_URL ?>/dao-tao-sau-dai-hoc">Sau đại học</a></li>
+                                                <?php $page_9 = Pages::findFirst(["id = 9 AND dept_id = 1","columns" => "slug, title"]) ?>
+                                                <li><a href="<?php echo $page_9 ? FRONTEND_URL.'/'.$page_9->slug : null ?>"><?php echo $page_9 ? $page_9->title : null ?></a></li>
+                                                <?php $page_10 = Pages::findFirst(["id = 10 AND dept_id = 1","columns" => "slug, title"]) ?>
+                                                <li><a href="<?php echo $page_10 ? FRONTEND_URL.'/'.$page_10->slug : null ?>"><?php echo $page_10 ? $page_10->title : null ?></a></li>
                                             </ul>
                                         </li>
                                         <!-- mega-menu end đào tạo-->
 
                                         <!-- mega-menu start nghiên cứu-->
                                         <li class="nav-item dropdown ">
-                                            <a href="#" class="nav-link dropdown-toggle"
-                                                id="sixth-dropdown" data-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="false">Tuyển sinh</a>
+                                            <a href="#" class="nav-link dropdown-toggle" id="sixth-dropdown"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tuyển
+                                                sinh</a>
                                             <ul class="dropdown-menu" aria-labelledby="fourth-dropdown">
-                                                <li><a href="<?php echo FRONTEND_URL ?>/tuyen-sinh-dai-hoc">Đại học</a></li>
-                                                <li><a href="<?php echo FRONTEND_URL ?>/tuyen-sinh-sau-dai-hoc">Sau đại học</a></li>
+                                                <?php $page_11 = Pages::findFirst(["id = 11 AND dept_id = 1","columns" => "slug, title"]) ?>
+                                                <li><a href="<?php echo $page_11 ? FRONTEND_URL.'/'.$page_11->slug : null ?>"><?php echo $page_11 ? $page_11->title : null ?></a></li>
+                                                <?php $page_12 = Pages::findFirst(["id = 12 AND dept_id = 1","columns" => "slug, title"]) ?>
+                                                <li><a href="<?php echo $page_12 ? FRONTEND_URL.'/'.$page_12->slug : null ?>"><?php echo $page_12 ? $page_12->title : null ?></a></li>
                                             </ul>
                                         </li>
                                         <!-- mega-menu end nghiên cứu-->
@@ -240,7 +258,8 @@
                 <div class="col-auto hidden-md-down p-0">
                     <div class="header-dropdown-buttons">
                         <a href="#">
-                            <img src="<?php echo FRONTEND_URL ?>/language_file/vie/vietnam.png" class="user-image" alt="VIET NAM" width="36px">
+                            <img src="<?php echo FRONTEND_URL ?>/language_file/vie/vietnam.png" class="user-image"
+                                alt="VIET NAM" width="36px">
                         </a>
                     </div>
                 </div>

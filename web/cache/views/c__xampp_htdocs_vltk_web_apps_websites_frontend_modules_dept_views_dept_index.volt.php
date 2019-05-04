@@ -8,7 +8,8 @@
         <!-- slider revolution start -->
         <!-- ================ -->
         <div class="slider-revolution-5-container">
-            <div id="slider-banner-fullwidth" class="slider-banner-fullwidth rev_slider" data-version="5.0">
+            <div id="slider-banner-fullwidth-big-height" class="slider-banner-fullwidth-big-height rev_slider"
+                data-version="5.0">
                 <ul class="slides">
                     <!-- slide 1 start -->
                     <!-- ================ -->
@@ -16,15 +17,13 @@
                         data-title="Title 1">
 
                         <!-- main image -->
-                        <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/banner1.png" alt="slidebg1"
-                            data-bgposition="center center" data-bgrepeat="no-repeat" data-bgfit="cover"
-                            class="rev-slidebg">
+                        <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/banner1.png" alt="slidebg1" data-bgposition="center top"
+                            data-bgrepeat="no-repeat" data-bgfit="cover" class="rev-slidebg">
 
                         <!-- Transparent Background -->
                         <div class="tp-caption" data-x="center" data-y="center" data-start="0"
                             data-transform_idle="o:1;" data-transform_in="o:0;s:600;e:Power2.easeInOut;"
-                            data-transform_out="o:0;s:600;" data-width="5000" data-height="5000"
-                            style="background-color: rgba(0, 0, 0, 0.2);">
+                            data-transform_out="o:0;s:600;" data-width="5000" data-height="5000" style="background-color: rgba(0, 0, 0, 0.1);">
                         </div>
 
                         <!-- LAYER NR. 1 -->
@@ -37,7 +36,10 @@
                             data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;">
                             <h2 class="title slider-title">Vật Lý - Vật Lý Kỹ Thuật</h2>
                             <div class="separator-2 clearfix"></div>
-                            <p class="slider-content">Là một trong những khoa ra đời từ những ngày Trường Cao đẳng Khoa học (Viện đại học Đông Dương) – Đại học Khoa học Sài Gòn được thành lập năm 1940- 1941. Khoa đã đạo tạo được rất nhiều nhân tài cho đất nước trên nhiều lĩnh vực.</p>
+                            <p class="slider-content">Voluptatem ad provident non repudiandae beatae cupiditate amet
+                                reiciendis lorem ipsum
+                                dolor sit
+                                amet, consectetur.</p>
                             <div class="text-right"><a class="btn btn-small btn-default margin-clear" href="#">Chi
                                     tiết</a></div>
                         </div>
@@ -51,15 +53,13 @@
                         data-title="Title 2">
 
                         <!-- main image -->
-                        <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/banner1.png" alt="slidebg2"
-                            data-bgposition="center center" data-bgrepeat="no-repeat" data-bgfit="cover"
-                            class="rev-slidebg">
+                        <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/banner1.png" alt="slidebg2" data-bgposition="center top"
+                            data-bgrepeat="no-repeat" data-bgfit="cover" class="rev-slidebg">
 
                         <!-- Transparent Background -->
                         <div class="tp-caption dark-translucent-bg" data-x="center" data-y="center" data-start="0"
                             data-transform_idle="o:1;" data-transform_in="o:0;s:600;e:Power2.easeInOut;"
-                            data-transform_out="o:0;s:600;" data-width="5000" data-height="5000"
-                            style="background-color: rgba(0, 0, 0, 0.2);">
+                            data-transform_out="o:0;s:600;" data-width="5000" data-height="5000" style="background-color: rgba(0, 0, 0, 0.1);">
                         </div>
 
                         <!-- LAYER NR. 1 -->
@@ -70,11 +70,12 @@
                             data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;"
                             data-mask_in="x:0px;y:[100%];s:inherit;e:inherit;"
                             data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;">
-                            <h2 class="title slider-title">Cơ hội nghề nghiệp sau khi ra trường</h2>
+                            <h2 class="title slider-title">Vật Lý - Vật Lý Kỹ Thuật</h2>
                             <div class="separator-2 clearfix"></div>
-                            <p class="slider-content">Sinh viên có cơ hội làm việc tại các công ty trong và ngoài nước, viện nghiên cứu, sở khoa học công nghệ liên quan tới lĩnh vực Vật lý, kỹ thuật và khoa học.
-                                Cơ hội được học tiếp chương trình sau đại học (thạc sĩ, tiến sĩ) tại các trường đại học danh tiếng trong và ngoài nước.
-                                </p>
+                            <p class="slider-content">Voluptatem ad provident non repudiandae beatae cupiditate amet
+                                reiciendis lorem ipsum
+                                dolor sit
+                                amet, consectetur.</p>
                             <div class="text-right"><a class="btn btn-small btn-default margin-clear" href="#">Chi
                                     tiết</a></div>
                         </div>
@@ -88,15 +89,13 @@
                         data-title="Title 3">
 
                         <!-- main image -->
-                        <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/banner3.jpg" alt="slidebg2"
-                            data-bgposition="center center" data-bgrepeat="no-repeat" data-bgfit="cover"
-                            class="rev-slidebg">
+                        <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/banner1.png" alt="slidebg2" data-bgposition="center top"
+                            data-bgrepeat="no-repeat" data-bgfit="cover" class="rev-slidebg">
 
                         <!-- Transparent Background -->
                         <div class="tp-caption dark-translucent-bg" data-x="center" data-y="center" data-start="0"
                             data-transform_idle="o:1;" data-transform_in="o:0;s:600;e:Power2.easeInOut;"
-                            data-transform_out="o:0;s:600;" data-width="5000" data-height="5000"
-                            style="background-color: rgba(0, 0, 0, 0.2);">
+                            data-transform_out="o:0;s:600;" data-width="5000" data-height="5000" style="background-color: rgba(0, 0, 0, 0.1);">
                         </div>
 
                         <!-- LAYER NR. 1 -->
@@ -107,9 +106,12 @@
                             data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;"
                             data-mask_in="x:0px;y:[100%];s:inherit;e:inherit;"
                             data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;">
-                            <h2 class="title slider-title">Sinh Viên</h2>
+                            <h2 class="title slider-title">Vật Lý - Vật Lý Kỹ Thuật</h2>
                             <div class="separator-2 clearfix"></div>
-                            <p class="slider-content">Năng động, sang tạo, tự tin, bản lĩnh, làm chủ kiến thức rộng bước tương lai.</p>
+                            <p class="slider-content">Voluptatem ad provident non repudiandae beatae cupiditate amet
+                                reiciendis lorem ipsum
+                                dolor sit
+                                amet, consectetur.</p>
                             <div class="text-right"><a class="btn btn-small btn-default margin-clear" href="#">Chi
                                     tiết</a></div>
                         </div>
@@ -138,7 +140,47 @@
                 <h3><span class="text-default">Tin Giáo Vụ</span></h3>
                 <div class="separator-2"></div>
                 <div class="block">
-                    <div id="posts2"></div>
+                    <div class="media margin-clear">
+                        <div class="overlay-container rounded">
+                            <img class="media-object" src="<?php echo FRONTEND_URL ?>/assets/frontend/images/medical-blog-thumb-1.jpg"
+                                alt="blog-thumb">
+                            <a href="blog-post.html" class="overlay-link small"><i class="fa fa-graduation-cap"></i></a>
+                        </div>
+                        <div class="media-body">
+                            <h5 class="media-heading"><a href="blog-post.html">Đăng ký thi chứng chỉ VNU-EPT</a></h5>
+                            <div class="small"><i class="fa fa-calendar pr-10"></i>Oct 23, 2017 <i
+                                    class="fa fa-clock-o pl-10 pr-10"></i>10:25am</div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="media margin-clear">
+                        <div class="overlay-container rounded">
+                            <img class="media-object" src="<?php echo FRONTEND_URL ?>/assets/frontend/images/medical-blog-thumb-2.jpg"
+                                alt="blog-thumb">
+                            <a href="blog-post.html" class="overlay-link small"><i class="fa fa-graduation-cap"></i></a>
+                        </div>
+                        <div class="media-body">
+                            <h5 class="media-heading"><a href="blog-post.html">Đăng ký thi chứng chỉ VNU-EPT</a></h5>
+                            <div class="small"><i class="fa fa-calendar pr-10"></i>Oct 23, 2017 <i
+                                    class="fa fa-clock-o pl-10 pr-10"></i>10:25
+                                am</div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="media margin-clear">
+                        <div class="overlay-container rounded">
+                            <img class="media-object" src="<?php echo FRONTEND_URL ?>/assets/frontend/images/medical-blog-thumb-3.jpg"
+                                alt="blog-thumb">
+                            <a href="blog-post.html" class="overlay-link small"><i class="fa fa-graduation-cap"></i></a>
+                        </div>
+                        <div class="media-body">
+                            <h5 class="media-heading"><a href="blog-post.html">Đăng ký thi chứng chỉ VNU-EPT</a></h5>
+                            <div class="small"><i class="fa fa-calendar pr-10"></i>Oct 23, 2017 <i
+                                    class="fa fa-clock-o pl-10 pr-10"></i>10:25
+                                am</div>
+                        </div>
+                    </div>
+                    <hr>
                     <footer class="clearfix">
                         <div class="link pull-right small"><i class="fa fa-link pr-1"></i><a href="#">Xem thêm</a></div>
                     </footer>
@@ -147,8 +189,49 @@
             <div class="col-lg-4">
                 <h3><span class="text-default">Tin NCKH - Seminar</span></h3>
                 <div class="separator-2"></div>
-                <div class="block" id="posts3">
-                    <div id="posts3"></div>
+                <div class="block">
+                    <div class="media margin-clear">
+                        <div class="overlay-container rounded">
+                            <img class="media-object" src="<?php echo FRONTEND_URL ?>/assets/frontend/images/medical-blog-thumb-1.jpg"
+                                alt="blog-thumb">
+                            <a href="blog-post.html" class="overlay-link small"><i class="fa fa-graduation-cap"></i></a>
+                        </div>
+                        <div class="media-body">
+                            <h5 class="media-heading"><a href="blog-post.html">Mời tham dự Hội nghị</a></h5>
+                            <div class="small"><i class="fa fa-calendar pr-10"></i>Oct 23, 2017 <i
+                                    class="fa fa-clock-o pl-10 pr-10"></i>10:25
+                                am</div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="media margin-clear">
+                        <div class="overlay-container rounded">
+                            <img class="media-object" src="<?php echo FRONTEND_URL ?>/assets/frontend/images/medical-blog-thumb-2.jpg"
+                                alt="blog-thumb">
+                            <a href="blog-post.html" class="overlay-link small"><i class="fa fa-graduation-cap"></i></a>
+                        </div>
+                        <div class="media-body">
+                            <h5 class="media-heading"><a href="blog-post.html">Mời tham dự Hội nghị</a></h5>
+                            <div class="small"><i class="fa fa-calendar pr-10"></i>Oct 23, 2017 <i
+                                    class="fa fa-clock-o pl-10 pr-10"></i>10:25
+                                am</div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="media margin-clear">
+                        <div class="overlay-container rounded">
+                            <img class="media-object" src="<?php echo FRONTEND_URL ?>/assets/frontend/images/medical-blog-thumb-3.jpg"
+                                alt="blog-thumb">
+                            <a href="blog-post.html" class="overlay-link small"><i class="fa fa-graduation-cap"></i></a>
+                        </div>
+                        <div class="media-body">
+                            <h5 class="media-heading"><a href="blog-post.html">Mời tham dự Hội nghị</a></h5>
+                            <div class="small"><i class="fa fa-calendar pr-10"></i>Oct 23, 2017 <i
+                                    class="fa fa-clock-o pl-10 pr-10"></i>10:25
+                                am</div>
+                        </div>
+                    </div>
+                    <hr>
                     <footer class="clearfix">
                         <div class="link pull-right small"><i class="fa fa-link pr-1"></i><a href="#">Xem thêm</a></div>
                     </footer>
@@ -158,9 +241,51 @@
                 <h3><span class="text-default">Thông Báo Tuyển Dụng</span></h3>
                 <div class="separator-2"></div>
                 <div class="block">
-                    <div id="posts5">
-
+                    <div class="media margin-clear">
+                        <div class="overlay-container rounded">
+                            <img class="media-object" src="<?php echo FRONTEND_URL ?>/assets/frontend/images/medical-blog-thumb-1.jpg"
+                                alt="blog-thumb">
+                            <a href="blog-post.html" class="overlay-link small"><i class="fa fa-graduation-cap"></i></a>
+                        </div>
+                        <div class="media-body">
+                            <h5 class="media-heading"><a href="blog-post.html"> Công ty New-Ocean thông báo tuyển
+                                    dụng</a></h5>
+                            <div class="small"><i class="fa fa-calendar pr-10"></i>Oct 23, 2017 <i
+                                    class="fa fa-clock-o pl-10 pr-10"></i>10:25
+                                am</div>
+                        </div>
                     </div>
+                    <hr>
+                    <div class="media margin-clear">
+                        <div class="overlay-container rounded">
+                            <img class="media-object" src="<?php echo FRONTEND_URL ?>/assets/frontend/images/medical-blog-thumb-2.jpg"
+                                alt="blog-thumb">
+                            <a href="blog-post.html" class="overlay-link small"><i class="fa fa-graduation-cap"></i></a>
+                        </div>
+                        <div class="media-body">
+                            <h5 class="media-heading"><a href="blog-post.html">Công ty New-Ocean thông báo tuyển
+                                    dụng</a></h5>
+                            <div class="small"><i class="fa fa-calendar pr-10"></i>Oct 23, 2017 <i
+                                    class="fa fa-clock-o pl-10 pr-10"></i>10:25
+                                am</div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="media margin-clear">
+                        <div class="overlay-container rounded">
+                            <img class="media-object" src="<?php echo FRONTEND_URL ?>/assets/frontend/images/medical-blog-thumb-3.jpg"
+                                alt="blog-thumb">
+                            <a href="blog-post.html" class="overlay-link small"><i class="fa fa-graduation-cap"></i></a>
+                        </div>
+                        <div class="media-body">
+                            <h5 class="media-heading"><a href="blog-post.html">Công ty New-Ocean thông báo tuyển
+                                    dụng</a></h5>
+                            <div class="small"><i class="fa fa-calendar pr-10"></i>Oct 23, 2017 <i
+                                    class="fa fa-clock-o pl-10 pr-10"></i>10:25
+                                am</div>
+                        </div>
+                    </div>
+                    <hr>
                     <footer class="clearfix">
                         <div class="link pull-right small"><i class="fa fa-link pr-1"></i><a href="#">Xem thêm</a></div>
                     </footer>
@@ -308,14 +433,14 @@
             </div>
         </div>
         <div class="slick-carousel carousel-autoplay pv-20">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="image-box team-member shadow-2 mb-20">
                     <div class="overlay-container rounded overlay-visible">
                         <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/education-4.jpg" alt="">
                         <a href="#" class="overlay-link" title="Jane Doe - CEO"><i class="fa fa-graduation-cap"></i></a>
                         <div class="overlay-bottom">
-                            <div class="text p-0">
-                                <h4 class="title text-white text-uppercase">PGS.TS. Lê Vũ Tuấn Hùng</h4>
+                            <div class="text">
+                                <h3 class="title">PGS.TS. Lê Vũ Tuấn Hùng</h3>
                                 <div class="separator light"></div>
                                 <p class="small margin-clear"><em>Trưởng khoa <br> Trưởng bộ môn vật lý ứng dụng</em>
                                 </p>
@@ -324,34 +449,64 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="image-box team-member shadow-2 mb-20">
                     <div class="overlay-container rounded overlay-visible">
                         <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/education-4.jpg" alt="">
                         <a href="#" class="overlay-link" title="Jane Doe - CEO"><i class="fa fa-graduation-cap"></i></a>
                         <div class="overlay-bottom">
-                            <div class="text p-0">
-                                <h4 class="title text-white text-uppercase">PGS.TS. HUỲNH TRÚC PHƯƠNG</h4>
+                            <div class="text">
+                                <h3 class="title">PGS.TS. Lê Vũ Tuấn Hùng</h3>
                                 <div class="separator light"></div>
-                                <p class="small margin-clear"><em>Phó trưởng khoa <br> Trưởng bộ môn vật lý ứng
-                                        dụng</em>
+                                <p class="small margin-clear"><em>Trưởng khoa <br> Trưởng bộ môn vật lý ứng dụng</em>
                                 </p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="image-box team-member shadow-2 mb-20">
                     <div class="overlay-container rounded overlay-visible">
                         <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/education-4.jpg" alt="">
                         <a href="#" class="overlay-link" title="Jane Doe - CEO"><i class="fa fa-graduation-cap"></i></a>
                         <div class="overlay-bottom">
-                            <div class="text p-0">
-                                <h4 class="title text-white text-uppercase">PGS.TS. HUỲNH VĂN TUẤN</h4>
+                            <div class="text">
+                                <h3 class="title">PGS.TS. Lê Vũ Tuấn Hùng</h3>
                                 <div class="separator light"></div>
-                                <p class="small margin-clear"><em>Phó trưởng khoa <br> Trưởng bộ môn vật lý ứng
-                                        dụng</em>
+                                <p class="small margin-clear"><em>Trưởng khoa <br> Trưởng bộ môn vật lý ứng dụng</em>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="image-box team-member shadow-2 mb-20">
+                    <div class="overlay-container rounded overlay-visible">
+                        <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/education-4.jpg" alt="">
+                        <a href="#" class="overlay-link" title="Jane Doe - CEO"><i class="fa fa-graduation-cap"></i></a>
+                        <div class="overlay-bottom">
+                            <div class="text">
+                                <h3 class="title">PGS.TS. Lê Vũ Tuấn Hùng</h3>
+                                <div class="separator light"></div>
+                                <p class="small margin-clear"><em>Trưởng khoa <br> Trưởng bộ môn vật lý ứng dụng</em>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="image-box team-member shadow-2 mb-20">
+                    <div class="overlay-container rounded overlay-visible">
+                        <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/education-4.jpg" alt="">
+                        <a href="#" class="overlay-link" title="Jane Doe - CEO"><i class="fa fa-graduation-cap"></i></a>
+                        <div class="overlay-bottom">
+                            <div class="text">
+                                <h3 class="title">PGS.TS. Lê Vũ Tuấn Hùng</h3>
+                                <div class="separator light"></div>
+                                <p class="small margin-clear"><em>Trưởng khoa <br> Trưởng bộ môn vật lý ứng dụng</em>
                                 </p>
                             </div>
                         </div>

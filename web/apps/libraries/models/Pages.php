@@ -14,7 +14,7 @@ class Pages extends \Phalcon\Mvc\Model
 
     public $content;
 
-    public $except;
+    public $excerpt;
 
     public $status;
 
@@ -47,6 +47,24 @@ class Pages extends \Phalcon\Mvc\Model
                 "bind" => array('id' => $id),
                 "columns" => $columns
             ]);
+        }
+    }
+
+    public static function getUrlById($id = null)
+    {
+        if($page = parent::findFirst($id)){
+            return FRONTEND_URL.'/'.$page->slug;
+        }else{
+            return null;
+        }
+    }
+
+    public static function getTitleById($id = null)
+    {
+        if($page = parent::findFirst($id)){
+            return $page->name;
+        }else{
+            return null;
         }
     }
 }

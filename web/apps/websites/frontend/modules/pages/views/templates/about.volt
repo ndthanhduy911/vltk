@@ -14,7 +14,7 @@
                 <div class="separator object-non-visible mt-10" data-animation-effect="fadeIn" data-effect-delay="100">
                 </div>
                 <p class="text-center object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">
-                    <?php echo $page->except ?>
+                    <?php echo $page->excerpt ?>
                 </p>
             </div>
         </div>

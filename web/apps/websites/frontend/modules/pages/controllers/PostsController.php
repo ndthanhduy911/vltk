@@ -8,6 +8,15 @@ class PostsController extends \FrontendController
 {
     public function indexAction(){
         $this->view->title = 'Tin tức';
+        $current_page = (int)$this->request->get('page');
+        $posts = Posts::find([
+            'dept_id = 1',
+            'offset' => 10 * ($current_page >= 0 ? ($current_page - 1) : 0),
+            'limit' => 10,
+        ]);
+        $paging = $this->helper->getPaging(Posts::find(['dept_id = 1'])->count(), $current_page);
+        $this->view->posts = $posts;
+        $this->view->paging = $paging;
         $this->view->pick('templates/blog');
     }
 
@@ -15,7 +24,20 @@ class PostsController extends \FrontendController
         $slug = $this->helper->slugify($params);
         $category = Categories::findFirst(['slug = :slug:', 'bind' => ['slug' => $slug]]);
         if($category){
+
+            $current_page = (int)$this->request->get('page');
             $this->view->title = $category->name;
+            $posts = Posts::find([
+                'dept_id = 1 AND cat_id = :cat_id:',
+                'offset' => 10 * ($current_page > 0 ? ($current_page - 1) : 0),
+                'limit' => 10,
+                'bind' => [
+                    'cat_id' => $category->id
+                ]
+            ]);
+            $paging = $this->helper->getPaging(Posts::find(['dept_id = 1 AND cat_id = '.$category->id])->count(), $current_page);
+            $this->view->posts = $posts;
+            $this->view->paging = $paging;
             $this->view->pick('templates/blog');           
         }else{
             $this->view->title = '404';
@@ -25,7 +47,16 @@ class PostsController extends \FrontendController
 
     public function singleAction($params = null){
         $slug = $this->helper->slugify($params);
-        $this->view->pick('templates/single');
+        $post = Posts::findFirst(['dept_id = 1 AND slug = :slug:', 'bind' => ['slug' => $slug]]);
+        if($post){
+            $this->view->title = $post->title;
+            $this->view->post = $post;
+            $this->view->pick('templates/single');
+        }else{
+            $this->view->title = '404';
+            $this->view->pick('templates/404');
+        }
+
     }
 
     // =======================================

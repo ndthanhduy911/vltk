@@ -43,7 +43,7 @@ class PostsController  extends \BackendController {
                     'content' => $this->request->getPost('content'),
                     'status' => $this->request->getPost('status'),
                     'calendar' => $p_calendar ? $p_calendar : date('d/m/Y H:i'),
-                    'except' => $this->request->getPost('except'),
+                    'excerpt' => $this->request->getPost('excerpt'),
                     'featured_image' => $this->request->getPost('featured_image'),
                 ];
 
@@ -276,7 +276,7 @@ class PostsController  extends \BackendController {
                 $npPosts.'.cat_id',
                 $npPosts.'.content',
                 $npPosts.'.status',
-                $npPosts.'.except',
+                $npPosts.'.excerpt',
                 $npPosts.'.dept_id',
                 $npPosts.'.created_at',
                 $npPosts.'.calendar',
@@ -318,7 +318,7 @@ class PostsController  extends \BackendController {
                 $npPosts.'.cat_id',
                 $npPosts.'.content',
                 $npPosts.'.status',
-                $npPosts.'.except',
+                $npPosts.'.excerpt',
                 $npPosts.'.dept_id',
                 $npPosts.'.created_at',
                 $npPosts.'.calendar',

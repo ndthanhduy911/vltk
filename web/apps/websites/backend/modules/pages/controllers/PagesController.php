@@ -21,7 +21,7 @@ class PagesController  extends \BackendController {
                 $npPages.'.attribute_id',
                 $npPages.'.content',
                 $npPages.'.status',
-                $npPages.'.except',
+                $npPages.'.excerpt',
                 $npPages.'.dept_id',
                 $npPages.'.created_at',
                 'D.name dept_name',
@@ -72,7 +72,7 @@ class PagesController  extends \BackendController {
                     'attribute_id' => $this->request->getPost('attribute_id'),
                     'content' => $this->request->getPost('content'),
                     'status' => $this->request->getPost('status'),
-                    'except' => $this->request->getPost('except'),
+                    'excerpt' => $this->request->getPost('excerpt'),
                 ];
 
                 $form->bind($post, $page);

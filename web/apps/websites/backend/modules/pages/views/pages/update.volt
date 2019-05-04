@@ -45,7 +45,7 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text fa fa-link"></div>
                                     </div>
-                                    {{form.render('except')}}
+                                    {{form.render('excerpt')}}
                                     <div class="invalid-tooltip"></div>
                                 </div>
                             </div>

@@ -38,21 +38,21 @@ class PostsForm extends Form
         ));
         $this->add($title);
 
-        $except = new Textarea('except');
-        $except->setAttributes(array(
+        $excerpt = new Textarea('excerpt');
+        $excerpt->setAttributes(array(
             'class' => 'form-control',
             'placeholder' => 'Tóm tắt',
             'maxlength' => "255",
             'data-error' => "Tóm tắt không đúng quy định.",
             'rows' => 4
         ));
-        $except->addValidators(array(
+        $excerpt->addValidators(array(
             new StringLength([
                 "max" => 255,
                 "messageMaximum" => "Tóm tắt không được dài quá 255 ký tự",
             ]),
         ));
-        $this->add($except);
+        $this->add($excerpt);
 
         $slug = new Text('slug');
         $slug->setAttributes(array(

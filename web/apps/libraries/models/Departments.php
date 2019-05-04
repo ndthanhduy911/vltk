@@ -126,4 +126,22 @@ class Departments extends \Phalcon\Mvc\Model
         return $data;
         
     }
+
+    public static function getUrlById($id = null)
+    {
+        if($dept = parent::findFirst($id)){
+            return FRONTEND_URL.'/'.$dept->slug;
+        }else{
+            return null;
+        }
+    }
+
+    public static function getTitleById($id = null)
+    {
+        if($dept = parent::findFirst($id)){
+            return $dept->name;
+        }else{
+            return null;
+        }
+    }
 }

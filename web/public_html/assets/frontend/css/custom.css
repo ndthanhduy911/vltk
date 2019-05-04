@@ -121,3 +121,14 @@ ul.dropdown-menu > li:last-of-type > a
 .media-object {
     object-fit: contain;
 }
+
+.object-fit-contain {
+    object-fit: contain;
+}
+
+.page-link.disabled {
+    cursor: no-drop;
+    opacity: 0.8;
+    background: #777777 !important;
+    border-color: #777777 !important;
+}
