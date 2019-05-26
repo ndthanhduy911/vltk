@@ -1,7 +1,7 @@
 <?php
 
 namespace Frontend\Modules\Dept\Controllers;
-
+use Models\Departments;
 use Phalcon\Mvc\View;
 
 class DeptController extends \FrontendController

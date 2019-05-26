@@ -62,7 +62,7 @@ class Posts extends \Phalcon\Mvc\Model
             return null;
         }
     }
-
+    
     public static function getTitleById($id = null)
     {
         if($post = parent::findFirst($id)){

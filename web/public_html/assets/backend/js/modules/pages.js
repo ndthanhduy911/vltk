@@ -46,8 +46,10 @@ const loadTablePages = () => {
                 $('td:eq(4)', row).html(showStatus(item.status));
                 $('td:eq(5)', row).html(`
                     <a href="${backendUrl}/pages/update/${item.id}" class="fa fa-pencil btn btn-info btn-sm editPage" title="Cập nhật"></a>
-                    <a href="#" data-href="${backendUrl}/pages/delete/${item.id}" class="fa fa-trash btn btn-danger btn-sm deletePage" title="Xóa"></a>
                 `);
+                if(parseInt(item.id) >= 17){
+                    $('td:eq(5)', row).append(`<a href="#" data-href="${backendUrl}/pages/delete/${item.id}" class="fa fa-trash btn btn-danger btn-sm deletePage" title="Xóa"></a>`);
+                }
             },
             "deferRender": true,
             "language": {

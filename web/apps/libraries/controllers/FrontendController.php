@@ -2,6 +2,9 @@
 
 use Phalcon\Mvc\Controller;
 use Phalcon\Mvc\Dispatcher;
+use Models\Pages;
+use Models\Departments;
+use Models\Categories;
 
 class FrontendController extends Controller
 {
@@ -26,6 +29,9 @@ class FrontendController extends Controller
     public function beforeExecuteRoute(Dispatcher $dispatcher)
     {
         try {
+            $this->view->depts =  Departments::find(["columns" => "slug, name, image"]);
+            $this->view->cats =  Categories::find(["columns" => "slug, name"]);
+            $this->view->pages =  Pages::find(["dept_id = 1","columns" => "slug, title"]);
             // $identity = $this->auth->getIdentity();
             // if($dispatcher->getControllerName() === 'captchas'
             // || ($dispatcher->getControllerName() === 'account' && $dispatcher->getActionName()=== 'login')

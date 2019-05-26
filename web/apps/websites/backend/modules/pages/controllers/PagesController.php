@@ -153,7 +153,7 @@ class PagesController  extends \BackendController {
 
     public function deleteAction($id = null){
 
-        if ($page = Pages::findFirstId($id)) {
+        if ($page = Pages::findFirst(['id = :id: AND id > 16','bind' => ['id' => $id]])) {
             $page->status = 4;
             if (!$page->save()) {
                 foreach ($page->getMessages() as $message) {

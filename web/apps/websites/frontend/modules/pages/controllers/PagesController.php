@@ -7,7 +7,7 @@ class PagesController extends \FrontendController
 {
     public function indexAction($params = null){
         $params = $this->helper->slugify($params);
-        $page = Pages::findFirst(['slug = :slug:', 'bind' => ['slug' => $params]]);
+        $page = Pages::findFirst(['slug = :slug: AND status = 1', 'bind' => ['slug' => $params]]);
         if($page){
             $this->view->title = $page->title;
             $this->view->page = $page;

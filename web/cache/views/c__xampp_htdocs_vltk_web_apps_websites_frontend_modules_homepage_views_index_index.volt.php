@@ -37,7 +37,9 @@
                             data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;">
                             <h2 class="title slider-title">Vật Lý - Vật Lý Kỹ Thuật</h2>
                             <div class="separator-2 clearfix"></div>
-                            <p class="slider-content">Là một trong những khoa ra đời từ những ngày Trường Cao đẳng Khoa học (Viện đại học Đông Dương) – Đại học Khoa học Sài Gòn được thành lập năm 1940- 1941. Khoa đã đạo tạo được rất nhiều nhân tài cho đất nước trên nhiều lĩnh vực.</p>
+                            <p class="slider-content">Là một trong những khoa ra đời từ những ngày Trường Cao đẳng Khoa
+                                học (Viện đại học Đông Dương) – Đại học Khoa học Sài Gòn được thành lập năm 1940- 1941.
+                                Khoa đã đạo tạo được rất nhiều nhân tài cho đất nước trên nhiều lĩnh vực.</p>
                             <div class="text-right"><a class="btn btn-small btn-default margin-clear" href="#">Chi
                                     tiết</a></div>
                         </div>
@@ -72,9 +74,12 @@
                             data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;">
                             <h2 class="title slider-title">Cơ hội nghề nghiệp sau khi ra trường</h2>
                             <div class="separator-2 clearfix"></div>
-                            <p class="slider-content">Sinh viên có cơ hội làm việc tại các công ty trong và ngoài nước, viện nghiên cứu, sở khoa học công nghệ liên quan tới lĩnh vực Vật lý, kỹ thuật và khoa học.
-                                Cơ hội được học tiếp chương trình sau đại học (thạc sĩ, tiến sĩ) tại các trường đại học danh tiếng trong và ngoài nước.
-                                </p>
+                            <p class="slider-content">Sinh viên có cơ hội làm việc tại các công ty trong và ngoài nước,
+                                viện nghiên cứu, sở khoa học công nghệ liên quan tới lĩnh vực Vật lý, kỹ thuật và khoa
+                                học.
+                                Cơ hội được học tiếp chương trình sau đại học (thạc sĩ, tiến sĩ) tại các trường đại học
+                                danh tiếng trong và ngoài nước.
+                            </p>
                             <div class="text-right"><a class="btn btn-small btn-default margin-clear" href="#">Chi
                                     tiết</a></div>
                         </div>
@@ -109,7 +114,8 @@
                             data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;">
                             <h2 class="title slider-title">Sinh Viên</h2>
                             <div class="separator-2 clearfix"></div>
-                            <p class="slider-content">Năng động, sang tạo, tự tin, bản lĩnh, làm chủ kiến thức rộng bước tương lai.</p>
+                            <p class="slider-content">Năng động, sang tạo, tự tin, bản lĩnh, làm chủ kiến thức rộng bước
+                                tương lai.</p>
                             <div class="text-right"><a class="btn btn-small btn-default margin-clear" href="#">Chi
                                     tiết</a></div>
                         </div>
@@ -135,34 +141,34 @@
     <div class="container mt-4">
         <div class="row">
             <div class="col-lg-4">
-                <h3><span class="text-default">Tin Giáo Vụ</span></h3>
+                <h3><span class="text-default"><?php echo $cats[1]->name ?></span></h3>
                 <div class="separator-2"></div>
                 <div class="block">
                     <div id="posts2"></div>
                     <footer class="clearfix">
-                        <div class="link pull-right small"><i class="fa fa-link pr-1"></i><a href="#">Xem thêm</a></div>
+                        <div class="link pull-right small"><i class="fa fa-link pr-1"></i><a href="<?php echo FRONTEND_URL.'/category/'.$cats[1]->slug ?>">Xem thêm</a></div>
                     </footer>
                 </div>
             </div>
             <div class="col-lg-4">
-                <h3><span class="text-default">Tin NCKH - Seminar</span></h3>
+                <h3><span class="text-default"><?php echo $cats[2]->name ?></span></h3>
                 <div class="separator-2"></div>
-                <div class="block" id="posts3">
+                <div class="block">
                     <div id="posts3"></div>
                     <footer class="clearfix">
-                        <div class="link pull-right small"><i class="fa fa-link pr-1"></i><a href="#">Xem thêm</a></div>
+                        <div class="link pull-right small"><i class="fa fa-link pr-1"></i><a href="<?php echo FRONTEND_URL.'/category/'.$cats[2]->slug ?>">Xem thêm</a></div>
                     </footer>
                 </div>
             </div>
             <div class="col-lg-4">
-                <h3><span class="text-default">Thông Báo Tuyển Dụng</span></h3>
+                <h3><span class="text-default"><?php echo $cats[4]->name ?></span></h3>
                 <div class="separator-2"></div>
                 <div class="block">
                     <div id="posts5">
 
                     </div>
                     <footer class="clearfix">
-                        <div class="link pull-right small"><i class="fa fa-link pr-1"></i><a href="#">Xem thêm</a></div>
+                        <div class="link pull-right small"><i class="fa fa-link pr-1"></i><a href="<?php echo FRONTEND_URL.'/category/'.$cats[4]->slug ?>">Xem thêm</a></div>
                     </footer>
                 </div>
             </div>
@@ -184,110 +190,25 @@
         </div>
     </div>
     <div class="row mb-4 mr-0 ml-0">
+        <?php foreach ($depts as $key => $dept) { ?>
+        <?php if($key !== 0): ?>
         <div class="col-lg-3 col-md-6 isotope-item">
             <div class="image-box shadow-2 bordered text-center mb-20">
                 <div class="overlay-container rounded overlay-visible">
-                    <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/section-image-3.jpg" alt="">
-                    <a href="#" class="overlay-link"><i class="fa fa-graduation-cap"></i></a>
+                    <img src="<?php echo $dept->image ? FRONTEND_URL.'/'.$dept->image : FRONTEND_URL.'/assets/frontend/images/section-image-3.jpg' ?>"
+                        alt="<?= $dept->name ?>">
+                    <a href="<?php echo FRONTEND_URL.'/dept/'.$dept->slug ?>" class="overlay-link"><i
+                            class="fa fa-graduation-cap"></i></a>
                     <div class="overlay-bottom hidden-xs">
                         <div class="text">
-                            Vật Lý tin học
+                            <?= $dept->name ?>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 col-md-6 isotope-item">
-            <div class="image-box shadow-2 bordered text-center mb-20">
-                <div class="overlay-container rounded overlay-visible">
-                    <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/section-image-3.jpg" alt="">
-                    <a href="#" class="overlay-link"><i class="fa fa-graduation-cap"></i></a>
-                    <div class="overlay-bottom hidden-xs">
-                        <div class="text">
-                            Vật Lý ứng dụng
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6 isotope-item">
-            <div class="image-box shadow-2 bordered text-center mb-20">
-                <div class="overlay-container rounded overlay-visible">
-                    <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/section-image-3.jpg" alt="">
-                    <a href="#" class="overlay-link"><i class="fa fa-graduation-cap"></i></a>
-                    <div class="overlay-bottom hidden-xs">
-                        <div class="text">
-                            Vật Lý hạt nhân - Kỹ thuật hạt nhân
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6 isotope-item interior-design">
-            <div class="image-box shadow-2 bordered text-center mb-20">
-                <div class="overlay-container rounded overlay-visible">
-                    <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/section-image-3.jpg" alt="">
-                    <a href="#" class="overlay-link"><i class="fa fa-graduation-cap"></i></a>
-                    <div class="overlay-bottom hidden-xs">
-                        <div class="text">
-                            Vật Lý chất rắn
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6 isotope-item architecture-plans">
-            <div class="image-box shadow-2 bordered text-center mb-20">
-                <div class="overlay-container rounded overlay-visible">
-                    <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/section-image-3.jpg" alt="">
-                    <a href="#" class="overlay-link"><i class="fa fa-graduation-cap"></i></a>
-                    <div class="overlay-bottom hidden-xs">
-                        <div class="text">
-                            Vật Lý địa cầu
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6 isotope-item construction-management">
-            <div class="image-box shadow-2 bordered text-center mb-20">
-                <div class="overlay-container rounded overlay-visible">
-                    <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/section-image-3.jpg" alt="">
-                    <a href="#" class="overlay-link"><i class="fa fa-graduation-cap"></i></a>
-                    <div class="overlay-bottom hidden-xs">
-                        <div class="text">
-                            Vật Lý lý thuyết
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6 isotope-item architecture-plans">
-            <div class="image-box shadow-2 bordered text-center mb-20">
-                <div class="overlay-container rounded overlay-visible">
-                    <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/section-image-3.jpg" alt="">
-                    <a href="#" class="overlay-link"><i class="fa fa-graduation-cap"></i></a>
-                    <div class="overlay-bottom hidden-xs">
-                        <div class="text">
-                            Hải dương
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6 isotope-item interior-design">
-            <div class="image-box shadow-2 bordered text-center mb-20">
-                <div class="overlay-container rounded overlay-visible">
-                    <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/section-image-3.jpg" alt="">
-                    <a href="#" class="overlay-link"><i class="fa fa-graduation-cap"></i></a>
-                    <div class="overlay-bottom hidden-xs">
-                        <div class="text">
-                            Kỹ thuật hạt nhân
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <?php endif ?>
+        <?php } ?>
     </div>
 
 </section>
@@ -301,10 +222,8 @@
             <div class="col-lg-8">
                 <h2 class="page-title text-center"><strong>LÃNH ĐẠO</strong></h2>
                 <div class="separator"></div>
-                <p class="lead text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo
-                    dignissimos, adipisci ipsa aut voluptate consequuntur ad minus rerum reprehenderit fuga quis eum
-                    eveniet
-                    eligendi, fugit neque laboriosam unde quae incidunt.</p>
+                <p class="lead text-center">Đội ngũ cán bộ nhiệt quyết có kinh nghiệm giảng dạy trong và ngoài nước.
+                    Phương châm giúp sinh viên nắm chắc kiến thức và ứng dụng kiến thưcd vào thực tiến công việc</p>
             </div>
         </div>
         <div class="slick-carousel carousel-autoplay pv-20">
@@ -333,8 +252,7 @@
                             <div class="text p-0">
                                 <h4 class="title text-white text-uppercase">PGS.TS. HUỲNH TRÚC PHƯƠNG</h4>
                                 <div class="separator light"></div>
-                                <p class="small margin-clear"><em>Phó trưởng khoa <br> Trưởng bộ môn vật lý ứng
-                                        dụng</em>
+                                <p class="small margin-clear"><em>Phó trưởng khoa</em>
                                 </p>
                             </div>
                         </div>
@@ -350,14 +268,16 @@
                             <div class="text p-0">
                                 <h4 class="title text-white text-uppercase">PGS.TS. HUỲNH VĂN TUẤN</h4>
                                 <div class="separator light"></div>
-                                <p class="small margin-clear"><em>Phó trưởng khoa <br> Trưởng bộ môn vật lý ứng
-                                        dụng</em>
+                                <p class="small margin-clear"><em>Phó trưởng khoa <br> Trưởng bộ môn vật lý tin học</em>
                                 </p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="col-lg-12 text-center">
+            <a href="<?php echo FRONTEND_URL.'/'.$pages[1]->slug ?>" class="btn btn-default btn-lg btn-animated radius-50">Xem thêm <i class="fa fa-arrow-right"></i></a>
         </div>
     </div>
 </section>
@@ -371,8 +291,10 @@
             <div class="col-lg-8">
                 <h2 class="text-center"> <strong>Liên kết</strong></h2>
                 <div class="separator"></div>
-                <p class="large text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam voluptas
-                    facere vero ex tempora saepe perspiciatis ducimus sequi animi.</p>
+                <p class="large text-center">Cán bộ Khoa Vật lý từ lâu đã tham gia hợp tác giảng dạy nghiên cứu ở nhiều
+                    nơi. Các giảng viên tham gia thỉnh giảng trong và ngoài nước: ĐH Sư phạm TPHCM, ĐH Sài Gòn, ĐH Tôn
+                    Đức Thắng, ĐH Cần Thơ, ĐH Đà Lạt. Ngược lại các cán bộ từ các trường khác tới Khoa tham gia các hội
+                    đồng, đồng hướng dẫn luận văn.</p>
             </div>
         </div>
     </div>

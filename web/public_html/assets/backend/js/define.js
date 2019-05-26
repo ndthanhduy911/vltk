@@ -22,7 +22,7 @@ const vi_moment = (date, type) => {
     return moment(date, 'YYYY-MM-DD HH:mm:ss').format(type)
 }
 
-const changeToSlug = (title) =>
+const changeTitleToSlug = (title) =>
 {
     //Đổi chữ hoa thành chữ thường
     slug = title.toLowerCase();

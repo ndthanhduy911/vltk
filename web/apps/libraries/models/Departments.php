@@ -12,6 +12,8 @@ class Departments extends \Phalcon\Mvc\Model
 
     public $slug;
 
+    public $image;
+
     public $parent_id;
 
     public $level;
