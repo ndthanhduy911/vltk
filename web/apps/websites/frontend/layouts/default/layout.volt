@@ -33,7 +33,7 @@
 
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="76x76" href="<?php echo FRONTEND_URL ?>/favicon.ico" />
-    <link rel="icon" type="image/png" href="<?php echo FRONTEND_URL ?>/favicon.ico" />
+    <link rel="icon" type="image/png" href="<?php echo FRONTEND_URL ?>/uploads/khoa-vat-ly/logo96x96.png" />
 
     <!-- Web Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i" rel="stylesheet">

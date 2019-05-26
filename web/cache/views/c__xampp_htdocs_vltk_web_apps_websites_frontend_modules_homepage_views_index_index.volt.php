@@ -195,7 +195,7 @@
         <div class="col-lg-3 col-md-6 isotope-item">
             <div class="image-box shadow-2 bordered text-center mb-20">
                 <div class="overlay-container rounded overlay-visible">
-                    <img src="<?php echo $dept->image ? FRONTEND_URL.'/'.$dept->image : FRONTEND_URL.'/assets/frontend/images/section-image-3.jpg' ?>"
+                    <img src="<?php echo $dept->image ? FRONTEND_URL.$dept->image : FRONTEND_URL.'/assets/frontend/images/section-image-3.jpg' ?>"
                         alt="<?= $dept->name ?>">
                     <a href="<?php echo FRONTEND_URL.'/dept/'.$dept->slug ?>" class="overlay-link"><i
                             class="fa fa-graduation-cap"></i></a>
@@ -236,7 +236,7 @@
                             <div class="text p-0">
                                 <h4 class="title text-white text-uppercase">PGS.TS. Lê Vũ Tuấn Hùng</h4>
                                 <div class="separator light"></div>
-                                <p class="small margin-clear"><em>Trưởng khoa <br> Trưởng bộ môn vật lý ứng dụng</em>
+                                <p class="small margin-clear"><em>Trưởng khoa <br> Trưởng bộ môn Vật Lý Ứng Dụng</em>
                                 </p>
                             </div>
                         </div>
@@ -268,7 +268,7 @@
                             <div class="text p-0">
                                 <h4 class="title text-white text-uppercase">PGS.TS. HUỲNH VĂN TUẤN</h4>
                                 <div class="separator light"></div>
-                                <p class="small margin-clear"><em>Phó trưởng khoa <br> Trưởng bộ môn vật lý tin học</em>
+                                <p class="small margin-clear"><em>Phó trưởng khoa <br> Trưởng bộ môn Vật Lý Tin Học</em>
                                 </p>
                             </div>
                         </div>
