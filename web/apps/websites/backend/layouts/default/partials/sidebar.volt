@@ -33,7 +33,7 @@
                     class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
                 <li><a class="treeview-item {% if dispatcher.getControllerName()=='pages' AND (dispatcher.getActionName() in ['index']) %} {{ 'actived' }} {% endif %}" href="{{ config.application.backendUri }}/pages"><i class="icon fa fa-circle-o"></i> Tất cả</a></li>
-                <li><a class="treeview-item {% if dispatcher.getControllerName()=='pages' AND (dispatcher.getActionName() in ['update']) %} {{ 'actived' }} {% endif %}" href="{{ config.application.backendUri }}/pages/update"><i class="icon fa fa-circle-o"></i> Trang mới</a></li>
+                <!-- <li><a class="treeview-item {% if dispatcher.getControllerName()=='pages' AND (dispatcher.getActionName() in ['update']) %} {{ 'actived' }} {% endif %}" href="{{ config.application.backendUri }}/pages/update"><i class="icon fa fa-circle-o"></i> Trang mới</a></li> -->
             </ul>
         </li>
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
