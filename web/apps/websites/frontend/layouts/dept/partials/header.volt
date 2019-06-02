@@ -19,14 +19,14 @@
                               <!-- logo -->
                               <div id="logo" class="logo">
                                   <a href="<?php echo FRONTEND_URL ?>/">
-                                      <h3 class="title text-default mb-0">VLTH</h3>
+                                      <h3 class="title text-default mb-0">LOGO</h3>
                                       <!-- <img id="logo_img" src="/assets/frontend/images/logo-khoa-single-1-96x96.png" alt="VL-VLKT"> -->
                                   </a>
                               </div>
 
                               <!-- name-and-slogan -->
                               <div class="site-slogan logo-font">
-                                  Vật Lý Tin Học
+                                  {{title}}
                               </div>
 
                           </div>
@@ -51,14 +51,14 @@
                                           <!-- logo -->
                                           <div id="logo-mobile" class="logo">
                                               <!-- <a href="<?php echo FRONTEND_URL ?>/"><img id="logo-img-mobile"
-                                              src="/assets/frontend/images/logo-khoa-single-1-96x96.png"
-                                              alt="VL-VLKT"></a> -->
-                                              <h3 class="title text-default mb-0">VLTH</h3>
+                                                    src="<?php echo FRONTEND_URL ?>/assets/frontend/images/logo-khoa-single-1-96x96.png"
+                                                    alt="VL-VLKT"></a> -->
+                                              <h3 class="title text-default mb-0">VL-VLKT</h3>
                                           </div>
 
                                           <!-- name-and-slogan -->
                                           <div class="site-slogan logo-font">
-                                              Vật Lý Tin Học
+                                              Khoa Vật Lý - Vật Lý Kỹ Thuật
                                           </div>
 
                                       </div>
@@ -77,17 +77,16 @@
                                               <li class="nav-item dropdown ">
                                                   <a href="#" class="nav-link dropdown-toggle" id="third-dropdown"
                                                       data-toggle="dropdown" aria-haspopup="true"
-                                                      aria-expanded="false">Trang chủ</a>
+                                                      aria-expanded="false">Trang
+                                                      chủ</a>
                                                   <ul class="dropdown-menu" aria-labelledby="third-dropdown">
-                                                      <li><a href="<?php echo FRONTEND_URL ?>/gioi-thieu">Giới thiệu Khoa</a></li>
-                                                      <li><a href="<?php echo FRONTEND_URL ?>/to-chuc-nhan-su"></i>Tổ chức - Nhân sự</a></li>
-                                                      <li><a href="<?php echo FRONTEND_URL ?>/hop-tac-dao-tao"></i>Hợp tác đào tạo</a></li>
-                                                      <li><a href="<?php echo FRONTEND_URL ?>/nghien-cuu-khoa-hoc"></i>Nghiên cứu khoa học</a>
+                                                      <?php foreach ($pages as $key => $page) { ?>
+                                                      <?php if($key <= 6): ?>
+                                                      <li><a
+                                                              href="<?php echo FRONTEND_URL.'/'.$page->slug ?>"><?php echo $page->title ?></a>
                                                       </li>
-                                                      <li><a href="<?php echo FRONTEND_URL ?>/phong-thi-nghiem">Phòng thí nghiệm</a></li>
-                                                      <li><a href="<?php echo FRONTEND_URL ?>/san-pham-nghien-cuu">Sản phẩm nghiên cứu</a></li>
-                                                      <li><a href="<?php echo FRONTEND_URL ?>/doan-hoi">Đoàn hội</a></li>
-
+                                                      <?php endif ?>
+                                                      <?php } ?>
                                                   </ul>
                                               </li>
                                               <!-- mega-menu end trang chủ-->
@@ -95,24 +94,9 @@
                                               <li class="nav-item dropdown ">
                                                   <a href="#" class="nav-link dropdown-toggle" id="fifth-dropdown"
                                                       data-toggle="dropdown" aria-haspopup="true"
-                                                      aria-expanded="false">Bộ môn</a>
+                                                      aria-expanded="false">Nghiên cứu</a>
                                                   <ul class="dropdown-menu" aria-labelledby="fifth-dropdown">
-                                                      <li><a href="<?php echo FRONTEND_URL ?>/vat-ly-tin-hoc">Vật
-                                                              lý tin học</a></li>
-                                                      <li><a href="<?php echo FRONTEND_URL ?>/vat-ly-ly-thuyet">Vật
-                                                              Lý Lý Thuyết</a></li>
-                                                      <li><a href="<?php echo FRONTEND_URL ?>/vat-ly-hat-nhan">Vật
-                                                              Lý Hạt Nhân - KTHN</a></li>
-                                                      <li><a href="<?php echo FRONTEND_URL ?>/vat-ly-chat-ran">Vật
-                                                              Lý Chất Rắn</a></li>
-                                                      <li><a href="<?php echo FRONTEND_URL ?>/vat-ly-ung-ung">Vật
-                                                              Lý Ứng Dụng</a></li>
-                                                      <li><a href="<?php echo FRONTEND_URL ?>/vat-ly-dien-tu">Vật
-                                                              Lý Điện Tử</a></li>
-                                                      <li><a href="<?php echo FRONTEND_URL ?>/vat-ly-dia-cau">Vật
-                                                              Lý Địa Cầu</a></li>
-                                                      <li><a href="<?php echo FRONTEND_URL ?>/vat-ly-hai-duong">Vật
-                                                              Lý Hải Dương</a></li>
+
                                                   </ul>
                                               </li>
                                               <!-- mega-menu end giới thiệu-->
@@ -121,12 +105,16 @@
                                               <li class="nav-item dropdown ">
                                                   <a href="#" class="nav-link dropdown-toggle" id="third-dropdown"
                                                       data-toggle="dropdown" aria-haspopup="true"
-                                                      aria-expanded="false">Bản tin khoa</a>
+                                                      aria-expanded="false">Bản
+                                                      tin khoa</a>
                                                   <ul class="dropdown-menu" aria-labelledby="third-dropdown">
-                                                      <li><a href="<?php echo FRONTEND_URL ?>/tin-tuc/tin-giao-vu">Tin giáo dụ</a></li>
-                                                      <li><a href="<?php echo FRONTEND_URL ?>/tin-tuc/tin-nckh-serminar">Tin NCKH - Serminar</a></li>
-                                                      <li><a href="<?php echo FRONTEND_URL ?>/tin-tuc/tin-cb-vc-khoa">Tin CB - VC Khoa</a></li>
-                                                      <li><a href="<?php echo FRONTEND_URL ?>/tin-tuc/tin-tuyen-dung">Tin Tuyển Dụng</a></li>
+                                                      <?php foreach ($cats as $key => $cat) { ?>
+                                                      <?php if($key !== 0): ?>
+                                                      <li><a
+                                                              href="<?php echo FRONTEND_URL.'/category/'.$cat->slug ?>"><?php echo $cat->name ?></a>
+                                                      </li>
+                                                      <?php endif ?>
+                                                      <?php } ?>
                                                   </ul>
                                               </li>
                                               <!-- mega-menu end tuyển sinh-->
@@ -136,10 +124,15 @@
                                               <li class="nav-item dropdown ">
                                                   <a href="#" class="nav-link dropdown-toggle" id="fourth-dropdown"
                                                       data-toggle="dropdown" aria-haspopup="true"
-                                                      aria-expanded="false">Đào tạo</a>
+                                                      aria-expanded="false">Đào
+                                                      tạo</a>
                                                   <ul class="dropdown-menu" aria-labelledby="fourth-dropdown">
-                                                      <li><a href="<?php echo FRONTEND_URL ?>/dao-tao-dai-hoc">Đại học</a></li>
-                                                      <li><a href="<?php echo FRONTEND_URL ?>/dao-tao-sau-dai-hoc">Sau đại học</a></li>
+                                                      <li><a
+                                                              href="<?php echo FRONTEND_URL.'/'.$pages[8]->slug ?>"><?php echo $pages[8]->title ?></a>
+                                                      </li>
+                                                      <li><a
+                                                              href="<?php echo FRONTEND_URL.'/'.$pages[9]->slug ?>"><?php echo $pages[9]->title ?></a>
+                                                      </li>
                                                   </ul>
                                               </li>
                                               <!-- mega-menu end đào tạo-->
@@ -148,10 +141,15 @@
                                               <li class="nav-item dropdown ">
                                                   <a href="#" class="nav-link dropdown-toggle" id="sixth-dropdown"
                                                       data-toggle="dropdown" aria-haspopup="true"
-                                                      aria-expanded="false">Tuyển sinh</a>
+                                                      aria-expanded="false">Tuyển
+                                                      sinh</a>
                                                   <ul class="dropdown-menu" aria-labelledby="fourth-dropdown">
-                                                      <li><a href="<?php echo FRONTEND_URL ?>/tuyen-sinh-dai-hoc">Đại học</a></li>
-                                                      <li><a href="<?php echo FRONTEND_URL ?>/tuyen-sinh-sau-dai-hoc">Sau đại học</a></li>
+                                                      <li><a
+                                                              href="<?php echo FRONTEND_URL.'/'.$pages[10]->slug ?>"><?php echo $pages[10]->title ?></a>
+                                                      </li>
+                                                      <li><a
+                                                              href="<?php echo FRONTEND_URL.'/'.$pages[11]->slug ?>"><?php echo $pages[11]->title ?></a>
+                                                      </li>
                                                   </ul>
                                               </li>
                                               <!-- mega-menu end nghiên cứu-->
@@ -168,8 +166,8 @@
                       <div class="col-auto hidden-md-down p-0">
                           <div class="header-dropdown-buttons">
                               <a href="#">
-                                  <img src="<?php echo FRONTEND_URL ?>/language_file/vie/vietnam.png" class="user-image" alt="VIET NAM"
-                                      width="36px">
+                                  <img src="<?php echo FRONTEND_URL ?>/language_file/vie/vietnam.png" class="user-image"
+                                      alt="VIET NAM" width="36px">
                               </a>
                           </div>
                       </div>

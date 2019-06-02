@@ -11,13 +11,10 @@
             <div id="slider-banner-fullwidth-big-height" class="slider-banner-fullwidth-big-height rev_slider"
                 data-version="5.0">
                 <ul class="slides">
-                    <!-- slide 1 start -->
-                    <!-- ================ -->
+                    <?php foreach ($banners as $key => $banner) { $location = $key%2 == 0 ? 'left' : 'right'; ?>
                     <li data-transition="random" data-slotamount="default" data-masterspeed="default"
-                        data-title="Title 1">
-
-                        <!-- main image -->
-                        <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/banner1.png" alt="slidebg1" data-bgposition="center top"
+                        data-title="<?php echo $banner->title ?>">
+                        <img src="<?php echo FRONTEND_URL.$banner->image ?>" alt="<?php echo $banner->title ?>" data-bgposition="center top"
                             data-bgrepeat="no-repeat" data-bgfit="cover" class="rev-slidebg">
 
                         <!-- Transparent Background -->
@@ -28,96 +25,20 @@
 
                         <!-- LAYER NR. 1 -->
                         <div class="tp-caption sfb fadeout caption-box text-left rounded"
-                            style="background-color: rgba(0, 0, 0, 0.8);" data-x="right" data-y="center"
+                            style="background-color: rgba(0, 0, 0, 0.8);" data-x="<?php echo $location ?>" data-y="center"
                             data-start="600" data-whitespace="normal" data-transform_idle="o:1;"
                             data-transform_in="y:[100%];sX:1;sY:1;o:0;s:1150;e:Power4.easeInOut;"
                             data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;"
                             data-mask_in="x:0px;y:[100%];s:inherit;e:inherit;"
                             data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;">
-                            <h2 class="title slider-title">Vật Lý - Vật Lý Kỹ Thuật</h2>
+                            <h2 class="title slider-title"><?php echo $banner->title ?></h2>
                             <div class="separator-2 clearfix"></div>
-                            <p class="slider-content">Voluptatem ad provident non repudiandae beatae cupiditate amet
-                                reiciendis lorem ipsum
-                                dolor sit
-                                amet, consectetur.</p>
-                            <div class="text-right"><a class="btn btn-small btn-default margin-clear" href="#">Chi
-                                    tiết</a></div>
+                            <p class="slider-content"><?php echo $banner->description ?></p>
+                            <div class="text-right"><a class="btn btn-small btn-default margin-clear" href="<?php echo $banner->button_link ?>"><?php echo $banner->button_text ? $banner->button_text : 'Chi tiết' ?></a></div>
                         </div>
 
                     </li>
-                    <!-- slide 1 end -->
-
-                    <!-- slide 2 start -->
-                    <!-- ================ -->
-                    <li data-transition="random" data-slotamount="default" data-masterspeed="default"
-                        data-title="Title 2">
-
-                        <!-- main image -->
-                        <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/banner1.png" alt="slidebg2" data-bgposition="center top"
-                            data-bgrepeat="no-repeat" data-bgfit="cover" class="rev-slidebg">
-
-                        <!-- Transparent Background -->
-                        <div class="tp-caption dark-translucent-bg" data-x="center" data-y="center" data-start="0"
-                            data-transform_idle="o:1;" data-transform_in="o:0;s:600;e:Power2.easeInOut;"
-                            data-transform_out="o:0;s:600;" data-width="5000" data-height="5000" style="background-color: rgba(0, 0, 0, 0.1);">
-                        </div>
-
-                        <!-- LAYER NR. 1 -->
-                        <div class="tp-caption sfb fadeout dark-translucent-bg caption-box text-left rounded"
-                            style="background-color: rgba(0, 0, 0, 0.8);" data-x="left" data-y="center" data-start="600"
-                            data-whitespace="normal" data-transform_idle="o:1;"
-                            data-transform_in="y:[100%];sX:1;sY:1;o:0;s:1150;e:Power4.easeInOut;"
-                            data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;"
-                            data-mask_in="x:0px;y:[100%];s:inherit;e:inherit;"
-                            data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;">
-                            <h2 class="title slider-title">Vật Lý - Vật Lý Kỹ Thuật</h2>
-                            <div class="separator-2 clearfix"></div>
-                            <p class="slider-content">Voluptatem ad provident non repudiandae beatae cupiditate amet
-                                reiciendis lorem ipsum
-                                dolor sit
-                                amet, consectetur.</p>
-                            <div class="text-right"><a class="btn btn-small btn-default margin-clear" href="#">Chi
-                                    tiết</a></div>
-                        </div>
-
-                    </li>
-                    <!-- slide 2 end -->
-
-                    <!-- slide 2 start -->
-                    <!-- ================ -->
-                    <li data-transition="random" data-slotamount="default" data-masterspeed="default"
-                        data-title="Title 3">
-
-                        <!-- main image -->
-                        <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/banner1.png" alt="slidebg2" data-bgposition="center top"
-                            data-bgrepeat="no-repeat" data-bgfit="cover" class="rev-slidebg">
-
-                        <!-- Transparent Background -->
-                        <div class="tp-caption dark-translucent-bg" data-x="center" data-y="center" data-start="0"
-                            data-transform_idle="o:1;" data-transform_in="o:0;s:600;e:Power2.easeInOut;"
-                            data-transform_out="o:0;s:600;" data-width="5000" data-height="5000" style="background-color: rgba(0, 0, 0, 0.1);">
-                        </div>
-
-                        <!-- LAYER NR. 1 -->
-                        <div class="tp-caption sfb fadeout dark-translucent-bg caption-box text-left rounded"
-                            style="background-color: rgba(0, 0, 0, 0.8);" data-x="right" data-y="center"
-                            data-start="600" data-whitespace="normal" data-transform_idle="o:1;"
-                            data-transform_in="y:[100%];sX:1;sY:1;o:0;s:1150;e:Power4.easeInOut;"
-                            data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;"
-                            data-mask_in="x:0px;y:[100%];s:inherit;e:inherit;"
-                            data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;">
-                            <h2 class="title slider-title">Vật Lý - Vật Lý Kỹ Thuật</h2>
-                            <div class="separator-2 clearfix"></div>
-                            <p class="slider-content">Voluptatem ad provident non repudiandae beatae cupiditate amet
-                                reiciendis lorem ipsum
-                                dolor sit
-                                amet, consectetur.</p>
-                            <div class="text-right"><a class="btn btn-small btn-default margin-clear" href="#">Chi
-                                    tiết</a></div>
-                        </div>
-
-                    </li>
-                    <!-- slide 2 end -->
+                    <?php } ?>
                 </ul>
                 <div class="tp-bannertimer"></div>
             </div>
