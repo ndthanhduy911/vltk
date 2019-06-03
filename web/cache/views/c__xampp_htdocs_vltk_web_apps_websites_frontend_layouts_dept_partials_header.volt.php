@@ -26,7 +26,7 @@
 
                               <!-- name-and-slogan -->
                               <div class="site-slogan logo-font">
-                                  {{dept.name}}
+                                  <?= $dept->name ?>
                               </div>
 
                           </div>
@@ -58,7 +58,7 @@
 
                                           <!-- name-and-slogan -->
                                           <div class="site-slogan logo-font">
-                                            {{dept.name}}
+                                            <?= $dept->name ?>
                                           </div>
 
                                       </div>

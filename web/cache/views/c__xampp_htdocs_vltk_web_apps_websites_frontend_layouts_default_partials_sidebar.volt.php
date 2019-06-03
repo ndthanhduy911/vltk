@@ -162,8 +162,7 @@
         <div class="media margin-clear">
             <div class="d-flex pr-2">
                 <div class="overlay-container">
-                    <img class="media-object" src="<?php echo FRONTEND_URL ?>/assets/frontend/images/blog-thumb-1.jpg"
-                        alt="blog-thumb">
+                    <img class="media-object" src="<?php echo FRONTEND_URL ?>/assets/frontend/images/blog-thumb-1.jpg" alt="blog-thumb">
                     <a href="blog-post.html" class="overlay-link small"><i class="fa fa-link"></i></a>
                 </div>
             </div>
@@ -177,8 +176,7 @@
         <div class="media margin-clear">
             <div class="d-flex pr-2">
                 <div class="overlay-container">
-                    <img class="media-object" src="<?php echo FRONTEND_URL ?>/assets/frontend/images/blog-thumb-2.jpg"
-                        alt="blog-thumb">
+                    <img class="media-object" src="<?php echo FRONTEND_URL ?>/assets/frontend/images/blog-thumb-2.jpg" alt="blog-thumb">
                     <a href="blog-post.html" class="overlay-link small"><i class="fa fa-link"></i></a>
                 </div>
             </div>
@@ -192,8 +190,7 @@
         <div class="media margin-clear">
             <div class="d-flex pr-2">
                 <div class="overlay-container">
-                    <img class="media-object" src="<?php echo FRONTEND_URL ?>/assets/frontend/images/blog-thumb-3.jpg"
-                        alt="blog-thumb">
+                    <img class="media-object" src="<?php echo FRONTEND_URL ?>/assets/frontend/images/blog-thumb-3.jpg" alt="blog-thumb">
                     <a href="blog-post.html" class="overlay-link small"><i class="fa fa-link"></i></a>
                 </div>
             </div>
@@ -207,8 +204,7 @@
         <div class="media margin-clear">
             <div class="d-flex pr-2">
                 <div class="overlay-container">
-                    <img class="media-object" src="<?php echo FRONTEND_URL ?>/assets/frontend/images/blog-thumb-4.jpg"
-                        alt="blog-thumb">
+                    <img class="media-object" src="<?php echo FRONTEND_URL ?>/assets/frontend/images/blog-thumb-4.jpg" alt="blog-thumb">
                     <a href="blog-post.html" class="overlay-link small"><i class="fa fa-link"></i></a>
                 </div>
             </div>

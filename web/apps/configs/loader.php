@@ -16,7 +16,7 @@ $loader->registerClasses(
     array(
         "BackendController"         => LIB_DIR . '/controllers/BackendController.php',
         "FrontendController"         => LIB_DIR . '/controllers/FrontendController.php',
-        "DeptFrontendController"         => LIB_DIR . '/controllers/DeptFrontendController.php',
+        "DeptfrontendController"         => LIB_DIR . '/controllers/DeptfrontendController.php',
         "NewsBaseController"         => LIB_DIR . '/controllers/NewsBaseController.php',
     )
 );

@@ -132,3 +132,9 @@ ul.dropdown-menu > li:last-of-type > a
     background: #777777 !important;
     border-color: #777777 !important;
 }
+
+
+.dept.dark-translucent-bg {
+    min-height: 300px;
+    padding-top: 100px;
+}

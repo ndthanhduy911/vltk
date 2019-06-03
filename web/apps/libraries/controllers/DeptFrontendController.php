@@ -6,7 +6,7 @@ use Models\Pages;
 use Models\Departments;
 use Models\Categories;
 
-class DeptFrontendController extends Controller
+class DeptfrontendController extends Controller
 {
     protected  $frontendUrl;
     
@@ -30,14 +30,14 @@ class DeptFrontendController extends Controller
     {
         try {
             if($dispatcher->getModuleName() !== 'dept' ){
-                echo $params = $this->helper->slugify($dispatcher->getParam(0));
+                $params = $this->helper->slugify($dispatcher->getParam('dept'));
                 $dept = Departments::findFirst(['slug = :slug:', 'bind' => ['slug' => $params]]);
                 if($dept){
                     // $dispatcher->setParam('dept_id' , $dept->id);
                     $dispatcher->setReturnedValue($dept);
                     $this->view->dept =  Departments::findFirst(['slug = :slug:', 'bind' => ['slug' => $params]]);
-                    $this->view->cats =  Categories::find(["dept_id = 1","columns" => "slug, name","bind" => ['dept_id' => $dept->id]]);
-                    $this->view->pages =  Pages::find(["dept_id = 1","columns" => "slug, title", "bind" => ['dept_id' => $dept->id]]);
+                    $this->view->cats =  Categories::find(["dept_id = :dept_id:","columns" => "slug, name","bind" => ['dept_id' => $dept->id]]);
+                    $this->view->pages =  Pages::find(["dept_id = :dept_id:","columns" => "id, slug, title", "bind" => ['dept_id' => $dept->id]]);
                 }else{
                     echo 'Truy cập không được phép'; die;
                 }

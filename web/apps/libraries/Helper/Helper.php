@@ -185,4 +185,14 @@ class Helper extends Component
         ];
         return $paging;
     }
+
+    public function getPageById($pages = [], $id = null)
+    {
+        foreach ($pages as $key => $page) {
+            if((int)$page->id === (int)$id){
+                return $page;
+            }
+        }
+        return NULL;
+    }
 }

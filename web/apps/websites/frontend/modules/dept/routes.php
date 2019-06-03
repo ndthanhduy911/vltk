@@ -1,31 +1,31 @@
 <?php
 /***********************DeptController***********************/
-$router->add($config->application->frontendUri."/dept/:params/", array(
+$router->add($config->application->frontendUri."/dept/{dept:[a-z\-]+}", array(
     'module' => 'frontend_dept',
     'controller' => 'dept',
     'action' => 'index',
-    'params' => 1
+    'dept' => 1,
 ));
 
-$router->add($config->application->frontendUri."/dept/:params", array(
+$router->add($config->application->frontendUri."/dept/{dept:[a-z\-]+}/", array(
     'module' => 'frontend_dept',
     'controller' => 'dept',
     'action' => 'index',
-    'params' => 1
+    'dept' => 1,
 ));
 
-$router->add($config->application->frontendUri."/dept/:params/{pages:[a-z\-]+}", array(
+$router->add($config->application->frontendUri."/dept/{dept:[a-z\-]+}/{pages:[a-z\-]+}", array(
     'module' => 'frontend_dept',
-    'controller' => 'deptpages',
+    'controller' => 'dept',
     'action' => 'index',
-    'params' => 1,
+    'dept' => 1,
     'pages' => 2
 ));
 
-$router->add($config->application->frontendUri."/dept/:params/{pages:[a-z\-]+}/", array(
+$router->add($config->application->frontendUri."/dept/{dept:[a-z\-]+}/{pages:[a-z\-]+}/", array(
     'module' => 'frontend_dept',
-    'controller' => 'deptpages',
+    'controller' => 'dept',
     'action' => 'index',
-    'params' => 1,
+    'dept' => 1,
     'pages' => 2
 ));
