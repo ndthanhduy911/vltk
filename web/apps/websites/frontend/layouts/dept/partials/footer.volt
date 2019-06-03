@@ -17,7 +17,7 @@
                                 </a>
                             </div> -->
 
-                            <h2 class="title logo-font text-default">Khoa Vật lý</h2>
+                            <h2 class="title logo-font text-default">{{dept.name}}</h2>
                             <div class="separator-2"></div>
                         </div>
                     </div>

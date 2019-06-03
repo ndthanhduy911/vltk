@@ -15,7 +15,7 @@
         <?php echo $this->flashSession->output(); ?>
     </div>
 
-    <div class="row m-0">
+    <div class="row">
         <form class="col-md-12 row p-0 m-0" method="post" enctype="multipart/form-data" data-toggle="validator"
             role="form">
             <div class="col-md-9 p-0">

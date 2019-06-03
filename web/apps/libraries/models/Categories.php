@@ -13,6 +13,8 @@ class Categories extends \Phalcon\Mvc\Model
 
     public $status;
 
+    public $dept_id;
+
     public $created_at;
 
     public $updated_at;

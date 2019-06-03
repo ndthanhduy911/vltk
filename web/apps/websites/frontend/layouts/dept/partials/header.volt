@@ -26,7 +26,7 @@
 
                               <!-- name-and-slogan -->
                               <div class="site-slogan logo-font">
-                                  {{title}}
+                                  {{dept.name}}
                               </div>
 
                           </div>
@@ -58,7 +58,7 @@
 
                                           <!-- name-and-slogan -->
                                           <div class="site-slogan logo-font">
-                                              Khoa Vật Lý - Vật Lý Kỹ Thuật
+                                            {{dept.name}}
                                           </div>
 
                                       </div>
@@ -82,9 +82,7 @@
                                                   <ul class="dropdown-menu" aria-labelledby="third-dropdown">
                                                       <?php foreach ($pages as $key => $page) { ?>
                                                       <?php if($key <= 6): ?>
-                                                      <li><a
-                                                              href="<?php echo FRONTEND_URL.'/'.$page->slug ?>"><?php echo $page->title ?></a>
-                                                      </li>
+                                                      <li><a href="<?php echo FRONTEND_URL.'/'.$page->slug ?>"><?php echo $page->title ?></a></li>
                                                       <?php endif ?>
                                                       <?php } ?>
                                                   </ul>
@@ -96,7 +94,7 @@
                                                       data-toggle="dropdown" aria-haspopup="true"
                                                       aria-expanded="false">Nghiên cứu</a>
                                                   <ul class="dropdown-menu" aria-labelledby="fifth-dropdown">
-
+                                                    <li><a href="<?php echo FRONTEND_URL.'/'.$pages[8]->slug ?>"><?php echo $pages[8]->title ?></a></li>
                                                   </ul>
                                               </li>
                                               <!-- mega-menu end giới thiệu-->
@@ -110,9 +108,7 @@
                                                   <ul class="dropdown-menu" aria-labelledby="third-dropdown">
                                                       <?php foreach ($cats as $key => $cat) { ?>
                                                       <?php if($key !== 0): ?>
-                                                      <li><a
-                                                              href="<?php echo FRONTEND_URL.'/category/'.$cat->slug ?>"><?php echo $cat->name ?></a>
-                                                      </li>
+                                                      <li><a href="<?php echo FRONTEND_URL.'/category/'.$cat->slug ?>"><?php echo $cat->name ?></a></li>
                                                       <?php endif ?>
                                                       <?php } ?>
                                                   </ul>
@@ -127,12 +123,8 @@
                                                       aria-expanded="false">Đào
                                                       tạo</a>
                                                   <ul class="dropdown-menu" aria-labelledby="fourth-dropdown">
-                                                      <li><a
-                                                              href="<?php echo FRONTEND_URL.'/'.$pages[8]->slug ?>"><?php echo $pages[8]->title ?></a>
-                                                      </li>
-                                                      <li><a
-                                                              href="<?php echo FRONTEND_URL.'/'.$pages[9]->slug ?>"><?php echo $pages[9]->title ?></a>
-                                                      </li>
+                                                      <li><a href="<?php echo FRONTEND_URL.'/'.$pages[8]->slug ?>"><?php echo $pages[8]->title ?></a></li>
+                                                      <li><a href="<?php echo FRONTEND_URL.'/'.$pages[9]->slug ?>"><?php echo $pages[9]->title ?></a></li>
                                                   </ul>
                                               </li>
                                               <!-- mega-menu end đào tạo-->

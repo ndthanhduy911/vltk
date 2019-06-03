@@ -15,7 +15,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 p-0">
             <div class="tile">
                 <div class="col-12 p-0 mb-2">
                     <a id="addPosts" href="{{ config.application.backendUri }}/posts/update" title="Tạo" class="btn btn-success fa fa-plus"></a>

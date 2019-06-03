@@ -224,7 +224,7 @@
     <div class="container mt-4">
         <div class="row justify-content-lg-center">
             <div class="col-lg-8 text-center">
-                <h2 class="page-title text-center"><strong>BỘ MÔN</strong></h2>
+                <h2 class="page-title text-center"><strong>HƯỚNG NGHIÊN CỨU</strong></h2>
                 <div class="separator"></div>
             </div>
         </div>
@@ -237,7 +237,7 @@
                     <a href="#" class="overlay-link"><i class="fa fa-graduation-cap"></i></a>
                     <div class="overlay-bottom hidden-xs">
                         <div class="text">
-                            Vật Lý tin học
+                            Lập trình trên thiết bị di động
                         </div>
                     </div>
                 </div>
@@ -250,7 +250,7 @@
                     <a href="#" class="overlay-link"><i class="fa fa-graduation-cap"></i></a>
                     <div class="overlay-bottom hidden-xs">
                         <div class="text">
-                            Vật Lý ứng dụng
+                            Lập trình website
                         </div>
                     </div>
                 </div>
@@ -263,7 +263,7 @@
                     <a href="#" class="overlay-link"><i class="fa fa-graduation-cap"></i></a>
                     <div class="overlay-bottom hidden-xs">
                         <div class="text">
-                            Vật Lý hạt nhân - Kỹ thuật hạt nhân
+                            Thu thập và xử lý tín hiệu
                         </div>
                     </div>
                 </div>
@@ -276,7 +276,7 @@
                     <a href="#" class="overlay-link"><i class="fa fa-graduation-cap"></i></a>
                     <div class="overlay-bottom hidden-xs">
                         <div class="text">
-                            Vật Lý chất rắn
+                            Mạng máy tính
                         </div>
                     </div>
                 </div>
@@ -289,7 +289,7 @@
                     <a href="#" class="overlay-link"><i class="fa fa-graduation-cap"></i></a>
                     <div class="overlay-bottom hidden-xs">
                         <div class="text">
-                            Vật Lý địa cầu
+                            Xử lý hình ảnh
                         </div>
                     </div>
                 </div>
@@ -302,7 +302,7 @@
                     <a href="#" class="overlay-link"><i class="fa fa-graduation-cap"></i></a>
                     <div class="overlay-bottom hidden-xs">
                         <div class="text">
-                            Vật Lý lý thuyết
+                            Xử lý âm thanh
                         </div>
                     </div>
                 </div>
@@ -315,7 +315,7 @@
                     <a href="#" class="overlay-link"><i class="fa fa-graduation-cap"></i></a>
                     <div class="overlay-bottom hidden-xs">
                         <div class="text">
-                            Hải dương
+                            Lập trình game
                         </div>
                     </div>
                 </div>
@@ -328,7 +328,7 @@
                     <a href="#" class="overlay-link"><i class="fa fa-graduation-cap"></i></a>
                     <div class="overlay-bottom hidden-xs">
                         <div class="text">
-                            Kỹ thuật hạt nhân
+                            Internet Of Thing
                         </div>
                     </div>
                 </div>
@@ -345,12 +345,10 @@
     <div class="container">
         <div class="row justify-content-lg-center pv-20">
             <div class="col-lg-8">
-                <h2 class="page-title text-center"><strong>LÃNH ĐẠO</strong></h2>
+                <h2 class="page-title text-center"><strong>NHÂN SỰ</strong></h2>
                 <div class="separator"></div>
-                <p class="lead text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo
-                    dignissimos, adipisci ipsa aut voluptate consequuntur ad minus rerum reprehenderit fuga quis eum
-                    eveniet
-                    eligendi, fugit neque laboriosam unde quae incidunt.</p>
+                <p class="lead text-center">LĐội ngũ cán bộ nhiệt quyết có kinh nghiệm giảng dạy trong và ngoài nước.
+                    Phương châm giúp sinh viên nắm chắc kiến thức và ứng dụng kiến thưcd vào thực tiến công việc.</p>
             </div>
         </div>
         <div class="slick-carousel carousel-autoplay pv-20">
@@ -361,9 +359,9 @@
                         <a href="#" class="overlay-link" title="Jane Doe - CEO"><i class="fa fa-graduation-cap"></i></a>
                         <div class="overlay-bottom">
                             <div class="text">
-                                <h3 class="title">PGS.TS. Lê Vũ Tuấn Hùng</h3>
+                                <h3 class="title">PGS.TS. Huỳnh Văn Tuấn</h3>
                                 <div class="separator light"></div>
-                                <p class="small margin-clear"><em>Trưởng khoa <br> Trưởng bộ môn vật lý ứng dụng</em>
+                                <p class="small margin-clear"><em>Trưởng khoa <br> Trưởng bộ môn Vật Lý Tin Học</em>
                                 </p>
                             </div>
                         </div>
@@ -377,9 +375,9 @@
                         <a href="#" class="overlay-link" title="Jane Doe - CEO"><i class="fa fa-graduation-cap"></i></a>
                         <div class="overlay-bottom">
                             <div class="text">
-                                <h3 class="title">PGS.TS. Lê Vũ Tuấn Hùng</h3>
+                                <h3 class="title">PGS.TS. Huỳnh Văn Tuấn</h3>
                                 <div class="separator light"></div>
-                                <p class="small margin-clear"><em>Trưởng khoa <br> Trưởng bộ môn vật lý ứng dụng</em>
+                                <p class="small margin-clear"><em>Trưởng khoa <br> Trưởng bộ môn Vật Lý Tin Học</em>
                                 </p>
                             </div>
                         </div>
@@ -393,9 +391,9 @@
                         <a href="#" class="overlay-link" title="Jane Doe - CEO"><i class="fa fa-graduation-cap"></i></a>
                         <div class="overlay-bottom">
                             <div class="text">
-                                <h3 class="title">PGS.TS. Lê Vũ Tuấn Hùng</h3>
+                                <h3 class="title">PGS.TS. Huỳnh Văn Tuấn</h3>
                                 <div class="separator light"></div>
-                                <p class="small margin-clear"><em>Trưởng khoa <br> Trưởng bộ môn vật lý ứng dụng</em>
+                                <p class="small margin-clear"><em>Trưởng khoa <br> Trưởng bộ môn Vật Lý Tin Học</em>
                                 </p>
                             </div>
                         </div>
@@ -409,9 +407,9 @@
                         <a href="#" class="overlay-link" title="Jane Doe - CEO"><i class="fa fa-graduation-cap"></i></a>
                         <div class="overlay-bottom">
                             <div class="text">
-                                <h3 class="title">PGS.TS. Lê Vũ Tuấn Hùng</h3>
+                                <h3 class="title">PGS.TS. Huỳnh Văn Tuấn</h3>
                                 <div class="separator light"></div>
-                                <p class="small margin-clear"><em>Trưởng khoa <br> Trưởng bộ môn vật lý ứng dụng</em>
+                                <p class="small margin-clear"><em>Trưởng khoa <br> Trưởng bộ môn Vật Lý Tin Học</em>
                                 </p>
                             </div>
                         </div>
@@ -425,9 +423,9 @@
                         <a href="#" class="overlay-link" title="Jane Doe - CEO"><i class="fa fa-graduation-cap"></i></a>
                         <div class="overlay-bottom">
                             <div class="text">
-                                <h3 class="title">PGS.TS. Lê Vũ Tuấn Hùng</h3>
+                                <h3 class="title">PGS.TS. Huỳnh Văn Tuấn</h3>
                                 <div class="separator light"></div>
-                                <p class="small margin-clear"><em>Trưởng khoa <br> Trưởng bộ môn vật lý ứng dụng</em>
+                                <p class="small margin-clear"><em>Trưởng khoa <br> Trưởng bộ môn Vật Lý Tin Học</em>
                                 </p>
                             </div>
                         </div>
@@ -447,8 +445,10 @@
             <div class="col-lg-8">
                 <h2 class="text-center"> <strong>Liên kết</strong></h2>
                 <div class="separator"></div>
-                <p class="large text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam voluptas
-                    facere vero ex tempora saepe perspiciatis ducimus sequi animi.</p>
+                <p class="large text-center">Cán bộ Khoa Vật lý từ lâu đã tham gia hợp tác giảng dạy nghiên cứu ở nhiều
+                    nơi. Các giảng viên tham gia thỉnh giảng trong và ngoài nước: ĐH Sư phạm TPHCM, ĐH Sài Gòn, ĐH Tôn
+                    Đức Thắng, ĐH Cần Thơ, ĐH Đà Lạt. Ngược lại các cán bộ từ các trường khác tới Khoa tham gia các hội
+                    đồng, đồng hướng dẫn luận văn.</p>
             </div>
         </div>
     </div>

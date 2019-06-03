@@ -29,9 +29,17 @@ class FrontendController extends Controller
     public function beforeExecuteRoute(Dispatcher $dispatcher)
     {
         try {
-            $this->view->depts =  Departments::find(["columns" => "slug, name, image"]);
-            $this->view->cats =  Categories::find(["columns" => "slug, name"]);
-            $this->view->pages =  Pages::find(["dept_id = 1","columns" => "slug, title"]);
+            $depts = Departments::find(["columns" => "slug, name, image"]);
+            $cats = Categories::find(["dept_id = 1","columns" => "slug, name"]);
+            $pages = Pages::find(["dept_id = 1","columns" => "slug, title"]);
+
+            if($depts->count() && $cats->count() &&$pages->count()){
+                $this->view->depts =  $depts;
+                $this->view->cats =  $cats;
+                $this->view->pages =  $pages;
+            }else{
+                echo "403";
+            }
             // $identity = $this->auth->getIdentity();
             // if($dispatcher->getControllerName() === 'captchas'
             // || ($dispatcher->getControllerName() === 'account' && $dispatcher->getActionName()=== 'login')

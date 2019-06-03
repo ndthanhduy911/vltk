@@ -15,7 +15,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 p-0">
             <div class="tile">
                 <div class="col-12 p-0 mb-2">
                     <a id="addPosts" href="{{ config.application.backendUri }}/pages/update" title="Tạo" class="btn btn-success fa fa-plus"></a>
@@ -24,11 +24,11 @@
                     <table id="pages" class="table table-bordered table-hover">
                         <thead>
                             <tr class="bg-primary">
-                                <th class="align-middle text-center text-white" style="width: 10px">#</th>
+                                <th class="align-middle text-center text-white w-20-px">#</th>
                                 <th class="align-middle text-center text-white">Tiêu đề</th>
                                 <th class="align-middle text-center text-white">Tác giả</th>
-                                <th class="align-middle text-center text-white">Ngày đăng</th>
-                                <th class="align-middle text-center text-white">Trạng thái</th>
+                                <th class="align-middle text-center text-white w-150-px">Ngày đăng</th>
+                                <th class="align-middle text-center text-white w-70-px">Trạng thái</th>
                                 <th class="align-middle text-center text-white w-70-px">Thao tác</th>
                             </tr>
                         </thead>
