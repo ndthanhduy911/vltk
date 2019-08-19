@@ -1,6 +1,6 @@
 <?php
 
-namespace Frontend\Modules\HomePage;
+namespace Frontend\Modules\Faculty;
 
 use Phalcon\Loader;
 use Phalcon\Mvc\View;
@@ -18,9 +18,9 @@ class Module implements ModuleDefinitionInterface
         $loader = new Loader();
 
         $loader->registerNamespaces(array(
-            'Frontend\Modules\HomePage\Controllers' => __DIR__ . '/controllers/',
-            'Frontend\Modules\HomePage\Models' => __DIR__ . '/models/',
-            'Frontend\Modules\HomePage\Forms' => __DIR__ . '/forms/',
+            'Frontend\Modules\Faculty\Controllers' => __DIR__ . '/controllers/',
+            'Frontend\Modules\Faculty\Models' => __DIR__ . '/models/',
+            'Frontend\Modules\Faculty\Forms' => __DIR__ . '/forms/',
         ));
         $loader->register();
     }
@@ -68,7 +68,7 @@ class Module implements ModuleDefinitionInterface
 
         $di->set('dispatcher' , function(){
             $dispatcher = new \Phalcon\Mvc\Dispatcher();
-            $dispatcher->setDefaultNamespace("Frontend\Modules\HomePage\Controllers\\");
+            $dispatcher->setDefaultNamespace("Frontend\Modules\Faculty\Controllers\\");
             return $dispatcher;
         });
 
