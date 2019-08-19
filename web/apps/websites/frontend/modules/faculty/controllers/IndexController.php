@@ -1,6 +1,6 @@
 <?php
 
-namespace Frontend\Modules\HomePage\Controllers;
+namespace Frontend\Modules\Faculty\Controllers;
 use Phalcon\Mvc\View;
 
 class IndexController extends \FrontendController
@@ -13,6 +13,6 @@ class IndexController extends \FrontendController
     // FUNCTION
     // =================================
     private function get_js_css (){
-        $this->assets->addJs(FRONTEND_URL.'/assets/frontend/js/modules/homepage/index.js');
+        $this->assets->addJs(FRONTEND_URL.'/assets/frontend/js/modules/faculty/index.js');
     }
 }
