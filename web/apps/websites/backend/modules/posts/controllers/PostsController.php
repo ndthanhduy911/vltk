@@ -1,7 +1,10 @@
 <?php
 namespace Backend\Modules\Posts\Controllers;
 use Models\Posts;
+use Models\PostsLang;
+use Models\Language;
 use Backend\Modules\Posts\Forms\PostsForm;
+use Backend\Modules\Posts\Forms\PostsLangForm;
 
 class PostsController  extends \BackendController {
 
@@ -14,11 +17,28 @@ class PostsController  extends \BackendController {
     }
 
     public function updateAction($id = null){
+        $forms_lang = [];
+        $posts_lang = [];
+        $post_content = [];
+        $languages = Language::find(['status = 1']);
         if($id){
-            $post = Posts::findFirstId($id);
+            if(!$post = Posts::findFirstId($id)){
+                echo 'Không tìm thấy dữ liệu'; die;
+            }
             $post->updated_at = date('Y-m-d H:i:s');
             $post->calendar = $this->helper->datetime_vn($post->calendar);
             $title = 'Cập nhật';
+            foreach ($languages as $key => $lang) {
+                $post_lang = PostsLang::findFirst(['post_id = :id: AND lang_id = :lang_id:','bind' => ['id' => $post->id, 'lang_id' => $lang->id]]);
+                if(!$post_lang){
+                    $form_lang = new PostsLangForm($post_lang);
+                    $posts_lang[$lang->id] = $post_lang;
+                    $forms_lang[$lang->id] = $form_lang;
+                    $post_content[$lang->id] = $post_lang->content;
+                }else{
+                    echo 'Nội dung không phù hợp'; die;
+                }
+            }   
         }else{
             $post = new Posts();
             $post->author = $this->session->get('user_id');
@@ -26,100 +46,99 @@ class PostsController  extends \BackendController {
             $post->created_at = date('Y-m-d H:i:s');
             $post->updated_at = $post->created_at;
             $title = 'Thêm mới';
+            foreach ($languages as $key => $lang) {
+                $forms_lang[$lang->id] = new PostsLangForm();
+                $posts_lang[$lang->id] = new PostsLang();
+                $post_content[$lang->id] = '';
+            }
         }
 
-        $form = new PostsForm($post);
+        $form_post = new PostsForm($post);
         if ($this->request->isPost()) {
-            if ($this->security->checkToken()) {
+            // if ($this->security->checkToken()) {
                 $data['token'] = ['key' => $this->security->getTokenKey(), 'value' => $this->security->getToken()];
                 $error = [];
                 $p_title = $this->request->getPost('title');
                 $p_slug = $this->request->getPost('slug');
+                $p_content = $this->request->getPost('content');
+                $p_excerpt = $this->request->getPost('excerpt');
                 $p_calendar = $this->request->getPost('calendar');
-                $req = [
-                    'title' => $p_title,
-                    'slug' => $this->request->getPost('slug') ? $p_slug : $this->helper->slugify($p_title),
+                $req_post = [
                     'cat_id' => $this->request->getPost('cat_id'),
-                    'content' => $this->request->getPost('content'),
                     'status' => $this->request->getPost('status'),
                     'calendar' => $p_calendar ? $p_calendar : date('d/m/Y H:i'),
-                    'excerpt' => $this->request->getPost('excerpt'),
                     'featured_image' => $this->request->getPost('featured_image'),
                 ];
 
-                $form->bind($req, $post);
-                if (!$form->isValid()) {
-                    foreach ($form->getMessages() as $message) {
+                $form_post->bind($req_post, $post);
+                if (!$form_post->isValid()) {
+                    foreach ($form_post->getMessages() as $message) {
                         array_push($error, $message->getMessage());
                     }
                 }
 
-                $check_slug = Posts::findFirst([
-                    "slug = :slug: AND id != :id:",
-                    "bind" => [
-                        "slug" => $req['slug'],
-                        'id'    => $id,
-                    ]
-                ]);
+                foreach ($languages as $key => $lang) {
+                    $req_post_lang[$lang->id] = [
+                        'title' => $p_title[$lang->id],
+                        'slug' => $p_slug[$lang->id] ? $p_slug[$lang->id] : $this->helper->slugify($p_title[$lang->id]),
+                        'content' => $p_content[$lang->id],
+                        'excerpt' => $p_excerpt[$lang->id],
+                        'lang_id' => $lang->id,
+                    ];
 
-                if($check_slug){
-                    array_push($error, 'Slug đã tồn tại');
+                    $check_slug = PostsLang::findFirst([
+                        "(slug = :slug: OR title = :title:) AND post_id != :id:",
+                        "bind" => [
+                            "slug" => $req_post_lang[$lang->id]['slug'],
+                            'id'    => $id,
+                            'title' => $req_post_lang[$lang->id]['title'],
+                        ]
+                    ]);
+        
+                    if($check_slug){
+                        array_push($error, $lang->name.': slug hoặc tiêu đề đã tồn tại');
+                    }
+
+                    $forms_lang[$lang->id]->bind($req_post_lang[$lang->id], $posts_lang[$lang->id]);
+                    if (!$forms_lang[$lang->id]->isValid()) {
+                        foreach ($forms_lang[$lang->id]->getMessages() as $message) {
+                            array_push($error, $message->getMessage());
+                        }
+                    }
                 }
 
                 if (!count($error)) {
                     $post->calendar = $this->helper->datetime_mysql($post->calendar);
+                    $post->author = $this->session->get('user_id');
+                    $post->dept_id = $this->session->get('dept_id');
                     if (!$post->save()) {
-                        if ($this->request->isAjax()) {
-                            foreach ($post->getMessages() as $message) {
-                                array_push($error, $message->getMessage());
-                            }
-                            $data['error'] = $error;
-                            $this->response->setStatusCode(400, 'error');
-                            $this->response->setJsonContent($data);
-                            return $this->response->send();
-                        } else {
-                            foreach ($post->getMessages() as $message) {
-                                $this->flashSession->error($message);
-                            }
+                        foreach ($post->getMessages() as $message) {
+                            $this->flashSession->error($message);
                         }
                     } else {
-                        if ($this->request->isAjax()) {
-                            $data['data'] = $post->toArray();
-                            $this->response->setStatusCode(200, 'OK');
-                            $this->response->setJsonContent($data);
-                            return $this->response->send();
-                        } else {
-                            // $this->logs->write_log(1, 1, 'Thêm dây chuyền ID: ' . $post->id, json_encode($post->toArray()), $this->session->get("user_id"));
-                            $this->flashSession->success($title." thành công");
-                            return $this->response->redirect(BACKEND_URL.'/posts');
+                        foreach ($languages as $key => $lang) {
+                            $posts_lang[$lang->id]->post_id = $post->id;
+                            $posts_lang[$lang->id]->save();
                         }
+                        $this->flashSession->success($title." thành công");
+                        return $this->response->redirect(BACKEND_URL.'/posts');
                     }
                 }else{
-                    if ($this->request->isAjax()) {
-                        $data['error'] = $error;
-                        $this->response->setStatusCode(400, 'error');
-                        $this->response->setJsonContent($data);
-                        return $this->response->send();
-                    } else {
-                        foreach ($error as $value) {
-                            $this->flashSession->error($value . ". ");
-                        }
+                    foreach ($error as $value) {
+                        $this->flashSession->error($value);
                     }
                 }
-            }else{
-                if ($this->request->isAjax()) {
-                    $data['token'] = ['key' => $this->security->getTokenKey(), 'value' => $this->security->getToken()];
-                    $data['error'] = ['Token không chính xác'];
-                    $this->response->setStatusCode(400, 'error');
-                    $this->response->setJsonContent($data);
-                    return $this->response->send();
-                } else {
-                    $this->flashSession->error("Token không chính xác");
-                }
-            }
+            // }else{
+            //     $this->flashSession->error("Token không chính xác");
+            // }
         }
-        $this->view->form = $form;
+
+        $this->view->languages = $languages;
+        $this->view->post_content = $post_content;
+        $this->view->forms_lang = $forms_lang;
+        $this->view->form_post = $form_post;
         $this->view->post = $post;
+        $this->view->posts_lang = $posts_lang;
         $this->view->title = $title;
         $this->assets->addJs('/elfinder/js/require.min.js');
         $this->get_js_css();

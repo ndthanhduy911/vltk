@@ -2,33 +2,29 @@
 
 namespace Models;
 
-class Posts extends \Phalcon\Mvc\Model
+class PostsLang extends \Phalcon\Mvc\Model
 {
     public $id;
 
-    public $cat_id;
+    public $post_id;
 
-    public $status;
-
-    public $dept_id;
-
-    public $calendar;
-
-    public $featured_image;
-
-    public $created_at;
-
-    public $updated_at;
+    public $title;
     
-    public $deleted;
+    public $slug;
+
+    public $content;
+
+    public $excerpt;
+
+    public $lang_id;
 
     public function getSource()
     {
-        return 'posts';
+        return 'posts_lang';
     }
 
     public static function getNamepace (){
-        return 'Models\Posts';
+        return 'Models\PostsLang';
     }
 
     public static function findFirstId($id, $columns = "*")
@@ -57,9 +53,9 @@ class Posts extends \Phalcon\Mvc\Model
         }
     }
     
-    public static function getTitleById($id = null)
+    public static function getTitleById($post_id = null)
     {
-        if($post = parent::findFirst($id)){
+        if($post = parent::findFirst(['post_id = :id: AND lang_id = 1', 'bind' => ['id' => $id]])){
             return $post->name;
         }else{
             return null;

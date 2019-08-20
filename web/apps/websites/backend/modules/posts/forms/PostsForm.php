@@ -18,56 +18,6 @@ class PostsForm extends Form
 {
     public function initialize($entity = null, $options = null)
     {
-        $title = new Text('title');
-        $title->setAttributes(array(
-            'class' => 'form-control',
-            'placeholder' => 'Tiêu đề',
-            'required' => '',
-            'data-required-error' => "Vui lòng nhập tiêu đề.",
-            'maxlength' => "255",
-            'data-error' => "Tiêu đề không đúng quy định.",
-        ));
-        $title->addValidators(array(
-            new PresenceOf(array(
-                'message' => 'Tiêu đề không được bỏ trống.',
-            )),
-            new StringLength([
-                "max" => 255,
-                "messageMaximum" => "Tiêu đề không được dài quá 255 ký tự",
-            ]),
-        ));
-        $this->add($title);
-
-        $excerpt = new Textarea('excerpt');
-        $excerpt->setAttributes(array(
-            'class' => 'form-control',
-            'placeholder' => 'Tóm tắt',
-            'maxlength' => "255",
-            'data-error' => "Tóm tắt không đúng quy định.",
-            'rows' => 4
-        ));
-        $excerpt->addValidators(array(
-            new StringLength([
-                "max" => 255,
-                "messageMaximum" => "Tóm tắt không được dài quá 255 ký tự",
-            ]),
-        ));
-        $this->add($excerpt);
-
-        $slug = new Text('slug');
-        $slug->setAttributes(array(
-            'class' => 'form-control',
-            'placeholder' => 'Slug',
-            'maxlength' => "200",
-        ));
-        $slug->addValidators(array(
-            new StringLength([
-                "max" => 200,
-                "messageMaximum" => "Tóm tắt không được dài quá 255 ký tự",
-            ]),
-        ));
-        $this->add($slug);
-
         $calendar = new Text('calendar');
         $calendar->setAttributes(array(
             'class' => 'form-control-sm datetime-basic w-100',
@@ -123,7 +73,7 @@ class PostsForm extends Form
         $featured_image = new Hidden('featured_image');
         $this->add($featured_image);
 
-        $content = new Hidden('content');
-        $this->add($content);
+        $deleted = new Hidden('deleted');
+        $this->add($deleted);
     }
 }

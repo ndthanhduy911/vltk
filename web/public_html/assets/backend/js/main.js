@@ -26,8 +26,12 @@
 
 	$('.select2-basic').select2();
 
-	if ($('#editor').length) {
-		initSample();
+	if ($('#editor1').length) {
+		initSample1();
+	}
+
+	if ($('#editor2').length) {
+		initSample2();
 	}
 
 	$('.date-basic').datetimepicker({

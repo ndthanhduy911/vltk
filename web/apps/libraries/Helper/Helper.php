@@ -156,6 +156,7 @@ class Helper extends Component
 
     public function datetime_mysql($date = null)
     {
+        $date = str_replace('/', '-', $date );
         return $date ? date_format(date_create($date), "Y-m-d H:i:s") : NULL;
     }
 
