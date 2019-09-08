@@ -40,6 +40,11 @@ class FrontendController extends Controller
             }else{
                 echo "403";
             }
+            if($lang_new =  $this->session->get('lang_new')){
+                $this->session->set('lang_id', $lang_new);
+            }else{
+                $this->session->set('lang_id', 1);
+            }
             // $identity = $this->auth->getIdentity();
             // if($dispatcher->getControllerName() === 'captchas'
             // || ($dispatcher->getControllerName() === 'account' && $dispatcher->getActionName()=== 'login')

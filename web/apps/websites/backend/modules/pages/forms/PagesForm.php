@@ -86,7 +86,7 @@ class PagesForm extends Form
         $this->add($attribute_id);
 
         $status = new Select('status', [
-            1 => "Sử dụng",
+            1 => "Hiển thị",
             0 => "Dừng",
         ], [
             'useEmpty' => true,

@@ -1,3 +1,4 @@
+const langId = $('#lang_id').attr('data-lang');
 const fontendUrl = window.location.origin;
 
 //Format number money

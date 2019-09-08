@@ -40,6 +40,20 @@ class PostsForm extends Form
         ));
         $this->add($calendar);
 
+        $slug = new Text('slug');
+        $slug->setAttributes(array(
+            'class' => 'form-control',
+            'placeholder' => 'Slug',
+            'maxlength' => "200",
+        ));
+        $slug->addValidators(array(
+            new StringLength([
+                "max" => 200,
+                "messageMaximum" => "Slug không được dài quá 255 ký tự",
+            ]),
+        ));
+        $this->add($slug);
+
         $cat_id = new Select('cat_id', Categories::find(), array(
             'using' => array('id', 'name'),
             'class' => 'form-control-sm pull-right w-100',
@@ -53,7 +67,7 @@ class PostsForm extends Form
         $this->add($cat_id);
 
         $status = new Select('status', [
-            1 => "Sử dụng",
+            1 => "Hiển thị",
             0 => "Dừng",
         ], [
             'useEmpty' => true,

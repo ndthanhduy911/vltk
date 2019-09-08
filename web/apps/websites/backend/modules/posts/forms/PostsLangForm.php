@@ -54,20 +54,6 @@ class PostsLangForm extends Form
         ));
         $this->add($excerpt);
 
-        $slug = new Text('slug');
-        $slug->setAttributes(array(
-            'class' => 'form-control',
-            'placeholder' => 'Slug',
-            'maxlength' => "200",
-        ));
-        $slug->addValidators(array(
-            new StringLength([
-                "max" => 200,
-                "messageMaximum" => "Tóm tắt không được dài quá 255 ký tự",
-            ]),
-        ));
-        $this->add($slug);
-
         $content = new Hidden('content');
         $this->add($content);
 

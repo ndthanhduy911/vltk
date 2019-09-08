@@ -6,6 +6,8 @@ class Posts extends \Phalcon\Mvc\Model
 {
     public $id;
 
+    public $slug;
+
     public $cat_id;
 
     public $status;

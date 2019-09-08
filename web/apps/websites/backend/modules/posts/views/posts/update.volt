@@ -46,23 +46,6 @@
                                 </div>
                             </div>
 
-                            <h5 class="font-weight-bold text-primary">SLUG</h5>
-                            <div class="tile p-3">
-                                <div class="modal-body p-0">
-                                    <div class="form-row">
-                                        <div class="form-group col-md-12 m-0">
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text fa fa-link"></div>
-                                                </div>
-                                                {{forms_lang[lang.id].render('slug', ['id' : 'slug'~lang.id, 'name' : 'slug['~lang.id~']'])}}
-                                                <div class="invalid-tooltip"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
                             <h5 class="font-weight-bold text-primary">Tóm tắt</h5>
                             <div class="tile p-0">
                                 <div class="modal-body pb-0">
@@ -114,12 +97,22 @@
                                     <div class="invalid-tooltip"></div>
                                 </div>
                             </div>
-                            <div class="d-inline-block w-100 mb-2">
+                            <div class="d-inline-block w-100">
                                 <i class="fa fa-calendar"></i>
                                 <span class="f-s-90">Lịch:</span>
                                 <div class="form-group mt-1">
                                     <div class="input-group">
                                         {{form_post.render('calendar')}}
+                                        <div class="invalid-tooltip"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-inline-block w-100 mb-2">
+                                <i class="fa fa-link"></i>
+                                <span class="f-s-90">Slug:</span>
+                                <div class="form-group mt-1">
+                                    <div class="input-group">
+                                        {{form_post.render('slug')}}
                                         <div class="invalid-tooltip"></div>
                                     </div>
                                 </div>

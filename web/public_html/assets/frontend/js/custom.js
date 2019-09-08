@@ -39,6 +39,12 @@
 			}); // End Notify Plugin - The above code (from line 14) is used for demonstration purposes only
 
 		};
+
+		$('#lang_id a').click(function (e) { 
+			e.preventDefault();
+			let lang_id = $(this).attr('data-id');
+			changeLang(lang_id);
+		});
 	}); // End document ready
 
 })(jQuery);

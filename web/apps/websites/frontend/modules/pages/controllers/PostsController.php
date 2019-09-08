@@ -4,6 +4,8 @@ namespace Frontend\Modules\Pages\Controllers;
 use Phalcon\Mvc\View;
 use Models\Categories;
 use Models\Posts;
+use Models\PostsLang;
+use Models\Language;
 class PostsController extends \FrontendController
 {
     public function indexAction(){
@@ -65,24 +67,69 @@ class PostsController extends \FrontendController
 
     public function getdatapostsAction($cat_id = null){
         if($this->request->isAjax()) {
+            $dept_id = $this->request->get('dept_id');
+            $dept_id = $dept_id ? $dept_id : 1;
+            $limit = $this->request->get('limit');
+            $limit = $limit ? (int)$limit : 5;
             if($cat_id){
-                $posts = Posts::find([
-                    'status = 1 AND cat_id = :cat_id:',
-                    'limit' => 5,
-                    'bind' => [
-                        'cat_id' => $cat_id
-                    ]
-                ]);
+                $npPosts = Posts::getNamepace();
+                $posts = $this->modelsManager->createBuilder()
+                ->columns(array(
+                    $npPosts.'.id',
+                    'PL.title',
+                    $npPosts.'.slug',
+                    $npPosts.'.cat_id',
+                    'PL.content',
+                    $npPosts.'.status',
+                    'PL.excerpt',
+                    $npPosts.'.dept_id',
+                    $npPosts.'.created_at',
+                    $npPosts.'.calendar',
+                    $npPosts.'.featured_image',
+                    'C.name cat_name',
+                ))
+                ->from($npPosts)
+                ->join('Models\Categories', 'C.id = '.$npPosts.'.cat_id','C')
+                ->join('Models\PostsLang', 'PL.post_id = '.$npPosts.'.id AND PL.lang_id = 1','PL')
+                ->orderBy($npPosts.'.id DESC')
+                ->where($npPosts.'.deleted = 0 AND '.$npPosts.'.cat_id = :cat_id: AND '.$npPosts.'.status = 1 AND '.$npPosts.'.dept_id = :dept_id:',['dept_id' => $dept_id, 'cat_id' => $cat_id])
+                ->limit($limit, 0)
+                ->getQuery()
+                ->execute()
+                ->toArray();
             }else{
-                $posts = Posts::find([
-                    'status = 1',
-                    'limit' => 5,
-                ]);
+                $npPosts = Posts::getNamepace();
+                $posts = $this->modelsManager->createBuilder()
+                ->columns(array(
+                    $npPosts.'.id',
+                    'PL.title',
+                    $npPosts.'.slug',
+                    $npPosts.'.cat_id',
+                    'PL.content',
+                    $npPosts.'.status',
+                    'PL.excerpt',
+                    $npPosts.'.dept_id',
+                    $npPosts.'.created_at',
+                    $npPosts.'.calendar',
+                    $npPosts.'.featured_image',
+                    'C.name cat_name',
+                ))
+                ->from($npPosts)
+                ->join('Models\Categories', 'C.id = '.$npPosts.'.cat_id','C')
+                ->join('Models\PostsLang', 'PL.post_id = '.$npPosts.'.id AND PL.lang_id = 1','PL')
+                ->orderBy($npPosts.'.id DESC')
+                ->where($npPosts.'.deleted = 0 AND '.$npPosts.'.status = 1 AND '.$npPosts.'.dept_id = :dept_id:',['dept_id' => $dept_id])
+                ->limit($limit, 0)
+                ->getQuery()
+                ->execute()
+                ->toArray();
             }
-
 
             $this->response->setStatusCode(200, 'OK');
             $this->response->setJsonContent($posts);
+            return $this->response->send();
+        }else{
+            $this->response->setStatusCode(403, 'Truy cập không được phép');
             return $this->response->send();
         }
     }

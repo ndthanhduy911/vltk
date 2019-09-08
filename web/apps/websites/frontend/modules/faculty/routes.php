@@ -5,3 +5,11 @@ $router->add($config->application->frontendUri.'/', array(
     'controller' => 'index',
     'action' => 'index',
 ));
+
+
+$router->add($config->application->frontendUri.'/faculty-api/changelanguage/:int', array(
+    'module' => 'frontend_faculty',
+    'controller' => 'index',
+    'action' => 'changelanguage',
+    'id' => 2,
+));

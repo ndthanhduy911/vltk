@@ -28,9 +28,9 @@
                                 <th class="align-middle text-center text-white w-20-px">#</th>
                                 <th class="align-middle text-center text-white w-70-px">Hình</th>
                                 <th class="align-middle text-center text-white">Tiêu đề</th>
-                                <th class="align-middle text-center text-white">Danh mục</th>
-                                <th class="align-middle text-center text-white">Tác giả</th>
-                                <th class="align-middle text-center text-white">Ngày đăng</th>
+                                <th class="align-middle text-center text-white w-200-px">Danh mục</th>
+                                <th class="align-middle text-center text-white w-200-px">Tác giả</th>
+                                <th class="align-middle text-center text-white w-70-px">Ngày đăng</th>
                                 <th class="align-middle text-center text-white w-70-px">Trạng thái</th>
                                 <th class="align-middle text-center text-white w-70-px">Thao tác</th>
                             </tr>

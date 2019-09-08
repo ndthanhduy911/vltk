@@ -30,7 +30,7 @@ class PostsController  extends \BackendController {
             $title = 'Cập nhật';
             foreach ($languages as $key => $lang) {
                 $post_lang = PostsLang::findFirst(['post_id = :id: AND lang_id = :lang_id:','bind' => ['id' => $post->id, 'lang_id' => $lang->id]]);
-                if(!$post_lang){
+                if($post_lang){
                     $form_lang = new PostsLangForm($post_lang);
                     $posts_lang[$lang->id] = $post_lang;
                     $forms_lang[$lang->id] = $form_lang;
@@ -55,7 +55,7 @@ class PostsController  extends \BackendController {
 
         $form_post = new PostsForm($post);
         if ($this->request->isPost()) {
-            // if ($this->security->checkToken()) {
+            if ($this->security->checkToken()) {
                 $data['token'] = ['key' => $this->security->getTokenKey(), 'value' => $this->security->getToken()];
                 $error = [];
                 $p_title = $this->request->getPost('title');
@@ -66,6 +66,7 @@ class PostsController  extends \BackendController {
                 $req_post = [
                     'cat_id' => $this->request->getPost('cat_id'),
                     'status' => $this->request->getPost('status'),
+                    'slug' => $p_slug ? $p_slug : $this->helper->slugify($p_title[$lang->id]),
                     'calendar' => $p_calendar ? $p_calendar : date('d/m/Y H:i'),
                     'featured_image' => $this->request->getPost('featured_image'),
                 ];
@@ -77,27 +78,25 @@ class PostsController  extends \BackendController {
                     }
                 }
 
+                $check_slug = Posts::findFirst([
+                    "slug = :slug: AND id != :id:",
+                    "bind" => [
+                        "slug" => $req_post['slug'],
+                        'id'    => $id,
+                    ]
+                ]);
+    
+                if($check_slug){
+                    $req_post['slug'] = $req_post['slug'] .'-'. strtotime(); 
+                }
+
                 foreach ($languages as $key => $lang) {
                     $req_post_lang[$lang->id] = [
                         'title' => $p_title[$lang->id],
-                        'slug' => $p_slug[$lang->id] ? $p_slug[$lang->id] : $this->helper->slugify($p_title[$lang->id]),
                         'content' => $p_content[$lang->id],
                         'excerpt' => $p_excerpt[$lang->id],
                         'lang_id' => $lang->id,
                     ];
-
-                    $check_slug = PostsLang::findFirst([
-                        "(slug = :slug: OR title = :title:) AND post_id != :id:",
-                        "bind" => [
-                            "slug" => $req_post_lang[$lang->id]['slug'],
-                            'id'    => $id,
-                            'title' => $req_post_lang[$lang->id]['title'],
-                        ]
-                    ]);
-        
-                    if($check_slug){
-                        array_push($error, $lang->name.': slug hoặc tiêu đề đã tồn tại');
-                    }
 
                     $forms_lang[$lang->id]->bind($req_post_lang[$lang->id], $posts_lang[$lang->id]);
                     if (!$forms_lang[$lang->id]->isValid()) {
@@ -128,9 +127,9 @@ class PostsController  extends \BackendController {
                         $this->flashSession->error($value);
                     }
                 }
-            // }else{
-            //     $this->flashSession->error("Token không chính xác");
-            // }
+            }else{
+                $this->flashSession->error("Token không chính xác");
+            }
         }
 
         $this->view->languages = $languages;
@@ -145,7 +144,6 @@ class PostsController  extends \BackendController {
     }
 
     public function restoreAction($id = null){
-
         if ($post = Posts::findFirstId($id)) {
             $post->status = 1;
             if (!$post->save()) {
@@ -170,7 +168,6 @@ class PostsController  extends \BackendController {
                     $this->response->setJsonContent($data);
                     return $this->response->send();
                 } else {
-                    // $this->logs->write_log(3, 1, 'Xóa trang', json_encode($save),$this->session->get("user_id"));
                     $this->flashSession->success("Khôi phục bài viết thành công");
                     return $this->response->redirect(BACKEND_URL.'/posts');
                 }
@@ -182,7 +179,6 @@ class PostsController  extends \BackendController {
                 $this->response->setJsonContent($data);
                 return $this->response->send();
             } else {
-                // $this->logs->write_log(3, 1, 'Xóa trang', json_encode($save),$this->session->get("user_id"));
                 $this->flashSession->error("Không tìm thấy bài viết");
                 return $this->response->redirect(BACKEND_URL.'/posts');
             }
@@ -237,8 +233,7 @@ class PostsController  extends \BackendController {
     }
 
     public function deleteAction($id = null){
-        $post = Posts::findFirstId($id);
-        if ($post !== false) {
+        if ($post = Posts::findFirstId($id)) {
             if (!$post->delete()) {
                 if ($this->request->isAjax()) {
                     foreach ($post->getMessages() as $message) {
@@ -274,7 +269,6 @@ class PostsController  extends \BackendController {
                 $this->response->setJsonContent($data);
                 return $this->response->send();
             } else {
-                // $this->logs->write_log(3, 1, 'Xóa trang', json_encode($save),$this->session->get("user_id"));
                 $this->flashSession->error("Không tìm thấy bài viết");
                 return $this->response->redirect(BACKEND_URL.'/trashs');
             }
@@ -290,12 +284,12 @@ class PostsController  extends \BackendController {
             $data = $this->modelsManager->createBuilder()
             ->columns(array(
                 $npPosts.'.id',
-                $npPosts.'.title',
+                'PL.title',
                 $npPosts.'.slug',
                 $npPosts.'.cat_id',
-                $npPosts.'.content',
+                'PL.content',
                 $npPosts.'.status',
-                $npPosts.'.excerpt',
+                'PL.excerpt',
                 $npPosts.'.dept_id',
                 $npPosts.'.created_at',
                 $npPosts.'.calendar',
@@ -309,8 +303,9 @@ class PostsController  extends \BackendController {
             ->join('Models\Departments', 'D.id = '.$npPosts.'.dept_id','D')
             ->join('Models\Users', 'U.id = '.$npPosts.'.author','U')
             ->join('Models\Categories', 'C.id = '.$npPosts.'.cat_id','C')
-            ->orderBy($npPosts.'.title DESC')
-            ->where($npPosts.'.status != 4');
+            ->join('Models\PostsLang', 'PL.post_id = '.$npPosts.'.id AND PL.lang_id = 1','PL')
+            ->orderBy($npPosts.'.id DESC')
+            ->where($npPosts.'.deleted = 0');
             // if($this->session->get('role') !== 1){
             //     $data = $data->andWhere("dept_id IN (".implode(',',$this->session->get('dept_mg')).")");
             // }
@@ -352,7 +347,7 @@ class PostsController  extends \BackendController {
             ->join('Models\Users', 'U.id = '.$npPosts.'.author','U')
             ->join('Models\Categories', 'C.id = '.$npPosts.'.cat_id','C')
             ->orderBy($npPosts.'.title DESC')
-            ->where($npPosts.'.status = 4');
+            ->where($npPosts.'.status = 4 AND '.$npPosts.'.deleted = 0');
             // if($this->session->get('role') !== 1){
             //     $data = $data->andWhere("dept_id IN (".implode(',',$this->session->get('dept_mg')).")");
             // }

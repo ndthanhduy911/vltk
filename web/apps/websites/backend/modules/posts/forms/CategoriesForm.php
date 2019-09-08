@@ -70,7 +70,7 @@ class CategoriesForm extends Form
         $this->add($slug);
 
         $status = new Select('status', [
-            1 => "Sử dụng",
+            1 => "Hiển thị",
             0 => "Dừng",
         ], [
             'useEmpty' => true,

@@ -9,8 +9,6 @@ class PostsLang extends \Phalcon\Mvc\Model
     public $post_id;
 
     public $title;
-    
-    public $slug;
 
     public $content;
 

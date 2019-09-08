@@ -25,7 +25,7 @@ $router->add($config->application->frontendUri . '/api-posts/:action/:int', arra
     'module' => 'frontend_pages',
     'controller' => 'posts',
     'action'  => 1,
-    'id' => 2
+    'id' => 2,
 ));
 
 $router->add($config->application->frontendUri . '/posts/:params', array(
