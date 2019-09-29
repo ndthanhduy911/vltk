@@ -16,7 +16,7 @@ class PostsController  extends \BackendController {
         $this->get_js_css();
     }
 
-    public function updateAction($id = null){
+    public function updateAction($id = 0){
         $forms_lang = [];
         $posts_lang = [];
         $post_content = [];
@@ -302,7 +302,7 @@ class PostsController  extends \BackendController {
             ->from($npPosts)
             ->join('Models\Departments', 'D.id = '.$npPosts.'.dept_id','D')
             ->join('Models\Users', 'U.id = '.$npPosts.'.author','U')
-            ->join('Models\Categories', 'C.id = '.$npPosts.'.cat_id','C')
+            ->join('Models\CategoriesLang', 'C.cat_id = '.$npPosts.'.cat_id AND C.lang_id = 1','C')
             ->join('Models\PostsLang', 'PL.post_id = '.$npPosts.'.id AND PL.lang_id = 1','PL')
             ->orderBy($npPosts.'.id DESC')
             ->where($npPosts.'.deleted = 0');
@@ -345,7 +345,7 @@ class PostsController  extends \BackendController {
             ->from($npPosts)
             ->join('Models\Departments', 'D.id = '.$npPosts.'.dept_id','D')
             ->join('Models\Users', 'U.id = '.$npPosts.'.author','U')
-            ->join('Models\Categories', 'C.id = '.$npPosts.'.cat_id','C')
+            ->join('Models\CategoriesLang', 'C.cat_id = '.$npPosts.'.cat_id AND C.lang_id = 1','C')
             ->orderBy($npPosts.'.title DESC')
             ->where($npPosts.'.status = 4 AND '.$npPosts.'.deleted = 0');
             // if($this->session->get('role') !== 1){

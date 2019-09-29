@@ -41,22 +41,4 @@ class PostsLang extends \Phalcon\Mvc\Model
             ]);
         }
     }
-
-    public static function getUrlById($id = null)
-    {
-        if($post = parent::findFirst($id)){
-            return FRONTEND_URL.'/'.$post->slug;
-        }else{
-            return null;
-        }
-    }
-    
-    public static function getTitleById($post_id = null)
-    {
-        if($post = parent::findFirst(['post_id = :id: AND lang_id = 1', 'bind' => ['id' => $id]])){
-            return $post->name;
-        }else{
-            return null;
-        }
-    }
 }

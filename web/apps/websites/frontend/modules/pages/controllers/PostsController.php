@@ -51,13 +51,18 @@ class PostsController extends \FrontendController
         $slug = $this->helper->slugify($params);
         $post = Posts::findFirst(['dept_id = 1 AND status = 1 AND slug = :slug:', 'bind' => ['slug' => $slug]]);
         if($post){
-            $this->view->title = $post->title;
-            $this->view->post = $post;
-            $this->view->pick('templates/single');
-        }else{
-            $this->view->title = '404';
-            $this->view->pick('templates/404');
+            if($posts_lang = Posts::getLang($post->id)){
+                $this->view->title = $posts_lang->title;
+                $post->content = $posts_lang->content;
+                $post->excerpt = $posts_lang->excerpt;
+                $this->view->post = $post;
+                return $this->view->pick('templates/single');
+            }
         }
+
+        $this->view->title = '404';
+        return $this->view->pick('templates/404');
+        
 
     }
 
@@ -89,7 +94,7 @@ class PostsController extends \FrontendController
                     'C.name cat_name',
                 ))
                 ->from($npPosts)
-                ->join('Models\Categories', 'C.id = '.$npPosts.'.cat_id','C')
+                ->join('Models\CategoriesLang', 'C.cat_id = '.$npPosts.'.cat_id AND C.lang_id = 1','C')
                 ->join('Models\PostsLang', 'PL.post_id = '.$npPosts.'.id AND PL.lang_id = 1','PL')
                 ->orderBy($npPosts.'.id DESC')
                 ->where($npPosts.'.deleted = 0 AND '.$npPosts.'.cat_id = :cat_id: AND '.$npPosts.'.status = 1 AND '.$npPosts.'.dept_id = :dept_id:',['dept_id' => $dept_id, 'cat_id' => $cat_id])
@@ -115,7 +120,7 @@ class PostsController extends \FrontendController
                     'C.name cat_name',
                 ))
                 ->from($npPosts)
-                ->join('Models\Categories', 'C.id = '.$npPosts.'.cat_id','C')
+                ->join('Models\CategoriesLang', 'C.cat_id = '.$npPosts.'.cat_id AND C.lang_id = 1','C')
                 ->join('Models\PostsLang', 'PL.post_id = '.$npPosts.'.id AND PL.lang_id = 1','PL')
                 ->orderBy($npPosts.'.id DESC')
                 ->where($npPosts.'.deleted = 0 AND '.$npPosts.'.status = 1 AND '.$npPosts.'.dept_id = :dept_id:',['dept_id' => $dept_id])

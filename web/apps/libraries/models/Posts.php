@@ -1,7 +1,7 @@
 <?php
 
 namespace Models;
-
+use Models\PostsLang;
 class Posts extends \Phalcon\Mvc\Model
 {
     public $id;
@@ -55,16 +55,24 @@ class Posts extends \Phalcon\Mvc\Model
         if($post = parent::findFirst($id)){
             return FRONTEND_URL.'/'.$post->slug;
         }else{
-            return null;
+            return false;
+        }
+    }
+
+    public static function getLang($post_id =  null){
+        if($post = PostsLang::findFirst(['post_id = :post_id: AND lang_id = :lang_id:','bind' => ['post_id' => $post_id, 'lang_id' => $_SESSION['lang_id']]])){
+            return $post;
+        }else{
+            return false;
         }
     }
     
-    public static function getTitleById($id = null)
+    public static function getTitleById($post_id = null)
     {
-        if($post = parent::findFirst($id)){
+        if($post = PostsLang::findFirst(['post_id = :post_id: AND lang_id = :lang_id:','bind' => ['post_id' => $post_id, 'lang_id' => $_SESSION['lang_id']]])){
             return $post->name;
         }else{
-            return null;
+            return false;
         }
     }
 }

@@ -28,9 +28,21 @@ class FrontendController extends Controller
 
     public function beforeExecuteRoute(Dispatcher $dispatcher)
     {
+
         try {
             $depts = Departments::find(["columns" => "slug, name, image"]);
-            $cats = Categories::find(["dept_id = 1","columns" => "slug, name"]);
+            $npCat = Categories::getNamepace();
+            $cats = $this->modelsManager->createBuilder()
+            ->columns(array(
+                $npCat.'.id',
+                'CL.name name',
+                $npCat.'.slug',
+            ))
+            ->from($npCat)
+            ->where("dept_id = 1")
+            ->join('Models\CategoriesLang', 'CL.cat_id = '.$npCat.'.id AND CL.lang_id = '.$_SESSION['lang_id'],'CL')
+            ->getQuery()
+            ->execute();
             $pages = Pages::find(["dept_id = 1","columns" => "slug, title"]);
 
             if($depts->count() && $cats->count() &&$pages->count()){

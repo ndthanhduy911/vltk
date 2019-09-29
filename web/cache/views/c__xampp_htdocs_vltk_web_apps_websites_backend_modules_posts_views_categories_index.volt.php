@@ -18,7 +18,7 @@
         <div class="col-md-12 p-0">
             <div class="tile">
                 <div class="col-12 p-0 mb-2">
-                    <a id="addCategories" href="{{ config.application.backendUri }}/categories/update" title="Tạo" class="btn btn-success fa fa-plus"></a>
+                    <a id="addCategories" href="<?= $this->config->application->backendUri ?>/categories/update" title="Tạo" class="btn btn-success fa fa-plus"></a>
                 </div>
                 <div class="tile-body">
                     <table id="categories" class="table table-bordered table-hover">

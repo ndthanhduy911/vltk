@@ -5,19 +5,18 @@ class CategoriesLang extends \Phalcon\Mvc\Model
 
     public $id;
 
+    public $cat_id;
+
+    public $lang_id;
 
     public $name;
 
     public $description;
 
-    public $created_at;
-
-    public $updated_at;
-
 
     public function getSource()
     {
-        return 'categories';
+        return 'categories_lang';
     }
 
     public static function getNamepace (){

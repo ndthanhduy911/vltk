@@ -16,7 +16,7 @@
                       <!-- ================ -->
                       <article class="blogpost full">
                           <header>
-                                <h2><?= $post->title ?></h2>
+                                <h2><?= $title ?></h2>
                                 <div class="post-info mb-4">
                                     <span class="post-date">
                                         <i class="fa fa-calendar-o pr-1"></i>

@@ -1,15 +1,11 @@
 <?php
 namespace Models;
+use Models\CategoriesLang;
 class Categories extends \Phalcon\Mvc\Model
 {
-
     public $id;
 
     public $slug;
-
-    public $name;
-
-    public $description;
 
     public $status;
 
@@ -47,12 +43,20 @@ class Categories extends \Phalcon\Mvc\Model
         }
     }
 
-    public static function getTitleById($id = null)
+    public static function getLang($cat_id =  null){
+        if($cat = CategoriesLang::findFirst(['cat_id = :cat_id: AND lang_id = :lang_id:','bind' => ['cat_id' => $cat_id, 'lang_id' => $_SESSION['lang_id']]])){
+            return $cat;
+        }else{
+            return false;
+        }
+    }
+    
+    public static function getTitleById($cat_id = null)
     {
-        if($cat = parent::findFirst($id)){
+        if($cat = CategoriesLang::findFirst(['cat_id = :cat_id: AND lang_id = :lang_id:','bind' => ['cat_id' => $cat_id, 'lang_id' => $_SESSION['lang_id']]])){
             return $cat->name;
         }else{
-            return null;
+            return false;
         }
     }
 }

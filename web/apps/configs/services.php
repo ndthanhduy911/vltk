@@ -149,8 +149,8 @@ $di->set('viewCache', function() use($config)
 
 });
 $di->set('modelsManager', function() {
-      return new \Phalcon\Mvc\Model\Manager();
-    });
+    return new \Phalcon\Mvc\Model\Manager();
+});
 
 
 //Collection manager

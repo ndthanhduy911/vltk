@@ -1,6 +1,7 @@
 <?php
 namespace Backend\Modules\Posts\Controllers;
 use Models\Categories;
+use Models\CategoriesLang;
 use Backend\Modules\Posts\Forms\CategoriesForm;
 
 class CategoriesController  extends \BackendController {
@@ -16,16 +17,19 @@ class CategoriesController  extends \BackendController {
             $data = $this->modelsManager->createBuilder()
             ->columns(array(
                 $npCat.'.id',
-                $npCat.'.name',
+                'CL.name name',
                 $npCat.'.slug',
-                $npCat.'.description',
+                'CL.description description',
                 $npCat.'.status',
                 $npCat.'.created_at',
                 'U.name author_name',
+                'D.name dept_name',
             ))
             ->from($npCat)
             ->join('Models\Users', 'U.id = '.$npCat.'.author','U')
-            ->orderBy($npCat.'.name DESC')
+            ->join('Models\Departments', 'D.id = '.$npCat.'.dept_id','D')
+            ->join('Models\CategoriesLang', 'CL.cat_id = '.$npCat.'.id AND CL.lang_id = 1','CL')
+            ->orderBy($npCat.'.dept_id ASC')
             ->where("1 = 1");
             // if($this->session->get('role') !== 1){
             //     $data = $data->andWhere("dept_id IN (".implode(',',$this->session->get('dept_mg')).")");
@@ -42,32 +46,52 @@ class CategoriesController  extends \BackendController {
         }
     }
 
-    public function updateAction($id = null){
+    public function updateAction($id = 0){
+        $forms_lang = [];
+        $posts_lang = [];
+        $languages = Language::find(['status = 1']);
         if($id){
-            $category = Categories::findFirstId($id);
+            if(!$category = Categories::findFirstId($id)){
+                echo 'Không tìm thấy dữ liệu'; die;
+            }
             $category->updated_at = date('Y-m-d H:i:s');
+            $title = 'Cập nhật';
+            foreach ($languages as $key => $lang) {
+                $cat_lang = CategoriesLang::findFirst(['cat_id = :id: AND lang_id = :lang_id:','bind' => ['id' => $category->id, 'lang_id' => $lang->id]]);
+                if($cat_lang){
+                    $form_lang = new CategoriesLangForm($cat_lang);
+                    $posts_lang[$lang->id] = $cat_lang;
+                    $forms_lang[$lang->id] = $form_lang;
+                }else{
+                    echo 'Nội dung không phù hợp'; die;
+                }
+            }   
         }else{
             $category = new Categories();
             $category->author = $this->session->get('user_id');
+            $category->dept_id = $this->session->get('dept_id');
             $category->created_at = date('Y-m-d H:i:s');
             $category->updated_at = $category->created_at;
-            
+            $title = 'Thêm mới';
+            foreach ($languages as $key => $lang) {
+                $forms_lang[$lang->id] = new CategoriesLangForm();
+                $cat_lang[$lang->id] = new CategoriesLang();
+            }
         }
 
-        $form = new CategoriesForm($category);
+        $form_cat = new CategoriesForm($category);
         if ($this->request->isPost()) {
             if ($this->security->checkToken()) {
                 $data['token'] = ['key' => $this->security->getTokenKey(), 'value' => $this->security->getToken()];
                 $error = [];
                 $c_name = $this->request->getPost('name');
-                $req = [
-                    'name' => $c_name,
+                $c_description = $this->request->getPost('description');
+                $req_cat = [
                     'slug' => $this->request->getPost('slug'),
                     'status' => $this->request->getPost('status'),
-                    'description' => $this->request->getPost('description'),
                 ];
 
-                $form->bind($req, $category);
+                $form_cat->bind($req_cat, $category);
                 if (!$form->isValid()) {
                     foreach ($form->getMessages() as $message) {
                         array_push($error, $message->getMessage());
@@ -83,7 +107,22 @@ class CategoriesController  extends \BackendController {
                 ]);
 
                 if($check_slug){
-                    array_push($error, 'Slug đã tồn tại');
+                    $req_post['slug'] = $req_post['slug'] .'-'. strtotime(); 
+                }
+
+                foreach ($languages as $key => $lang) {
+                    $req_cat_lang[$lang->id] = [
+                        'name' => $c_name[$lang->id],
+                        'description' => $c_description[$lang->id],
+                        'lang_id' => $lang->id,
+                    ];
+
+                    $forms_lang[$lang->id]->bind($req_post_lang[$lang->id], $posts_lang[$lang->id]);
+                    if (!$forms_lang[$lang->id]->isValid()) {
+                        foreach ($forms_lang[$lang->id]->getMessages() as $message) {
+                            array_push($error, $message->getMessage());
+                        }
+                    }
                 }
 
                 if (!count($error)) {
