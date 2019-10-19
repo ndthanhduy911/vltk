@@ -30,6 +30,7 @@ class FrontendController extends Controller
     {
 
         try {
+
             $depts = Departments::find(["columns" => "slug, name, image"]);
             $npCat = Categories::getNamepace();
             $cats = $this->modelsManager->createBuilder()
@@ -39,7 +40,7 @@ class FrontendController extends Controller
                 $npCat.'.slug',
             ))
             ->from($npCat)
-            ->where("dept_id = 1")
+            ->where($npCat."dept_id = 1")
             ->join('Models\CategoriesLang', 'CL.cat_id = '.$npCat.'.id AND CL.lang_id = '.$_SESSION['lang_id'],'CL')
             ->getQuery()
             ->execute();

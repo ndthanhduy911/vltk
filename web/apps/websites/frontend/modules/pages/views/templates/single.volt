@@ -40,9 +40,9 @@
                                     {{post.content}}
                                 </div>
                           </div>
-                          <footer class="clearfix">
-                              <!-- <div class="tags pull-left"><i class="fa fa-tags pr-1"></i> <a href="#">tag 1</a>, <a
-                                      href="#">tag 2</a>, <a href="#">long tag 3</a></div> -->
+                          <!-- <footer class="clearfix">
+                              <div class="tags pull-left"><i class="fa fa-tags pr-1"></i> <a href="#">tag 1</a>, <a
+                                      href="#">tag 2</a>, <a href="#">long tag 3</a></div>
                               <div class="link pull-right">
                                   <ul
                                       class="social-links circle small colored clearfix margin-clear text-right animated-effect-1">
@@ -51,7 +51,7 @@
                                       <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
                                   </ul>
                               </div>
-                          </footer>
+                          </footer> -->
                       </article>
                       <!-- blogpost end -->
                   </div>

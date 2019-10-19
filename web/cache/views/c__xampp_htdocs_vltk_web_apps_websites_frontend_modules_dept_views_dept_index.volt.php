@@ -63,7 +63,7 @@
                 <div class="block">
                     <div class="media margin-clear">
                         <div class="overlay-container rounded">
-                            <img class="media-object" src="<?php echo FRONTEND_URL ?>/assets/frontend/images/medical-blog-thumb-1.jpg"
+                            <img class="media-object" src="<?php echo FRONTEND_URL ?>/assets/frontend/images/defaut_img.png"
                                 alt="blog-thumb">
                             <a href="blog-post.html" class="overlay-link small"><i class="fa fa-graduation-cap"></i></a>
                         </div>
@@ -113,7 +113,7 @@
                 <div class="block">
                     <div class="media margin-clear">
                         <div class="overlay-container rounded">
-                            <img class="media-object" src="<?php echo FRONTEND_URL ?>/assets/frontend/images/medical-blog-thumb-1.jpg"
+                            <img class="media-object" src="<?php echo FRONTEND_URL ?>/assets/frontend/images/defaut_img.png"
                                 alt="blog-thumb">
                             <a href="blog-post.html" class="overlay-link small"><i class="fa fa-graduation-cap"></i></a>
                         </div>
@@ -164,7 +164,7 @@
                 <div class="block">
                     <div class="media margin-clear">
                         <div class="overlay-container rounded">
-                            <img class="media-object" src="<?php echo FRONTEND_URL ?>/assets/frontend/images/medical-blog-thumb-1.jpg"
+                            <img class="media-object" src="<?php echo FRONTEND_URL ?>/assets/frontend/images/defaut_img.png"
                                 alt="blog-thumb">
                             <a href="blog-post.html" class="overlay-link small"><i class="fa fa-graduation-cap"></i></a>
                         </div>

@@ -11,13 +11,26 @@ use Phalcon\Forms\Form;
 use Phalcon\Validation\Validator\StringLength as StringLength;
 use Phalcon\Validation\Validator\PresenceOf;
 use Phalcon\Validation\Validator\Date as DateValidator;
-
 use Models\Categories;
 
 class PostsForm extends Form
 {
     public function initialize($entity = null, $options = null)
     {
+        $dept_id = isset($_SESSION['dept_id']) ? $_SESSION['dept_id'] : 0;
+        $npCat = Categories::getNamepace();
+        $cats = $this->modelsManager->createBuilder()
+        ->columns(array(
+            $npCat.'.id',
+            'CL.name name',
+        ))
+        ->from($npCat)
+        ->join('Models\CategoriesLang', "CL.cat_id = $npCat.id AND CL.lang_id = 1",'CL')
+        ->orderBy('CL.name ASC')
+        ->where("$npCat.dept_id = $dept_id")
+        ->getQuery()
+        ->execute();
+
         $calendar = new Text('calendar');
         $calendar->setAttributes(array(
             'class' => 'form-control-sm datetime-basic w-100',
@@ -54,7 +67,7 @@ class PostsForm extends Form
         ));
         $this->add($slug);
 
-        $cat_id = new Select('cat_id', Categories::find(), array(
+        $cat_id = new Select('cat_id', $cats, array(
             'using' => array('id', 'name'),
             'class' => 'form-control-sm pull-right w-100',
             'data-error' => "Chưa đúng định dạng",

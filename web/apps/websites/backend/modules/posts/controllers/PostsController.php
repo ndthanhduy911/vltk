@@ -10,6 +10,7 @@ class PostsController  extends \BackendController {
 
     public function indexAction(){
         $this->get_js_css();
+        // var_dump($_SESSION); die;
     }
 
     public function trashsAction(){
@@ -294,21 +295,22 @@ class PostsController  extends \BackendController {
                 $npPosts.'.created_at',
                 $npPosts.'.calendar',
                 $npPosts.'.featured_image',
-                'D.name dept_name',
+                'DL.name dept_name',
                 'D.slug dept_slug',
                 'U.name author_name',
                 'C.name cat_name',
             ))
             ->from($npPosts)
+            ->join('Models\DepartmentsLang', 'DL.dept_id = '.$npPosts.'.dept_id','DL')
             ->join('Models\Departments', 'D.id = '.$npPosts.'.dept_id','D')
             ->join('Models\Users', 'U.id = '.$npPosts.'.author','U')
             ->join('Models\CategoriesLang', 'C.cat_id = '.$npPosts.'.cat_id AND C.lang_id = 1','C')
             ->join('Models\PostsLang', 'PL.post_id = '.$npPosts.'.id AND PL.lang_id = 1','PL')
             ->orderBy($npPosts.'.id DESC')
             ->where($npPosts.'.deleted = 0');
-            // if($this->session->get('role') !== 1){
-            //     $data = $data->andWhere("dept_id IN (".implode(',',$this->session->get('dept_mg')).")");
-            // }
+            if($this->session->get('role') !== 1){
+                $data = $data->andWhere($npPosts.".dept_id IN (".implode(',',$this->session->get('dept_mg')).")");
+            }
     
             $search = $npPosts.'.title LIKE :search:';
             $this->response->setStatusCode(200, 'OK');
