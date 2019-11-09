@@ -1,8 +1,11 @@
 <?php
 namespace Backend\Modules\Posts\Controllers;
 use Models\Categories;
+use Models\Language;
 use Models\CategoriesLang;
 use Backend\Modules\Posts\Forms\CategoriesForm;
+use Backend\Modules\Posts\Forms\CategoriesLangForm;
+
 
 class CategoriesController  extends \BackendController {
 
@@ -31,9 +34,9 @@ class CategoriesController  extends \BackendController {
             ->join('Models\CategoriesLang', 'CL.cat_id = '.$npCat.'.id AND CL.lang_id = 1','CL')
             ->orderBy($npCat.'.dept_id ASC')
             ->where("1 = 1");
-            // if($this->session->get('role') !== 1){
-            //     $data = $data->andWhere("dept_id IN (".implode(',',$this->session->get('dept_mg')).")");
-            // }
+            if($this->session->get('role') !== 1){
+                $data = $data->andWhere("$npCat.dept_id = :dept_id:",['dept_id' => $this->session->get('dept_id')]);
+            }
     
             $search = $npCat.'.name LIKE :search:';
             $this->response->setStatusCode(200, 'OK');
@@ -48,7 +51,7 @@ class CategoriesController  extends \BackendController {
 
     public function updateAction($id = 0){
         $forms_lang = [];
-        $posts_lang = [];
+        $cats_lang = [];
         $languages = Language::find(['status = 1']);
         if($id){
             if(!$category = Categories::findFirstId($id)){
@@ -60,12 +63,13 @@ class CategoriesController  extends \BackendController {
                 $cat_lang = CategoriesLang::findFirst(['cat_id = :id: AND lang_id = :lang_id:','bind' => ['id' => $category->id, 'lang_id' => $lang->id]]);
                 if($cat_lang){
                     $form_lang = new CategoriesLangForm($cat_lang);
-                    $posts_lang[$lang->id] = $cat_lang;
+                    $cats_lang[$lang->id] = $cat_lang;
                     $forms_lang[$lang->id] = $form_lang;
                 }else{
                     echo 'Nội dung không phù hợp'; die;
                 }
-            }   
+            }
+            $form_cat = new CategoriesForm($category);   
         }else{
             $category = new Categories();
             $category->author = $this->session->get('user_id');
@@ -75,25 +79,26 @@ class CategoriesController  extends \BackendController {
             $title = 'Thêm mới';
             foreach ($languages as $key => $lang) {
                 $forms_lang[$lang->id] = new CategoriesLangForm();
-                $cat_lang[$lang->id] = new CategoriesLang();
+                $cats_lang[$lang->id] = new CategoriesLang();
             }
+            $form_cat = new CategoriesForm($category);
         }
-
-        $form_cat = new CategoriesForm($category);
         if ($this->request->isPost()) {
-            if ($this->security->checkToken()) {
-                $data['token'] = ['key' => $this->security->getTokenKey(), 'value' => $this->security->getToken()];
+            // if ($this->security->checkToken()) {
+                // $data['token'] = ['key' => $this->security->getTokenKey(), 'value' => $this->security->getToken()];
                 $error = [];
                 $c_name = $this->request->getPost('name');
+                $c_slug = $this->request->getPost('slug');
                 $c_description = $this->request->getPost('description');
                 $req_cat = [
-                    'slug' => $this->request->getPost('slug'),
+                    'slug' => $c_slug ? $c_slug : $this->helper->slugify($c_name[1]),
+                    'featured_image' => $this->request->getPost('featured_image'),
                     'status' => $this->request->getPost('status'),
                 ];
-
+                
                 $form_cat->bind($req_cat, $category);
-                if (!$form->isValid()) {
-                    foreach ($form->getMessages() as $message) {
+                if (!$form_cat->isValid()) {
+                    foreach ($form_cat->getMessages() as $message) {
                         array_push($error, $message->getMessage());
                     }
                 }
@@ -101,13 +106,13 @@ class CategoriesController  extends \BackendController {
                 $check_slug = Categories::findFirst([
                     "slug = :slug: AND id != :id:",
                     "bind" => [
-                        "slug" => $req['slug'],
+                        "slug" => $req_cat['slug'],
                         'id'    => $id,
                     ]
                 ]);
 
                 if($check_slug){
-                    $req_post['slug'] = $req_post['slug'] .'-'. strtotime(); 
+                    $req_cat['slug'] = $req_cat['slug'] .'-'. strtotime('now'); 
                 }
 
                 foreach ($languages as $key => $lang) {
@@ -116,8 +121,7 @@ class CategoriesController  extends \BackendController {
                         'description' => $c_description[$lang->id],
                         'lang_id' => $lang->id,
                     ];
-
-                    $forms_lang[$lang->id]->bind($req_post_lang[$lang->id], $posts_lang[$lang->id]);
+                    $forms_lang[$lang->id]->bind($req_cat_lang[$lang->id], $cats_lang[$lang->id]);
                     if (!$forms_lang[$lang->id]->isValid()) {
                         foreach ($forms_lang[$lang->id]->getMessages() as $message) {
                             array_push($error, $message->getMessage());
@@ -127,58 +131,33 @@ class CategoriesController  extends \BackendController {
 
                 if (!count($error)) {
                     if (!$category->save()) {
-                        if ($this->request->isAjax()) {
-                            foreach ($category->getMessages() as $message) {
-                                array_push($error, $message->getMessage());
-                            }
-                            $data['error'] = $error;
-                            $this->response->setStatusCode(400, 'error');
-                            $this->response->setJsonContent($data);
-                            return $this->response->send();
-                        } else {
-                            foreach ($category->getMessages() as $message) {
-                                $this->flashSession->error($message);
-                            }
+                        foreach ($category->getMessages() as $message) {
+                            $this->flashSession->error($message);
                         }
                     } else {
-                        if ($this->request->isAjax()) {
-                            $data['data'] = $category->toArray();
-                            $this->response->setStatusCode(200, 'OK');
-                            $this->response->setJsonContent($data);
-                            return $this->response->send();
-                        } else {
-                            // $this->logs->write_log(1, 1, 'Thêm dây chuyền ID: ' . $category->id, json_encode($category->toArray()), $this->session->get("user_id"));
-                            $this->flashSession->success("Cập nhật thành công");
-                            // return $this->response->redirect('page');
+                        foreach ($languages as $key => $lang) {
+                            $cats_lang[$lang->id]->cat_id = $category->id;
+                            $cats_lang[$lang->id]->save();
                         }
+                        $this->flashSession->success($title." thành công");
+                        return $this->response->redirect(BACKEND_URL.'/categories');
                     }
                 }else{
-                    if ($this->request->isAjax()) {
-                        $data['error'] = $error;
-                        $this->response->setStatusCode(400, 'error');
-                        $this->response->setJsonContent($data);
-                        return $this->response->send();
-                    } else {
-                        foreach ($error as $value) {
-                            $this->flashSession->error($value . ". ");
-                        }
+                    foreach ($error as $value) {
+                        $this->flashSession->error($value . ". ");
                     }
                 }
-            }else{
-                if ($this->request->isAjax()) {
-                    $data['token'] = ['key' => $this->security->getTokenKey(), 'value' => $this->security->getToken()];
-                    $data['error'] = ['Token không chính xác'];
-                    $this->response->setStatusCode(400, 'error');
-                    $this->response->setJsonContent($data);
-                    return $this->response->send();
-                } else {
-                    $this->flashSession->error("Token không chính xác");
-                }
-            }
+            // }else{
+            //     $this->flashSession->error("Token không chính xác");
+            // }
         }
-        $this->view->form = $form;
-        $this->view->cat = $category;
-        $this->get_js_css();
+        $this->view->languages = $languages;
+        $this->view->forms_lang = $forms_lang;
+        $this->view->form_cat = $form_cat;
+        $this->view->cats_lang = $cats_lang;
+        $this->view->title = $title;
+    $this->assets->addJs('/elfinder/js/require.min.js');
+    $this->get_js_css();
     }
 
     public function deleteAction($id = null){

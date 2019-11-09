@@ -1,5 +1,5 @@
 <main class="app-content">
-    <div class="app-title">
+    <div class="app-title mb-3">
         <div>
             <h1><i class="fa fa-th-list"></i> DANH MỤC</h1>
             <p>Quản lý danh mục</p>
@@ -10,7 +10,7 @@
         </ul>
     </div>
 
-    <div class="body-message m-0">
+    <div class="body-message">
         <?php echo $this->flashSession->output(); ?>
     </div>
 

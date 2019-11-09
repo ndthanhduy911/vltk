@@ -6,7 +6,7 @@ $router->add($config->application->frontendUri."/:params/", array(
     'action' => 'index',
     'params' => 1
 ));
-$router->add($config->application->frontendUri."/:params", array(
+$router->add($config->application->frontendUri."/:params.html", array(
     'module' => 'frontend_pages',
     'controller' => 'pages',
     'action' => 'index',
@@ -15,19 +15,6 @@ $router->add($config->application->frontendUri."/:params", array(
 
 
 /***********************PostsController***********************/
-$router->add($config->application->frontendUri . '/api-posts/:action', array(
-    'module' => 'frontend_pages',
-    'controller' => 'posts',
-    'action' => 1,
-));
-
-$router->add($config->application->frontendUri . '/api-posts/:action/:int', array(
-    'module' => 'frontend_pages',
-    'controller' => 'posts',
-    'action'  => 1,
-    'id' => 2,
-));
-
 $router->add($config->application->frontendUri . '/posts/:params', array(
     'module' => 'frontend_pages',
     'controller' => 'posts',
@@ -53,3 +40,5 @@ $router->add($config->application->frontendUri . '/category/:params', array(
     'action' => 'category',
     'params' => 1,
 ));
+
+/***********************API*********************************/

@@ -1,11 +1,10 @@
 <?php
 namespace Backend\Modules\Posts\Forms;
-
-
 use Phalcon\Forms\Element\Email;
 use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\Textarea;
 use Phalcon\Forms\Element\Select;
+use Phalcon\Forms\Element\Hidden;
 use Phalcon\Forms\Form;
 use Phalcon\Validation\Validator\StringLength as StringLength;
 use Phalcon\Validation\Validator\PresenceOf;
@@ -39,9 +38,9 @@ class CategoriesLangForm extends Form
         $description = new Textarea('description');
         $description->setAttributes(array(
             'class' => 'form-control',
-            'placeholder' => 'Tóm tắt',
+            'placeholder' => 'Mô tả',
             'maxlength' => "255",
-            'data-error' => "Tóm tắt không đúng quy định.",
+            'data-error' => "Mô tả không đúng quy định.",
             'rows' => 4
         ));
         $description->addValidators(array(
@@ -51,5 +50,11 @@ class CategoriesLangForm extends Form
             ]),
         ));
         $this->add($description);
+
+        $cat_id = new Hidden('cat_id');
+        $this->add($cat_id);
+
+        $lang_id = new Hidden('lang_id');
+        $this->add($lang_id);
     }
 }

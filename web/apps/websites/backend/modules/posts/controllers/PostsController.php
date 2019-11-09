@@ -67,7 +67,7 @@ class PostsController  extends \BackendController {
                 $req_post = [
                     'cat_id' => $this->request->getPost('cat_id'),
                     'status' => $this->request->getPost('status'),
-                    'slug' => $p_slug ? $p_slug : $this->helper->slugify($p_title[$lang->id]),
+                    'slug' => $p_slug ? $p_slug : $this->helper->slugify($p_title[1]),
                     'calendar' => $p_calendar ? $p_calendar : date('d/m/Y H:i'),
                     'featured_image' => $this->request->getPost('featured_image'),
                 ];
@@ -88,7 +88,7 @@ class PostsController  extends \BackendController {
                 ]);
     
                 if($check_slug){
-                    $req_post['slug'] = $req_post['slug'] .'-'. strtotime(); 
+                    $req_post['slug'] = $req_post['slug'] .'-'. strtotime('now'); 
                 }
 
                 foreach ($languages as $key => $lang) {
@@ -109,8 +109,6 @@ class PostsController  extends \BackendController {
 
                 if (!count($error)) {
                     $post->calendar = $this->helper->datetime_mysql($post->calendar);
-                    $post->author = $this->session->get('user_id');
-                    $post->dept_id = $this->session->get('dept_id');
                     if (!$post->save()) {
                         foreach ($post->getMessages() as $message) {
                             $this->flashSession->error($message);
@@ -307,7 +305,8 @@ class PostsController  extends \BackendController {
             ->join('Models\CategoriesLang', 'C.cat_id = '.$npPosts.'.cat_id AND C.lang_id = 1','C')
             ->join('Models\PostsLang', 'PL.post_id = '.$npPosts.'.id AND PL.lang_id = 1','PL')
             ->orderBy($npPosts.'.id DESC')
-            ->where($npPosts.'.deleted = 0');
+            ->where($npPosts.'.deleted = 0')
+            ->groupBy('PL.post_id');
             if($this->session->get('role') !== 1){
                 $data = $data->andWhere($npPosts.".dept_id IN (".implode(',',$this->session->get('dept_mg')).")");
             }
