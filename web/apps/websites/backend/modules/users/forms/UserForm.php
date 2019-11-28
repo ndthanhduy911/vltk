@@ -171,7 +171,7 @@ class UserForm extends \Phalcon\Forms\Form
 
         $status = new Select('status', [
             1 => "Sử dụng",
-            0 => "Dừng",
+            0 => "Khóa",
         ], [
             'useEmpty' => true,
             'emptyText' => 'Vui lòng chọn trạng thái',

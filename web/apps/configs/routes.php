@@ -8,7 +8,7 @@ $router->notFound(array(
     "action" => "index"
 ));
 /*---------------------------------include_routes_frontend-----------------*/
-include APP_DIR . '/websites/frontend/modules/pages/routes.php';
+// include APP_DIR . '/websites/frontend/modules/pages/routes.php';
 include APP_DIR . '/websites/frontend/modules/faculty/routes.php';
 include APP_DIR . '/websites/frontend/modules/dept/routes.php';
 
@@ -18,4 +18,5 @@ include APP_DIR . '/websites/backend/modules/posts/routes.php';
 include APP_DIR . '/websites/backend/modules/pages/routes.php';
 include APP_DIR . '/websites/backend/modules/dashboard/routes.php';
 include APP_DIR . '/websites/backend/modules/users/routes.php';
+include APP_DIR . '/websites/backend/modules/setting/routes.php';
 return $router;

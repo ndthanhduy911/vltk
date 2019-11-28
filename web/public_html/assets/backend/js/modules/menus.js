@@ -1,4 +1,4 @@
-//Datatable cho bảng posts
+//Datatable cho bảng categories
 const showStatus = (id = '') => {
     switch (parseInt(id)) {
         case 0:
@@ -10,33 +10,24 @@ const showStatus = (id = '') => {
     }
 }
 
-const loadTablePosts = () => {
-    if ($('#posts').length) {
-        let dt = $('#posts').DataTable({
+const loadTableMenuLocation = () => {
+    if ($('#menulocation').length) {
+        let dt = $('#menulocation').DataTable({
             "scrollX": true,
             "ordering": false,
             "processing": true,
             "serverSide": true,
             "autoWidth": false,
-            "ajax": backendUrl+"/posts/getdata",
+            "ajax": backendUrl+"/menu/getdatalocation",
             "columns": [
                 {
                     "data": "no"
                 },
                 {
-                    "data": "featured_image"
+                    "data": "name"
                 },
                 {
-                    "data": "title"
-                },
-                {
-                    "data": "cat_name"
-                },
-                {
-                    "data": "author_name"
-                },
-                {
-                    "data": "created_at"
+                    "data": "description"
                 },
                 {
                     "data": "status"
@@ -46,16 +37,13 @@ const loadTablePosts = () => {
                 }
             ],
             'createdRow': function (row, item, dataIndex) {
-                let image = item.featured_image ? `<img src="${item.featured_image}" width="50px">` : '<img src="/assets/frontend/images/defaut_img.png" width="50px">';
                 $(row).addClass('text-center');
                 $('td', row).addClass('align-middle');
-                $('td:eq(1)', row).html(image);
-                $('td:eq(5)', row).html(vi_moment(item.created_at, 'DD/MM/YYYY HH:mm'));
-                $('td:eq(6)', row).html(showStatus(item.status));
-                $('td:eq(7)', row).html(`
-                    <a href="${backendUrl}/posts/update/${item.id}" class="fa fa-pencil btn btn-info btn-sm editPost" title="Cập nhật"></a>
-                    <a href="#" data-href="${backendUrl}/posts/trash/${item.id}" class="fa fa-trash btn btn-danger btn-sm trashPost" title="Chuyển đến thùng rác"></a>
-                `);
+                $('td:eq(3)', row).html(showStatus(item.status));
+                $('td:eq(4)', row).addClass('text-nowrap');
+                $('td:eq(4)', row).html(`<a href="${backendUrl}/menu/updatelocation/${item.id}" class="fa fa-pencil btn btn-info btn-sm editLocation" title="Cập nhật"></a>`);
+                $('td:eq(4)', row).append(`<a href="#" data-href="${backendUrl}/menu/deletelocation/${item.id}" class="fa fa-trash btn btn-danger btn-sm deleteLocation" title="Xóa"></a>`);
+
             },
             "deferRender": true,
             "language": {
@@ -76,55 +64,47 @@ const loadTablePosts = () => {
                 }
             }
         });
-
-        showConfrimDelete('.trashPost',()=>{
+        showConfrimDelete('.deleteLocation',()=>{
             dt.draw();
         })
     }
 }
 
-const loadTablePostsTrash = () => {
-    if ($('#posts_trash').length) {
-        let dt = $('#posts_trash').DataTable({
+const loadTableMenu = () => {
+    if ($('#menus').length) {
+        let dt = $('#menus').DataTable({
+            "bInfo" : false,
+            "paging":   false,
             "scrollX": true,
             "ordering": false,
             "processing": true,
             "serverSide": true,
             "autoWidth": false,
-            "ajax": backendUrl+"/posts/getdatatrash",
+            "searching": false,
+            "ajax": backendUrl+"/menu/getdata",
             "columns": [
                 {
-                    "data": "no"
+                    "data": "menu_name"
                 },
                 {
-                    "data": "featured_image"
+                    "data": "null"
                 },
                 {
-                    "data": "title"
-                },
-                {
-                    "data": "cat_name"
-                },
-                {
-                    "data": "author_name"
-                },
-                {
-                    "data": "created_at"
+                    "data": "status"
                 },
                 {
                     "data": null
                 }
             ],
             'createdRow': function (row, item, dataIndex) {
-                let image = item.featured_image ? `<img src="${item.featured_image}" width="50px">` : '';
                 $(row).addClass('text-center');
                 $('td', row).addClass('align-middle');
-                $('td:eq(1)', row).html(image);
-                $('td:eq(5)', row).html(vi_moment(item.created_at, 'DD/MM/YYYY HH:mm'));
-                $('td:eq(6)', row).html(`
-                    <a href="#" data-href="${backendUrl}/posts/restore/${item.id}" class="fa fa-refresh btn btn-info btn-sm restorePost" title="Phục hồi"></a>
-                    <a href="#" data-href="${backendUrl}/posts/delete/${item.id}" class="fa fa-remove btn btn-danger btn-sm deletePost" title="Xóa vĩnh viễn"></a>
+                $('td:eq(2)', row).html(showStatus(item.status));
+                $('td:eq(3)', row).html(`
+                    <a href="${backendUrl}/menu/update/${item.id}" class="fa fa-pencil btn btn-info btn-sm editMenu" title="Cập nhật"></a>
                 `);
+
+                $('td:eq(3)', row).append(`<a href="#" data-href="${backendUrl}/menu/delete/${item.id}" class="fa fa-trash btn btn-danger btn-sm deleteMenu" title="Xóa"></a>`);
             },
             "deferRender": true,
             "language": {
@@ -145,18 +125,14 @@ const loadTablePostsTrash = () => {
                 }
             }
         });
-
-        showConfrimDelete('.restorePost',()=>{
-            dt.draw();
-        })
-
-        showConfrimDelete('.deletePost',()=>{
+        showConfrimDelete('.deleteMenu',()=>{
             dt.draw();
         })
     }
 }
 
-loadTablePosts();
-loadTablePostsTrash();
+loadTableMenuLocation();
+
+loadTableMenu();
+
 changeTitleToSlug('#title', '#slug');
-showSelectImage('#uploadImage','#showImg','#featured_image');

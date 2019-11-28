@@ -166,8 +166,8 @@
 
                       </div>
                       <div class="col-auto hidden-md-down p-0">
-                          <div class="header-dropdown-buttons">
-                              <a href="#">
+                          <div class="header-dropdown-buttons" id="lang_id" data-lang="<?php echo $this->session->get('lang_id'); ?>">
+                              <a href="#" data-id="1">
                                   <img src="<?php echo FRONTEND_URL ?>/language_file/vie/vietnam.png" class="user-image"
                                       alt="VIET NAM" width="36px">
                               </a>

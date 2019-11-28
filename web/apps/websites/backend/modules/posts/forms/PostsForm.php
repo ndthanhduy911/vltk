@@ -80,8 +80,8 @@ class PostsForm extends Form
         $this->add($cat_id);
 
         $status = new Select('status', [
-            1 => "Hiển thị",
-            0 => "Dừng",
+            1 => "Hoạt động",
+            0 => "Khóa",
         ], [
             'useEmpty' => true,
             'emptyText' => 'Vui lòng chọn trạng thái',

@@ -1,19 +1,19 @@
 <?php
-/***********************AccountController***********************/
-$router->add($config->application->backendUri . '/login', array(
-    'module' => 'backend_account',
-    'controller' => 'account',
-    'action' => 'login',
+/***********************MenuController***********************/
+$router->add($config->application->backendUri . '/menu', array(
+    'module' => 'backend_setting',
+    'controller' => 'menus',
+    'action' => 'index',
 ));
 
-$router->add($config->application->backendUri . '/account/:action', array(
-    'module' => 'backend_account',
-    'controller' => 'account',
+$router->add($config->application->backendUri . '/menu/:action', array(
+    'module' => 'backend_setting',
+    'controller' => 'menus',
     'action' => 1,
 ));
-$router->add($config->application->backendUri . '/account/:action/:int', array(
-    'module' => 'backend_account',
-    'controller' => 'account',
+$router->add($config->application->backendUri . '/menu/:action/:int', array(
+    'module' => 'backend_setting',
+    'controller' => 'menus',
     'action'  => 1,
     'id' => 2
 ));
