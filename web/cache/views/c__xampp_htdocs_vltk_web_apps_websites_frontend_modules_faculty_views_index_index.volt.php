@@ -134,49 +134,31 @@
 <!-- banner end -->
 
 <div id="page-start"></div>
-
+<?php if ($cats->count()) { ?>
 <!-- section start thông báo-->
 <!-- ================ -->
 <section id="section1" class="section clearfix pt-5">
     <div class="container mt-4">
         <div class="row">
+            <?php foreach ($cats as $cat) { ?>
             <div class="col-lg-4">
-                <h3><span class="text-default"><?php echo $cats[1]->name ?></span></h3>
+                <h3><span class="text-default"><?= $cat->cat_name ?></span></h3>
                 <div class="separator-2"></div>
                 <div class="block">
-                    <div id="posts2"></div>
+                    <div class="hone-post" data-id="<?= $cat->id ?>"></div>
                     <footer class="clearfix">
-                        <div class="link pull-right small"><i class="fa fa-link pr-1"></i><a href="<?php echo FRONTEND_URL.'/category/'.$cats[1]->slug ?>">Xem thêm</a></div>
+                        <div class="link pull-right small"><i class="fa fa-link pr-1"></i><a href="<?= constant('FRONTEND_URL') . '/category/' . $cat->slug ?>">Xem thêm</a></div>
                     </footer>
                 </div>
             </div>
-            <div class="col-lg-4">
-                <h3><span class="text-default"><?php echo $cats[2]->name ?></span></h3>
-                <div class="separator-2"></div>
-                <div class="block">
-                    <div id="posts3"></div>
-                    <footer class="clearfix">
-                        <div class="link pull-right small"><i class="fa fa-link pr-1"></i><a href="<?php echo FRONTEND_URL.'/category/'.$cats[2]->slug ?>">Xem thêm</a></div>
-                    </footer>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <h3><span class="text-default"><?php echo $cats[4]->name ?></span></h3>
-                <div class="separator-2"></div>
-                <div class="block">
-                    <div id="posts5">
-
-                    </div>
-                    <footer class="clearfix">
-                        <div class="link pull-right small"><i class="fa fa-link pr-1"></i><a href="<?php echo FRONTEND_URL.'/category/'.$cats[4]->slug ?>">Xem thêm</a></div>
-                    </footer>
-                </div>
-            </div>
+            <?php } ?>
         </div>
     </div>
 </section>
 <!-- section end thông báo-->
+<?php } ?>
 
+<?php if ($depts->count()) { ?>
 <!-- section start các bộ môn-->
 <!-- ================ -->
 <section class="pt-5 pb-5 section dark-translucent-bg fixed-bg"
@@ -190,29 +172,27 @@
         </div>
     </div>
     <div class="row mb-4 mr-0 ml-0">
-        <?php foreach ($depts as $key => $dept) { ?>
-        <?php if($key !== 0): ?>
+        <?php foreach ($depts as $dept) { ?>
         <div class="col-lg-3 col-md-6 isotope-item">
             <div class="image-box shadow-2 bordered text-center mb-20">
                 <div class="overlay-container rounded overlay-visible">
-                    <img src="<?php echo $dept->image ? FRONTEND_URL.$dept->image : FRONTEND_URL.'/assets/frontend/images/section-image-3.jpg' ?>"
-                        alt="<?= $dept->name ?>">
-                    <a href="<?php echo FRONTEND_URL.'/dept/'.$dept->slug ?>" class="overlay-link"><i
+                    <img src="<?= $this->helper->getLinkImage($dept->image) ?>"
+                        alt="<?= $dept->dept_name ?>">
+                    <a href="<?= constant('FRONTEND_URL') . '/' . $dept->slug ?>" class="overlay-link"><i
                             class="fa fa-graduation-cap"></i></a>
                     <div class="overlay-bottom hidden-xs">
                         <div class="text">
-                            <?= $dept->name ?>
+                            <?= $dept->dept_name ?>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <?php endif ?>
         <?php } ?>
     </div>
-
 </section>
 <!-- section end các bộ môn -->
+<?php } ?>
 
 <!-- section start lãnh đạo-->
 <!-- ================ -->

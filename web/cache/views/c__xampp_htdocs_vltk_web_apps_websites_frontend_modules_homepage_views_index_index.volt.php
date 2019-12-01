@@ -195,7 +195,7 @@
         <div class="col-lg-3 col-md-6 isotope-item">
             <div class="image-box shadow-2 bordered text-center mb-20">
                 <div class="overlay-container rounded overlay-visible">
-                    <img src="<?php echo $dept->image ? FRONTEND_URL.$dept->image : FRONTEND_URL.'/assets/frontend/images/section-image-3.jpg' ?>"
+                    <img src="<?php echo $dept->image ? FRONTEND_URL.$dept->image : FRONTEND_URL.'/assets/images/no-image.jpg' ?>"
                         alt="<?= $dept->name ?>">
                     <a href="<?php echo FRONTEND_URL.'/dept/'.$dept->slug ?>" class="overlay-link"><i
                             class="fa fa-graduation-cap"></i></a>

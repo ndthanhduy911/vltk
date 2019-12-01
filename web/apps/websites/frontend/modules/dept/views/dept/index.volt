@@ -233,7 +233,7 @@
         <div class="col-lg-3 col-md-6 isotope-item">
             <div class="image-box shadow-2 bordered text-center mb-20">
                 <div class="overlay-container rounded overlay-visible">
-                    <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/section-image-3.jpg" alt="">
+                    <img src="<?php echo FRONTEND_URL ?>/assets/images/no-image.jpg" alt="">
                     <a href="#" class="overlay-link"><i class="fa fa-graduation-cap"></i></a>
                     <div class="overlay-bottom hidden-xs">
                         <div class="text">
@@ -246,7 +246,7 @@
         <div class="col-lg-3 col-md-6 isotope-item">
             <div class="image-box shadow-2 bordered text-center mb-20">
                 <div class="overlay-container rounded overlay-visible">
-                    <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/section-image-3.jpg" alt="">
+                    <img src="<?php echo FRONTEND_URL ?>/assets/images/no-image.jpg" alt="">
                     <a href="#" class="overlay-link"><i class="fa fa-graduation-cap"></i></a>
                     <div class="overlay-bottom hidden-xs">
                         <div class="text">
@@ -259,7 +259,7 @@
         <div class="col-lg-3 col-md-6 isotope-item">
             <div class="image-box shadow-2 bordered text-center mb-20">
                 <div class="overlay-container rounded overlay-visible">
-                    <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/section-image-3.jpg" alt="">
+                    <img src="<?php echo FRONTEND_URL ?>/assets/images/no-image.jpg" alt="">
                     <a href="#" class="overlay-link"><i class="fa fa-graduation-cap"></i></a>
                     <div class="overlay-bottom hidden-xs">
                         <div class="text">
@@ -272,7 +272,7 @@
         <div class="col-lg-3 col-md-6 isotope-item interior-design">
             <div class="image-box shadow-2 bordered text-center mb-20">
                 <div class="overlay-container rounded overlay-visible">
-                    <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/section-image-3.jpg" alt="">
+                    <img src="<?php echo FRONTEND_URL ?>/assets/images/no-image.jpg" alt="">
                     <a href="#" class="overlay-link"><i class="fa fa-graduation-cap"></i></a>
                     <div class="overlay-bottom hidden-xs">
                         <div class="text">
@@ -285,7 +285,7 @@
         <div class="col-lg-3 col-md-6 isotope-item architecture-plans">
             <div class="image-box shadow-2 bordered text-center mb-20">
                 <div class="overlay-container rounded overlay-visible">
-                    <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/section-image-3.jpg" alt="">
+                    <img src="<?php echo FRONTEND_URL ?>/assets/images/no-image.jpg" alt="">
                     <a href="#" class="overlay-link"><i class="fa fa-graduation-cap"></i></a>
                     <div class="overlay-bottom hidden-xs">
                         <div class="text">
@@ -298,7 +298,7 @@
         <div class="col-lg-3 col-md-6 isotope-item construction-management">
             <div class="image-box shadow-2 bordered text-center mb-20">
                 <div class="overlay-container rounded overlay-visible">
-                    <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/section-image-3.jpg" alt="">
+                    <img src="<?php echo FRONTEND_URL ?>/assets/images/no-image.jpg" alt="">
                     <a href="#" class="overlay-link"><i class="fa fa-graduation-cap"></i></a>
                     <div class="overlay-bottom hidden-xs">
                         <div class="text">
@@ -311,7 +311,7 @@
         <div class="col-lg-3 col-md-6 isotope-item architecture-plans">
             <div class="image-box shadow-2 bordered text-center mb-20">
                 <div class="overlay-container rounded overlay-visible">
-                    <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/section-image-3.jpg" alt="">
+                    <img src="<?php echo FRONTEND_URL ?>/assets/images/no-image.jpg" alt="">
                     <a href="#" class="overlay-link"><i class="fa fa-graduation-cap"></i></a>
                     <div class="overlay-bottom hidden-xs">
                         <div class="text">
@@ -324,7 +324,7 @@
         <div class="col-lg-3 col-md-6 isotope-item interior-design">
             <div class="image-box shadow-2 bordered text-center mb-20">
                 <div class="overlay-container rounded overlay-visible">
-                    <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/section-image-3.jpg" alt="">
+                    <img src="<?php echo FRONTEND_URL ?>/assets/images/no-image.jpg" alt="">
                     <a href="#" class="overlay-link"><i class="fa fa-graduation-cap"></i></a>
                     <div class="overlay-bottom hidden-xs">
                         <div class="text">

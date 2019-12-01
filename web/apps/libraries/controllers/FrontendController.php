@@ -35,7 +35,6 @@ class FrontendController extends Controller
             }else{
                 $this->session->set('lang_id', 1);
             }
-
             $this->view->lang_id = $this->session->get('lang_id');
         } catch (\Exception $e) {
             $this->flash->error($e->getMessage());

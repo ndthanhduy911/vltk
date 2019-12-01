@@ -2,7 +2,6 @@
     use Models\Link;
     use Models\Social;
     use Models\Menus;
-    use Models\MenusLang;
 
     $socials = Social::find(['status = 1 AND dept_id = 1 AND location = 1', "order" => "sort ASC"]);
     $links = Link::find(['status = 1 AND dept_id = 1 AND location = 1', "order" => "sort ASC"]);
@@ -45,7 +44,7 @@
                                         <i class="fa <?= $link->icon ?> pr-1"></i>
                                         <?php } ?>
 
-                                        <?= $link->name ?>
+                                        <?= Link::getName($link->id, $lang_id) ?>
 
                                         <?php if ($link->link) { ?>
                                         </a>
@@ -121,8 +120,7 @@
                 <div class="col-auto hidden-md-down p-0">
                     <div class="header-dropdown-buttons" id="lang_id" data-lang="<?= $lang_id ?>">
                         <a href="#" data-id="1">
-                            <img src="<?php echo FRONTEND_URL ?>/language_file/vie/vietnam.png" class="user-image"
-                                alt="VIET NAM" width="36px">
+                            <img src="<?php echo FRONTEND_URL ?>/language_file/vie/vietnam.png" class="user-image" alt="VIET NAM" width="36px">
                         </a>
                     </div>
                 </div>

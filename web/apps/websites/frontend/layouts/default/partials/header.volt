@@ -2,7 +2,6 @@
     use Models\Link;
     use Models\Social;
     use Models\Menus;
-    use Models\MenusLang;
 
     $socials = Social::find(['status = 1 AND dept_id = 1 AND location = 1', "order" => "sort ASC"]);
     $links = Link::find(['status = 1 AND dept_id = 1 AND location = 1', "order" => "sort ASC"]);
@@ -45,7 +44,7 @@
                                         <i class="fa {{ link.icon }} pr-1"></i>
                                         {% endif %}
 
-                                        {{ link.name }}
+                                        <?= Link::getName($link->id, $lang_id) ?>
 
                                         {% if link.link %}
                                         </a>

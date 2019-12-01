@@ -146,4 +146,8 @@ class Departments extends \Phalcon\Mvc\Model
             return null;
         }
     }
+
+    public static function getNamepace (){
+        return 'Models\Departments';
+    }
 }

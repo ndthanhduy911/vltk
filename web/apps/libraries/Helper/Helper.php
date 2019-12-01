@@ -196,4 +196,9 @@ class Helper extends Component
         }
         return NULL;
     }
+
+    public function getLinkImage($path)
+    {
+        return $path ? FRONTEND_URL.$path : FRONTEND_URL.'/assets/images/no-image.jpg';
+    }
 }
