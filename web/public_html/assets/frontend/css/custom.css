@@ -68,13 +68,13 @@ ul.dropdown-menu > li:last-of-type > a
     margin-right: 10px;
 }
 
-#section1 .media-body {
+/* #section1 .media-body {
     height: 50px;
-}
+} */
 
-#section1 .overlay-container img {
+/* #section1 .overlay-container img {
     height: 45px;
-}
+} */
 
 #section1 .media-heading a {
     text-transform: initial;

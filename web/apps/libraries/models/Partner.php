@@ -1,34 +1,28 @@
 <?php
 namespace Models;
 
-class Banners extends \Phalcon\Mvc\Model
+class Partner extends \Phalcon\Mvc\Model
 {
     public $id;
-    
-    public $name;
-    
+
     public $dept_id;
 
     public $image;
 
-    public $title;
-
-    public $description;
-    
-    public $button_link;
-
-    public $button_text;
+    public $link;
 
     public $created_at;
-
+    
     public $updated_at;
+
+    public $status;
 
     public function getSource()
     {
-        return 'banners';
+        return 'partner';
     }
 
     public static function getNamepace (){
-        return 'Models\Banners';
+        return 'Models\Partner';
     }
 }

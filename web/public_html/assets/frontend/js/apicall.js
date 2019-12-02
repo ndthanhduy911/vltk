@@ -2,8 +2,8 @@ const getPostByCatId = (id, dept_id = 1, limit = 5) => {
     return new Promise((resolve, reject) => {
         $.ajax({
             type: "GET",
-            url: `/api-posts/getdataposts/${id}`,
-            data: {dept_id : dept_id, limit : limit},
+            url: `/api-posts/getdataposts`,
+            data: {dept_id : dept_id, limit : limit, cat_id : id},
             dataType: "json",
             success: function (response) {
                 resolve(response);

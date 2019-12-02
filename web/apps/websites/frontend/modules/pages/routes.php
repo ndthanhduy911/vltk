@@ -14,7 +14,7 @@ $router->add($config->application->frontendUri."/:params.html", array(
 ));
 
 
-/***********************PostsController***********************/
+/***********************PageController***********************/
 $router->add($config->application->frontendUri . '/posts/:params', array(
     'module' => 'frontend_pages',
     'controller' => 'posts',

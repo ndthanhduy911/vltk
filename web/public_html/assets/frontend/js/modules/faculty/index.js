@@ -4,7 +4,7 @@ const showPosts = (block , cat_id = null) => {
         data.forEach(item => {
             let imageUrl = item.featured_image ? fontendUrl + item.featured_image : fontendUrl + '/assets/frontend/images/defaut_img.png';
             $(block).append(`
-            <div class="media margin-clear">
+            <div class="media mb-3">
                 <div class="overlay-container rounded">
                     <img class="media-object" src="${imageUrl}"
                         alt="${item.title}">
@@ -12,8 +12,7 @@ const showPosts = (block , cat_id = null) => {
                 </div>
                 <div class="media-body">
                     <h5 class="media-heading"><a href="${getLinkPostBySlug(item.slug)}">${item.title}</a></h5>
-                    <div class="small"><i class="fa fa-calendar pr-10"></i>${getDatePost(item.created_at, item.calendar)} <i
-                            class="fa fa-clock-o pl-10 pr-10"></i>${getTimePost(item.created_at, item.calendar)}</div>
+                    <div class="small"><i class="fa fa-calendar pr-10"></i>${getDatePost(item.created_at, item.calendar)}
                 </div>
             </div>
             <hr>
@@ -22,8 +21,16 @@ const showPosts = (block , cat_id = null) => {
     })
 }
 
-showPosts('#posts2', 2);
+let homePost = $('.hone-post');
+if(homePost.length){
+    homePost.each(function (item) {
+        let cat_id = $(this).attr('data-id');
+        showPosts(this, cat_id);
+    });
+    
+}
 
-showPosts('#posts3', 3);
 
-showPosts('#posts5', 5);
+// showPosts('#posts3', 3);
+
+// showPosts('#posts5', 5);

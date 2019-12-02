@@ -34,10 +34,10 @@ $application->registerModules(array(
         'path' => APP_DIR . '/websites/frontend/modules/faculty/module.php'
     ),
 
-    // 'frontend_pages' => array(
-    //     'className' => 'Frontend\Modules\Pages\Module',
-    //     'path' => APP_DIR . '/websites/frontend/modules/pages/module.php'
-    // ),
+    'frontend_api' => array(
+        'className' => 'Frontend\Modules\Api\Module',
+        'path' => APP_DIR . '/websites/frontend/modules/api/module.php'
+    ),
 
     'frontend_dept' => array(
         'className' => 'Frontend\Modules\Dept\Module',

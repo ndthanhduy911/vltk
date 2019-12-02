@@ -13,9 +13,9 @@ class HomeSetting extends \Phalcon\Mvc\Model
 
     public $setting;
 
-    public $sort;
+    public $background;
 
-    public $name;
+    public $sort;
 
     public function getSource()
     {
