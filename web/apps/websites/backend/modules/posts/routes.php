@@ -96,6 +96,25 @@ $router->add($config->application->backendUri . '/partner/:action/:int', array(
     'id' => 2
 ));
 
+/***********************HomeController***********************/
+$router->add($config->application->backendUri . '/home', array(
+    'module' => 'backend_posts',
+    'controller' => 'home',
+    'action' => 'index',
+));
+
+$router->add($config->application->backendUri . '/home/:action', array(
+    'module' => 'backend_posts',
+    'controller' => 'home',
+    'action' => 1,
+));
+$router->add($config->application->backendUri . '/home/:action/:int', array(
+    'module' => 'backend_posts',
+    'controller' => 'home',
+    'action'  => 1,
+    'id' => 2
+));
+
 
 /***********************CategoriesController***********************/
 
