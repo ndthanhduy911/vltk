@@ -9,7 +9,7 @@ class PartnerLang extends \Phalcon\Mvc\Model
     
     public $lang_id;
 
-    public $name;
+    public $title;
 
     public function getSource()
     {

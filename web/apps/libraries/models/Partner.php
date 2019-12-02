@@ -7,7 +7,7 @@ class Partner extends \Phalcon\Mvc\Model
 
     public $dept_id;
 
-    public $image;
+    public $featured_image;
 
     public $link;
 
@@ -17,8 +17,6 @@ class Partner extends \Phalcon\Mvc\Model
 
     public $status;
 
-    public $sort;
-
     public function getSource()
     {
         return 'partner';
@@ -26,5 +24,15 @@ class Partner extends \Phalcon\Mvc\Model
 
     public static function getNamepace (){
         return 'Models\Partner';
+    }
+
+    public static function findFirstId($id, $columns = "*")
+    {
+        
+        return parent::findFirst([
+            "conditions" => "id = :id:",
+            "bind" => array('id' => $id),
+            "columns" => $columns
+        ]);
     }
 }

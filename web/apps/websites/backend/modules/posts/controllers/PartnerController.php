@@ -1,11 +1,10 @@
 <?php
 namespace Backend\Modules\Posts\Controllers;
 use Models\Partner;
-use Models\Posts;
-use Models\PostsLang;
+use Models\PartnerLang;
 use Models\Language;
-use Backend\Modules\Posts\Forms\PostsForm;
-use Backend\Modules\Posts\Forms\PostsLangForm;
+use Backend\Modules\Posts\Forms\PartnerForm;
+use Backend\Modules\Posts\Forms\PartnerLangForm;
 
 class PartnerController  extends \BackendController {
 
@@ -16,87 +15,62 @@ class PartnerController  extends \BackendController {
 
     public function updateAction($id = 0){
         $forms_lang = [];
-        $posts_lang = [];
-        $post_content = [];
+        $partners_lang = [];
+        $partner_content = [];
         $languages = Language::find(['status = 1']);
         if($id){
-            if(!$post = Posts::findFirstId($id)){
+            if(!$partner = Partner::findFirstId($id)){
                 echo 'Không tìm thấy dữ liệu'; die;
             }
-            $post->updated_at = date('Y-m-d H:i:s');
-            $post->calendar = $this->helper->datetime_vn($post->calendar);
+            $partner->updated_at = date('Y-m-d H:i:s');
             $title = 'Cập nhật';
             foreach ($languages as $key => $lang) {
-                $post_lang = PostsLang::findFirst(['post_id = :id: AND lang_id = :lang_id:','bind' => ['id' => $post->id, 'lang_id' => $lang->id]]);
-                if($post_lang){
-                    $form_lang = new PostsLangForm($post_lang);
-                    $posts_lang[$lang->id] = $post_lang;
+                $partner_lang = PartnerLang::findFirst(['partner_id = :id: AND lang_id = :lang_id:','bind' => ['id' => $partner->id, 'lang_id' => $lang->id]]);
+                if($partner_lang){
+                    $form_lang = new PartnerLangForm($partner_lang);
+                    $partners_lang[$lang->id] = $partner_lang;
                     $forms_lang[$lang->id] = $form_lang;
-                    $post_content[$lang->id] = $post_lang->content;
                 }else{
                     echo 'Nội dung không phù hợp'; die;
                 }
             }   
         }else{
-            $post = new Posts();
-            $post->author = $this->session->get('user_id');
-            $post->dept_id = $this->session->get('dept_id');
-            $post->created_at = date('Y-m-d H:i:s');
-            $post->updated_at = $post->created_at;
+            $partner = new Partner();
+            $partner->dept_id = $this->session->get('dept_id');
+            $partner->created_at = date('Y-m-d H:i:s');
+            $partner->updated_at = $partner->created_at;
             $title = 'Thêm mới';
             foreach ($languages as $key => $lang) {
-                $forms_lang[$lang->id] = new PostsLangForm();
-                $posts_lang[$lang->id] = new PostsLang();
-                $post_content[$lang->id] = '';
+                $forms_lang[$lang->id] = new PartnerLangForm();
+                $partners_lang[$lang->id] = new PartnerLang();
             }
         }
 
-        $form_post = new PostsForm($post);
+        $form_partner = new PartnerForm($partner);
         if ($this->request->isPost()) {
             if ($this->security->checkToken()) {
-                $data['token'] = ['key' => $this->security->getTokenKey(), 'value' => $this->security->getToken()];
                 $error = [];
                 $p_title = $this->request->getPost('title');
-                $p_slug = $this->request->getPost('slug');
-                $p_content = $this->request->getPost('content');
-                $p_excerpt = $this->request->getPost('excerpt');
-                $p_calendar = $this->request->getPost('calendar');
-                $req_post = [
-                    'cat_id' => $this->request->getPost('cat_id'),
+                $p_link = $this->request->getPost('link');
+                $req_partner = [
                     'status' => $this->request->getPost('status'),
-                    'slug' => $p_slug ? $p_slug : $this->helper->slugify($p_title[1]),
-                    'calendar' => $p_calendar ? $p_calendar : date('d/m/Y H:i'),
                     'featured_image' => $this->request->getPost('featured_image'),
                 ];
 
-                $form_post->bind($req_post, $post);
-                if (!$form_post->isValid()) {
-                    foreach ($form_post->getMessages() as $message) {
+                $form_partner->bind($req_partner, $partner);
+                if (!$form_partner->isValid()) {
+                    foreach ($form_partner->getMessages() as $message) {
                         array_push($error, $message->getMessage());
                     }
                 }
 
-                $check_slug = Posts::findFirst([
-                    "slug = :slug: AND id != :id:",
-                    "bind" => [
-                        "slug" => $req_post['slug'],
-                        'id'    => $id,
-                    ]
-                ]);
-    
-                if($check_slug){
-                    $req_post['slug'] = $req_post['slug'] .'-'. strtotime('now'); 
-                }
-
                 foreach ($languages as $key => $lang) {
-                    $req_post_lang[$lang->id] = [
+                    $req_partner_lang[$lang->id] = [
                         'title' => $p_title[$lang->id],
-                        'content' => $p_content[$lang->id],
-                        'excerpt' => $p_excerpt[$lang->id],
                         'lang_id' => $lang->id,
                     ];
 
-                    $forms_lang[$lang->id]->bind($req_post_lang[$lang->id], $posts_lang[$lang->id]);
+                    $forms_lang[$lang->id]->bind($req_partner_lang[$lang->id], $partners_lang[$lang->id]);
                     if (!$forms_lang[$lang->id]->isValid()) {
                         foreach ($forms_lang[$lang->id]->getMessages() as $message) {
                             array_push($error, $message->getMessage());
@@ -105,18 +79,18 @@ class PartnerController  extends \BackendController {
                 }
 
                 if (!count($error)) {
-                    $post->calendar = $this->helper->datetime_mysql($post->calendar);
-                    if (!$post->save()) {
-                        foreach ($post->getMessages() as $message) {
+                    $partner->calendar = $this->helper->datetime_mysql($partner->calendar);
+                    if (!$partner->save()) {
+                        foreach ($partner->getMessages() as $message) {
                             $this->flashSession->error($message);
                         }
                     } else {
                         foreach ($languages as $key => $lang) {
-                            $posts_lang[$lang->id]->post_id = $post->id;
-                            $posts_lang[$lang->id]->save();
+                            $partners_lang[$lang->id]->partner_id = $partner->id;
+                            $partners_lang[$lang->id]->save();
                         }
                         $this->flashSession->success($title." thành công");
-                        return $this->response->redirect(BACKEND_URL.'/posts');
+                        return $this->response->redirect(BACKEND_URL.'/partner');
                     }
                 }else{
                     foreach ($error as $value) {
@@ -129,21 +103,21 @@ class PartnerController  extends \BackendController {
         }
 
         $this->view->languages = $languages;
-        $this->view->post_content = $post_content;
+        $this->view->partner_content = $partner_content;
         $this->view->forms_lang = $forms_lang;
-        $this->view->form_post = $form_post;
-        $this->view->post = $post;
-        $this->view->posts_lang = $posts_lang;
+        $this->view->form_partner = $form_partner;
+        $this->view->partner = $partner;
+        $this->view->partners_lang = $partners_lang;
         $this->view->title = $title;
         $this->assets->addJs('/elfinder/js/require.min.js');
         $this->get_js_css();
     }
     
     public function deleteAction($id = null){
-        if ($post = Posts::findFirstId($id)) {
-            if (!$post->delete()) {
+        if ($partner = Partner::findFirstId($id)) {
+            if (!$partner->delete()) {
                 if ($this->request->isAjax()) {
-                    foreach ($post->getMessages() as $message) {
+                    foreach ($partner->getMessages() as $message) {
                         array_push($error, $message->getMessage());
                     }
                     $data['error'] = $error;
@@ -151,14 +125,14 @@ class PartnerController  extends \BackendController {
                     $this->response->setJsonContent($data);
                     return $this->response->send();
                 } else {
-                    foreach ($post->getMessages() as $message) {
+                    foreach ($partner->getMessages() as $message) {
                         $this->flashSession->error($message);
                     }
                     return $this->response->redirect(BACKEND_URL.'/trashs');
                 }
             }else{
                 if ($this->request->isAjax()) {
-                    $data['data'] = $post->toArray();
+                    $data['data'] = $partner->toArray();
                     $this->response->setStatusCode(200, 'OK');
                     $this->response->setJsonContent($data);
                     return $this->response->send();
@@ -193,20 +167,20 @@ class PartnerController  extends \BackendController {
             ->columns(array(
                 $npPartner.'.id',
                 $npPartner.'.link',
-                $npPartner.'.image',
+                $npPartner.'.featured_image',
                 $npPartner.'.status',
                 $npPartner.'.dept_id',
                 $npPartner.'.created_at',
-                'PL.name name',
+                'PL.title title',
                 'D.name dept_name',
             ))
             ->from($npPartner)
-            ->leftJoin('Models\DepartmentsLang', 'D.dept_id = '.$npPartner.'.dept_id','D')
+            ->leftJoin('Models\DepartmentsLang', 'D.dept_id = '.$npPartner.'.dept_id AND D.lang_id = 1','D')
             ->leftJoin('Models\PartnerLang', 'PL.partner_id = '.$npPartner.'.id AND PL.lang_id = 1','PL')
             ->orderBy($npPartner.'.dept_id ASC')
             ->where("1=1");
     
-            $search = 'PL.name LIKE :search:';
+            $search = 'PL.title LIKE :search:';
             $this->response->setStatusCode(200, 'OK');
             $this->response->setJsonContent($this->ssp->data_output($this->request->get(), $data,$search));
             return $this->response->send();

@@ -5,7 +5,7 @@
             </div>
             <ul class="app-breadcrumb breadcrumb side">
                 <li class="breadcrumb-item"><a class="link" href="{{ config.application.backendUri }}"><i class="fa fa-home fa-lg"></i></a></li>
-                <li class="breadcrumb-item"><a class="link" href="{{ config.application.backendUri }}/staffs">Bài viết</a></li>
+                <li class="breadcrumb-item"><a class="link" href="{{ config.application.backendUri }}/staff">Nhận sự</a></li>
                 <li class="breadcrumb-item">{{title}}</li>
             </ul>
         </div>

@@ -5,7 +5,7 @@
             </div>
             <ul class="app-breadcrumb breadcrumb side">
                 <li class="breadcrumb-item"><a class="link" href="<?= $this->config->application->backendUri ?>"><i class="fa fa-home fa-lg"></i></a></li>
-                <li class="breadcrumb-item"><a class="link" href="<?= $this->config->application->backendUri ?>/posts">Bài viết</a></li>
+                <li class="breadcrumb-item"><a class="link" href="<?= $this->config->application->backendUri ?>/posts">Banner</a></li>
                 <li class="breadcrumb-item"><?= $title ?></li>
             </ul>
         </div>
@@ -66,6 +66,18 @@
                             <?php } ?>
                         </div>
                     </div>
+                    
+                    <div class="tile p-3 mt-3">  
+                        <h5 class="font-weight-bold text-primary">Hình banner</h5> 
+                        <div class="row m-0">
+                            <div class="col-md-12 p-0">
+                                <img id="showImg" src="<?php echo $banner->image ? $banner->image : '' ?>"
+                                    alt="" width="100%">
+                                <?= $form_banner->render('image') ?>
+                                <a id="uploadImage" href="#" class="link"><?php echo $banner->image ? 'Đổi hình' : 'Chọn hình' ?></a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
     
                 <div class="col-md-3 pr-0">
@@ -96,17 +108,6 @@
                             <div class="col-md-12 p-0">
                                 <button type="submit" class="btn btn-success float-right btn-sm"><?= $title ?></button>
                             </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tile p-3 col-md-12 mt-3">   
-                    <div class="row m-0">
-                        <div class="col-md-12 p-0">
-                            <img id="showImg" src="<?php echo $banner->image ? $banner->image : '' ?>"
-                                alt="" width="100%">
-                            <?= $form_banner->render('image') ?>
-                            <a id="uploadImage" href="#" class="link"><?php echo $banner->image ? 'Đổi hình' : 'Chọn hình' ?></a>
                         </div>
                     </div>
                 </div>
