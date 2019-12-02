@@ -1,6 +1,6 @@
 <?php
 
-namespace Frontend\Modules\Pages\Controllers;
+namespace Frontend\Modules\Dept\Controllers;
 use Models\Pages;
 use Models\Attributes;
 class PagesController extends \FrontendController

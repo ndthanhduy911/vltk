@@ -30,33 +30,25 @@ foreach ($depts as $key => $dept) {
     ));
 }
 
-// /***********************DeptController***********************/
-// $router->add($config->application->frontendUri."/dept/{dept:[a-z\-]+}", array(
-//     'module' => 'frontend_dept',
-//     'controller' => 'dept',
-//     'action' => 'index',
-//     'dept' => 1,
-// ));
+/***********************PostController***********************/
 
-// $router->add($config->application->frontendUri."/dept/{dept:[a-z\-]+}/", array(
-//     'module' => 'frontend_dept',
-//     'controller' => 'dept',
-//     'action' => 'index',
-//     'dept' => 1,
-// ));
+$router->add($config->application->frontendUri."/{page:[a-z\-]+}", array(
+    'module' => 'frontend_dept',
+    'controller' => 'pages',
+    'action' => 'index',
+    'page' => 1,
+));
 
-// $router->add($config->application->frontendUri."/dept/{dept:[a-z\-]+}/{pages:[a-z\-]+}", array(
-//     'module' => 'frontend_dept',
-//     'controller' => 'dept',
-//     'action' => 'index',
-//     'dept' => 1,
-//     'pages' => 2
-// ));
+$router->add($config->application->frontendUri."/news/{post:[a-z\-]+}", array(
+    'module' => 'frontend_dept',
+    'controller' => 'posts',
+    'action' => 'single',
+    'post' => 1,
+));
 
-// $router->add($config->application->frontendUri."/dept/{dept:[a-z\-]+}/{pages:[a-z\-]+}/", array(
-//     'module' => 'frontend_dept',
-//     'controller' => 'dept',
-//     'action' => 'index',
-//     'dept' => 1,
-//     'pages' => 2
-// ));
+$router->add($config->application->frontendUri."/category/{cat:[a-z\-]+}", array(
+    'module' => 'frontend_dept',
+    'controller' => 'categories',
+    'action' => 'index',
+    'cat' => 1,
+));

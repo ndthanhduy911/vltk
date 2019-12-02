@@ -23,7 +23,7 @@ const vi_moment = (date, type) => {
 }
 
 const getLinkPostBySlug = ($slug = null) => {
-    return window.location.origin+'/posts/' + $slug;
+    return window.location.origin+'/news/' + $slug;
 }
 
 const getDatePost = ($date = null, calendar = null) => {

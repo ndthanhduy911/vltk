@@ -1,26 +1,15 @@
-      <!-- header-container start -->
+
       <div class="header-container">
-          <!-- header start -->
-          <!-- classes:  -->
-          <!-- "fixed": enables fixed navigation mode (sticky menu) e.g. class="header fixed clearfix" -->
-          <!-- "fixed-desktop": enables fixed navigation only for desktop devices e.g. class="header fixed fixed-desktop clearfix" -->
-          <!-- "fixed-all": enables fixed navigation only for all devices desktop and mobile e.g. class="header fixed fixed-desktop clearfix" -->
-          <!-- "dark": dark version of header e.g. class="header dark clearfix" -->
-          <!-- "centered": mandatory class for the centered logo layout -->
-          <!-- ================ -->
           <header class="header dark fixed fixed-desktop clearfix">
               <div class="container">
                   <div class="row">
                       <div class="col-md-auto hidden-md-down pl-3">
-                          <!-- header-first start -->
-                          <!-- ================ -->
                           <div class="header-first clearfix">
 
                               <!-- logo -->
                               <div id="logo" class="logo">
                                   <a href="<?php echo FRONTEND_URL.'/dept/'.$dept->slug ?>">
                                       <h3 class="title text-default mb-0">LOGO</h3>
-                                      <!-- <img id="logo_img" src="/assets/frontend/images/logo-khoa-single-1-96x96.png" alt="VL-VLKT"> -->
                                   </a>
                               </div>
 
@@ -38,21 +27,11 @@
                           <!-- header-second start -->
                           <!-- ================ -->
                           <div class="header-second clearfix">
-
-                              <!-- main-navigation start -->
-                              <!-- classes: -->
-                              <!-- "onclick": Makes the dropdowns open on click, this the default bootstrap behavior e.g. class="main-navigation onclick" -->
-                              <!-- "animated": Enables animations on dropdowns opening e.g. class="main-navigation animated" -->
-                              <!-- ================ -->
                               <div class="main-navigation main-navigation--mega-menu  animated">
                                   <nav class="navbar navbar-expand-lg navbar-light p-0">
                                       <div class="navbar-brand clearfix hidden-lg-up">
 
-                                          <!-- logo -->
                                           <div id="logo-mobile" class="logo">
-                                              <!-- <a href="<?php echo FRONTEND_URL ?>/"><img id="logo-img-mobile"
-                                                    src="<?php echo FRONTEND_URL ?>/assets/frontend/images/logo-khoa-single-1-96x96.png"
-                                                    alt="VL-VLKT"></a> -->
                                               <h3 class="title text-default mb-0">VL-VLKT</h3>
                                           </div>
 
