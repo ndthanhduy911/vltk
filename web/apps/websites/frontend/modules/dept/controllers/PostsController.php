@@ -20,7 +20,7 @@ class PostsController extends \FrontendController
 
     public function singleAction($params = null){
         $slug = $this->helper->slugify($params);
-        $post = Posts::findFirst(['dept_id = 1 AND status = 1 AND slug = :slug:', 'bind' => ['slug' => $slug]]);
+        $post = Posts::findFirst(['status = 1 AND slug = :slug:', 'bind' => ['slug' => $slug]]);
         if($post){
             if($posts_lang = Posts::getLang($post->id)){
                 $this->view->title = $posts_lang->title;

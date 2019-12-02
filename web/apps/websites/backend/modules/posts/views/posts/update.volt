@@ -10,7 +10,7 @@
         </ul>
     </div>
 
-    <div class="body-message m-0">
+    <div class="body-message">
         <?php echo $this->flashSession->output(); ?>
     </div>
 
@@ -85,8 +85,8 @@
             </div>
 
             <div class="col-md-3 pr-0">
-                <h5 class="font-weight-bold text-primary">Đăng bài</h5>
                 <div class="tile p-3">
+                    <h5 class="font-weight-bold text-primary">Đăng bài</h5>
                     <div class="row m-0">
                         <div class="col-md-12 p-0">
                             <i class="fa fa-key"></i>
@@ -124,8 +124,9 @@
                         </div>
                     </div>
                 </div>
-                <h5 class="font-weight-bold text-primary">Danh mục</h5>
+
                 <div class="tile p-3">
+                    <h5 class="font-weight-bold text-primary">Danh mục</h5>
                     <div class="row m-0">
                         <div class="col-md-12 p-0">
                             <div class="form-group mb-0">
@@ -138,8 +139,8 @@
                     </div>
                 </div>
 
-                <h5 class="font-weight-bold text-primary">Ảnh đại diện</h5>
                 <div class="tile p-3">
+                    <h5 class="font-weight-bold text-primary">Ảnh đại diện</h5>
                     <div class="row m-0">
                         <div class="col-md-12 p-0">
                             <img id="showImg" src="<?php echo $post->featured_image ? $post->featured_image : '' ?>"

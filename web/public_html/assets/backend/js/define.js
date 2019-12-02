@@ -259,3 +259,7 @@ const showSelectImage = (button, showImg, uploadImageValue) => {
         });
     }
 }
+
+const getPathImage = (path = null, iamgeDefault = '') => {
+    return path ? path : iamgeDefault
+}

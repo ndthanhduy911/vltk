@@ -17,6 +17,8 @@ class Partner extends \Phalcon\Mvc\Model
 
     public $status;
 
+    public $sort;
+
     public function getSource()
     {
         return 'partner';

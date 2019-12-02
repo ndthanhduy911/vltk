@@ -30,7 +30,7 @@ class CategoriesController  extends \BackendController {
             ))
             ->from($npCat)
             ->join('Models\Users', 'U.id = '.$npCat.'.author','U')
-            ->join('Models\Departments', 'D.id = '.$npCat.'.dept_id','D')
+            ->join('Models\DepartmentsLang', 'D.dept_id = '.$npCat.'.dept_id','D')
             ->join('Models\CategoriesLang', 'CL.cat_id = '.$npCat.'.id AND CL.lang_id = 1','CL')
             ->orderBy($npCat.'.dept_id ASC')
             ->where("1 = 1");

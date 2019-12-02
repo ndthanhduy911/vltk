@@ -69,12 +69,12 @@ class PostsForm extends Form
 
         $cat_id = new Select('cat_id', $cats, array(
             'using' => array('id', 'name'),
-            'class' => 'form-control-sm pull-right w-100',
+            'class' => 'form-control pull-right w-100',
             'data-error' => "Chưa đúng định dạng",
         ));
         $cat_id->addValidators(array(
             new PresenceOf(array(
-                'message' => 'Đơn vị không được để trống',
+                'message' => 'Danh mục không được để trống',
             )),
         ));
         $this->add($cat_id);
@@ -86,7 +86,7 @@ class PostsForm extends Form
             'useEmpty' => true,
             'emptyText' => 'Vui lòng chọn trạng thái',
             'emptyValue' => '',
-            'class' => 'form-control-sm pull-right w-100',
+            'class' => 'form-control pull-right w-100',
             'required' => '',
             'data-required-error' => 'Vui lòng điền đầy đủ thông tin.',
         ]);

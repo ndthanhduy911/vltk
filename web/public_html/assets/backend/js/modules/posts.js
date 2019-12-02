@@ -46,7 +46,7 @@ const loadTablePosts = () => {
                 }
             ],
             'createdRow': function (row, item, dataIndex) {
-                let image = item.featured_image ? `<img src="${item.featured_image}" width="50px">` : '<img src="/assets/frontend/images/defaut_img.png" width="50px">';
+                let image = `<img src="${getPathImage(item.featured_image, '/assets/frontend/images/defaut_img.png')}" width="50px">`;
                 $(row).addClass('text-center');
                 $('td', row).addClass('align-middle');
                 $('td:eq(1)', row).html(image);

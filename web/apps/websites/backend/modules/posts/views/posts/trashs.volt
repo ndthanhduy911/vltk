@@ -10,7 +10,7 @@
         </ul>
     </div>
 
-    <div class="body-message m-0">
+    <div class="body-message">
         <?php echo $this->flashSession->output(); ?>
     </div>
 

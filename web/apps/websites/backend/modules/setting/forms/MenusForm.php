@@ -38,7 +38,7 @@ class CategoriesForm extends Form
             'useEmpty' => true,
             'emptyText' => 'Vui lòng chọn trạng thái',
             'emptyValue' => '',
-            'class' => 'form-control-sm pull-right w-100',
+            'class' => 'form-control pull-right w-100',
             'required' => '',
             'data-required-error' => 'Vui lòng điền đầy đủ thông tin.',
         ]);

@@ -2,33 +2,27 @@
 
 namespace Models;
 
-use Models\PagesLang;
-
-class Pages extends \Phalcon\Mvc\Model
+class PagesLang extends \Phalcon\Mvc\Model
 {
     public $id;
-    
-    public $slug;
-
-    public $attribute_id;
-
-    public $status;
 
     public $dept_id;
+    
+    public $lang_id;
 
-    public $created_at;
+    public $title;
 
-    public $updated_at;
+    public $content;
 
-    public $featured_image;
+    public $excerpt;
 
     public function getSource()
     {
-        return 'pages';
+        return 'pages_lang';
     }
 
     public static function getNamepace (){
-        return 'Models\Pages';
+        return 'Models\PagesLang';
     }
 
     public static function findFirstId($id, $columns = "*")
@@ -45,24 +39,6 @@ class Pages extends \Phalcon\Mvc\Model
                 "bind" => array('id' => $id),
                 "columns" => $columns
             ]);
-        }
-    }
-
-    public static function getUrlById($id = null)
-    {
-        if($page = parent::findFirst($id)){
-            return FRONTEND_URL.'/'.$page->slug;
-        }else{
-            return null;
-        }
-    }
-
-    public static function getTitleById($id = null)
-    {
-        if($page = PagesLang::findFirst(['page_id = :page_id:','bind' => ['page_id' => $id]])){
-            return $page->name;
-        }else{
-            return null;
         }
     }
 }

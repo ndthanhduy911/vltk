@@ -11,7 +11,7 @@
         </ul>
     </div>
 
-    <div class="body-message m-0">
+    <div class="body-message">
         <?php echo $this->flashSession->output(); ?>
     </div>
 
@@ -28,7 +28,7 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text fa fa-header"></div>
                                     </div>
-                                    {{form.render('title')}}
+                                    <?= $form->render('title') ?>
                                     <div class="invalid-tooltip"></div>
                                 </div>
                             </div>
@@ -45,7 +45,7 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text fa fa-link"></div>
                                     </div>
-                                    {{form.render('excerpt')}}
+                                    <?= $form->render('excerpt') ?>
                                     <div class="invalid-tooltip"></div>
                                 </div>
                             </div>
@@ -58,7 +58,7 @@
                     <div class="grid-container rounded">
                         <div class="grid-width-100 p-0 rounded">
                             <textarea id="editor" name="content" class="rounded" >
-                                {{page.content}}
+                                <?= $page->content ?>
                             </textarea>
                         </div>
                     </div>
@@ -72,7 +72,7 @@
                         <div class="col-md-12 p-0">
                             <div class="form-group mb-0">
                                 <div class="input-group">
-                                    {{form.render('slug')}}
+                                    <?= $form->render('slug') ?>
                                     <div class="invalid-tooltip"></div>
                                 </div>
                             </div>
@@ -86,7 +86,7 @@
                             <p class="small mb-2">Trạng thái:</p>
                             <div class="form-group">
                                 <div class="input-group">
-                                    {{form.render('status')}}
+                                    <?= $form->render('status') ?>
                                     <div class="invalid-tooltip"></div>
                                 </div>
                             </div>
@@ -102,7 +102,7 @@
                         <div class="col-md-12 p-0">
                             <div class="form-group mb-0">
                                 <div class="input-group">
-                                    {{form.render('attribute_id')}}
+                                    <?= $form->render('attribute_id') ?>
                                     <div class="invalid-tooltip"></div>
                                 </div>
                             </div>
@@ -111,7 +111,7 @@
                 </div>
             </div>
 
-            <input class="tokenCSRF" type="hidden" name="{{ security.getTokenKey() }}" value="{{ security.getToken() }}">
+            <input class="tokenCSRF" type="hidden" name="<?= $this->security->getTokenKey() ?>" value="<?= $this->security->getToken() ?>">
         </form>
     </div>
 </main>

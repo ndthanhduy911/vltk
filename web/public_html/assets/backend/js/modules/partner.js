@@ -1,4 +1,4 @@
-//Datatable cho bảng pages
+//Datatable cho bảng partner
 const showStatus = (id = '') => {
     switch (parseInt(id)) {
         case 0:
@@ -11,23 +11,23 @@ const showStatus = (id = '') => {
 }
 
 const loadTablePages = () => {
-    if ($('#pages').length) {
-        let dt = $('#pages').DataTable({
+    if ($('#partner').length) {
+        let dt = $('#partner').DataTable({
             "scrollX": true,
             "ordering": false,
             "processing": true,
             "serverSide": true,
             "autoWidth": false,
-            "ajax": backendUrl+"/pages/getdata",
+            "ajax": backendUrl+"/partner/getdata",
             "columns": [
                 {
                     "data": "no"
                 },
                 {
-                    "data": "title"
+                    "data": "image"
                 },
                 {
-                    "data": "excerpt"
+                    "data": "name"
                 },
                 {
                     "data": "dept_name"
@@ -44,13 +44,15 @@ const loadTablePages = () => {
             ],
             'createdRow': function (row, item, dataIndex) {
                 $(row).addClass('text-center');
+                let image = `<img src="${getPathImage(item.image, '/assets/frontend/images/defaut_img.png')}" width="50px">`;
                 $('td', row).addClass('align-middle');
-                $('td:eq(3)', row).html(vi_moment(item.created_at, 'DD/MM/YYYY HH:mm'));
+                $('td:eq(1)', row).html(image);
+                $('td:eq(4)', row).html(vi_moment(item.created_at, 'DD/MM/YYYY HH:mm'));
                 $('td:eq(5)', row).html(showStatus(item.status));
                 $('td:eq(6)', row).html(`
-                    <a href="${backendUrl}/pages/update/${item.id}" class="fa fa-pencil btn btn-info btn-sm editPage" title="Cập nhật"></a>
+                    <a href="${backendUrl}/partner/update/${item.id}" class="fa fa-pencil btn btn-info btn-sm editPage" title="Cập nhật"></a>
                 `);
-                $('td:eq(6)', row).append(`<a href="#" data-href="${backendUrl}/pages/delete/${item.id}" class="fa fa-trash btn btn-danger btn-sm deletePage" title="Xóa"></a>`);
+                $('td:eq(6)', row).append(`<a href="#" data-href="${backendUrl}/partner/delete/${item.id}" class="fa fa-trash btn btn-danger btn-sm deletePartner" title="Xóa"></a>`);
                 
             },
             "deferRender": true,
@@ -81,5 +83,3 @@ const loadTablePages = () => {
 loadTablePages();
 
 changeTitleToSlug('#title', '#slug');
-
-showSelectImage('#uploadImage','#showImg','#featured_image');

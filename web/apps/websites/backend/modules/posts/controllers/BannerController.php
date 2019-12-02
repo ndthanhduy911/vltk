@@ -5,16 +5,13 @@ use Models\PostsLang;
 use Models\Language;
 use Backend\Modules\Posts\Forms\PostsForm;
 use Backend\Modules\Posts\Forms\PostsLangForm;
+use Models\Banner;
 
-class PostsController  extends \BackendController {
+class BannerController  extends \BackendController {
 
     public function indexAction(){
         $this->get_js_css();
-        // var_dump($_SESSION); die;
-    }
-
-    public function trashsAction(){
-        $this->get_js_css();
+        // $this->view->form = new UserForm();
     }
 
     public function updateAction($id = 0){
@@ -142,95 +139,6 @@ class PostsController  extends \BackendController {
         $this->get_js_css();
     }
 
-    public function restoreAction($id = null){
-        if ($post = Posts::findFirstId($id)) {
-            $post->status = 1;
-            if (!$post->save()) {
-                if ($this->request->isAjax()) {
-                    foreach ($post->getMessages() as $message) {
-                        array_push($error, $message->getMessage());
-                    }
-                    $data['error'] = $error;
-                    $this->response->setStatusCode(400, 'error');
-                    $this->response->setJsonContent($data);
-                    return $this->response->send();
-                } else {
-                    foreach ($post->getMessages() as $message) {
-                        $this->flashSession->error($message);
-                    }
-                    return $this->response->redirect(BACKEND_URL.'/trashs');
-                }
-            }else{
-                if ($this->request->isAjax()) {
-                    $data['data'] = $post->toArray();
-                    $this->response->setStatusCode(200, 'OK');
-                    $this->response->setJsonContent($data);
-                    return $this->response->send();
-                } else {
-                    $this->flashSession->success("Khôi phục bài viết thành công");
-                    return $this->response->redirect(BACKEND_URL.'/posts');
-                }
-            }
-        }else{
-            if ($this->request->isAjax()) {
-                $data['error'] = 'Không tìm thấy bài viết';
-                $this->response->setStatusCode(404, 'Not found');
-                $this->response->setJsonContent($data);
-                return $this->response->send();
-            } else {
-                $this->flashSession->error("Không tìm thấy bài viết");
-                return $this->response->redirect(BACKEND_URL.'/posts');
-            }
-        }
-        
-    }
-
-    public function trashAction($id = null){
-
-        if ($post = Posts::findFirstId($id)) {
-            $post->status = 4;
-            if (!$post->save()) {
-                if ($this->request->isAjax()) {
-                    foreach ($post->getMessages() as $message) {
-                        array_push($error, $message->getMessage());
-                    }
-                    $data['error'] = $error;
-                    $this->response->setStatusCode(400, 'error');
-                    $this->response->setJsonContent($data);
-                    return $this->response->send();
-                } else {
-                    foreach ($post->getMessages() as $message) {
-                        $this->flashSession->error($message);
-                    }
-                    return $this->response->redirect(BACKEND_URL.'/trashs');
-                }
-            }else{
-                if ($this->request->isAjax()) {
-                    $data['data'] = $post->toArray();
-                    $this->response->setStatusCode(200, 'OK');
-                    $this->response->setJsonContent($data);
-                    return $this->response->send();
-                } else {
-                    // $this->logs->write_log(3, 1, 'Xóa trang', json_encode($save),$this->session->get("user_id"));
-                    $this->flashSession->success("Chuyển bài viết đến thùng rác thành công");
-                    return $this->response->redirect(BACKEND_URL.'/posts');
-                }
-            }
-        }else{
-            if ($this->request->isAjax()) {
-                $data['error'] = 'Không tìm thấy bài viết';
-                $this->response->setStatusCode(404, 'Not found');
-                $this->response->setJsonContent($data);
-                return $this->response->send();
-            } else {
-                // $this->logs->write_log(3, 1, 'Xóa trang', json_encode($save),$this->session->get("user_id"));
-                $this->flashSession->error("Không tìm thấy bài viết");
-                return $this->response->redirect(BACKEND_URL.'/posts');
-            }
-        }
-        
-    }
-
     public function deleteAction($id = null){
         if ($post = Posts::findFirstId($id)) {
             if (!$post->delete()) {
@@ -277,41 +185,31 @@ class PostsController  extends \BackendController {
     // =================================
     // API
     // =================================
+
     public function getdataAction(){
         if($this->request->isAjax()){
-            $npPosts = Posts::getNamepace();
+            $npBanner = Banner::getNamepace();
             $data = $this->modelsManager->createBuilder()
             ->columns(array(
-                $npPosts.'.id',
-                'PL.title',
-                $npPosts.'.slug',
-                $npPosts.'.cat_id',
-                'PL.content',
-                $npPosts.'.status',
-                'PL.excerpt',
-                $npPosts.'.dept_id',
-                $npPosts.'.created_at',
-                $npPosts.'.calendar',
-                $npPosts.'.featured_image',
-                'DL.name dept_name',
-                'D.slug dept_slug',
-                'U.name author_name',
-                'C.name cat_name',
+                $npBanner.'.id',
+                $npBanner.'.dept_id',
+                $npBanner.'.image',
+                $npBanner.'.button_link',
+                $npBanner.'.dept_id',
+                $npBanner.'.status',
+                $npBanner.'.created_at',
+                'BL.name name',
+                'BL.description description',
+                'BL.button_text button_text',
+                'D.name dept_name',
             ))
-            ->from($npPosts)
-            ->join('Models\DepartmentsLang', 'DL.dept_id = '.$npPosts.'.dept_id AND D.lang_id = 1','DL')
-            ->join('Models\Departments', 'D.id = '.$npPosts.'.dept_id','D')
-            ->join('Models\Users', 'U.id = '.$npPosts.'.author','U')
-            ->join('Models\CategoriesLang', 'C.cat_id = '.$npPosts.'.cat_id AND C.lang_id = 1','C')
-            ->join('Models\PostsLang', 'PL.post_id = '.$npPosts.'.id AND PL.lang_id = 1','PL')
-            ->orderBy($npPosts.'.id DESC')
-            ->where($npPosts.'.deleted = 0')
-            ->groupBy('PL.post_id');
-            if($this->session->get('role') !== 1){
-                $data = $data->andWhere($npPosts.".dept_id IN (".implode(',',$this->session->get('dept_mg')).")");
-            }
+            ->from($npBanner)
+            ->leftJoin('Models\DepartmentsLang', 'D.dept_id = '.$npBanner.'.dept_id AND D.lang_id = 1','D')
+            ->leftJoin('Models\BannerLang', 'BL.banner_id = '.$npBanner.'.id AND BL.lang_id = 1','BL')
+            ->orderBy($npBanner.'.dept_id ASC, '.$npBanner.'.status DESC')
+            ->where("1=1");
     
-            $search = $npPosts.'.title LIKE :search:';
+            $search = 'BL.name LIKE :search:';
             $this->response->setStatusCode(200, 'OK');
             $this->response->setJsonContent($this->ssp->data_output($this->request->get(), $data,$search));
             return $this->response->send();
@@ -322,51 +220,7 @@ class PostsController  extends \BackendController {
         }
     }
 
-    public function getdatatrashAction(){
-        if($this->request->isAjax()){
-            $npPosts = Posts::getNamepace();
-            $data = $this->modelsManager->createBuilder()
-            ->columns(array(
-                $npPosts.'.id',
-                $npPosts.'.title',
-                $npPosts.'.slug',
-                $npPosts.'.cat_id',
-                $npPosts.'.content',
-                $npPosts.'.status',
-                $npPosts.'.excerpt',
-                $npPosts.'.dept_id',
-                $npPosts.'.created_at',
-                $npPosts.'.calendar',
-                $npPosts.'.featured_image',
-                'D.name dept_name',
-                'D.slug dept_slug',
-                'U.name author_name',
-                'C.name cat_name',
-            ))
-            ->from($npPosts)
-            ->join('Models\Departments', 'D.id = '.$npPosts.'.dept_id','D')
-            ->join('Models\Users', 'U.id = '.$npPosts.'.author','U')
-            ->join('Models\CategoriesLang', 'C.cat_id = '.$npPosts.'.cat_id AND C.lang_id = 1','C')
-            ->orderBy($npPosts.'.title DESC')
-            ->where($npPosts.'.status = 4 AND '.$npPosts.'.deleted = 0');
-            // if($this->session->get('role') !== 1){
-            //     $data = $data->andWhere("dept_id IN (".implode(',',$this->session->get('dept_mg')).")");
-            // }
-    
-            $search = $npPosts.'.title LIKE :search:';
-            $this->response->setStatusCode(200, 'OK');
-            $this->response->setJsonContent($this->ssp->data_output($this->request->get(), $data,$search));
-            return $this->response->send();
-        }else{
-            $this->response->setStatusCode(403, 'Failed');
-            $this->response->setJsonContent(['Truy cập không được phép']);
-            return $this->response->send();
-        }
-    }
-    // =================================
-    // FUNCTION
-    // =================================
     private function get_js_css (){
-        $this->assets->addJs($this->config->application->baseUri.'/assets/backend/js/modules/posts.js');
+        $this->assets->addJs($this->config->application->baseUri.'/assets/backend/js/modules/banner.js');
     }
 }

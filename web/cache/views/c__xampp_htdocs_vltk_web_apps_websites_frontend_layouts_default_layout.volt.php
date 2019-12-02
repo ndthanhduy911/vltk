@@ -77,9 +77,12 @@
     <div class="scrollToTop circle"><i class="fa fa-angle-up"></i></div>
 
     <div class="page-wrapper">
+        <?php if(isset($lang_id) && $lang_id != 1){ ?>
+            <?= $this->partial('header-dept') ?>
+        <?php } else { ?>
+            <?= $this->partial('header') ?>
+        <?php } ?>
         
-        <?= $this->partial('header') ?>
-
         <?= $this->getContent() ?>
 
         <?= $this->partial('footer') ?>
