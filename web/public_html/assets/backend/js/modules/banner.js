@@ -74,7 +74,7 @@ const loadTablePages = () => {
                 }
             }
         });
-        showConfrimDelete('.deletePage',()=>{
+        showConfrimDelete('.deleteBanner',()=>{
             dt.draw();
         })
     }
@@ -82,4 +82,4 @@ const loadTablePages = () => {
 
 loadTablePages();
 
-changeTitleToSlug('#title', '#slug');
+showSelectImage('#uploadImage','#showImg','#image');

@@ -17,7 +17,7 @@
     <div class="row">
         <div class="col-md-12 p-0">
             <div class="tile">
-                <div class="col-12 p-0 mb-2">
+                <div class="col-12 p-0 mb-2 text-right">
                     <a id="addPosts" href="<?= $this->config->application->backendUri ?>/staff/update" title="Tạo" class="btn btn-success fa fa-plus"></a>
                 </div>
                 <div class="tile-body">
