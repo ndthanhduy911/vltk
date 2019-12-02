@@ -138,7 +138,6 @@
                         </div>
                     </div>
     
-                    <h5 class="font-weight-bold text-primary">Ảnh đại diện</h5>
                     <div class="tile p-3">
                         <div class="row m-0">
                             <div class="col-md-12 p-0">

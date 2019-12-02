@@ -116,7 +116,6 @@
                 </div>
 
                 <div class="tile p-3">
-                    <h5 class="font-weight-bold text-primary">Ảnh đại diện</h5>
                     <div class="row m-0">
                         <div class="col-md-12 p-0">
                             <img id="showImg" src="<?php echo $page->featured_image ? $page->featured_image : '' ?>"

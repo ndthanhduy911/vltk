@@ -9,11 +9,11 @@ class StaffLang extends \Phalcon\Mvc\Model
     
     public $lang_id;
 
-    public $name;
+    public $title;
 
     public $regency;
 
-    public $description;
+    public $content;
 
     public function getSource()
     {

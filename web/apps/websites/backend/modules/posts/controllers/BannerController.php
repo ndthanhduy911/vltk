@@ -71,7 +71,7 @@ class BannerController  extends \BackendController {
                         'lang_id' => $lang->id,
                     ];
 
-                    $forms_lang[$lang->id]->bind($req_banner_lang[$lang->id], $banner_lang[$lang->id]);
+                    $forms_lang[$lang->id]->bind($req_banner_lang[$lang->id], $banners_lang[$lang->id]);
                     if (!$forms_lang[$lang->id]->isValid()) {
                         foreach ($forms_lang[$lang->id]->getMessages() as $message) {
                             array_push($error, $message->getMessage());
@@ -80,15 +80,14 @@ class BannerController  extends \BackendController {
                 }
 
                 if (!count($error)) {
-                    $banner->calendar = $this->helper->datetime_mysql($banner->calendar);
                     if (!$banner->save()) {
                         foreach ($banner->getMessages() as $message) {
                             $this->flashSession->error($message);
                         }
                     } else {
                         foreach ($languages as $key => $lang) {
-                            $banner_lang[$lang->id]->banner_id = $banner->id;
-                            $banner_lang[$lang->id]->save();
+                            $banners_lang[$lang->id]->banner_id = $banner->id;
+                            $banners_lang[$lang->id]->save();
                         }
                         $this->flashSession->success($title." thành công");
                         return $this->response->redirect(BACKEND_URL.'/banner');
@@ -181,7 +180,7 @@ class BannerController  extends \BackendController {
             ->leftJoin('Models\DepartmentsLang', 'D.dept_id = '.$npBanner.'.dept_id AND D.lang_id = 1','D')
             ->leftJoin('Models\BannerLang', 'BL.banner_id = '.$npBanner.'.id AND BL.lang_id = 1','BL')
             ->orderBy($npBanner.'.dept_id ASC, '.$npBanner.'.status DESC')
-            ->where("1=1");
+            ->where('1=1');
     
             $search = 'BL.name LIKE :search:';
             $this->response->setStatusCode(200, 'OK');

@@ -11,25 +11,24 @@ use Phalcon\Forms\Form;
 use Phalcon\Validation\Validator\StringLength as StringLength;
 use Phalcon\Validation\Validator\PresenceOf;
 use Phalcon\Validation\Validator\Date as DateValidator;
-use Models\Categories;
 
-class BannerForm extends Form
+class StaffForm extends Form
 {
     public function initialize($entity = null, $options = null)
     {
-        $link = new Text('link');
-        $link->setAttributes(array(
+        $slug = new Text('slug');
+        $slug->setAttributes(array(
             'class' => 'form-control',
-            'placeholder' => 'Link',
+            'placeholder' => 'Slug',
             'maxlength' => "200",
         ));
-        $link->addValidators(array(
+        $slug->addValidators(array(
             new StringLength([
                 "max" => 200,
                 "messageMaximum" => "Slug không được dài quá 255 ký tự",
             ]),
         ));
-        $this->add($link);
+        $this->add($slug);
 
         $status = new Select('status', [
             1 => "Hoạt động",
@@ -49,8 +48,8 @@ class BannerForm extends Form
         ));
         $this->add($status);
 
-        $image = new Hidden('image');
-        $this->add($image);
+        $featured_image = new Hidden('featured_image');
+        $this->add($featured_image);
 
         $deleted = new Hidden('deleted');
         $this->add($deleted);

@@ -202,9 +202,9 @@ class PartnerController  extends \BackendController {
             ))
             ->from($npPartner)
             ->leftJoin('Models\DepartmentsLang', 'D.dept_id = '.$npPartner.'.dept_id','D')
-            ->leftJoin('Models\PartnerLang', 'PL.partner_id = '.$npPartner.'.id','PL')
+            ->leftJoin('Models\PartnerLang', 'PL.partner_id = '.$npPartner.'.id AND PL.lang_id = 1','PL')
             ->orderBy($npPartner.'.dept_id ASC')
-            ->where("PL.lang_id = 1");
+            ->where("1=1");
     
             $search = 'PL.name LIKE :search:';
             $this->response->setStatusCode(200, 'OK');

@@ -9,7 +9,7 @@ class Staff extends \Phalcon\Mvc\Model
 
     public $slug;
 
-    public $image;
+    public $featured_image;
 
     public $created_at;
     
@@ -24,5 +24,15 @@ class Staff extends \Phalcon\Mvc\Model
 
     public static function getNamepace (){
         return 'Models\Staff';
+    }
+
+    public static function findFirstId($id, $columns = "*")
+    {
+        
+        return parent::findFirst([
+            "conditions" => "id = :id:",
+            "bind" => array('id' => $id),
+            "columns" => $columns
+        ]);
     }
 }

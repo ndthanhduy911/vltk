@@ -1,11 +1,11 @@
 <main class="app-content">
         <div class="app-title">
             <div>
-                <h1><i class="fa fa-th-list"></i> <?= ($posts_lang[1]->title ? 'Cập nhật bài viết' : 'Thêm bài viết mới') ?></h1>
+                <h1><i class="fa fa-th-list"></i> <?= ($staffs_lang[1]->title ? 'Cập nhật nhân sự' : 'Thêm nhân sự mới') ?></h1>
             </div>
             <ul class="app-breadcrumb breadcrumb side">
                 <li class="breadcrumb-item"><a class="link" href="<?= $this->config->application->backendUri ?>"><i class="fa fa-home fa-lg"></i></a></li>
-                <li class="breadcrumb-item"><a class="link" href="<?= $this->config->application->backendUri ?>/posts">Bài viết</a></li>
+                <li class="breadcrumb-item"><a class="link" href="<?= $this->config->application->backendUri ?>/staffs">Bài viết</a></li>
                 <li class="breadcrumb-item"><?= $title ?></li>
             </ul>
         </div>
@@ -15,7 +15,7 @@
         </div>
     
         <div class="row">
-            <form class="col-md-12 row p-0 m-0" method="post" enctype="multipart/form-data" data-toggle="validator"
+            <form class="col-md-12 row p-0 m-0" method="POST" enctype="multipart/form-data" data-toggle="validator"
                 role="form">
                 <div class="col-md-9 p-0">
                     <div class="bs-component bg-white rounded">
@@ -46,7 +46,7 @@
                                     </div>
                                 </div>
     
-                                <h5 class="font-weight-bold text-primary">Tóm tắt</h5>
+                                <h5 class="font-weight-bold text-primary">Chức vụ</h5>
                                 <div class="tile p-0">
                                     <div class="modal-body pb-0">
                                         <div class="form-row">
@@ -55,7 +55,7 @@
                                                     <div class="input-group-prepend">
                                                         <div class="input-group-text fa fa-tags"></div>
                                                     </div>
-                                                    <?= $forms_lang[$lang->id]->render('excerpt', ['id' => 'excerpt' . $lang->id, 'name' => 'excerpt[' . $lang->id . ']']) ?>
+                                                    <?= $forms_lang[$lang->id]->render('regency', ['id' => 'regency' . $lang->id, 'name' => 'regency[' . $lang->id . ']']) ?>
                                                     <div class="invalid-tooltip"></div>
                                                 </div>
                                             </div>
@@ -63,14 +63,14 @@
                                     </div>
                                 </div>
     
-                                <h5 class="font-weight-bold text-primary">Nội dung</h5>
+                                <h5 class="font-weight-bold text-primary">Giới thiệu</h5>
                                 <div class="tile p-0">
                                     <div class="row m-0">
                                         <div class="col-md-12 p-0">
                                             <div class="form-group mb-0">
                                                 <div class="input-group">
                                                     <textarea id="editor<?= $lang->id ?>" name="content[<?= $lang->id ?>]" class="rounded">
-                                                        <?= $post_content[$lang->id] ?>
+                                                        <?= $staff_content[$lang->id] ?>
                                                     </textarea>
                                                     <div class="invalid-tooltip"></div>
                                                 </div>
@@ -85,26 +85,16 @@
                 </div>
     
                 <div class="col-md-3 pr-0">
-                    <h5 class="font-weight-bold text-primary">Đăng bài</h5>
                     <div class="tile p-3">
+                        <h5 class="font-weight-bold text-primary">Đăng bài</h5>
                         <div class="row m-0">
                             <div class="col-md-12 p-0">
                                 <i class="fa fa-key"></i>
                                 <span class="f-s-90">Trạng thái:</span>
                                 <div class="form-group mt-1">
                                     <div class="input-group">
-                                        <?= $form_post->render('status') ?>
+                                        <?= $form_staff->render('status') ?>
                                         <div class="invalid-tooltip"></div>
-                                    </div>
-                                </div>
-                                <div class="d-inline-block w-100">
-                                    <i class="fa fa-calendar"></i>
-                                    <span class="f-s-90">Lịch:</span>
-                                    <div class="form-group mt-1">
-                                        <div class="input-group">
-                                            <?= $form_post->render('calendar') ?>
-                                            <div class="invalid-tooltip"></div>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="d-inline-block w-100 mb-2">
@@ -112,7 +102,7 @@
                                     <span class="f-s-90">Slug:</span>
                                     <div class="form-group mt-1">
                                         <div class="input-group">
-                                            <?= $form_post->render('slug') ?>
+                                            <?= $form_staff->render('slug') ?>
                                             <div class="invalid-tooltip"></div>
                                         </div>
                                     </div>
@@ -124,27 +114,14 @@
                             </div>
                         </div>
                     </div>
-                    <h5 class="font-weight-bold text-primary">Danh mục</h5>
-                    <div class="tile p-3">
-                        <div class="row m-0">
-                            <div class="col-md-12 p-0">
-                                <div class="form-group mb-0">
-                                    <div class="input-group">
-                                        <?= $form_post->render('cat_id') ?>
-                                        <div class="invalid-tooltip"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
     
-                    <h5 class="font-weight-bold text-primary">Ảnh đại diện</h5>
+
                     <div class="tile p-3">
                         <div class="row m-0">
                             <div class="col-md-12 p-0">
-                                <img id="showImg" src="<?php echo $post->featured_image ? $post->featured_image : '' ?>"
+                                <img id="showImg" src="<?php echo $staff->featured_image ? $staff->featured_image : '' ?>"
                                     alt="" width="100%">
-                                <?= $form_post->render('featured_image') ?>
+                                <?= $form_staff->render('featured_image') ?>
                                 <a id="uploadImage" href="#" class="link">Đặt ảnh đại diện</a>
                             </div>
                         </div>

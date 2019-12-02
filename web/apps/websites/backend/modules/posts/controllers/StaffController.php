@@ -1,11 +1,10 @@
 <?php
 namespace Backend\Modules\Posts\Controllers;
 use Models\Staff;
-use Models\Posts;
-use Models\PostsLang;
+use Models\StaffLang;
 use Models\Language;
-use Backend\Modules\Posts\Forms\PostsForm;
-use Backend\Modules\Posts\Forms\PostsLangForm;
+use Backend\Modules\Posts\Forms\StaffForm;
+use Backend\Modules\Posts\Forms\StaffLangForm;
 
 class StaffController  extends \BackendController {
 
@@ -16,42 +15,41 @@ class StaffController  extends \BackendController {
 
     public function updateAction($id = 0){
         $forms_lang = [];
-        $posts_lang = [];
-        $post_content = [];
+        $staffs_lang = [];
+        $staff_content = [];
         $languages = Language::find(['status = 1']);
         if($id){
-            if(!$post = Posts::findFirstId($id)){
+            if(!$staff = Staff::findFirstId($id)){
                 echo 'Không tìm thấy dữ liệu'; die;
             }
-            $post->updated_at = date('Y-m-d H:i:s');
-            $post->calendar = $this->helper->datetime_vn($post->calendar);
+            $staff->updated_at = date('Y-m-d H:i:s');
+            $staff->calendar = $this->helper->datetime_vn($staff->calendar);
             $title = 'Cập nhật';
             foreach ($languages as $key => $lang) {
-                $post_lang = PostsLang::findFirst(['post_id = :id: AND lang_id = :lang_id:','bind' => ['id' => $post->id, 'lang_id' => $lang->id]]);
-                if($post_lang){
-                    $form_lang = new PostsLangForm($post_lang);
-                    $posts_lang[$lang->id] = $post_lang;
+                $staff_lang = StaffLang::findFirst(['staff_id = :id: AND lang_id = :lang_id:','bind' => ['id' => $staff->id, 'lang_id' => $lang->id]]);
+                if($staff_lang){
+                    $form_lang = new StaffLangForm($staff_lang);
+                    $staffs_lang[$lang->id] = $staff_lang;
                     $forms_lang[$lang->id] = $form_lang;
-                    $post_content[$lang->id] = $post_lang->content;
+                    $staff_content[$lang->id] = $staff_lang->content;
                 }else{
                     echo 'Nội dung không phù hợp'; die;
                 }
             }   
         }else{
-            $post = new Posts();
-            $post->author = $this->session->get('user_id');
-            $post->dept_id = $this->session->get('dept_id');
-            $post->created_at = date('Y-m-d H:i:s');
-            $post->updated_at = $post->created_at;
+            $staff = new Staff();
+            $staff->dept_id = $this->session->get('dept_id');
+            $staff->created_at = date('Y-m-d H:i:s');
+            $staff->updated_at = $staff->created_at;
             $title = 'Thêm mới';
             foreach ($languages as $key => $lang) {
-                $forms_lang[$lang->id] = new PostsLangForm();
-                $posts_lang[$lang->id] = new PostsLang();
-                $post_content[$lang->id] = '';
+                $forms_lang[$lang->id] = new StaffLangForm();
+                $staffs_lang[$lang->id] = new StaffLang();
+                $staff_content[$lang->id] = '';
             }
         }
 
-        $form_post = new PostsForm($post);
+        $form_staff = new StaffForm($staff);
         if ($this->request->isPost()) {
             if ($this->security->checkToken()) {
                 $data['token'] = ['key' => $this->security->getTokenKey(), 'value' => $this->security->getToken()];
@@ -59,44 +57,42 @@ class StaffController  extends \BackendController {
                 $p_title = $this->request->getPost('title');
                 $p_slug = $this->request->getPost('slug');
                 $p_content = $this->request->getPost('content');
-                $p_excerpt = $this->request->getPost('excerpt');
-                $p_calendar = $this->request->getPost('calendar');
-                $req_post = [
+                $p_regency = $this->request->getPost('regency');
+                $req_staff = [
                     'cat_id' => $this->request->getPost('cat_id'),
                     'status' => $this->request->getPost('status'),
                     'slug' => $p_slug ? $p_slug : $this->helper->slugify($p_title[1]),
-                    'calendar' => $p_calendar ? $p_calendar : date('d/m/Y H:i'),
                     'featured_image' => $this->request->getPost('featured_image'),
                 ];
 
-                $form_post->bind($req_post, $post);
-                if (!$form_post->isValid()) {
-                    foreach ($form_post->getMessages() as $message) {
+                $form_staff->bind($req_staff, $staff);
+                if (!$form_staff->isValid()) {
+                    foreach ($form_staff->getMessages() as $message) {
                         array_push($error, $message->getMessage());
                     }
                 }
 
-                $check_slug = Posts::findFirst([
+                $check_slug = Staff::findFirst([
                     "slug = :slug: AND id != :id:",
                     "bind" => [
-                        "slug" => $req_post['slug'],
+                        "slug" => $req_staff['slug'],
                         'id'    => $id,
                     ]
                 ]);
     
                 if($check_slug){
-                    $req_post['slug'] = $req_post['slug'] .'-'. strtotime('now'); 
+                    $req_staff['slug'] = $req_staff['slug'] .'-'. strtotime('now'); 
                 }
 
                 foreach ($languages as $key => $lang) {
-                    $req_post_lang[$lang->id] = [
+                    $req_staff_lang[$lang->id] = [
                         'title' => $p_title[$lang->id],
                         'content' => $p_content[$lang->id],
-                        'excerpt' => $p_excerpt[$lang->id],
+                        'regency' => $p_regency[$lang->id],
                         'lang_id' => $lang->id,
                     ];
 
-                    $forms_lang[$lang->id]->bind($req_post_lang[$lang->id], $posts_lang[$lang->id]);
+                    $forms_lang[$lang->id]->bind($req_staff_lang[$lang->id], $staffs_lang[$lang->id]);
                     if (!$forms_lang[$lang->id]->isValid()) {
                         foreach ($forms_lang[$lang->id]->getMessages() as $message) {
                             array_push($error, $message->getMessage());
@@ -105,18 +101,17 @@ class StaffController  extends \BackendController {
                 }
 
                 if (!count($error)) {
-                    $post->calendar = $this->helper->datetime_mysql($post->calendar);
-                    if (!$post->save()) {
-                        foreach ($post->getMessages() as $message) {
+                    if (!$staff->save()) {
+                        foreach ($staff->getMessages() as $message) {
                             $this->flashSession->error($message);
                         }
                     } else {
                         foreach ($languages as $key => $lang) {
-                            $posts_lang[$lang->id]->post_id = $post->id;
-                            $posts_lang[$lang->id]->save();
+                            $staffs_lang[$lang->id]->staff_id = $staff->id;
+                            $staffs_lang[$lang->id]->save();
                         }
                         $this->flashSession->success($title." thành công");
-                        return $this->response->redirect(BACKEND_URL.'/posts');
+                        return $this->response->redirect(BACKEND_URL.'/staff');
                     }
                 }else{
                     foreach ($error as $value) {
@@ -129,21 +124,21 @@ class StaffController  extends \BackendController {
         }
 
         $this->view->languages = $languages;
-        $this->view->post_content = $post_content;
+        $this->view->staff_content = $staff_content;
         $this->view->forms_lang = $forms_lang;
-        $this->view->form_post = $form_post;
-        $this->view->post = $post;
-        $this->view->posts_lang = $posts_lang;
+        $this->view->form_staff = $form_staff;
+        $this->view->staff = $staff;
+        $this->view->staffs_lang = $staffs_lang;
         $this->view->title = $title;
         $this->assets->addJs('/elfinder/js/require.min.js');
         $this->get_js_css();
     }
 
     public function deleteAction($id = null){
-        if ($post = Posts::findFirstId($id)) {
-            if (!$post->delete()) {
+        if ($staff = Staff::findFirstId($id)) {
+            if (!$staff->delete()) {
                 if ($this->request->isAjax()) {
-                    foreach ($post->getMessages() as $message) {
+                    foreach ($staff->getMessages() as $message) {
                         array_push($error, $message->getMessage());
                     }
                     $data['error'] = $error;
@@ -151,14 +146,14 @@ class StaffController  extends \BackendController {
                     $this->response->setJsonContent($data);
                     return $this->response->send();
                 } else {
-                    foreach ($post->getMessages() as $message) {
+                    foreach ($staff->getMessages() as $message) {
                         $this->flashSession->error($message);
                     }
                     return $this->response->redirect(BACKEND_URL.'/trashs');
                 }
             }else{
                 if ($this->request->isAjax()) {
-                    $data['data'] = $post->toArray();
+                    $data['data'] = $staff->toArray();
                     $this->response->setStatusCode(200, 'OK');
                     $this->response->setJsonContent($data);
                     return $this->response->send();
@@ -193,22 +188,22 @@ class StaffController  extends \BackendController {
             ->columns(array(
                 $npStaff.'.id',
                 $npStaff.'.slug',
-                $npStaff.'.image',
+                $npStaff.'.featured_image',
                 $npStaff.'.status',
                 $npStaff.'.dept_id',
                 $npStaff.'.created_at',
-                'SL.name name',
+                'SL.title title',
                 'SL.regency regency',
-                'SL.description description',
+                'SL.content content',
                 'D.name dept_name',
             ))
             ->from($npStaff)
             ->leftJoin('Models\DepartmentsLang', 'D.dept_id = '.$npStaff.'.dept_id','D')
-            ->leftJoin('Models\StaffLang', 'SL.staff_id = '.$npStaff.'.id','SL')
+            ->leftJoin('Models\StaffLang', 'SL.staff_id = '.$npStaff.'.id AND SL.lang_id = 1','SL')
             ->orderBy($npStaff.'.dept_id ASC, '.$npStaff.'.created_at DESC')
-            ->where("SL.lang_id = 1");
+            ->where('1=1');
     
-            $search = 'SL.name LIKE :search:';
+            $search = 'SL.title LIKE :search:';
             $this->response->setStatusCode(200, 'OK');
             $this->response->setJsonContent($this->ssp->data_output($this->request->get(), $data,$search));
             return $this->response->send();

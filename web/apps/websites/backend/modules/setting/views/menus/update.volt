@@ -69,8 +69,8 @@
             </div>
 
             <div class="col-md-3 pr-0">
-                <h5 class="font-weight-bold text-primary">{{title}}</h5>
                 <div class="tile p-3">
+                    <h5 class="font-weight-bold text-primary">{{title}}</h5>
                     <div class="row m-0">
                         <div class="col-md-12 p-0">
                             <i class="fa fa-key"></i>
@@ -100,7 +100,6 @@
                     </div>
                 </div>
 
-                <h5 class="font-weight-bold text-primary">Ảnh đại diện</h5>
                 <div class="tile p-3">
                     <div class="row m-0">
                         <div class="col-md-12 p-0">

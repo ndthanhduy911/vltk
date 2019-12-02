@@ -24,10 +24,10 @@ const loadTablePages = () => {
                     "data": "no"
                 },
                 {
-                    "data": "image"
+                    "data": "featured_image"
                 },
                 {
-                    "data": "name"
+                    "data": "title"
                 },
                 {
                     "data": "regency"
@@ -47,7 +47,7 @@ const loadTablePages = () => {
             ],
             'createdRow': function (row, item, dataIndex) {
                 $(row).addClass('text-center');
-                let image = `<img src="${getPathImage(item.image, '/assets/frontend/images/defaut_img.png')}" width="50px">`;
+                let image = `<img src="${getPathImage(item.featured_image, '/assets/frontend/images/defaut_img.png')}" width="50px">`;
                 $('td:eq(1)', row).html(image);
                 $('td', row).addClass('align-middle');
                 $('td:eq(5)', row).html(vi_moment(item.created_at, 'DD/MM/YYYY HH:mm'));
