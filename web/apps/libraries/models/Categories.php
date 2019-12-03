@@ -11,6 +11,8 @@ class Categories extends \Phalcon\Mvc\Model
 
     public $dept_id;
 
+    public $author;
+
     public $featured_image;
 
     public $created_at;

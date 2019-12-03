@@ -138,6 +138,15 @@ class Departments extends \Phalcon\Mvc\Model
         }
     }
 
+    public static function getBySlug($slug = null)
+    {
+        if($dept = parent::findFirst(['slug = :slug:','bind' => ['slug' => $slug]])){
+            return $dept;
+        }else{
+            return false;
+        }
+    }
+
     public static function getTitleById($id = null)
     {
         if($dept = parent::findFirst($id)){

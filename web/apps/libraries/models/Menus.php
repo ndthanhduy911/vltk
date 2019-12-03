@@ -5,6 +5,7 @@ use Models\MenusLang;
 use Models\Posts;
 use Models\Pages;
 use Models\Categories;
+use Models\Departments;
 
 
 class Menus extends \Phalcon\Mvc\Model
@@ -51,26 +52,29 @@ class Menus extends \Phalcon\Mvc\Model
     public static function getLink($menu){
         switch ((int)$menu->type) {
             case 1: {
-                $post = Posts::findFirstId($menu->post_id);
-                return $post ? FRONTEND_URL.'/news/'.$post->slug : '';
+                return ($post = Posts::findFirstId($menu->post_id)) ? FRONTEND_URL.'/news/'.$post->slug : '#';
                 break;
             }    
             case 2: {
-                $page = Pages::findFirstId($menu->page_id);
-                return $page ? FRONTEND_URL.'/'.$page->slug : '';
+                ;
+                return ($page = Pages::findFirstId($menu->page_id)) ? FRONTEND_URL.'/'.$page->slug : '#';
                 break;
             } 
             case 3: {
-                $page = Categories::findFirstId($menu->cat_id);
-                return $page ? FRONTEND_URL.'/category/'.$page->slug : '';
+                ;
+                return ($page = Categories::findFirstId($menu->cat_id)) ? FRONTEND_URL.'/category/'.$page->slug : '#';
                 break;
             }   
             case 4: {
+                return ($dept = Departments::findFirstId($menu->dept)) ? FRONTEND_URL.'/'.$dept->slug : '#';
+                break;
+            } 
+            case 5: {
                 return $menu->link;
                 break;
             }        
             default: {
-                    return '';
+                return '#';
                 break;
             }
         }

@@ -11,7 +11,7 @@
                 <!-- ================ -->
                 <article class="blogpost full">
                     <header>
-                        <h2>{{title}}</h2>
+                        <h3>{{title}}</h3>
                         <div class="post-info">
                             <span class="post-date">
                                 <i class="fa fa-calendar-o pr-1"></i>
