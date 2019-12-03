@@ -36,7 +36,7 @@ class PostsController extends \FrontendController
                 ->from($npPosts)
                 ->join('Models\CategoriesLang', 'CL.cat_id = '.$npPosts.'.cat_id AND CL.lang_id = '.$this->session->get('lang_id'),'CL')
                 ->join('Models\PostsLang', 'PL.post_id = '.$npPosts.'.id AND PL.lang_id = '.$this->session->get('lang_id'),'PL')
-                ->orderBy($npPosts.'.calendar DESC')
+                ->orderBy("$npPosts.calendar DESC")
                 ->where($npPosts.'.deleted = 0 AND '.$npPosts.'.cat_id = :cat_id: AND '.$npPosts.'.status = 1 AND '.$npPosts.'.dept_id = :dept_id:',['dept_id' => $dept_id, 'cat_id' => $cat_id])
                 ->limit($limit, 0)
                 ->getQuery()

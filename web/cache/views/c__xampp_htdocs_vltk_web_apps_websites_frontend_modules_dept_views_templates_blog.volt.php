@@ -1,6 +1,6 @@
       <!-- breadcrumb start -->
       <!-- ================ -->
-      {{ partial('breadcrumb') }}
+      <?= $this->partial('breadcrumb') ?>
       <!-- breadcrumb end -->
 
       <!-- main-container start -->
@@ -15,7 +15,7 @@
 
                       <!-- page-title start -->
                       <!-- ================ -->
-                      <h1 class="page-title">{{title}}</h1>
+                      <h1 class="page-title"><?= $title ?></h1>
                       <div class="separator-2"></div>
                       <!-- page-title end -->
 
@@ -30,12 +30,12 @@
                                   data-animation-effect="fadeInUpSmall" data-effect-delay="100">
                                   <?php if($post->featured_image) : ?>
                                   <div class="overlay-container">
-                                      <img class="ml-auto mr-auto" src="<?php echo FRONTEND_URL.$post->featured_image ?>" alt="{{post.title}}">
+                                      <img class="ml-auto mr-auto" src="<?php echo FRONTEND_URL.$post->featured_image ?>" alt="<?= $post->title ?>">
                                       <a class="overlay-link" href="<?php echo FRONTEND_URL.'/news/'.$post->slug ?>"><i class="fa fa-link"></i></a>
                                   </div>
                                   <?php endif ?>
                                   <header>
-                                      <h2><a href="<?php echo FRONTEND_URL.'/news/'.$post->slug ?>">{{post.title}}</a></h2>
+                                      <h2><a href="<?php echo FRONTEND_URL.'/news/'.$post->slug ?>"><?= $post->title ?></a></h2>
                                       <div class="post-info">
                                           <span class="post-date">
                                               <i class="fa fa-calendar-o pr-1"></i>
@@ -44,7 +44,7 @@
                                       </div>
                                   </header>
                                   <div class="blogpost-content">
-                                      <p>{{post.excerpt}}</p>
+                                      <p><?= $post->excerpt ?></p>
                                   </div>
                                   <footer class="clearfix">
                                       <!-- <div class="tags pull-left"><i class="fa fa-tags pr-1"></i> <a href="#">tag 1</a>,
@@ -72,7 +72,7 @@
                                 </li>
                                 <?php endif ?>
                                 <?php for ($i = 1; $i <= $paging['total_page']; $i++) { ?>
-                                <li class="page-item <?php echo $i == $paging['current_page'] ? 'active' : ''  ?>"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+                                <li class="page-item <?php echo $i == $paging['current_page'] ? 'active' : ''  ?>"><a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a></li>
                                 <?php } ?>
                                 <?php if((int)$paging['current_page'] !== (int)$paging['total_page']): ?>
                                 <li class="page-item">
@@ -92,7 +92,7 @@
                   <!-- sidebar start -->
                   <!-- ================ -->
                   <aside class="col-lg-3 col-xl-3 ml-xl-auto">
-                    {{ partial('sidebar') }}
+                    <?= $this->partial('sidebar') ?>
                   </aside>
                   <!-- sidebar end -->
 

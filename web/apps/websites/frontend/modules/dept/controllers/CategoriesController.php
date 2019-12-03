@@ -1,6 +1,8 @@
 <?php
 
 namespace Frontend\Modules\Dept\Controllers;
+use Models\Categories;
+use Models\Posts;
 
 class CategoriesController extends \DeptfrontendController
 {
@@ -8,6 +10,7 @@ class CategoriesController extends \DeptfrontendController
         $lang_id = $this->session->get('lang_id');
         $slug = $this->helper->slugify($params);
         $category = Categories::findFirst(['slug = :slug: AND status = 1', 'bind' => ['slug' => $slug]]);
+
         if($category){
             $current_page = (int)$this->request->get('page');
 
@@ -25,17 +28,18 @@ class CategoriesController extends \DeptfrontendController
                 $npPosts.'.created_at',
                 $npPosts.'.calendar',
                 $npPosts.'.featured_image',
-                'D.name dept_name',
+                'DL.name dept_name',
                 'D.slug dept_slug',
                 'U.name author_name',
                 'C.name cat_name',
             ))
             ->from($npPosts)
             ->join('Models\Departments', 'D.id = '.$npPosts.'.dept_id','D')
+            ->join('Models\DepartmentsLang', "DL.dept_id = $npPosts.dept_id AND DL.lang_id = $lang_id",'DL')
             ->join('Models\Users', 'U.id = '.$npPosts.'.author','U')
             ->join('Models\CategoriesLang', "C.cat_id = $npPosts.cat_id AND C.lang_id = $lang_id",'C')
             ->join('Models\PostsLang', "PL.post_id = $npPosts.id AND PL.lang_id = $lang_id",'PL')
-            ->orderBy($npPosts.'.id DESC')
+            ->orderBy("$npPosts.calendar DESC")
             ->where("$npPosts.deleted = 0 AND $npPosts.status = 1 AND $npPosts.cat_id = ".$category->id);
             
             $post_count = $posts->getQuery()

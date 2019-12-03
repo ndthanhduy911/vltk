@@ -42,13 +42,13 @@ class IndexController extends \FrontendController
                     $npBanner.'.id',
                     $npBanner.'.image',
                     $npBanner.'.button_link',
-                    'SL.name name',
-                    'SL.description description',
-                    'SL.button_text button_text'
+                    'BL.name name',
+                    'BL.description description',
+                    'BL.button_text button_text'
                 ))
                 ->from($npBanner)
-                ->leftJoin('Models\BannerLang', 'SL.banner_id = '.$npBanner.'.id','SL')
-                ->where('SL.lang_id = :lang_id: AND status = 1',['lang_id' => $this->session->get('lang_id')])
+                ->leftJoin('Models\BannerLang', 'BL.banner_id = '.$npBanner.'.id','BL')
+                ->where('BL.lang_id = :lang_id: AND status = 1',['lang_id' => $this->session->get('lang_id')])
                 ->inWhere($npBanner.".id", $listBanner)
                 ->getQuery()
                 ->execute();
@@ -137,10 +137,10 @@ class IndexController extends \FrontendController
                 ->columns(array(
                     $npStaff.'.id',
                     $npStaff.'.slug',
-                    $npStaff.'.image',
-                    'SL.name name',
+                    $npStaff.'.featured_image',
+                    'SL.title title',
                     'SL.regency regency',
-                    'SL.description description'
+                    'SL.content content'
                 ))
                 ->from($npStaff)
                 ->leftJoin('Models\StaffLang', 'SL.staff_id = '.$npStaff.'.id','SL')
@@ -178,8 +178,8 @@ class IndexController extends \FrontendController
                 ->columns(array(
                     $npPartner.'.id',
                     $npPartner.'.link',
-                    $npPartner.'.image',
-                    'PL.name name',
+                    $npPartner.'.featured_image',
+                    'PL.title title',
                 ))
                 ->from($npPartner)
                 ->leftJoin('Models\PartnerLang', 'PL.partner_id = '.$npPartner.'.id','PL')

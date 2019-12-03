@@ -136,11 +136,11 @@
             <div class="col-md-4">
                 <div class="image-box team-member shadow-2 mb-20">
                     <div class="overlay-container rounded overlay-visible">
-                        <img src="{{ helper.getLinkImage(staff.image,'/assets/frontend/images/education-4.jpg') }}" alt="{{staff.name}}">
-                        <a href="{{ constant('FRONTEND_URL')~'/staff/'~staff.slug }}" class="overlay-link" title="{{staff.name}}"><i class="fa fa-graduation-cap"></i></a>
+                        <img src="{{ helper.getLinkImage(staff.featured_image,'/assets/frontend/images/education-4.jpg') }}" alt="{{staff.title}}">
+                        <a href="{{ constant('FRONTEND_URL')~'/staff/'~staff.slug }}" class="overlay-link" title="{{staff.title}}"><i class="fa fa-graduation-cap"></i></a>
                         <div class="overlay-bottom">
                             <div class="text p-0">
-                                <h4 class="title text-white text-uppercase">{{staff.name}}</h4>
+                                <h4 class="title text-white text-uppercase">{{staff.title}}</h4>
                                 <div class="separator light"></div>
                                 <p class="small margin-clear"><em>{{staff.regency}}</em>
                                 </p>
@@ -180,8 +180,8 @@
             <div class="col-lg-3 col-md-6">
                 <div class="ph-20 feature-box text-center object-non-visible" data-animation-effect="fadeInDownSmall"
                     data-effect-delay="100">
-                    <span class="icon large circle"><img class="rounded-circle" alt="{{partner.name}}" src="{{ helper.getLinkImage(staff.image,'/assets/frontend/images/beauty-1.jpg') }}"></span>
-                    <h3>{{partner.name}}</h3>
+                    <span class="icon large circle"><img class="rounded-circle" alt="{{partner.title}}" src="{{ helper.getLinkImage(staff.featured_image,'/assets/frontend/images/beauty-1.jpg') }}"></span>
+                    <h3>{{partner.title}}</h3>
                 </div>
             </div>
             {% endfor %}

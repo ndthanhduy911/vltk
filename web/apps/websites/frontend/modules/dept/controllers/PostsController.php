@@ -33,7 +33,5 @@ class PostsController extends \FrontendController
 
         $this->view->title = '404';
         return $this->view->pick('templates/404');
-        
-
     }
 }

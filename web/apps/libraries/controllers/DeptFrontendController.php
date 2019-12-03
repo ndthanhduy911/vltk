@@ -29,6 +29,12 @@ class DeptfrontendController extends Controller
     public function beforeExecuteRoute(Dispatcher $dispatcher)
     {
         try {
+            if($lang_new =  $this->session->get('lang_new')){
+                $this->session->set('lang_id', $lang_new);
+            }else{
+                $this->session->set('lang_id', 1);
+            }
+            $this->view->lang_id = $this->session->get('lang_id');
             // if($dispatcher->getModuleName() !== 'dept' ){
             //     $params = $this->helper->slugify($dispatcher->getParam('dept'));
             //     $dept = Departments::findFirst(['slug = :slug:', 'bind' => ['slug' => $params]]);
