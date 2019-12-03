@@ -19,6 +19,7 @@ class PostsController extends \FrontendController
         $paging = $this->helper->getPaging(Posts::find(['dept_id = 1 AND status = 1'])->count(), $current_page);
         $this->view->posts = $posts;
         $this->view->paging = $paging;
+        $this->view->dept_id = $dept_id;
         $this->view->pick('templates/blog');
     }
 
@@ -32,7 +33,7 @@ class PostsController extends \FrontendController
             return $this->view->pick('templates/404');
         }
         $slug = $dept_id === 1 ? $slug1 : $slug2;
-
+        $this->view->dept_id = $dept_id;
         if(!$post = Posts::findFirst(["status = 1 AND slug = :slug: AND dept_id = $dept_id", 'bind' => ['slug' => $slug]])){
             $this->view->title = '404';
             return $this->view->pick('templates/404');

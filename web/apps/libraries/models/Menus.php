@@ -56,13 +56,11 @@ class Menus extends \Phalcon\Mvc\Model
                 break;
             }    
             case 2: {
-                ;
-                return ($page = Pages::findFirstId($menu->page_id)) ? FRONTEND_URL.'/'.$page->slug : '#';
+                return ($page = Pages::findFirstId($menu->page_id)) ? FRONTEND_URL.'/'.$page->slug.'.html' : '#';
                 break;
             } 
             case 3: {
-                ;
-                return ($page = Categories::findFirstId($menu->cat_id)) ? FRONTEND_URL.'/category/'.$page->slug : '#';
+                return ($cat = Categories::findFirstId($menu->cat_id)) ? FRONTEND_URL.'/category/'.$cat->slug : '#';
                 break;
             }   
             case 4: {

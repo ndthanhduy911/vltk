@@ -20,8 +20,14 @@ $router->add($config->application->frontendUri."/{dept:[a-z\-]+}/category/{cat:[
 ));
 
 /***********************PagesController***********************/
+$router->add($config->application->frontendUri."/{dept:[a-z\-]+}", array(
+    'module' => 'frontend_dept',
+    'controller' => 'dept',
+    'action' => 'index',
+    'dept' => 1,
+));
 
-$router->add($config->application->frontendUri."/{dept:[a-z\-]+}/{page:[a-z\-]+}", array(
+$router->add($config->application->frontendUri."/{dept:[a-z\-]+}/{page:[a-z\-]+}.html", array(
     'module' => 'frontend_dept',
     'controller' => 'pages',
     'action' => 'index',
@@ -29,7 +35,7 @@ $router->add($config->application->frontendUri."/{dept:[a-z\-]+}/{page:[a-z\-]+}
     'page' => 2,
 ));
 
-$router->add($config->application->frontendUri."/{page:[a-z\-]+}", array(
+$router->add($config->application->frontendUri."/{page:[a-z\-]+}.html", array(
     'module' => 'frontend_dept',
     'controller' => 'pages',
     'action' => 'index',
@@ -49,12 +55,3 @@ $router->add($config->application->frontendUri."/news/{post:[a-z\-]+}", array(
     'action' => 'single',
     'post' => 1,
 ));
-
-$depts = Departments::find(['status = 1 AND id != 1']);
-foreach ($depts as $key => $dept) {
-    $router->add($config->application->frontendUri."/$dept->slug", array(
-        'module' => 'frontend_dept',
-        'controller' => 'dept',
-        'action' => 'index'
-    ));
-}

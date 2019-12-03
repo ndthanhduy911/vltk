@@ -13,7 +13,6 @@ use Models\Banner;
 class IndexController extends \FrontendController
 {
     public function indexAction(){
-
         $banners = [];
         $banner_info = [
             'name' => '',
