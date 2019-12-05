@@ -1,5 +1,4 @@
 {% if banners %}
-<!-- banner start -->
 <!-- ================ -->
 <div class="banner clearfix">
     <!-- slideshow start -->
@@ -9,13 +8,12 @@
         <!-- slider revolution start -->
         <!-- ================ -->
         <div class="slider-revolution-5-container">
-            <div id="slider-banner-fullwidth-big-height" class="slider-banner-fullwidth-big-height rev_slider"
+            <div id="slider-banner-fullwidth" class="slider-banner-fullwidth rev_slider"
                 data-version="5.0">
                 <ul class="slides">
                     {% for key, banner in banners %}
-                    <li data-transition="random" data-slotamount="default" data-masterspeed="default"
-                        data-title="<?php echo $banner->title ?>">
-                        <img src="{{ helper.getLinkImage(banner.image,'/assets/frontend/images/banner1.png') }}" alt="{{ banner.name }}" data-bgposition="center top"
+                    <li data-transition="random" data-slotamount="default" data-masterspeed="default" data-title="{{ banner.name }}">
+                        <img src="{{ helper.getLinkImage(banner.image,'/assets/frontend/images/banner1.png') }}" alt="{{ banner.name }}" data-bgposition="center center"
                             data-bgrepeat="no-repeat" data-bgfit="cover" class="rev-slidebg">
 
                         <!-- Transparent Background -->
@@ -37,7 +35,6 @@
                             <p class="slider-content">{{ banner.description }}</p>
                             <div class="text-right"><a class="btn btn-small btn-default margin-clear" href="{{ banner.button_link }}">{{ banner.button_text }}</a></div>
                         </div>
-
                     </li>
                     {% endfor %}
                 </ul>
@@ -49,13 +46,10 @@
     </div>
     <!-- slideshow end -->
 </div>
-<!-- banner end -->
 {% endif %}
 
 <div id="page-start"></div>
 {% if cats %}
-<!-- section start thông báo-->
-<!-- ================ -->
 <section id="section1" class="section clearfix pt-5">
     <div class="container mt-4">
         <div class="row">
@@ -74,12 +68,9 @@
         </div>
     </div>
 </section>
-<!-- section end thông báo-->
 {% endif %}
 
 {% if staffs %}
-<!-- section start lãnh đạo-->
-<!-- ================ -->
 <section class="clearfix pt-5 pb-5">
     <div class="container">
         {% if staff_info['name'] %}
@@ -116,12 +107,9 @@
         </div>
     </div>
 </section>
-<!-- section end lãnh đạo-->
 {% endif %}
 
 {% if partners %}
-<!-- section start liên kết-->
-<!-- ================ -->
 <section class="pt-5 pb-5 section background-img-1 dark-translucent-bg fixed-bg" style="background-position: 50% 42%;">
     {% if partner_info['name'] %}
     <div class="container pv-20">
@@ -148,9 +136,9 @@
         </div>
     </div>
 </section>
-<!-- section end liên kết-->
 {% endif %}
 
+{% if contact_info['name'] %}
 <section id="section-5" class="section pv-40 stats padding-bottom-clear hovered">
     <div class="container">
         <div class="row justify-content-lg-center">
@@ -167,3 +155,4 @@
         </div>
     </div>
 </section>
+{% endif %}

@@ -4,6 +4,7 @@ namespace Frontend\Modules\Dept\Controllers;
 use Models\Posts;
 use Models\Categories;
 use Models\Departments;
+use Models\DepartmentsLang;
 use Models\PostsLang;
 
 class PostsController extends \FrontendController
@@ -28,6 +29,11 @@ class PostsController extends \FrontendController
         $slug2 = $this->helper->slugify($slug2);
         $lang_id = $this->session->get('lang_id');
         $dept_id = $slug2 ? (($dept = Departments::getBySlug($slug1)) ? $dept->id : NULL ): 1;
+        $dept = !empty($dept) ? $dept : Departments::findFirstId(1);
+        $dept_lang = DepartmentsLang::findFirst(['dept_id = :dept_id: AND lang_id = :lang_id:','bind' => ['dept_id' => $dept->id, 'lang_id' => $lang_id]]);
+        $this->view->dept_id = $dept_id;
+        $this->view->dept = $dept;
+        $this->view->dept_lang = $dept_lang;
         if(!$dept_id){
             $this->view->title = '404';
             return $this->view->pick('templates/404');
@@ -53,6 +59,11 @@ class PostsController extends \FrontendController
         $slug2 = $this->helper->slugify($slug2);
         $lang_id = $this->session->get('lang_id');
         $dept_id = $slug2 ? (($dept = Departments::getBySlug($slug1)) ? $dept->id : NULL ): 1;
+        $dept = !empty($dept) ? $dept : Departments::findFirstId(1);
+        $dept_lang = DepartmentsLang::findFirst(['dept_id = :dept_id: AND lang_id = :lang_id:','bind' => ['dept_id' => $dept->id, 'lang_id' => $lang_id]]);
+        $this->view->dept_id = $dept_id;
+        $this->view->dept = $dept;
+        $this->view->dept_lang = $dept_lang;
         if(!$dept_id){
             $this->view->title = '404';
             return $this->view->pick('templates/404');

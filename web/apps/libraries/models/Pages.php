@@ -33,19 +33,11 @@ class Pages extends \Phalcon\Mvc\Model
 
     public static function findFirstId($id, $columns = "*")
     {
-        if($_SESSION['role'] === 1){
-            return parent::findFirst([
-                "conditions" => "id = :id:",
-                "bind" => array('id' => $id),
-                "columns" => $columns
-            ]);
-        }else{
-            return parent::findFirst([
-                "conditions" => "id = :id: AND dept_id IN (".implode(',',$_SESSION['dept_mg']).")",
-                "bind" => array('id' => $id),
-                "columns" => $columns
-            ]);
-        }
+        return parent::findFirst([
+            "conditions" => "id = :id:",
+            "bind" => array('id' => $id),
+            "columns" => $columns
+        ]);   
     }
 
     public static function getUrlById($id = null)

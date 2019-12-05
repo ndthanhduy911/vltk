@@ -12,10 +12,8 @@
             <div id="slider-banner-fullwidth" class="slider-banner-fullwidth rev_slider" data-version="5.0">
                 <ul class="slides">
                     {% for key, banner in banners %}
-                    <li data-transition="random" data-slotamount="default" data-masterspeed="default"
-                        data-title="{{ banner.name }}">
+                    <li data-transition="random" data-slotamount="default" data-masterspeed="default" data-title="{{ banner.name }}">
 
-                        <!-- main image -->
                         <img src="{{ helper.getLinkImage(banner.image,'/assets/frontend/images/banner1.png') }}" alt="{{ banner.name }}"
                             data-bgposition="center center" data-bgrepeat="no-repeat" data-bgfit="cover"
                             class="rev-slidebg">
@@ -40,7 +38,6 @@
                             <p class="slider-content">{{ banner.description }}</p>
                             <div class="text-right"><a class="btn btn-small btn-default margin-clear" href="{{ banner.button_link }}">{{ banner.button_text }}</a></div>
                         </div>
-
                     </li>
                     {% endfor %}
                 </ul>

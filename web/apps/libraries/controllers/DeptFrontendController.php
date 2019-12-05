@@ -32,6 +32,9 @@ class DeptfrontendController extends Controller
             }else{
                 $this->session->set('lang_id', 1);
             }
+            if($language = Language::findFirstId($this->session->get('lang_id'))){
+                $this->session->set('short_name', strtolower($language->short_name));
+            }
             $this->view->lang_id = $this->session->get('lang_id');
             $this->view->language = Language::findFirstId($this->session->get('lang_id'));
         } catch (\Exception $e) {

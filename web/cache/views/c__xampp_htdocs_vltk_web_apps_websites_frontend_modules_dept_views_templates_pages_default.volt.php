@@ -9,14 +9,12 @@
     <div class="container">
         <div class="row justify-content-lg-center">
             <div class="col-lg-8 text-center pv-20">
-                <h2 class="title object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100"><span
-                        class="text-white text-uppercase"><?php echo isset($title) ? $title : 'Mặc định'; ?></span></h2>
+                <h2 class="title object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100"><span class="text-white text-uppercase"><?= $page_lang->title ?></span></h2>
+                <?php if ($page_lang->excerpt) { ?>
                 <div class="separator object-non-visible mt-10" data-animation-effect="fadeIn" data-effect-delay="100">
                 </div>
-                <p class="text-center object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi perferendis magnam ea
-                    necessitatibus, officiis voluptas odit! Aperiam omnis, cupiditate laudantium velit nostrum,
-                    exercitationem accusamus, possimus soluta illo deserunt tempora qui.</p>
+                <p class="text-center object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100"><?= $page_lang->excerpt ?></p>
+                <?php } ?>
             </div>
         </div>
     </div>
@@ -28,7 +26,7 @@
         <div class="row">
             <div class="main col-md-9">
                 <article>
-                    <?php echo $page->content ?>
+                    <?= $page_lang->content ?>
                 </article>
             </div>
 

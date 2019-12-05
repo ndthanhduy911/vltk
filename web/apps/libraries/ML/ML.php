@@ -32,7 +32,7 @@ namespace Library\ML;
 class ML {
     static function _ml_system($id = null, $sentence = ""){
         $lang_de = isset($_SESSION['short_name']) ? $_SESSION['short_name'] : 'vie';
-        $path =  PUBLIC_PATH.'/language_file'.'/'.$lang_de.'/'.$lang_de.'_system.json';
+        $path =  PUBLIC_DIR.'/language_file'.'/'.$lang_de.'/'.$lang_de.'.json';
         if(!file_exists($path)){
             return "Not find this vocabulary";
         }
@@ -45,7 +45,6 @@ class ML {
                 $json_data[$id]['default'] = $sentence;
                 return $json_data[$id]['trans'];
             }else{
-                
                 return $json_data[$id]['trans'];
             }
             
@@ -60,7 +59,7 @@ class ML {
     static function _ml_update($id = null, $sentence = "", $language){
         if($language){
             $short_name = strtolower($language->short_name);
-            $path =  PUBLIC_PATH.'/language_file'.'/'.$short_name.'/'.$short_name.'_system.json';
+            $path =  PUBLIC_DIR.'/language_file'.'/'.$short_name.'/'.$short_name.'.json';
             if(!file_exists($path)){
                 return "Not find this vocabulary";
             }

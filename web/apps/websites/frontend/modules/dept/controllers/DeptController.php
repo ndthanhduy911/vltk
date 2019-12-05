@@ -16,8 +16,8 @@ class DeptController extends \DeptfrontendController
     public function indexAction($slug = null){
 
         $slug = $this->helper->slugify($slug);
-        $dept_id = ($dept = Departments::getBySlug($slug)) ? $dept->id : NULL;
-
+        $dept_id = ($dept = Departments::getBySlug($slug)) ? $dept->id : 0;
+        $lang_id = $this->session->get('lang_id');
         $banners = [];
         $banner_info = [
             'name' => '',
@@ -30,7 +30,7 @@ class DeptController extends \DeptfrontendController
                 'home_id = :home_id: AND lang_id = :lang_id:',
                 'bind' => [
                     'home_id' => $bannerSetting->id,
-                    'lang_id' => $this->session->get('lang_id')
+                    'lang_id' => $lang_id
                 ] 
             ]);
             if($bannerSettingLang){
@@ -52,8 +52,8 @@ class DeptController extends \DeptfrontendController
                     'BL.button_text button_text'
                 ))
                 ->from($npBanner)
-                ->leftJoin('Models\BannerLang', 'BL.banner_id = '.$npBanner.'.id','BL')
-                ->where('BL.lang_id = :lang_id: AND status = 1',['lang_id' => $this->session->get('lang_id')])
+                ->leftJoin('Models\BannerLang', "BL.banner_id = $npBanner.id AND BL.lang_id = $lang_id",'BL')
+                ->where("$npBanner.status = 1")
                 ->inWhere($npBanner.".id", $listBanner)
                 ->getQuery()
                 ->execute();
@@ -63,20 +63,21 @@ class DeptController extends \DeptfrontendController
         $cats = [];
         if($catSetting = HomeSetting::findFirst(["dept_id = $dept_id AND type = 2"])){
             $listCats = json_decode($catSetting->setting);
-            $npCat = Categories::getNamepace();
-            $cats = $this->modelsManager->createBuilder()
-            ->columns(array(
-                $npCat.'.id',
-                $npCat.'.slug',
-                'CL.name cat_name',
-            ))
-            ->from($npCat)
-            ->leftJoin('Models\CategoriesLang', 'CL.cat_id = '.$npCat.'.id','CL')
-            ->where("CL.lang_id = :lang_id: AND status = 1 AND dept_id = $dept_id",['lang_id' => $this->session->get('lang_id')])
-            ->inWhere($npCat.".id", $listCats)
-            ->getQuery()
-            ->execute();
-
+            if($listCats){
+                $npCat = Categories::getNamepace();
+                $cats = $this->modelsManager->createBuilder()
+                ->columns(array(
+                    $npCat.'.id',
+                    $npCat.'.slug',
+                    'CL.name cat_name',
+                ))
+                ->from($npCat)
+                ->leftJoin('Models\CategoriesLang', "CL.cat_id = $npCat.id AND CL.lang_id = $lang_id",'CL')
+                ->where("$npCat.status = 1 AND $npCat.dept_id = $dept_id")
+                ->inWhere($npCat.".id", $listCats)
+                ->getQuery()
+                ->execute();
+            }
         }
 
         $staffs = [];
@@ -90,7 +91,7 @@ class DeptController extends \DeptfrontendController
                 'home_id = :home_id: AND lang_id = :lang_id:',
                 'bind' => [
                     'home_id' => $staffSetting->id,
-                    'lang_id' => $this->session->get('lang_id')
+                    'lang_id' => $lang_id
                 ] 
             ]);
             if($staffSettingLang){
@@ -112,8 +113,8 @@ class DeptController extends \DeptfrontendController
                     'SL.content content'
                 ))
                 ->from($npStaff)
-                ->leftJoin('Models\StaffLang', 'SL.staff_id = '.$npStaff.'.id','SL')
-                ->where('SL.lang_id = :lang_id: AND status = 1',['lang_id' => $this->session->get('lang_id')])
+                ->leftJoin("Models\StaffLang", "SL.staff_id = $npStaff.id AND SL.lang_id = $lang_id",'SL')
+                ->where("$npStaff.status = 1")
                 ->inWhere($npStaff.".id", $listStaff)
                 ->getQuery()
                 ->execute();
@@ -131,7 +132,7 @@ class DeptController extends \DeptfrontendController
                 'home_id = :home_id: AND lang_id = :lang_id:',
                 'bind' => [
                     'home_id' => $partnerSetting->id,
-                    'lang_id' => $this->session->get('lang_id')
+                    'lang_id' => $lang_id
                 ] 
             ]);
             if($partnerSettingLang){
@@ -151,8 +152,8 @@ class DeptController extends \DeptfrontendController
                     'PL.title title',
                 ))
                 ->from($npPartner)
-                ->leftJoin('Models\PartnerLang', 'PL.partner_id = '.$npPartner.'.id','PL')
-                ->where('PL.lang_id = :lang_id: AND status = 1',['lang_id' => $this->session->get('lang_id')])
+                ->leftJoin('Models\PartnerLang', "PL.partner_id = $npPartner.id AND PL.lang_id = $lang_id",'PL')
+                ->where("$npPartner.status = 1")
                 ->inWhere($npPartner.".id", $listPartner)
                 ->getQuery()
                 ->execute();
@@ -170,7 +171,7 @@ class DeptController extends \DeptfrontendController
                 'home_id = :home_id: AND lang_id = :lang_id:',
                 'bind' => [
                     'home_id' => $contactSetting->id,
-                    'lang_id' => $this->session->get('lang_id')
+                    'lang_id' => $lang_id
                 ] 
             ]);
             if($contactSettingLang){
@@ -179,7 +180,6 @@ class DeptController extends \DeptfrontendController
                 $contact_info['background'] = $contactSetting->background;
             }
         }
-
         $this->view->banner_info = $banner_info;
         $this->view->banners = $banners;
         $this->view->cats = $cats;
@@ -190,7 +190,7 @@ class DeptController extends \DeptfrontendController
         $this->view->contact_info = $contact_info;
         $this->view->dept_id = $dept_id;
         $this->view->dept = $dept;
-        $this->view->dept_lang = DepartmentsLang::findFirst(['dept_id = :dept_id: AND lang_id = :lang_id:','bind' => ['dept_id' => $dept_id, 'lang_id' => $this->session->get('lang_id')]]);
+        $this->view->dept_lang = DepartmentsLang::findFirst(['dept_id = :dept_id: AND lang_id = :lang_id:','bind' => ['dept_id' => $dept_id, 'lang_id' => $lang_id]]);
         $this->get_js_css();
     }
 
