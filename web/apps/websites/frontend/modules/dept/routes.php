@@ -35,6 +35,13 @@ $router->add($config->application->frontendUri."/{dept:[a-z\-]+}/{page:[a-z\-]+}
     'page' => 2,
 ));
 
+$router->add($config->application->frontendUri."/{dept:[a-z\-]+}/blog", array(
+    'module' => 'frontend_dept',
+    'controller' => 'posts',
+    'action' => 'blog',
+    'dept' => 1,
+));
+
 $router->add($config->application->frontendUri."/{page:[a-z\-]+}.html", array(
     'module' => 'frontend_dept',
     'controller' => 'pages',
@@ -47,6 +54,12 @@ $router->add($config->application->frontendUri."/category/{cat:[a-z\-]+}", array
     'controller' => 'posts',
     'action' => 'category',
     'cat' => 1,
+));
+
+$router->add($config->application->frontendUri."/blog", array(
+    'module' => 'frontend_dept',
+    'controller' => 'posts',
+    'action' => 'blog'
 ));
 
 $router->add($config->application->frontendUri."/news/{post:[a-z\-]+}", array(

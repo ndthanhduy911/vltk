@@ -75,4 +75,13 @@ class Posts extends \Phalcon\Mvc\Model
             return false;
         }
     }
+
+    public static function getUrl($dept = NULL, $post = NULL)
+    {
+        if($post && $dept){
+            return FRONTEND_URL.($dept->id != 1 ? "/$dept->slug" : '' ).'/news/'.$post->slug;
+        }else{
+            return '';
+        }
+    }
 }

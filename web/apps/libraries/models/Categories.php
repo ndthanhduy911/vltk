@@ -41,10 +41,26 @@ class Categories extends \Phalcon\Mvc\Model
     public static function getUrlById($id = null)
     {
         if($cat = parent::findFirst($id)){
-            return FRONTEND_URL.'/'.$cat->slug;
+            return FRONTEND_URL.'/category/'.$cat->slug;
         }else{
             return null;
         }
+    }
+
+    public static function getUrl($dept = NULL, $cat = NULL)
+    {
+
+
+
+        if($cat && $dept){
+            return FRONTEND_URL.($dept->id != 1 ? "/$dept->slug" : '' ).'/category/'.$cat->slug;
+        }
+
+        if(!$cat){
+            return FRONTEND_URL.($dept->id != 1 ? "/$dept->slug" : '' ).'/blog';
+        }
+
+        return '';
     }
 
     public static function getLang($cat_id =  null){
