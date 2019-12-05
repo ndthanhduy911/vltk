@@ -213,7 +213,7 @@ tbody {
 }
 
 .header-first {
-  padding: 12px 0 0 0;
+  padding: 15px 0 15px 0;
 }
 
 /*header dropdown*/
@@ -873,7 +873,7 @@ tbody {
   }
 
   .fixed-header-on .header-first {
-    padding: 7px 0 0 0;
+    padding: 7px 0 7px 0;
     -webkit-transition: all 0.2s ease-in-out;
     -o-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out;

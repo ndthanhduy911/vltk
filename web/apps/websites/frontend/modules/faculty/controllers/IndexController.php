@@ -9,6 +9,7 @@ use Models\HomeSetting;
 use Models\Staff;
 use Models\Partner;
 use Models\Banner;
+use Models\DepartmentsLang;
 
 class IndexController extends \FrontendController
 {
@@ -220,10 +221,13 @@ class IndexController extends \FrontendController
         $this->view->partner_info = $partner_info;
         $this->view->partners = $partners;
         $this->view->contact_info = $contact_info;
+        $this->view->dept_id = 1;
+        $this->view->dept = Departments::findFirstId(1);
+        $this->view->dept_lang = DepartmentsLang::findFirst(['dept_id = :dept_id: AND lang_id = :lang_id:','bind' => ['dept_id' => 1, 'lang_id' => $this->session->get('lang_id')]]);
         $this->get_js_css();
     }
 
-    public function changelanguage($lang_id = 1){
+    public function changelanguageAction($lang_id = 1){
         $this->session->set("lang_new", $lang_id);
         $this->response->setStatusCode(200, 'OK');
         $this->response->setJsonContent(['lang_id' => $lang_id]);

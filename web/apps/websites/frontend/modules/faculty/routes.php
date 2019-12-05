@@ -11,5 +11,5 @@ $router->add($config->application->frontendUri.'/faculty-api/changelanguage/:int
     'module' => 'frontend_faculty',
     'controller' => 'index',
     'action' => 'changelanguage',
-    'id' => 2,
+    'id' => 1,
 ));

@@ -2,9 +2,7 @@
 
 use Phalcon\Mvc\Controller;
 use Phalcon\Mvc\Dispatcher;
-use Models\Pages;
-use Models\Departments;
-use Models\Categories;
+use Models\Language;
 
 class FrontendController extends Controller
 {
@@ -36,6 +34,7 @@ class FrontendController extends Controller
                 $this->session->set('lang_id', 1);
             }
             $this->view->lang_id = $this->session->get('lang_id');
+            $this->view->language = Language::findFirstId($this->session->get('lang_id'));
         } catch (\Exception $e) {
             $this->flash->error($e->getMessage());
         }

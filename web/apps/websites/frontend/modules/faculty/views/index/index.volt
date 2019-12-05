@@ -1,4 +1,4 @@
-{% if banners.count() %}
+{% if banners %}
 <!-- banner start -->
 <!-- ================ -->
 <div class="banner clearfix">
@@ -56,7 +56,7 @@
 {% endif %}
 
 <div id="page-start"></div>
-{% if cats.count() %}
+{% if cats %}
 <!-- section start thông báo-->
 <!-- ================ -->
 <section id="section1" class="section clearfix pt-5">
@@ -80,7 +80,7 @@
 <!-- section end thông báo-->
 {% endif %}
 
-{% if depts.count() %}
+{% if depts %}
 <!-- section start các bộ môn-->
 <!-- ================ -->
 <section class="pt-5 pb-5 section dark-translucent-bg fixed-bg" style="background-position: 50% 42%; background-image: url(./assets/frontend/images/education-4.jpg)">
@@ -117,7 +117,7 @@
 <!-- section end các bộ môn -->
 {% endif %}
 
-{% if staffs.count() %}
+{% if staffs %}
 <!-- section start lãnh đạo-->
 <!-- ================ -->
 <section class="clearfix pt-5 pb-5">
@@ -159,7 +159,7 @@
 <!-- section end lãnh đạo-->
 {% endif %}
 
-{% if partners.count() %}
+{% if partners %}
 <!-- section start liên kết-->
 <!-- ================ -->
 <section class="pt-5 pb-5 section background-img-1 dark-translucent-bg fixed-bg" style="background-position: 50% 42%;">

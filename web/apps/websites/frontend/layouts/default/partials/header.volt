@@ -5,7 +5,7 @@
 
     $socials = Social::find(['status = 1 AND dept_id = 1 AND location = 1', "order" => "sort ASC"]);
     $links = Link::find(['status = 1 AND dept_id = 1 AND location = 1', "order" => "sort ASC"]);
-    $menuParents = Menus::find(['status = 1 AND dept_id = 1 AND menu_location_id = 1 AND parent_id is NULL']);
+    $menuParents = Menus::find(['status = 1 AND dept_id = 1 AND menu_location_id = 1 AND parent_id is NULL','order' => 'sort ASC']);
 ?>
 <div class="header-container">
     <div class="header-top colored">
@@ -65,11 +65,15 @@
                     <div class="header-first clearfix">
                         <div id="logo" class="logo">
                             <a href="<?php echo FRONTEND_URL ?>/">
-                                <h3 class="title text-default mb-0">VL-VLKT</h3>
+                                {% if dept.logo %}
+                                <img src="{{ helper.getLinkImage(dept.logo) }}" alt="{{ dept_lang.name }}">
+                                {% else %}
+                                <h3 class="title text-default mb-0">{{ dept.code }}</h3>
+                                {% endif %}
                             </a>
                         </div>
                         <div class="site-slogan logo-font">
-                            Khoa Vật Lý - Vật Lý Kỹ Thuật
+                            {{dept_lang.name}}
                         </div>
                     </div>
                 </div>
@@ -79,13 +83,17 @@
                             <nav class="navbar navbar-expand-lg navbar-light p-0">
                                 <div class="navbar-brand clearfix hidden-lg-up">
                                     <div id="logo-mobile" class="logo">
-                                        <!-- <a href="<?php echo FRONTEND_URL ?>/"><img id="logo-img-mobile"
-                                                src="<?php echo FRONTEND_URL ?>/assets/frontend/images/logo-khoa-single-1-96x96.png"
-                                                alt="VL-VLKT"></a> -->
-                                        <h3 class="title text-default mb-0">VL-VLKT</h3>
+                                        <a href="<?php echo FRONTEND_URL ?>/">
+                                            {% if dept.logo %}
+                                            <img id="logo-img-mobile" src="<?= FRONTEND_URL ?>{ helper.getLinkImage(dept.logo,'/assets/frontend/images/logo-khoa-single-1-96x96.png') }}" alt="{{ dept_lang.name }}">
+                                            {% else %}
+                                            <h3 class="title text-default mb-0">{{ dept_lang.code }}</h3>
+                                            {% endif %}
+                                        </a>
+                                        
                                     </div>
                                     <div class="site-slogan logo-font">
-                                        Khoa Vật Lý - Vật Lý Kỹ Thuật
+                                        {{dept_lang.name}}
                                     </div>
 
                                 </div>
@@ -109,8 +117,8 @@
                                                 {%endfor%}
                                                 </ul>
                                             <?php } ?>
-                                            {%endfor%}
                                         </li>
+                                        {%endfor%}
                                     </ul>
                                 </div>
                             </nav>
@@ -118,9 +126,9 @@
                     </div>
                 </div>
                 <div class="col-auto hidden-md-down p-0">
-                    <div class="header-dropdown-buttons" id="lang_id" data-lang="<?= $lang_id ?>">
-                        <a href="#" data-id="1">
-                            <img src="<?php echo FRONTEND_URL ?>/language_file/vie/vietnam.png" class="user-image" alt="VIET NAM" width="36px">
+                    <div class="header-dropdown-buttons" id="lang_id" data-lang="{{ lang_id }}">
+                        <a href="<?= FRONTEND_URL ?>/faculty-api/changelanguage/{{ lang_id == 1 ? 2 : 1  }}" data-id="{{ lang_id }}" class="d-flex align-items-center">
+                            <img src="<?= FRONTEND_URL ?>{{language.path}}/{{language.icon}}" class="user-image" alt="{{ language.name }}" width="36px">
                         </a>
                     </div>
                 </div>

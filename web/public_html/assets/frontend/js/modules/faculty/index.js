@@ -29,8 +29,3 @@ if(homePost.length){
     });
     
 }
-
-
-// showPosts('#posts3', 3);
-
-// showPosts('#posts5', 5);

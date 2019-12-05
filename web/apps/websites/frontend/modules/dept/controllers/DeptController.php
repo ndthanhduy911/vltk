@@ -3,6 +3,7 @@
 namespace Frontend\Modules\Dept\Controllers;
 use Models\Categories;
 use Models\Departments;
+use Models\DepartmentsLang;
 use Models\HomeLang;
 use Models\HomeSetting;
 use Models\Staff;
@@ -76,42 +77,6 @@ class DeptController extends \DeptfrontendController
             ->getQuery()
             ->execute();
 
-        }
-
-        $depts = [];
-        $dept_info = [
-            'name' => '',
-            'des' => '',
-            'background' => ''
-        ];
-        if($deptSetting = HomeSetting::findFirst(["dept_id = $dept_id AND type = 3"])){
-            $npDept = Departments::getNamepace();
-            $deptSettingLang = HomeLang::findFirst([
-                'home_id = :home_id: AND lang_id = :lang_id:',
-                'bind' => [
-                    'home_id' => $deptSetting->id,
-                    'lang_id' => $this->session->get('lang_id')
-                ] 
-            ]);
-            if($deptSettingLang){
-                $dept_info['name'] = $deptSettingLang->name;
-                $dept_info['des'] = $deptSettingLang->description;
-                $dept_info['background'] = $deptSetting->background;
-
-            }
-
-            $depts = $this->modelsManager->createBuilder()
-            ->columns(array(
-                $npDept.'.id',
-                $npDept.'.slug',
-                $npDept.'.image',
-                'DL.name dept_name',
-            ))
-            ->from($npDept)
-            ->leftJoin('Models\DepartmentsLang', 'DL.dept_id = '.$npDept.'.id','DL')
-            ->where('DL.lang_id = :lang_id: AND status = 1 AND '.$npDept.'.id != 1',['lang_id' => $this->session->get('lang_id')])
-            ->getQuery()
-            ->execute();
         }
 
         $staffs = [];
@@ -218,14 +183,14 @@ class DeptController extends \DeptfrontendController
         $this->view->banner_info = $banner_info;
         $this->view->banners = $banners;
         $this->view->cats = $cats;
-        $this->view->dept_info = $dept_info;
-        $this->view->depts = $depts;
         $this->view->staff_info = $staff_info;
         $this->view->staffs = $staffs;
         $this->view->partner_info = $partner_info;
         $this->view->partners = $partners;
         $this->view->contact_info = $contact_info;
         $this->view->dept_id = $dept_id;
+        $this->view->dept = $dept;
+        $this->view->dept_lang = DepartmentsLang::findFirst(['dept_id = :dept_id: AND lang_id = :lang_id:','bind' => ['dept_id' => $dept_id, 'lang_id' => $this->session->get('lang_id')]]);
         $this->get_js_css();
     }
 

@@ -21,7 +21,7 @@ class DepartmentsLang extends \Phalcon\Mvc\Model
     public static function findFirstId($id, $columns = "*")
     {
         return parent::findFirst([
-            "conditions" => "id = :id: AND status = 1",
+            "conditions" => "id = :id:",
             "bind" => array('id' => $id),
             "columns" => $columns
         ]);

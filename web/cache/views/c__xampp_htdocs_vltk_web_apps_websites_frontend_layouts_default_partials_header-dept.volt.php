@@ -1,160 +1,92 @@
+<?php 
+use Models\Menus;
+$menuParents = Menus::find(["status = 1 AND dept_id = $dept_id AND menu_location_id = 1 AND parent_id is NULL",'order' => 'sort ASC']);
+?>
+<div class="header-container">
+    <header class="header dark fixed fixed-desktop clearfix">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-auto hidden-md-down pl-3">
+                    <div class="header-first clearfix">
 
-      <div class="header-container">
-          <header class="header dark fixed fixed-desktop clearfix">
-              <div class="container">
-                  <div class="row">
-                      <div class="col-md-auto hidden-md-down pl-3">
-                          <div class="header-first clearfix">
+                        <!-- logo -->
+                        <div id="logo" class="logo">
+                            <a href="<?php echo FRONTEND_URL.'/dept/'.$dept->slug ?>">
+                                <h3 class="title text-default mb-0">LOGO</h3>
+                            </a>
+                        </div>
 
-                              <!-- logo -->
-                              <div id="logo" class="logo">
-                                  <a href="<?php echo FRONTEND_URL.'/dept/'.$dept->slug ?>">
-                                      <h3 class="title text-default mb-0">LOGO</h3>
-                                  </a>
-                              </div>
+                        <!-- name-and-slogan -->
+                        <div class="site-slogan logo-font">
+                            <?= $dept_lang->name ?>
+                        </div>
 
-                              <!-- name-and-slogan -->
-                              <div class="site-slogan logo-font">
-                                  <?= $dept->name ?>
-                              </div>
+                    </div>
+                    <!-- header-first end -->
 
-                          </div>
-                          <!-- header-first end -->
+                </div>
+                <div class="col-lg-8 ml-lg-auto">
 
-                      </div>
-                      <div class="col-lg-8 ml-lg-auto">
+                    <!-- header-second start -->
+                    <!-- ================ -->
+                    <div class="header-second clearfix">
+                        <div class="main-navigation main-navigation--mega-menu  animated">
+                            <nav class="navbar navbar-expand-lg navbar-light p-0">
+                                <div class="navbar-brand clearfix hidden-lg-up">
 
-                          <!-- header-second start -->
-                          <!-- ================ -->
-                          <div class="header-second clearfix">
-                              <div class="main-navigation main-navigation--mega-menu  animated">
-                                  <nav class="navbar navbar-expand-lg navbar-light p-0">
-                                      <div class="navbar-brand clearfix hidden-lg-up">
+                                    <div id="logo-mobile" class="logo">
+                                        <h3 class="title text-default mb-0"><?= $dept->code ?></h3>
+                                    </div>
 
-                                          <div id="logo-mobile" class="logo">
-                                              <h3 class="title text-default mb-0">VL-VLKT</h3>
-                                          </div>
+                                    <!-- name-and-slogan -->
+                                    <div class="site-slogan logo-font">
+                                        <?= $dept_lang->name ?>
+                                    </div>
 
-                                          <!-- name-and-slogan -->
-                                          <div class="site-slogan logo-font">
-                                            <?= $dept->name ?>
-                                          </div>
+                                </div>
 
-                                      </div>
+                                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                    data-target="#navbar-collapse-1" aria-controls="navbar-collapse-1"
+                                    aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
 
-                                      <button class="navbar-toggler" type="button" data-toggle="collapse"
-                                          data-target="#navbar-collapse-1" aria-controls="navbar-collapse-1"
-                                          aria-expanded="false" aria-label="Toggle navigation">
-                                          <span class="navbar-toggler-icon"></span>
-                                      </button>
+                                <div class="collapse navbar-collapse" id="navbar-collapse-1">
+                                    <!-- main-menu -->
+                                    <ul class="navbar-nav ml-xl-auto">
+                                        <?php foreach ($menuParents as $menu) { ?>
+                                        <?php $menuChild = Menus::find(['parent_id = :parent_id:','bind' => ['parent_id' => $menu->id]]); ?>
+                                        <li class="nav-item dropdown">
+                                            <a href="<?= Menus::getLink($menu) ?>" class="nav-link <?= $menuChild->count() ? 'dropdown-toggle' : '' ?>" <?= $menuChild->count() ? 'data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"' : '' ?>><?= Menus::getName($menu->id, $lang_id) ?></a>
+                                            <?php if($menuChild->count()){ ?>
+                                                <ul class="dropdown-menu">
+                                                <?php foreach ($menuChild as $child) { ?>
+                                                    <li><a href="<?= Menus::getLink($child) ?>"><?= Menus::getName($child->id, $lang_id) ?></a></li>
+                                                <?php } ?>
+                                                </ul>
+                                            <?php } ?>
+                                        </li>
+                                        <?php } ?>
+                                    </ul>
+                                    <!-- main-menu end -->
+                                </div>
+                            </nav>
+                        </div>
+                        <!-- main-navigation end -->
+                    </div>
+                    <!-- header-second end -->
 
-                                      <div class="collapse navbar-collapse" id="navbar-collapse-1">
-                                          <!-- main-menu -->
-                                          <ul class="navbar-nav ml-xl-auto">
-
-                                              <!-- mega-menu start trang chủ-->
-                                              <li class="nav-item dropdown ">
-                                                  <a href="#" class="nav-link dropdown-toggle" id="third-dropdown"
-                                                      data-toggle="dropdown" aria-haspopup="true"
-                                                      aria-expanded="false">Trang
-                                                      chủ</a>
-                                                  <ul class="dropdown-menu" aria-labelledby="third-dropdown">
-                                                    <?php $page = $this->helper->getPageById($pages, 19); ?>
-                                                    <li><a href="<?php echo FRONTEND_URL.'/dept/'.$dept->slug.'/'.$page->slug ?>"><?php echo $page->title ?></a></li>
-                                                    <?php $page = $this->helper->getPageById($pages, 20); ?>
-                                                    <li><a href="<?php echo FRONTEND_URL.'/dept/'.$dept->slug.'/'.$page->slug ?>"><?php echo $page->title ?></a></li>
-                                                    <?php $page = $this->helper->getPageById($pages, 21); ?>
-                                                    <li><a href="<?php echo FRONTEND_URL.'/dept/'.$dept->slug.'/'.$page->slug ?>"><?php echo $page->title ?></a></li>
-                                                    <?php $page = $this->helper->getPageById($pages, 22); ?>
-                                                    <li><a href="<?php echo FRONTEND_URL.'/dept/'.$dept->slug.'/'.$page->slug ?>"><?php echo $page->title ?></a></li>
-                                                    <?php $page = $this->helper->getPageById($pages, 23); ?>
-                                                    <li><a href="<?php echo FRONTEND_URL.'/dept/'.$dept->slug.'/'.$page->slug ?>"><?php echo $page->title ?></a></li>
-                                                    <?php $page = $this->helper->getPageById($pages, 24); ?>
-                                                    <li><a href="<?php echo FRONTEND_URL.'/dept/'.$dept->slug.'/'.$page->slug ?>"><?php echo $page->title ?></a></li>
-                                                  </ul>
-                                              </li>
-                                              <!-- mega-menu end trang chủ-->
-                                              <!-- mega-menu start Giới thiệu-->
-                                              <li class="nav-item dropdown ">
-                                                  <a href="#" class="nav-link dropdown-toggle" id="fifth-dropdown"
-                                                      data-toggle="dropdown" aria-haspopup="true"
-                                                      aria-expanded="false">Nghiên cứu</a>
-                                                  <ul class="dropdown-menu" aria-labelledby="fifth-dropdown">
-                                                        <?php $page = $this->helper->getPageById($pages, 17); ?>
-                                                        <li><a href="<?php echo FRONTEND_URL.'/dept/'.$dept->slug.'/'.$page->slug ?>"><?php echo $page->title ?></a></li>
-                                                        <?php $page = $this->helper->getPageById($pages, 18); ?>
-                                                        <li><a href="<?php echo FRONTEND_URL.'/dept/'.$dept->slug.'/'.$page->slug ?>"><?php echo $page->title ?></a></li>
-                                                  </ul>
-                                              </li>
-                                              <!-- mega-menu end giới thiệu-->
-
-                                              <!-- mega-menu start Tuyển sinh-->
-                                              <li class="nav-item dropdown ">
-                                                  <a href="#" class="nav-link dropdown-toggle" id="third-dropdown"
-                                                      data-toggle="dropdown" aria-haspopup="true"
-                                                      aria-expanded="false">Bản
-                                                      tin khoa</a>
-                                                  <ul class="dropdown-menu" aria-labelledby="third-dropdown">
-                                                    <?php foreach ($cats as $key => $cat) { ?>
-                                                        <?php if($key !== 0): ?>
-                                                            <li><a href="<?php echo FRONTEND_URL.'/category/'.$cat->slug ?>"><?php echo $cat->name ?></a></li>
-                                                        <?php endif ?>
-                                                    <?php } ?>
-                                                  </ul>
-                                              </li>
-                                              <!-- mega-menu end tuyển sinh-->
-
-                                              <!-- mega-menu start Đào tạo-->
-
-                                              <li class="nav-item dropdown ">
-                                                  <a href="#" class="nav-link dropdown-toggle" id="fourth-dropdown"
-                                                      data-toggle="dropdown" aria-haspopup="true"
-                                                      aria-expanded="false">Đào
-                                                      tạo</a>
-                                                  <ul class="dropdown-menu" aria-labelledby="fourth-dropdown">
-                                                    <?php $page = $this->helper->getPageById($pages, 25); ?>
-                                                    <li><a href="<?php echo FRONTEND_URL.'/dept/'.$dept->slug.'/'.$page->slug ?>"><?php echo $page->title ?></a></li>
-                                                    <?php $page = $this->helper->getPageById($pages, 26); ?>
-                                                    <li><a href="<?php echo FRONTEND_URL.'/dept/'.$dept->slug.'/'.$page->slug ?>"><?php echo $page->title ?></a></li>
-                                                  </ul>
-                                              </li>
-                                              <!-- mega-menu end đào tạo-->
-
-                                              <!-- mega-menu start nghiên cứu-->
-                                              <li class="nav-item dropdown ">
-                                                  <a href="#" class="nav-link dropdown-toggle" id="sixth-dropdown"
-                                                      data-toggle="dropdown" aria-haspopup="true"
-                                                      aria-expanded="false">Tuyển
-                                                      sinh</a>
-                                                  <ul class="dropdown-menu" aria-labelledby="fourth-dropdown">
-                                                        <?php $page = $this->helper->getPageById($pages, 27); ?>
-                                                        <li><a href="<?php echo FRONTEND_URL.'/dept/'.$dept->slug.'/'.$page->slug ?>"><?php echo $page->title ?></a></li>
-                                                        <?php $page = $this->helper->getPageById($pages, 28); ?>
-                                                        <li><a href="<?php echo FRONTEND_URL.'/dept/'.$dept->slug.'/'.$page->slug ?>"><?php echo $page->title ?></a></li>
-                                                  </ul>
-                                              </li>
-                                              <!-- mega-menu end nghiên cứu-->
-                                          </ul>
-                                          <!-- main-menu end -->
-                                      </div>
-                                  </nav>
-                              </div>
-                              <!-- main-navigation end -->
-                          </div>
-                          <!-- header-second end -->
-
-                      </div>
-                      <div class="col-auto hidden-md-down p-0">
-                          <div class="header-dropdown-buttons" id="lang_id" data-lang="<?php echo $this->session->get('lang_id'); ?>">
-                              <a href="#" data-id="1">
-                                  <img src="<?php echo FRONTEND_URL ?>/language_file/vie/vietnam.png" class="user-image"
-                                      alt="VIET NAM" width="36px">
-                              </a>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </header>
-          <!-- header end -->
-      </div>
-      <!-- header-container end -->
+                </div>
+                <div class="col-auto hidden-md-down p-0">
+                    <div class="header-dropdown-buttons" id="lang_id" data-lang="<?= $lang_id ?>">
+                        <a href="<?= FRONTEND_URL ?>/faculty-api/changelanguage/<?= ($lang_id == 1 ? 2 : 1) ?>" data-id="<?= $language->id ?>">
+                            <img src="<?= FRONTEND_URL ?><?= $language->path ?>/<?= $language->icon ?>" class="user-image" alt="<?= $language->name ?>" width="36px">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- header end -->
+</div>
+<!-- header-container end -->

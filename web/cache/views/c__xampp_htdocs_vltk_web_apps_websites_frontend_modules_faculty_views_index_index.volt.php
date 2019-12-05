@@ -1,4 +1,4 @@
-<?php if ($banners->count()) { ?>
+<?php if ($banners) { ?>
 <!-- banner start -->
 <!-- ================ -->
 <div class="banner clearfix">
@@ -56,7 +56,7 @@
 <?php } ?>
 
 <div id="page-start"></div>
-<?php if ($cats->count()) { ?>
+<?php if ($cats) { ?>
 <!-- section start thông báo-->
 <!-- ================ -->
 <section id="section1" class="section clearfix pt-5">
@@ -80,7 +80,7 @@
 <!-- section end thông báo-->
 <?php } ?>
 
-<?php if ($depts->count()) { ?>
+<?php if ($depts) { ?>
 <!-- section start các bộ môn-->
 <!-- ================ -->
 <section class="pt-5 pb-5 section dark-translucent-bg fixed-bg" style="background-position: 50% 42%; background-image: url(./assets/frontend/images/education-4.jpg)">
@@ -117,7 +117,7 @@
 <!-- section end các bộ môn -->
 <?php } ?>
 
-<?php if ($staffs->count()) { ?>
+<?php if ($staffs) { ?>
 <!-- section start lãnh đạo-->
 <!-- ================ -->
 <section class="clearfix pt-5 pb-5">
@@ -159,7 +159,7 @@
 <!-- section end lãnh đạo-->
 <?php } ?>
 
-<?php if ($partners->count()) { ?>
+<?php if ($partners) { ?>
 <!-- section start liên kết-->
 <!-- ================ -->
 <section class="pt-5 pb-5 section background-img-1 dark-translucent-bg fixed-bg" style="background-position: 50% 42%;">
