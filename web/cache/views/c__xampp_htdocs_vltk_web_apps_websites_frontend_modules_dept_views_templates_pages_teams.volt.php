@@ -1,47 +1,42 @@
 <?php use Models\Staff; 
 
     $npStaff = Staff::getNamepace();
-    if($dept_id == 1){
-        $deanStaffs = $this->modelsManager->createBuilder()
-        ->columns(array(
-            $npStaff.'.id',
-            $npStaff.'.slug',
-            $npStaff.'.featured_image',
-            $npStaff.'.is_dean',
-            $npStaff.'.is_vice_dean',
-            $npStaff.'.dept_position',
-            'SL.title title',
-            'SL.regency regency',
-            'SL.content content'
-        ))
-        ->from($npStaff)
-        ->leftJoin("Models\StaffLang", "SL.staff_id = $npStaff.id AND SL.lang_id = $lang_id",'SL')
-        ->where("$npStaff.status = 1")
-        ->getQuery()
-        ->execute();
-    }else{
-        
-    }
+    $mainStaffs = $this->modelsManager->createBuilder()
+    ->columns(array(
+        $npStaff.'.id',
+        $npStaff.'.slug',
+        $npStaff.'.featured_image',
+        // $npStaff.'.position',
+        'SL.title title',
+        'SL.regency regency',
+        'SL.content content'
+    ))
+    ->from($npStaff)
+    ->leftJoin("Models\StaffLang", "SL.staff_id = $npStaff.id AND SL.lang_id = $lang_id",'SL')
+    ->where("$npStaff.status = 1")
+    ->inWhere($npStaff.".id", [1])
+    ->getQuery()
+    ->execute();
+
 ?>
 
-{{ partial('breadcrumb') }}
+<?= $this->partial('breadcrumb') ?>
 
 <section class="main-container pt-4">
     <div class="container">
         <div class="row">
             <div class="main col-md-9">
-                <h3 class="text-primary">{{ ml._ml_system('about', 'BAN CHỦ NHIỆM') }}</h3>
+                <h3 class="text-primary"><?= $this->ml->_ml_system('about', 'BAN CHỦ NHIỆM') ?></h3>
                 <div class="separator-2"></div>
                 <div class="row grid-space-10">
-                    {% for staff in deanStaffs %}
                     <div class="col-md-4">
                         <div class="team-member image-box style-2 dark-bg text-center">
                             <div class="overlay-container overlay-visible">
-                                <img src="{{ helper.getLinkImage(staff.featured_image) }}"
-                                    alt="{{ staff.title }}" width="100%">
+                                <img src="<?php echo FRONTEND_URL ?>/assets/frontend/images/team-member-1.jpg"
+                                    alt="" width="100%">
                             </div>
                             <div class="body">
-                                <h5 class="margin-clear text-uppercase">{{ staff.title }}</h5>
+                                <h5 class="margin-clear">PGS.TS. LÊ VŨ TUẤN HÙNG</h5>
                                 <small>TRƯỞNG KHOA</small>
                                 <div class="separator mt-10"></div>
                                 <a href="mailto:lvthung@hcmus.edu.vn" class="margin-clear btn btn-md-link link-light"><i
@@ -49,7 +44,6 @@
                             </div>
                         </div>
                     </div>
-                    {% endfor %}
                     <div class="col-md-4">
                         <div class="team-member image-box style-2 dark-bg text-center">
                             <div class="overlay-container overlay-visible">
@@ -333,7 +327,7 @@
                 </div>
             </div>
             <div class="col-md-3">
-                {{ partial('sidebar') }}
+                <?= $this->partial('sidebar') ?>
             </div>
         </div>
     </div>

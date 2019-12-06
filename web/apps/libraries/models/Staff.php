@@ -11,6 +11,12 @@ class Staff extends \Phalcon\Mvc\Model
 
     public $featured_image;
 
+    public $is_dean;
+    
+    public $is_vice_dean;
+
+    public $dept_position;
+
     public $created_at;
     
     public $updated_at;
@@ -34,5 +40,20 @@ class Staff extends \Phalcon\Mvc\Model
             "bind" => array('id' => $id),
             "columns" => $columns
         ]);
+    }
+
+    public static function getDeptPosition($position = null) {
+        switch ((int)$position) {
+            case 1:
+                return "Trưởng bộ môn";
+            case 2:
+                return "";
+                break;
+            
+            default:
+                # code...
+                break;
+        }
+        return $dept_position;
     }
 }

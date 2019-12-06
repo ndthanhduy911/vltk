@@ -143,7 +143,7 @@ class PostsController extends \FrontendController
             $npPosts.'.featured_image',
         ))
         ->from($npPosts)
-        ->join('Models\PostsLang', "PL.post_id = $npPosts.id AND PL.lang_id = $lang_id AND $npPosts.dept_id = 1",'PL')
+        ->join('Models\PostsLang', "PL.post_id = $npPosts.id AND PL.lang_id = $lang_id AND $npPosts.dept_id = $dept_id",'PL')
         ->orderBy("$npPosts.calendar DESC")
         ->where("$npPosts.deleted = 0 AND $npPosts.status = 1");
         

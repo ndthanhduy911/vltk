@@ -4,17 +4,17 @@
     style="background-image:url('<?php echo FRONTEND_URL ?>/assets/frontend/images/page-about-banner-1.jpg'); background-position: 50% 27%;">
     <!-- breadcrumb start -->
     <!-- ================ -->
-    {{ partial('breadcrumb') }}
+    <?= $this->partial('breadcrumb') ?>
     <!-- breadcrumb end -->
     <div class="container">
         <div class="row justify-content-lg-center">
             <div class="col-lg-8 text-center pv-20">
-                <h2 class="title object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100"><span class="text-white text-uppercase">{{ title }}</span></h2>
-                {% if page_lang.excerpt %}
+                <h2 class="title object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100"><span class="text-white text-uppercase"><?= $title ?></span></h2>
+                <?php if ($page_lang->excerpt) { ?>
                 <div class="separator object-non-visible mt-10" data-animation-effect="fadeIn" data-effect-delay="100">
                 </div>
-                <p class="text-center object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">{{ page_lang.excerpt }}</p>
-                {% endif %}
+                <p class="text-center object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100"><?= $page_lang->excerpt ?></p>
+                <?php } ?>
             </div>
         </div>
     </div>
@@ -29,11 +29,11 @@
             <!-- main start -->
             <!-- ================ -->
             <div class="main col-12">
-                <h3 class="title">{{ ml._ml_system('about', 'Giới thiệu') }} <strong class="text-primary">{{ dept_lang.name }}</strong></h3>
+                <h3 class="title"><?= $this->ml->_ml_system('about', 'Giới thiệu') ?> <strong class="text-primary"><?= $dept_lang->name ?></strong></h3>
                 <div class="separator-2"></div>
                 <div class="row">
                     <div class="col-lg-6">
-                        {{ page_lang.content }}
+                        <?= $page_lang->content ?>
                     </div>
                     <div class="col-lg-6">
                         <div class="slick-carousel content-slider-with-controls">

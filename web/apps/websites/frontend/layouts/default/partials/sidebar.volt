@@ -36,7 +36,7 @@
 <div class="sidebar">
     {% if cats.count() %}
     <div class="block clearfix">
-        <h3 class="title"> {{ ml._ml_system('news', 'Tin tức') }}</h3>
+        <h3 class="title"> {{ ml._ml_system('categories', 'Danh mục') }}</h3>
         <div class="separator-2"></div>
         <nav>
             <ul class="nav flex-column">
