@@ -9,6 +9,8 @@ class Staff extends \Phalcon\Mvc\Model
 
     public $slug;
 
+    public $email;
+
     public $featured_image;
 
     public $is_dean;
@@ -47,7 +49,7 @@ class Staff extends \Phalcon\Mvc\Model
             case 1:
                 return "Trưởng bộ môn";
             case 2:
-                return "";
+                return "Phó bộ môn";
                 break;
             
             default:

@@ -23,7 +23,6 @@ class StaffController  extends \BackendController {
                 echo 'Không tìm thấy dữ liệu'; die;
             }
             $staff->updated_at = date('Y-m-d H:i:s');
-            $staff->calendar = $this->helper->datetime_vn($staff->calendar);
             $title = 'Cập nhật';
             foreach ($languages as $key => $lang) {
                 $staff_lang = StaffLang::findFirst(['staff_id = :id: AND lang_id = :lang_id:','bind' => ['id' => $staff->id, 'lang_id' => $lang->id]]);
@@ -198,7 +197,7 @@ class StaffController  extends \BackendController {
                 'D.name dept_name',
             ))
             ->from($npStaff)
-            ->leftJoin('Models\DepartmentsLang', 'D.dept_id = '.$npStaff.'.dept_id','D')
+            ->leftJoin('Models\DepartmentsLang', 'D.dept_id = '.$npStaff.".dept_id AND D.lang_id = 1",'D')
             ->leftJoin('Models\StaffLang', 'SL.staff_id = '.$npStaff.'.id AND SL.lang_id = 1','SL')
             ->orderBy($npStaff.'.dept_id ASC, '.$npStaff.'.created_at DESC')
             ->where('1=1');
