@@ -16,7 +16,6 @@ use Models\Staff;
             $npStaff.'.email',
             $npStaff.'.dept_id',
             'SL.title title',
-            'SL.regency regency',
             'SL.content content'
         ))
         ->from($npStaff)
@@ -38,7 +37,6 @@ use Models\Staff;
             $npStaff.'.email',
             $npStaff.'.dept_id',
             'SL.title title',
-            'SL.regency regency',
             'SL.content content'
         ))
         ->from($npStaff)
@@ -61,7 +59,6 @@ use Models\Staff;
             $npStaff.'.email',
             $npStaff.'.dept_id',
             'SL.title title',
-            'SL.regency regency',
             'SL.content content'
         ))
         ->from($npStaff)

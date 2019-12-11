@@ -139,7 +139,6 @@ class IndexController extends \FrontendController
                     $npStaff.'.slug',
                     $npStaff.'.featured_image',
                     'SL.title title',
-                    'SL.regency regency',
                     'SL.content content'
                 ))
                 ->from($npStaff)
