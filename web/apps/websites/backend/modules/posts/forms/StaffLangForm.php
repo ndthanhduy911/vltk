@@ -35,22 +35,6 @@ class StaffLangForm extends Form
         ));
         $this->add($title);
 
-        $regency = new Text('regency');
-        $regency->setAttributes(array(
-            'class' => 'form-control',
-            'placeholder' => 'Tóm tắt',
-            'maxlength' => "255",
-            'data-error' => "Tóm tắt không đúng quy định.",
-            'rows' => 4
-        ));
-        $regency->addValidators(array(
-            new StringLength([
-                "max" => 150,
-                "messageMaximum" => "Tóm tắt không được dài quá 255 ký tự",
-            ]),
-        ));
-        $this->add($regency);
-
         $content = new Hidden('content');
         $this->add($content);
 

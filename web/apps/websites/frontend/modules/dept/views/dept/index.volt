@@ -93,7 +93,7 @@
                             <div class="text p-0">
                                 <h4 class="title text-white text-uppercase">{{staff.title}}</h4>
                                 <div class="separator light"></div>
-                                <p class="small margin-clear"><em>{{staff.regency}}</em>
+                                <p class="small margin-clear"><em>{{helper.getDean(staff.dean)}}</em>
                                 </p>
                             </div>
                         </div>

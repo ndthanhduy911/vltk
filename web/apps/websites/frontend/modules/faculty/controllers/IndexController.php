@@ -137,7 +137,10 @@ class IndexController extends \FrontendController
                 ->columns(array(
                     $npStaff.'.id',
                     $npStaff.'.slug',
+                    $npStaff.'.dept_position',
                     $npStaff.'.featured_image',
+                    $npStaff.'.email',
+                    $npStaff.'.dean',
                     'SL.title title',
                     'SL.content content'
                 ))

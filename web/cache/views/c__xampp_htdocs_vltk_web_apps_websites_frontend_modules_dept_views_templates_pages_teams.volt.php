@@ -69,9 +69,7 @@ use Models\Staff;
         ->limit(3)
         ->getQuery()
         ->execute();
-    }
-
-    
+    }    
 ?>
 
 <?= $this->partial('breadcrumb') ?>

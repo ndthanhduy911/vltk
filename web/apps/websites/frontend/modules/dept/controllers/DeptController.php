@@ -108,6 +108,9 @@ class DeptController extends \DeptfrontendController
                     $npStaff.'.id',
                     $npStaff.'.slug',
                     $npStaff.'.featured_image',
+                    $npStaff.'.email',
+                    $npStaff.'.dean',
+                    $npStaff.'.dept_position',
                     'SL.title title',
                     'SL.content content'
                 ))
