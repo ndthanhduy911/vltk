@@ -7,6 +7,7 @@ use Phalcon\Forms\Element\Hidden;
 use Phalcon\Forms\Form;
 use Phalcon\Validation\Validator\StringLength as StringLength;
 use Phalcon\Validation\Validator\PresenceOf;
+use Models\Attributes;
 class PagesForm extends Form
 {
     public function initialize($entity = null, $options = null)
@@ -43,12 +44,9 @@ class PagesForm extends Form
         ));
         $this->add($status);
 
-        $attribute_id = new Select('attribute_id', [
-            1 => "Hoạt động",
-            0 => "Khóa",
-        ], [
+        $attribute_id = new Select('attribute_id', Attributes::find(), [
             'useEmpty' => true,
-            'emptyText' => 'Giao điện mặc định',
+            'emptyText' => 'Mặc định',
             'emptyValue' => '',
             'class' => 'form-control pull-right w-100',
         ]);

@@ -155,7 +155,7 @@ class UserForm extends \Phalcon\Forms\Form
         $dept_id = new Select('dept_id', $departments, array(
             'using' => array('id', 'name'),
             'useEmpty' => true,
-            'emptyText' => 'Vui lòng chọn đơn vị',
+            'emptyText' => 'Vui lòng chọn bộ môn',
             'emptyValue' => '',
             'class' => 'form-control select2-basic',
             'required' => '',
@@ -164,7 +164,7 @@ class UserForm extends \Phalcon\Forms\Form
         ));
         $dept_id->addValidators(array(
             new PresenceOf(array(
-                'message' => 'Đơn vị không được để trống',
+                'message' => 'Bộ môn không được để trống',
             )),
         ));
         $this->add($dept_id);

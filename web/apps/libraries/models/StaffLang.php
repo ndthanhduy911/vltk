@@ -11,8 +11,6 @@ class StaffLang extends \Phalcon\Mvc\Model
 
     public $title;
 
-    public $regency;
-
     public $content;
 
     public function getSource()

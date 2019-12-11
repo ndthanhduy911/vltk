@@ -1,7 +1,7 @@
 <?php
 namespace Backend\Modules\Posts\Forms;
 
-
+use Models\Departments;
 use Phalcon\Forms\Element\Email;
 use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\Textarea;
@@ -30,6 +30,36 @@ class StaffForm extends Form
         ));
         $this->add($slug);
 
+        $npDept = Departments::getNamepace();
+        $depts = $this->modelsManager->createBuilder()
+        ->columns(array(
+            $npDept.'.id',
+            'DL.name name',
+        ))
+        ->from($npDept)
+        ->join('Models\DepartmentsLang', "DL.dept_id = $npDept.id AND DL.lang_id = 1",'DL')
+        ->orderBy('DL.id ASC')
+        ->where("$npDept.status = 1 AND $npDept.id != 1")
+        ->getQuery()
+        ->execute();
+
+        $dept_id = new Select('dept_id', $depts, array(
+            'using' => array('id', 'name'),
+            'class' => 'form-control pull-right w-100',
+            'useEmpty' => true,
+            'emptyText' => 'Vui lòng chọn bộ môn',
+            'emptyValue' => '',
+            'data-error' => "Chưa đúng định dạng",
+            'required' => '',
+            'data-required-error' => 'Vui lòng điền đầy đủ thông tin.',
+        ));
+        $dept_id->addValidators(array(
+            new PresenceOf(array(
+                'message' => 'Bộ môn không được để trống',
+            )),
+        ));
+        $this->add($dept_id);
+
         $status = new Select('status', [
             1 => "Hoạt động",
             0 => "Khóa",
@@ -47,6 +77,47 @@ class StaffForm extends Form
             )),
         ));
         $this->add($status);
+
+        $dean = new Select('dean', [
+            1 => "Trưởng khoa",
+            2 => "Phó trưởng khoa",
+        ], [
+            'class' => 'form-control',
+            'useEmpty' => true,
+            'emptyText' => 'Không có',
+            'emptyValue' => '',
+        ]);
+        $this->add($dean);
+
+        $dept_position = new Select('dept_position', [
+            1 => "Trưởng bộ môn",
+            2 => "Phó bộ môn",
+            3 => "Giáo vụ bộ môn",
+            4 => "Giảng viên",
+            5 => "Giảng viên thỉnh giảng",
+            6 => "Nhân viên",
+        ], [
+            'class' => 'form-control',
+            'useEmpty' => true,
+            'emptyText' => 'Nhân viên',
+            'emptyValue' => '',
+        ]);
+        $this->add($dept_position);
+
+        $email = new Text('email');
+        $email->setAttributes(array(
+            'class' => 'form-control',
+            'placeholder' => 'Địa chỉ e-mail',
+            'maxlength' => "150",
+        ));
+        $email->addValidators(array(
+            new StringLength([
+                "max" => 150,
+                "messageMaximum" => "Email không được dài quá 255 ký tự",
+            ]),
+        ));
+        $this->add($email);
+
 
         $featured_image = new Hidden('featured_image');
         $this->add($featured_image);

@@ -30,7 +30,7 @@
                                 <th class="align-middle text-center text-white">Tên đăng nhập</th>
                                 <th class="align-middle text-center text-white">E-mail</th>
                                 <th class="align-middle text-center text-white">Số điện thoại</th>
-                                <th class="align-middle text-center text-white">Đơn vị</th>
+                                <th class="align-middle text-center text-white">Bộ môn</th>
                                 <th class="align-middle text-center text-white">Phân quyền</th>
                                 <th class="align-middle text-center text-white">Trạng thái</th>
                                 <th class="align-middle text-center text-white">Thao tác</th>
@@ -67,7 +67,7 @@
                             </div>
                         </div>
                         <div class="form-group col-md-6">
-                            <label class="control-label">Đơn vị </label>
+                            <label class="control-label">Bộ môn </label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text fa fa-building"></div>

@@ -107,6 +107,16 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="d-inline-block w-100 mb-2">
+                                <i class="fa fa-link"></i>
+                                <span class="f-s-90">Giao diện:</span>
+                                <div class="form-group mt-1">
+                                    <div class="input-group">
+                                        {{form_page.render('attribute_id')}}
+                                        <div class="invalid-tooltip"></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="col-md-12 p-0">

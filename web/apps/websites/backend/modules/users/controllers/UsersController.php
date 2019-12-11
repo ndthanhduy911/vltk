@@ -126,7 +126,7 @@ class UsersController  extends \BackendController {
                     $form = new UserForm();
                     $password = $this->request->getPost('password');
                     if(!$this->rmt->checkDeptId($user->dept_id, $this->session->get('dept_mg'))){
-                        $this->flash->error('Khu vực/ Đơn vị không cho phép.');
+                        $this->flash->error('Khu vực/ Bộ môn không cho phép.');
                         return $this->response->redirect('/users/edit/'.$id);
                     }
                     $post = [

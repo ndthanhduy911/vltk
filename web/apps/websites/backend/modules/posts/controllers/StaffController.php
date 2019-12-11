@@ -51,17 +51,18 @@ class StaffController  extends \BackendController {
         $form_staff = new StaffForm($staff);
         if ($this->request->isPost()) {
             if ($this->security->checkToken()) {
-                $data['token'] = ['key' => $this->security->getTokenKey(), 'value' => $this->security->getToken()];
                 $error = [];
                 $p_title = $this->request->getPost('title');
                 $p_slug = $this->request->getPost('slug');
                 $p_content = $this->request->getPost('content');
-                $p_regency = $this->request->getPost('regency');
                 $req_staff = [
-                    'cat_id' => $this->request->getPost('cat_id'),
                     'status' => $this->request->getPost('status'),
                     'slug' => $p_slug ? $p_slug : $this->helper->slugify($p_title[1]),
                     'featured_image' => $this->request->getPost('featured_image'),
+                    'dean' => $this->request->getPost('dean'),
+                    'dept_position' => $this->request->getPost('dept_position'),
+                    'email' => $this->request->getPost('email'),
+                    'dept_id' => $this->request->getPost('dept_id')
                 ];
 
                 $form_staff->bind($req_staff, $staff);
@@ -87,7 +88,6 @@ class StaffController  extends \BackendController {
                     $req_staff_lang[$lang->id] = [
                         'title' => $p_title[$lang->id],
                         'content' => $p_content[$lang->id],
-                        'regency' => $p_regency[$lang->id],
                         'lang_id' => $lang->id,
                     ];
 
@@ -190,16 +190,18 @@ class StaffController  extends \BackendController {
                 $npStaff.'.featured_image',
                 $npStaff.'.status',
                 $npStaff.'.dept_id',
+                $npStaff.'.email',
+                $npStaff.'.dean',
+                $npStaff.'.dept_position',
                 $npStaff.'.created_at',
                 'SL.title title',
-                'SL.regency regency',
                 'SL.content content',
                 'D.name dept_name',
             ))
             ->from($npStaff)
             ->leftJoin('Models\DepartmentsLang', 'D.dept_id = '.$npStaff.".dept_id AND D.lang_id = 1",'D')
             ->leftJoin('Models\StaffLang', 'SL.staff_id = '.$npStaff.'.id AND SL.lang_id = 1','SL')
-            ->orderBy($npStaff.'.dept_id ASC, '.$npStaff.'.created_at DESC')
+            ->orderBy("$npStaff.dean ASC, $npStaff.dept_id ASC, $npStaff.dept_position ASC")
             ->where('1=1');
     
             $search = 'SL.title LIKE :search:';

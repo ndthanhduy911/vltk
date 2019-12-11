@@ -28,7 +28,7 @@
                                 <th class="align-middle text-center text-white">Ảnh đại diện</th>
                                 <th class="align-middle text-center text-white">Họ & Tên</th>
                                 <th class="align-middle text-center text-white">Chức vụ</th>
-                                <th class="align-middle text-center text-white">Đơn vị</th>
+                                <th class="align-middle text-center text-white">Bộ môn</th>
                                 <th class="align-middle text-center text-white w-150-px">Ngày đăng</th>
                                 <th class="align-middle text-center text-white w-70-px">Trạng thái</th>
                                 <th class="align-middle text-center text-white w-70-px">Thao tác</th>

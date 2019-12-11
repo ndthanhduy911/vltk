@@ -111,7 +111,7 @@ class ProfileForm extends Form
         $this->add($phone);
 
         $dept = new Text('dept_name');
-        $dept->setLabel('Đơn vị:');
+        $dept->setLabel('Bộ môn:');
         $dept->setAttributes([
             'class' => "form-control",
             'value' => $department ? $department->name : 'ADMIN',

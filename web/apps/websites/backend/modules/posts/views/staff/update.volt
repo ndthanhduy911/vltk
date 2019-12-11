@@ -27,42 +27,22 @@
                         </ul>
                         <div class="tab-content p-3">
                             {% for key, lang in languages %}
-                            <div class="tab-pane fade {{ !key ? 'active show' : '' }}"
-                                id="lang{{lang.id}}">
+                            <div class="tab-pane fade {{ !key ? 'active show' : '' }}"id="lang{{lang.id}}">
                                 <h5 class="font-weight-bold text-primary">Tiêu đề</h5>
-                                <div class="tile p-3">
-                                    <div class="modal-body p-0">
-                                        <div class="form-row">
-                                            <div class="form-group col-md-12 m-0">
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text fa fa-header"></div>
-                                                    </div>
-                                                    {{forms_lang[lang.id].render('title', ['id' : 'title'~lang.id,'name' : 'title['~lang.id~']'])}}
-                                                    <div class="invalid-tooltip"></div>
+                                <div class="mb-3">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12 m-0">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text fa fa-header"></div>
                                                 </div>
+                                                {{forms_lang[lang.id].render('title', ['id' : 'title'~lang.id,'name' : 'title['~lang.id~']'])}}
+                                                <div class="invalid-tooltip"></div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-    
-                                <h5 class="font-weight-bold text-primary">Chức vụ</h5>
-                                <div class="tile p-0">
-                                    <div class="modal-body pb-0">
-                                        <div class="form-row">
-                                            <div class="form-group col-md-12">
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text fa fa-tags"></div>
-                                                    </div>
-                                                    {{forms_lang[lang.id].render('regency', ['id' : 'regency'~lang.id, 'name' : 'regency['~lang.id~']'])}}
-                                                    <div class="invalid-tooltip"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-    
+                 
                                 <h5 class="font-weight-bold text-primary">Giới thiệu</h5>
                                 <div class="tile p-0">
                                     <div class="row m-0">
@@ -86,11 +66,10 @@
     
                 <div class="col-md-3 pr-0">
                     <div class="tile p-3">
-                        <h5 class="font-weight-bold text-primary">Đăng bài</h5>
+
                         <div class="row m-0">
                             <div class="col-md-12 p-0">
-                                <i class="fa fa-key"></i>
-                                <span class="f-s-90">Trạng thái:</span>
+                                <h5 class="font-weight-bold text-primary">Trạng thái</h5>
                                 <div class="form-group mt-1">
                                     <div class="input-group">
                                         {{form_staff.render('status')}}
@@ -98,8 +77,7 @@
                                     </div>
                                 </div>
                                 <div class="d-inline-block w-100 mb-2">
-                                    <i class="fa fa-link"></i>
-                                    <span class="f-s-90">Slug:</span>
+                                    <h5 class="font-weight-bold text-primary">Slug</h5>
                                     <div class="form-group mt-1">
                                         <div class="input-group">
                                             {{form_staff.render('slug')}}
@@ -115,6 +93,44 @@
                         </div>
                     </div>
     
+                    <div class="tile p-3">
+                        <h5 class="font-weight-bold text-primary">Bộ môn</h5>
+                        <div class="row m-0">
+                            <div class="form-group mt-1 w-100">
+                                <div class="input-group">
+                                    {{form_staff.render('dept_id')}}
+                                    <div class="invalid-tooltip"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <h5 class="font-weight-bold text-primary">Chức vụ Khoa</h5>
+                        <div class="row m-0">
+                            <div class="form-group mt-1 w-100">
+                                <div class="input-group">
+                                    {{form_staff.render('dean')}}
+                                    <div class="invalid-tooltip"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <h5 class="font-weight-bold text-primary">Chức vụ Bộ Môn</h5>
+                        <div class="row m-0">
+                            <div class="form-group mt-1 w-100">
+                                <div class="input-group">
+                                    {{form_staff.render('dept_position')}}
+                                    <div class="invalid-tooltip"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <h5 class="font-weight-bold text-primary">E-mail</h5>
+                        <div class="row m-0">
+                            <div class="form-group mt-1 w-100">
+                                <div class="input-group">
+                                    {{form_staff.render('email')}}
+                                    <div class="invalid-tooltip"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="tile p-3">
                         <div class="row m-0">

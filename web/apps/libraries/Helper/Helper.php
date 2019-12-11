@@ -1,7 +1,7 @@
 <?php
 namespace Library\Helper;
 use Phalcon\Mvc\User\Component;
-use Library\PHPMailer\PHPMailer;
+use Library\ML\ML as MLML;
 use Models\Logs as Logs;
 // use Models\Emails;
 // use Models\GenaralSetting;
@@ -200,5 +200,39 @@ class Helper extends Component
     public function getLinkImage($path, $path_default = '/assets/images/no-image.jpg')
     {
         return $path ? FRONTEND_URL.$path : FRONTEND_URL.$path_default;
+    }
+
+    public function getDean($dean = "")
+    {
+        switch ((int)$dean) {
+            case 1: 
+                return MLML::_ml_system('dean',"Trưởng khoa");
+            case 2: 
+                return MLML::_ml_system('vice_dean',"Phó trưởng khoa");            
+            default:
+                return "";
+                break;
+        }
+    }
+
+    public function getPosition($pos = "")
+    {
+        switch ((int)$pos) {
+            case 1: 
+                return  MLML::_ml_system('dean_dept',"Trưởng bộ môn") ;
+            case 2: 
+                return MLML::_ml_system('vice_dean_dept',"Phó bộ môn");       
+            case 3: 
+                return MLML::_ml_system('managing_lecturer',"Giáo vụ");      
+            case 4: 
+                return MLML::_ml_system('lecturer',"Giảng viên");  
+            case 5: 
+                return MLML::_ml_system('visiting_lecturer',"Giảng viên thỉnh giảng");  
+            case 6: 
+                return MLML::_ml_system('staff',"Nhân viên");  
+            default:
+                return "";
+                break;
+        }
     }
 }

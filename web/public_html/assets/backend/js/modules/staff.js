@@ -10,6 +10,36 @@ const showStatus = (id = '') => {
     }
 }
 
+const showDean = (dean = '') => {
+    switch (parseInt(dean)) {
+        case 1:
+            return `<span class="badge badge-primary p-2">Trưởng khoa</span>`;
+        case 2:
+            return `<span class="badge badge-primary p-2">Phó trưởng khoa</span>`;
+        default:
+            return "";
+    }
+}
+
+const showPosition = (pos = '') => {
+    switch (parseInt(pos)) {
+        case 1:
+            return `<span class="badge badge-primary p-2">Trưởng bộ môn</span>`;
+        case 2:
+            return `<span class="badge badge-primary p-2">Phó bộ môn</span>`;
+        case 3:
+            return `<span class="badge badge-primary p-2">Giáo vụ</span>`;
+        case 4:
+            return `<span class="badge badge-primary p-2">Giảng viên</span>`;
+        case 5:
+            return `<span class="badge badge-primary p-2">Giảng viên thỉnh giản</span>`;
+        case 6:
+            return `<span class="badge badge-primary p-2">Nhân viên</span>`;
+        default:
+            return "";
+    }
+}
+
 const loadTablePages = () => {
     if ($('#staff').length) {
         let dt = $('#staff').DataTable({
@@ -30,7 +60,7 @@ const loadTablePages = () => {
                     "data": "title"
                 },
                 {
-                    "data": "regency"
+                    "data": null
                 },
                 {
                     "data": "dept_name"
@@ -50,6 +80,7 @@ const loadTablePages = () => {
                 let image = `<img src="${getPathImage(item.featured_image, '/assets/frontend/images/defaut_img.png')}" width="50px">`;
                 $('td:eq(1)', row).html(image);
                 $('td', row).addClass('align-middle');
+                $('td:eq(5)', row).html(showDean(item.dean)+showPosition(item.dept_position))
                 $('td:eq(5)', row).html(vi_moment(item.created_at, 'DD/MM/YYYY HH:mm'));
                 $('td:eq(6)', row).html(showStatus(item.status));
                 $('td:eq(7)', row).html(`

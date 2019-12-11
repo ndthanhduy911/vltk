@@ -57,7 +57,7 @@ class MediaController  extends \BackendController {
                     
                     //Kiem tra khu vuc
                     if(!$this->rmt->checkDeptList($form_checked, $this->session->get('dept_mg'))){
-                        $this->flashSession->error('Khu vực/ Đơn vị không cho phép.');
+                        $this->flashSession->error('Khu vực/ Bộ môn không cho phép.');
                         return $this->response->redirect('/users/add');
                     }
 
@@ -146,7 +146,7 @@ class MediaController  extends \BackendController {
                         
                         //Kiem tra khu vuc
                         if(!$this->rmt->checkDeptList($form_checked, $this->session->get('dept_mg'))){
-                            $this->flash->error('Khu vực/ Đơn vị không cho phép.');
+                            $this->flash->error('Khu vực/ Bộ môn không cho phép.');
                             return $this->response->redirect('/users/edit/'.$id);
                         }
 
@@ -235,7 +235,7 @@ class MediaController  extends \BackendController {
                     return $this->response->redirect('users');
                 }else{
                     if(!$this->rmt->checkDeptId($post->dept_id, $this->session->get('dept_mg'))){
-                        $this->flash->error('Khu vực/ Đơn vị không cho phép.');
+                        $this->flash->error('Khu vực/ Bộ môn không cho phép.');
                         return $this->response->redirect('/users');
                     }
                     $save = $post;
