@@ -128,7 +128,7 @@
             </div>
         </div>
         <?php } ?>
-        <div class="slick-carousel carousel-autoplay pv-20">
+        <div class="row pv-20">
             <?php foreach ($staffs as $staff) { ?>
             <div class="col-md-4">
                 <div class="image-box team-member shadow-2 mb-20">

@@ -80,6 +80,13 @@ ul.dropdown-menu > li:last-of-type > a
     text-transform: initial;
 }
 
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1330px
+    }
+}
+
+
 @media (max-width:480px) {
     .caption-box p.slider-content {
         font-size: 13px;

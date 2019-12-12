@@ -31,7 +31,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-10 col-md-7">
+                <div class="col-10 col-md-7 pr-md-0">
                     <div id="header-top-second" class="clearfix text-right">
                         <nav>
                             <ul class="list-inline">
@@ -61,8 +61,8 @@
     </div>
     <header class="header fixed fixed-desktop clearfix">
         <div class="container">
-            <div class="row">
-                <div class="col-md-auto hidden-md-down pl-3">
+            <div class="d-flex">
+                <div class="col-md-auto hidden-md-down pl-md-0">
                     <div class="header-first clearfix">
                         <div id="logo" class="logo">
                             <a href="<?php echo FRONTEND_URL ?>/">
@@ -78,7 +78,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-8 ml-lg-auto">
+                <div class="ml-lg-auto">
                     <div class="header-second clearfix">
                         <div class="main-navigation main-navigation--mega-menu  animated">
                             <nav class="navbar navbar-expand-lg navbar-light p-0">
@@ -114,7 +114,7 @@
                                             <?php if($menuChild->count()){ ?>
                                                 <ul class="dropdown-menu">
                                                 <?php foreach ($menuChild as $child) { ?>
-                                                    <li><a href="<?= Menus::getLink($child) ?>"><?= Menus::getName($child->id, $lang_id) ?></a></li>
+                                                    <li><a href="<?= Menus::getLink($child) ?>" class=""><?= Menus::getName($child->id, $lang_id) ?></a></li>
                                                 <?php } ?>
                                                 </ul>
                                             <?php } ?>
