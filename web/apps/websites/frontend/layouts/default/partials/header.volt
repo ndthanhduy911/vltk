@@ -78,17 +78,17 @@
                         </div>
                     </div>
                 </div>
-                <div class="ml-lg-auto">
+                <div class="ml-lg-auto col-xs-12 p-0">
                     <div class="header-second clearfix">
                         <div class="main-navigation main-navigation--mega-menu  animated">
-                            <nav class="navbar navbar-expand-lg navbar-light p-0">
+                            <nav class="navbar navbar-expand-lg navbar-light p-0 d-flex">
                                 <div class="navbar-brand clearfix hidden-lg-up">
                                     <div id="logo-mobile" class="logo">
                                         <a href="<?php echo FRONTEND_URL ?>/">
                                             {% if dept.logo %}
                                             <img id="logo-img-mobile" src="<?= FRONTEND_URL ?>{ helper.getLinkImage(dept.logo,'/assets/frontend/images/logo-khoa-single-1-96x96.png') }}" alt="{{ dept_lang.name }}">
                                             {% else %}
-                                            <h3 class="title text-default mb-0">{{ dept_lang.code }}</h3>
+                                            <h3 class="title text-default mb-0">{{ dept.code }}</h3>
                                             {% endif %}
                                         </a>
                                         
@@ -99,7 +99,7 @@
 
                                 </div>
 
-                                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                <button class="ml-auto navbar-toggler" type="button" data-toggle="collapse"
                                     data-target="#navbar-collapse-1" aria-controls="navbar-collapse-1"
                                     aria-expanded="false" aria-label="Toggle navigation">
                                     <span class="navbar-toggler-icon"></span>

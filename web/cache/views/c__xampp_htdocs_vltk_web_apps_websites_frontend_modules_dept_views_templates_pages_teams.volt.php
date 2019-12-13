@@ -10,8 +10,7 @@ use Models\Staff;
             $npStaff.'.id',
             $npStaff.'.slug',
             $npStaff.'.featured_image',
-            $npStaff.'.is_dean',
-            $npStaff.'.is_vice_dean',
+            $npStaff.'.dean',
             $npStaff.'.dept_position',
             $npStaff.'.email',
             $npStaff.'.dept_id',
@@ -20,8 +19,8 @@ use Models\Staff;
         ))
         ->from($npStaff)
         ->leftJoin("Models\StaffLang", "SL.staff_id = $npStaff.id AND SL.lang_id = $lang_id",'SL')
-        ->where("$npStaff.status = 1 AND ($npStaff.is_dean = 1 OR $npStaff.is_vice_dean = 1)")
-        ->orderBy("$npStaff.is_dean DESC")
+        ->where("$npStaff.status = 1 AND ($npStaff.dean = 1 OR $npStaff.dean = 2)")
+        ->orderBy("$npStaff.dean DESC")
         ->limit(3)
         ->getQuery()
         ->execute();
@@ -31,8 +30,7 @@ use Models\Staff;
             $npStaff.'.id',
             $npStaff.'.slug',
             $npStaff.'.featured_image',
-            $npStaff.'.is_dean',
-            $npStaff.'.is_vice_dean',
+            $npStaff.'.dean',
             $npStaff.'.dept_position',
             $npStaff.'.email',
             $npStaff.'.dept_id',
@@ -53,8 +51,7 @@ use Models\Staff;
             $npStaff.'.id',
             $npStaff.'.slug',
             $npStaff.'.featured_image',
-            $npStaff.'.is_dean',
-            $npStaff.'.is_vice_dean',
+            $npStaff.'.dean',
             $npStaff.'.dept_position',
             $npStaff.'.email',
             $npStaff.'.dept_id',
@@ -89,7 +86,7 @@ use Models\Staff;
                                 </div>
                                 <div class="body">
                                     <h5 class="margin-clear text-uppercase"><?= $staff->title ?></h5>
-                                    <small><?= ($staff->is_dean ? $this->ml->_ml_system('dean', 'TRƯỞNG KHOA') : $this->ml->_ml_system('vice_dean', 'PHÓ TRƯỞNG KHOA')) ?></small>
+                                    <small class="text-uppercase"><?= $this->helper->getDean($staff->dean) ?></small>
                                     <div class="separator mt-10"></div>
                                     <?php if ($staff->email) { ?>
                                     <a href="mailto:<?= $staff->email ?>" class="margin-clear btn btn-md-link link-light"><i class="pr-10 fa fa-envelope-o"></i><?= $staff->email ?></a>
@@ -109,7 +106,7 @@ use Models\Staff;
                                 </div>
                                 <div class="body">
                                     <h5 class="margin-clear text-uppercase"><?= $staff->title ?></h5>
-                                    <small class="text-uppercase"><?= ($staff->is_dean ? $this->ml->_ml_system('dean_dept', 'Trưởng bộ môn') : $this->ml->_ml_system('vice_dean_dept', 'Phó bộ môn')) ?></small>
+                                    <small class="text-uppercase"><?= $this->helper->getPosition($staff->dept_position) ?></small>
                                     <div class="separator mt-10"></div>
                                     <?php if ($staff->email) { ?>
                                     <a href="mailto:<?= $staff->email ?>" class="margin-clear btn btn-md-link link-light"><i class="pr-10 fa fa-envelope-o"></i><?= $staff->email ?></a>
@@ -141,7 +138,7 @@ use Models\Staff;
                                         <div class="body mt-3">
                                             <h5 class="title margin-clear"><?= $staff->title ?></h5>
                                             <div class="separator-2 mt-2"></div>
-                                            <h5 class="m-0 text-uppercase"><?= Staff::getDeptPosition($staff->dept_position) ?></h5>
+                                            <h5 class="m-0 text-uppercase"><?= $this->helper->getPosition($staff->dept_position) ?></h5>
                                             <?php if ($staff->email) { ?>
                                             <a href="mailto:<?= $staff->email ?>" class="btn btn-link pl-0 text-left"><i class="pr-10 margin-clear fa fa-envelope-o"></i><?= $staff->email ?></a>
                                             <?php } ?>

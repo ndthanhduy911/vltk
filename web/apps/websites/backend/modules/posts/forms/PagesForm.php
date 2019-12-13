@@ -45,6 +45,7 @@ class PagesForm extends Form
         $this->add($status);
 
         $attribute_id = new Select('attribute_id', Attributes::find(), [
+            'using' => array('id', 'title'),
             'useEmpty' => true,
             'emptyText' => 'Mặc định',
             'emptyValue' => '',
