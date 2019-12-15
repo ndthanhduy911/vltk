@@ -342,7 +342,7 @@ class PostsController  extends \BackendController {
                 'C.name cat_name',
             ))
             ->from($npPosts)
-            ->where("$npPosts.deleted = 1 AND $npPosts.dept_id = $dept_id")
+            ->where("$npPosts.deleted = 0 AND $npPosts.status = 4 AND $npPosts.dept_id = $dept_id")
             ->join('Models\Users', 'U.id = '.$npPosts.'.author','U')
             ->join('Models\CategoriesLang', 'C.cat_id = '.$npPosts.'.cat_id AND C.lang_id = 1','C')
             ->join('Models\PostsLang', 'PL.post_id = '.$npPosts.'.id AND PL.lang_id = 1','PL')
