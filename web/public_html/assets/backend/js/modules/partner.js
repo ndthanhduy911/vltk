@@ -18,6 +18,7 @@ const loadTablePages = () => {
             "processing": true,
             "serverSide": true,
             "autoWidth": false,
+            "pageLength": 25,
             "ajax": backendUrl+"/partner/getdata",
             "columns": [
                 {

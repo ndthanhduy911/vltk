@@ -18,6 +18,7 @@ const loadTablePosts = () => {
             "processing": true,
             "serverSide": true,
             "autoWidth": false,
+            "pageLength": 25,
             "ajax": backendUrl+"/posts/getdata",
             "columns": [
                 {
@@ -91,6 +92,7 @@ const loadTablePostsTrash = () => {
             "processing": true,
             "serverSide": true,
             "autoWidth": false,
+"pageLength": 25,
             "ajax": backendUrl+"/posts/getdatatrash",
             "columns": [
                 {

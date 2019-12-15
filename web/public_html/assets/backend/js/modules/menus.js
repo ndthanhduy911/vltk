@@ -18,6 +18,7 @@ const loadTableMenuLocation = () => {
             "processing": true,
             "serverSide": true,
             "autoWidth": false,
+            "pageLength": 25,
             "ajax": backendUrl+"/menu/getdatalocation",
             "columns": [
                 {
@@ -85,6 +86,7 @@ const loadTableMenu = () => {
             "processing": true,
             "serverSide": true,
             "autoWidth": false,
+"pageLength": 25,
             "iDisplayLength": 'all',
             // "searching": false,
             "ajax": `${backendUrl}/menu/getdata${textGet}`,

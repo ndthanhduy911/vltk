@@ -18,6 +18,7 @@ const loadTableUsers = () => {
             "processing": true,
             "serverSide": true,
             "autoWidth": false,
+"pageLength": 25,
             "ajax": backendUrl+"/users/getdata",
             "columns": [
                 {

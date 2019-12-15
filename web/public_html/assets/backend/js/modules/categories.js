@@ -18,6 +18,7 @@ const loadTableCategories = () => {
             "processing": true,
             "serverSide": true,
             "autoWidth": false,
+            "pageLength": 25,
             "ajax": backendUrl+"/categories/getdata",
             "columns": [
                 {
