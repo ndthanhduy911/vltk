@@ -18,7 +18,7 @@
         <div class="col-md-12 p-0">
             <div class="tile">
                 <div class="col-12 p-0 mb-2 text-right">
-                    <a id="addBanner" href="{{ config.application.backendUri }}/banner/update" title="Tạo" class="btn btn-success fa fa-plus pull-right"></a>
+                    <a id="addBanner" href="<?= $this->config->application->backendUri ?>/banner/update" title="Tạo" class="btn btn-success fa fa-plus pull-right"></a>
                 </div>
                 <div class="tile-body">
                     <table id="banner" class="table table-bordered table-hover">

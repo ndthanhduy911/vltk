@@ -49,7 +49,7 @@
 {% endif %}
 
 <div id="page-start"></div>
-{% if cats %}
+{% if cats.count() %}
 <section id="section1" class="section clearfix pt-5">
     <div class="container mt-4">
         <div class="row">
@@ -70,7 +70,7 @@
 </section>
 {% endif %}
 
-{% if staffs %}
+{% if staffs.count() %}
 <section class="clearfix pt-5 pb-5">
     <div class="container">
         {% if staff_info['name'] %}
@@ -109,7 +109,7 @@
 </section>
 {% endif %}
 
-{% if partners %}
+{% if partners.count() %}
 <section class="pt-5 pb-5 section background-img-1 dark-translucent-bg fixed-bg" style="background-position: 50% 42%;">
     {% if partner_info['name'] %}
     <div class="container pv-20">

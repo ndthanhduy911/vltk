@@ -17,8 +17,8 @@
     <div class="row">
         <div class="col-md-12 p-0">
             <div class="tile">
-                <div class="col-12 p-0 mb-2 text-right">
-                    <a id="addPosts" href="<?= $this->config->application->backendUri ?>/pages/update" title="Tạo" class="btn btn-success fa fa-plus"></a>
+                <div class="col-12 p-0 mb-2">
+                    <a id="addPosts" href="<?= $this->config->application->backendUri ?>/pages/update" title="Tạo" class="btn btn-success fa fa-plus pull-right pull-right"></a>
                 </div>
                 <div class="tile-body">
                     <table id="pages" class="table table-bordered table-hover">

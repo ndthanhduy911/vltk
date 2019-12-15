@@ -15,10 +15,10 @@
     </div>
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 p-0">
             <div class="tile">
                 <div class="col-12 p-0 mb-2">
-                    <a href="{{ config.application.backendUri }}/posts" title="Danh sách bài viết" class="btn btn-info fa fa-list-alt"></a>
+                    <a href="{{ config.application.backendUri }}/posts" title="Danh sách bài viết" class="btn btn-info fa fa-list-alt pull-right"></a>
                 </div>
                 <div class="tile-body">
                     <table id="posts_trash" class="table table-bordered table-hover">

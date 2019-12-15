@@ -25,7 +25,7 @@
                             </select>
                         </div>
                         <div class="col-md-6 text-right">
-                            <a id="addMenu" href="{{ config.application.backendUri }}/menu/update" title="Tạo" class="btn btn-success fa fa-plus"></a>
+                            <a id="addMenu" href="{{ config.application.backendUri }}/menu/update" title="Tạo" class="btn btn-success fa fa-plus pull-right"></a>
                         </div>
                     </div>
                 </form>

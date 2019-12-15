@@ -18,7 +18,7 @@
         <div class="col-md-12 p-0">
             <div class="tile">
                 <div class="col-12 p-0 mb-2">
-                    <a id="addPosts" href="<?= $this->config->application->backendUri ?>/posts/update" title="Tạo" class="btn btn-success fa fa-plus"></a>
+                    <a id="addPosts" href="<?= $this->config->application->backendUri ?>/posts/update" title="Tạo" class="btn btn-success fa fa-plus pull-right pull-right"></a>
                     <a href="<?= $this->config->application->backendUri ?>/posts/trashs" title="Danh sách bài viết đã xoá" class="btn btn-danger fa fa-trash pull-right"></a>
                 </div>
                 <div class="tile-body">

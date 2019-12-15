@@ -278,7 +278,55 @@ class PostsController  extends \BackendController {
     // API
     // =================================
     public function getdataAction(){
+        if(!$this->request->isAjax() && $this->request->isPost()){ 
+            $this->response->setStatusCode(403, 'Failed');
+            $this->response->setJsonContent(['Truy cập không được phép']);
+            return $this->response->send();
+        }
+
+        $dept_id = $this->session->get('dept_id');
+        $npPosts = Posts::getNamepace();
+        $data = $this->modelsManager->createBuilder()
+        ->columns(array(
+            $npPosts.'.id',
+            'PL.title',
+            $npPosts.'.slug',
+            $npPosts.'.cat_id',
+            'PL.content',
+            $npPosts.'.status',
+            'PL.excerpt',
+            $npPosts.'.dept_id',
+            $npPosts.'.created_at',
+            $npPosts.'.calendar',
+            $npPosts.'.featured_image',
+            'DL.name dept_name',
+            'D.slug dept_slug',
+            'U.name author_name',
+            'C.name cat_name',
+        ))
+        ->from($npPosts)
+        ->join('Models\DepartmentsLang', 'DL.dept_id = '.$npPosts.'.dept_id AND DL.lang_id = 1','DL')
+        ->join('Models\Departments',"D.id = $npPosts.dept_id AND $npPosts.dept_id = $dept_id",'D')
+        ->join('Models\Users', 'U.id = '.$npPosts.'.author','U')
+        ->join('Models\CategoriesLang', 'C.cat_id = '.$npPosts.'.cat_id AND C.lang_id = 1','C')
+        ->join('Models\PostsLang', 'PL.post_id = '.$npPosts.'.id AND PL.lang_id = 1','PL')
+        ->orderBy($npPosts.'.calendar DESC')
+        ->where($npPosts.'.deleted = 0')
+        ->groupBy('PL.post_id');
+        // if($this->session->get('role') !== 1){
+        //     $data = $data->andWhere($npPosts.".dept_id IN (".implode(',',$this->session->get('dept_mg')).")");
+        // }
+
+        $search = $npPosts.'.title LIKE :search:';
+        $this->response->setStatusCode(200, 'OK');
+        $this->response->setJsonContent($this->ssp->data_output($this->request->get(), $data,$search));
+        return $this->response->send();
+
+    }
+
+    public function getdatatrashAction(){
         if($this->request->isAjax()){
+            $dept_id = $this->session->get('dept_id');
             $npPosts = Posts::getNamepace();
             $data = $this->modelsManager->createBuilder()
             ->columns(array(
@@ -299,56 +347,14 @@ class PostsController  extends \BackendController {
                 'C.name cat_name',
             ))
             ->from($npPosts)
-            ->join('Models\DepartmentsLang', 'DL.dept_id = '.$npPosts.'.dept_id AND D.lang_id = 1','DL')
-            ->join('Models\Departments', 'D.id = '.$npPosts.'.dept_id','D')
+            ->join('Models\DepartmentsLang', 'DL.dept_id = '.$npPosts.'.dept_id AND DL.lang_id = 1','DL')
+            ->join('Models\Departments',"D.id = $npPosts.dept_id AND $npPosts.dept_id = $dept_id",'D')
             ->join('Models\Users', 'U.id = '.$npPosts.'.author','U')
             ->join('Models\CategoriesLang', 'C.cat_id = '.$npPosts.'.cat_id AND C.lang_id = 1','C')
             ->join('Models\PostsLang', 'PL.post_id = '.$npPosts.'.id AND PL.lang_id = 1','PL')
-            ->orderBy($npPosts.'.id DESC')
-            ->where($npPosts.'.deleted = 0')
+            ->orderBy($npPosts.'.calendar DESC')
+            ->where($npPosts.'.deleted = 1')
             ->groupBy('PL.post_id');
-            if($this->session->get('role') !== 1){
-                $data = $data->andWhere($npPosts.".dept_id IN (".implode(',',$this->session->get('dept_mg')).")");
-            }
-    
-            $search = $npPosts.'.title LIKE :search:';
-            $this->response->setStatusCode(200, 'OK');
-            $this->response->setJsonContent($this->ssp->data_output($this->request->get(), $data,$search));
-            return $this->response->send();
-        }else{
-            $this->response->setStatusCode(403, 'Failed');
-            $this->response->setJsonContent(['Truy cập không được phép']);
-            return $this->response->send();
-        }
-    }
-
-    public function getdatatrashAction(){
-        if($this->request->isAjax()){
-            $npPosts = Posts::getNamepace();
-            $data = $this->modelsManager->createBuilder()
-            ->columns(array(
-                $npPosts.'.id',
-                $npPosts.'.title',
-                $npPosts.'.slug',
-                $npPosts.'.cat_id',
-                $npPosts.'.content',
-                $npPosts.'.status',
-                $npPosts.'.excerpt',
-                $npPosts.'.dept_id',
-                $npPosts.'.created_at',
-                $npPosts.'.calendar',
-                $npPosts.'.featured_image',
-                'D.name dept_name',
-                'D.slug dept_slug',
-                'U.name author_name',
-                'C.name cat_name',
-            ))
-            ->from($npPosts)
-            ->join('Models\Departments', 'D.id = '.$npPosts.'.dept_id','D')
-            ->join('Models\Users', 'U.id = '.$npPosts.'.author','U')
-            ->join('Models\CategoriesLang', 'C.cat_id = '.$npPosts.'.cat_id AND C.lang_id = 1','C')
-            ->orderBy($npPosts.'.title DESC')
-            ->where($npPosts.'.status = 4 AND '.$npPosts.'.deleted = 0');
             // if($this->session->get('role') !== 1){
             //     $data = $data->andWhere("dept_id IN (".implode(',',$this->session->get('dept_mg')).")");
             // }

@@ -11,15 +11,15 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Admin">
     <meta property="og:title" content="Admin">
-    <meta property="og:url" content="<?php echo FRONTEND_URL ?>/">
-    <meta property="og:image" content="<?php echo FRONTEND_URL ?>/">
+    <meta property="og:url" content="<?php echo FRONTEND_URL ?>/uploads/khoa-vat-ly/logo96x96.png">
+    <meta property="og:image" content="<?php echo FRONTEND_URL ?>/uploads/khoa-vat-ly/logo96x96.png">
     <meta property="og:description" content="">
     <title>ADMIN</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/uploads/khoa-vat-ly/logo96x96.png">
 
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="/assets/backend/fonts/font-awesome/css/font-awesome.min.css">

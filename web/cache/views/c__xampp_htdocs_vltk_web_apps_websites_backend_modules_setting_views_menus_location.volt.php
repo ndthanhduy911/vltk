@@ -18,7 +18,7 @@
         <div class="col-md-12 p-0">
             <div class="tile">
                 <div class="col-12 p-0 mb-2">
-                    <a id="addMenuLocation" href="<?= $this->config->application->backendUri ?>/menu/updatelocation" title="Tạo" class="btn btn-success fa fa-plus"></a>
+                    <a id="addMenuLocation" href="<?= $this->config->application->backendUri ?>/menu/updatelocation" title="Tạo" class="btn btn-success fa fa-plus pull-right"></a>
                 </div>
                 <div class="tile-body">
                     <table id="menulocation" class="table table-bordered table-hover">

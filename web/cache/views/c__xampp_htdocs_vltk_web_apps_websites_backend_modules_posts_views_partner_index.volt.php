@@ -1,12 +1,12 @@
 <main class="app-content">
     <div class="app-title">
         <div>
-            <h1><i class="fa fa-th-list"></i> BANNER</h1>
-            <p>Quản lý banner</p>
+            <h1><i class="fa fa-th-list"></i> Đối tác</h1>
+            <p>Quản lý đối tác</p>
         </div>
         <ul class="app-breadcrumb breadcrumb side">
             <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-            <li class="breadcrumb-item">Banner</li>
+            <li class="breadcrumb-item">Đối tác</li>
         </ul>
     </div>
 
@@ -18,15 +18,15 @@
         <div class="col-md-12 p-0">
             <div class="tile">
                 <div class="col-12 p-0 mb-2 text-right">
-                    <a id="addBanner" href="{{ config.application.backendUri }}/banner/update" title="Tạo" class="btn btn-success fa fa-plus pull-right"></a>
+                    <a id="addPosts" href="<?= $this->config->application->backendUri ?>/partner/update" title="Tạo" class="btn btn-success fa fa-plus pull-right"></a>
                 </div>
                 <div class="tile-body">
-                    <table id="banner" class="table table-bordered table-hover">
+                    <table id="partner" class="table table-bordered table-hover">
                         <thead>
                             <tr class="bg-primary">
                                 <th class="align-middle text-center text-white w-20-px">#</th>
                                 <th class="align-middle text-center text-white">Ảnh đại diện</th>
-                                <th class="align-middle text-center text-white">Tiêu đề</th>
+                                <th class="align-middle text-center text-white">Tên đối tác</th>
                                 <th class="align-middle text-center text-white">Bộ môn</th>
                                 <th class="align-middle text-center text-white w-150-px">Ngày đăng</th>
                                 <th class="align-middle text-center text-white w-70-px">Trạng thái</th>
