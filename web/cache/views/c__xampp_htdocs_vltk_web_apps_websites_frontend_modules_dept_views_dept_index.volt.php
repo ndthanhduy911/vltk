@@ -49,7 +49,7 @@
 <?php } ?>
 
 <div id="page-start"></div>
-<?php if ($cats) { ?>
+<?php if ($cats->count()) { ?>
 <section id="section1" class="section clearfix pt-5">
     <div class="container mt-4">
         <div class="row">
@@ -70,7 +70,7 @@
 </section>
 <?php } ?>
 
-<?php if ($staffs) { ?>
+<?php if ($staffs->count()) { ?>
 <section class="clearfix pt-5 pb-5">
     <div class="container">
         <?php if ($staff_info['name']) { ?>
@@ -109,7 +109,7 @@
 </section>
 <?php } ?>
 
-<?php if ($partners) { ?>
+<?php if ($partners->count()) { ?>
 <section class="pt-5 pb-5 section background-img-1 dark-translucent-bg fixed-bg" style="background-position: 50% 42%;">
     <?php if ($partner_info['name']) { ?>
     <div class="container pv-20">

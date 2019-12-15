@@ -70,7 +70,7 @@
             <div class="d-flex">
                 <div class="col-md-auto hidden-md-down pl-md-0">
                     <div class="header-first clearfix">
-                        <div id="logo" class="logo">
+                        <div id="logo" class="logo" dept-id = "{{ dept_id }}">
                             <a href="<?php echo FRONTEND_URL ?>/">
                                 {% if dept.logo %}
                                 <img src="{{ helper.getLinkImage(dept.logo) }}" alt="{{ dept_lang.name }}">

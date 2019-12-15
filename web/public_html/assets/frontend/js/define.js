@@ -1,5 +1,6 @@
 const langId = $('#lang_id').attr('data-lang');
 const fontendUrl = window.location.origin;
+const deptId = $('#logo').attr('dept-id');
 
 //Format number money
 const number_format = (number, decimals, dec_point, thousands_sep, unit = "") => {

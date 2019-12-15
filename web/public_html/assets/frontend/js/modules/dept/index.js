@@ -1,5 +1,5 @@
 const showPosts = (block , cat_id = null) => {
-    getPostByCatId(cat_id).then((data)=>{
+    getPostByCatId(cat_id, deptId).then((data)=>{
         $(block).html('');
         data.forEach(item => {
             let imageUrl = item.featured_image ? fontendUrl + item.featured_image : fontendUrl + '/assets/frontend/images/defaut_img.png';
