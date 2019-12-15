@@ -1,12 +1,16 @@
 <?php 
     use Models\Link;
+    use Models\MenuLocation;
     use Models\Social;
     use Models\Menus;
 
 
     $socials = Social::find(["status = 1 AND dept_id = $dept_id AND location = 1", "order" => "sort ASC"]);
     $links = Link::find(["status = 1 AND dept_id = $dept_id AND location = 1", "order" => "sort ASC"]);
-    $menuParents = Menus::find(["status = 1 AND dept_id = $dept_id AND menu_location_id = 1 AND parent_id is NULL",'order' => 'sort ASC']);
+    $menuParents = [];
+    if($menuLocation = MenuLocation::findFirst(["status =  1 AND dept_id = $dept_id AND type = 1"])) {
+        $menuParents = Menus::find(["status = 1 AND dept_id = $dept_id AND menu_location_id = {$menuLocation->id} AND parent_id is NULL",'order' => 'sort ASC']);
+    }
 ?>
 <div class="header-container">
     {% if socials.count() OR links.count() %}
@@ -61,7 +65,7 @@
         </div>
     </div>
     {% endif %}
-    <header class="header {{ dept_id == 1 ? '' : 'dark' }} fixed fixed-desktop clearfix">
+    <header class="header fixed fixed-desktop clearfix">
         <div class="container">
             <div class="d-flex">
                 <div class="col-md-auto hidden-md-down pl-md-0">
