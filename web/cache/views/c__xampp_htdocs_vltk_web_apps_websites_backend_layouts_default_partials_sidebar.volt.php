@@ -1,7 +1,7 @@
 <!-- Sidebar menu-->
 <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
 <aside class="app-sidebar">
-        <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg" alt="User Image">
+        <div class="app-sidebar__user"><img width="50px" class="app-sidebar__user-avatar" src="<?= $this->helper->getLinkImage($this->session->get('avatar'), '/assets/frontend/images/avatar.jpg') ?>" alt="<?= $this->session->get('username') ?>">
                 <div><p class="app-sidebar__user-name"><?php echo $this->session->get('username') ?></p><p class="app-sidebar__user-designation"><?php echo $this->session->get('name') ?></p></div>
         </div>
         <ul class="app-menu">
