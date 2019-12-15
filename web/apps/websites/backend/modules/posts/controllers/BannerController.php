@@ -161,6 +161,7 @@ class BannerController  extends \BackendController {
 
     public function getdataAction(){
         if($this->request->isAjax()){
+            $dept_id = $this->session->get('dept_id');
             $npBanner = Banner::getNamepace();
             $data = $this->modelsManager->createBuilder()
             ->columns(array(
@@ -174,13 +175,12 @@ class BannerController  extends \BackendController {
                 'BL.name name',
                 'BL.description description',
                 'BL.button_text button_text',
-                'D.name dept_name',
             ))
             ->from($npBanner)
-            ->leftJoin('Models\DepartmentsLang', 'D.dept_id = '.$npBanner.'.dept_id AND D.lang_id = 1','D')
+            ->where("$npBanner.deleted = 0 AND $npBanner.dept_id = $dept_id")
             ->leftJoin('Models\BannerLang', 'BL.banner_id = '.$npBanner.'.id AND BL.lang_id = 1','BL')
-            ->orderBy($npBanner.'.dept_id ASC, '.$npBanner.'.status DESC')
-            ->where('1=1');
+            ->orderBy($npBanner.'.dept_id ASC, '.$npBanner.'.status DESC');
+
     
             $search = 'BL.name LIKE :search:';
             $this->response->setStatusCode(200, 'OK');

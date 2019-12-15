@@ -16,6 +16,7 @@ class CategoriesController  extends \BackendController {
 
     public function getdataAction(){
         if($this->request->isAjax()){
+            $dept_id = $this->session->get('dept_id');
             $npCat = Categories::getNamepace();
             $data = $this->modelsManager->createBuilder()
             ->columns(array(
@@ -26,17 +27,12 @@ class CategoriesController  extends \BackendController {
                 $npCat.'.status',
                 $npCat.'.created_at',
                 'U.name author_name',
-                'D.name dept_name',
             ))
             ->from($npCat)
+            ->where("$npCat.deleted = 0 AND $npCat.dept_id = $dept_id")
             ->join('Models\Users', 'U.id = '.$npCat.'.author','U')
-            ->join('Models\DepartmentsLang', 'D.dept_id = '.$npCat.'.dept_id','D')
             ->join('Models\CategoriesLang', 'CL.cat_id = '.$npCat.'.id AND CL.lang_id = 1','CL')
-            ->orderBy($npCat.'.dept_id ASC')
-            ->where("1 = 1");
-            if($this->session->get('role') !== 1){
-                $data = $data->andWhere("$npCat.dept_id = :dept_id:",['dept_id' => $this->session->get('dept_id')]);
-            }
+            ->orderBy($npCat.'.dept_id ASC');
     
             $search = $npCat.'.name LIKE :search:';
             $this->response->setStatusCode(200, 'OK');

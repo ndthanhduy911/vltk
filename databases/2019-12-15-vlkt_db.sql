@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: localhost
--- Thời gian đã tạo: Th12 15, 2019 lúc 10:59 AM
+-- Thời gian đã tạo: Th12 15, 2019 lúc 11:58 PM
 -- Phiên bản máy phục vụ: 5.5.41-MariaDB
 -- Phiên bản PHP: 7.1.33
 
@@ -59,17 +59,21 @@ CREATE TABLE `banner` (
   `button_link` text COLLATE utf8_unicode_ci,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
-  `status` int(1) NOT NULL DEFAULT '1'
+  `status` int(1) NOT NULL DEFAULT '1',
+  `deleted` int(1) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `banner`
 --
 
-INSERT INTO `banner` (`id`, `dept_id`, `image`, `button_link`, `created_at`, `updated_at`, `status`) VALUES
-(1, 1, '/assets/frontend/images/banner1.png', '#', '2019-12-02 00:00:00', '2019-12-02 23:41:21', 1),
-(2, 1, '/assets/frontend/images/banner1.png', '#', '2019-12-02 00:00:00', '2019-12-02 00:00:00', 1),
-(3, 1, '/assets/frontend/images/banner1.png', '#', '2019-12-02 00:00:00', '2019-12-02 00:00:00', 1);
+INSERT INTO `banner` (`id`, `dept_id`, `image`, `button_link`, `created_at`, `updated_at`, `status`, `deleted`) VALUES
+(1, 1, '/assets/frontend/images/banner1.png', '#', '2019-12-02 00:00:00', '2019-12-02 23:41:21', 1, 0),
+(2, 1, '/assets/frontend/images/banner1.png', '#', '2019-12-02 00:00:00', '2019-12-02 00:00:00', 1, 0),
+(3, 1, '/assets/frontend/images/banner1.png', '#', '2019-12-02 00:00:00', '2019-12-02 00:00:00', 1, 0),
+(4, 2, '/assets/frontend/images/banner1.png', '#', '2019-12-02 00:00:00', '2019-12-02 23:41:21', 1, 0),
+(5, 2, '/assets/frontend/images/banner1.png', '#', '2019-12-02 00:00:00', '2019-12-02 00:00:00', 1, 0),
+(6, 2, '/assets/frontend/images/banner1.png', '#', '2019-12-02 00:00:00', '2019-12-02 00:00:00', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -96,7 +100,13 @@ INSERT INTO `banner_lang` (`id`, `banner_id`, `lang_id`, `name`, `description`, 
 (3, 2, 1, 'Cơ hội nghề nghiệp sau khi ra trường', 'Sinh viên có cơ hội làm việc tại các công ty trong và ngoài nước, viện nghiên cứu, sở khoa học công nghệ liên quan tới lĩnh vực Vật lý, kỹ thuật và khoa học. Cơ hội được học tiếp chương trình sau đại học (thạc sĩ, tiến sĩ) tại các trường đại học danh tiếng trong và ngoài nước.', 'Chi tiết'),
 (4, 2, 2, 'Cơ hội nghề nghiệp sau khi ra trường', 'Sinh viên có cơ hội làm việc tại các công ty trong và ngoài nước, viện nghiên cứu, sở khoa học công nghệ liên quan tới lĩnh vực Vật lý, kỹ thuật và khoa học. Cơ hội được học tiếp chương trình sau đại học (thạc sĩ, tiến sĩ) tại các trường đại học danh tiếng trong và ngoài nước.', 'Chi tiết'),
 (5, 3, 1, 'Sinh Viên', 'Năng động, sang tạo, tự tin, bản lĩnh, làm chủ kiến thức rộng bước tương lai.', 'Chi tiết'),
-(6, 3, 2, 'Sinh Viên', 'Năng động, sang tạo, tự tin, bản lĩnh, làm chủ kiến thức rộng bước tương lai.', 'Chi tiết');
+(6, 3, 2, 'Sinh Viên', 'Năng động, sang tạo, tự tin, bản lĩnh, làm chủ kiến thức rộng bước tương lai.', 'Chi tiết'),
+(7, 4, 1, 'Vật Lý - Vật Lý Kỹ Thuật', 'Là một trong những khoa ra đời từ những ngày Trường Cao đẳng Khoa học (Viện đại học Đông Dương) – Đại học Khoa học Sài Gòn được thành lập năm 1940- 1941. Khoa đã đạo tạo được rất nhiều nhân tài cho đất nước trên nhiều lĩnh vực.', 'Chi tiết'),
+(8, 4, 2, 'Vật Lý - Vật Lý Kỹ Thuật', 'Là một trong những khoa ra đời từ những ngày Trường Cao đẳng Khoa học (Viện đại học Đông Dương) – Đại học Khoa học Sài Gòn được thành lập năm 1940- 1941. Khoa đã đạo tạo được rất nhiều nhân tài cho đất nước trên nhiều lĩnh vực.', 'Chi tiết'),
+(9, 5, 1, 'Cơ hội nghề nghiệp sau khi ra trường', 'Sinh viên có cơ hội làm việc tại các công ty trong và ngoài nước, viện nghiên cứu, sở khoa học công nghệ liên quan tới lĩnh vực Vật lý, kỹ thuật và khoa học. Cơ hội được học tiếp chương trình sau đại học (thạc sĩ, tiến sĩ) tại các trường đại học danh tiếng trong và ngoài nước.', 'Chi tiết'),
+(10, 5, 2, 'Cơ hội nghề nghiệp sau khi ra trường', 'Sinh viên có cơ hội làm việc tại các công ty trong và ngoài nước, viện nghiên cứu, sở khoa học công nghệ liên quan tới lĩnh vực Vật lý, kỹ thuật và khoa học. Cơ hội được học tiếp chương trình sau đại học (thạc sĩ, tiến sĩ) tại các trường đại học danh tiếng trong và ngoài nước.', 'Chi tiết'),
+(11, 6, 1, 'Sinh Viên', 'Năng động, sang tạo, tự tin, bản lĩnh, làm chủ kiến thức rộng bước tương lai.', 'Chi tiết'),
+(12, 6, 2, 'Sinh Viên', 'Năng động, sang tạo, tự tin, bản lĩnh, làm chủ kiến thức rộng bước tương lai.', 'Chi tiết');
 
 -- --------------------------------------------------------
 
@@ -124,7 +134,12 @@ INSERT INTO `categories` (`id`, `dept_id`, `slug`, `status`, `author`, `featured
 (2, 1, 'tin-giao-vu', 1, 1, NULL, '2019-03-29 00:00:00', '2019-03-29 00:00:00'),
 (3, 1, 'tin-nckh-serminar', 1, 1, NULL, '2019-03-29 00:00:00', '2019-03-29 00:00:00'),
 (4, 1, 'tin-cb-vc-khoa', 1, 1, NULL, '2019-03-29 00:00:00', '2019-03-29 00:00:00'),
-(5, 1, 'tin-tuyen-dung', 1, 1, NULL, '2019-03-29 00:00:00', '2019-05-01 09:27:41');
+(5, 1, 'tin-tuyen-dung', 1, 1, NULL, '2019-03-29 00:00:00', '2019-05-01 09:27:41'),
+(6, 2, 'khac-vlth', 1, 1, '', '2019-03-29 00:00:00', '2019-10-29 16:50:55'),
+(7, 2, 'tin-giao-vu-vlth', 1, 1, NULL, '2019-03-29 00:00:00', '2019-03-29 00:00:00'),
+(8, 2, 'tin-nckh-serminar-vlth', 1, 1, NULL, '2019-03-29 00:00:00', '2019-03-29 00:00:00'),
+(9, 2, 'tin-cb-vc-khoa-vlth', 1, 1, NULL, '2019-03-29 00:00:00', '2019-03-29 00:00:00'),
+(10, 2, 'tin-tuyen-dung-vlth', 1, 1, NULL, '2019-03-29 00:00:00', '2019-05-01 09:27:41');
 
 -- --------------------------------------------------------
 
@@ -154,7 +169,17 @@ INSERT INTO `categories_lang` (`id`, `cat_id`, `lang_id`, `name`, `description`)
 (7, 4, 1, 'Tin CB - VC Khoa', NULL),
 (8, 4, 2, 'Tin CB - VC Khoa', NULL),
 (9, 5, 1, 'Tin Tuyển Dụng', NULL),
-(10, 5, 2, 'Tin Tuyển Dụng', NULL);
+(10, 5, 2, 'Tin Tuyển Dụng', NULL),
+(13, 6, 1, 'Khác', 'Khác'),
+(14, 6, 2, 'Other', 'Other'),
+(15, 7, 1, 'Tin giáo vụ', NULL),
+(16, 7, 2, 'Tin giáo vụ', NULL),
+(17, 8, 1, 'Tin NCKH - Serminar', NULL),
+(18, 8, 2, 'Tin NCKH - Serminar', NULL),
+(19, 9, 1, 'Tin CB - VC Khoa', NULL),
+(20, 9, 2, 'Tin CB - VC Khoa', NULL),
+(21, 10, 1, 'Tin Tuyển Dụng', NULL),
+(22, 10, 2, 'Tin Tuyển Dụng', NULL);
 
 -- --------------------------------------------------------
 
@@ -317,8 +342,8 @@ INSERT INTO `home_setting` (`id`, `dept_id`, `type`, `setting`, `backgroud`, `so
 (4, 1, 4, '[\"1\",\"2\",\"3\"]', NULL, 0),
 (5, 1, 5, '[\"1\",\"2\",\"3\",\"4\",\"5\",\"6\"]', NULL, 0),
 (6, 1, 6, NULL, NULL, 0),
-(7, 2, 1, '[\"1\",\"2\",\"3\"]', NULL, 0),
-(8, 2, 2, '[\"2\",\"3\",\"4\"]', NULL, 0),
+(7, 2, 1, '[\"4\",\"5\",\"6\"]', NULL, 0),
+(8, 2, 2, '[\"7\",\"8\",\"9\"]', NULL, 0),
 (9, 2, 3, NULL, NULL, 0),
 (10, 2, 4, '[\"1\",\"2\",\"3\"]', NULL, 0),
 (11, 2, 5, '[\"1\",\"2\",\"3\",\"4\",\"5\",\"6\"]', NULL, 0),
@@ -497,12 +522,11 @@ INSERT INTO `menus` (`id`, `dept_id`, `menu_location_id`, `type`, `post_id`, `pa
 (31, 1, 1, 2, NULL, 13, NULL, NULL, NULL, NULL, 29, 2, 1, '2019-11-29 00:00:00', '2019-11-29 00:00:00'),
 (32, 1, 1, 2, NULL, 14, NULL, NULL, NULL, NULL, 29, 2, 1, '2019-11-29 00:00:00', '2019-11-29 00:00:00'),
 (33, 1, 1, 2, NULL, 15, NULL, NULL, '#', NULL, NULL, 2, 1, '2019-11-29 00:00:00', '2019-11-29 00:00:00'),
-(34, 2, 3, 5, NULL, NULL, NULL, NULL, '#', NULL, NULL, 1, 1, '2019-11-29 00:00:00', '2019-11-29 00:00:00'),
+(34, 2, 3, 5, NULL, 1, NULL, NULL, '#', NULL, NULL, 1, 1, '2019-11-29 00:00:00', '2019-11-29 00:00:00'),
 (35, 2, 3, 2, NULL, NULL, NULL, NULL, NULL, NULL, 34, 1, 1, '2019-11-29 00:00:00', '2019-11-29 00:00:00'),
 (36, 2, 3, 2, NULL, NULL, NULL, NULL, NULL, NULL, 34, 1, 1, '2019-11-29 00:00:00', '2019-11-29 00:00:00'),
 (37, 2, 3, 2, NULL, NULL, NULL, NULL, NULL, NULL, 34, 1, 1, '2019-11-29 00:00:00', '2019-11-29 00:00:00'),
 (38, 2, 3, 2, NULL, NULL, NULL, NULL, NULL, NULL, 34, 1, 1, '2019-11-29 00:00:00', '2019-11-29 00:00:00'),
-(39, 2, 3, 2, NULL, NULL, NULL, NULL, NULL, NULL, 34, 1, 1, '2019-11-29 00:00:00', '2019-11-29 00:00:00'),
 (40, 2, 3, 5, NULL, NULL, NULL, NULL, '#', NULL, NULL, 1, 1, '2019-11-29 00:00:00', '2019-11-29 00:00:00'),
 (41, 2, 3, 2, NULL, NULL, NULL, NULL, NULL, NULL, 40, 1, 1, '2019-11-29 00:00:00', '2019-11-29 00:00:00'),
 (42, 2, 3, 2, NULL, NULL, NULL, NULL, NULL, NULL, 40, 1, 1, '2019-11-29 00:00:00', '2019-11-29 00:00:00'),
@@ -516,7 +540,6 @@ INSERT INTO `menus` (`id`, `dept_id`, `menu_location_id`, `type`, `post_id`, `pa
 (50, 2, 3, 2, NULL, NULL, NULL, NULL, NULL, NULL, 44, 1, 1, '2019-11-29 00:00:00', '2019-11-29 00:00:00'),
 (51, 2, 3, 5, NULL, NULL, NULL, NULL, '#', NULL, NULL, 1, 1, '2019-11-29 00:00:00', '2019-11-29 00:00:00'),
 (52, 2, 3, 2, NULL, NULL, NULL, NULL, NULL, NULL, 51, 1, 1, '2019-11-29 00:00:00', '2019-11-29 00:00:00'),
-(53, 2, 3, 2, NULL, NULL, NULL, NULL, NULL, NULL, 51, 1, 1, '2019-11-29 00:00:00', '2019-11-29 00:00:00'),
 (54, 2, 3, 2, NULL, NULL, NULL, NULL, NULL, NULL, 51, 1, 1, '2019-11-29 00:00:00', '2019-11-29 00:00:00'),
 (55, 2, 3, 2, NULL, NULL, NULL, NULL, NULL, NULL, 51, 1, 1, '2019-11-29 00:00:00', '2019-11-29 00:00:00'),
 (56, 2, 3, 2, NULL, NULL, NULL, NULL, NULL, NULL, 51, 1, 1, '2019-11-29 00:00:00', '2019-11-29 00:00:00'),
@@ -544,15 +567,15 @@ INSERT INTO `menus` (`id`, `dept_id`, `menu_location_id`, `type`, `post_id`, `pa
 (78, 1, 2, 2, NULL, 1, NULL, NULL, NULL, NULL, 77, 2, 1, '2019-11-29 00:00:00', '2019-11-29 00:00:00'),
 (79, 1, 2, 2, NULL, 1, NULL, NULL, NULL, NULL, 77, 2, 1, '2019-11-29 00:00:00', '2019-11-29 00:00:00'),
 (80, 2, 4, 5, NULL, 1, NULL, NULL, '#', NULL, NULL, 2, 1, '2019-11-29 00:00:00', '2019-11-29 00:00:00'),
-(81, 2, 4, 2, NULL, 1, NULL, NULL, NULL, NULL, 70, 2, 1, '2019-11-29 00:00:00', '2019-11-29 00:00:00'),
-(82, 2, 4, 2, NULL, 1, NULL, NULL, NULL, NULL, 70, 2, 1, '2019-11-29 00:00:00', '2019-11-29 00:00:00'),
-(83, 2, 4, 2, NULL, 1, NULL, NULL, NULL, NULL, 70, 2, 1, '2019-11-29 00:00:00', '2019-11-29 00:00:00'),
+(81, 2, 4, 2, NULL, 1, NULL, NULL, NULL, NULL, 80, 2, 1, '2019-11-29 00:00:00', '2019-11-29 00:00:00'),
+(82, 2, 4, 2, NULL, 1, NULL, NULL, NULL, NULL, 80, 2, 1, '2019-11-29 00:00:00', '2019-11-29 00:00:00'),
+(83, 2, 4, 2, NULL, 1, NULL, NULL, NULL, NULL, 80, 2, 1, '2019-11-29 00:00:00', '2019-11-29 00:00:00'),
 (84, 2, 4, 5, NULL, 1, NULL, NULL, '#', NULL, NULL, 2, 1, '2019-11-29 00:00:00', '2019-11-29 00:00:00'),
-(85, 2, 4, 2, NULL, 1, NULL, NULL, NULL, NULL, 74, 2, 1, '2019-11-29 00:00:00', '2019-11-29 00:00:00'),
-(86, 2, 4, 2, NULL, 1, NULL, NULL, NULL, NULL, 74, 2, 1, '2019-11-29 00:00:00', '2019-11-29 00:00:00'),
+(85, 2, 4, 2, NULL, 1, NULL, NULL, NULL, NULL, 84, 2, 1, '2019-11-29 00:00:00', '2019-11-29 00:00:00'),
+(86, 2, 4, 2, NULL, 1, NULL, NULL, NULL, NULL, 84, 2, 1, '2019-11-29 00:00:00', '2019-11-29 00:00:00'),
 (87, 2, 4, 5, NULL, 1, NULL, NULL, '#', NULL, NULL, 2, 1, '2019-11-29 00:00:00', '2019-11-29 00:00:00'),
-(88, 2, 4, 2, NULL, 1, NULL, NULL, NULL, NULL, 77, 2, 1, '2019-11-29 00:00:00', '2019-11-29 00:00:00'),
-(89, 2, 4, 2, NULL, 1, NULL, NULL, NULL, NULL, 77, 2, 1, '2019-11-29 00:00:00', '2019-11-29 00:00:00');
+(88, 2, 4, 2, NULL, 1, NULL, NULL, NULL, NULL, 87, 2, 1, '2019-11-29 00:00:00', '2019-11-29 00:00:00'),
+(89, 2, 4, 2, NULL, 1, NULL, NULL, NULL, NULL, 87, 2, 1, '2019-11-29 00:00:00', '2019-11-29 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -646,8 +669,8 @@ INSERT INTO `menus_lang` (`id`, `menu_id`, `lang_id`, `name`) VALUES
 (88, 37, 2, 'Laboratory'),
 (90, 38, 1, 'Thư Viện'),
 (91, 38, 2, 'Library'),
-(92, 39, 1, 'Vật Lý Y Khoa'),
-(93, 39, 2, 'Medical Physics Specialcialization'),
+(92, 36, 1, 'Nhân Sự'),
+(93, 36, 2, 'Staffs'),
 (94, 40, 1, 'Đào Tạo'),
 (95, 40, 2, 'Academics'),
 (96, 41, 1, 'Đào Tạo Đại Học'),
@@ -674,8 +697,6 @@ INSERT INTO `menus_lang` (`id`, `menu_id`, `lang_id`, `name`) VALUES
 (117, 51, 2, 'News'),
 (118, 52, 1, 'Lịch Làm Việc'),
 (119, 52, 2, 'Calendar'),
-(120, 53, 1, 'CLB Aurora'),
-(121, 53, 2, 'Aurora Club'),
 (122, 54, 1, 'Hình Ảnh Sự Kiện'),
 (123, 54, 2, 'Photo Of Events'),
 (124, 55, 1, 'Biểu Mẫu'),
@@ -2333,22 +2354,22 @@ ALTER TABLE `attributes`
 -- AUTO_INCREMENT cho bảng `banner`
 --
 ALTER TABLE `banner`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT cho bảng `banner_lang`
 --
 ALTER TABLE `banner_lang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT cho bảng `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT cho bảng `categories_lang`
 --
 ALTER TABLE `categories_lang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT cho bảng `cat_status`
 --

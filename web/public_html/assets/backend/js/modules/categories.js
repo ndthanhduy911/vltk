@@ -25,9 +25,6 @@ const loadTableCategories = () => {
                     "data": "no"
                 },
                 {
-                    "data": "dept_name"
-                },
-                {
                     "data": "name"
                 },
                 {
@@ -46,13 +43,13 @@ const loadTableCategories = () => {
             'createdRow': function (row, item, dataIndex) {
                 $(row).addClass('text-center');
                 $('td', row).addClass('align-middle');
-                $('td:eq(4)', row).html(vi_moment(item.created_at, 'DD/MM/YYYY HH:mm'));
-                $('td:eq(5)', row).html(showStatus(item.status));
-                $('td:eq(6)', row).html(`
+                $('td:eq(3)', row).html(vi_moment(item.created_at, 'DD/MM/YYYY HH:mm'));
+                $('td:eq(4)', row).html(showStatus(item.status));
+                $('td:eq(5)', row).html(`
                     <a href="${backendUrl}/categories/update/${item.id}" class="fa fa-pencil btn btn-info btn-sm editCat" title="Cập nhật"></a>
                 `);
                 // if(![1, 2, 3, 4, 5].includes(parseInt(item.id))){
-                    $('td:eq(6)', row).append(`<a href="#" data-href="${backendUrl}/categories/delete/${item.id}" class="fa fa-trash btn btn-danger btn-sm deleteCat" title="Xóa"></a>`);
+                    $('td:eq(5)', row).append(`<a href="#" data-href="${backendUrl}/categories/delete/${item.id}" class="fa fa-trash btn btn-danger btn-sm deleteCat" title="Xóa"></a>`);
                 // }
             },
             "deferRender": true,

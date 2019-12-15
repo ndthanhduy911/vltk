@@ -19,6 +19,9 @@ class Categories extends \Phalcon\Mvc\Model
 
     public $updated_at;
 
+    public $deleted;
+
+
 
     public function getSource()
     {

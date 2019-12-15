@@ -17,6 +17,8 @@ class Banner extends \Phalcon\Mvc\Model
 
     public $status;
 
+    public $deleted;
+
     public function getSource()
     {
         return 'banner';

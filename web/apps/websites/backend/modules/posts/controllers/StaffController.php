@@ -18,6 +18,7 @@ class StaffController  extends \BackendController {
         $staffs_lang = [];
         $staff_content = [];
         $languages = Language::find(['status = 1']);
+        $dept_id = $this->session->get('dept_id');
         if($id){
             if(!$staff = Staff::findFirstId($id)){
                 echo 'Không tìm thấy dữ liệu'; die;
@@ -59,11 +60,14 @@ class StaffController  extends \BackendController {
                     'status' => $this->request->getPost('status'),
                     'slug' => $p_slug ? $p_slug : $this->helper->slugify($p_title[1]),
                     'featured_image' => $this->request->getPost('featured_image'),
-                    'dean' => $this->request->getPost('dean'),
                     'dept_position' => $this->request->getPost('dept_position'),
                     'email' => $this->request->getPost('email'),
                     'dept_id' => $this->request->getPost('dept_id')
                 ];
+
+                if($dept_id == 1){
+                    $req_staff['dean'] = $this->request->getPost('dean');
+                }
 
                 $form_staff->bind($req_staff, $staff);
                 if (!$form_staff->isValid()) {
@@ -129,6 +133,7 @@ class StaffController  extends \BackendController {
         $this->view->staff = $staff;
         $this->view->staffs_lang = $staffs_lang;
         $this->view->title = $title;
+        $this->view->dept_id = $dept_id;
         $this->assets->addJs('/elfinder/js/require.min.js');
         $this->get_js_css();
     }
@@ -182,6 +187,7 @@ class StaffController  extends \BackendController {
 
     public function getdataAction(){
         if($this->request->isAjax()){
+            $dept_id = $this->session->get('dept_id');
             $npStaff = Staff::getNamepace();
             $data = $this->modelsManager->createBuilder()
             ->columns(array(
@@ -199,10 +205,15 @@ class StaffController  extends \BackendController {
                 'D.name dept_name',
             ))
             ->from($npStaff)
-            ->leftJoin('Models\DepartmentsLang', 'D.dept_id = '.$npStaff.".dept_id AND D.lang_id = 1",'D')
+            ->where("$npStaff.deleted = 0");
+            
+            if($dept_id != 1){
+                $data = $data->andWhere("$npStaff.dept_id = $dept_id");
+            }
+
+            $data = $data->leftJoin('Models\DepartmentsLang', 'D.dept_id = '.$npStaff.".dept_id AND D.lang_id = 1",'D')
             ->leftJoin('Models\StaffLang', 'SL.staff_id = '.$npStaff.'.id AND SL.lang_id = 1','SL')
-            ->orderBy("$npStaff.dean ASC, $npStaff.dept_id ASC, $npStaff.dept_position ASC")
-            ->where('1=1');
+            ->orderBy("$npStaff.dean ASC, $npStaff.dept_id ASC, $npStaff.dept_position ASC");
     
             $search = 'SL.title LIKE :search:';
             $this->response->setStatusCode(200, 'OK');

@@ -182,6 +182,7 @@ class PagesController  extends \BackendController {
 
     public function getdataAction(){
         if($this->request->isAjax()){
+            $dept_id = $this->session->get('dept_id');
             $npPages = Pages::getNamepace();
             $data = $this->modelsManager->createBuilder()
             ->columns(array(
@@ -194,13 +195,11 @@ class PagesController  extends \BackendController {
                 'PL.excerpt excerpt',
                 'PL.title title',
                 'PL.content content',
-                'D.name dept_name',
             ))
             ->from($npPages)
-            ->leftJoin('Models\DepartmentsLang', 'D.dept_id = '.$npPages.'.dept_id AND D.lang_id = 1','D')
+            ->where("$npPages.deleted = 0 AND $npPages.dept_id = $dept_id")
             ->leftJoin('Models\PagesLang', 'PL.page_id = '.$npPages.'.id AND PL.lang_id = 1','PL')
-            ->orderBy($npPages.'.dept_id ASC, '.$npPages.'.created_at DESC')
-            ->where("1 = 1");
+            ->orderBy($npPages.'.dept_id ASC, '.$npPages.'.created_at DESC');
     
             $search = 'PL.title LIKE :search:';
             $this->response->setStatusCode(200, 'OK');

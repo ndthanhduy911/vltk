@@ -162,6 +162,7 @@ class PartnerController  extends \BackendController {
 
     public function getdataAction(){
         if($this->request->isAjax()){
+            $dept_id = $this->session->get('dept_id');
             $npPartner = Partner::getNamepace();
             $data = $this->modelsManager->createBuilder()
             ->columns(array(
@@ -172,13 +173,11 @@ class PartnerController  extends \BackendController {
                 $npPartner.'.dept_id',
                 $npPartner.'.created_at',
                 'PL.title title',
-                'D.name dept_name',
             ))
             ->from($npPartner)
-            ->leftJoin('Models\DepartmentsLang', 'D.dept_id = '.$npPartner.'.dept_id AND D.lang_id = 1','D')
+            ->where("$npPartner.deleted = 0 AND $npPartner.dept_id = $dept_id")
             ->leftJoin('Models\PartnerLang', 'PL.partner_id = '.$npPartner.'.id AND PL.lang_id = 1','PL')
-            ->orderBy($npPartner.'.dept_id ASC')
-            ->where("1=1");
+            ->orderBy($npPartner.'.dept_id ASC');
     
             $search = 'PL.title LIKE :search:';
             $this->response->setStatusCode(200, 'OK');

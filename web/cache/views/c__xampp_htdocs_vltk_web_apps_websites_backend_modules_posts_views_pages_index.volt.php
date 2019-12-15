@@ -27,7 +27,6 @@
                                 <th class="align-middle text-center text-white w-20-px">#</th>
                                 <th class="align-middle text-center text-white">Tiêu đề</th>
                                 <th class="align-middle text-center text-white">Mô tả</th>
-                                <th class="align-middle text-center text-white">Bộ môn</th>
                                 <th class="align-middle text-center text-white w-150-px">Ngày đăng</th>
                                 <th class="align-middle text-center text-white w-70-px">Trạng thái</th>
                                 <th class="align-middle text-center text-white w-70-px">Thao tác</th>

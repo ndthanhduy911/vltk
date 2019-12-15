@@ -103,6 +103,7 @@
                                 </div>
                             </div>
                         </div>
+                        {% if dept_id == 1 %}
                         <h5 class="font-weight-bold text-primary">Chức vụ Khoa</h5>
                         <div class="row m-0">
                             <div class="form-group mt-1 w-100">
@@ -112,6 +113,7 @@
                                 </div>
                             </div>
                         </div>
+                        {% endif %}
                         <h5 class="font-weight-bold text-primary">Chức vụ Bộ Môn</h5>
                         <div class="row m-0">
                             <div class="form-group mt-1 w-100">

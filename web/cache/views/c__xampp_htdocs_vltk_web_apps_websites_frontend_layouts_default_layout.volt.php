@@ -32,7 +32,7 @@
     <meta property="og:site_name" content="Vật Lý - Vật Lý Kỹ Thuật" />
 
     <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="76x76" href="<?php echo FRONTEND_URL ?>/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="76x76" href="<?php echo FRONTEND_URL ?>/uploads/khoa-vat-ly/logo96x96.png" />
     <link rel="icon" type="image/png" href="<?php echo FRONTEND_URL ?>/uploads/khoa-vat-ly/logo96x96.png" />
 
     <!-- Web Fonts -->
