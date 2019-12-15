@@ -20,15 +20,7 @@
                 <li><a class="app-menu__item <?php if ($this->dispatcher->getControllerName() == 'staff') { ?> <?= 'active' ?> <?php } ?>" href="<?= $this->config->application->backendUri ?>/staff"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Nhân sự</span></a></li>
                 <li><a class="app-menu__item <?php if ($this->dispatcher->getControllerName() == 'partner') { ?> <?= 'active' ?> <?php } ?>" href="<?= $this->config->application->backendUri ?>/partner"><i class="app-menu__icon fa fa-handshake-o"></i><span class="app-menu__label">Liên kết</span></a></li>
                 <li><a class="app-menu__item <?php if ($this->dispatcher->getControllerName() == 'home') { ?> <?= 'active' ?> <?php } ?>" href="<?= $this->config->application->backendUri ?>/home"><i class="app-menu__icon fa fa-home"></i><span class="app-menu__label">Trang chủ</span></a></li>
-                <li class="treeview <?php if ($this->isIncluded($this->dispatcher->getControllerName(), ['menus'])) { ?> <?= 'is-expanded' ?><?php } ?>">
-                        <a class="app-menu__item" href="#" data-toggle="treeview">
-                                <i class="app-menu__icon fa fa-link"></i><span class="app-menu__label">Menu</span><i class="treeview-indicator fa fa-angle-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                                <li><a class="treeview-item <?php if ($this->dispatcher->getControllerName() == 'menus' && ($this->isIncluded($this->dispatcher->getActionName(), ['index']))) { ?> <?= 'actived' ?> <?php } ?>" href="<?= $this->config->application->backendUri ?>/menu"><i class="icon fa fa-circle-o"></i>Danh sách menu</a></li>
-                                <li><a class="treeview-item <?php if ($this->dispatcher->getControllerName() == 'menus' && ($this->isIncluded($this->dispatcher->getActionName(), ['location']))) { ?> <?= 'actived' ?> <?php } ?>" href="<?= $this->config->application->backendUri ?>/menu/location"><i class="icon fa fa-circle-o"></i>Vị trí menu</a></li>
-                        </ul>
-                </li>
+                <li><a class="app-menu__item <?php if ($this->dispatcher->getControllerName() == 'menu') { ?> <?= 'active' ?> <?php } ?>" href="<?= $this->config->application->backendUri ?>/menu"><i class="app-menu__icon fa fa-link"></i><span class="app-menu__label">Menu</span></a></li>
                 <!-- <li><a class="app-menu__item" href="<?= $this->config->application->backendUri ?>/media"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Thư viện</span></a></li> -->
                 <li class="treeview <?php if ($this->isIncluded($this->dispatcher->getControllerName(), ['users', 'roles'])) { ?> <?= 'is-expanded' ?><?php } ?>">
                 <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Tài khoản</span><i class="treeview-indicator fa fa-angle-right"></i></a>
