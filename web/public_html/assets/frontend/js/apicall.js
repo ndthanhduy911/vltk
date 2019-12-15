@@ -19,7 +19,7 @@ const changeLang = (lang_id) => {
     return new Promise((resolve, reject) => {
         $.ajax({
             type: "GET",
-            url: `/faculty-api/changelanguage/${lang_id}`,
+            url: `/api/changelanguage/${lang_id}`,
             data: null,
             dataType: "json",
             success: function (response) {

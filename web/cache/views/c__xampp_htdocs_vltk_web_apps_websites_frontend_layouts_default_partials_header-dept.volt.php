@@ -18,7 +18,7 @@ $menuParents = Menus::find(["status = 1 AND dept_id = $dept_id AND menu_location
 
                         <!-- name-and-slogan -->
                         <div class="site-slogan logo-font">
-                            {{dept_lang.name}}
+                            <?= $dept_lang->name ?>
                         </div>
 
                     </div>
@@ -35,12 +35,12 @@ $menuParents = Menus::find(["status = 1 AND dept_id = $dept_id AND menu_location
                                 <div class="navbar-brand clearfix hidden-lg-up">
 
                                     <div id="logo-mobile" class="logo">
-                                        <h3 class="title text-default mb-0">{{dept.code}}</h3>
+                                        <h3 class="title text-default mb-0"><?= $dept->code ?></h3>
                                     </div>
 
                                     <!-- name-and-slogan -->
                                     <div class="site-slogan logo-font">
-                                        {{dept_lang.name}}
+                                        <?= $dept_lang->name ?>
                                     </div>
 
                                 </div>
@@ -54,19 +54,19 @@ $menuParents = Menus::find(["status = 1 AND dept_id = $dept_id AND menu_location
                                 <div class="collapse navbar-collapse" id="navbar-collapse-1">
                                     <!-- main-menu -->
                                     <ul class="navbar-nav ml-xl-auto">
-                                        {%for menu in menuParents%}
+                                        <?php foreach ($menuParents as $menu) { ?>
                                         <?php $menuChild = Menus::find(['parent_id = :parent_id:','bind' => ['parent_id' => $menu->id]]); ?>
                                         <li class="nav-item dropdown">
                                             <a href="<?= Menus::getLink($menu) ?>" class="nav-link <?= $menuChild->count() ? 'dropdown-toggle' : '' ?>" <?= $menuChild->count() ? 'data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"' : '' ?>><?= Menus::getName($menu->id, $lang_id) ?></a>
                                             <?php if($menuChild->count()){ ?>
                                                 <ul class="dropdown-menu">
-                                                {%for child in menuChild%}
+                                                <?php foreach ($menuChild as $child) { ?>
                                                     <li><a href="<?= Menus::getLink($child) ?>"><?= Menus::getName($child->id, $lang_id) ?></a></li>
-                                                {%endfor%}
+                                                <?php } ?>
                                                 </ul>
                                             <?php } ?>
                                         </li>
-                                        {%endfor%}
+                                        <?php } ?>
                                     </ul>
                                     <!-- main-menu end -->
                                 </div>
@@ -78,9 +78,9 @@ $menuParents = Menus::find(["status = 1 AND dept_id = $dept_id AND menu_location
 
                 </div>
                 <div class="col-auto hidden-md-down p-0">
-                    <div class="header-dropdown-buttons" id="lang_id" data-lang="{{lang_id}}">
-                        <a href="<?= FRONTEND_URL ?>/api/changelanguage/{{ lang_id == 1 ? 2 : 1  }}" data-id="{{ language.id }}">
-                            <img src="<?= FRONTEND_URL ?>{{language.path}}/{{language.icon}}" class="user-image" alt="{{ language.name }}" width="36px">
+                    <div class="header-dropdown-buttons" id="lang_id" data-lang="<?= $lang_id ?>">
+                        <a href="<?= FRONTEND_URL ?>/faculty-api/changelanguage/<?= ($lang_id == 1 ? 2 : 1) ?>" data-id="<?= $language->id ?>">
+                            <img src="<?= FRONTEND_URL ?><?= $language->path ?>/<?= $language->icon ?>" class="user-image" alt="<?= $language->name ?>" width="36px">
                         </a>
                     </div>
                 </div>

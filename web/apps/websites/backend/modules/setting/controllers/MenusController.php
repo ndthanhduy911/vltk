@@ -15,7 +15,7 @@ class MenusController  extends \BackendController
 {
     public function indexAction(){
         $this->get_js_css();
-        $this->view->menu_location = MenuLocation::find();
+        $this->view->menu_location = MenuLocation::find(["dept_id = {$this->session->get('dept_id')}"]);
     }
 
     public function locationAction(){
@@ -239,38 +239,74 @@ class MenusController  extends \BackendController
     // =================================
     // API
     // =================================
-    public function getdataAction($menu_location_id = 0){
-        if($this->request->isAjax()){
-            $npMenu = Menus::getNamepace();
-            $data = $this->modelsManager->createBuilder()
-            ->columns(array(
-                $npMenu.'.id',
-                $npMenu.'.parent_id',
-                $npMenu.'.param_id',
-                $npMenu.'.link',
-                $npMenu.'.status',
-                $npMenu.'.module',
-                $npMenu.'.controller',
-                $npMenu.'.action',
-                'ML.name menu_name',
-            ))
-            ->from($npMenu)
-            ->join('Models\MenusLang', 'ML.menu_id = '.$npMenu.'.id AND ML.lang_id = 1','ML')
-            ->orderBy($npMenu.'.parent_id DESC, '.$npMenu.'.sort_other ASC, ML.name ASC')
-            ->where($npMenu.'.deleted = 0 AND '.$npMenu.'.menu_location_id = '.$menu_location_id);
-            if($this->session->get('role') !== 1){
-                $data = $data->andWhere($npMenu.".dept_id IN (".implode(',',$this->session->get('dept_mg')).")");
-            }
-    
-            $search = false;
-            $this->response->setStatusCode(200, 'OK');
-            $this->response->setJsonContent($this->ssp->data_output($this->request->get(), $data,$search));
-            return $this->response->send();
-        }else{
-            $this->response->setStatusCode(403, 'Failed');
-            $this->response->setJsonContent(['Truy cập không được phép']);
-            return $this->response->send();
-        }
+    public function getdataAction(){
+        // if(!$this->request->isAjax()){
+        //     $this->response->setStatusCode(403, 'Failed');
+        //     $this->response->setJsonContent(['Truy cập không được phép']);
+        //     return $this->response->send();
+        // }
+        $menu_location_id = $this->request->get('menu_location_id');
+        $menu_location_id = $menu_location_id ? $menu_location_id : 0;
+        $npMenu = Menus::getNamepace();
+        $data = $this->modelsManager->createBuilder()
+        ->columns(array(
+            $npMenu.'.id',
+            $npMenu.'.dept_id',
+            $npMenu.'.menu_location_id',
+            $npMenu.'.type',
+            $npMenu.'.post_id',
+            $npMenu.'.page_id',
+            $npMenu.'.cat_id',
+            $npMenu.'.dept',
+            $npMenu.'.link',
+            $npMenu.'.icon',
+            $npMenu.'.parent_id',
+            $npMenu.'.sort',
+            $npMenu.'.status',
+            'ML.name menu_name',
+        ))
+        ->from($npMenu)
+        ->join('Models\MenusLang', 'ML.menu_id = '.$npMenu.'.id AND ML.lang_id = 1','ML')
+        ->orderBy("$npMenu.sort ASC, ML.name ASC")
+        ->where("$npMenu.parent_id is NULL AND $npMenu.deleted = 0 AND $npMenu.menu_location_id = $menu_location_id");
+
+        $search = "$npMenu.name LIKE :search:";
+        $this->response->setStatusCode(200, 'OK');
+        $this->response->setJsonContent($this->ssp->data_output($this->request->get(), $data,$search));
+        return $this->response->send();
+    }
+
+    public function getdatachildAction($parent_id = 0){
+        // if(!$this->request->isAjax()){
+        //     $this->response->setStatusCode(403, 'Failed');
+        //     $this->response->setJsonContent(['Truy cập không được phép']);
+        //     return $this->response->send();
+        // }
+        $npMenu = Menus::getNamepace();
+        $data = $this->modelsManager->createBuilder()
+        ->columns(array(
+            $npMenu.'.id',
+            $npMenu.'.type',
+            $npMenu.'.post_id',
+            $npMenu.'.page_id',
+            $npMenu.'.cat_id',
+            $npMenu.'.dept',
+            $npMenu.'.link',
+            $npMenu.'.icon',
+            $npMenu.'.sort',
+            $npMenu.'.status',
+            'ML.name menu_name',
+        ))
+        ->from($npMenu)
+        ->join('Models\MenusLang', 'ML.menu_id = '.$npMenu.'.id AND ML.lang_id = 1','ML')
+        ->orderBy("$npMenu.sort ASC, ML.name ASC")
+        ->where("$npMenu.deleted = 0 AND $npMenu.parent_id = :parent_id:",['parent_id' => $parent_id])
+        ->getQuery()
+        ->execute();
+
+        $this->response->setStatusCode(200, 'OK');
+        $this->response->setJsonContent(['menus' => $data->toArray()]);
+        return $this->response->send();
     }
 
     public function getdatalocationAction(){

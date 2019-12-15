@@ -29,11 +29,6 @@ $application->registerModules(array(
         'path' => APP_DIR . '/websites/backend/modules/setting/module.php'
     ),
 
-    'frontend_faculty' => array(
-        'className' => 'Frontend\Modules\Faculty\Module',
-        'path' => APP_DIR . '/websites/frontend/modules/faculty/module.php'
-    ),
-
     'frontend_api' => array(
         'className' => 'Frontend\Modules\Api\Module',
         'path' => APP_DIR . '/websites/frontend/modules/api/module.php'

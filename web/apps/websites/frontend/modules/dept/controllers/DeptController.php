@@ -10,9 +10,8 @@ use Models\Staff;
 use Models\Partner;
 use Models\Banner;
 
-class DeptController extends \DeptfrontendController
+class DeptController extends \FrontendController
 {
-
     public function indexAction($slug = null){
 
         $slug = $this->helper->slugify($slug);
@@ -59,7 +58,7 @@ class DeptController extends \DeptfrontendController
                 ->execute();
             }
         }
-        
+
         $cats = [];
         if($catSetting = HomeSetting::findFirst(["dept_id = $dept_id AND type = 2"])){
             $listCats = json_decode($catSetting->setting);
@@ -200,6 +199,6 @@ class DeptController extends \DeptfrontendController
     // FUNCTION
     // =================================
     private function get_js_css (){
-        $this->assets->addJs(FRONTEND_URL.'/assets/frontend/js/modules/faculty/index.js');
+        $this->assets->addJs(FRONTEND_URL.'/assets/frontend/js/modules/dept/index.js');
     }
 }

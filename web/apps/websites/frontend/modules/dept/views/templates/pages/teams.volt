@@ -20,7 +20,7 @@ use Models\Staff;
         ->from($npStaff)
         ->leftJoin("Models\StaffLang", "SL.staff_id = $npStaff.id AND SL.lang_id = $lang_id",'SL')
         ->where("$npStaff.status = 1 AND ($npStaff.dean = 1 OR $npStaff.dean = 2)")
-        ->orderBy("$npStaff.dean DESC")
+        ->orderBy("$npStaff.dean ASC")
         ->limit(3)
         ->getQuery()
         ->execute();

@@ -1,45 +1,45 @@
 <?php use Models\Posts; ?>
 
-{{ partial('breadcrumb') }}
+<?= $this->partial('breadcrumb') ?>
 
 <section class="main-container">
     <div class="container">
         <div class="row">
             <div class="main col-lg-9">
-                <h1 class="page-title">{{title}}</h1>
+                <h1 class="page-title"><?= $title ?></h1>
                 <div class="separator-2"></div>
 
                 <div class="masonry-grid row">
-                    {% for key, post in posts %}
+                    <?php foreach ($posts as $key => $post) { ?>
                     <div class="masonry-grid-item col-md-6">
                         <article class="blogpost shadow-2 light-gray-bg bordered object-non-visible"
                             data-animation-effect="fadeInUpSmall" data-effect-delay="100">
-                            {% if post.featured_image %}
+                            <?php if ($post->featured_image) { ?>
                             <div class="overlay-container">
-                                <img class="ml-auto mr-auto" src="{{ helper.getLinkImage(post.featured_image) }}" alt="{{ post.title }}">
+                                <img class="ml-auto mr-auto" src="<?= $this->helper->getLinkImage($post->featured_image) ?>" alt="<?= $post->title ?>">
                                 <a class="overlay-link" href="<?= Posts::getUrl($dept, $post) ?>"><i class="fa fa-link"></i></a>
                             </div>
-                            {% endif %}
+                            <?php } ?>
                             <header>
-                                <h2><a href="<?= Posts::getUrl($dept, $post) ?>">{{post.title}}</a></h2>
+                                <h2><a href="<?= Posts::getUrl($dept, $post) ?>"><?= $post->title ?></a></h2>
                                 <div class="post-info">
                                     <span class="post-date">
                                         <i class="fa fa-calendar-o pr-1"></i>
-                                        <span class="day">{{ helper.datetime_vn(post.calendar) }}</span>
+                                        <span class="day"><?= $this->helper->datetime_vn($post->calendar) ?></span>
                                     </span>
                                 </div>
                             </header>
                             <div class="blogpost-content">
-                                <p>{{post.excerpt}}</p>
+                                <p><?= $post->excerpt ?></p>
                             </div>
                             <footer class="clearfix">
                                 <!-- <div class="tags pull-left"><i class="fa fa-tags pr-1"></i> <a href="#">tag 1</a>,
                                     <a href="#">tag 2</a>, <a href="#">long tag 3</a></div> -->
-                                <div class="link pull-right"><i class="fa fa-link pr-1"></i><a href="<?= Posts::getUrl($dept, $post) ?>">{{ ml._ml_system('more', 'Xem thêm') }}</a></div>
+                                <div class="link pull-right"><i class="fa fa-link pr-1"></i><a href="<?= Posts::getUrl($dept, $post) ?>"><?= $this->ml->_ml_system('more', 'Xem thêm') ?></a></div>
                             </footer>
                         </article>
                     </div>
-                    {% endfor %}
+                    <?php } ?>
                 </div>
 
                 <?php if($paging !== false) : ?>
@@ -56,7 +56,7 @@
                         <?php endif ?>
 
                         <?php for ($i = 1; $i <= $paging['total_page']; $i++) { ?>
-                        <li class="page-item <?php echo $i == $paging['current_page'] ? 'active' : ''  ?>"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+                        <li class="page-item <?php echo $i == $paging['current_page'] ? 'active' : ''  ?>"><a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a></li>
                         <?php } ?>
                         <?php if((int)$paging['current_page'] !== (int)$paging['total_page']): ?>
                         <li class="page-item">
@@ -77,11 +77,11 @@
                         <?php endif ?>
 
                         <?php for ($i = 1; $i <= 4; $i++) { ?>
-                        <li class="page-item <?php echo $i == $paging['current_page'] ? 'active' : ''  ?>"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+                        <li class="page-item <?php echo $i == $paging['current_page'] ? 'active' : ''  ?>"><a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a></li>
                         <?php } ?>
                         <li class="page-item"><a class="page-link disabled">...</a></li>
                         <?php for ($i = ($paging['total_page'] - 3); $i <= $paging['total_page']; $i++) { ?>
-                        <li class="page-item <?php echo $i == $paging['current_page'] ? 'active' : ''  ?>"><a class="page-link" href="?page={{(i)}}">{{(i)}}</a></li>
+                        <li class="page-item <?php echo $i == $paging['current_page'] ? 'active' : ''  ?>"><a class="page-link" href="?page=<?= ($i) ?>"><?= ($i) ?></a></li>
                         <?php } ?>
 
                         <?php if((int)$paging['current_page'] !== (int)$paging['total_page']): ?>
@@ -98,7 +98,7 @@
                 <?php endif ?>
             </div>
             <aside class="col-lg-3 col-xl-3 ml-xl-auto">
-            {{ partial('sidebar') }}
+            <?= $this->partial('sidebar') ?>
             </aside>
         </div>
     </div>

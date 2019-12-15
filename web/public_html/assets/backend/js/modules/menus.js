@@ -43,7 +43,6 @@ const loadTableMenuLocation = () => {
                 $('td:eq(4)', row).addClass('text-nowrap');
                 $('td:eq(4)', row).html(`<a href="${backendUrl}/menu/updatelocation/${item.id}" class="fa fa-pencil btn btn-info btn-sm editLocation" title="Cập nhật"></a>`);
                 $('td:eq(4)', row).append(`<a href="#" data-href="${backendUrl}/menu/deletelocation/${item.id}" class="fa fa-trash btn btn-danger btn-sm deleteLocation" title="Xóa"></a>`);
-
             },
             "deferRender": true,
             "language": {
@@ -72,6 +71,12 @@ const loadTableMenuLocation = () => {
 
 const loadTableMenu = () => {
     if ($('#menus').length) {
+        let formSearch = $('#searchMenu');
+        let dataLoadSearch = formSearch.serializeArray();
+        let textGet = "?";
+        dataLoadSearch.forEach((element, index) => {
+            textGet += `${index !== 0 ?'&':''}${element.name}=${element.value}`
+        });
         let dt = $('#menus').DataTable({
             "bInfo" : false,
             "paging":   false,
@@ -80,14 +85,15 @@ const loadTableMenu = () => {
             "processing": true,
             "serverSide": true,
             "autoWidth": false,
-            "searching": false,
-            "ajax": backendUrl+"/menu/getdata",
+            "iDisplayLength": 'all',
+            // "searching": false,
+            "ajax": `${backendUrl}/menu/getdata${textGet}`,
             "columns": [
                 {
                     "data": "menu_name"
                 },
                 {
-                    "data": "null"
+                    "data": null
                 },
                 {
                     "data": "status"
@@ -97,14 +103,40 @@ const loadTableMenu = () => {
                 }
             ],
             'createdRow': function (row, item, dataIndex) {
-                $(row).addClass('text-center');
+                $(row).addClass('text-center bg-warning text-white');
                 $('td', row).addClass('align-middle');
+                $('td:eq(0)', row).addClass('text-left');                
+                if(item.parent_id){
+                    $('td:eq(0)', row).html('---'+item.menu_name);
+                }
                 $('td:eq(2)', row).html(showStatus(item.status));
                 $('td:eq(3)', row).html(`
                     <a href="${backendUrl}/menu/update/${item.id}" class="fa fa-pencil btn btn-info btn-sm editMenu" title="Cập nhật"></a>
                 `);
 
                 $('td:eq(3)', row).append(`<a href="#" data-href="${backendUrl}/menu/delete/${item.id}" class="fa fa-trash btn btn-danger btn-sm deleteMenu" title="Xóa"></a>`);
+
+                $.ajax({
+                    type: "GET",
+                    url: `${backendUrl}/menu/getdatachild/${item.id}`,
+                    data: null,
+                    dataType: "json",
+                    success: function (response) {
+                        let menus = response.menus;                        
+                        menus.forEach(menu => {
+                            let newRow = $(row).clone();
+                            $(newRow).removeClass('bg-warning text-white');
+                            $('td:eq(2)', newRow).html(showStatus(menu.status));
+                            $('td:eq(3)', newRow).html(`
+                                <a href="${backendUrl}/menu/update/${menu.id}" class="fa fa-pencil btn btn-info btn-sm editMenu" title="Cập nhật"></a>
+                            `);
+                            $('td:eq(0)', newRow).html('---'+menu.menu_name);
+            
+                            $('td:eq(3)', newRow).append(`<a href="#" data-href="${backendUrl}/menu/delete/${menu.id}" class="fa fa-trash btn btn-danger btn-sm deleteMenu" title="Xóa"></a>`);
+                            $(newRow).insertAfter(row);
+                        });
+                    }
+                });
             },
             "deferRender": true,
             "language": {
@@ -128,11 +160,22 @@ const loadTableMenu = () => {
         showConfrimDelete('.deleteMenu',()=>{
             dt.draw();
         })
+        $('#menuLocationId').change(function (e) { 
+            e.preventDefault();
+            let data = formSearch.serializeArray();
+            textGet = "?";
+            data.forEach((element, index) => {
+                textGet += `${index !== 0 ?'&':''}${element.name}=${element.value}`
+            });
+            dt.ajax.url( `${backendUrl}/menu/getdata${textGet}` ).load();
+            window.history.pushState({}, "Search group", `${backendUrl}/menu${textGet}`);
+        });
     }
 }
 
-loadTableMenuLocation();
-
 loadTableMenu();
 
+loadTableMenuLocation();
+
 changeTitleToSlug('#title', '#slug');
+

@@ -1,14 +1,13 @@
 <?php
 $router = new Phalcon\Mvc\Router();
 
-$router->setDefaultModule("frontend_faculty");
+$router->setDefaultModule("frontend_dept");
 $router->notFound(array(
-    'module' => 'frontend_faculty',
+    'module' => 'frontend_dept',
     "controller" => "index",
     "action" => "index"
 ));
 /*---------------------------------include_routes_frontend-----------------*/
-include APP_DIR . '/websites/frontend/modules/faculty/routes.php';
 include APP_DIR . '/websites/frontend/modules/dept/routes.php';
 include APP_DIR . '/websites/frontend/modules/api/routes.php';
 
