@@ -7,7 +7,7 @@
     <title><?php echo isset($title) ? $title.' | Khoa Vật Lý - Vật Lý Kỹ Thuật' : 'Khoa Vật Lý - Vật Lý Kỹ Thuật' ?> </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Canonical SEO -->
-    <link rel="canonical" href="<?php echo FRONTEND_URL ?>/" />
+    <link rel="canonical" href="<?= FRONTEND_URL ?>/" />
     <!--  Social tags      -->
     <meta name="keywords" content="support, it, technical, physics, network, system">
     <meta name="description" content="Ho tro khach hang physics">
@@ -77,12 +77,8 @@
     <div class="scrollToTop circle"><i class="fa fa-angle-up"></i></div>
 
     <div class="page-wrapper">
-        <?php if(isset($dept_id) && $dept_id != 1){ ?>
-            {{ partial('header-dept') }}
-        <?php } else { ?>
-            {{ partial('header') }}
-        <?php } ?>
-        
+        {{ partial('header') }}
+
         {{ content() }}
 
         {{ partial('footer') }}
