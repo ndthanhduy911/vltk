@@ -135,7 +135,8 @@ class PagesController  extends \BackendController {
 
     public function deleteAction($id = null){
         if ($page = Pages::findFirstId($id)) {
-            if (!$page->delete()) {
+            $page->deleted = 1;
+            if (!$page->save()) {
                 if ($this->request->isAjax()) {
                     foreach ($page->getMessages() as $message) {
                         array_push($error, $message->getMessage());

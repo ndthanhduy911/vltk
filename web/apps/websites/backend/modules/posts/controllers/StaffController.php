@@ -140,7 +140,8 @@ class StaffController  extends \BackendController {
 
     public function deleteAction($id = null){
         if ($staff = Staff::findFirstId($id)) {
-            if (!$staff->delete()) {
+            $staff->deleted = 1;
+            if (!$staff->save()) {
                 if ($this->request->isAjax()) {
                     foreach ($staff->getMessages() as $message) {
                         array_push($error, $message->getMessage());

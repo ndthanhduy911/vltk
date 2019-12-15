@@ -156,10 +156,10 @@ class CategoriesController  extends \BackendController {
     $this->get_js_css();
     }
 
-    public function deleteAction($id = null){
+    public function deleteAction($id = 0){
         
         if ($cat = Categories::findFirstId($id) && !in_array((int)$id, [1,2,3,4,5])) {
-            $cat->status = 4;
+            $cat->deleted = 1;
             if (!$cat->save()) {
                 if ($this->request->isAjax()) {
                     foreach ($cat->getMessages() as $message) {

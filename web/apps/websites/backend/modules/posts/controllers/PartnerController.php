@@ -115,7 +115,8 @@ class PartnerController  extends \BackendController {
     
     public function deleteAction($id = null){
         if ($partner = Partner::findFirstId($id)) {
-            if (!$partner->delete()) {
+            $partner->deleted = 1;
+            if (!$partner->save()) {
                 if ($this->request->isAjax()) {
                     foreach ($partner->getMessages() as $message) {
                         array_push($error, $message->getMessage());

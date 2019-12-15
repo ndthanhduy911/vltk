@@ -233,7 +233,8 @@ class PostsController  extends \BackendController {
 
     public function deleteAction($id = null){
         if ($post = Posts::findFirstId($id)) {
-            if (!$post->delete()) {
+            $post->deleted = 1;
+            if (!$post->save()) {
                 if ($this->request->isAjax()) {
                     foreach ($post->getMessages() as $message) {
                         array_push($error, $message->getMessage());
@@ -299,20 +300,16 @@ class PostsController  extends \BackendController {
             $npPosts.'.created_at',
             $npPosts.'.calendar',
             $npPosts.'.featured_image',
-            'DL.name dept_name',
-            'D.slug dept_slug',
             'U.name author_name',
             'C.name cat_name',
         ))
         ->from($npPosts)
-        ->join('Models\DepartmentsLang', 'DL.dept_id = '.$npPosts.'.dept_id AND DL.lang_id = 1','DL')
-        ->join('Models\Departments',"D.id = $npPosts.dept_id AND $npPosts.dept_id = $dept_id",'D')
+        ->where($npPosts.'.deleted = 0')
         ->join('Models\Users', 'U.id = '.$npPosts.'.author','U')
         ->join('Models\CategoriesLang', 'C.cat_id = '.$npPosts.'.cat_id AND C.lang_id = 1','C')
         ->join('Models\PostsLang', 'PL.post_id = '.$npPosts.'.id AND PL.lang_id = 1','PL')
-        ->orderBy($npPosts.'.calendar DESC')
-        ->where($npPosts.'.deleted = 0')
-        ->groupBy('PL.post_id');
+        ->orderBy($npPosts.'.calendar DESC');
+
         // if($this->session->get('role') !== 1){
         //     $data = $data->andWhere($npPosts.".dept_id IN (".implode(',',$this->session->get('dept_mg')).")");
         // }
@@ -345,13 +342,11 @@ class PostsController  extends \BackendController {
                 'C.name cat_name',
             ))
             ->from($npPosts)
-            ->where("$npPosts.deleted = 0 AND $npPosts.dept_id = $dept_id")
+            ->where("$npPosts.deleted = 1 AND $npPosts.dept_id = $dept_id")
             ->join('Models\Users', 'U.id = '.$npPosts.'.author','U')
             ->join('Models\CategoriesLang', 'C.cat_id = '.$npPosts.'.cat_id AND C.lang_id = 1','C')
             ->join('Models\PostsLang', 'PL.post_id = '.$npPosts.'.id AND PL.lang_id = 1','PL')
-            ->orderBy($npPosts.'.calendar DESC')
-            ->where("$npPosts.deleted = 1")
-            ->groupBy('PL.post_id');
+            ->orderBy($npPosts.'.calendar DESC');
             // if($this->session->get('role') !== 1){
             //     $data = $data->andWhere("dept_id IN (".implode(',',$this->session->get('dept_mg')).")");
             // }

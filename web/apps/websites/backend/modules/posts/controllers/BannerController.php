@@ -114,7 +114,8 @@ class BannerController  extends \BackendController {
 
     public function deleteAction($id = null){
         if ($banner = Banner::findFirstId($id)) {
-            if (!$banner->delete()) {
+            $banner->deleted = 1;
+            if (!$banner->save()) {
                 if ($this->request->isAjax()) {
                     foreach ($banner->getMessages() as $message) {
                         array_push($error, $message->getMessage());
