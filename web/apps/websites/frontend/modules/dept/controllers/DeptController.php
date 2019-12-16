@@ -189,6 +189,7 @@ class DeptController extends \FrontendController
         $this->view->partner_info = $partner_info;
         $this->view->partners = $partners;
         $this->view->contact_info = $contact_info;
+        $this->view->slug = $slug;
         $this->view->dept_id = $dept_id;
         $this->view->dept = $dept;
         $this->view->dept_lang = DepartmentsLang::findFirst(['dept_id = :dept_id: AND lang_id = :lang_id:','bind' => ['dept_id' => $dept_id, 'lang_id' => $lang_id]]);

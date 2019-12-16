@@ -31,6 +31,7 @@ class PostsController extends \FrontendController
         $dept_id = $slug2 ? (($dept = Departments::getBySlug($slug1)) ? $dept->id : NULL ): 1;
         $dept = !empty($dept) ? $dept : Departments::findFirstId(1);
         $dept_lang = DepartmentsLang::findFirst(['dept_id = :dept_id: AND lang_id = :lang_id:','bind' => ['dept_id' => $dept->id, 'lang_id' => $lang_id]]);
+        $this->view->slug = $dept_id === 1 ? '' : $slug1;
         $this->view->dept_id = $dept_id;
         $this->view->dept = $dept;
         $this->view->dept_lang = $dept_lang;
@@ -61,6 +62,7 @@ class PostsController extends \FrontendController
         $dept_id = $slug2 ? (($dept = Departments::getBySlug($slug1)) ? $dept->id : NULL ): 1;
         $dept = !empty($dept) ? $dept : Departments::findFirstId(1);
         $dept_lang = DepartmentsLang::findFirst(['dept_id = :dept_id: AND lang_id = :lang_id:','bind' => ['dept_id' => $dept->id, 'lang_id' => $lang_id]]);
+        $this->view->slug = $dept_id === 1 ? '' : $slug1;
         $this->view->dept_id = $dept_id;
         $this->view->dept = $dept;
         $this->view->dept_lang = $dept_lang;
@@ -118,6 +120,7 @@ class PostsController extends \FrontendController
         $dept_id = $slug ? (($dept = Departments::getBySlug($slug)) ? $dept->id : NULL ): 1;
         $dept = !empty($dept) ? $dept : Departments::findFirstId(1);
         $dept_lang = DepartmentsLang::findFirst(['dept_id = :dept_id: AND lang_id = :lang_id:','bind' => ['dept_id' => $dept->id, 'lang_id' => $lang_id]]);
+        $this->view->slug = $dept_id === 1 ? '' : $slug1;
         $this->view->dept_id = $dept_id;
         $this->view->dept = $dept;
         $this->view->dept_lang = $dept_lang;
