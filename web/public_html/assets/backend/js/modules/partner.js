@@ -81,3 +81,5 @@ const loadTablePages = () => {
 loadTablePages();
 
 changeTitleToSlug('#title', '#slug');
+
+showSelectImage('#uploadImage','#showImg','#featured_image');

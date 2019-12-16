@@ -21,14 +21,7 @@
                 <li><a class="app-menu__item <?php if ($this->dispatcher->getControllerName() == 'partner') { ?> <?= 'active' ?> <?php } ?>" href="<?= $this->config->application->backendUri ?>/partner"><i class="app-menu__icon fa fa-handshake-o"></i><span class="app-menu__label">Liên kết</span></a></li>
                 <li><a class="app-menu__item <?php if ($this->dispatcher->getControllerName() == 'home') { ?> <?= 'active' ?> <?php } ?>" href="<?= $this->config->application->backendUri ?>/home"><i class="app-menu__icon fa fa-home"></i><span class="app-menu__label">Trang chủ</span></a></li>
                 <li><a class="app-menu__item <?php if ($this->dispatcher->getControllerName() == 'menu') { ?> <?= 'active' ?> <?php } ?>" href="<?= $this->config->application->backendUri ?>/menu"><i class="app-menu__icon fa fa-link"></i><span class="app-menu__label">Menu</span></a></li>
-                <!-- <li><a class="app-menu__item" href="<?= $this->config->application->backendUri ?>/media"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Thư viện</span></a></li> -->
-                <li class="treeview <?php if ($this->isIncluded($this->dispatcher->getControllerName(), ['users', 'roles'])) { ?> <?= 'is-expanded' ?><?php } ?>">
-                <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Tài khoản</span><i class="treeview-indicator fa fa-angle-right"></i></a>
-                <ul class="treeview-menu">
-                        <li><a class="treeview-item <?php if ($this->dispatcher->getControllerName() == 'users' && ($this->isIncluded($this->dispatcher->getActionName(), ['index', 'edit']))) { ?> <?= 'actived' ?> <?php } ?>" href="<?php echo BACKEND_URL.'/users' ?>"><i class="icon fa fa-circle-o"></i> Danh sách</a></li>
-                        <li><a class="treeview-item <?php if ($this->dispatcher->getControllerName() == 'users' && ($this->isIncluded($this->dispatcher->getActionName(), ['update']))) { ?> <?= 'actived' ?> <?php } ?>" href="<?php echo BACKEND_URL.'/users/update' ?>"><i class="icon fa fa-circle-o"></i> Thêm mới</a></li>
-                </ul>
-                </li>
+                <li><a class="app-menu__item <?php if ($this->dispatcher->getControllerName() == 'users') { ?> <?= 'active' ?> <?php } ?>" href="<?= $this->config->application->backendUri ?>/users"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Tài khoản</span></a></li>
                 <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-cogs"></i><span class="app-menu__label">Hệ thống</span><i class="treeview-indicator fa fa-angle-right"></i></a>
                         <ul class="treeview-menu">
                                 <li><a class="treeview-item" href="form-components.html"><i class="icon fa fa-circle-o"></i> Ngôn ngữ</a></li>

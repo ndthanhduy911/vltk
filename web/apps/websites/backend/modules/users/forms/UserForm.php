@@ -153,7 +153,7 @@ class UserForm extends \Phalcon\Forms\Form
         $this->add($confirm_password);
 
         $dept_id = new Select('dept_id', $departments, array(
-            'using' => array('id', 'name'),
+            'using' => array('id', 'code'),
             'useEmpty' => true,
             'emptyText' => 'Vui lòng chọn bộ môn',
             'emptyValue' => '',

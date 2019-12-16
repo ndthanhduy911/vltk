@@ -139,8 +139,7 @@
                             <div class="text p-0">
                                 <h4 class="title text-white text-uppercase">{{staff.title}}</h4>
                                 <div class="separator light"></div>
-                                <p class="small margin-clear"><em>{{helper.getDean(staff.dean)}}</em>
-                                </p>
+                                <p class="small margin-clear"><em>{{helper.getDean(staff.dean)}}</em></p>
                             </div>
                         </div>
                     </div>
@@ -177,7 +176,7 @@
             <div class="col-lg-3 col-md-6">
                 <div class="ph-20 feature-box text-center object-non-visible" data-animation-effect="fadeInDownSmall"
                     data-effect-delay="100">
-                    <span class="icon large circle"><img class="rounded-circle" alt="{{partner.title}}" src="{{ helper.getLinkImage(staff.featured_image,'/assets/frontend/images/beauty-1.jpg') }}"></span>
+                    <span class="icon large circle"><img class="rounded-circle" alt="{{partner.title}}" src="{{ helper.getLinkImage(partner.featured_image,'/assets/frontend/images/beauty-1.jpg') }}"></span>
                     <h3>{{partner.title}}</h3>
                 </div>
             </div>

@@ -1,12 +1,12 @@
 <main class="app-content">
     <div class="app-title">
         <div>
-            <h1><i class="fa fa-th-list"></i> Đối tác</h1>
-            <p>Quản lý đối tác</p>
+            <h1><i class="fa fa-th-list"></i> Liên kết</h1>
+            <p>Quản lý liên kết</p>
         </div>
         <ul class="app-breadcrumb breadcrumb side">
             <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-            <li class="breadcrumb-item">Đối tác</li>
+            <li class="breadcrumb-item">Liên kết</li>
         </ul>
     </div>
 

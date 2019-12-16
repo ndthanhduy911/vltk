@@ -224,17 +224,14 @@ class UsersController  extends \BackendController {
             $npUsers.'.avatar',
             $npUsers.'.role',
             $npUsers.'.dept_id',
-            'D.name dept_name',
+            'DL.name dept_name',
             'R.name role_name',
         ))
         ->from($npUsers)
-        ->join('Models\Departments', 'D.id = '.$npUsers.'.dept_id','D')
+        ->join('Models\DepartmentsLang', "DL.dept_id = $npUsers.dept_id AND DL.lang_id = 1",'DL')
         ->join(Roles::getNamepace(), 'R.id = '.$npUsers.'.role','R')
         ->orderBy($npUsers.'.name ASC')
         ->where("1 = 1");
-        // if($this->session->get('role') !== 1){
-        //     $data = $data->andWhere("dept_id IN (".implode(',',$this->session->get('dept_mg')).")");
-        // }
 
         $search = $npUsers.'.name LIKE :search:';
         $this->response->setStatusCode(200, 'OK');

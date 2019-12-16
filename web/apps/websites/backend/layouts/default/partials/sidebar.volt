@@ -21,14 +21,7 @@
                 <li><a class="app-menu__item {% if dispatcher.getControllerName()=='partner' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/partner"><i class="app-menu__icon fa fa-handshake-o"></i><span class="app-menu__label">Liên kết</span></a></li>
                 <li><a class="app-menu__item {% if dispatcher.getControllerName()=='home' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/home"><i class="app-menu__icon fa fa-home"></i><span class="app-menu__label">Trang chủ</span></a></li>
                 <li><a class="app-menu__item {% if dispatcher.getControllerName()=='menu' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/menu"><i class="app-menu__icon fa fa-link"></i><span class="app-menu__label">Menu</span></a></li>
-                <!-- <li><a class="app-menu__item" href="{{ config.application.backendUri }}/media"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Thư viện</span></a></li> -->
-                <li class="treeview {% if dispatcher.getControllerName() in ['users','roles'] %} {{ 'is-expanded' }}{% endif %}">
-                <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Tài khoản</span><i class="treeview-indicator fa fa-angle-right"></i></a>
-                <ul class="treeview-menu">
-                        <li><a class="treeview-item {% if dispatcher.getControllerName()=='users' AND (dispatcher.getActionName() in ['index','edit']) %} {{ 'actived' }} {% endif %}" href="<?php echo BACKEND_URL.'/users' ?>"><i class="icon fa fa-circle-o"></i> Danh sách</a></li>
-                        <li><a class="treeview-item {% if dispatcher.getControllerName()=='users' AND (dispatcher.getActionName() in ['update']) %} {{ 'actived' }} {% endif %}" href="<?php echo BACKEND_URL.'/users/update' ?>"><i class="icon fa fa-circle-o"></i> Thêm mới</a></li>
-                </ul>
-                </li>
+                <li><a class="app-menu__item {% if dispatcher.getControllerName()=='users' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/users"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Tài khoản</span></a></li>
                 <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-cogs"></i><span class="app-menu__label">Hệ thống</span><i class="treeview-indicator fa fa-angle-right"></i></a>
                         <ul class="treeview-menu">
                                 <li><a class="treeview-item" href="form-components.html"><i class="icon fa fa-circle-o"></i> Ngôn ngữ</a></li>
