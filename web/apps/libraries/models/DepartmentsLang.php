@@ -14,6 +14,8 @@ class DepartmentsLang extends \Phalcon\Mvc\Model
 
     public $address;
 
+    public $description;
+
     public function getSource()
     {
         return 'departments_lang';
