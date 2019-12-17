@@ -5,8 +5,8 @@
     use Models\Menus;
 
 
-    $socials = Social::find(["status = 1 AND dept_id = $dept_id AND location = 1", "order" => "sort ASC"]);
-    $links = Link::find(["status = 1 AND dept_id = $dept_id AND location = 1", "order" => "sort ASC"]);
+    $socials = Social::find(["status = 1 AND dept_id = $dept_id", "order" => "sort ASC"]);
+    $links = Link::find(["status = 1 AND dept_id = $dept_id", "order" => "sort ASC"]);
     $menuParents = [];
     if($menuLocation = MenuLocation::findFirst(["status =  1 AND dept_id = $dept_id AND type = 1"])) {
         $menuParents = Menus::find(["status = 1 AND dept_id = $dept_id AND menu_location_id = {$menuLocation->id} AND parent_id is NULL",'order' => 'sort ASC']);

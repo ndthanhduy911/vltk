@@ -80,12 +80,12 @@
 <?php if ($depts) { ?>
 <!-- section start các bộ môn-->
 <!-- ================ -->
-<section class="pt-5 pb-5 section dark-translucent-bg fixed-bg" style="background-position: 50% 42%; background-image: url(./assets/frontend/images/education-4.jpg)">
-    <?php if ($dept_info['name']) { ?>
+<section class="pt-5 pb-5 section dark-translucent-bg fixed-bg" style="background-position: 50% 42%; background-image: url(<?= $this->helper->getLinkImage($home['specialized_bg'], './assets/frontend/images/education-4.jpg') ?>)">
+    <?php if ($home['specialized_title']) { ?>
     <div class="container mt-4">
         <div class="row justify-content-lg-center">
             <div class="col-lg-8 text-center">
-                <h2 class="page-title text-center"><strong><?= $dept_info['name'] ?></strong></h2>
+                <h2 class="page-title text-center"><strong><?= $home['specialized_title'] ?></strong></h2>
                 <div class="separator"></div>
             </div>
         </div>
@@ -119,12 +119,12 @@
 <!-- ================ -->
 <section class="clearfix pt-5 pb-5">
     <div class="container">
-        <?php if ($staff_info['name']) { ?>
+        <?php if ($home['staff_title']) { ?>
         <div class="row justify-content-lg-center pv-20">
             <div class="col-lg-8">
-                <h2 class="page-title text-center"><strong><?= $staff_info['name'] ?></strong></h2>
+                <h2 class="page-title text-center"><strong><?= $home['staff_title'] ?></strong></h2>
                 <div class="separator"></div>
-                <p class="lead text-center"><?= $staff_info['des'] ?></p>
+                <p class="lead text-center"><?= $home['staff_des'] ?></p>
             </div>
         </div>
         <?php } ?>
@@ -148,7 +148,7 @@
             <?php } ?>
         </div>
         <div class="col-lg-12 text-center">
-            <a href="<?php echo FRONTEND_URL.'/staff' ?>" class="btn btn-default btn-lg btn-animated radius-50">Xem thêm <i class="fa fa-arrow-right"></i></a>
+            <a href="<?php echo FRONTEND_URL.'/staff' ?>" class="btn btn-default btn-lg btn-animated radius-50"><?= $this->ml->_ml_system('more', 'Xem thêm') ?> <i class="fa fa-arrow-right"></i></a>
         </div>
     </div>
 </section>
@@ -158,14 +158,14 @@
 <?php if ($partners) { ?>
 <!-- section start liên kết-->
 <!-- ================ -->
-<section class="pt-5 pb-5 section background-img-1 dark-translucent-bg fixed-bg" style="background-position: 50% 42%;">
-    <?php if ($partner_info['name']) { ?>
+<section class="pt-5 pb-5 section dark-translucent-bg fixed-bg" style="background-position: 50% 42%; background-image: url(<?= $this->helper->getLinkImage($home->partner_bg, './assets/frontend/images/education-4.jpg') ?>)">
+    <?php if ($home['partner_title']) { ?>
     <div class="container pv-20">
         <div class="row justify-content-lg-center">
             <div class="col-lg-8">
-                <h2 class="text-center"> <strong><?= $partner_info['name'] ?></strong></h2>
+                <h2 class="text-center"> <strong><?= $home['partner_title'] ?></strong></h2>
                 <div class="separator"></div>
-                <p class="large text-center"><?= $partner_info['des'] ?></p>
+                <p class="large text-center"><?= $home['partner_des'] ?></p>
             </div>
         </div>
     </div>
@@ -191,13 +191,10 @@
     <div class="container">
         <div class="row justify-content-lg-center">
             <div class="col-lg-8 text-center pv-20">
-                <?php if ($contact_info['name']) { ?>
-                <h2 class="text-center"><?= $contact_info['name'] ?></h2>
-
+                <?php if ($home['contact_title']) { ?>
+                <h2 class="text-center"><?= $home['contact_title'] ?></h2>
                 <div class="separator"></div>
-                <?php } ?>
-                <?php if ($contact_info['des']) { ?>
-                <?= $contact_info['des'] ?>
+                <p class="large text-center"><?= $home['contact_des'] ?></p>
                 <?php } ?>
             </div>
         </div>

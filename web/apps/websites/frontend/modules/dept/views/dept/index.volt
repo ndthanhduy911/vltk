@@ -138,21 +138,28 @@
 </section>
 {% endif %}
 
-{% if contact_info['name'] %}
 <section id="section-5" class="section pv-40 stats padding-bottom-clear hovered">
     <div class="container">
         <div class="row justify-content-lg-center">
             <div class="col-lg-8 text-center pv-20">
-                {% if contact_info['name'] %}
-                <h2 class="text-center">{{contact_info['name']}}</h2>
-
+                {% if home['contact_title'] %}
+                <h2 class="text-center">{{ home['contact_title'] }}</h2>
                 <div class="separator"></div>
+                <p class="large text-center">{{ home['contact_des'] }}</p>
                 {% endif %}
-                {% if contact_info['des'] %}
-                {{contact_info['des']}}
-                {% endif %}
+                <ul class="list-inline mb-20 text-center">
+                    <li class="list-inline-item"><i class="text-default fa fa-map-marker pr-1"></i>Street Address No,
+                        City</li>
+                    <li class="list-inline-item"><a href="#" class="link-dark"><i class="text-default fa fa-phone pl-10 pr-1"></i>+00 1234567890</a></li>
+                    <li class="list-inline-item"><a href="#" class="link-dark"><i class="text-default fa fa-envelope-o pl-10 pr-1"></i>example@your_domain.com</a></li>
+                </ul>
+                <div class="separator"></div>
+                <ul class="social-links circle animated-effect-1 margin-clear text-center space-bottom">
+                    {%for social in socials%}
+                    <li class="{{ social.name }}"><a href="{{ social.link }}"><i class="fa {{ social.icon }}"></i></a></li>
+                    {%endfor%}
+                </ul>
             </div>
         </div>
     </div>
 </section>
-{% endif %}

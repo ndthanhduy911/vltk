@@ -128,12 +128,12 @@
     
                     <div class="tile p-3">
                         <div class="row m-0">
-                            <h5 class="font-weight-bold text-primary w-100">Tin tức</h5>
+                            <!-- <h5 class="font-weight-bold text-primary w-100">Tin tức</h5>
                             <div class="animated-checkbox mb-3">
                                 <label class="m-0">
                                     <input name="post_connect" type="checkbox"><span class="label-text">Liên kết bài viết với Khoa</span>
                                 </label>
-                            </div>
+                            </div> -->
 
                             <h5 class="font-weight-bold text-primary w-100">{{ dept_id == 1 ? 'Bộ môn' : 'Hướng nghiên cứu' }}</h5>
                             <div class="w-100 mb-3">

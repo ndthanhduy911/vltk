@@ -11,6 +11,8 @@ class Banner extends \Phalcon\Mvc\Model
 
     public $button_link;
 
+    public $sort;
+
     public $created_at;
     
     public $updated_at;

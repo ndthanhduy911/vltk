@@ -11,8 +11,6 @@ class Home extends \Phalcon\Mvc\Model
 
     public $cat_list;
 
-    public $post_connect;
-
     public $post_number;
 
     public $specialized_bg;

@@ -11,8 +11,6 @@ class Social extends \Phalcon\Mvc\Model
 
     public $name;
 
-    public $location;
-
     public $sort;
     
     public $dept;

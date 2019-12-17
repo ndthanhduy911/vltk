@@ -16,6 +16,12 @@ class Departments extends \Phalcon\Mvc\Model
 
     public $logo;
 
+    public $email;
+
+    public $phone;
+
+    public $post_connect;
+
     public $parent_id;
 
     public $level;

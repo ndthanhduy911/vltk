@@ -17,182 +17,129 @@ class DeptController extends \FrontendController
         $slug = $this->helper->slugify($slug);
         $dept_id = ($dept = Departments::getBySlug($slug)) ? $dept->id : 0;
         $lang_id = $this->session->get('lang_id');
-        $banners = [];
-        $banner_info = [
-            'name' => '',
-            'des' => '',
-            'background' => ''
-        ];
 
-        if($bannerSetting = HomeSetting::findFirst(["dept_id = $dept_id AND type = 1"])){
-            $bannerSettingLang = HomeLang::findFirst([
-                'home_id = :home_id: AND lang_id = :lang_id:',
-                'bind' => [
-                    'home_id' => $bannerSetting->id,
-                    'lang_id' => $lang_id
-                ] 
-            ]);
-            if($bannerSettingLang){
-                $banner_info['name'] = $bannerSettingLang->name;
-                $banner_info['des'] = $bannerSettingLang->description;
-                $banner_info['background'] = $bannerSetting->background;
-            }
-
-            $listBanner = json_decode($bannerSetting->setting);
-            if($listBanner){
-                $npBanner = Banner::getNamepace();
-                $banners = $this->modelsManager->createBuilder()
-                ->columns(array(
-                    $npBanner.'.id',
-                    $npBanner.'.image',
-                    $npBanner.'.button_link',
-                    'BL.name name',
-                    'BL.description description',
-                    'BL.button_text button_text'
-                ))
-                ->from($npBanner)
-                ->leftJoin('Models\BannerLang', "BL.banner_id = $npBanner.id AND BL.lang_id = $lang_id",'BL')
-                ->where("$npBanner.status = 1")
-                ->inWhere($npBanner.".id", $listBanner)
-                ->getQuery()
-                ->execute();
-            }
+        if(!$dept_id){
+            $this->view->title = '404';
+            $this->view->slug = "";
+            $this->view->dept_id = 1;
+            $this->view->dept = Departments::findFrist(1);
+            $this->view->dept_lang = DepartmentsLang::findFirst(['dept_id = :dept_id: AND lang_id = :lang_id:','bind' => ['dept_id' => 1, 'lang_id' => $lang_id]]);
+            return $this->view->pick('templates/404');
         }
 
-        $cats = [];
-        if($catSetting = HomeSetting::findFirst(["dept_id = $dept_id AND type = 2"])){
-            $listCats = json_decode($catSetting->setting);
-            if($listCats){
-                $npCat = Categories::getNamepace();
-                $cats = $this->modelsManager->createBuilder()
-                ->columns(array(
-                    $npCat.'.id',
-                    $npCat.'.slug',
-                    'CL.name cat_name',
-                ))
-                ->from($npCat)
-                ->leftJoin('Models\CategoriesLang', "CL.cat_id = $npCat.id AND CL.lang_id = $lang_id",'CL')
-                ->where("$npCat.status = 1 AND $npCat.dept_id = $dept_id")
-                ->inWhere($npCat.".id", $listCats)
-                ->getQuery()
-                ->execute();
-            }
-        }
-
-        $staffs = [];
-        $staff_info = [
-            'name' => '',
-            'des' => '',
-            'background' => ''
-        ];
-        if($staffSetting = HomeSetting::findFirst(["dept_id = $dept_id AND type = 4"])){
-            $staffSettingLang = HomeLang::findFirst([
-                'home_id = :home_id: AND lang_id = :lang_id:',
-                'bind' => [
-                    'home_id' => $staffSetting->id,
-                    'lang_id' => $lang_id
-                ] 
-            ]);
-            if($staffSettingLang){
-                $staff_info['name'] = $staffSettingLang->name;
-                $staff_info['des'] = $staffSettingLang->description;
-                $staff_info['background'] = $staffSetting->background;
-            }
-
-            $listStaff = json_decode($staffSetting->setting);
-            if($listStaff){
-                $npStaff = Staff::getNamepace();
-                $staffs = $this->modelsManager->createBuilder()
-                ->columns(array(
-                    $npStaff.'.id',
-                    $npStaff.'.slug',
-                    $npStaff.'.featured_image',
-                    $npStaff.'.email',
-                    $npStaff.'.dean',
-                    $npStaff.'.dept_position',
-                    'SL.title title',
-                    'SL.content content'
-                ))
-                ->from($npStaff)
-                ->leftJoin("Models\StaffLang", "SL.staff_id = $npStaff.id AND SL.lang_id = $lang_id",'SL')
-                ->where("$npStaff.status = 1")
-                ->inWhere($npStaff.".id", $listStaff)
-                ->getQuery()
-                ->execute();
-            }
-        }
-
-        $partners = [];
-        $partner_info = [
-            'name' => '',
-            'des' => '',
-            'background' => ''
-        ];
-        if($partnerSetting = HomeSetting::findFirst(["dept_id = $dept_id AND type = 5"])){
-            $partnerSettingLang = HomeLang::findFirst([
-                'home_id = :home_id: AND lang_id = :lang_id:',
-                'bind' => [
-                    'home_id' => $partnerSetting->id,
-                    'lang_id' => $lang_id
-                ] 
-            ]);
-            if($partnerSettingLang){
-                $partner_info['name'] = $partnerSettingLang->name;
-                $partner_info['des'] = $partnerSettingLang->description;
-                $partner_info['background'] = $partnerSetting->background;
-            }
-
-            $listPartner = json_decode($partnerSetting->setting);
-            if($listPartner){
-                $npPartner = Partner::getNamepace();
-                $partners = $this->modelsManager->createBuilder()
-                ->columns(array(
-                    $npPartner.'.id',
-                    $npPartner.'.link',
-                    $npPartner.'.featured_image',
-                    'PL.title title',
-                ))
-                ->from($npPartner)
-                ->leftJoin('Models\PartnerLang', "PL.partner_id = $npPartner.id AND PL.lang_id = $lang_id",'PL')
-                ->where("$npPartner.status = 1")
-                ->inWhere($npPartner.".id", $listPartner)
-                ->getQuery()
-                ->execute();
-            }
-        }
-
-
-        $contact_info = [
-            'name' => '',
-            'des' => '',
-            'background' => ''
-        ];
-        if($contactSetting = HomeSetting::findFirst(["dept_id = $dept_id AND type = 6"])){
-            $contactSettingLang = HomeLang::findFirst([
-                'home_id = :home_id: AND lang_id = :lang_id:',
-                'bind' => [
-                    'home_id' => $contactSetting->id,
-                    'lang_id' => $lang_id
-                ] 
-            ]);
-            if($contactSettingLang){
-                $contact_info['name'] = $contactSettingLang->name;
-                $contact_info['des'] = $contactSettingLang->description;
-                $contact_info['background'] = $contactSetting->background;
-            }
-        }
-        $this->view->banner_info = $banner_info;
-        $this->view->banners = $banners;
-        $this->view->cats = $cats;
-        $this->view->staff_info = $staff_info;
-        $this->view->staffs = $staffs;
-        $this->view->partner_info = $partner_info;
-        $this->view->partners = $partners;
-        $this->view->contact_info = $contact_info;
         $this->view->slug = $slug;
         $this->view->dept_id = $dept_id;
         $this->view->dept = $dept;
         $this->view->dept_lang = DepartmentsLang::findFirst(['dept_id = :dept_id: AND lang_id = :lang_id:','bind' => ['dept_id' => $dept_id, 'lang_id' => $lang_id]]);
+
+
+        $npHome = Home::getNamepace();
+        $homeSetting = $this->modelsManager->createBuilder()
+        ->columns(array(
+            $npHome.'.id',
+            $npHome.'.dept_id',
+            $npHome.'.cat_list',
+            $npHome.'.post_number',
+            $npHome.'.specialized_bg',
+            $npHome.'.partner_bg',
+            'HL.specialized_title specialized_title',
+            'HL.staff_title staff_title',
+            'HL.staff_des partner_title',
+            'HL.partner_des partner_des',
+            'HL.contact_title contact_title',
+            'HL.contact_des contact_des'
+        ))
+        ->from($npHome)
+        ->where("$npHome.dept_id = $dept_id")
+        ->leftJoin('Models\HomeLang', "HL.home_id = $npHome.id AND HL.lang_id = $lang_id",'HL')
+        ->limit(1)
+        ->getQuery()
+        ->execute();
+
+        if(!$homeSetting->count()){
+            $this->view->title = '404';
+            return $this->view->pick('templates/404');
+        }
+        $home = $homeSetting->toArray()[0];
+
+        $banners = [];
+        $npBanner = Banner::getNamepace();
+        $banners = $this->modelsManager->createBuilder()
+        ->columns(array(
+            $npBanner.'.id',
+            $npBanner.'.image',
+            $npBanner.'.button_link',
+            'BL.name name',
+            'BL.description description',
+            'BL.button_text button_text'
+        ))
+        ->from($npBanner)
+        ->where("$npBanner.status = 1 AND $npBanner.deleted = 0 AND $npBanner.dept_id = $dept_id")
+        ->leftJoin('Models\BannerLang', "BL.banner_id = $npBanner.id AND BL.lang_id = $lang_id",'BL')
+        ->getQuery()
+        ->execute();
+        
+        $cats = [];
+        $listCats = json_decode($home['cat_list']);
+        if($listCats){
+            $npCat = Categories::getNamepace();
+            $cats = $this->modelsManager->createBuilder()
+            ->columns(array(
+                $npCat.'.id',
+                $npCat.'.slug',
+                'CL.name cat_name',
+            ))
+            ->from($npCat)
+            ->leftJoin('Models\CategoriesLang', "CL.cat_id = $npCat.id AND CL.lang_id = $lang_id",'CL')
+            ->where("$npCat.status = 1 AND $npCat.dept_id = $dept_id")
+            ->inWhere($npCat.".id", $listCats)
+            ->getQuery()
+            ->execute();
+        }
+
+
+        $npStaff = Staff::getNamepace();
+        $staffs = $this->modelsManager->createBuilder()
+        ->columns(array(
+            $npStaff.'.id',
+            $npStaff.'.slug',
+            $npStaff.'.featured_image',
+            $npStaff.'.dean',
+            $npStaff.'.dept_position',
+            $npStaff.'.email',
+            $npStaff.'.dept_id',
+            'SL.title title',
+            'SL.content content'
+        ))
+        ->from($npStaff)
+        ->where("$npStaff.dept_id = $dept_id AND $npStaff.status = 1 AND $npStaff.deleted = 0 AND ($npStaff.dept_position = 1 OR $npStaff.dept_position = 2)")
+        ->leftJoin("Models\StaffLang", "SL.staff_id = $npStaff.id AND SL.lang_id = $lang_id",'SL')
+        ->orderBy("$npStaff.dean ASC")
+        ->limit(3)
+        ->getQuery()
+        ->execute();
+        
+
+        $npPartner = Partner::getNamepace();
+        $partners = $this->modelsManager->createBuilder()
+        ->columns(array(
+            $npPartner.'.id',
+            $npPartner.'.link',
+            $npPartner.'.featured_image',
+            'PL.title title',
+        ))
+        ->from($npPartner)
+        ->where("$npPartner.status = 1 AND $npPartner.deleted = 0 AND $npPartner.dept_id = $dept_id")
+        ->leftJoin('Models\PartnerLang', "PL.partner_id = $npPartner.id AND PL.lang_id = $lang_id",'PL')
+        ->getQuery()
+        ->execute();
+        
+        
+        $this->view->home = $home;
+        $this->view->banners = $banners;
+        $this->view->cats = $cats;
+        $this->view->staffs = $staffs;
+        $this->view->partners = $partners;
         $this->get_js_css();
     }
 

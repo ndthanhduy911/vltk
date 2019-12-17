@@ -80,12 +80,12 @@
 {% if depts %}
 <!-- section start các bộ môn-->
 <!-- ================ -->
-<section class="pt-5 pb-5 section dark-translucent-bg fixed-bg" style="background-position: 50% 42%; background-image: url(./assets/frontend/images/education-4.jpg)">
-    {% if dept_info['name'] %}
+<section class="pt-5 pb-5 section dark-translucent-bg fixed-bg" style="background-position: 50% 42%; background-image: url({{ helper.getLinkImage(home['specialized_bg'], './assets/frontend/images/education-4.jpg') }})">
+    {% if home['specialized_title'] %}
     <div class="container mt-4">
         <div class="row justify-content-lg-center">
             <div class="col-lg-8 text-center">
-                <h2 class="page-title text-center"><strong>{{dept_info['name']}}</strong></h2>
+                <h2 class="page-title text-center"><strong>{{ home['specialized_title'] }}</strong></h2>
                 <div class="separator"></div>
             </div>
         </div>
@@ -119,12 +119,12 @@
 <!-- ================ -->
 <section class="clearfix pt-5 pb-5">
     <div class="container">
-        {% if staff_info['name'] %}
+        {% if home['staff_title'] %}
         <div class="row justify-content-lg-center pv-20">
             <div class="col-lg-8">
-                <h2 class="page-title text-center"><strong>{{staff_info['name']}}</strong></h2>
+                <h2 class="page-title text-center"><strong>{{ home['staff_title'] }}</strong></h2>
                 <div class="separator"></div>
-                <p class="lead text-center">{{staff_info['des']}}</p>
+                <p class="lead text-center">{{ home['staff_des'] }}</p>
             </div>
         </div>
         {% endif %}
@@ -148,7 +148,7 @@
             {% endfor %}
         </div>
         <div class="col-lg-12 text-center">
-            <a href="<?php echo FRONTEND_URL.'/staff' ?>" class="btn btn-default btn-lg btn-animated radius-50">Xem thêm <i class="fa fa-arrow-right"></i></a>
+            <a href="<?php echo FRONTEND_URL.'/staff' ?>" class="btn btn-default btn-lg btn-animated radius-50">{{ ml._ml_system('more', 'Xem thêm') }} <i class="fa fa-arrow-right"></i></a>
         </div>
     </div>
 </section>
@@ -158,14 +158,14 @@
 {% if partners %}
 <!-- section start liên kết-->
 <!-- ================ -->
-<section class="pt-5 pb-5 section background-img-1 dark-translucent-bg fixed-bg" style="background-position: 50% 42%;">
-    {% if partner_info['name'] %}
+<section class="pt-5 pb-5 section dark-translucent-bg fixed-bg" style="background-position: 50% 42%; background-image: url({{ helper.getLinkImage(home.partner_bg, './assets/frontend/images/education-4.jpg') }})">
+    {% if home['partner_title'] %}
     <div class="container pv-20">
         <div class="row justify-content-lg-center">
             <div class="col-lg-8">
-                <h2 class="text-center"> <strong>{{partner_info['name']}}</strong></h2>
+                <h2 class="text-center"> <strong>{{ home['partner_title'] }}</strong></h2>
                 <div class="separator"></div>
-                <p class="large text-center">{{partner_info['des']}}</p>
+                <p class="large text-center">{{ home['partner_des'] }}</p>
             </div>
         </div>
     </div>
@@ -191,14 +191,23 @@
     <div class="container">
         <div class="row justify-content-lg-center">
             <div class="col-lg-8 text-center pv-20">
-                {% if contact_info['name'] %}
-                <h2 class="text-center">{{contact_info['name']}}</h2>
-
+                {% if home['contact_title'] %}
+                <h2 class="text-center">{{ home['contact_title'] }}</h2>
                 <div class="separator"></div>
+                <p class="large text-center">{{ home['contact_des'] }}</p>
                 {% endif %}
-                {% if contact_info['des'] %}
-                {{contact_info['des']}}
-                {% endif %}
+                <ul class="list-inline mb-20 text-center">
+                    <li class="list-inline-item"><i class="text-default fa fa-map-marker pr-1"></i>Street Address No,
+                        City</li>
+                    <li class="list-inline-item"><a href="#" class="link-dark"><i class="text-default fa fa-phone pl-10 pr-1"></i>+00 1234567890</a></li>
+                    <li class="list-inline-item"><a href="#" class="link-dark"><i class="text-default fa fa-envelope-o pl-10 pr-1"></i>example@your_domain.com</a></li>
+                </ul>
+                <div class="separator"></div>
+                <ul class="social-links circle animated-effect-1 margin-clear text-center space-bottom">
+                    {%for social in socials%}
+                    <li class="{{ social.name }}"><a href="{{ social.link }}"><i class="fa {{ social.icon }}"></i></a></li>
+                    {%endfor%}
+                </ul>
             </div>
         </div>
     </div>

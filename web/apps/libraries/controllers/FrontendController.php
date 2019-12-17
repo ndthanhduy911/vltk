@@ -3,6 +3,7 @@
 use Phalcon\Mvc\Controller;
 use Phalcon\Mvc\Dispatcher;
 use Models\Language;
+use Models\Social;
 
 class FrontendController extends Controller
 {
