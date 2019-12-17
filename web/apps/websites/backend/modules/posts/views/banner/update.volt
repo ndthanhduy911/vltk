@@ -1,7 +1,7 @@
 <main class="app-content">
         <div class="app-title">
             <div>
-                <h1><i class="fa fa-th-list"></i> {{banners_lang[1].name ? 'Cập nhật banner': 'Thêm banner mới'}}</h1>
+                <h1><i class="fa fa-th-list"></i> {{title}} banner</h1>
             </div>
             <ul class="app-breadcrumb breadcrumb side">
                 <li class="breadcrumb-item"><a class="link" href="{{ config.application.backendUri }}"><i class="fa fa-home fa-lg"></i></a></li>

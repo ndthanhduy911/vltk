@@ -16,412 +16,147 @@
         <div class="row">
             <form class="col-md-12 row p-0 m-0" method="POST" enctype="multipart/form-data" data-toggle="validator"
                 role="form">
-                <div class="col-md-12 p-0">
+                <div class="col-md-9 p-0">
                     <div class="bs-component bg-white rounded">
                         <ul class="nav nav-tabs">
-                            <li class="nav-item"><a style="font-size : 1rem" class="nav-link font-weight-bold active" data-toggle="tab" href="#banner">Banner</a></li>
-                            <li class="nav-item"><a style="font-size : 1rem" class="nav-link font-weight-bold" data-toggle="tab" href="#posts">Thông báo</a></li>
-                            <li class="nav-item"><a style="font-size : 1rem" class="nav-link font-weight-bold" data-toggle="tab" href="#depts">Bộ môn</a></li>
-                            <li class="nav-item"><a style="font-size : 1rem" class="nav-link font-weight-bold" data-toggle="tab" href="#staffs">Lãnh đạo</a></li>
-                            <li class="nav-item"><a style="font-size : 1rem" class="nav-link font-weight-bold" data-toggle="tab" href="#partners">Liên kết</a></li>
-                            <li class="nav-item"><a style="font-size : 1rem" class="nav-link font-weight-bold" data-toggle="tab" href="#contacts">Liên hệ</a></li>
+                            <?php foreach ($languages as $key => $lang) { ?>
+                            <li class="nav-item"><a style="font-size : 1rem" class="nav-link font-weight-bold <?= (!$key ? 'active' : '') ?>" data-toggle="tab"
+                                    href="#lang<?= $lang->id ?>"><?= $lang->name ?></a></li>
+                            <?php } ?>
                         </ul>
                         <div class="tab-content p-3">
-                            <div class="tab-pane fade active show" id="banner">
-                                <form class="col-md-12 p-0" method="POST" enctype="multipart/form-data" data-toggle="validator" role="form" action="<?= $this->config->application->backendUri ?>/home/update/1">
+                            <?php foreach ($languages as $key => $lang) { ?>
+                            <div class="tab-pane fade <?= (!$key ? 'active show' : '') ?>"id="lang<?= $lang->id ?>">
+                                <h5 class="font-weight-bold text-primary"><?= ($dept_id == 1 ? 'Bộ môn' : 'Hướng nghiên cứu') ?></h5>
+                                <div class="form-row mb-3">
+                                    <div class="form-group col-md-12 m-0">
+                                        <label for="">Tiêu đề</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text fa fa-edit"></div>
+                                            </div>
+                                            <input type="text" id="specialized_title<?= $lang->id ?>" name="specialized_title[<?= $lang->id ?>]" class="form-control" placeholder="Tiêu đề" maxlength="255" data-error="Tiêu đề không đúng quy định.">
+                                            <div class="invalid-tooltip"></div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                    <div class="form-row">
-                                        <div class="form-group col-md-12 mb-3">
-                                            <label for="">Cài đặt</label>
-                                            <div class="input-group">
-                                                <textarea name="setting" class="form-control"></textarea>
-                                                <div class="invalid-tooltip"></div>
+                                <h5 class="font-weight-bold text-primary">Lãnh đạo</h5>
+                                <div class="form-row mb-3">
+                                    <div class="form-group col-md-12 m-0">
+                                        <label for="">Tiêu đề</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text fa fa-edit"></div>
                                             </div>
+                                            <input type="text" id="staff_title<?= $lang->id ?>" name="staff_title[<?= $lang->id ?>]" class="form-control" placeholder="Tiêu đề" maxlength="255" data-error="Tiêu đề không đúng quy định.">
+                                            <div class="invalid-tooltip"></div>
                                         </div>
                                     </div>
-                                    <div class="form-row mt-3">
-                                        <div class="col-md-12">
-                                            <button type="submit" class="btn btn-success float-left btn-sm">Cập nhật</button>
+                                </div>
+                                <div class="form-row mb-3">
+                                    <div class="form-group col-md-12 m-0">
+                                        <label for="">Giới thiệu</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text fa fa-edit"></div>
+                                            </div>
+                                            <textarea rows="4" id="staff_des<?= $lang->id ?>" name="staff_des[<?= $lang->id ?>]" class="form-control" placeholder="Giới thiệu"></textarea>
+                                            <div class="invalid-tooltip"></div>
                                         </div>
                                     </div>
-                                </form>
+                                </div>
+
+                                <h5 class="font-weight-bold text-primary">Liên kết</h5>
+                                <div class="form-row mb-3">
+                                    <div class="form-group col-md-12 m-0">
+                                        <label for="">Tiêu đề</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text fa fa-edit"></div>
+                                            </div>
+                                            <input type="text" id="partner_title<?= $lang->id ?>" name="partner_title[<?= $lang->id ?>]" class="form-control" placeholder="Tiêu đề" maxlength="255" data-error="Tiêu đề không đúng quy định.">
+                                            <div class="invalid-tooltip"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row mb-3">
+                                    <div class="form-group col-md-12 m-0">
+                                        <label for="">Giới thiệu</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text fa fa-edit"></div>
+                                            </div>
+                                            <textarea rows="4" id="partner_des<?= $lang->id ?>" name="partner_des[<?= $lang->id ?>]" class="form-control" placeholder="Giới thiệu"></textarea>
+                                            <div class="invalid-tooltip"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <h5 class="font-weight-bold text-primary">Liên hệ</h5>
+                                <div class="form-row mb-3">
+                                    <div class="form-group col-md-12 m-0">
+                                        <label for="">Tiêu đề</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text fa fa-edit"></div>
+                                            </div>
+                                            <input type="text" id="contact_title<?= $lang->id ?>" name="contact_title[<?= $lang->id ?>]" class="form-control" placeholder="Tiêu đề" maxlength="255" data-error="Tiêu đề không đúng quy định.">
+                                            <div class="invalid-tooltip"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row mb-3">
+                                    <div class="form-group col-md-12 m-0">
+                                        <label for="">Giới thiệu</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text fa fa-edit"></div>
+                                            </div>
+                                            <textarea rows="4" id="contact_des<?= $lang->id ?>" name="contact_des[<?= $lang->id ?>]" class="form-control" placeholder="Giới thiệu"></textarea>
+                                            <div class="invalid-tooltip"></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="tab-pane fade" id="posts">
-                                <form class="col-md-12 p-0" method="POST" enctype="multipart/form-data" data-toggle="validator" role="form" action="<?= $this->config->application->backendUri ?>/home/update/2">
-                                    <ul class="nav nav-tabs">
-                                        <li class="nav-item"><a style="font-size : 1rem" class="nav-link font-weight-bold active" data-toggle="tab" href="#viPosts">Tiếng Việt</a></li>
-                                        <li class="nav-item"><a style="font-size : 1rem" class="nav-link font-weight-bold" data-toggle="tab" href="#enPosts">Tiếng Anh</a></li>
-                                    </ul>
-                                    <div class="tab-content p-3 border rounded-bottom mb-3">
-                                        <div class="tab-pane fade active show" id="viPosts">
-                                            <div class="form-row">
-                                                <div class="form-group col-md-12 mb-3">
-                                                    <label for="">Tiêu đề</label>
-                                                    <div class="input-group">
-                                                        <input type="text" name="title[1]" class="form-control">
-                                                        <div class="invalid-tooltip"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="form-group col-md-12 mb-3">
-                                                    <label for="">Giới thiệu</label>
-                                                    <div class="input-group">
-                                                        <textarea name="description[1]" class="form-control"></textarea>
-                                                        <div class="invalid-tooltip"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane fade rounded" id="enPosts">
-                                            <div class="form-row">
-                                                <div class="form-group col-md-12 mb-3">
-                                                    <label for="">Tiêu đề</label>
-                                                    <div class="input-group">
-                                                        <input type="text" name="title[2]" class="form-control">
-                                                        <div class="invalid-tooltip"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="form-group col-md-12 mb-3">
-                                                    <label for="">Giới thiệu</label>
-                                                    <div class="input-group">
-                                                        <textarea name="description[2]" class="form-control"></textarea>
-                                                        <div class="invalid-tooltip"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-12 mb-3">
-                                            <label for="">Cài đặt</label>
-                                            <div class="input-group">
-                                                <textarea name="" class="form-control"></textarea>
-                                                <div class="invalid-tooltip"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-12 mb-3">
-                                            <label for="">Hình nền</label>
-                                            <div class="w-100">
-                                                <img id="showImg" src="#" alt="" width="100%">
-                                                <input type="hidden" name="background">
-                                                <a href="#" class="link">Đặt hình nền</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-row mt-3">
-                                        <div class="col-md-12">
-                                            <button type="submit" class="btn btn-success float-left btn-sm">Cập nhật</button>
-                                        </div>
-                                    </div>
-                                </form>
+                            <?php } ?>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 pr-0">
+    
+                    <div class="tile p-3">
+                        <div class="row m-0">
+                            <h5 class="font-weight-bold text-primary w-100">Tin tức</h5>
+                            <div class="animated-checkbox mb-3">
+                                <label class="m-0">
+                                    <input name="" type="checkbox"><span class="label-text">Liên kết bài viết với Khoa</span>
+                                </label>
                             </div>
-                            <div class="tab-pane fade" id="depts">
-                                <form class="col-md-12 p-0" method="POST" enctype="multipart/form-data" data-toggle="validator" role="form" action="<?= $this->config->application->backendUri ?>/home/update/3">
-                                    <ul class="nav nav-tabs">
-                                        <li class="nav-item"><a style="font-size : 1rem" class="nav-link font-weight-bold active" data-toggle="tab" href="#viDepts">Tiếng Việt</a></li>
-                                        <li class="nav-item"><a style="font-size : 1rem" class="nav-link font-weight-bold" data-toggle="tab" href="#enDepts">Tiếng Anh</a></li>
-                                    </ul>
-                                    <div class="tab-content p-3 border rounded-bottom mb-3">
-                                        <div class="tab-pane fade active show" id="viDepts">
-                                            <div class="form-row">
-                                                <div class="form-group col-md-12 mb-3">
-                                                    <label for="">Tiêu đề</label>
-                                                    <div class="input-group">
-                                                        <input type="text" name="title[1]" class="form-control">
-                                                        <div class="invalid-tooltip"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="form-group col-md-12 mb-3">
-                                                    <label for="">Giới thiệu</label>
-                                                    <div class="input-group">
-                                                        <textarea name="description[1]" class="form-control"></textarea>
-                                                        <div class="invalid-tooltip"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane fade rounded" id="enDepts">
-                                            <div class="form-row">
-                                                <div class="form-group col-md-12 mb-3">
-                                                    <label for="">Tiêu đề</label>
-                                                    <div class="input-group">
-                                                        <input type="text" name="title[2]" class="form-control">
-                                                        <div class="invalid-tooltip"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="form-group col-md-12 mb-3">
-                                                    <label for="">Giới thiệu</label>
-                                                    <div class="input-group">
-                                                        <textarea name="description[2]" class="form-control"></textarea>
-                                                        <div class="invalid-tooltip"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-12 mb-3">
-                                            <label for="">Cài đặt</label>
-                                            <div class="input-group">
-                                                <textarea name="setting" class="form-control"></textarea>
-                                                <div class="invalid-tooltip"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-12 mb-3">
-                                            <label for="">Hình nền</label>
-                                            <div class="w-100">
-                                                <img id="showImg" src="#" alt="" width="100%">
-                                                <input type="hidden" name="background">
-                                                <a href="#" class="link">Đặt hình nền</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-row mt-3">
-                                        <div class="col-md-12">
-                                            <button type="submit" class="btn btn-success float-left btn-sm">Cập nhật</button>
-                                        </div>
-                                    </div>
-                                </form>
+
+                            <h5 class="font-weight-bold text-primary w-100"><?= ($dept_id == 1 ? 'Bộ môn' : 'Hướng nghiên cứu') ?></h5>
+                            <div class="w-100 mb-3">
+                                <img id="showImgSpecializedBg" src="" alt="" class="w-100">
+                                <input type="hidden" id="specialized_bg" name="specialized_bg">
+                                <a id="uploadImageSpecializedBg" href="#" class="link">Đặt ảnh nền <?= ($dept_id == 1 ? 'bộ môn' : 'hướng nghiên cứu') ?></a>
                             </div>
-                            <div class="tab-pane fade" id="staffs">
-                                <form class="col-md-12 p-0" method="POST" enctype="multipart/form-data" data-toggle="validator" role="form" action="<?= $this->config->application->backendUri ?>/home/update/4">
-                                    <ul class="nav nav-tabs">
-                                        <li class="nav-item"><a style="font-size : 1rem" class="nav-link font-weight-bold active" data-toggle="tab" href="#viStaffs">Tiếng Việt</a></li>
-                                        <li class="nav-item"><a style="font-size : 1rem" class="nav-link font-weight-bold" data-toggle="tab" href="#enStaffs">Tiếng Anh</a></li>
-                                    </ul>
-                                    <div class="tab-content p-3 border rounded-bottom mb-3">
-                                        <div class="tab-pane fade active show" id="viStaffs">
-                                            <div class="form-row">
-                                                <div class="form-group col-md-12 mb-3">
-                                                    <label for="">Tiêu đề</label>
-                                                    <div class="input-group">
-                                                        <input type="text" name="title[1]" class="form-control">
-                                                        <div class="invalid-tooltip"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="form-group col-md-12 mb-3">
-                                                    <label for="">Giới thiệu</label>
-                                                    <div class="input-group">
-                                                        <textarea name="description[1]" class="form-control"></textarea>
-                                                        <div class="invalid-tooltip"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane fade rounded" id="enStaffs">
-                                            <div class="form-row">
-                                                <div class="form-group col-md-12 mb-3">
-                                                    <label for="">Tiêu đề</label>
-                                                    <div class="input-group">
-                                                        <input type="text" name="title[2]" class="form-control">
-                                                        <div class="invalid-tooltip"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="form-group col-md-12 mb-3">
-                                                    <label for="">Giới thiệu</label>
-                                                    <div class="input-group">
-                                                        <textarea name="description[2]" class="form-control"></textarea>
-                                                        <div class="invalid-tooltip"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-12 mb-3">
-                                            <label for="">Cài đặt</label>
-                                            <div class="input-group">
-                                                <textarea name="setting" class="form-control"></textarea>
-                                                <div class="invalid-tooltip"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-12 mb-3">
-                                            <label for="">Hình nền</label>
-                                            <div class="w-100">
-                                                <img id="showImg" src="#" alt="" width="100%">
-                                                <input type="hidden" name="background">
-                                                <a href="#" class="link">Đặt hình nền</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-row mt-3">
-                                        <div class="col-md-12">
-                                            <button type="submit" class="btn btn-success float-left btn-sm">Cập nhật</button>
-                                        </div>
-                                    </div>
-                                </form>
+
+                            <h5 class="font-weight-bold text-primary w-100">Liên kết</h5>
+                            <div class="w-100 mb-3">
+                                <img id="showImgPartnerBg" src="" alt="" class="w-100">
+                                <input type="hidden" id="partner_bg" name="partner_bg">
+                                <a id="uploadImagePartnerBg" href="#" class="link">Đặt ảnh nền <?= ($dept_id == 1 ? 'bộ môn' : 'hướng nghiên cứu') ?></a>
                             </div>
-                            <div class="tab-pane fade" id="partners">
-                                <form class="col-md-12 p-0" method="POST" enctype="multipart/form-data" data-toggle="validator" role="form" action="<?= $this->config->application->backendUri ?>/home/update/5">
-                                    <ul class="nav nav-tabs">
-                                        <li class="nav-item"><a style="font-size : 1rem" class="nav-link font-weight-bold active" data-toggle="tab" href="#viPartners">Tiếng Việt</a></li>
-                                        <li class="nav-item"><a style="font-size : 1rem" class="nav-link font-weight-bold" data-toggle="tab" href="#enPartners">Tiếng Anh</a></li>
-                                    </ul>
-                                    <div class="tab-content p-3 border rounded-bottom mb-3">
-                                        <div class="tab-pane fade active show" id="viPartners">
-                                            <div class="form-row">
-                                                <div class="form-group col-md-12 mb-3">
-                                                    <label for="">Tiêu đề</label>
-                                                    <div class="input-group">
-                                                        <input type="text" name="title[1]" class="form-control">
-                                                        <div class="invalid-tooltip"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="form-group col-md-12 mb-3">
-                                                    <label for="">Giới thiệu</label>
-                                                    <div class="input-group">
-                                                        <textarea name="description[1]" class="form-control"></textarea>
-                                                        <div class="invalid-tooltip"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane fade rounded" id="enPartners">
-                                            <div class="form-row">
-                                                <div class="form-group col-md-12 mb-3">
-                                                    <label for="">Tiêu đề</label>
-                                                    <div class="input-group">
-                                                        <input type="text" name="title[2]" class="form-control">
-                                                        <div class="invalid-tooltip"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="form-group col-md-12 mb-3">
-                                                    <label for="">Giới thiệu</label>
-                                                    <div class="input-group">
-                                                        <textarea name="description[2]" class="form-control"></textarea>
-                                                        <div class="invalid-tooltip"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-12 mb-3">
-                                            <label for="">Cài đặt</label>
-                                            <div class="input-group">
-                                                <textarea name="setting" class="form-control"></textarea>
-                                                <div class="invalid-tooltip"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-12 mb-3">
-                                            <label for="">Hình nền</label>
-                                            <div class="w-100">
-                                                <img id="showImg" src="#" alt="" width="100%">
-                                                <input type="hidden" name="background">
-                                                <a href="#" class="link">Đặt hình nền</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-row mt-3">
-                                        <div class="col-md-12">
-                                            <button type="submit" class="btn btn-success float-left btn-sm">Cập nhật</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="tab-pane fade" id="contacts">
-                                <form class="col-md-12 p-0" method="POST" enctype="multipart/form-data" data-toggle="validator" role="form" action="<?= $this->config->application->backendUri ?>/home/update/6">
-                                    <ul class="nav nav-tabs">
-                                        <li class="nav-item"><a style="font-size : 1rem" class="nav-link font-weight-bold active" data-toggle="tab" href="#viContacts">Tiếng Việt</a></li>
-                                        <li class="nav-item"><a style="font-size : 1rem" class="nav-link font-weight-bold" data-toggle="tab" href="#enContacts">Tiếng Anh</a></li>
-                                    </ul>
-                                    <div class="tab-content p-3 border rounded-bottom mb-3">
-                                        <div class="tab-pane fade active show" id="viContacts">
-                                            <div class="form-row">
-                                                <div class="form-group col-md-12 mb-3">
-                                                    <label for="">Tiêu đề</label>
-                                                    <div class="input-group">
-                                                        <input type="text" name="title[1]" class="form-control">
-                                                        <div class="invalid-tooltip"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="form-group col-md-12 mb-3">
-                                                    <label for="">Giới thiệu</label>
-                                                    <div class="input-group">
-                                                        <textarea name="description[1]" class="form-control"></textarea>
-                                                        <div class="invalid-tooltip"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane fade rounded" id="enContacts">
-                                            <div class="form-row">
-                                                <div class="form-group col-md-12 mb-3">
-                                                    <label for="">Tiêu đề</label>
-                                                    <div class="input-group">
-                                                        <input type="text" name="title[2]" class="form-control">
-                                                        <div class="invalid-tooltip"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="form-group col-md-12 mb-3">
-                                                    <label for="">Giới thiệu</label>
-                                                    <div class="input-group">
-                                                        <textarea name="description[2]" class="form-control"></textarea>
-                                                        <div class="invalid-tooltip"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-12 mb-3">
-                                            <label for="">Cài đặt</label>
-                                            <div class="input-group">
-                                                <textarea name="setting" class="form-control"></textarea>
-                                                <div class="invalid-tooltip"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-12 mb-3">
-                                            <label for="">Hình nền</label>
-                                            <div class="w-100">
-                                                <img id="showImg" src="#" alt="" width="100%">
-                                                <input type="hidden" name="background">
-                                                <a href="#" class="link">Đặt hình nền</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-row mt-3">
-                                        <div class="col-md-12">
-                                            <button type="submit" class="btn btn-success float-left btn-sm">Cập nhật</button>
-                                        </div>
-                                    </div>
-                                </form>
+
+                            <div class="w-100">
+                                <button type="submit" class="btn btn-success float-right btn-sm">Cập nhật</button>
                             </div>
                         </div>
                     </div>
                 </div>
     
-                <!-- <input class="tokenCSRF" type="hidden" name="<?= $this->security->getTokenKey() ?>"
-                    value="<?= $this->security->getToken() ?>"> -->
+                <input class="tokenCSRF" type="hidden" name="<?= $this->security->getTokenKey() ?>" value="<?= $this->security->getToken() ?>">
             </form>
         </div>
     </main>

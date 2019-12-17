@@ -1,9 +1,6 @@
 <?php
 namespace Backend\Modules\Posts\Controllers;
-use Models\Staff;
-use Models\StaffLang;
-use Backend\Modules\Posts\Forms\StaffForm;
-use Backend\Modules\Posts\Forms\StaffLangForm;
+use Models\Language;
 use Models\HomeSetting;
 
 class HomeController  extends \BackendController {
@@ -15,6 +12,13 @@ class HomeController  extends \BackendController {
         $this->view->setting4 = HomeSetting::findFirst(4);
         $this->view->setting5 = HomeSetting::findFirst(5);
         $this->view->setting6 = HomeSetting::findFirst(6);
+
+        $languages = Language::find(['status = 1']);
+        $dept_id = $this->session->get('dept_id');
+
+        $this->view->languages = $languages;
+        $this->view->dept_id = $dept_id;
+        $this->view->title = "Trang chủ";
         $this->get_js_css();
     }
 

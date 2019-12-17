@@ -9,9 +9,19 @@ class HomeLang extends \Phalcon\Mvc\Model
     
     public $lang_id;
 
-    public $name;
+    public $specialized_title;
 
-    public $description;
+    public $staff_title;
+
+    public $staff_des;
+
+    public $partner_title;
+
+    public $partner_des;
+
+    public $contact_title;
+
+    public $contact_des;
 
     public function getSource()
     {
