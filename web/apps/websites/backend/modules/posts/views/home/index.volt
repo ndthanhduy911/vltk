@@ -35,7 +35,7 @@
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text fa fa-edit"></div>
                                             </div>
-                                            <input type="text" id="specialized_title{{lang.id}}" name="specialized_title[{{lang.id}}]" class="form-control" placeholder="Tiêu đề" maxlength="255" data-error="Tiêu đề không đúng quy định.">
+                                            {{forms_lang[lang.id].render('specialized_title', ['id' : 'specialized_title'~lang.id,'name' : 'specialized_title['~lang.id~']'])}}
                                             <div class="invalid-tooltip"></div>
                                         </div>
                                     </div>
@@ -49,7 +49,7 @@
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text fa fa-edit"></div>
                                             </div>
-                                            <input type="text" id="staff_title{{lang.id}}" name="staff_title[{{lang.id}}]" class="form-control" placeholder="Tiêu đề" maxlength="255" data-error="Tiêu đề không đúng quy định.">
+                                            {{forms_lang[lang.id].render('staff_title', ['id' : 'staff_title'~lang.id,'name' : 'staff_title['~lang.id~']'])}}
                                             <div class="invalid-tooltip"></div>
                                         </div>
                                     </div>
@@ -61,7 +61,7 @@
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text fa fa-edit"></div>
                                             </div>
-                                            <textarea rows="4" id="staff_des{{lang.id}}" name="staff_des[{{lang.id}}]" class="form-control" placeholder="Giới thiệu"></textarea>
+                                            {{forms_lang[lang.id].render('staff_des', ['id' : 'staff_des'~lang.id,'name' : 'staff_des['~lang.id~']'])}}
                                             <div class="invalid-tooltip"></div>
                                         </div>
                                     </div>
@@ -75,7 +75,7 @@
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text fa fa-edit"></div>
                                             </div>
-                                            <input type="text" id="partner_title{{lang.id}}" name="partner_title[{{lang.id}}]" class="form-control" placeholder="Tiêu đề" maxlength="255" data-error="Tiêu đề không đúng quy định.">
+                                            {{forms_lang[lang.id].render('partner_title', ['id' : 'partner_title'~lang.id,'name' : 'partner_title['~lang.id~']'])}}
                                             <div class="invalid-tooltip"></div>
                                         </div>
                                     </div>
@@ -87,7 +87,7 @@
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text fa fa-edit"></div>
                                             </div>
-                                            <textarea rows="4" id="partner_des{{lang.id}}" name="partner_des[{{lang.id}}]" class="form-control" placeholder="Giới thiệu"></textarea>
+                                            {{forms_lang[lang.id].render('partner_des', ['id' : 'partner_des'~lang.id,'name' : 'partner_des['~lang.id~']'])}}
                                             <div class="invalid-tooltip"></div>
                                         </div>
                                     </div>
@@ -101,7 +101,7 @@
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text fa fa-edit"></div>
                                             </div>
-                                            <input type="text" id="contact_title{{lang.id}}" name="contact_title[{{lang.id}}]" class="form-control" placeholder="Tiêu đề" maxlength="255" data-error="Tiêu đề không đúng quy định.">
+                                            {{forms_lang[lang.id].render('contact_title', ['id' : 'contact_title'~lang.id,'name' : 'contact_title['~lang.id~']'])}}
                                             <div class="invalid-tooltip"></div>
                                         </div>
                                     </div>
@@ -113,7 +113,7 @@
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text fa fa-edit"></div>
                                             </div>
-                                            <textarea rows="4" id="contact_des{{lang.id}}" name="contact_des[{{lang.id}}]" class="form-control" placeholder="Giới thiệu"></textarea>
+                                            {{forms_lang[lang.id].render('contact_des', ['id' : 'contact_des'~lang.id,'name' : 'contact_des['~lang.id~']'])}}
                                             <div class="invalid-tooltip"></div>
                                         </div>
                                     </div>
@@ -137,15 +137,15 @@
 
                             <h5 class="font-weight-bold text-primary w-100">{{ dept_id == 1 ? 'Bộ môn' : 'Hướng nghiên cứu' }}</h5>
                             <div class="w-100 mb-3">
-                                <img id="showImgSpecializedBg" src="" alt="" class="w-100">
-                                <input type="hidden" id="specialized_bg" name="specialized_bg">
+                                <img id="showImgSpecializedBg" src="<?php echo $home->specialized_bg ? $banner->specialized_bg : '' ?>" alt="" class="w-100">
+                                {{form_banner.render('specialized_bg')}}
                                 <a id="uploadImageSpecializedBg" href="#" class="link">Đặt ảnh nền {{ dept_id == 1 ? 'bộ môn' : 'hướng nghiên cứu' }}</a>
                             </div>
 
                             <h5 class="font-weight-bold text-primary w-100">Liên kết</h5>
                             <div class="w-100 mb-3">
-                                <img id="showImgPartnerBg" src="" alt="" class="w-100">
-                                <input type="hidden" id="partner_bg" name="partner_bg">
+                                <img id="showImgPartnerBg" src="<?php echo $home->partner_bg ? $banner->partner_bg : '' ?>" alt="" class="w-100">
+                                {{form_banner.render('partner_bg')}}
                                 <a id="uploadImagePartnerBg" href="#" class="link">Đặt ảnh nền {{ dept_id == 1 ? 'bộ môn' : 'hướng nghiên cứu' }}</a>
                             </div>
 

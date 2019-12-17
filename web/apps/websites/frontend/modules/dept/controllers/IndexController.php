@@ -27,7 +27,8 @@ class IndexController extends \FrontendController
             $npHome.'.partner_bg',
             'HL.specialized_title specialized_title',
             'HL.staff_title staff_title',
-            'HL.staff_des partner_title',
+            'HL.staff_des staff_des',
+            'HL.partner_title partner_title',
             'HL.partner_des partner_des',
             'HL.contact_title contact_title',
             'HL.contact_des contact_des'

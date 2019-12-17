@@ -115,6 +115,19 @@ $router->add($config->application->backendUri . '/home/:action/:int', array(
     'id' => 2
 ));
 
+/***********************DepartmentsController***********************/
+$router->add($config->application->backendUri . '/departments/:action', array(
+    'module' => 'backend_posts',
+    'controller' => 'departments',
+    'action' => 1,
+));
+$router->add($config->application->backendUri . '/departments/:action/:int', array(
+    'module' => 'backend_posts',
+    'controller' => 'departments',
+    'action'  => 1,
+    'id' => 2
+));
+
 
 /***********************CategoriesController***********************/
 

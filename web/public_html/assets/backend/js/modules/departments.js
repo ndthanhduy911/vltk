@@ -1,0 +1,1 @@
+showSelectImage('#uploadImage','#showImg','#image');

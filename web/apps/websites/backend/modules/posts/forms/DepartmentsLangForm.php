@@ -12,7 +12,7 @@ use Phalcon\Validation\Validator\StringLength as StringLength;
 use Phalcon\Validation\Validator\PresenceOf;
 use Phalcon\Validation\Validator\Date as DateValidator;
 
-class BannerLangForm extends Form
+class DepartmentsLangForm extends Form
 {
     public function initialize($entity = null, $options = null)
     {
@@ -46,11 +46,28 @@ class BannerLangForm extends Form
         ));
         $this->add($description);
 
-        $content = new Hidden('content');
-        $this->add($content);
+        $address = new Text('address');
+        $address->setAttributes(array(
+            'class' => 'form-control',
+            'placeholder' => 'Tiêu đề',
+            'required' => '',
+            'data-required-error' => "Vui lòng nhập tiêu đề.",
+            'maxlength' => "255",
+            'data-error' => "Tiêu đề không đúng quy định.",
+        ));
+        $address->addValidators(array(
+            new PresenceOf(array(
+                'message' => 'Tiêu đề không được bỏ trống.',
+            )),
+            new StringLength([
+                "max" => 255,
+                "messageMaximum" => "Tiêu đề không được dài quá 255 ký tự",
+            ]),
+        ));
+        $this->add($address);
 
-        $banner_id = new Hidden('banner_id');
-        $this->add($banner_id);
+        $dept_id = new Hidden('dept_id');
+        $this->add($dept_id);
 
         $lang_id = new Hidden('lang_id');
         $this->add($lang_id);
