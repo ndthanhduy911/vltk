@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="en">
+<html lang="vi">
 
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title><?php echo isset($title) ? $title.' | Khoa Vật Lý - Vật Lý Kỹ Thuật' : 'Khoa Vật Lý - Vật Lý Kỹ Thuật' ?> </title>
+    <title><?= $dept->name ?> </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Canonical SEO -->
     <link rel="canonical" href="<?= FRONTEND_URL ?>/" />
@@ -12,28 +12,28 @@
     <meta name="keywords" content="support, it, technical, physics, network, system">
     <meta name="description" content="Ho tro khach hang physics">
     <!-- Schema.org markup for Google+ -->
-    <meta itemprop="name" content="Vật Lý - Vật Lý Kỹ Thuật">
-    <meta itemprop="description" content="Vật Lý - Vật Lý Kỹ Thuật">
-    <meta itemprop="image" content="http://physics.vn/images/logo.png">
+    <meta itemprop="name" content="<?= $dept->name ?>">
+    <meta itemprop="description" content="<?= $dept->name ?>">
+    <meta itemprop="image" content="<?= $this->helper->getLinkImage($dept->logo, '/logo.png') ?>">
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@hcmus.edu.vn">
-    <meta name="twitter:title" content="Vật Lý - Vật Lý Kỹ Thuật">
-    <meta name="twitter:description" content="Vật Lý - Vật Lý Kỹ Thuật">
+    <meta name="twitter:title" content="<?= $dept->name ?>">
+    <meta name="twitter:description" content="<?= $dept->name ?>">
     <meta name="twitter:creator" content="@hcmus.edu.vn">
-    <meta name="twitter:image" content="http://physics.vn/images/logo.png">
+    <meta name="twitter:image" content="<?= $this->helper->getLinkImage($dept->logo, '/logo.png') ?>">
     <!-- Open Graph data -->
     <meta property="fb:app_id" content="655968634437471">
-    <meta property="og:title" content="Vật Lý - Vật Lý Kỹ Thuật" />
+    <meta property="og:title" content="<?= $dept->name ?>" />
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="http://physics.vn/" />
-    <meta property="og:image" content="http://physics.vn/images/logo.png" />
-    <meta property="og:description" content="Vật Lý - Vật Lý Kỹ Thuật" />
-    <meta property="og:site_name" content="Vật Lý - Vật Lý Kỹ Thuật" />
+    <meta property="og:url" content="<?= FRONTEND_URL ?>/" />
+    <meta property="og:image" content="<?= $this->helper->getLinkImage($dept->logo, '/logo.png') ?>" />
+    <meta property="og:description" content="<?= $dept->name ?>" />
+    <meta property="og:site_name" content="<?= $dept->name ?>" />
 
     <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="76x76" href="<?php echo FRONTEND_URL ?>/uploads/khoa-vat-ly/logo96x96.png" />
-    <link rel="icon" type="image/png" href="<?php echo FRONTEND_URL ?>/uploads/khoa-vat-ly/logo96x96.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="<?= $this->helper->getLinkImage($dept->icon, '/favicon.ico') ?>" />
+    <link rel="icon" type="image/png" href="<?= $this->helper->getLinkImage($dept->icon, '/favicon.ico') ?>" />
 
     <!-- Web Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
