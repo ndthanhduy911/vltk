@@ -28,7 +28,7 @@
                         <div class="tab-content p-3">
                             <?php foreach ($languages as $key => $lang) { ?>
                             <div class="tab-pane fade <?= (!$key ? 'active show' : '') ?>"id="lang<?= $lang->id ?>">
-                                <h5 class="font-weight-bold text-primary">Tiêu đề</h5>
+                                <h5 class="text-primary font-weight-normal">Tiêu đề</h5>
                                 <div class="mb-3">
                                     <div class="form-row">
                                         <div class="form-group col-md-12 m-0">
@@ -43,7 +43,7 @@
                                     </div>
                                 </div>
                  
-                                <h5 class="font-weight-bold text-primary">Giới thiệu</h5>
+                                <h5 class="text-primary font-weight-normal">Giới thiệu</h5>
                                 <div class="tile p-0">
                                     <div class="row m-0">
                                         <div class="col-md-12 p-0">
@@ -69,7 +69,7 @@
 
                         <div class="row m-0">
                             <div class="col-md-12 p-0">
-                                <h5 class="font-weight-bold text-primary">Trạng thái</h5>
+                                <h5 class="text-primary font-weight-normal">Trạng thái</h5>
                                 <div class="form-group mt-1">
                                     <div class="input-group">
                                         <?= $form_staff->render('status') ?>
@@ -77,7 +77,7 @@
                                     </div>
                                 </div>
                                 <div class="d-inline-block w-100 mb-2">
-                                    <h5 class="font-weight-bold text-primary">Slug</h5>
+                                    <h5 class="text-primary font-weight-normal">Slug</h5>
                                     <div class="form-group mt-1">
                                         <div class="input-group">
                                             <?= $form_staff->render('slug') ?>
@@ -94,7 +94,7 @@
                     </div>
     
                     <div class="tile p-3">
-                        <h5 class="font-weight-bold text-primary">Bộ môn</h5>
+                        <h5 class="text-primary font-weight-normal">Bộ môn</h5>
                         <div class="row m-0">
                             <div class="form-group mt-1 w-100">
                                 <div class="input-group">
@@ -104,7 +104,7 @@
                             </div>
                         </div>
                         <?php if ($dept_id == 1) { ?>
-                        <h5 class="font-weight-bold text-primary">Chức vụ Khoa</h5>
+                        <h5 class="text-primary font-weight-normal">Chức vụ Khoa</h5>
                         <div class="row m-0">
                             <div class="form-group mt-1 w-100">
                                 <div class="input-group">
@@ -114,7 +114,7 @@
                             </div>
                         </div>
                         <?php } ?>
-                        <h5 class="font-weight-bold text-primary">Chức vụ Bộ Môn</h5>
+                        <h5 class="text-primary font-weight-normal">Chức vụ Bộ Môn</h5>
                         <div class="row m-0">
                             <div class="form-group mt-1 w-100">
                                 <div class="input-group">
@@ -123,7 +123,7 @@
                                 </div>
                             </div>
                         </div>
-                        <h5 class="font-weight-bold text-primary">E-mail</h5>
+                        <h5 class="text-primary font-weight-normal">E-mail</h5>
                         <div class="row m-0">
                             <div class="form-group mt-1 w-100">
                                 <div class="input-group">

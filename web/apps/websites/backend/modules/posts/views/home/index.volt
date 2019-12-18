@@ -27,7 +27,7 @@
                         <div class="tab-content p-3">
                             {% for key, lang in languages %}
                             <div class="tab-pane fade {{ !key ? 'active show' : '' }}"id="lang{{lang.id}}">
-                                <h5 class="font-weight-bold text-primary">{{ dept_id == 1 ? 'Bộ môn' : 'Hướng nghiên cứu' }}</h5>
+                                <h5 class="text-primary font-weight-normal">{{ dept_id == 1 ? 'Bộ môn' : 'Hướng nghiên cứu' }}</h5>
                                 <div class="form-row mb-3">
                                     <div class="form-group col-md-12 m-0">
                                         <label for="">Tiêu đề</label>
@@ -41,7 +41,7 @@
                                     </div>
                                 </div>
 
-                                <h5 class="font-weight-bold text-primary">Lãnh đạo</h5>
+                                <h5 class="text-primary font-weight-normal">Lãnh đạo</h5>
                                 <div class="form-row mb-3">
                                     <div class="form-group col-md-12 m-0">
                                         <label for="">Tiêu đề</label>
@@ -67,7 +67,7 @@
                                     </div>
                                 </div>
 
-                                <h5 class="font-weight-bold text-primary">Liên kết</h5>
+                                <h5 class="text-primary font-weight-normal">Liên kết</h5>
                                 <div class="form-row mb-3">
                                     <div class="form-group col-md-12 m-0">
                                         <label for="">Tiêu đề</label>
@@ -93,7 +93,7 @@
                                     </div>
                                 </div>
 
-                                <h5 class="font-weight-bold text-primary">Liên hệ</h5>
+                                <h5 class="text-primary font-weight-normal">Liên hệ</h5>
                                 <div class="form-row mb-3">
                                     <div class="form-group col-md-12 m-0">
                                         <label for="">Tiêu đề</label>

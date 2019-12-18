@@ -29,7 +29,7 @@
                         <?php foreach ($languages as $key => $lang) { ?>
                         <div class="tab-pane fade <?= (!$key ? 'active show' : '') ?>"
                             id="lang<?= $lang->id ?>">
-                            <h5 class="font-weight-bold text-primary">Tiêu đề</h5>
+                            <h5 class="text-primary font-weight-normal">Tiêu đề</h5>
                             <div class="tile p-3">
                                 <div class="modal-body p-0">
                                     <div class="form-row">
@@ -46,7 +46,7 @@
                                 </div>
                             </div>
 
-                            <h5 class="font-weight-bold text-primary">Tóm tắt</h5>
+                            <h5 class="text-primary font-weight-normal">Tóm tắt</h5>
                             <div class="tile p-0">
                                 <div class="modal-body pb-0">
                                     <div class="form-row">
@@ -63,7 +63,7 @@
                                 </div>
                             </div>
 
-                            <h5 class="font-weight-bold text-primary">Nội dung</h5>
+                            <h5 class="text-primary font-weight-normal">Nội dung</h5>
                             <div class="tile p-0">
                                 <div class="row m-0">
                                     <div class="col-md-12 p-0">
@@ -86,11 +86,11 @@
 
             <div class="col-md-3 pr-0">
                 <div class="tile p-3">
-                    <h5 class="font-weight-bold text-primary">Đăng bài</h5>
+                    <h5 class="text-primary font-weight-normal">Đăng bài</h5>
                     <div class="row m-0">
                         <div class="col-md-12 p-0">
-                            <i class="fa fa-key"></i>
-                            <span class="f-s-90">Trạng thái:</span>
+                            
+                            <span class="text-primary">Trạng thái:</span>
                             <div class="form-group mt-1">
                                 <div class="input-group">
                                     <?= $form_post->render('status') ?>
@@ -99,7 +99,7 @@
                             </div>
                             <div class="d-inline-block w-100">
                                 <i class="fa fa-calendar"></i>
-                                <span class="f-s-90">Lịch:</span>
+                                <span class="text-primary">Lịch:</span>
                                 <div class="form-group mt-1">
                                     <div class="input-group">
                                         <?= $form_post->render('calendar') ?>
@@ -109,7 +109,7 @@
                             </div>
                             <div class="d-inline-block w-100 mb-2">
                                 <i class="fa fa-link"></i>
-                                <span class="f-s-90">Slug:</span>
+                                <span class="text-primary">Slug:</span>
                                 <div class="form-group mt-1">
                                     <div class="input-group">
                                         <?= $form_post->render('slug') ?>
@@ -126,7 +126,7 @@
                 </div>
 
                 <div class="tile p-3">
-                    <h5 class="font-weight-bold text-primary">Danh mục</h5>
+                    <h5 class="text-primary font-weight-normal">Danh mục</h5>
                     <div class="row m-0">
                         <div class="col-md-12 p-0">
                             <div class="form-group mb-0">

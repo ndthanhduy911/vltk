@@ -49,19 +49,14 @@ class DepartmentsLangForm extends Form
         $address = new Text('address');
         $address->setAttributes(array(
             'class' => 'form-control',
-            'placeholder' => 'Tiêu đề',
-            'required' => '',
-            'data-required-error' => "Vui lòng nhập tiêu đề.",
+            'placeholder' => 'Địa chỉ',
             'maxlength' => "255",
-            'data-error' => "Tiêu đề không đúng quy định.",
+            'data-error' => "Địa chỉ không đúng quy định.",
         ));
         $address->addValidators(array(
-            new PresenceOf(array(
-                'message' => 'Tiêu đề không được bỏ trống.',
-            )),
             new StringLength([
                 "max" => 255,
-                "messageMaximum" => "Tiêu đề không được dài quá 255 ký tự",
+                "messageMaximum" => "Địa chỉ không được dài quá 255 ký tự",
             ]),
         ));
         $this->add($address);

@@ -57,6 +57,26 @@ class DepartmentsForm extends Form
         ));
         $this->add($phone);
 
+        $email = new Email('email');
+        $email->setAttributes(array(
+            'class' => 'form-control',
+            'placeholder' => "E-mail",
+            'data-required-error' => "Vui lòng điền đầy đủ thông tin",
+            'maxlength' => "100",
+            'required' => '',
+            'data-error' => "Chưa đúng định dạng e-mail",
+        ));
+        $email->addValidators(array(
+            new PresenceOf(array(
+                'message' => 'Địa chỉ e-mail không được để trống',
+            )),
+            new StringLength([
+                "max" => 100,
+                "messageMaximum" => "Địa chỉ e-mail không được dài quá 100 ký tự",
+            ]),
+        ));
+        $this->add($email);
+
         $status = new Select('status', [
             1 => "Hoạt động",
             0 => "Khóa",

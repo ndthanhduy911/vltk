@@ -29,84 +29,108 @@
                             {% for key, lang in languages %}
                             <div class="tab-pane fade {{ !key ? 'active show' : '' }}"
                                 id="lang{{lang.id}}">
-                                <h5 class="font-weight-bold text-primary">Tiêu đề</h5>
-                                <div class="tile p-3">
-                                    <div class="modal-body p-0">
-                                        <div class="form-row">
-                                            <div class="form-group col-md-12 m-0">
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text fa fa-header"></div>
-                                                    </div>
-                                                    {{forms_lang[lang.id].render('name', ['id' : 'name'~lang.id,'name' : 'name['~lang.id~']'])}}
-                                                    <div class="invalid-tooltip"></div>
-                                                </div>
-                                            </div>
+                                <h5 class="text-primary font-weight-normal">Tên bộ môn</h5>
+      
+                                <div class="form-group col-md-12 m-0">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text fa fa-header"></div>
                                         </div>
+                                        {{forms_lang[lang.id].render('name', ['id' : 'name'~lang.id,'name' : 'name['~lang.id~']'])}}
+                                        <div class="invalid-tooltip"></div>
                                     </div>
                                 </div>
     
-                                <h5 class="font-weight-bold text-primary">Tóm tắt</h5>
-                                <div class="tile p-0">
-                                    <div class="modal-body pb-0">
-                                        <div class="form-row">
-                                            <div class="form-group col-md-12">
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text fa fa-tags"></div>
-                                                    </div>
-                                                    {{forms_lang[lang.id].render('description', ['id' : 'description'~lang.id, 'name' : 'description['~lang.id~']'])}}
-                                                    <div class="invalid-tooltip"></div>
-                                                </div>
-                                            </div>
+                                <h5 class="text-primary font-weight-normal">Giới thiệu</h5>
+                                <div class="form-group col-md-12">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text fa fa-tags"></div>
                                         </div>
+                                        {{forms_lang[lang.id].render('description', ['id' : 'description'~lang.id, 'name' : 'description['~lang.id~']'])}}
+                                        <div class="invalid-tooltip"></div>
+                                    </div>
+                                </div>
+
+                                <h5 class="text-primary font-weight-normal">Địa chỉ</h5>
+                                <div class="form-group col-md-12">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text fa fa-building-o"></div>
+                                        </div>
+                                        {{forms_lang[lang.id].render('address', ['id' : 'address'~lang.id, 'name' : 'address['~lang.id~']'])}}
+                                        <div class="invalid-tooltip"></div>
                                     </div>
                                 </div>
                             </div>
                             {% endfor  %}
                         </div>
                     </div>
-                    
-                    <div class="tile p-3 mt-3">  
-                        <h5 class="font-weight-bold text-primary">Hình banner</h5> 
-                        <div class="row m-0">
-                            <div class="col-md-12 p-0">
-                                <img id="showImg" src="<?php echo $department->image ? $department->image : '' ?>"
-                                    alt="" width="100%">
-                                {{form_department.render('image')}}
-                                <a id="uploadImage" href="#" class="link"><?php echo $department->image ? 'Đổi hình' : 'Chọn hình' ?></a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
     
                 <div class="col-md-3 pr-0">
                     <div class="tile p-3">
-                        <h5 class="font-weight-bold text-primary">Đăng bài</h5>
                         <div class="row m-0">
                             <div class="col-md-12 p-0">
-                                <i class="fa fa-key"></i>
-                                <span class="f-s-90">Trạng thái:</span>
-                                <div class="form-group mt-1">
-                                    <div class="input-group">
-                                        {{form_department.render('status')}}
-                                        <div class="invalid-tooltip"></div>
-                                    </div>
-                                </div>
-                                <div class="d-inline-block w-100 mb-2">
-                                    <i class="fa fa-link"></i>
-                                    <span class="f-s-90">Link:</span>
+                                <div class="d-inline-block w-100">
+                                    <span class="text-primary">Viết tắt:</span>
                                     <div class="form-group mt-1">
                                         <div class="input-group">
-                                            {{form_department.render('link')}}
+                                            {{form_department.render('code')}}
                                             <div class="invalid-tooltip"></div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="d-inline-block w-100">
+                                    <span class="text-primary">Số điện thoại:</span>
+                                    <div class="form-group mt-1">
+                                        <div class="input-group">
+                                            {{form_department.render('phone')}}
+                                            <div class="invalid-tooltip"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-inline-block w-100">
+                                    <span class="text-primary">E-mail:</span>
+                                    <div class="form-group mt-1">
+                                        <div class="input-group">
+                                            {{form_department.render('email')}}
+                                            <div class="invalid-tooltip"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% if session.get('dept_id') != 1 %}
+                                <div class="animated-checkbox mb-3">
+                                    <label class="m-0">
+                                        <input name="post_connect" type="checkbox" value="1" {{department.post_connect ? 'checked' : '' }}><span class="label-text">Liên kết bài viết với Khoa</span>
+                                    </label>
+                                </div>
+                                {% endif %}
                             </div>
     
                             <div class="col-md-12 p-0">
-                                <button type="submit" class="btn btn-success float-right btn-sm">{{title}}</button>
+                                <button type="submit" class="btn btn-success float-right btn-sm">Cập nhật</button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="tile p-3">
+                        <div class="row m-0">
+                            <div class="col-md-12 p-0">
+                                <img id="showLogo" src="<?php echo $department->logo ? $department->logo : '' ?>" alt="" width="100%">
+                                    {{form_department.render('logo')}}
+                                <a id="uploadLogo" href="#" class="link">Đặt ảnh logo</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tile p-3">
+                        <div class="row m-0">
+                            <div class="col-md-12 p-0">
+                                <img id="showImg" src="<?php echo $department->image ? $department->image : '' ?>" alt="" width="100%">
+                                {{form_department.render('image')}}
+                                <a id="uploadImage" href="#" class="link">Đặt ảnh đại diện</a>
                             </div>
                         </div>
                     </div>

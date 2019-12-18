@@ -35,11 +35,23 @@ class DepartmentsController  extends \BackendController {
                 $error = [];
                 $p_name = $this->request->getPost('name');
                 $p_description = $this->request->getPost('description');
+                $p_address = $this->request->getPost('address');
                 $req_department = [
-                    'status' => $this->request->getPost('status'),
+                    'status' => 1,
+                    'level' => 0,
+                    'slug' => $department->slug,
+                    'phone' => $this->request->getPost('phone'),
+                    'email' => $this->request->getPost('email'),
+                    'code' => $this->request->getPost('code'),
                     'image' => $this->request->getPost('image'),
-                    'link' => $this->request->getPost('link'),
+                    'logo' => $this->request->getPost('logo'),
+                    'post_connect' => 0,
                 ];
+
+                if($dept_id != 1){
+                    $req_department['post_connect'] = $this->request->getPost('post_connect');
+                    $req_department['post_connect'] = $req_department['post_connect'] ? $req_department['post_connect'] : 0;
+                }
 
                 $form_department->bind($req_department, $department);
                 if (!$form_department->isValid()) {
@@ -52,6 +64,7 @@ class DepartmentsController  extends \BackendController {
                     $req_department_lang[$lang->id] = [
                         'name' => $p_name[$lang->id],
                         'description' => $p_description[$lang->id],
+                        'address' => $p_address[$lang->id],
                         'lang_id' => $lang->id,
                     ];
 
@@ -74,7 +87,7 @@ class DepartmentsController  extends \BackendController {
                             $departments_lang[$lang->id]->save();
                         }
                         $this->flashSession->success($title." thành công");
-                        return $this->response->redirect(BACKEND_URL.'/department');
+                        return $this->response->redirect(BACKEND_URL.'/departments/update');
                     }
                 }else{
                     foreach ($error as $value) {
@@ -83,6 +96,7 @@ class DepartmentsController  extends \BackendController {
                 }
             }else{
                 $this->flashSession->error("Token không chính xác");
+                return $this->response->redirect(BACKEND_URL."/departments/update");
             }
         }
 
@@ -92,7 +106,7 @@ class DepartmentsController  extends \BackendController {
         $this->view->department = $department;
         $this->view->departments_lang = $departments_lang;
         $this->view->title = $title;
-        // $this->assets->addJs('/elfinder/js/require.min.js');
+        $this->assets->addJs('/elfinder/js/require.min.js');
         $this->get_js_css();
     }
 

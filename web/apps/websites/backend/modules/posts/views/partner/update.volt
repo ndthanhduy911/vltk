@@ -29,7 +29,7 @@
                         {% for key, lang in languages %}
                         <div class="tab-pane fade {{ !key ? 'active show' : '' }}"
                             id="lang{{lang.id}}">
-                            <h5 class="font-weight-bold text-primary">Tiêu đề</h5>
+                            <h5 class="text-primary font-weight-normal">Tiêu đề</h5>
                             <div class="tile p-3">
                                 <div class="modal-body p-0">
                                     <div class="form-row">
@@ -50,7 +50,7 @@
                     </div>
                 </div>
                 <div class="tile p-3 mt-3">
-                    <h5 class="font-weight-bold text-primary">Hình logo</h5> 
+                    <h5 class="text-primary font-weight-normal">Hình logo</h5> 
                     <div class="row m-0">
                         <div class="col-md-12 p-0">
                             <img id="showImg" src="<?php echo $partner->featured_image ? $partner->featured_image : '' ?>"
@@ -64,11 +64,11 @@
 
             <div class="col-md-3 pr-0">
                 <div class="tile p-3">
-                    <h5 class="font-weight-bold text-primary">Đăng bài</h5>
+                    <h5 class="text-primary font-weight-normal">Đăng bài</h5>
                     <div class="row m-0">
                         <div class="col-md-12 p-0">
-                            <i class="fa fa-key"></i>
-                            <span class="f-s-90">Trạng thái:</span>
+                            
+                            <span class="text-primary">Trạng thái:</span>
                             <div class="form-group mt-1">
                                 <div class="input-group">
                                     {{form_partner.render('status')}}
@@ -76,8 +76,8 @@
                                 </div>
                             </div>
                             <div class="d-inline-block w-100 mb-2">
-                                <i class="fa fa-link"></i>
-                                <span class="f-s-90">Link:</span>
+                                
+                                <span class="text-primary">Link:</span>
                                 <div class="form-group mt-1">
                                     <div class="input-group">
                                         {{form_partner.render('link')}}

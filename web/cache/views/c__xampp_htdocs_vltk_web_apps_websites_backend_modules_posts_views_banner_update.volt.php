@@ -27,9 +27,8 @@
                         </ul>
                         <div class="tab-content p-3">
                             <?php foreach ($languages as $key => $lang) { ?>
-                            <div class="tab-pane fade <?= (!$key ? 'active show' : '') ?>"
-                                id="lang<?= $lang->id ?>">
-                                <h5 class="font-weight-bold text-primary">Tiêu đề</h5>
+                            <div class="tab-pane fade <?= (!$key ? 'active show' : '') ?>" id="lang<?= $lang->id ?>">
+                                <h5 class="text-primary font-weight-normal">Tiêu đề</h5>
                                 <div class="tile p-3">
                                     <div class="modal-body p-0">
                                         <div class="form-row">
@@ -46,7 +45,7 @@
                                     </div>
                                 </div>
     
-                                <h5 class="font-weight-bold text-primary">Tóm tắt</h5>
+                                <h5 class="text-primary font-weight-normal">Nội dung</h5>
                                 <div class="tile p-0">
                                     <div class="modal-body pb-0">
                                         <div class="form-row">
@@ -68,7 +67,7 @@
                     </div>
                     
                     <div class="tile p-3 mt-3">  
-                        <h5 class="font-weight-bold text-primary">Hình banner</h5> 
+                        <h5 class="text-primary font-weight-normal">Hình banner</h5> 
                         <div class="row m-0">
                             <div class="col-md-12 p-0">
                                 <img id="showImg" src="<?php echo $banner->image ? $banner->image : '' ?>"
@@ -82,11 +81,9 @@
     
                 <div class="col-md-3 pr-0">
                     <div class="tile p-3">
-                        <h5 class="font-weight-bold text-primary">Đăng bài</h5>
                         <div class="row m-0">
                             <div class="col-md-12 p-0">
-                                <i class="fa fa-key"></i>
-                                <span class="f-s-90">Trạng thái:</span>
+                                <span class="text-primary">Trạng thái:</span>
                                 <div class="form-group mt-1">
                                     <div class="input-group">
                                         <?= $form_banner->render('status') ?>
@@ -94,8 +91,7 @@
                                     </div>
                                 </div>
                                 <div class="d-inline-block w-100 mb-2">
-                                    <i class="fa fa-link"></i>
-                                    <span class="f-s-90">Link:</span>
+                                    <span class="text-primary">Link:</span>
                                     <div class="form-group mt-1">
                                         <div class="input-group">
                                             <?= $form_banner->render('link') ?>
