@@ -1,12 +1,12 @@
 <?php
-namespace Backend\Modules\Posts\Controllers;
-use Models\Pages;
-use Models\PagesLang;
+namespace Backend\Modules\Admins\Controllers;
+use Models\Staff;
+use Models\StaffLang;
 use Models\Language;
-use Backend\Modules\Posts\Forms\PagesForm;
-use Backend\Modules\Posts\Forms\PagesLangForm;
+use Backend\Modules\Admins\Forms\StaffForm;
+use Backend\Modules\Admins\Forms\StaffLangForm;
 
-class PagesController  extends \BackendController {
+class StaffController  extends \BackendController {
 
     public function indexAction(){
         $this->get_js_css();
@@ -15,83 +15,87 @@ class PagesController  extends \BackendController {
 
     public function updateAction($id = 0){
         $forms_lang = [];
-        $pages_lang = [];
-        $page_content = [];
+        $staffs_lang = [];
+        $staff_content = [];
         $languages = Language::find(['status = 1']);
+        $dept_id = $this->session->get('dept_id');
         if($id){
-            if(!$page = Pages::findFirstId($id)){
+            if(!$staff = Staff::findFirstId($id)){
                 echo 'Không tìm thấy dữ liệu'; die;
             }
-            $page->updated_at = date('Y-m-d H:i:s');
+            $staff->updated_at = date('Y-m-d H:i:s');
             $title = 'Cập nhật';
             foreach ($languages as $key => $lang) {
-                $page_lang = PagesLang::findFirst(['page_id = :id: AND lang_id = :lang_id:','bind' => ['id' => $page->id, 'lang_id' => $lang->id]]);
-                if($page_lang){
-                    $form_lang = new PagesLangForm($page_lang);
-                    $pages_lang[$lang->id] = $page_lang;
+                $staff_lang = StaffLang::findFirst(['staff_id = :id: AND lang_id = :lang_id:','bind' => ['id' => $staff->id, 'lang_id' => $lang->id]]);
+                if($staff_lang){
+                    $form_lang = new StaffLangForm($staff_lang);
+                    $staffs_lang[$lang->id] = $staff_lang;
                     $forms_lang[$lang->id] = $form_lang;
-                    $page_content[$lang->id] = $page_lang->content;
+                    $staff_content[$lang->id] = $staff_lang->content;
                 }else{
                     echo 'Nội dung không phù hợp'; die;
                 }
             }   
         }else{
-            $page = new Pages();
-            $page->author = $this->session->get('user_id');
-            $page->dept_id = $this->session->get('dept_id');
-            $page->created_at = date('Y-m-d H:i:s');
-            $page->updated_at = $page->created_at;
+            $staff = new Staff();
+            $staff->dept_id = $this->session->get('dept_id');
+            $staff->created_at = date('Y-m-d H:i:s');
+            $staff->updated_at = $staff->created_at;
             $title = 'Thêm mới';
             foreach ($languages as $key => $lang) {
-                $forms_lang[$lang->id] = new PagesLangForm();
-                $pages_lang[$lang->id] = new PagesLang();
-                $page_content[$lang->id] = '';
+                $forms_lang[$lang->id] = new StaffLangForm();
+                $staffs_lang[$lang->id] = new StaffLang();
+                $staff_content[$lang->id] = '';
             }
         }
 
-        $form_page = new PagesForm($page);
+        $form_staff = new StaffForm($staff);
         if ($this->request->isPost()) {
             if ($this->security->checkToken()) {
                 $error = [];
                 $p_title = $this->request->getPost('title');
                 $p_slug = $this->request->getPost('slug');
                 $p_content = $this->request->getPost('content');
-                $p_excerpt = $this->request->getPost('excerpt');
-                $req_page = [
+                $req_staff = [
                     'status' => $this->request->getPost('status'),
                     'slug' => $p_slug ? $p_slug : $this->helper->slugify($p_title[1]),
                     'featured_image' => $this->request->getPost('featured_image'),
-                    'attribute_id' => $this->request->getPost('attribute_id'),
+                    'dept_position' => $this->request->getPost('dept_position'),
+                    'email' => $this->request->getPost('email'),
+                    'dept_id' => $this->request->getPost('dept_id')
                 ];
 
-                $form_page->bind($req_page, $page);
-                if (!$form_page->isValid()) {
-                    foreach ($form_page->getMessages() as $message) {
+                if($dept_id == 1){
+                    $req_staff['dean'] = $this->request->getPost('dean');
+                }
+
+                $form_staff->bind($req_staff, $staff);
+                if (!$form_staff->isValid()) {
+                    foreach ($form_staff->getMessages() as $message) {
                         array_push($error, $message->getMessage());
                     }
                 }
 
-                $check_slug = Pages::findFirst([
+                $check_slug = Staff::findFirst([
                     "slug = :slug: AND id != :id:",
                     "bind" => [
-                        "slug" => $req_page['slug'],
+                        "slug" => $req_staff['slug'],
                         'id'    => $id,
                     ]
                 ]);
     
                 if($check_slug){
-                    $req_page['slug'] = $req_page['slug'] .'-'. strtotime('now'); 
+                    $req_staff['slug'] = $req_staff['slug'] .'-'. strtotime('now'); 
                 }
 
                 foreach ($languages as $key => $lang) {
-                    $req_page_lang[$lang->id] = [
+                    $req_staff_lang[$lang->id] = [
                         'title' => $p_title[$lang->id],
                         'content' => $p_content[$lang->id],
-                        'excerpt' => $p_excerpt[$lang->id],
                         'lang_id' => $lang->id,
                     ];
 
-                    $forms_lang[$lang->id]->bind($req_page_lang[$lang->id], $pages_lang[$lang->id]);
+                    $forms_lang[$lang->id]->bind($req_staff_lang[$lang->id], $staffs_lang[$lang->id]);
                     if (!$forms_lang[$lang->id]->isValid()) {
                         foreach ($forms_lang[$lang->id]->getMessages() as $message) {
                             array_push($error, $message->getMessage());
@@ -100,17 +104,17 @@ class PagesController  extends \BackendController {
                 }
 
                 if (!count($error)) {
-                    if (!$page->save()) {
-                        foreach ($page->getMessages() as $message) {
+                    if (!$staff->save()) {
+                        foreach ($staff->getMessages() as $message) {
                             $this->flashSession->error($message);
                         }
                     } else {
                         foreach ($languages as $key => $lang) {
-                            $pages_lang[$lang->id]->page_id = $page->id;
-                            $pages_lang[$lang->id]->save();
+                            $staffs_lang[$lang->id]->staff_id = $staff->id;
+                            $staffs_lang[$lang->id]->save();
                         }
                         $this->flashSession->success($title." thành công");
-                        return $this->response->redirect(BACKEND_URL.'/pages');
+                        return $this->response->redirect(BACKEND_URL.'/staff');
                     }
                 }else{
                     foreach ($error as $value) {
@@ -123,22 +127,23 @@ class PagesController  extends \BackendController {
         }
 
         $this->view->languages = $languages;
-        $this->view->page_content = $page_content;
+        $this->view->staff_content = $staff_content;
         $this->view->forms_lang = $forms_lang;
-        $this->view->form_page = $form_page;
-        $this->view->page = $page;
-        $this->view->pages_lang = $pages_lang;
+        $this->view->form_staff = $form_staff;
+        $this->view->staff = $staff;
+        $this->view->staffs_lang = $staffs_lang;
         $this->view->title = $title;
+        $this->view->dept_id = $dept_id;
         $this->assets->addJs('/elfinder/js/require.min.js');
         $this->get_js_css();
     }
 
     public function deleteAction($id = null){
-        if ($page = Pages::findFirstId($id)) {
-            $page->deleted = 1;
-            if (!$page->save()) {
+        if ($staff = Staff::findFirstId($id)) {
+            $staff->deleted = 1;
+            if (!$staff->save()) {
                 if ($this->request->isAjax()) {
-                    foreach ($page->getMessages() as $message) {
+                    foreach ($staff->getMessages() as $message) {
                         array_push($error, $message->getMessage());
                     }
                     $data['error'] = $error;
@@ -146,14 +151,14 @@ class PagesController  extends \BackendController {
                     $this->response->setJsonContent($data);
                     return $this->response->send();
                 } else {
-                    foreach ($page->getMessages() as $message) {
+                    foreach ($staff->getMessages() as $message) {
                         $this->flashSession->error($message);
                     }
                     return $this->response->redirect(BACKEND_URL.'/trashs');
                 }
             }else{
                 if ($this->request->isAjax()) {
-                    $data['data'] = $page->toArray();
+                    $data['data'] = $staff->toArray();
                     $this->response->setStatusCode(200, 'OK');
                     $this->response->setJsonContent($data);
                     return $this->response->send();
@@ -184,25 +189,34 @@ class PagesController  extends \BackendController {
     public function getdataAction(){
         if($this->request->isAjax()){
             $dept_id = $this->session->get('dept_id');
-            $npPages = Pages::getNamepace();
+            $npStaff = Staff::getNamepace();
             $data = $this->modelsManager->createBuilder()
             ->columns(array(
-                $npPages.'.id',
-                $npPages.'.slug',
-                $npPages.'.attribute_id',
-                $npPages.'.status',
-                $npPages.'.dept_id',
-                $npPages.'.created_at',
-                'PL.excerpt excerpt',
-                'PL.title title',
-                'PL.content content',
+                $npStaff.'.id',
+                $npStaff.'.slug',
+                $npStaff.'.featured_image',
+                $npStaff.'.status',
+                $npStaff.'.dept_id',
+                $npStaff.'.email',
+                $npStaff.'.dean',
+                $npStaff.'.dept_position',
+                $npStaff.'.created_at',
+                'SL.title title',
+                'SL.content content',
+                'D.name dept_name',
             ))
-            ->from($npPages)
-            ->where("$npPages.deleted = 0 AND $npPages.dept_id = $dept_id")
-            ->leftJoin('Models\PagesLang', 'PL.page_id = '.$npPages.'.id AND PL.lang_id = 1','PL')
-            ->orderBy($npPages.'.dept_id ASC, '.$npPages.'.created_at DESC');
+            ->from($npStaff)
+            ->where("$npStaff.deleted = 0");
+            
+            if($dept_id != 1){
+                $data = $data->andWhere("$npStaff.dept_id = $dept_id");
+            }
+
+            $data = $data->leftJoin('Models\DepartmentsLang', 'D.dept_id = '.$npStaff.".dept_id AND D.lang_id = 1",'D')
+            ->leftJoin('Models\StaffLang', 'SL.staff_id = '.$npStaff.'.id AND SL.lang_id = 1','SL')
+            ->orderBy("$npStaff.dean ASC, $npStaff.dept_id ASC, $npStaff.dept_position ASC");
     
-            $search = 'PL.title LIKE :search:';
+            $search = 'SL.title LIKE :search:';
             $this->response->setStatusCode(200, 'OK');
             $this->response->setJsonContent($this->ssp->data_output($this->request->get(), $data,$search));
             return $this->response->send();
@@ -214,6 +228,6 @@ class PagesController  extends \BackendController {
     }
 
     private function get_js_css (){
-        $this->assets->addJs($this->config->application->baseUri.'/assets/backend/js/modules/pages.js');
+        $this->assets->addJs($this->config->application->baseUri.'/assets/backend/js/modules/staff.js');
     }
 }

@@ -1,10 +1,10 @@
 <?php
-namespace Backend\Modules\Posts\Controllers;
+namespace Backend\Modules\Admins\Controllers;
 use Models\Categories;
 use Models\Language;
 use Models\CategoriesLang;
-use Backend\Modules\Posts\Forms\CategoriesForm;
-use Backend\Modules\Posts\Forms\CategoriesLangForm;
+use Backend\Modules\Admins\Forms\CategoriesForm;
+use Backend\Modules\Admins\Forms\CategoriesLangForm;
 
 
 class CategoriesController  extends \BackendController {

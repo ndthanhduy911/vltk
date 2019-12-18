@@ -1,14 +1,19 @@
 <?php
-namespace Backend\Modules\Posts\Forms;
+namespace Backend\Modules\Admins\Forms;
 
+
+use Phalcon\Forms\Element\Email;
 use Phalcon\Forms\Element\Text;
+use Phalcon\Forms\Element\Textarea;
 use Phalcon\Forms\Element\Select;
 use Phalcon\Forms\Element\Hidden;
 use Phalcon\Forms\Form;
 use Phalcon\Validation\Validator\StringLength as StringLength;
 use Phalcon\Validation\Validator\PresenceOf;
-use Models\Attributes;
-class PagesForm extends Form
+
+use Models\Categories;
+
+class CategoriesForm extends Form
 {
     public function initialize($entity = null, $options = null)
     {
@@ -44,19 +49,7 @@ class PagesForm extends Form
         ));
         $this->add($status);
 
-        $attribute_id = new Select('attribute_id', Attributes::find(), [
-            'using' => array('id', 'title'),
-            'useEmpty' => true,
-            'emptyText' => 'Mặc định',
-            'emptyValue' => '',
-            'class' => 'form-control pull-right w-100',
-        ]);
-        $this->add($attribute_id);
-
         $featured_image = new Hidden('featured_image');
         $this->add($featured_image);
-
-        $deleted = new Hidden('deleted');
-        $this->add($deleted);
     }
 }

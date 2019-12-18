@@ -1,5 +1,5 @@
 <?php
-namespace Backend\Modules\Posts\Forms;
+namespace Backend\Modules\Admins\Forms;
 
 
 use Phalcon\Forms\Element\Email;
@@ -11,7 +11,7 @@ use Phalcon\Forms\Form;
 use Phalcon\Validation\Validator\StringLength as StringLength;
 use Phalcon\Validation\Validator\PresenceOf;
 
-class StaffLangForm extends Form
+class PartnerLangForm extends Form
 {
     public function initialize($entity = null, $options = null)
     {
@@ -34,6 +34,22 @@ class StaffLangForm extends Form
             ]),
         ));
         $this->add($title);
+
+        $excerpt = new Textarea('excerpt');
+        $excerpt->setAttributes(array(
+            'class' => 'form-control',
+            'placeholder' => 'Tóm tắt',
+            'maxlength' => "255",
+            'data-error' => "Tóm tắt không đúng quy định.",
+            'rows' => 4
+        ));
+        $excerpt->addValidators(array(
+            new StringLength([
+                "max" => 255,
+                "messageMaximum" => "Tóm tắt không được dài quá 255 ký tự",
+            ]),
+        ));
+        $this->add($excerpt);
 
         $content = new Hidden('content');
         $this->add($content);

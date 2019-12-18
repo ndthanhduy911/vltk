@@ -1,5 +1,5 @@
 <?php
-namespace Backend\Modules\Posts\Controllers;
+namespace Backend\Modules\Admins\Controllers;
 
 class DashboardController  extends \BackendController {
 

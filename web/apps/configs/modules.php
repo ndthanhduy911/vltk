@@ -8,13 +8,9 @@ $application->registerModules(array(
         'className' => 'Backend\Modules\Account\Module',
         'path' => APP_DIR . '/websites/backend/modules/account/module.php'
     ),
-    'backend_posts' => array(
-        'className' => 'Backend\Modules\Posts\Module',
-        'path' => APP_DIR . '/websites/backend/modules/posts/module.php'
-    ),
-    'backend_pages' => array(
-        'className' => 'Backend\Modules\Pages\Module',
-        'path' => APP_DIR . '/websites/backend/modules/pages/module.php'
+    'backend_admins' => array(
+        'className' => 'Backend\Modules\Admins\Module',
+        'path' => APP_DIR . '/websites/backend/modules/admins/module.php'
     ),
     'backend_users' => array(
         'className' => 'Backend\Modules\Users\Module',

@@ -1,6 +1,6 @@
 <?php
 
-namespace Backend\Modules\Posts;
+namespace Backend\Modules\Admins;
 
 use Phalcon\Loader;
 use Phalcon\Mvc\View;
@@ -18,9 +18,9 @@ class Module implements ModuleDefinitionInterface
         $loader = new Loader();
 
         $loader->registerNamespaces(array(
-            'Backend\Modules\Posts\Controllers' => __DIR__ . '/controllers/',
-            'Backend\Modules\Posts\Models' => __DIR__ . '/models/',
-            'Backend\Modules\Posts\Forms' => __DIR__ . '/forms/',
+            'Backend\Modules\Admins\Controllers' => __DIR__ . '/controllers/',
+            'Backend\Modules\Admins\Models' => __DIR__ . '/models/',
+            'Backend\Modules\Admins\Forms' => __DIR__ . '/forms/',
         ));
         $loader->register();
     }
@@ -68,7 +68,7 @@ class Module implements ModuleDefinitionInterface
 
         $di->set('dispatcher' , function(){
             $dispatcher = new \Phalcon\Mvc\Dispatcher();
-            $dispatcher->setDefaultNamespace("Backend\Modules\Posts\Controllers\\");
+            $dispatcher->setDefaultNamespace("Backend\Modules\Admins\Controllers\\");
             return $dispatcher;
         });
 

@@ -1,10 +1,10 @@
 <?php
-namespace Backend\Modules\Posts\Controllers;
+namespace Backend\Modules\Admins\Controllers;
 use Models\Posts;
 use Models\PostsLang;
 use Models\Language;
-use Backend\Modules\Posts\Forms\PostsForm;
-use Backend\Modules\Posts\Forms\PostsLangForm;
+use Backend\Modules\Admins\Forms\PostsForm;
+use Backend\Modules\Admins\Forms\PostsLangForm;
 
 class PostsController  extends \BackendController {
 

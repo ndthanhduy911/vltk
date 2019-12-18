@@ -1,8 +1,8 @@
 <?php
-namespace Backend\Modules\Posts\Controllers;
+namespace Backend\Modules\Admins\Controllers;
 use Models\Language;
-use Backend\Modules\Posts\Forms\DepartmentsForm;
-use Backend\Modules\Posts\Forms\DepartmentsLangForm;
+use Backend\Modules\Admins\Forms\DepartmentsForm;
+use Backend\Modules\Admins\Forms\DepartmentsLangForm;
 use Models\Departments;
 use Models\DepartmentsLang;
 

@@ -1,5 +1,7 @@
 <?php
-namespace Backend\Modules\Posts\Forms;
+namespace Backend\Modules\Admins\Forms;
+
+
 use Phalcon\Forms\Element\Email;
 use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\Textarea;
@@ -9,14 +11,12 @@ use Phalcon\Forms\Form;
 use Phalcon\Validation\Validator\StringLength as StringLength;
 use Phalcon\Validation\Validator\PresenceOf;
 
-use Models\Categories;
-
-class CategoriesLangForm extends Form
+class StaffLangForm extends Form
 {
     public function initialize($entity = null, $options = null)
     {
-        $name = new Text('name');
-        $name->setAttributes(array(
+        $title = new Text('title');
+        $title->setAttributes(array(
             'class' => 'form-control',
             'placeholder' => 'Tiêu đề',
             'required' => '',
@@ -24,7 +24,7 @@ class CategoriesLangForm extends Form
             'maxlength' => "255",
             'data-error' => "Tiêu đề không đúng quy định.",
         ));
-        $name->addValidators(array(
+        $title->addValidators(array(
             new PresenceOf(array(
                 'message' => 'Tiêu đề không được bỏ trống.',
             )),
@@ -33,26 +33,13 @@ class CategoriesLangForm extends Form
                 "messageMaximum" => "Tiêu đề không được dài quá 255 ký tự",
             ]),
         ));
-        $this->add($name);
+        $this->add($title);
 
-        $description = new Textarea('description');
-        $description->setAttributes(array(
-            'class' => 'form-control',
-            'placeholder' => 'Mô tả',
-            'maxlength' => "255",
-            'data-error' => "Mô tả không đúng quy định.",
-            'rows' => 4
-        ));
-        $description->addValidators(array(
-            new StringLength([
-                "max" => 255,
-                "messageMaximum" => "Tóm tắt không được dài quá 255 ký tự",
-            ]),
-        ));
-        $this->add($description);
+        $content = new Hidden('content');
+        $this->add($content);
 
-        $cat_id = new Hidden('cat_id');
-        $this->add($cat_id);
+        $post_id = new Hidden('post_id');
+        $this->add($post_id);
 
         $lang_id = new Hidden('lang_id');
         $this->add($lang_id);

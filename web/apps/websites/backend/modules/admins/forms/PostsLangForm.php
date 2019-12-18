@@ -1,5 +1,5 @@
 <?php
-namespace Backend\Modules\Posts\Forms;
+namespace Backend\Modules\Admins\Forms;
 
 
 use Phalcon\Forms\Element\Email;
@@ -12,12 +12,14 @@ use Phalcon\Validation\Validator\StringLength as StringLength;
 use Phalcon\Validation\Validator\PresenceOf;
 use Phalcon\Validation\Validator\Date as DateValidator;
 
-class DepartmentsLangForm extends Form
+use Models\Categories;
+
+class PostsLangForm extends Form
 {
     public function initialize($entity = null, $options = null)
     {
-        $name = new Text('name');
-        $name->setAttributes(array(
+        $title = new Text('title');
+        $title->setAttributes(array(
             'class' => 'form-control',
             'placeholder' => 'Tiêu đề',
             'required' => '',
@@ -25,7 +27,7 @@ class DepartmentsLangForm extends Form
             'maxlength' => "255",
             'data-error' => "Tiêu đề không đúng quy định.",
         ));
-        $name->addValidators(array(
+        $title->addValidators(array(
             new PresenceOf(array(
                 'message' => 'Tiêu đề không được bỏ trống.',
             )),
@@ -34,35 +36,29 @@ class DepartmentsLangForm extends Form
                 "messageMaximum" => "Tiêu đề không được dài quá 255 ký tự",
             ]),
         ));
-        $this->add($name);
+        $this->add($title);
 
-        $description = new Textarea('description');
-        $description->setAttributes(array(
+        $excerpt = new Textarea('excerpt');
+        $excerpt->setAttributes(array(
             'class' => 'form-control',
-            'placeholder' => 'Giới thiệu',
+            'placeholder' => 'Tóm tắt',
             'maxlength' => "255",
-            'data-error' => "Giới thiệu",
+            'data-error' => "Tóm tắt không đúng quy định.",
             'rows' => 4
         ));
-        $this->add($description);
-
-        $address = new Text('address');
-        $address->setAttributes(array(
-            'class' => 'form-control',
-            'placeholder' => 'Địa chỉ',
-            'maxlength' => "255",
-            'data-error' => "Địa chỉ không đúng quy định.",
-        ));
-        $address->addValidators(array(
+        $excerpt->addValidators(array(
             new StringLength([
                 "max" => 255,
-                "messageMaximum" => "Địa chỉ không được dài quá 255 ký tự",
+                "messageMaximum" => "Tóm tắt không được dài quá 255 ký tự",
             ]),
         ));
-        $this->add($address);
+        $this->add($excerpt);
 
-        $dept_id = new Hidden('dept_id');
-        $this->add($dept_id);
+        $content = new Hidden('content');
+        $this->add($content);
+
+        $post_id = new Hidden('post_id');
+        $this->add($post_id);
 
         $lang_id = new Hidden('lang_id');
         $this->add($lang_id);

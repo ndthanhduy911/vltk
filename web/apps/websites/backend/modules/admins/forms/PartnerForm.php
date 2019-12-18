@@ -1,5 +1,5 @@
 <?php
-namespace Backend\Modules\Posts\Forms;
+namespace Backend\Modules\Admins\Forms;
 
 
 use Phalcon\Forms\Element\Email;
@@ -10,10 +10,8 @@ use Phalcon\Forms\Element\Hidden;
 use Phalcon\Forms\Form;
 use Phalcon\Validation\Validator\StringLength as StringLength;
 use Phalcon\Validation\Validator\PresenceOf;
-use Phalcon\Validation\Validator\Date as DateValidator;
-use Models\Categories;
 
-class BannerForm extends Form
+class PartnerForm extends Form
 {
     public function initialize($entity = null, $options = null)
     {
@@ -25,8 +23,8 @@ class BannerForm extends Form
         ));
         $link->addValidators(array(
             new StringLength([
-                "max" => 200,
-                "messageMaximum" => "Slug không được dài quá 255 ký tự",
+                "max" => 255,
+                "messageMaximum" => "Link không được dài quá 255 ký tự",
             ]),
         ));
         $this->add($link);
@@ -49,8 +47,8 @@ class BannerForm extends Form
         ));
         $this->add($status);
 
-        $image = new Hidden('image');
-        $this->add($image);
+        $featured_image = new Hidden('featured_image');
+        $this->add($featured_image);
 
         $deleted = new Hidden('deleted');
         $this->add($deleted);

@@ -1,5 +1,5 @@
 <?php
-namespace Backend\Modules\Posts\Forms;
+namespace Backend\Modules\Admins\Forms;
 
 
 use Phalcon\Forms\Element\Email;

@@ -1,8 +1,8 @@
 <?php
-namespace Backend\Modules\Posts\Controllers;
+namespace Backend\Modules\Admins\Controllers;
 use Models\Language;
-use Backend\Modules\Posts\Forms\BannerForm;
-use Backend\Modules\Posts\Forms\BannerLangForm;
+use Backend\Modules\Admins\Forms\BannerForm;
+use Backend\Modules\Admins\Forms\BannerLangForm;
 use Models\Banner;
 use Models\BannerLang;
 

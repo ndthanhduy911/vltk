@@ -1,10 +1,10 @@
 <?php
-namespace Backend\Modules\Posts\Controllers;
+namespace Backend\Modules\Admins\Controllers;
 use Models\Partner;
 use Models\PartnerLang;
 use Models\Language;
-use Backend\Modules\Posts\Forms\PartnerForm;
-use Backend\Modules\Posts\Forms\PartnerLangForm;
+use Backend\Modules\Admins\Forms\PartnerForm;
+use Backend\Modules\Admins\Forms\PartnerLangForm;
 
 class PartnerController  extends \BackendController {
 

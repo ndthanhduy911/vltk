@@ -1,10 +1,10 @@
 <?php
-namespace Backend\Modules\Posts\Controllers;
+namespace Backend\Modules\Admins\Controllers;
 use Models\Language;
 use Models\Home;
 use Models\HomeLang;
-use Backend\Modules\Posts\Forms\HomeForm;
-use Backend\Modules\Posts\Forms\HomeLangForm;
+use Backend\Modules\Admins\Forms\HomeForm;
+use Backend\Modules\Admins\Forms\HomeLangForm;
 
 class HomeController  extends \BackendController {
 

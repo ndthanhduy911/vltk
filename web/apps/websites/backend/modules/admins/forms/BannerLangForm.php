@@ -1,5 +1,5 @@
 <?php
-namespace Backend\Modules\Posts\Forms;
+namespace Backend\Modules\Admins\Forms;
 
 
 use Phalcon\Forms\Element\Email;
@@ -10,13 +10,14 @@ use Phalcon\Forms\Element\Hidden;
 use Phalcon\Forms\Form;
 use Phalcon\Validation\Validator\StringLength as StringLength;
 use Phalcon\Validation\Validator\PresenceOf;
+use Phalcon\Validation\Validator\Date as DateValidator;
 
-class PartnerLangForm extends Form
+class BannerLangForm extends Form
 {
     public function initialize($entity = null, $options = null)
     {
-        $title = new Text('title');
-        $title->setAttributes(array(
+        $name = new Text('name');
+        $name->setAttributes(array(
             'class' => 'form-control',
             'placeholder' => 'Tiêu đề',
             'required' => '',
@@ -24,7 +25,7 @@ class PartnerLangForm extends Form
             'maxlength' => "255",
             'data-error' => "Tiêu đề không đúng quy định.",
         ));
-        $title->addValidators(array(
+        $name->addValidators(array(
             new PresenceOf(array(
                 'message' => 'Tiêu đề không được bỏ trống.',
             )),
@@ -33,29 +34,23 @@ class PartnerLangForm extends Form
                 "messageMaximum" => "Tiêu đề không được dài quá 255 ký tự",
             ]),
         ));
-        $this->add($title);
+        $this->add($name);
 
-        $excerpt = new Textarea('excerpt');
-        $excerpt->setAttributes(array(
+        $description = new Textarea('description');
+        $description->setAttributes(array(
             'class' => 'form-control',
-            'placeholder' => 'Tóm tắt',
+            'placeholder' => 'Giới thiệu',
             'maxlength' => "255",
-            'data-error' => "Tóm tắt không đúng quy định.",
+            'data-error' => "Giới thiệu",
             'rows' => 4
         ));
-        $excerpt->addValidators(array(
-            new StringLength([
-                "max" => 255,
-                "messageMaximum" => "Tóm tắt không được dài quá 255 ký tự",
-            ]),
-        ));
-        $this->add($excerpt);
+        $this->add($description);
 
         $content = new Hidden('content');
         $this->add($content);
 
-        $post_id = new Hidden('post_id');
-        $this->add($post_id);
+        $banner_id = new Hidden('banner_id');
+        $this->add($banner_id);
 
         $lang_id = new Hidden('lang_id');
         $this->add($lang_id);
