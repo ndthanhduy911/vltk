@@ -156,8 +156,6 @@
 {% endif %}
 
 {% if partners %}
-<!-- section start liên kết-->
-<!-- ================ -->
 <section class="pt-5 pb-5 section dark-translucent-bg fixed-bg" style="background-position: 50% 42%; background-image: url({{ helper.getLinkImage(home.partner_bg, './assets/frontend/images/education-4.jpg') }})">
     {% if home['partner_title'] %}
     <div class="container pv-20">
@@ -184,7 +182,6 @@
         </div>
     </div>
 </section>
-<!-- section end liên kết-->
 {% endif %}
 
 <section id="section-5" class="section pv-40 stats padding-bottom-clear hovered">
