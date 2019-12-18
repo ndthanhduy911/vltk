@@ -18,19 +18,21 @@ class Menus extends \Phalcon\Mvc\Model
     
     public $type;
     
-    public $param_id;
+    public $post_id;
 
-    public $link;
+    public $page_id;
+
+    public $cat_id;
+    
+    public $dept;
+
+    public $links;
+
+    public $icon;
 
     public $parent_id;
-    
-    public $sort_other;
 
-    public $module;
-
-    public $controller;
-
-    public $action;
+    public $sort;
 
     public $status;
 
@@ -68,7 +70,7 @@ class Menus extends \Phalcon\Mvc\Model
                 break;
             } 
             case 5: {
-                return $menu->link;
+                return $menu->links;
                 break;
             }        
             default: {
@@ -81,5 +83,14 @@ class Menus extends \Phalcon\Mvc\Model
     public static function getName($menu_id, $lang_id = 1){
         $menu_lang = MenusLang::findFirst(['lang_id =:lang_id: AND menu_id = :menu_id:', 'bind'=>['lang_id' => $lang_id, 'menu_id' => $menu_id]]);
         return $menu_lang ? $menu_lang->name : '';
+    }
+
+    public static function findFirstId($id, $columns = "*")
+    {
+        return parent::findFirst([
+            "conditions" => "id = :id:",
+            "bind" => array('id' => $id),
+            "columns" => $columns
+        ]);
     }
 }

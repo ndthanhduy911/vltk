@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>{{ dept.name }} </title>
+    <title>{{ dept_lang.name }} </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Canonical SEO -->
     <link rel="canonical" href="<?= FRONTEND_URL ?>/" />
@@ -12,24 +12,24 @@
     <meta name="keywords" content="support, it, technical, physics, network, system">
     <meta name="description" content="Ho tro khach hang physics">
     <!-- Schema.org markup for Google+ -->
-    <meta itemprop="name" content="{{ dept.name }}">
-    <meta itemprop="description" content="{{ dept.name }}">
+    <meta itemprop="name" content="{{ dept_lang.name }}">
+    <meta itemprop="description" content="{{ dept_lang.name }}">
     <meta itemprop="image" content="{{ helper.getLinkImage(dept.logo, '/logo.png') }}">
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@hcmus.edu.vn">
-    <meta name="twitter:title" content="{{ dept.name }}">
-    <meta name="twitter:description" content="{{ dept.name }}">
+    <meta name="twitter:title" content="{{ dept_lang.name }}">
+    <meta name="twitter:description" content="{{ dept_lang.name }}">
     <meta name="twitter:creator" content="@hcmus.edu.vn">
     <meta name="twitter:image" content="{{ helper.getLinkImage(dept.logo, '/logo.png') }}">
     <!-- Open Graph data -->
     <meta property="fb:app_id" content="655968634437471">
-    <meta property="og:title" content="{{ dept.name }}" />
+    <meta property="og:title" content="{{ dept_lang.name }}" />
     <meta property="og:type" content="article" />
     <meta property="og:url" content="<?= FRONTEND_URL ?>/" />
     <meta property="og:image" content="{{ helper.getLinkImage(dept.logo, '/logo.png') }}" />
-    <meta property="og:description" content="{{ dept.name }}" />
-    <meta property="og:site_name" content="{{ dept.name }}" />
+    <meta property="og:description" content="{{ dept_lang.name }}" />
+    <meta property="og:site_name" content="{{ dept_lang.name }}" />
 
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="76x76" href="{{ helper.getLinkImage(dept.icon, '/favicon.ico') }}" />

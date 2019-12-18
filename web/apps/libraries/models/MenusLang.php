@@ -5,29 +5,11 @@ class MenusLang extends \Phalcon\Mvc\Model
 {
     public $id;
     
-    public $type;
+    public $menu_id;
     
-    public $param_id;
+    public $name;
 
-    public $link;
-
-    public $icon;
-
-    public $parent_id;
-    
-    public $module;
-
-    public $controller;
-
-    public $action;
-
-    public $slug;
-    
-    public $status;
-
-    public $created_at;
-
-    public $updated_at;
+    public $lang_id;
 
     public function getSource()
     {
@@ -35,6 +17,6 @@ class MenusLang extends \Phalcon\Mvc\Model
     }
 
     public static function getNamepace (){
-        return 'Models\Banners';
+        return 'Models\MenusLang';
     }
 }

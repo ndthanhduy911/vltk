@@ -92,17 +92,17 @@
     </div>
     <?php } ?>
     <div class="row mb-4 mr-0 ml-0">
-        <?php foreach ($depts as $dept) { ?>
+        <?php foreach ($depts as $dept_item) { ?>
         <div class="col-lg-3 col-md-6 isotope-item">
             <div class="image-box shadow-2 bordered text-center mb-20">
                 <div class="overlay-container rounded overlay-visible">
-                    <img src="<?= $this->helper->getLinkImage($dept->image) ?>"
-                        alt="<?= $dept->dept_name ?>">
-                    <a href="<?= constant('FRONTEND_URL') . '/' . $dept->slug ?>" class="overlay-link"><i
+                    <img src="<?= $this->helper->getLinkImage($dept_item->image) ?>"
+                        alt="<?= $dept_item->dept_name ?>">
+                    <a href="<?= constant('FRONTEND_URL') . '/' . $dept_item->slug ?>" class="overlay-link"><i
                             class="fa fa-graduation-cap"></i></a>
                     <div class="overlay-bottom hidden-xs">
                         <div class="text">
-                            <?= $dept->dept_name ?>
+                            <?= $dept_item->dept_name ?>
                         </div>
                     </div>
                 </div>
@@ -128,7 +128,7 @@
             </div>
         </div>
         <?php } ?>
-        <div class="row pv-20">
+        <div class="row pv-20 d-md-flex justify-content-center">
             <?php foreach ($staffs as $staff) { ?>
             <div class="col-md-4">
                 <div class="image-box team-member shadow-2 mb-20">

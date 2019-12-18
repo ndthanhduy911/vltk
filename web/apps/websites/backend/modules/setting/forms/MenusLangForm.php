@@ -1,5 +1,7 @@
 <?php
 namespace Backend\Modules\Setting\Forms;
+
+
 use Phalcon\Forms\Element\Email;
 use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\Textarea;
@@ -8,10 +10,9 @@ use Phalcon\Forms\Element\Hidden;
 use Phalcon\Forms\Form;
 use Phalcon\Validation\Validator\StringLength as StringLength;
 use Phalcon\Validation\Validator\PresenceOf;
+use Phalcon\Validation\Validator\Date as DateValidator;
 
-use Models\Menu;
-
-class MenuLangForm extends Form
+class MenusLangForm extends Form
 {
     public function initialize($entity = null, $options = null)
     {
@@ -35,24 +36,8 @@ class MenuLangForm extends Form
         ));
         $this->add($name);
 
-        $description = new Textarea('description');
-        $description->setAttributes(array(
-            'class' => 'form-control',
-            'placeholder' => 'Mô tả',
-            'maxlength' => "255",
-            'data-error' => "Mô tả không đúng quy định.",
-            'rows' => 4
-        ));
-        $description->addValidators(array(
-            new StringLength([
-                "max" => 255,
-                "messageMaximum" => "Tóm tắt không được dài quá 255 ký tự",
-            ]),
-        ));
-        $this->add($description);
-
-        $cat_id = new Hidden('cat_id');
-        $this->add($cat_id);
+        $menu_id = new Hidden('menu_id');
+        $this->add($menu_id);
 
         $lang_id = new Hidden('lang_id');
         $this->add($lang_id);

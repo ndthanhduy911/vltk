@@ -1,15 +1,15 @@
 <?php
 
 namespace Backend\Modules\Setting\Controllers;
-use Phalcon\Mvc\View;
 
 use Models\Menus;
 use Models\MenusLang;
 use Models\MenuLocation;
+use Models\Language;
+
 
 use Backend\Modules\Setting\Forms\MenusForm;
 use Backend\Modules\Setting\Forms\MenusLangForm;
-use Backend\Modules\Setting\Forms\MenuLocationForm;
 
 class MenusController  extends \BackendController
 {
@@ -18,84 +18,73 @@ class MenusController  extends \BackendController
         $this->view->menu_location = MenuLocation::find(["dept_id = {$this->session->get('dept_id')}"]);
     }
 
-    public function locationAction(){
-        $this->get_js_css();
-        // $this->view->form = new UserForm();
-    }
-
-    public function updateAction($id = 0){
+    public function updateAction($location_id = 0){
         $forms_lang = [];
-        $cats_lang = [];
+        $menus_lang = [];
         $languages = Language::find(['status = 1']);
+        $dept_id = $this->session->get('dept_id');
+        $id = $this->request->get('id');
         if($id){
-            if(!$category = Categories::findFirstId($id)){
+            if(!$menu = Menus::findFirst(["id = $id AND menu_location_id = $location_id AND dept_id = $dept_id"])){
                 echo 'Không tìm thấy dữ liệu'; die;
             }
-            $category->updated_at = date('Y-m-d H:i:s');
+            $menu->updated_at = date('Y-m-d H:i:s');
             $title = 'Cập nhật';
             foreach ($languages as $key => $lang) {
-                $cat_lang = CategoriesLang::findFirst(['cat_id = :id: AND lang_id = :lang_id:','bind' => ['id' => $category->id, 'lang_id' => $lang->id]]);
-                if($cat_lang){
-                    $form_lang = new CategoriesLangForm($cat_lang);
-                    $cats_lang[$lang->id] = $cat_lang;
+                $menu_lang = MenusLang::findFirst(['menu_id = :id: AND lang_id = :lang_id:','bind' => ['id' => $menu->id, 'lang_id' => $lang->id]]);
+                if($menu_lang){
+                    $form_lang = new MenusLangForm($menu_lang);
+                    $menus_lang[$lang->id] = $menu_lang;
                     $forms_lang[$lang->id] = $form_lang;
                 }else{
                     echo 'Nội dung không phù hợp'; die;
                 }
             }
-            $form_cat = new CategoriesForm($category);   
+            $form_menu = new MenusForm($menu);   
         }else{
-            $category = new Categories();
-            $category->author = $this->session->get('user_id');
-            $category->dept_id = $this->session->get('dept_id');
-            $category->created_at = date('Y-m-d H:i:s');
-            $category->updated_at = $category->created_at;
+            $menu = new Menus();
+            $menu->created_at = date('Y-m-d H:i:s');
+            $menu->updated_at = $menu->created_at;
             $title = 'Thêm mới';
             foreach ($languages as $key => $lang) {
-                $forms_lang[$lang->id] = new CategoriesLangForm();
-                $cats_lang[$lang->id] = new CategoriesLang();
+                $forms_lang[$lang->id] = new MenusLangForm();
+                $menus_lang[$lang->id] = new MenusLang();
             }
-            $form_cat = new CategoriesForm($category);
+            $form_menu = new MenusForm($menu);
         }
         if ($this->request->isPost()) {
-            // if ($this->security->checkToken()) {
-                // $data['token'] = ['key' => $this->security->getTokenKey(), 'value' => $this->security->getToken()];
+            if ($this->security->checkToken()) {
                 $error = [];
-                $c_name = $this->request->getPost('name');
-                $c_slug = $this->request->getPost('slug');
-                $c_description = $this->request->getPost('description');
-                $req_cat = [
-                    'slug' => $c_slug ? $c_slug : $this->helper->slugify($c_name[1]),
-                    'featured_image' => $this->request->getPost('featured_image'),
+                $m_name = $this->request->getPost('name');
+                $req_menu = [
+                    'dept_id' => $menu->dept_id ? $menu->dept_id : $dept_id,
+                    'menu_location_id' => $location_id,
+                    'type' => $this->request->getPost('type'),
+                    'status' => $this->request->getPost('status'),
+                    'post_id' => $this->request->getPost('post_id'),
+                    'page_id' => $this->request->getPost('page_id'),
+                    'cat_id' => $this->request->getPost('cat_id'),
+                    'dept' => $this->request->getPost('dept'),
+                    'links' => $this->request->getPost('links'),
+                    'icon' => $this->request->getPost('icon'),
+                    'parent_id' => $this->request->getPost('parent_id'),
+                    'sort' => $this->request->getPost('sort'),
                     'status' => $this->request->getPost('status'),
                 ];
                 
-                $form_cat->bind($req_cat, $category);
-                if (!$form_cat->isValid()) {
-                    foreach ($form_cat->getMessages() as $message) {
+                $form_menu->bind($req_menu, $menu);
+                if (!$form_menu->isValid()) {
+                    foreach ($form_menu->getMessages() as $message) {
                         array_push($error, $message->getMessage());
                     }
                 }
 
-                $check_slug = Categories::findFirst([
-                    "slug = :slug: AND id != :id:",
-                    "bind" => [
-                        "slug" => $req_cat['slug'],
-                        'id'    => $id,
-                    ]
-                ]);
-
-                if($check_slug){
-                    $req_cat['slug'] = $req_cat['slug'] .'-'. strtotime('now'); 
-                }
-
                 foreach ($languages as $key => $lang) {
-                    $req_cat_lang[$lang->id] = [
-                        'name' => $c_name[$lang->id],
-                        'description' => $c_description[$lang->id],
+                    $req_menu_lang[$lang->id] = [
+                        'name' => $m_name[$lang->id],
                         'lang_id' => $lang->id,
                     ];
-                    $forms_lang[$lang->id]->bind($req_cat_lang[$lang->id], $cats_lang[$lang->id]);
+                    $forms_lang[$lang->id]->bind($req_menu_lang[$lang->id], $menus_lang[$lang->id]);
                     if (!$forms_lang[$lang->id]->isValid()) {
                         foreach ($forms_lang[$lang->id]->getMessages() as $message) {
                             array_push($error, $message->getMessage());
@@ -104,75 +93,15 @@ class MenusController  extends \BackendController
                 }
 
                 if (!count($error)) {
-                    if (!$category->save()) {
-                        foreach ($category->getMessages() as $message) {
+                    if (!$menu->save()) {
+                        foreach ($menu->getMessages() as $message) {
                             $this->flashSession->error($message);
                         }
                     } else {
                         foreach ($languages as $key => $lang) {
-                            $cats_lang[$lang->id]->cat_id = $category->id;
-                            $cats_lang[$lang->id]->save();
+                            $menus_lang[$lang->id]->menu_id = $menu->id;
+                            $menus_lang[$lang->id]->save();
                         }
-                        $this->flashSession->success($title." thành công");
-                        return $this->response->redirect(BACKEND_URL.'/categories');
-                    }
-                }else{
-                    foreach ($error as $value) {
-                        $this->flashSession->error($value . ". ");
-                    }
-                }
-            // }else{
-            //     $this->flashSession->error("Token không chính xác");
-            // }
-        }
-        $this->view->languages = $languages;
-        $this->view->forms_lang = $forms_lang;
-        $this->view->form_cat = $form_cat;
-        $this->view->cats_lang = $cats_lang;
-        $this->view->title = $title;
-        $this->assets->addJs('/elfinder/js/require.min.js');
-        $this->get_js_css();
-    }
-    
-    public function updatelocationAction($id = 0){
-        if($id){
-            if(!$menu_location = MenuLocation::findFirstId($id)){
-                echo 'Không tìm thấy dữ liệu'; die;
-            }
-            $menu_location->updated_at = date('Y-m-d H:i:s');
-            $title = 'Cập nhật';
-            $form = new MenuLocationForm($menu_location);   
-        }else{
-            $menu_location = new MenuLocation();
-            $menu_location->dept_id = $this->session->get('dept_id');
-            $menu_location->created_at = date('Y-m-d H:i:s');
-            $menu_location->updated_at = $menu_location->created_at;
-            $title = 'Thêm mới';
-            $form = new MenuLocationForm($menu_location);
-        }
-        if ($this->request->isPost()) {
-            if ($this->security->checkToken()) {
-                $data['token'] = ['key' => $this->security->getTokenKey(), 'value' => $this->security->getToken()];
-                $error = [];
-                $req = [
-                    'name' => $this->request->getPost('name'),
-                    'description' => $this->request->getPost('description'),
-                    'status' => $this->request->getPost('status'),
-                ];
-                
-                $form->bind($req, $menu_location);
-                if (!$form->isValid()) {
-                    foreach ($form->getMessages() as $message) {
-                        array_push($error, $message->getMessage());
-                    }
-                }
-
-                if (!count($error)) {
-                    if (!$menu_location->save()) {
-                        foreach ($menu_location->getMessages() as $message) {
-                            $this->flashSession->error($message);
-                        }
-                    } else {
                         $this->flashSession->success($title." thành công");
                         return $this->response->redirect(BACKEND_URL.'/menu');
                     }
@@ -183,20 +112,26 @@ class MenusController  extends \BackendController
                 }
             }else{
                 $this->flashSession->error("Token không chính xác");
+                return $this->response->redirect(BACKEND_URL.'/menu');
             }
         }
-        $this->view->form = $form;
+        $this->view->location_id = $location_id;
+        $this->view->languages = $languages;
+        $this->view->forms_lang = $forms_lang;
+        $this->view->form_menu = $form_menu;
+        $this->view->menus_lang = $menus_lang;
+        $this->view->menu = $menu;
         $this->view->title = $title;
+        $this->assets->addJs('/elfinder/js/require.min.js');
         $this->get_js_css();
     }
 
     public function deleteAction($id = null){
-        
-        if ($cat = Categories::findFirstId($id) && !in_array((int)$id, [1,2,3,4,5])) {
-            $cat->status = 4;
-            if (!$cat->save()) {
+        if ($menu = Menus::findFirstId($id) && !in_array((int)$id, [1,2,3,4,5])) {
+            $menu->status = 4;
+            if (!$menu->save()) {
                 if ($this->request->isAjax()) {
-                    foreach ($cat->getMessages() as $message) {
+                    foreach ($menu->getMessages() as $message) {
                         array_push($error, $message->getMessage());
                     }
                     $data['error'] = $error;
@@ -204,14 +139,14 @@ class MenusController  extends \BackendController
                     $this->response->setJsonContent($data);
                     return $this->response->send();
                 } else {
-                    foreach ($cat->getMessages() as $message) {
+                    foreach ($menu->getMessages() as $message) {
                         $this->flashSession->error($message);
                     }
                     return $this->response->redirect(BACKEND_URL.'/trashs');
                 }
             }else{
                 if ($this->request->isAjax()) {
-                    $data['data'] = $cat->toArray();
+                    $data['data'] = $menu->toArray();
                     $this->response->setStatusCode(200, 'OK');
                     $this->response->setJsonContent($data);
                     return $this->response->send();
@@ -258,7 +193,7 @@ class MenusController  extends \BackendController
             $npMenu.'.page_id',
             $npMenu.'.cat_id',
             $npMenu.'.dept',
-            $npMenu.'.link',
+            $npMenu.'.links',
             $npMenu.'.icon',
             $npMenu.'.parent_id',
             $npMenu.'.sort',
@@ -278,21 +213,22 @@ class MenusController  extends \BackendController
     }
 
     public function getdatachildAction($parent_id = 0){
-        // if(!$this->request->isAjax()){
-        //     $this->response->setStatusCode(403, 'Failed');
-        //     $this->response->setJsonContent(['Truy cập không được phép']);
-        //     return $this->response->send();
-        // }
+        if(!$this->request->isAjax()){
+            $this->response->setStatusCode(403, 'Failed');
+            $this->response->setJsonContent(['Truy cập không được phép']);
+            return $this->response->send();
+        }
         $npMenu = Menus::getNamepace();
         $data = $this->modelsManager->createBuilder()
         ->columns(array(
             $npMenu.'.id',
+            $npMenu.'.menu_location_id',
             $npMenu.'.type',
             $npMenu.'.post_id',
             $npMenu.'.page_id',
             $npMenu.'.cat_id',
             $npMenu.'.dept',
-            $npMenu.'.link',
+            $npMenu.'.links',
             $npMenu.'.icon',
             $npMenu.'.sort',
             $npMenu.'.status',
@@ -309,36 +245,6 @@ class MenusController  extends \BackendController
         $this->response->setJsonContent(['menus' => $data->toArray()]);
         return $this->response->send();
     }
-
-    public function getdatalocationAction(){
-        if($this->request->isAjax()){
-            $npMenu = MenuLocation::getNamepace();
-            $data = $this->modelsManager->createBuilder()
-            ->columns(array(
-                $npMenu.'.id',
-                $npMenu.'.name',
-                $npMenu.'.description',
-                $npMenu.'.status',
-                $npMenu.'.created_at'
-            ))
-            ->from($npMenu)
-            ->orderBy($npMenu.'.dept_id ASC, '.$npMenu.'.name ASC')
-            ->where("1 = 1");
-            if($this->session->get('role') !== 1){
-                $data = $data->andWhere("$npMenu.dept_id = :dept_id:",['dept_id' => $this->session->get('dept_id')]);
-            }
-    
-            $search = $npMenu.'.name LIKE :search:';
-            $this->response->setStatusCode(200, 'OK');
-            $this->response->setJsonContent($this->ssp->data_output($this->request->get(), $data,$search));
-            return $this->response->send();
-        }else{
-            $this->response->setStatusCode(403, 'Failed');
-            $this->response->setJsonContent(['Truy cập không được phép']);
-            return $this->response->send();
-        }
-    }
-
 
     // =================================
     // FUNCTION

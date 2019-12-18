@@ -86,16 +86,13 @@ const loadTableMenu = () => {
             "processing": true,
             "serverSide": true,
             "autoWidth": false,
-"pageLength": 25,
+            "pageLength": 25,
             "iDisplayLength": 'all',
             // "searching": false,
             "ajax": `${backendUrl}/menu/getdata${textGet}`,
             "columns": [
                 {
                     "data": "menu_name"
-                },
-                {
-                    "data": null
                 },
                 {
                     "data": "status"
@@ -111,12 +108,12 @@ const loadTableMenu = () => {
                 if(item.parent_id){
                     $('td:eq(0)', row).html('---'+item.menu_name);
                 }
-                $('td:eq(2)', row).html(showStatus(item.status));
-                $('td:eq(3)', row).html(`
-                    <a href="${backendUrl}/menu/update/${item.id}" class="fa fa-pencil btn btn-info btn-sm editMenu" title="Cập nhật"></a>
+                $('td:eq(1)', row).html(showStatus(item.status));
+                $('td:eq(2)', row).html(`
+                    <a href="${backendUrl}/menu/update/${item.menu_location_id}?id=${item.id}" class="fa fa-pencil btn btn-info btn-sm editMenu" title="Cập nhật"></a>
                 `);
 
-                $('td:eq(3)', row).append(`<a href="#" data-href="${backendUrl}/menu/delete/${item.id}" class="fa fa-trash btn btn-danger btn-sm deleteMenu" title="Xóa"></a>`);
+                $('td:eq(2)', row).append(`<a href="#" data-href="${backendUrl}/menu/delete/${item.id}" class="fa fa-trash btn btn-danger btn-sm deleteMenu" title="Xóa"></a>`);
 
                 $.ajax({
                     type: "GET",
@@ -128,13 +125,13 @@ const loadTableMenu = () => {
                         menus.forEach(menu => {
                             let newRow = $(row).clone();
                             $(newRow).removeClass('bg-warning text-white');
-                            $('td:eq(2)', newRow).html(showStatus(menu.status));
-                            $('td:eq(3)', newRow).html(`
-                                <a href="${backendUrl}/menu/update/${menu.id}" class="fa fa-pencil btn btn-info btn-sm editMenu" title="Cập nhật"></a>
+                            $('td:eq(1)', newRow).html(showStatus(menu.status));
+                            $('td:eq(2)', newRow).html(`
+                                <a href="${backendUrl}/menu/update/${menu.menu_location_id}?id=${menu.id}" class="fa fa-pencil btn btn-info btn-sm editMenu" title="Cập nhật"></a>
                             `);
                             $('td:eq(0)', newRow).html('---'+menu.menu_name);
             
-                            $('td:eq(3)', newRow).append(`<a href="#" data-href="${backendUrl}/menu/delete/${menu.id}" class="fa fa-trash btn btn-danger btn-sm deleteMenu" title="Xóa"></a>`);
+                            $('td:eq(2)', newRow).append(`<a href="#" data-href="${backendUrl}/menu/delete/${menu.id}" class="fa fa-trash btn btn-danger btn-sm deleteMenu" title="Xóa"></a>`);
                             $(newRow).insertAfter(row);
                         });
                     }
@@ -159,12 +156,15 @@ const loadTableMenu = () => {
                 }
             }
         });
+        
         showConfrimDelete('.deleteMenu',()=>{
             dt.draw();
-        })
+        });
+        
         $('#menuLocationId').change(function (e) { 
             e.preventDefault();
             let data = formSearch.serializeArray();
+            $('#addMenu').attr('href',`${backendUrl}/menu/update/${$(this).val()}`);
             textGet = "?";
             data.forEach((element, index) => {
                 textGet += `${index !== 0 ?'&':''}${element.name}=${element.value}`
@@ -180,4 +180,29 @@ loadTableMenu();
 loadTableMenuLocation();
 
 changeTitleToSlug('#title', '#slug');
+
+$('#frmMenus .typeSeleted.hidden').find('select, input').attr('disabled', true).attr('required', false);
+
+$('#frmMenus #type').change(function (e) { 
+    e.preventDefault();
+    let type = $(this).val();
+    $(`#frmMenus .typeSeleted[data-type="${type}"]`).removeClass('hidden').find('select, input').attr('disabled', false).attr('required', true);
+    $(`#frmMenus .typeSeleted:not([data-type="${type}"])`).addClass('hidden').find('select, input').attr('disabled', true).attr('required', false);
+});
+
+$("#post_id").select2({
+    placeholder: "Chọn bài viết",
+});
+
+$("#page_id").select2({
+    placeholder: "Chọn trang",
+});
+
+$("#cat_id").select2({
+    placeholder: "Chọn danh mục",
+});
+
+$("#depts").select2({
+    placeholder: "Chọn bộ môn",
+});
 

@@ -3,6 +3,10 @@ body {
     overflow-x: hidden;
 }
 
+.hidden {
+    display: none !important;
+}
+
 .f-s-90 {
     font-size: 90%;
 }
@@ -58,4 +62,9 @@ body {
 .control-label {
     color: #1976D2;
     font-weight: 600;
+}
+
+.select2-container {
+    width: auto !important;
+    flex: 0 0 100%;
 }

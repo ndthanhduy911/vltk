@@ -25,7 +25,7 @@
                             </select>
                         </div>
                         <div class="col-md-6 text-right">
-                            <a id="addMenu" href="<?= $this->config->application->backendUri ?>/menu/update" title="Tạo" class="btn btn-success fa fa-plus pull-right"></a>
+                            <a id="addMenu" href="<?= $this->config->application->backendUri ?>/menu/update/<?= ($this->request->get('menu_location_id') ? $this->request->get('menu_location_id') : $menu_location[0]->id) ?>" title="Tạo" class="btn btn-success fa fa-plus pull-right"></a>
                         </div>
                     </div>
                 </form>
@@ -34,7 +34,6 @@
                         <thead>
                             <tr class="bg-primary">
                                 <th class="align-middle text-center text-white">Tên</th>
-                                <th class="align-middle text-center text-white">Link</th>
                                 <th class="align-middle text-center text-white">Trạng thái</th>
                                 <th class="align-middle text-center text-white">Thao tác</th>
                             </tr>

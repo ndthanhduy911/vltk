@@ -70,19 +70,19 @@
 </section>
 <?php } ?>
 
-<?php if ($staffs->count()) { ?>
+<?php if ($staffs) { ?>
 <section class="clearfix pt-5 pb-5">
     <div class="container">
-        <?php if ($staff_info['name']) { ?>
+        <?php if ($home['staff_title']) { ?>
         <div class="row justify-content-lg-center pv-20">
             <div class="col-lg-8">
-                <h2 class="page-title text-center"><strong><?= $staff_info['name'] ?></strong></h2>
+                <h2 class="page-title text-center"><strong><?= $home['staff_title'] ?></strong></h2>
                 <div class="separator"></div>
-                <p class="lead text-center"><?= $staff_info['des'] ?></p>
+                <p class="lead text-center"><?= $home['staff_des'] ?></p>
             </div>
         </div>
         <?php } ?>
-        <div class="slick-carousel carousel-autoplay pv-20">
+        <div class="row pv-20 d-md-flex justify-content-center">
             <?php foreach ($staffs as $staff) { ?>
             <div class="col-md-4">
                 <div class="image-box team-member shadow-2 mb-20">
@@ -93,8 +93,7 @@
                             <div class="text p-0">
                                 <h4 class="title text-white text-uppercase"><?= $staff->title ?></h4>
                                 <div class="separator light"></div>
-                                <p class="small margin-clear"><em><?= $this->helper->getDean($staff->dean) ?></em>
-                                </p>
+                                <p class="small margin-clear"><em><?= $this->helper->getDean($staff->dean) ?></em></p>
                             </div>
                         </div>
                     </div>
@@ -103,7 +102,7 @@
             <?php } ?>
         </div>
         <div class="col-lg-12 text-center">
-            <a href="<?php echo FRONTEND_URL.'/staff' ?>" class="btn btn-default btn-lg btn-animated radius-50">Xem thêm <i class="fa fa-arrow-right"></i></a>
+            <a href="<?php echo FRONTEND_URL.'/staff' ?>" class="btn btn-default btn-lg btn-animated radius-50"><?= $this->ml->_ml_system('more', 'Xem thêm') ?> <i class="fa fa-arrow-right"></i></a>
         </div>
     </div>
 </section>
@@ -138,21 +137,28 @@
 </section>
 <?php } ?>
 
-<?php if ($contact_info['name']) { ?>
 <section id="section-5" class="section pv-40 stats padding-bottom-clear hovered">
     <div class="container">
         <div class="row justify-content-lg-center">
             <div class="col-lg-8 text-center pv-20">
-                <?php if ($contact_info['name']) { ?>
-                <h2 class="text-center"><?= $contact_info['name'] ?></h2>
-
+                <?php if ($home['contact_title']) { ?>
+                <h2 class="text-center"><?= $home['contact_title'] ?></h2>
                 <div class="separator"></div>
+                <p class="large text-center"><?= $home['contact_des'] ?></p>
                 <?php } ?>
-                <?php if ($contact_info['des']) { ?>
-                <?= $contact_info['des'] ?>
-                <?php } ?>
+
+                <ul class="list-inline mb-20 text-center">
+                    <li class="list-inline-item"><i class="text-default fa fa-map-marker pr-1"></i><?= $dept_lang->address ?></li>
+                    <li class="list-inline-item"><a href="tel: <?= $dept->phone ?>" class="link-dark"><i class="text-default fa fa-phone pl-10 pr-1"></i><?= $dept->phone ?></a></li>
+                    <li class="list-inline-item"><a href="mailto: <?= $dept->email ?>" class="link-dark"><i class="text-default fa fa-envelope-o pl-10 pr-1"></i><?= $dept->email ?></a></li>
+                </ul>
+                <div class="separator"></div>
+                <ul class="social-links circle animated-effect-1 margin-clear text-center space-bottom">
+                    <?php foreach ($socials as $social) { ?>
+                    <li class="<?= $social->name ?>"><a href="<?= $social->link ?>"><i class="fa <?= $social->icon ?>"></i></a></li>
+                    <?php } ?>
+                </ul>
             </div>
         </div>
     </div>
 </section>
-<?php } ?>
