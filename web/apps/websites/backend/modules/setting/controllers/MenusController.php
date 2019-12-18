@@ -240,11 +240,11 @@ class MenusController  extends \BackendController
     // API
     // =================================
     public function getdataAction(){
-        // if(!$this->request->isAjax()){
-        //     $this->response->setStatusCode(403, 'Failed');
-        //     $this->response->setJsonContent(['Truy cập không được phép']);
-        //     return $this->response->send();
-        // }
+        if(!$this->request->isAjax()){
+            $this->response->setStatusCode(403, 'Failed');
+            $this->response->setJsonContent(['Truy cập không được phép']);
+            return $this->response->send();
+        }
         $menu_location_id = $this->request->get('menu_location_id');
         $menu_location_id = $menu_location_id ? $menu_location_id : 0;
         $npMenu = Menus::getNamepace();
@@ -266,9 +266,10 @@ class MenusController  extends \BackendController
             'ML.name menu_name',
         ))
         ->from($npMenu)
+        ->where("$npMenu.parent_id is NULL AND $npMenu.deleted = 0 AND $npMenu.status = 1 AND $npMenu.menu_location_id = $menu_location_id")
         ->join('Models\MenusLang', 'ML.menu_id = '.$npMenu.'.id AND ML.lang_id = 1','ML')
-        ->orderBy("$npMenu.sort ASC, ML.name ASC")
-        ->where("$npMenu.parent_id is NULL AND $npMenu.deleted = 0 AND $npMenu.menu_location_id = $menu_location_id");
+        ->orderBy("$npMenu.sort ASC, $npMenu.id ASC");
+
 
         $search = "$npMenu.name LIKE :search:";
         $this->response->setStatusCode(200, 'OK');
