@@ -5,7 +5,7 @@
 			<div><p class="app-sidebar__user-name"><?php echo $this->session->get('username') ?></p><p class="app-sidebar__user-designation"><?php echo $this->session->get('name') ?></p></div>
 	</div>
 	<ul class="app-menu">
-		<li><a class="app-menu__item" href="#"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Bảng điều khiển</span></a></li>
+		<li><a class="app-menu__item" href="{{ config.application.backendUri }}/dashboard"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Bảng điều khiển</span></a></li>
 		<li class="treeview {% if dispatcher.getControllerName() in ['posts','categories'] %} {{ 'is-expanded' }}{% endif %}">
 			<a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-tags"></i><span class="app-menu__label">Bài viết</span><i class="treeview-indicator fa fa-angle-right"></i></a>
 			<ul class="treeview-menu">
@@ -20,7 +20,7 @@
 		<li><a class="app-menu__item {% if dispatcher.getControllerName()=='staff' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/staff"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Nhân sự</span></a></li>
 		<li><a class="app-menu__item {% if dispatcher.getControllerName()=='partner' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/partner"><i class="app-menu__icon fa fa-handshake-o"></i><span class="app-menu__label">Liên kết</span></a></li>
 		<li><a class="app-menu__item {% if dispatcher.getControllerName()=='home' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/home"><i class="app-menu__icon fa fa-home"></i><span class="app-menu__label">Trang chủ</span></a></li>
-		<li><a class="app-menu__item {% if dispatcher.getControllerName()=='menu' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/menu"><i class="app-menu__icon fa fa-link"></i><span class="app-menu__label">Menu</span></a></li>
+		<li><a class="app-menu__item {% if dispatcher.getControllerName()=='menus' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/menu"><i class="app-menu__icon fa fa-link"></i><span class="app-menu__label">Menu</span></a></li>
 		<li><a class="app-menu__item {% if dispatcher.getControllerName()=='users' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/users"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Tài khoản</span></a></li>
 		<li><a class="app-menu__item {% if dispatcher.getControllerName()=='departments' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/departments/update"><i class="app-menu__icon fa fa-cog"></i><span class="app-menu__label">Cài đặt</span></a></li>
 		<!-- <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-cogs"></i><span class="app-menu__label">Hệ thống</span><i class="treeview-indicator fa fa-angle-right"></i></a>

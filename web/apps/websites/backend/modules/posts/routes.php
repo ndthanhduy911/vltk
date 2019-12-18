@@ -1,6 +1,14 @@
 <?php
 /***********************PostsController***********************/
 
+$router->add($config->application->backendUri . '/dashboard', array(
+    'module' => 'backend_posts',
+    'controller' => 'dashboard',
+    'action' => 'index',
+));
+
+/***********************PostsController***********************/
+
 $router->add($config->application->backendUri . '/posts', array(
     'module' => 'backend_posts',
     'controller' => 'posts',

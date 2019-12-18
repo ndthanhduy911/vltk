@@ -76,7 +76,7 @@
                                 </div>
                             </div>
                             <div class="d-inline-block w-100 mb-2">
-                                <i class="fa fa-link"></i>
+                                
                                 <span class="text-primary">Link:</span>
                                 <div class="form-group mt-1">
                                     <div class="input-group">

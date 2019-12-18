@@ -31,7 +31,7 @@
                                 id="lang{{lang.id}}">
                                 <h5 class="text-primary font-weight-normal">Tên bộ môn</h5>
       
-                                <div class="form-group col-md-12 m-0">
+                                <div class="form-group">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text fa fa-header"></div>
@@ -42,7 +42,7 @@
                                 </div>
     
                                 <h5 class="text-primary font-weight-normal">Giới thiệu</h5>
-                                <div class="form-group col-md-12">
+                                <div class="form-group">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text fa fa-tags"></div>
@@ -53,7 +53,7 @@
                                 </div>
 
                                 <h5 class="text-primary font-weight-normal">Địa chỉ</h5>
-                                <div class="form-group col-md-12">
+                                <div class="form-group">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text fa fa-building-o"></div>

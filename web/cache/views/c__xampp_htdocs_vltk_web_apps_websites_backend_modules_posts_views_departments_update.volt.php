@@ -30,53 +30,36 @@
                             <div class="tab-pane fade <?= (!$key ? 'active show' : '') ?>"
                                 id="lang<?= $lang->id ?>">
                                 <h5 class="text-primary font-weight-normal">Tên bộ môn</h5>
-                                <div class="tile p-3">
-                                    <div class="modal-body p-0">
-                                        <div class="form-row">
-                                            <div class="form-group col-md-12 m-0">
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text fa fa-header"></div>
-                                                    </div>
-                                                    <?= $forms_lang[$lang->id]->render('name', ['id' => 'name' . $lang->id, 'name' => 'name[' . $lang->id . ']']) ?>
-                                                    <div class="invalid-tooltip"></div>
-                                                </div>
-                                            </div>
+      
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text fa fa-header"></div>
                                         </div>
+                                        <?= $forms_lang[$lang->id]->render('name', ['id' => 'name' . $lang->id, 'name' => 'name[' . $lang->id . ']']) ?>
+                                        <div class="invalid-tooltip"></div>
                                     </div>
                                 </div>
     
                                 <h5 class="text-primary font-weight-normal">Giới thiệu</h5>
-                                <div class="tile p-0">
-                                    <div class="modal-body pb-0">
-                                        <div class="form-row">
-                                            <div class="form-group col-md-12">
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text fa fa-tags"></div>
-                                                    </div>
-                                                    <?= $forms_lang[$lang->id]->render('description', ['id' => 'description' . $lang->id, 'name' => 'description[' . $lang->id . ']']) ?>
-                                                    <div class="invalid-tooltip"></div>
-                                                </div>
-                                            </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text fa fa-tags"></div>
                                         </div>
+                                        <?= $forms_lang[$lang->id]->render('description', ['id' => 'description' . $lang->id, 'name' => 'description[' . $lang->id . ']']) ?>
+                                        <div class="invalid-tooltip"></div>
                                     </div>
                                 </div>
 
                                 <h5 class="text-primary font-weight-normal">Địa chỉ</h5>
-                                <div class="tile p-0">
-                                    <div class="modal-body pb-0">
-                                        <div class="form-row">
-                                            <div class="form-group col-md-12">
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text fa fa-building-o"></div>
-                                                    </div>
-                                                    <?= $forms_lang[$lang->id]->render('address', ['id' => 'address' . $lang->id, 'name' => 'address[' . $lang->id . ']']) ?>
-                                                    <div class="invalid-tooltip"></div>
-                                                </div>
-                                            </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text fa fa-building-o"></div>
                                         </div>
+                                        <?= $forms_lang[$lang->id]->render('address', ['id' => 'address' . $lang->id, 'name' => 'address[' . $lang->id . ']']) ?>
+                                        <div class="invalid-tooltip"></div>
                                     </div>
                                 </div>
                             </div>
