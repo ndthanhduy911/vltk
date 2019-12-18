@@ -69,7 +69,7 @@
                 </div>
     
                 <div class="col-md-3 pr-0">
-                    <div class="tile p-3">
+                    <div class="tile p-3 mb-3">
                         <div class="row m-0">
                             <div class="col-md-12 p-0">
                                 <div class="d-inline-block w-100">
@@ -115,7 +115,7 @@
                     </div>
 
 
-                    <div class="tile p-3">
+                    <div class="tile p-3 mb-3">
                         <div class="row m-0">
                             <div class="col-md-12 p-0">
                                 <img id="showLogo" src="<?php echo $department->logo ? $department->logo : '' ?>" alt="" width="100%">
@@ -125,12 +125,22 @@
                         </div>
                     </div>
 
-                    <div class="tile p-3">
+                    <div class="tile p-3 mb-3">
                         <div class="row m-0">
                             <div class="col-md-12 p-0">
                                 <img id="showImg" src="<?php echo $department->image ? $department->image : '' ?>" alt="" width="100%">
                                 {{form_department.render('image')}}
                                 <a id="uploadImage" href="#" class="link">Đặt ảnh đại diện</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tile p-3 mb-3">
+                        <div class="row m-0">
+                            <div class="col-md-12 p-0">
+                                <img id="showIcon" src="<?php echo $department->icon ? $department->icon : '' ?>" alt="" width="100%">
+                                    {{form_department.render('logo')}}
+                                <a id="uploadIcon" href="#" class="link">Đặt ảnh favicon</a>
                             </div>
                         </div>
                     </div>

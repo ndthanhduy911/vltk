@@ -101,6 +101,9 @@ class DepartmentsForm extends Form
         $logo = new Hidden('logo');
         $this->add($logo);
 
+        $icon = new Hidden('icon');
+        $this->add($icon);
+
         $post_connect = new Hidden('post_connect');
         $this->add($post_connect);
 

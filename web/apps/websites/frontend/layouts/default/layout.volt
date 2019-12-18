@@ -93,9 +93,9 @@
 <!-- jQuery Revolution Slider  -->
 <script src="<?php echo FRONTEND_URL ?>/assets/frontend/plugins/rs-plugin-5/js/jquery.themepunch.tools.min.js"></script>
 <script src="<?php echo FRONTEND_URL ?>/assets/frontend/plugins/rs-plugin-5/js/jquery.themepunch.revolution.min.js"></script>
-<script type="text/javascript" src="<?php echo FRONTEND_URL ?>/assets/frontend/plugins/rs-plugin-5/js/extensions/revolution.extension.slideanims.min.js"></script>
-<script type="text/javascript" src="<?php echo FRONTEND_URL ?>/assets/frontend/plugins/rs-plugin-5/js/extensions/revolution.extension.layeranimation.min.js"></script>
-<script type="text/javascript" src="<?php echo FRONTEND_URL ?>/assets/frontend/plugins/rs-plugin-5/js/extensions/revolution.extension.navigation.min.js"></script>
+<script src="<?php echo FRONTEND_URL ?>/assets/frontend/plugins/rs-plugin-5/js/extensions/revolution.extension.slideanims.min.js"></script>
+<script src="<?php echo FRONTEND_URL ?>/assets/frontend/plugins/rs-plugin-5/js/extensions/revolution.extension.layeranimation.min.js"></script>
+<script src="<?php echo FRONTEND_URL ?>/assets/frontend/plugins/rs-plugin-5/js/extensions/revolution.extension.navigation.min.js"></script>
 <!-- Isotope javascript -->
 <script src="<?php echo FRONTEND_URL ?>/assets/frontend/plugins/isotope/imagesloaded.pkgd.min.js"></script>
 <script src="<?php echo FRONTEND_URL ?>/assets/frontend/plugins/isotope/isotope.pkgd.min.js"></script>
