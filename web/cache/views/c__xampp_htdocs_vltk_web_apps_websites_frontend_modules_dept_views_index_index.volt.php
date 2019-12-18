@@ -196,6 +196,17 @@
                 <div class="separator"></div>
                 <p class="large text-center"><?= $home['contact_des'] ?></p>
                 <?php } ?>
+                <ul class="list-inline mb-20 text-center">
+                    <li class="list-inline-item"><i class="text-default fa fa-map-marker pr-1"></i><?= $dept_lang->address ?></li>
+                    <li class="list-inline-item"><a href="tel: <?= $dept->phone ?>" class="link-dark"><i class="text-default fa fa-phone pl-10 pr-1"></i><?= $dept->phone ?></a></li>
+                    <li class="list-inline-item"><a href="mailto: <?= $dept->email ?>" class="link-dark"><i class="text-default fa fa-envelope-o pl-10 pr-1"></i><?= $dept->email ?></a></li>
+                </ul>
+                <div class="separator"></div>
+                <ul class="social-links circle animated-effect-1 margin-clear text-center space-bottom">
+                    <?php foreach ($socials as $social) { ?>
+                    <li class="<?= $social->name ?>"><a href="<?= $social->link ?>"><i class="fa <?= $social->icon ?>"></i></a></li>
+                    <?php } ?>
+                </ul>
             </div>
         </div>
     </div>

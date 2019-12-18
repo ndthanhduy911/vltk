@@ -128,8 +128,17 @@
     
                     <div class="tile p-3">
                         <div class="row m-0">
-                            <!-- <h5 class="font-weight-bold text-primary w-100">Tin tức</h5>
-                            <div class="animated-checkbox mb-3">
+                            <h5 class="font-weight-bold text-primary w-100">Tin tức</h5>
+
+                                
+                            <div class="w-100 form-group mb-3">
+                                <div class="input-group">
+                                    <?= $form_home->render('cat_list') ?>
+                                    <div class="invalid-tooltip"></div>
+                                </div>
+                            </div>
+
+                            <!-- <div class="animated-checkbox mb-3">
                                 <label class="m-0">
                                     <input name="post_connect" type="checkbox"><span class="label-text">Liên kết bài viết với Khoa</span>
                                 </label>
@@ -137,15 +146,15 @@
 
                             <h5 class="font-weight-bold text-primary w-100"><?= ($dept_id == 1 ? 'Bộ môn' : 'Hướng nghiên cứu') ?></h5>
                             <div class="w-100 mb-3">
-                                <img id="showImgSpecializedBg" src="" alt="" class="w-100">
-                                <input type="hidden" id="specialized_bg" name="specialized_bg">
+                                <img id="showImgSpecializedBg" src="<?php echo $home->specialized_bg ? $home->specialized_bg : '' ?>" alt="" class="w-100">
+                                <?= $form_home->render('specialized_bg') ?>
                                 <a id="uploadImageSpecializedBg" href="#" class="link">Đặt ảnh nền <?= ($dept_id == 1 ? 'bộ môn' : 'hướng nghiên cứu') ?></a>
                             </div>
 
                             <h5 class="font-weight-bold text-primary w-100">Liên kết</h5>
                             <div class="w-100 mb-3">
-                                <img id="showImgPartnerBg" src="" alt="" class="w-100">
-                                <input type="hidden" id="partner_bg" name="partner_bg">
+                                <img id="showImgPartnerBg" src="<?php echo $home->partner_bg ? $home->partner_bg : '' ?>" alt="" class="w-100">
+                                <?= $form_home->render('partner_bg') ?>
                                 <a id="uploadImagePartnerBg" href="#" class="link">Đặt ảnh nền <?= ($dept_id == 1 ? 'bộ môn' : 'hướng nghiên cứu') ?></a>
                             </div>
 

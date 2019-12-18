@@ -92,6 +92,7 @@ class HomeController  extends \BackendController {
                 }
             }else{
                 $this->flashSession->error("Token không chính xác");
+                return $this->response->redirect(BACKEND_URL.'/home');
             }
         }
 

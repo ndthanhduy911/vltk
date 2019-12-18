@@ -22,7 +22,7 @@ class DeptController extends \FrontendController
             $this->view->title = '404';
             $this->view->slug = "";
             $this->view->dept_id = 1;
-            $this->view->dept = Departments::findFrist(1);
+            $this->view->dept = Departments::findFirst(1);
             $this->view->dept_lang = DepartmentsLang::findFirst(['dept_id = :dept_id: AND lang_id = :lang_id:','bind' => ['dept_id' => 1, 'lang_id' => $lang_id]]);
             return $this->view->pick('templates/404');
         }

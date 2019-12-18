@@ -34,7 +34,7 @@ class HomeForm extends Form
 
         $cat_list = new Select('cat_list', $cats, array(
             'using' => array('id', 'name'),
-            'class' => 'form-control pull-right w-100',
+            'class' => 'form-control pull-right',
             'data-error' => "Chưa đúng định dạng",
             'name' => 'cat_list[]',
             'multiple' => true

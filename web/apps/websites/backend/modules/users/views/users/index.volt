@@ -68,10 +68,7 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label class="control-label">Bộ môn </label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text fa fa-building"></div>
-                                </div>
+                            <div class="input-group d-flex">
                                 {{form.render('dept_id')}}
                                 <div class="invalid-tooltip"></div>
                             </div>
