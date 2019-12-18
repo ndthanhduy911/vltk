@@ -1,4 +1,10 @@
 <?php
+$router->add($config->application->backendUri, array(
+    'module' => 'backend_admins',
+    'controller' => 'dashboard',
+    'action' => 'index',
+));
+
 /***********************PostsController***********************/
 
 $router->add($config->application->backendUri . '/dashboard', array(
