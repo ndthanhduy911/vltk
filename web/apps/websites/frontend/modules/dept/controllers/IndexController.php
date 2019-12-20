@@ -8,8 +8,6 @@ use Models\Home;
 use Models\Staff;
 use Models\Partner;
 use Models\Banner;
-use Models\DepartmentsLang;
-use Models\Link;
 use Models\Social;
 
 class IndexController extends \FrontendController
@@ -39,11 +37,6 @@ class IndexController extends \FrontendController
         ->limit(1)
         ->getQuery()
         ->execute();
-
-        $this->view->slug = '';
-        $this->view->dept_id = 1;
-        $this->view->dept = Departments::findFirstId(1);
-        $this->view->dept_lang = DepartmentsLang::findFirst(['dept_id = :dept_id: AND lang_id = :lang_id:','bind' => ['dept_id' => 1, 'lang_id' => $lang_id]]);
         if(!$homeSetting->count()){
             $this->view->title = '404';
             return $this->view->pick('templates/404');

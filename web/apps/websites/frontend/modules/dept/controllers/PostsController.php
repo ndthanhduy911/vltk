@@ -10,7 +10,9 @@ use Models\PostsLang;
 class PostsController extends \FrontendController
 {
     public function indexAction(){
-        $this->view->title = 'Tin tức';
+        $dept = $this->dispatcher->getReturnedValue();
+        $lang_id = $this->session->get('lang_id');
+
         $current_page = (int)$this->request->get('page');
         $posts = Posts::find([
             'dept_id = 1',
@@ -18,30 +20,20 @@ class PostsController extends \FrontendController
             'limit' => 10,
         ]);
         $paging = $this->helper->getPaging(Posts::find(['dept_id = 1 AND status = 1'])->count(), $current_page);
+        $this->view->title = 'Tin tức';
         $this->view->posts = $posts;
         $this->view->paging = $paging;
-        $this->view->dept_id = $dept_id;
+        $this->view->dept_id = $dept->id;
         $this->view->pick('templates/blog');
     }
 
     public function singleAction($slug1 = null, $slug2 = null){
         $slug1 = $this->helper->slugify($slug1);
         $slug2 = $this->helper->slugify($slug2);
+        $dept = $this->dispatcher->getReturnedValue();
         $lang_id = $this->session->get('lang_id');
-        $dept_id = $slug2 ? (($dept = Departments::getBySlug($slug1)) ? $dept->id : NULL ): 1;
-        $dept = !empty($dept) ? $dept : Departments::findFirstId(1);
-        $dept_lang = DepartmentsLang::findFirst(['dept_id = :dept_id: AND lang_id = :lang_id:','bind' => ['dept_id' => $dept->id, 'lang_id' => $lang_id]]);
-        $this->view->slug = $dept_id === 1 ? '' : $slug1;
-        $this->view->dept_id = $dept_id;
-        $this->view->dept = $dept;
-        $this->view->dept_lang = $dept_lang;
-        if(!$dept_id){
-            $this->view->title = '404';
-            return $this->view->pick('templates/404');
-        }
-        $slug = $dept_id === 1 ? $slug1 : $slug2;
-        $this->view->dept_id = $dept_id;
-        if(!$post = Posts::findFirst(["status = 1 AND slug = :slug: AND dept_id = $dept_id", 'bind' => ['slug' => $slug]])){
+        $slug = (int)$dept->id === 1 ? $slug1 : $slug2;
+        if(!$post = Posts::findFirst(["status = 1 AND slug = :slug: AND dept_id = $dept->id", 'bind' => ['slug' => $slug]])){
             $this->view->title = '404';
             return $this->view->pick('templates/404');
         }
@@ -58,21 +50,16 @@ class PostsController extends \FrontendController
     public function categoryAction($slug1 = null, $slug2 = null){
         $slug1 = $this->helper->slugify($slug1);
         $slug2 = $this->helper->slugify($slug2);
+        $dept = $this->dispatcher->getReturnedValue();
         $lang_id = $this->session->get('lang_id');
-        $dept_id = $slug2 ? (($dept = Departments::getBySlug($slug1)) ? $dept->id : NULL ): 1;
-        $dept = !empty($dept) ? $dept : Departments::findFirstId(1);
-        $dept_lang = DepartmentsLang::findFirst(['dept_id = :dept_id: AND lang_id = :lang_id:','bind' => ['dept_id' => $dept->id, 'lang_id' => $lang_id]]);
-        $this->view->slug = $dept_id === 1 ? '' : $slug1;
-        $this->view->dept_id = $dept_id;
-        $this->view->dept = $dept;
-        $this->view->dept_lang = $dept_lang;
-        if(!$dept_id){
+        $slug = (int)$dept->id === 1 ? $slug1 : $slug2;
+        if(!$dept->id){
             $this->view->title = '404';
             return $this->view->pick('templates/404');
         }
-        $slug = $dept_id === 1 ? $slug1 : $slug2;
+        $slug = (int)$dept->id === 1 ? $slug1 : $slug2;
 
-        if(!$category = Categories::findFirst(["slug = :slug: AND status = 1 AND dept_id = $dept_id", 'bind' => ['slug' => $slug]])){
+        if(!$category = Categories::findFirst(["slug = :slug: AND status = 1 AND dept_id = $dept->id", 'bind' => ['slug' => $slug]])){
             $this->view->title = '404';
             return $this->view->pick('templates/404');
         }
@@ -116,19 +103,8 @@ class PostsController extends \FrontendController
 
     public function blogAction($slug = null){
         $slug = $this->helper->slugify($slug);
+        $dept = $this->dispatcher->getReturnedValue();
         $lang_id = $this->session->get('lang_id');
-        $dept_id = $slug ? (($dept = Departments::getBySlug($slug)) ? $dept->id : NULL ): 1;
-        $dept = !empty($dept) ? $dept : Departments::findFirstId(1);
-        $dept_lang = DepartmentsLang::findFirst(['dept_id = :dept_id: AND lang_id = :lang_id:','bind' => ['dept_id' => $dept->id, 'lang_id' => $lang_id]]);
-        $this->view->slug = $dept_id === 1 ? '' : $slug1;
-        $this->view->dept_id = $dept_id;
-        $this->view->dept = $dept;
-        $this->view->dept_lang = $dept_lang;
-        if(!$dept_id){
-            $this->view->title = '404';
-            return $this->view->pick('templates/404');
-        }
-
         $current_page = (int)$this->request->get('page');
         $npPosts = Posts::getNamepace();
         $posts = $this->modelsManager->createBuilder()
@@ -146,7 +122,7 @@ class PostsController extends \FrontendController
             $npPosts.'.featured_image',
         ))
         ->from($npPosts)
-        ->join('Models\PostsLang', "PL.post_id = $npPosts.id AND PL.lang_id = $lang_id AND $npPosts.dept_id = $dept_id",'PL')
+        ->join('Models\PostsLang', "PL.post_id = $npPosts.id AND PL.lang_id = $lang_id AND $npPosts.dept_id = $dept->id",'PL')
         ->orderBy("$npPosts.calendar DESC")
         ->where("$npPosts.deleted = 0 AND $npPosts.status = 1");
         

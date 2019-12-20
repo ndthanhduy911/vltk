@@ -5,11 +5,11 @@
     use Models\Menus;
 
 
-    $socials = Social::find(["status = 1 AND dept_id = $dept_id", "order" => "sort ASC"]);
-    $links = Link::find(["status = 1 AND dept_id = $dept_id", "order" => "sort ASC"]);
+    $socials = Social::find(["status = 1 AND dept_id = $dept->id", "order" => "sort ASC"]);
+    $links = Link::find(["status = 1 AND dept_id = $dept->id", "order" => "sort ASC"]);
     $menuParents = [];
-    if($menuLocation = MenuLocation::findFirst(["status =  1 AND dept_id = $dept_id AND type = 1"])) {
-        $menuParents = Menus::find(["status = 1 AND dept_id = $dept_id AND menu_location_id = {$menuLocation->id} AND parent_id is NULL",'order' => 'sort ASC']);
+    if($menuLocation = MenuLocation::findFirst(["status =  1 AND dept_id = $dept->id AND type = 1"])) {
+        $menuParents = Menus::find(["status = 1 AND dept_id = $dept->id AND menu_location_id = {$menuLocation->id} AND parent_id is NULL",'order' => 'sort ASC']);
     }
 ?>
 <div class="header-container">
@@ -70,7 +70,7 @@
             <div class="d-flex">
                 <div class="col-md-auto hidden-md-down pl-md-0">
                     <div class="header-first clearfix">
-                        <div id="logo" class="logo" dept-id = "{{ dept_id }}">
+                        <div id="logo" class="logo" dept-id = "{{ dept.id }}">
                             <a href="<?php echo FRONTEND_URL ?>/">
                                 {% if dept.logo %}
                                 <img src="{{ helper.getLinkImage(dept.logo) }}" alt="{{ dept_lang.name }}">

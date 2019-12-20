@@ -2,8 +2,8 @@
 use Models\Menus;
 use Models\MenuLocation;
 $menuParents = [];
-if($menuLocation = MenuLocation::findFirst(["status =  1 AND dept_id = $dept_id AND type = 2"])) {
-    $menuParents = Menus::find(["status = 1 AND dept_id = $dept_id AND menu_location_id = {$menuLocation->id} AND parent_id is NULL",'order' => 'sort ASC','limit' => 3]);
+if($menuLocation = MenuLocation::findFirst(["status =  1 AND dept_id = $dept->id AND type = 2"])) {
+    $menuParents = Menus::find(["status = 1 AND dept_id = $dept->id AND menu_location_id = {$menuLocation->id} AND parent_id is NULL",'order' => 'sort ASC','limit' => 3]);
 }
 ?>
 

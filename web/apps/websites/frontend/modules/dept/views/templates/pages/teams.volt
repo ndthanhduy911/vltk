@@ -4,7 +4,7 @@ use Models\Departments;
 use Models\Staff; 
 
     $npStaff = Staff::getNamepace();
-    if($dept_id == 1){
+    if($dept->id == 1){
         $deanStaffs = $this->modelsManager->createBuilder()
         ->columns(array(
             $npStaff.'.id',
@@ -59,7 +59,7 @@ use Models\Staff;
             'SL.content content'
         ))
         ->from($npStaff)
-        ->leftJoin("Models\StaffLang", "SL.staff_id = $npStaff.id AND SL.lang_id = $lang_id AND $npStaff.dept_id = $dept_id",'SL')
+        ->leftJoin("Models\StaffLang", "SL.staff_id = $npStaff.id AND SL.lang_id = $lang_id AND $npStaff.dept_id = $dept->id",'SL')
         ->where("$npStaff.status = 1")
         ->inWhere("$npStaff.dept_position", [1,2])
         ->orderBy("$npStaff.dept_position ASC")

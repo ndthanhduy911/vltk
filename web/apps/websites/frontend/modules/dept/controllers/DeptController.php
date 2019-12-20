@@ -13,25 +13,9 @@ use Models\Banner;
 class DeptController extends \FrontendController
 {
     public function indexAction($slug = null){
-
         $slug = $this->helper->slugify($slug);
-        $dept_id = ($dept = Departments::getBySlug($slug)) ? $dept->id : 0;
+        $dept = $this->dispatcher->getReturnedValue();
         $lang_id = $this->session->get('lang_id');
-
-        if(!$dept_id){
-            $this->view->title = '404';
-            $this->view->slug = "";
-            $this->view->dept_id = 1;
-            $this->view->dept = Departments::findFirst(1);
-            $this->view->dept_lang = DepartmentsLang::findFirst(['dept_id = :dept_id: AND lang_id = :lang_id:','bind' => ['dept_id' => 1, 'lang_id' => $lang_id]]);
-            return $this->view->pick('templates/404');
-        }
-
-        $this->view->slug = $slug;
-        $this->view->dept_id = $dept_id;
-        $this->view->dept = $dept;
-        $this->view->dept_lang = DepartmentsLang::findFirst(['dept_id = :dept_id: AND lang_id = :lang_id:','bind' => ['dept_id' => $dept_id, 'lang_id' => $lang_id]]);
-
 
         $npHome = Home::getNamepace();
         $homeSetting = $this->modelsManager->createBuilder()
@@ -51,7 +35,7 @@ class DeptController extends \FrontendController
             'HL.contact_des contact_des'
         ))
         ->from($npHome)
-        ->where("$npHome.dept_id = $dept_id")
+        ->where("$npHome.dept_id = $dept->id")
         ->leftJoin('Models\HomeLang', "HL.home_id = $npHome.id AND HL.lang_id = $lang_id",'HL')
         ->limit(1)
         ->getQuery()
@@ -75,7 +59,7 @@ class DeptController extends \FrontendController
             'BL.button_text button_text'
         ))
         ->from($npBanner)
-        ->where("$npBanner.status = 1 AND $npBanner.deleted = 0 AND $npBanner.dept_id = $dept_id")
+        ->where("$npBanner.status = 1 AND $npBanner.deleted = 0 AND $npBanner.dept_id = $dept->id")
         ->leftJoin('Models\BannerLang', "BL.banner_id = $npBanner.id AND BL.lang_id = $lang_id",'BL')
         ->getQuery()
         ->execute();
@@ -92,7 +76,7 @@ class DeptController extends \FrontendController
             ))
             ->from($npCat)
             ->leftJoin('Models\CategoriesLang', "CL.cat_id = $npCat.id AND CL.lang_id = $lang_id",'CL')
-            ->where("$npCat.status = 1 AND $npCat.dept_id = $dept_id")
+            ->where("$npCat.status = 1 AND $npCat.dept_id = $dept->id")
             ->inWhere($npCat.".id", $listCats)
             ->getQuery()
             ->execute();
@@ -113,7 +97,7 @@ class DeptController extends \FrontendController
             'SL.content content'
         ))
         ->from($npStaff)
-        ->where("$npStaff.dept_id = $dept_id AND $npStaff.status = 1 AND $npStaff.deleted = 0 AND ($npStaff.dept_position = 1 OR $npStaff.dept_position = 2)")
+        ->where("$npStaff.dept_id = $dept->id AND $npStaff.status = 1 AND $npStaff.deleted = 0 AND ($npStaff.dept_position = 1 OR $npStaff.dept_position = 2)")
         ->leftJoin("Models\StaffLang", "SL.staff_id = $npStaff.id AND SL.lang_id = $lang_id",'SL')
         ->orderBy("$npStaff.dean ASC")
         ->limit(3)
@@ -130,7 +114,7 @@ class DeptController extends \FrontendController
             'PL.title title',
         ))
         ->from($npPartner)
-        ->where("$npPartner.status = 1 AND $npPartner.deleted = 0 AND $npPartner.dept_id = $dept_id")
+        ->where("$npPartner.status = 1 AND $npPartner.deleted = 0 AND $npPartner.dept_id = $dept->id")
         ->leftJoin('Models\PartnerLang', "PL.partner_id = $npPartner.id AND PL.lang_id = $lang_id",'PL')
         ->getQuery()
         ->execute();
