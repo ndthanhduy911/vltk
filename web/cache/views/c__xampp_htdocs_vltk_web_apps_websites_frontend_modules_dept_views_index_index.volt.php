@@ -156,8 +156,6 @@
 <?php } ?>
 
 <?php if ($partners) { ?>
-<!-- section start liên kết-->
-<!-- ================ -->
 <section class="pt-5 pb-5 section dark-translucent-bg fixed-bg" style="background-position: 50% 42%; background-image: url(<?= $this->helper->getLinkImage($home->partner_bg, './assets/frontend/images/education-4.jpg') ?>)">
     <?php if ($home['partner_title']) { ?>
     <div class="container pv-20">
@@ -184,7 +182,6 @@
         </div>
     </div>
 </section>
-<!-- section end liên kết-->
 <?php } ?>
 
 <section id="section-5" class="section pv-40 stats padding-bottom-clear hovered">

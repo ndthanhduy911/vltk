@@ -198,6 +198,17 @@ class MenusForm extends Form
         ]);
         $this->add($icon);
 
+        $target = new Select('target', [
+            '0' => "_self",
+            '1' => "_blank",
+            '2' => "_parent",
+            '3' => "_top",
+            
+        ], [
+            'class' => 'form-control',
+        ]);
+        $this->add($target);
+
         $parent_id = new Select('parent_id', $menus, array(
             'using' => array('id', 'name'),
             'class' => 'form-control',

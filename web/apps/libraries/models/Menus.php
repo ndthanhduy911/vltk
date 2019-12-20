@@ -34,6 +34,8 @@ class Menus extends \Phalcon\Mvc\Model
 
     public $sort;
 
+    public $target;
+
     public $status;
 
     public $created_at;

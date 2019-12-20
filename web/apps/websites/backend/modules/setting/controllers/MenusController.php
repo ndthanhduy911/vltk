@@ -70,6 +70,7 @@ class MenusController  extends \BackendController
                     'parent_id' => $this->request->getPost('parent_id'),
                     'sort' => $this->request->getPost('sort'),
                     'status' => $this->request->getPost('status'),
+                    'target' => $this->request->getPost('target')
                 ];
                 
                 $form_menu->bind($req_menu, $menu);
