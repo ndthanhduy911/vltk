@@ -76,8 +76,11 @@ class DeptController extends \FrontendController
             ))
             ->from($npCat)
             ->where("$npCat.status = 1")
-            ->leftJoin('Models\CategoriesLang', "CL.cat_id = $npCat.id AND CL.lang_id = $lang_id",'CL')
-            ->inWhere($npCat.".id", $listCats)
+            ->inWhere($npCat.".id", $listCats);
+            if(!(int)$dept->post_connect) {
+                $cats = $cats->andWhere("$npCat.dept_id = $dept->id");
+            }
+            $cats = $cats->leftJoin('Models\CategoriesLang', "CL.cat_id = $npCat.id AND CL.lang_id = $lang_id",'CL')
             ->getQuery()
             ->execute();
         }
