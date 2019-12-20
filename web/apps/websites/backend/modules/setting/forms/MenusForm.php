@@ -55,7 +55,6 @@ class MenusForm extends Form
             'DL.name name',
         ))
         ->from($npDept)
-        ->where("$npDept.id = $dept_id")
         ->join('Models\DepartmentsLang', "DL.dept_id = $npDept.id AND DL.lang_id = 1",'DL')
         ->getQuery()
         ->execute();

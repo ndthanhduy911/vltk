@@ -34,7 +34,7 @@ if($menuLocation = MenuLocation::findFirst(["status =  1 AND dept_id = $dept->id
                             <nav class="mb-20">
                                 <ul class="nav flex-column list-style-icons">
                                     <?php foreach ($menuChild as $child) { ?>
-                                    <li class="nav-item"><a class="nav-link" href="<?= Menus::getLink($child) ?>"><i class="fa fa-chevron-circle-right"></i><?= Menus::getName($child->id, $lang_id) ?></a></li>
+                                    <li class="nav-item"><a class="nav-link" target="<?= $this->helper->getTarget($menu->target) ?>" href="<?= Menus::getLink($child) ?>"><i class="fa fa-chevron-circle-right"></i><?= Menus::getName($child->id, $lang_id) ?></a></li>
                                     <?php } ?>
                                 </ul>
                             </nav>

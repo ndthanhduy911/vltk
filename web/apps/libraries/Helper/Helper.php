@@ -235,4 +235,21 @@ class Helper extends Component
                 break;
         }
     }
+
+    public function getTarget($pos = "")
+    {
+        switch ((int)$pos) {
+            case 0: 
+                return  '_self' ;
+            case 1: 
+                return '__blank';       
+            case 2: 
+                return '_parent';      
+            case 3: 
+                return '_top';   
+            default:
+                return "_self";
+                break;
+        }
+    }
 }

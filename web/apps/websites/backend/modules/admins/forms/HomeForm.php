@@ -13,12 +13,19 @@ use Phalcon\Validation\Validator\StringLength as StringLength;
 use Phalcon\Validation\Validator\PresenceOf;
 use Phalcon\Validation\Validator\Date as DateValidator;
 use Models\Categories;
+use Models\Departments;
 
 class HomeForm extends Form
 {
     public function initialize($entity = null, $options = null)
     {
         $dept_id = isset($_SESSION['dept_id']) ? $_SESSION['dept_id'] : 0;
+        $dept = Departments::findFirstId($dept_id);
+        if($dept && $dept->post_connect){
+            $array_dept = [$dept_id, 1];
+        }else{
+            $array_dept = [$dept_id];
+        }
         $npCat = Categories::getNamepace();
         $cats = $this->modelsManager->createBuilder()
         ->columns(array(
@@ -26,9 +33,9 @@ class HomeForm extends Form
             'CL.name name',
         ))
         ->from($npCat)
+        ->inWhere("$npCat.dept_id", $array_dept)
         ->join('Models\CategoriesLang', "CL.cat_id = $npCat.id AND CL.lang_id = 1",'CL')
         ->orderBy('CL.name ASC')
-        ->where("$npCat.dept_id = $dept_id")
         ->getQuery()
         ->execute();
 

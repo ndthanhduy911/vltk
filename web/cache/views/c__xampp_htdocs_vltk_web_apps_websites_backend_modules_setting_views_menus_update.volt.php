@@ -140,6 +140,16 @@
                         </div>
 
                         <div class="col-md-12 p-0">
+                            <span class="text-primary">Mục tiêu</span>
+                            <div class="form-group mt-1">
+                                <div class="input-group">
+                                    <?= $form_menu->render('target') ?>
+                                    <div class="invalid-tooltip"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 p-0">
                             <span class="text-primary">Sắp xếp</span>
                             <div class="form-group mt-1">
                                 <div class="input-group">

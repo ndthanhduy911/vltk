@@ -116,11 +116,11 @@
                                         {%for menu in menuParents%}
                                         <?php $menuChild = Menus::find(['parent_id = :parent_id:','bind' => ['parent_id' => $menu->id]]); ?>
                                         <li class="nav-item dropdown">
-                                            <a href="<?= Menus::getLink($menu, $slug) ?>" class="nav-link <?= $menuChild->count() ? 'dropdown-toggle' : '' ?>" <?= $menuChild->count() ? 'data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"' : '' ?>><?= Menus::getName($menu->id, $lang_id) ?></a>
+                                            <a target="{{ helper.getTarget(menu.target)}}" href="<?= Menus::getLink($menu, $slug) ?>" class="nav-link <?= $menuChild->count() ? 'dropdown-toggle' : '' ?>" <?= $menuChild->count() ? 'data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"' : '' ?>><?= Menus::getName($menu->id, $lang_id) ?></a>
                                             <?php if($menuChild->count()){ ?>
                                                 <ul class="dropdown-menu">
                                                 {%for child in menuChild%}
-                                                    <li><a href="<?= Menus::getLink($child, $slug) ?>" class=""><?= Menus::getName($child->id, $lang_id) ?></a></li>
+                                                    <li><a target="{{ helper.getTarget(child.target)}}" href="<?= Menus::getLink($child, $slug) ?>" class=""><?= Menus::getName($child->id, $lang_id) ?></a></li>
                                                 {%endfor%}
                                                 </ul>
                                             <?php } ?>
