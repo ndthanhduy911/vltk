@@ -43,7 +43,10 @@ class HomeController  extends \BackendController {
                 $req_home = [
                     'specialized_bg' => $this->request->getPost('specialized_bg'),
                     'partner_bg' => $this->request->getPost('partner_bg'),
+                    'cat_list' => $this->request->getPost('cat_list'),
                 ];
+
+                $req_home['cat_list'] = $req_home['cat_list'] ? json_encode($req_home ['cat_list']) : NULL;
 
                 $form_home->bind($req_home, $home);
                 if (!$form_home->isValid()) {
@@ -103,6 +106,7 @@ class HomeController  extends \BackendController {
         $this->view->dept_id = $dept_id;
         $this->view->homes_lang = $homes_lang;
         $this->view->title = $title;
+        $this->assets->addJs('/elfinder/js/require.min.js');
         $this->get_js_css();
     }
 

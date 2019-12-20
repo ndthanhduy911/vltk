@@ -133,7 +133,7 @@
                                 
                             <div class="w-100 form-group mb-3">
                                 <div class="input-group">
-                                    {{form_home.render('cat_list')}}
+                                    {{form_home.render('cat_list[]',['id' : 'cat_list'])}}
                                     <div class="invalid-tooltip"></div>
                                 </div>
                             </div>

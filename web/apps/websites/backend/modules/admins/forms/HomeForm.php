@@ -32,19 +32,18 @@ class HomeForm extends Form
         ->getQuery()
         ->execute();
 
-        $cat_list = new Select('cat_list', $cats, array(
+        $cat_list_array = new Select('cat_list[]', $cats, array(
             'using' => array('id', 'name'),
             'class' => 'form-control pull-right',
             'data-error' => "Chưa đúng định dạng",
             'name' => 'cat_list[]',
             'multiple' => true
         ));
-        $cat_list->addValidators(array(
-            new PresenceOf(array(
-                'message' => 'Danh mục không được để trống',
-            )),
-        ));
-        $this->add($cat_list);
+        if(!empty($entity->cat_list)){
+            $cat_list_array->setDefault(json_decode($entity->cat_list));
+        }
+        $this->add($cat_list_array);
+
 
         $post_number = new Numeric('post_number');
         $post_number->setAttributes(array(
@@ -59,5 +58,13 @@ class HomeForm extends Form
 
         $specialized_bg = new Hidden('specialized_bg');
         $this->add($specialized_bg);
+
+        $cat_list = new Hidden('cat_list');
+        $cat_list->addValidators(array(
+            new PresenceOf(array(
+                'message' => 'Danh mục không được để trống',
+            )),
+        ));
+        $this->add($cat_list);
     }
 }
