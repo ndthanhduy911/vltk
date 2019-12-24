@@ -1,5 +1,6 @@
 const backendUrl = '/admin';
 const fontendUrl = '';
+const deptId = parseInt($('body').attr('dept-id'));
 
 //Format number money
 const number_format = (number, decimals, dec_point, thousands_sep, unit = "") => {
@@ -239,7 +240,7 @@ const showSelectImage = (button, showImg, uploadImageValue) => {
                 create: function (event, ui) {
                     $(this).elfinder({
                         resizable: false,
-                        url: "/elfinder/php/connector.minimal.php",
+                        url: "/elfinder/php/connector.minimal.php?dept_id="+deptId,
                         commandsOptions: {
                             getfile: {
                                 oncomplete: 'destroy'

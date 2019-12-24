@@ -36,7 +36,7 @@
     {{ assets.outputCss() }}
 </head>
 
-<body class="app sidebar-mini rtl">
+<body class="app sidebar-mini rtl" dept-id="{{session.get('dept_id')}}">
 
     <!-- header header  -->
     {{ partial('header') }}

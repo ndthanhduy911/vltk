@@ -121,7 +121,7 @@
 			// Documentation for client options:
 			// https://github.com/Studio-42/elFinder/wiki/Client-configuration-options
 			defaultOpts: {
-				url: '/elfinder/php/connector.minimal.php',
+				url: '/elfinder/php/connector.minimal.php?dept_id='+deptId,
 				height: 450, // connector URL (REQUIRED)
 				commandsOptions: {
 					edit: {
