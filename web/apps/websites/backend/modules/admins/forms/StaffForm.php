@@ -39,7 +39,7 @@ class StaffForm extends Form
         ->from($npDept)
         ->join('Models\DepartmentsLang', "DL.dept_id = $npDept.id AND DL.lang_id = 1",'DL')
         ->orderBy('DL.id ASC')
-        ->where("$npDept.status = 1 AND $npDept.id != 1")
+        ->where("$npDept.status = 1")
         ->getQuery()
         ->execute();
 
