@@ -22,6 +22,8 @@ class Pages extends \Phalcon\Mvc\Model
 
     public $featured_image;
 
+    public $backgroud_image;
+
     public $deleted;
 
     public function getSource()

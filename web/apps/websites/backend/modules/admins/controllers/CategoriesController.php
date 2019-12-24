@@ -152,8 +152,8 @@ class CategoriesController  extends \BackendController {
         $this->view->form_cat = $form_cat;
         $this->view->cats_lang = $cats_lang;
         $this->view->title = $title;
-    $this->assets->addJs('/elfinder/js/require.min.js');
-    $this->get_js_css();
+        $this->assets->addJs('/elfinder/js/require.min.js');
+        $this->get_js_css();
     }
 
     public function deleteAction($id = 0){

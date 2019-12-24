@@ -22,12 +22,12 @@
 		<li><a class="app-menu__item {% if dispatcher.getControllerName()=='home' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/home"><i class="app-menu__icon fa fa-home"></i><span class="app-menu__label">Trang chủ</span></a></li>
 		<li><a class="app-menu__item {% if dispatcher.getControllerName()=='menus' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/menu"><i class="app-menu__icon fa fa-link"></i><span class="app-menu__label">Menu</span></a></li>
 		<li><a class="app-menu__item {% if dispatcher.getControllerName()=='users' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/users"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Tài khoản</span></a></li>
-		<li><a class="app-menu__item {% if dispatcher.getControllerName()=='departments' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/departments/update"><i class="app-menu__icon fa fa-cog"></i><span class="app-menu__label">Cài đặt</span></a></li>
-		<!-- <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-cogs"></i><span class="app-menu__label">Hệ thống</span><i class="treeview-indicator fa fa-angle-right"></i></a>
-			<ul class="treeview-menu">
-				<li><a class="treeview-item" href="form-components.html"><i class="icon fa fa-circle-o"></i> Ngôn ngữ</a></li>
-				<li><a class="treeview-item" href="form-components.html"><i class="icon fa fa-circle-o"></i> Sao lưu dữ liệu</a></li>
+		<li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-cogs"></i><span class="app-menu__label">Hệ thống</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+			<ul class="treeview-menu {% if dispatcher.getControllerName() in ['setting','departments'] %} {{ 'is-expanded' }}{% endif %}">
+				<li><a class="treeview-item {% if dispatcher.getControllerName()=='departments' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/departments/update"><i class="icon fa fa-cog"></i> Cài đặt</a></li>
+				<li><a class="treeview-item {% if dispatcher.getActionName()=='social' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/setting/socials"><i class="icon fa fa-link"></i> Biểu tượng</a></li>
+				<li><a class="treeview-item {% if dispatcher.getActionName()=='links' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/setting/links"><i class="icon fa fa-link"></i> Links</a></li>
 			</ul>
-		</li> -->
+		</li>
 	</ul>
 </aside>

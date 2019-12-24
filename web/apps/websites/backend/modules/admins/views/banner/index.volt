@@ -1,11 +1,11 @@
 <main class="app-content">
-    <div class="app-title">
+    <div class="app-title mb-3">
         <div>
             <h1><i class="fa fa-th-list"></i> BANNER</h1>
             <p>Quản lý banner</p>
         </div>
         <ul class="app-breadcrumb breadcrumb side">
-            <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+            <li class="breadcrumb-item"><a class="link" href="{{ config.application.backenduri }}"><i class="fa fa-home fa-lg"></i></a></li>
             <li class="breadcrumb-item">Banner</li>
         </ul>
     </div>

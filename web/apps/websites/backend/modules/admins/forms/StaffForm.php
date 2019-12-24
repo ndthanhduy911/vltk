@@ -47,7 +47,7 @@ class StaffForm extends Form
             'using' => array('id', 'name'),
             'class' => 'form-control pull-right w-100',
             'useEmpty' => true,
-            'emptyText' => 'Vui lòng chọn bộ môn',
+            'emptyText' => 'Chọn bộ môn',
             'emptyValue' => '',
             'data-error' => "Chưa đúng định dạng",
             'required' => '',
@@ -65,7 +65,7 @@ class StaffForm extends Form
             0 => "Khóa",
         ], [
             'useEmpty' => true,
-            'emptyText' => 'Vui lòng chọn trạng thái',
+            'emptyText' => 'Chọn trạng thái',
             'emptyValue' => '',
             'class' => 'form-control pull-right w-100',
             'required' => '',

@@ -29,4 +29,13 @@ class Social extends \Phalcon\Mvc\Model
     public static function getNamepace (){
         return 'Models\Social';
     }
+
+    public static function findFirstId($id, $columns = "*")
+    {
+        return parent::findFirst([
+            "conditions" => "id = :id:",
+            "bind" => array('id' => $id),
+            "columns" => $columns
+        ]);
+    }
 }

@@ -1,5 +1,5 @@
 <main class="app-content">
-    <div class="app-title">
+    <div class="app-title mb-3">
         <div>
             <h1><i class="fa fa-th-list"></i> {{title}} danh mục</h1>
         </div>
@@ -30,36 +30,25 @@
                         <div class="tab-pane fade {{ !key ? 'active show' : '' }}"
                             id="lang{{lang.id}}">
                             <h5 class="text-primary font-weight-normal">Tiêu đề</h5>
-                            <div class="tile p-3">
-                                <div class="modal-body p-0">
-                                    <div class="form-row">
-                                        <div class="form-group col-md-12 m-0">
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text fa fa-header"></div>
-                                                </div>
-                                                {{forms_lang[lang.id].render('name', ['id' : 'name'~lang.id,'name' : 'name['~lang.id~']'])}}
-                                                <div class="invalid-tooltip"></div>
-                                            </div>
-                                        </div>
+
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text fa fa-header"></div>
                                     </div>
+                                    {{forms_lang[lang.id].render('name', ['id' : 'name'~lang.id,'name' : 'name['~lang.id~']'])}}
+                                    <div class="invalid-tooltip"></div>
                                 </div>
                             </div>
 
                             <h5 class="text-primary font-weight-normal">Mô tả</h5>
-                            <div class="tile p-0">
-                                <div class="modal-body pb-0">
-                                    <div class="form-row">
-                                        <div class="form-group col-md-12">
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text fa fa-tags"></div>
-                                                </div>
-                                                {{forms_lang[lang.id].render('description', ['id' : 'description'~lang.id, 'name' : 'description['~lang.id~']'])}}
-                                                <div class="invalid-tooltip"></div>
-                                            </div>
-                                        </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text fa fa-tags"></div>
                                     </div>
+                                    {{forms_lang[lang.id].render('description', ['id' : 'description'~lang.id, 'name' : 'description['~lang.id~']'])}}
+                                    <div class="invalid-tooltip"></div>
                                 </div>
                             </div>
                         </div>
@@ -69,11 +58,9 @@
             </div>
 
             <div class="col-md-3 pr-0">
-                <h5 class="text-primary font-weight-normal">{{title}}</h5>
-                <div class="tile p-3">
+                <div class="tile p-3 mb-3">
                     <div class="row m-0">
                         <div class="col-md-12 p-0">
-                            
                             <span class="text-primary">Trạng thái:</span>
                             <div class="form-group mt-1">
                                 <div class="input-group">
@@ -81,15 +68,12 @@
                                     <div class="invalid-tooltip"></div>
                                 </div>
                             </div>
-
-                            <div class="d-inline-block w-100 mb-2">
-                                
-                                <span class="text-primary">Slug:</span>
-                                <div class="form-group mt-1">
-                                    <div class="input-group">
-                                        {{form_cat.render('slug')}}
-                                        <div class="invalid-tooltip"></div>
-                                    </div>
+                            
+                            <span class="text-primary">Slug:</span>
+                            <div class="form-group mt-1">
+                                <div class="input-group">
+                                    {{form_cat.render('slug')}}
+                                    <div class="invalid-tooltip"></div>
                                 </div>
                             </div>
                         </div>
@@ -100,7 +84,7 @@
                     </div>
                 </div>
 
-                <div class="tile p-3">
+                <div class="tile p-3 mb-3">
                     <div class="row m-0">
                         <div class="col-md-12 p-0">
                             <img id="showImg" src="<?php echo $post->featured_image ? $post->featured_image : '' ?>"

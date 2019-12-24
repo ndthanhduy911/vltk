@@ -1,5 +1,5 @@
 <main class="app-content">
-    <div class="app-title">
+    <div class="app-title mb-3">
         <div>
             <h1><i class="fa fa-th-list"></i> {{posts_lang[1].title ? 'Cập nhật bài viết': 'Thêm bài viết mới'}}</h1>
         </div>
@@ -30,7 +30,7 @@
                         <div class="tab-pane fade {{ !key ? 'active show' : '' }}"
                             id="lang{{lang.id}}">
                             <h5 class="text-primary font-weight-normal">Tiêu đề</h5>
-                            <div class="tile p-3">
+                            <div class="tile p-3 mb-3">
                                 <div class="modal-body p-0">
                                     <div class="form-row">
                                         <div class="form-group col-md-12 m-0">
@@ -85,8 +85,7 @@
             </div>
 
             <div class="col-md-3 pr-0">
-                <div class="tile p-3">
-                    <h5 class="text-primary font-weight-normal">Đăng bài</h5>
+                <div class="tile p-3 mb-3">
                     <div class="row m-0">
                         <div class="col-md-12 p-0">
                             
@@ -125,7 +124,7 @@
                     </div>
                 </div>
 
-                <div class="tile p-3">
+                <div class="tile p-3 mb-3">
                     <h5 class="text-primary font-weight-normal">Danh mục</h5>
                     <div class="row m-0">
                         <div class="col-md-12 p-0">
@@ -139,7 +138,7 @@
                     </div>
                 </div>
 
-                <div class="tile p-3">
+                <div class="tile p-3 mb-3">
                     <div class="row m-0">
                         <div class="col-md-12 p-0">
                             <img id="showImg" src="<?php echo $post->featured_image ? $post->featured_image : '' ?>"

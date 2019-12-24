@@ -61,6 +61,7 @@ class PagesController  extends \BackendController {
                     'status' => $this->request->getPost('status'),
                     'slug' => $p_slug ? $p_slug : $this->helper->slugify($p_title[1]),
                     'featured_image' => $this->request->getPost('featured_image'),
+                    'backgroud_image' => $this->request->getPost('backgroud_image'),
                     'attribute_id' => $this->request->getPost('attribute_id'),
                 ];
 

@@ -1,5 +1,5 @@
 <main class="app-content">
-    <div class="app-title">
+    <div class="app-title mb-3">
         <div>
             <h1><i class="fa fa-th-list"></i> {{pages_lang[1].title ? 'Cập nhật trang': 'Thêm trang mới'}}</h1>
         </div>
@@ -74,8 +74,7 @@
             </div>
 
             <div class="col-md-3 pr-0">
-                <div class="tile p-3">
-                    <h5 class="text-primary font-weight-normal">Đăng bài</h5>
+                <div class="tile p-3 mb-3">
                     <div class="row m-0">
                         <div class="col-md-12 p-0">
                             <div class="d-inline-block w-100">
@@ -116,13 +115,24 @@
                     </div>
                 </div>
 
-                <div class="tile p-3">
+                <div class="tile p-3 mb-3">
                     <div class="row m-0">
                         <div class="col-md-12 p-0">
                             <img id="showImg" src="<?php echo $page->featured_image ? $page->featured_image : '' ?>"
                                 alt="" width="100%">
                             {{form_page.render('featured_image')}}
                             <a id="uploadImage" href="#" class="link">Đặt ảnh đại diện</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile p-3 mb-3">
+                    <div class="row m-0">
+                        <div class="col-md-12 p-0">
+                            <img id="showBackgroundImg" src="<?php echo $page->background_image ? $page->background_image : '' ?>"
+                                alt="" width="100%">
+                            {{form_page.render('background_image')}}
+                            <a id="uploadBackgroundImage" href="#" class="link">Đặt ảnh nền</a>
                         </div>
                     </div>
                 </div>

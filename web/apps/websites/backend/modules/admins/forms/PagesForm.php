@@ -31,7 +31,7 @@ class PagesForm extends Form
             0 => "Khóa",
         ], [
             'useEmpty' => true,
-            'emptyText' => 'Vui lòng chọn trạng thái',
+            'emptyText' => 'Chọn trạng thái',
             'emptyValue' => '',
             'class' => 'form-control pull-right w-100',
             'required' => '',
@@ -45,7 +45,7 @@ class PagesForm extends Form
         $this->add($status);
 
         $attribute_id = new Select('attribute_id', Attributes::find(), [
-            'using' => array('id', 'title'),
+            'using' => array('id', 'name'),
             'useEmpty' => true,
             'emptyText' => 'Mặc định',
             'emptyValue' => '',
@@ -55,6 +55,9 @@ class PagesForm extends Form
 
         $featured_image = new Hidden('featured_image');
         $this->add($featured_image);
+
+        $background_image = new Hidden('background_image');
+        $this->add($background_image);
 
         $deleted = new Hidden('deleted');
         $this->add($deleted);

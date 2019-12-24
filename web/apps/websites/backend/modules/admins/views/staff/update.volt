@@ -1,5 +1,5 @@
 <main class="app-content">
-        <div class="app-title">
+        <div class="app-title mb-3">
             <div>
                 <h1><i class="fa fa-th-list"></i> {{staffs_lang[1].title ? 'Cập nhật nhân sự': 'Thêm nhân sự mới'}}</h1>
             </div>
@@ -65,7 +65,7 @@
                 </div>
     
                 <div class="col-md-3 pr-0">
-                    <div class="tile p-3">
+                    <div class="tile p-3 mb-3">
 
                         <div class="row m-0">
                             <div class="col-md-12 p-0">
@@ -93,7 +93,7 @@
                         </div>
                     </div>
     
-                    <div class="tile p-3">
+                    <div class="tile p-3 mb-3">
                         <h5 class="text-primary font-weight-normal">Bộ môn</h5>
                         <div class="row m-0">
                             <div class="form-group mt-1 w-100">
@@ -134,7 +134,7 @@
                         </div>
                     </div>
 
-                    <div class="tile p-3">
+                    <div class="tile p-3 mb-3">
                         <div class="row m-0">
                             <div class="col-md-12 p-0">
                                 <img id="showImg" src="<?php echo $staff->featured_image ? $staff->featured_image : '' ?>"

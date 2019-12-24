@@ -1,4 +1,4 @@
-//Datatable cho bảng pages
+//Datatable cho bảng socials
 const showStatus = (id = '') => {
     switch (parseInt(id)) {
         case 0:
@@ -10,28 +10,31 @@ const showStatus = (id = '') => {
     }
 }
 
-const loadTablePages = () => {
-    if ($('#pages').length) {
-        let dt = $('#pages').DataTable({
+const loadTableSocials = () => {
+    if ($('#socials').length) {
+        let dt = $('#socials').DataTable({
             "scrollX": true,
             "ordering": false,
             "processing": true,
             "serverSide": true,
             "autoWidth": false,
             "pageLength": 25,
-            "ajax": backendUrl+"/pages/getdata",
+            "ajax": backendUrl+"/setting/getdatasocials",
             "columns": [
                 {
                     "data": "no"
                 },
                 {
-                    "data": "title"
+                    "data": "name"
                 },
                 {
-                    "data": "excerpt"
+                    "data": "icon"
                 },
                 {
-                    "data": "created_at"
+                    "data": "link"
+                },
+                {
+                    "data": "sort"
                 },
                 {
                     "data": "status"
@@ -43,12 +46,14 @@ const loadTablePages = () => {
             'createdRow': function (row, item, dataIndex) {
                 $(row).addClass('text-center');
                 $('td', row).addClass('align-middle');
-                $('td:eq(3)', row).html(vi_moment(item.created_at, 'DD/MM/YYYY HH:mm'));
-                $('td:eq(4)', row).html(showStatus(item.status));
-                $('td:eq(5)', row).html(`
-                    <a href="${backendUrl}/pages/update/${item.id}" class="fa fa-pencil btn btn-info btn-sm editPage" title="Cập nhật"></a>
+                $('td:eq(2)', row).html(`<i class="fa ${item.icon ? item.icon : 'fa-image'}"></i>`);
+                $('td:eq(5)', row).html(showStatus(item.status));
+                $('td:eq(6)', row).html(`
+                    <a href="${backendUrl}/setting/updatesocial/${item.id}" class="fa fa-pencil btn btn-info btn-sm editSocial" title="Cập nhật"></a>
                 `);
-                $('td:eq(5)', row).append(`<a href="#" data-href="${backendUrl}/pages/delete/${item.id}" class="fa fa-trash btn btn-danger btn-sm deletePage" title="Xóa"></a>`);
+
+                $('td:eq(6)', row).append(`<a href="#" data-href="${backendUrl}/setting/deletesocial/${item.id}" class="fa fa-trash btn btn-danger btn-sm deleteSocial" title="Xóa"></a>`);
+
             },
             "deferRender": true,
             "language": {
@@ -69,16 +74,10 @@ const loadTablePages = () => {
                 }
             }
         });
-        showConfrimDelete('.deletePage',()=>{
+        showConfrimDelete('.deleteSocial',()=>{
             dt.draw();
         })
     }
 }
 
-loadTablePages();
-
-changeTitleToSlug('#title', '#slug');
-
-showSelectImage('#uploadImage','#showImg','#featured_image');
-
-showSelectImage('#uploadBackgroundImage','#showBackgroundImg','#background_image');
+loadTableSocials();

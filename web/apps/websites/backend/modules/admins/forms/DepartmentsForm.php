@@ -77,7 +77,7 @@ class DepartmentsForm extends Form
             0 => "Khóa",
         ], [
             'useEmpty' => true,
-            'emptyText' => 'Vui lòng chọn trạng thái',
+            'emptyText' => 'Chọn trạng thái',
             'emptyValue' => '',
             'class' => 'form-control pull-right w-100',
             'required' => '',

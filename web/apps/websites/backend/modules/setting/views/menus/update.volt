@@ -1,5 +1,5 @@
 <main class="app-content">
-    <div class="app-title">
+    <div class="app-title mb-3">
         <div>
             <h1><i class="fa fa-th-list"></i> {{title}} menu</h1>
         </div>
@@ -42,7 +42,7 @@
             </div>
 
             <div class="col-md-4 pr-0">
-                <div class="tile p-3">
+                <div class="tile p-3 mb-3">
                     <div class="row m-0">
                         <div class="col-md-12 p-0">
                             <span class="text-primary">Menu gốc</span>
@@ -117,7 +117,7 @@
             </div>
 
             <div class="col-md-4 pr-0">
-                <div class="tile p-3">
+                <div class="tile p-3 mb-3">
                     <div class="row m-0">
                         <div class="col-md-12 p-0">
                             <span class="text-primary">Trạng thái</span>

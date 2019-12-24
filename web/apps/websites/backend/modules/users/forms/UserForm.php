@@ -155,7 +155,7 @@ class UserForm extends \Phalcon\Forms\Form
         $dept_id = new Select('dept_id', $departments, array(
             'using' => array('id', 'code'),
             'useEmpty' => true,
-            'emptyText' => 'Vui lòng chọn bộ môn',
+            'emptyText' => 'Chọn bộ môn',
             'emptyValue' => '',
             'class' => 'form-control select2-basic',
             'required' => '',
@@ -174,7 +174,7 @@ class UserForm extends \Phalcon\Forms\Form
             0 => "Khóa",
         ], [
             'useEmpty' => true,
-            'emptyText' => 'Vui lòng chọn trạng thái',
+            'emptyText' => 'Chọn trạng thái',
             'emptyValue' => '',
             'class' => 'form-control',
             'required' => '',
@@ -194,7 +194,7 @@ class UserForm extends \Phalcon\Forms\Form
         $role = new Select('role', $roles, array(
             'using' => array('id', 'name'),
             'useEmpty' => true,
-            'emptyText' => 'Vui lòng chọn quyền',
+            'emptyText' => 'Chọn quyền',
             'emptyValue' => '',
             'class' => 'form-control',
             'required' => '',

@@ -5,7 +5,7 @@
             <p><?php echo $user->id ? 'Cập nhật tài khoản': 'Thêm tài khoản mới' ?></p>
         </div>
         <ul class="app-breadcrumb breadcrumb side">
-            <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+            <li class="breadcrumb-item"><a class="link" href="{{ config.application.backenduri }}"><i class="fa fa-home fa-lg"></i></a></li>
             <li class="breadcrumb-item">Tài khoản</li>
             <li class="breadcrumb-item">{{title}}</li>
         </ul>
