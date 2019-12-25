@@ -1,16 +1,19 @@
 <?php
 namespace Backend\Modules\Admins\Controllers;
 
+use Models\Pages;
+use Models\Partner;
 use Models\Posts;
+use Models\Staff;
 
 class DashboardController  extends \BackendController {
 
     public function indexAction(){
         $dept_id = $this->session->get('dept_id');
-        $count_post = 0;
-        $count_staff = 0;
-        $count_partner = 0;
-        $count_page = 0;
+        $count_post = Posts::count(["dept_id = $dept_id AND status = 1 AND deleted = 0"]);
+        $count_staff = Staff::count(["dept_id = $dept_id AND status = 1 AND deleted = 0"]);
+        $count_partner = Partner::count(["dept_id = $dept_id AND status = 1 AND deleted = 0"]);
+        $count_page = Pages::count(["dept_id = $dept_id AND status = 1 AND deleted = 0"]);
         $newest_post = [];
 
 

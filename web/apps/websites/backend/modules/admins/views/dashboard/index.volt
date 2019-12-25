@@ -54,7 +54,7 @@
                             <div class="small-box bg-warning">
                                 <div class="inner">
                                     <h3>{{ count_staff }}</h3>
-                                    <p>Nhân viên</p>
+                                    <p>Cán bộ</p>
                                 </div>
                                 <div class="icon">
                                     <i class="fa fa-users"></i>
