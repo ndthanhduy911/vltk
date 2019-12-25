@@ -16,6 +16,7 @@
 			</ul>
 		</li>
 		<li><a class="app-menu__item {% if dispatcher.getControllerName()=='pages' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/pages"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">Trang</span></a></li>
+		<li><a class="app-menu__item {% if dispatcher.getControllerName()=='calendar' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/calendar"><i class="app-menu__icon fa fa-calendar"></i><span class="app-menu__label">Lịch học</span></a></li>
 		<li><a class="app-menu__item {% if dispatcher.getControllerName()=='banner' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/banner"><i class="app-menu__icon fa fa-image"></i><span class="app-menu__label">Banners</span></a></li>
 		<li><a class="app-menu__item {% if dispatcher.getControllerName()=='staff' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/staff"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Nhân sự</span></a></li>
 		<li><a class="app-menu__item {% if dispatcher.getControllerName()=='partner' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/partner"><i class="app-menu__icon fa fa-handshake-o"></i><span class="app-menu__label">Liên kết</span></a></li>

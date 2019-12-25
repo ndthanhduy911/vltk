@@ -160,9 +160,9 @@ class Helper extends Component
         return $date ? date_format(date_create($date), "Y-m-d H:i:s") : NULL;
     }
 
-    public function datetime_vn($date = null)
+public function datetime_vn($date = null, $type = "d/m/Y H:i")
     {
-        return $date ? date_format(date_create($date), "d/m/Y H:i") : NULL;
+        return $date ? date_format(date_create($date), $type) : NULL;
     }
 
     public function getPaging($total_records, $current_page, $limit = 10)

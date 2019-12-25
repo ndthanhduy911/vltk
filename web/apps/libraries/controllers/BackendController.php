@@ -36,7 +36,7 @@ class BackendController extends Controller
             }
             $roleMaster = new RoleMaster($permission, $private, $dispatcher->getControllerName(), $dispatcher->getActionName());
             if ($roleMaster->isPrivate()) {
-                $this->view->dept_code = Departments::findFirstId($this->session->get('dept_id'))->code;
+                $this->view->dept = Departments::findFirstId($this->session->get('dept_id'));
             } else {
                 echo "Không có quyền truy cập";
                 die;
