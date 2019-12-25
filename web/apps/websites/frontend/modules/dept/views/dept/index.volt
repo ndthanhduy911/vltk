@@ -50,7 +50,7 @@
 
 <div id="page-start"></div>
 {% if cats.count() %}
-<section id="section1" class="section clearfix pt-5">
+<section id="section1" class="section clearfix pt-5 pb-0">
     <div class="container mt-4">
         <div class="row">
             {% for cat in cats %}
@@ -144,7 +144,7 @@
 {% endif %}
 
 {% if partners.count() %}
-<section class="pt-5 pb-5 section background-img-1 dark-translucent-bg fixed-bg" style="background-position: 50% 42%;">
+<section class="pb-5 section background-img-1 dark-translucent-bg fixed-bg" style="background-position: 50% 42%;">
     {% if partner_info['name'] %}
     <div class="container pv-20">
         <div class="row justify-content-lg-center">
@@ -172,7 +172,7 @@
 </section>
 {% endif %}
 
-<section id="section-5" class="section pv-40 stats padding-bottom-clear hovered">
+<section id="section-5" class="section pt-0 pb-5 stats padding-bottom-clear hovered">
     <div class="container">
         <div class="row justify-content-lg-center">
             <div class="col-lg-8 text-center pv-20">

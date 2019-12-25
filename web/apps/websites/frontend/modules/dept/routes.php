@@ -38,8 +38,17 @@ $router->add($config->application->frontendUri."/{dept:[a-zA-Z0-9_-]+}/{page:[a-
 $router->add($config->application->frontendUri."/{dept:[a-zA-Z0-9_-]+}/blog", array(
     'module' => 'frontend_dept',
     'controller' => 'posts',
-    'action' => 'blog',
+    'action' => 'single',
     'dept' => 1,
+    'dept' => 1,
+));
+
+$router->add($config->application->frontendUri."/{dept:[a-zA-Z0-9_-]+}/news/{post:[a-zA-Z0-9_-]+}", array(
+    'module' => 'frontend_dept',
+    'controller' => 'posts',
+    'action' => 'single',
+    'dept' => 1,
+    'post' => 2,
 ));
 
 $router->add($config->application->frontendUri."/{page:[a-zA-Z0-9_-]+}.html", array(
