@@ -71,7 +71,7 @@
                 <div class="col-md-auto hidden-md-down pl-md-0">
                     <div class="header-first clearfix">
                         <div id="logo" class="logo" dept-id = "{{ dept.id }}">
-                            <a href="<?php echo FRONTEND_URL ?>/{{dept.slug}}">
+                            <a href="<?php echo FRONTEND_URL ?>/{{ dept.id != 1 ? dept.slug : ''}}">
                                 {% if dept.logo %}
                                 <img src="{{ helper.getLinkImage(dept.logo) }}" alt="{{ dept_lang.name }}">
                                 {% else %}

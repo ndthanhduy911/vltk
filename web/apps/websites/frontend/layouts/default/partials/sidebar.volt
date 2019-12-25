@@ -62,7 +62,7 @@
             </div>
 
             <div class="media-body">
-                <h6 class="media-heading"><a href="<?= Posts::getUrl($dept, $post) ?>">{{ post.title }}</a></h6>
+                <h5 class="media-heading"><a href="<?= Posts::getUrl($dept, $post) ?>" title="{{ post.title }}">{{ helper.getExcerpt(post.title, 0, 60) }}</a></h5>
                 <p class="small margin-clear"><i class="fa fa-calendar pr-10"></i>{{ helper.datetime_vn(post.calendar) }}</p>
             </div>
         </div>
