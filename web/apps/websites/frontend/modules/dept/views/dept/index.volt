@@ -106,7 +106,7 @@
 {% endif %}
 
 {% if staffs %}
-<section class="clearfix pt-5 pb-5">
+<section class="clearfix pb-5">
     <div class="container">
         {% if home['staff_title'] %}
         <div class="row justify-content-lg-center pv-20">
