@@ -4,8 +4,9 @@ namespace Backend\Modules\Setting\Controllers;
 
 use Backend\Modules\Setting\Forms\SocialForm;
 use Models\Language;
+use Models\Link;
+use Models\LinkLang;
 use Models\Social;
-use Models\SocialLang;
 
 class SettingController  extends \BackendController
 {
