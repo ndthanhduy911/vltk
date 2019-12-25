@@ -93,13 +93,13 @@ class StaffForm extends Form
             1 => "Trưởng bộ môn",
             2 => "Phó bộ môn",
             3 => "Giáo vụ bộ môn",
-            4 => "Giảng viên",
-            5 => "Giảng viên thỉnh giảng",
+            4 => "Giảng viên cơ hữu",
+            5 => "Cán bộ thỉnh giảng",
             6 => "Nhân viên",
         ], [
             'class' => 'form-control',
             'useEmpty' => true,
-            'emptyText' => 'Nhân viên',
+            'emptyText' => 'Chọn chức vụ',
             'emptyValue' => '',
         ]);
         $this->add($dept_position);

@@ -44,9 +44,8 @@ use Models\Staff;
         ->orderBy("$npStaff.dept_id ASC, $npStaff.dept_position ASC")
         ->getQuery()
         ->execute();
-        
     }else{
-        $deanStaffs = $this->modelsManager->createBuilder()
+        $mainStaffs = $this->modelsManager->createBuilder()
         ->columns(array(
             $npStaff.'.id',
             $npStaff.'.slug',
@@ -59,11 +58,28 @@ use Models\Staff;
             'SL.content content'
         ))
         ->from($npStaff)
-        ->leftJoin("Models\StaffLang", "SL.staff_id = $npStaff.id AND SL.lang_id = $lang_id AND $npStaff.dept_id = $dept->id",'SL')
-        ->where("$npStaff.status = 1")
-        ->inWhere("$npStaff.dept_position", [1,2])
+        ->where("$npStaff.deleted = 0 AND $npStaff.status = 1 AND $npStaff.dept_position != 5 AND $npStaff.dept_id = $dept->id")
+        ->leftJoin("Models\StaffLang", "SL.staff_id = $npStaff.id AND SL.lang_id = $lang_id",'SL')
         ->orderBy("$npStaff.dept_position ASC")
-        ->limit(3)
+        ->getQuery()
+        ->execute();
+        
+        $employStaff = $this->modelsManager->createBuilder()
+        ->columns(array(
+            $npStaff.'.id',
+            $npStaff.'.slug',
+            $npStaff.'.featured_image',
+            $npStaff.'.dean',
+            $npStaff.'.dept_position',
+            $npStaff.'.email',
+            $npStaff.'.dept_id',
+            'SL.title title',
+            'SL.content content'
+        ))
+        ->from($npStaff)
+        ->where("$npStaff.deleted = 0 AND $npStaff.status = 1 AND $npStaff.dept_position = 5 AND $npStaff.dept_id = $dept->id")
+        ->leftJoin("Models\StaffLang", "SL.staff_id = $npStaff.id AND SL.lang_id = $lang_id",'SL')
+        ->orderBy("$npStaff.dept_position ASC")
         ->getQuery()
         ->execute();
     } 
@@ -79,7 +95,7 @@ use Models\Staff;
     <div class="container">
         <div class="row justify-content-lg-center">
             <div class="col-lg-8 text-center pv-20">
-                <h2 class="title object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100"><span class="text-white text-uppercase">{{ page_lang.title }}</span></h2>
+                <h1 class="title object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100"><span class="text-white text-uppercase">{{ page_lang.title }}</span></h1>
                 {% if page_lang.excerpt %}
                 <div class="separator object-non-visible mt-10" data-animation-effect="fadeIn" data-effect-delay="100">
                 </div>
@@ -152,7 +168,61 @@ use Models\Staff;
                         {% endif %}
                     {% endfor %}
                 {% else %}
+                    <h2 class="page-title">{{ ml._ml_system('main_staff', 'Cán bộ cơ hữu') }}</h2>
+                    <div class="separator-2"></div>
+                    {% for staff in mainStaffs %}
+                    <div class="image-box team-member style-3-b">
+                        <div class="row">
+                            <div class="col-md-3 col-lg-3">
+                                <div class="overlay-container overlay-visible">
+                                <img src="{{ helper.getLinkImage(staff.featured_image,'/assets/frontend/images/team-member-1.jpg') }}" alt="{{ staff.title }}">
+                                <a href="{{ helper.getLinkImage(staff.featured_image,'/assets/frontend/images/team-member-1.jpg') }}" class="popup-img overlay-link" title="{{ staff.title }}"><i class="fa fa-plus"></i></a>
+                                </div>
+                            </div>
+                            <div class="col-md-9 col-lg-9">
+                                <div class="body">
+                                <h3 class="title margin-clear">{{ staff.title }} - <small>{{ helper.getPosition(staff.dept_position) }}</small></h3>
+                                <div class="separator-2 mt-10"></div>
+                                {{ staff.content }}
+                                {% if staff.email %}
+                                <h4 class="title mt-3">{{ ml._ml_system('contact', 'Liên hệ') }}</h4>
+                                <ul class="list-icons">
+                                    <li><a href="mailto:{{ staff.email }}" class="text-info"><i class="fa fa-envelope-o pr-10"></i>{{ staff.email }}</a></li>
+                                </ul>
+                                {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
 
+                    <h2 class="page-title">{{ ml._ml_system('employ_staff', 'Cán bộ thỉnh giảng') }}</h2>
+                    <div class="separator-2"></div>
+                    {% for staff in employStaff %}
+                    <div class="image-box team-member style-3-b">
+                        <div class="row">
+                            <div class="col-md-3 col-lg-3">
+                                <div class="overlay-container overlay-visible">
+                                <img src="{{ helper.getLinkImage(staff.featured_image,'/assets/frontend/images/team-member-1.jpg') }}" alt="{{ staff.title }}">
+                                <a href="{{ helper.getLinkImage(staff.featured_image,'/assets/frontend/images/team-member-1.jpg') }}" class="popup-img overlay-link" title="{{ staff.title }}"><i class="fa fa-plus"></i></a>
+                                </div>
+                            </div>
+                            <div class="col-md-9 col-lg-9">
+                                <div class="body">
+                                <h3 class="title margin-clear">{{ staff.title }}</small></h3>
+                                <div class="separator-2 mt-10"></div>
+                                {{ staff.content }}
+                                {% if staff.email %}
+                                <h4 class="title mt-3">{{ ml._ml_system('contact', 'Liên hệ') }}</h4>
+                                <ul class="list-icons">
+                                    <li><a href="mailto:{{ staff.email }}" class="text-info"><i class="fa fa-envelope-o pr-10"></i>{{ staff.email }}</a></li>
+                                </ul>
+                                {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
                 {% endif %}
             </div>
             <div class="col-md-3">

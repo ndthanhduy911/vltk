@@ -227,7 +227,7 @@ public function datetime_vn($date = null, $type = "d/m/Y H:i")
             case 4: 
                 return MLML::_ml_system('lecturer',"Giảng viên");  
             case 5: 
-                return MLML::_ml_system('visiting_lecturer',"Giảng viên thỉnh giảng");  
+                return MLML::_ml_system('visiting_lecturer',"Cán bộ thỉnh giảng");  
             case 6: 
                 return MLML::_ml_system('staff',"Nhân viên");  
             default:
