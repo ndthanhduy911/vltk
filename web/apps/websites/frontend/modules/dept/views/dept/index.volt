@@ -58,8 +58,41 @@
                 <h3><span class="text-default">{{cat.cat_name}}</span></h3>
                 <div class="separator-2"></div>
                 <div class="block">
-                    <div class="home-post" data-id="{{cat.id}}">
-                        
+                    <div class="home-post">
+                        <?php 
+                            $npPosts = $postModel::getNamepace();
+                            $posts = $this->modelsManager->createBuilder()
+                            ->columns(array(
+                                $npPosts.'.id',
+                                'PL.title',
+                                $npPosts.'.slug',
+                                $npPosts.'.cat_id',
+                                'PL.content',
+                                $npPosts.'.status',
+                                'PL.excerpt',
+                                $npPosts.'.calendar',
+                                $npPosts.'.featured_image',
+                            ))
+                            ->from($npPosts)
+                            ->where("$npPosts.deleted = 0 AND $npPosts.cat_id = $cat->id AND $npPosts.status = 1")
+                            ->join('Models\PostsLang', 'PL.post_id = '.$npPosts.'.id AND PL.lang_id = '.$this->session->get('lang_id'),'PL')
+                            ->orderBy("$npPosts.calendar DESC")
+                            ->limit(5, 0)
+                            ->getQuery()
+                            ->execute();
+                        ?>
+                        {% for post in posts %}
+                        <div class="media mb-3">
+                            <div class="overlay-container rounded">
+                                <img class="media-object" src="{{ helper.getLinkImage(post.featured_image) }}" alt="{{ post.title }}">
+                                <a href="{{ postModel.getUrl(dept, post) }}" class="overlay-link small"><i class="fa fa-graduation-cap"></i></a>
+                            </div>
+                            <div class="media-body">
+                                <h5 class="media-heading"><a href="{{ postModel.getUrl(dept, post) }}" title="{{ post.title }}">{{ helper.getExcerpt(post.title, 0, 70) }}</a></h5>
+                                <div class="small"><i class="fa fa-calendar pr-10"></i>{{ helper.datetime_vn(post.calendar, 'd/m/Y') }}</div>
+                            </div>
+                        </div>
+                        {% endfor %}
                     </div>
                     <footer class="clearfix">
                         <div class="link pull-right small"><i class="fa fa-link pr-1"></i><a href="{{ constant('FRONTEND_URL')~'/category/'~cat.slug }}">Xem thêm</a></div>

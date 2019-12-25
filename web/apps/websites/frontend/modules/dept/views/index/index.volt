@@ -80,7 +80,7 @@
                                 $npPosts.'.featured_image',
                             ))
                             ->from($npPosts)
-                            ->where("$npPosts.deleted = 0 AND $npPosts.cat_id = $cat->id AND $npPosts.status = 1 AND $npPosts.dept_id = 1")
+                            ->where("$npPosts.deleted = 0 AND $npPosts.cat_id = $cat->id AND $npPosts.status = 1")
                             ->join('Models\PostsLang', 'PL.post_id = '.$npPosts.'.id AND PL.lang_id = '.$this->session->get('lang_id'),'PL')
                             ->orderBy("$npPosts.calendar DESC")
                             ->limit(5, 0)

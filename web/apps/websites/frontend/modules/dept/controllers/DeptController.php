@@ -9,6 +9,8 @@ use Models\Home;
 use Models\Staff;
 use Models\Partner;
 use Models\Banner;
+use Models\Posts;
+use Models\Social;
 
 class DeptController extends \FrontendController
 {
@@ -124,10 +126,12 @@ class DeptController extends \FrontendController
         
         
         $this->view->home = $home;
+        $this->view->socials = Social::find(["status = 1 AND dept_id = $dept->id", "order" => "sort ASC"]);
         $this->view->banners = $banners;
         $this->view->cats = $cats;
         $this->view->staffs = $staffs;
         $this->view->partners = $partners;
+        $this->view->postModel = new Posts();
         $this->get_js_css();
     }
 
