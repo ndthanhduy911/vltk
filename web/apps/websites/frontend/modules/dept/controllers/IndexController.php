@@ -8,6 +8,7 @@ use Models\Home;
 use Models\Staff;
 use Models\Partner;
 use Models\Banner;
+use Models\Posts;
 use Models\Social;
 
 class IndexController extends \FrontendController
@@ -137,6 +138,7 @@ class IndexController extends \FrontendController
         $this->view->depts = $depts->count() ? $depts : [];
         $this->view->staffs = $staffs->count() ? $staffs : [];
         $this->view->partners = $partners->count() ? $partners : [];
+        $this->view->postModel = new Posts();
         $this->get_js_css();
     }
 

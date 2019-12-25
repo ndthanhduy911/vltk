@@ -58,7 +58,9 @@
                 <h3><span class="text-default">{{cat.cat_name}}</span></h3>
                 <div class="separator-2"></div>
                 <div class="block">
-                    <div class="hone-post" data-id="{{cat.id}}"></div>
+                    <div class="home-post" data-id="{{cat.id}}">
+                        
+                    </div>
                     <footer class="clearfix">
                         <div class="link pull-right small"><i class="fa fa-link pr-1"></i><a href="{{ constant('FRONTEND_URL')~'/category/'~cat.slug }}">Xem thêm</a></div>
                     </footer>
