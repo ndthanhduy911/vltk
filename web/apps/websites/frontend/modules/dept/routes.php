@@ -1,12 +1,13 @@
 <?php
 use Models\Departments;
-
+// ======================================
+// DEPARTMENT
+// ======================================
 /***********************PostsController***********************/
-
 $router->add($config->application->frontendUri."/{dept:[a-zA-Z0-9_-]+}/news/{post:[a-zA-Z0-9_-]+}", array(
     'module' => 'frontend_dept',
     'controller' => 'posts',
-    'action' => 'index',
+    'action' => 'single',
     'dept' => 1,
     'post' => 2,
 ));
@@ -19,7 +20,14 @@ $router->add($config->application->frontendUri."/{dept:[a-zA-Z0-9_-]+}/category/
     'cat' => 2,
 ));
 
-/***********************PagesController***********************/
+$router->add($config->application->frontendUri."/{dept:[a-zA-Z0-9_-]+}/blog", array(
+    'module' => 'frontend_dept',
+    'controller' => 'posts',
+    'action' => 'blog',
+    'dept' => 1,
+));
+
+/***********************DeptController***********************/
 $router->add($config->application->frontendUri."/{dept:[a-zA-Z0-9_-]+}", array(
     'module' => 'frontend_dept',
     'controller' => 'dept',
@@ -27,6 +35,7 @@ $router->add($config->application->frontendUri."/{dept:[a-zA-Z0-9_-]+}", array(
     'dept' => 1,
 ));
 
+/***********************PagesController***********************/
 $router->add($config->application->frontendUri."/{dept:[a-zA-Z0-9_-]+}/{page:[a-zA-Z0-9_-]+}.html", array(
     'module' => 'frontend_dept',
     'controller' => 'pages',
@@ -35,22 +44,19 @@ $router->add($config->application->frontendUri."/{dept:[a-zA-Z0-9_-]+}/{page:[a-
     'page' => 2,
 ));
 
-$router->add($config->application->frontendUri."/{dept:[a-zA-Z0-9_-]+}/blog", array(
+/***********************StaffController***********************/
+$router->add($config->application->frontendUri."/staff/{staff:[a-zA-Z0-9_-]+}", array(
     'module' => 'frontend_dept',
-    'controller' => 'posts',
+    'controller' => 'staff',
     'action' => 'single',
-    'dept' => 1,
-    'dept' => 1,
+    'staff' => 1,
 ));
 
-$router->add($config->application->frontendUri."/{dept:[a-zA-Z0-9_-]+}/news/{post:[a-zA-Z0-9_-]+}", array(
-    'module' => 'frontend_dept',
-    'controller' => 'posts',
-    'action' => 'single',
-    'dept' => 1,
-    'post' => 2,
-));
 
+// ======================================
+// HOMEPAGE
+// ======================================
+/***********************PagesController***********************/
 $router->add($config->application->frontendUri."/{page:[a-zA-Z0-9_-]+}.html", array(
     'module' => 'frontend_dept',
     'controller' => 'pages',
@@ -58,6 +64,7 @@ $router->add($config->application->frontendUri."/{page:[a-zA-Z0-9_-]+}.html", ar
     'page' => 1,
 ));
 
+/***********************PostsController***********************/
 $router->add($config->application->frontendUri."/category/{cat:[a-zA-Z0-9_-]+}", array(
     'module' => 'frontend_dept',
     'controller' => 'posts',

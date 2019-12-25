@@ -43,4 +43,9 @@ class Staff extends \Phalcon\Mvc\Model
             "columns" => $columns
         ]);
     }
+
+    public static function getUrl($staff = NULL)
+    {
+        return FRONTEND_URL.'/staff/'.$staff->slug;
+    }
 }
