@@ -314,7 +314,7 @@ class PostsController  extends \BackendController {
         //     $data = $data->andWhere($npPosts.".dept_id IN (".implode(',',$this->session->get('dept_mg')).")");
         // }
 
-        $search = $npPosts.'.title LIKE :search:';
+        $search = 'PL.title LIKE :search:';
         $this->response->setStatusCode(200, 'OK');
         $this->response->setJsonContent($this->ssp->data_output($this->request->get(), $data,$search));
         return $this->response->send();

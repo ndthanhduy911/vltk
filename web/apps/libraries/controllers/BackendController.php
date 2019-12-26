@@ -16,12 +16,13 @@ class BackendController extends Controller
 
     public function beforeExecuteRoute(Dispatcher $dispatcher)
     {
-        if (!$this->session->has("short_name")) {
-            $lang_short = Language::findFirst(["actived = 1 AND status = 1",'columns' => 'id, name']);
-            $this->session->set("short_name", $lang_short ? strtolower($lang_short->short_name) : 'vie');
-            $this->session->set("lang_id", $lang_short ? strtolower($lang_short->id) : 1);
-        }
-        if ($this->session->has("user_id")) {
+        // if (!$this->session->has("short_name")) {
+        //     $lang_short = Language::findFirst(["actived = 1 AND status = 1",'columns' => 'id, name']);
+        //     $this->session->set("short_name", $lang_short ? strtolower($lang_short->short_name) : 'vie');
+        //     $this->session->set("lang_id", $lang_short ? strtolower($lang_short->id) : 1);
+        // }
+
+        if ($this->session->get("user_id")) {
             if ($this->session->has("private")) {
                 $private = $this->session->get("private");
             } else {
@@ -42,7 +43,9 @@ class BackendController extends Controller
                 die;
             }
         } else {
-            return $this->response->redirect($this->getBackendUrl().'/account/login');
+            $this->session->destroy();
+            header('Location: '.$this->getBackendUrl().'/account/login');
+            die;
         }
     }
 }

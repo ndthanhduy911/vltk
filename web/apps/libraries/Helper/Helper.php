@@ -197,7 +197,7 @@ public function datetime_vn($date = null, $type = "d/m/Y H:i")
         return NULL;
     }
 
-    public function getLinkImage($path, $path_default = '/assets/images/no-image.jpg')
+    public function getLinkImage($path, $path_default = '/assets/frontend/images/defaut_img.png')
     {
         return $path ? FRONTEND_URL.$path : FRONTEND_URL.$path_default;
     }

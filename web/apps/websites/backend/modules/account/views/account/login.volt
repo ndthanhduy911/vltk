@@ -10,7 +10,7 @@
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" href="/assets/backend/css/main.css">
     <link rel="stylesheet" href="/assets/backend/css/custom.css">
-    <title>Login</title>
+    <title>HCMUS Phuysics | Login</title>
 </head>
 
 <body>
