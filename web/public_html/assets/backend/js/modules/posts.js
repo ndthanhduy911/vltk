@@ -92,7 +92,7 @@ const loadTablePostsTrash = () => {
             "processing": true,
             "serverSide": true,
             "autoWidth": false,
-"pageLength": 25,
+            "pageLength": 25,
             "ajax": backendUrl+"/posts/getdatatrash",
             "columns": [
                 {
@@ -161,4 +161,4 @@ const loadTablePostsTrash = () => {
 loadTablePosts();
 loadTablePostsTrash();
 changeTitleToSlug('#title', '#slug');
-showSelectImage('#uploadImage','#showImg','#featured_image');
+showSelectImage('#uploadImage','#showImg','#featured_image', '#removeImage');

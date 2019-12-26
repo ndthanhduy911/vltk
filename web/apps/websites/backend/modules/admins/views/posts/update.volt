@@ -141,10 +141,13 @@
                 <div class="tile p-3 mb-3">
                     <div class="row m-0">
                         <div class="col-md-12 p-0">
-                            <img id="showImg" src="<?php echo $post->featured_image ? $post->featured_image : '' ?>"
-                                alt="" width="100%">
+                            <div class="w-100">
+                                <img id="showImg" src="<?php echo $post->featured_image ? $post->featured_image : '' ?>"
+                                alt="<?php echo $post->featured_image ? $post->featured_image : '' ?>" width="100%">
+                            </div>
                             {{form_post.render('featured_image')}}
                             <a id="uploadImage" href="#" class="link">Đặt ảnh đại diện</a>
+                            <a id="removeImage" href="#" class="link text-danger {{ post.featured_image ? '' : 'hidden' }}">Xóa</a>
                         </div>
                     </div>
                 </div>

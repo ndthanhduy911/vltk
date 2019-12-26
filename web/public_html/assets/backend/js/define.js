@@ -227,7 +227,7 @@ const showModalBasic = (option, dt = false, add = () => {}, update = () => {}, r
     });
 }
 
-const showSelectImage = (button, showImg, uploadImageValue) => {
+const showSelectImage = (button, showImg, uploadImageValue, buttonRemoveImg) => {
     if($(button).length){
         $('body').on('click', button ,function (e) {
             e.preventDefault();
@@ -249,7 +249,11 @@ const showSelectImage = (button, showImg, uploadImageValue) => {
                         getFileCallback: function (file) {
                             file.url = file.url.replace("/elfinder/php/../../", fontendUrl+'/');
                             let url = file.url;
+                            if($(buttonRemoveImg).length){
+                                $(buttonRemoveImg).removeClass('hidden');
+                            }
                             $(showImg).attr('src' , url);
+                            $(showImg).attr('alt' , url);
                             $(uploadImageValue).val(url);
                             elfNode.dialog('close');
                             elfInsrance.disable();
@@ -258,6 +262,17 @@ const showSelectImage = (button, showImg, uploadImageValue) => {
                 }
             }).parent().css({'zIndex':'11000','top':'100px', 'position' : 'fixed'});
         });
+        if($(buttonRemoveImg).length){
+            $('body').on('click', buttonRemoveImg ,function (e) {
+                e.preventDefault();
+                showSweetAlert(()=>{
+                    $(showImg).attr('src' , '');
+                    $(showImg).attr('alt' , '');
+                    $(uploadImageValue).val('');
+                    $(buttonRemoveImg).addClass('hidden');
+                })
+            });
+        }
     }
 }
 
