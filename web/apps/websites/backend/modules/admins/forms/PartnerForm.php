@@ -19,6 +19,8 @@ class PartnerForm extends Form
         $link->setAttributes(array(
             'class' => 'form-control',
             'placeholder' => 'Link',
+            'required' => '',
+            'data-required-error' => 'Vui lòng điền đầy đủ thông tin.',
             'maxlength' => "200",
         ));
         $link->addValidators(array(

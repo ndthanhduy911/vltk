@@ -22,7 +22,7 @@ class Pages extends \Phalcon\Mvc\Model
 
     public $featured_image;
 
-    public $backgroud_image;
+    public $background_image;
 
     public $deleted;
 

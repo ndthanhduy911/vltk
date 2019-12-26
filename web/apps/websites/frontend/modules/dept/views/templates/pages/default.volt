@@ -1,6 +1,6 @@
 <!-- banner start -->
 <!-- ================ -->
-<div class="banner dark-translucent-bg fixed-bg"style="background-image:url('{{helper.getLinkImage(page.backgroud_image, '/assets/frontend/images/page-about-banner-1.jpg') }}'); background-position: 50% 27%;">
+<div class="banner dark-translucent-bg fixed-bg"style="background-image:url('{{helper.getLinkImage(page.background_image, '/assets/frontend/images/page-about-banner-1.jpg') }}'); background-position: 50% 27%;">
     <!-- breadcrumb start -->
     <!-- ================ -->
     {{ partial('breadcrumb') }}

@@ -55,6 +55,7 @@ class PartnerController  extends \BackendController {
                 $req_partner = [
                     'status' => $this->request->getPost('status'),
                     'featured_image' => $this->request->getPost('featured_image'),
+                    'link' => $this->request->getPost('link'),
                 ];
 
                 $form_partner->bind($req_partner, $partner);

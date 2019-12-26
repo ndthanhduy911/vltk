@@ -28,7 +28,7 @@
                     <div class="tab-content p-3">
                         {% for key, lang in languages %}
                         <div class="tab-pane fade {{ !key ? 'active show' : '' }}" id="lang{{lang.id}}">
-                            <h5 class="text-primary font-weight-normal">Tiêu đề</h5>
+                            <h6 class="text-primary font-weight-normal">Tiêu đề</h6>
                             <div class="form-row mb-3">
                                 <div class="form-group col-md-12 m-0">
                                     <div class="input-group">
@@ -41,7 +41,7 @@
                                 </div>
                             </div>
 
-                            <h5 class="text-primary font-weight-normal">Tóm tắt</h5>
+                            <h6 class="text-primary font-weight-normal">Tóm tắt</h6>
                             <div class="form-row">
                                 <div class="form-group col-md-12">
                                     <div class="input-group">
@@ -54,8 +54,7 @@
                                 </div>
                             </div>
 
-                            <h5 class="text-primary font-weight-normal">Nội dung</h5>
-
+                            <h6 class="text-primary font-weight-normal">Nội dung</h6>
                             <div class="form-row">
                                 <div class="form-group col-md-12">
                                     <div class="input-group">
@@ -78,8 +77,7 @@
                     <div class="row m-0">
                         <div class="col-md-12 p-0">
                             <div class="d-inline-block w-100">
-                                
-                                <span class="text-primary">Trạng thái:</span>
+                                <h6 class="text-primary font-weight-normal">Trạng thái</h6>
                                 <div class="form-group mt-1">
                                     <div class="input-group">
                                         {{form_page.render('status')}}
@@ -88,8 +86,7 @@
                                 </div>
                             </div>
                             <div class="d-inline-block w-100">
-                                
-                                <span class="text-primary">Slug:</span>
+                                <h6 class="text-primary font-weight-normal">Slug</h6>
                                 <div class="form-group mt-1">
                                     <div class="input-group">
                                         {{form_page.render('slug')}}
@@ -98,8 +95,7 @@
                                 </div>
                             </div>
                             <div class="d-inline-block w-100">
-                                
-                                <span class="text-primary">Giao diện:</span>
+                                <h6 class="text-primary font-weight-normal">Giao diện</h6>
                                 <div class="form-group mt-1">
                                     <div class="input-group">
                                         {{form_page.render('attribute_id')}}
@@ -118,10 +114,10 @@
                 <div class="tile p-3 mb-3">
                     <div class="row m-0">
                         <div class="col-md-12 p-0">
-                            <img id="showImg" src="<?php echo $page->featured_image ? $page->featured_image : '' ?>"
-                                alt="" width="100%">
+                            <img id="showImg" class="w-100 d-block" src="{{ page.featured_image ? page.featured_image : '' }}" alt="{{ page.featured_image ? page.featured_image : '' }}">
                             {{form_page.render('featured_image')}}
                             <a id="uploadImage" href="#" class="link">Đặt ảnh đại diện</a>
+                            <a id="removeImage" href="#" class="link text-danger {{ page.featured_image ? '' : 'hidden' }}">Xóa</a>
                         </div>
                     </div>
                 </div>
@@ -129,10 +125,11 @@
                 <div class="tile p-3 mb-3">
                     <div class="row m-0">
                         <div class="col-md-12 p-0">
-                            <img id="showBackgroundImg" src="<?php echo $page->background_image ? $page->background_image : '' ?>"
-                                alt="" width="100%">
+                            <img id="showBackgroundImg" class="w-100 d-block" src="{{ page.background_image ? page.background_image : '' }}"
+                                alt="{{ page.background_image ? page.background_image : '' }}">
                             {{form_page.render('background_image')}}
                             <a id="uploadBackgroundImage" href="#" class="link">Đặt ảnh nền</a>
+                            <a id="removeBackgroundImage" href="#" class="link text-danger {{ page.background_image ? '' : 'hidden' }}">Xóa</a>
                         </div>
                     </div>
                 </div>

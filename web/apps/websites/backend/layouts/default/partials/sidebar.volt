@@ -9,8 +9,8 @@
 		<li class="treeview {% if dispatcher.getControllerName() in ['posts','categories'] %} {{ 'is-expanded' }}{% endif %}">
 			<a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-tags"></i><span class="app-menu__label">Bài viết</span><i class="treeview-indicator fa fa-angle-right"></i></a>
 			<ul class="treeview-menu">
-				<li><a class="treeview-item {% if dispatcher.getControllerName()=='posts' AND (dispatcher.getActionName() in ['index','edit']) %} {{ 'actived' }} {% endif %}" href="{{ config.application.backendUri }}/posts"><i class="icon fa fa-circle-o"></i>Tất cả</a></li>
-				<li><a class="treeview-item {% if dispatcher.getControllerName()=='posts' AND (dispatcher.getActionName() in ['update']) %} {{ 'actived' }} {% endif %}" href="{{ config.application.backendUri }}/posts/update"><i class="icon fa fa-circle-o"></i>Bài viết mới</a></li>
+				<li><a class="treeview-item {% if dispatcher.getControllerName()=='posts' AND (dispatcher.getActionName() in ['index','update']) AND dispatcher.getParam('id') %} {{ 'actived' }} {% endif %}" href="{{ config.application.backendUri }}/posts"><i class="icon fa fa-circle-o"></i>Tất cả</a></li>
+				<li><a class="treeview-item {% if dispatcher.getControllerName()=='posts' AND (dispatcher.getActionName() in ['update']) AND !dispatcher.getParam('id') %} {{ 'actived' }} {% endif %}" href="{{ config.application.backendUri }}/posts/update"><i class="icon fa fa-circle-o"></i>Bài viết mới</a></li>
 				<li><a class="treeview-item {% if dispatcher.getControllerName()=='categories' %} {{ 'actived' }} {% endif %}" href="{{ config.application.backendUri }}/categories"><i class="icon fa fa-circle-o"></i> Danh mục</a></li>
 				<!-- <li><a class="treeview-item" href="{{ config.application.backendUri }}/tag"><i class="icon fa fa-circle-o"></i> Thẻ</a></li> -->
 			</ul>
