@@ -10,10 +10,18 @@ class DashboardController  extends \BackendController {
 
     public function indexAction(){
         $dept_id = $this->session->get('dept_id');
-        $count_post = Posts::count(["dept_id = $dept_id AND status = 1 AND deleted = 0"]);
-        $count_staff = Staff::count(["dept_id = $dept_id AND status = 1 AND deleted = 0"]);
-        $count_partner = Partner::count(["dept_id = $dept_id AND status = 1 AND deleted = 0"]);
-        $count_page = Pages::count(["dept_id = $dept_id AND status = 1 AND deleted = 0"]);
+        if($dept_id != 1){
+            $count_staff = Staff::count(["dept_id = $dept_id AND status = 1 AND deleted = 0"]);
+            $count_partner = Partner::count(["dept_id = $dept_id AND status = 1 AND deleted = 0"]);
+            $count_page = Pages::count(["dept_id = $dept_id AND status = 1 AND deleted = 0"]);
+            $count_post = Posts::count(["dept_id = $dept_id AND status = 1 AND deleted = 0"]);
+        }else{
+            $count_staff = Staff::count(["status = 1 AND deleted = 0"]);
+            $count_partner = Partner::count(["status = 1 AND deleted = 0"]);
+            $count_page = Pages::count(["status = 1 AND deleted = 0"]);
+            $count_post = Posts::count(["status = 1 AND deleted = 0"]);
+        }
+
         $newest_post = [];
 
 

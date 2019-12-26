@@ -1,7 +1,8 @@
 <?php
 
 namespace Backend\Modules\Setting\Controllers;
-
+use Backend\Modules\Setting\Forms\LinkForm;
+use Backend\Modules\Setting\Forms\LinkLangForm;
 use Backend\Modules\Setting\Forms\SocialForm;
 use Models\Language;
 use Models\Link;

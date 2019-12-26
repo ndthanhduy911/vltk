@@ -191,7 +191,7 @@
 {% endif %}
 
 {% if partners %}
-<section class="pt-5 pb-5 section dark-translucent-bg fixed-bg" style="background-position: 50% 42%; background-image: url({{ helper.getLinkImage(home.partner_bg, './assets/frontend/images/education-4.jpg') }})">
+<section class="pt-5 pb-5 section dark-translucent-bg fixed-bg" style="background-position: 50% 42%; background-image: url({{ helper.getLinkImage(home['partner_bg'], './assets/frontend/images/education-4.jpg') }})">
     {% if home['partner_title'] %}
     <div class="container pv-20">
         <div class="row justify-content-lg-center">

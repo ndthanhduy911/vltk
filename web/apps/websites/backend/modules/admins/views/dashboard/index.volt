@@ -95,12 +95,12 @@
                         {% for post in newest_post %}
                         <li class="item">
                             <div class="product-img">
-                                <img src="{{ helper.getExcerpt(post.featured_image) }}" alt="{{ post.title }}" class="img-size-50">
+                                <img src="{{ helper.getLinkImage(post.featured_image) }}" alt="{{ post.title }}" class="img-size-50">
                             </div>
                             <div class="product-info">
                                 <a target="__blank" href="{{ postModel.getUrl(dept, post) }}" class="product-title">{{ helper.getExcerpt(post.title, 0, 50) }}<span class="badge badge-info float-right">{{ helper.datetime_vn(post.calendar,'d/m/Y') }}</span></a>
                                 <span class="product-description">
-                                    {{ helper.getLinkImage(post.excerpt, 0, 50) }}
+                                    {{ helper.getExcerpt(post.excerpt, 0, 50) }}
                                 </span>
                             </div>
                         </li>
