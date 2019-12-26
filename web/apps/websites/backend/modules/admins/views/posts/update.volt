@@ -29,53 +29,35 @@
                         {% for key, lang in languages %}
                         <div class="tab-pane fade {{ !key ? 'active show' : '' }}"
                             id="lang{{lang.id}}">
-                            <h5 class="text-primary font-weight-normal">Tiêu đề</h5>
-                            <div class="tile p-3 mb-3">
-                                <div class="modal-body p-0">
-                                    <div class="form-row">
-                                        <div class="form-group col-md-12 m-0">
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text fa fa-header"></div>
-                                                </div>
-                                                {{forms_lang[lang.id].render('title', ['id' : 'title'~lang.id,'name' : 'title['~lang.id~']'])}}
-                                                <div class="invalid-tooltip"></div>
-                                            </div>
-                                        </div>
+                            <h6 class="text-primary font-weight-normal">Tiêu đề</h6>
+                            <div class="form-group mb-3">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text fa fa-header"></div>
                                     </div>
+                                    {{forms_lang[lang.id].render('title', ['id' : 'title'~lang.id,'name' : 'title['~lang.id~']'])}}
+                                    <div class="invalid-tooltip"></div>
                                 </div>
                             </div>
 
-                            <h5 class="text-primary font-weight-normal">Tóm tắt</h5>
-                            <div class="tile p-0">
-                                <div class="modal-body pb-0">
-                                    <div class="form-row">
-                                        <div class="form-group col-md-12">
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text fa fa-tags"></div>
-                                                </div>
-                                                {{forms_lang[lang.id].render('excerpt', ['id' : 'excerpt'~lang.id, 'name' : 'excerpt['~lang.id~']'])}}
-                                                <div class="invalid-tooltip"></div>
-                                            </div>
-                                        </div>
+                            <h6 class="text-primary font-weight-normal">Tóm tắt</h6>
+                            <div class="form-group mb-3">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text fa fa-tags"></div>
                                     </div>
+                                    {{forms_lang[lang.id].render('excerpt', ['id' : 'excerpt'~lang.id, 'name' : 'excerpt['~lang.id~']'])}}
+                                    <div class="invalid-tooltip"></div>
                                 </div>
                             </div>
 
-                            <h5 class="text-primary font-weight-normal">Nội dung</h5>
-                            <div class="tile p-0">
-                                <div class="row m-0">
-                                    <div class="col-md-12 p-0">
-                                        <div class="form-group mb-0">
-                                            <div class="input-group">
-                                                <textarea id="editor{{lang.id}}" name="content[{{lang.id}}]" class="rounded">
-                                                    {{post_content[lang.id]}}
-                                                </textarea>
-                                                <div class="invalid-tooltip"></div>
-                                            </div>
-                                        </div>
-                                    </div>
+                            <h6 class="text-primary font-weight-normal">Nội dung</h6>
+                            <div class="form-group mb-3">
+                                <div class="input-group">
+                                    <textarea id="editor{{lang.id}}" name="content[{{lang.id}}]" class="rounded">
+                                        {{post_content[lang.id]}}
+                                    </textarea>
+                                    <div class="invalid-tooltip"></div>
                                 </div>
                             </div>
                         </div>
@@ -88,32 +70,27 @@
                 <div class="tile p-3 mb-3">
                     <div class="row m-0">
                         <div class="col-md-12 p-0">
-                            
-                            <span class="text-primary">Trạng thái:</span>
+                            <h6 class="text-primary  font-weight-normal">Trạng thái</h6>
                             <div class="form-group mt-1">
                                 <div class="input-group">
                                     {{form_post.render('status')}}
                                     <div class="invalid-tooltip"></div>
                                 </div>
                             </div>
-                            <div class="d-inline-block w-100">
-                                <i class="fa fa-calendar"></i>
-                                <span class="text-primary">Lịch:</span>
-                                <div class="form-group mt-1">
-                                    <div class="input-group">
-                                        {{form_post.render('calendar')}}
-                                        <div class="invalid-tooltip"></div>
-                                    </div>
+
+                            <h6 class="text-primary font-weight-normal">Lịch</h6>
+                            <div class="form-group mt-1">
+                                <div class="input-group">
+                                    {{form_post.render('calendar')}}
+                                    <div class="invalid-tooltip"></div>
                                 </div>
                             </div>
-                            <div class="d-inline-block w-100 mb-2">
-                                
-                                <span class="text-primary">Slug:</span>
-                                <div class="form-group mt-1">
-                                    <div class="input-group">
-                                        {{form_post.render('slug')}}
-                                        <div class="invalid-tooltip"></div>
-                                    </div>
+                        
+                            <h6 class="text-primary font-weight-normal">Trạng thái</h6>
+                            <div class="form-group mt-1">
+                                <div class="input-group">
+                                    {{form_post.render('slug')}}
+                                    <div class="invalid-tooltip"></div>
                                 </div>
                             </div>
                         </div>
@@ -125,9 +102,9 @@
                 </div>
 
                 <div class="tile p-3 mb-3">
-                    <h5 class="text-primary font-weight-normal">Danh mục</h5>
                     <div class="row m-0">
                         <div class="col-md-12 p-0">
+                            <h6 class="text-primary font-weight-normal">Danh mục</h6>
                             <div class="form-group mb-0">
                                 <div class="input-group">
                                     {{form_post.render('cat_id')}}
@@ -141,10 +118,9 @@
                 <div class="tile p-3 mb-3">
                     <div class="row m-0">
                         <div class="col-md-12 p-0">
-                            <div class="w-100">
-                                <img id="showImg" src="<?php echo $post->featured_image ? $post->featured_image : '' ?>"
-                                alt="<?php echo $post->featured_image ? $post->featured_image : '' ?>" width="100%">
-                            </div>
+
+                            <img id="showImg" class="w-100 d-block" src="<?php echo $post->featured_image ? $post->featured_image : '' ?>"
+                            alt="<?php echo $post->featured_image ? $post->featured_image : '' ?>">
                             {{form_post.render('featured_image')}}
                             <a id="uploadImage" href="#" class="link">Đặt ảnh đại diện</a>
                             <a id="removeImage" href="#" class="link text-danger {{ post.featured_image ? '' : 'hidden' }}">Xóa</a>
