@@ -56,19 +56,19 @@ class Menus extends \Phalcon\Mvc\Model
     public static function getLink($menu , $slug = ''){
         switch ((int)$menu->type) {
             case 1: {
-                return ($post = Posts::findFirstId($menu->post_id)) ? FRONTEND_URL.($slug ? '/'.$slug : '')."/news/".$post->slug : '#';
+                return ($post = Posts::findFirstId($menu->post_id)) ? FRONTEND_URL.($slug != '/' ? '/'.$slug : '')."/news/".$post->slug : '#';
                 break;
             }    
             case 2: {
-                return ($page = Pages::findFirstId($menu->page_id)) ? FRONTEND_URL.($slug ? '/'.$slug : '').'/'.$page->slug.'.html' : '#';
+                return ($page = Pages::findFirstId($menu->page_id)) ? FRONTEND_URL.($slug != '/' ? '/'.$slug : '').'/'.$page->slug.'.html' : '#';
                 break;
             } 
             case 3: {
-                return ($cat = Categories::findFirstId($menu->cat_id)) ? FRONTEND_URL.($slug ? '/'.$slug : '').'/category/'.$cat->slug : '#';
+                return ($cat = Categories::findFirstId($menu->cat_id)) ? FRONTEND_URL.($slug != '/' ? '/'.$slug : '').'/category/'.$cat->slug : '#';
                 break;
             }   
             case 4: {
-                return ($dept = Departments::findFirstId($menu->dept)) ? FRONTEND_URL.($slug ? '/'.$slug : '').'/'.$dept->slug : '#';
+                return ($dept = Departments::findFirstId($menu->dept)) ? FRONTEND_URL.($slug != '/' ? '/'.$slug : '').'/'.$dept->slug : '#';
                 break;
             } 
             case 5: {
