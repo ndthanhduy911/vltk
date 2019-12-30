@@ -95,7 +95,7 @@
                         {% endfor %}
                     </div>
                     <footer class="clearfix">
-                        <div class="link pull-right small"><i class="fa fa-link pr-1"></i><a href="{{ constant('FRONTEND_URL')~'/category/'~cat.slug }}">Xem thêm</a></div>
+                        <div class="link pull-right small"><i class="fa fa-link pr-1"></i><a href="{{ constant('FRONTEND_URL')~'/category/'~cat.slug }}">{{ ml._ml_system('more', 'Xem thêm') }}</a></div>
                     </footer>
                 </div>
             </div>
@@ -137,7 +137,8 @@
             {% endfor %}
         </div>
         <div class="col-lg-12 text-center">
-            <a href="<?php echo FRONTEND_URL.'/staff' ?>" class="btn btn-default btn-lg btn-animated radius-50">{{ ml._ml_system('more', 'Xem thêm') }} <i class="fa fa-arrow-right"></i></a>
+            <?php $staff_link = $dept->slug != '/' ? FRONTEND_URL.$dept->slug.'/staff' : FRONTEND_URL.'/staff'; ?>
+            <a href="{{ staff_link }}" class="btn btn-default btn-lg btn-animated radius-50">{{ ml._ml_system('more', 'Xem thêm') }} <i class="fa fa-arrow-right"></i></a>
         </div>
     </div>
 </section>
