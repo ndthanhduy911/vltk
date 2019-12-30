@@ -45,11 +45,13 @@ $router->add($config->application->frontendUri."/{dept:[a-zA-Z0-9_-]+}/{page:[a-
 ));
 
 /***********************StaffController***********************/
-$router->add($config->application->frontendUri."/staff/{staff:[a-zA-Z0-9_-]+}", array(
+
+$router->add($config->application->frontendUri."/{dept:[a-zA-Z0-9_-]+}/staff/{staff:[a-zA-Z0-9_-]+}", array(
     'module' => 'frontend_dept',
     'controller' => 'staff',
     'action' => 'single',
-    'staff' => 1,
+    'dept' => 1,
+    'staff' => 2,
 ));
 
 $router->add($config->application->frontendUri."/{dept:[a-zA-Z0-9_-]+}/staff", array(
@@ -57,12 +59,6 @@ $router->add($config->application->frontendUri."/{dept:[a-zA-Z0-9_-]+}/staff", a
     'controller' => 'staff',
     'action' => 'index',
     'dept' => 1,
-));
-
-$router->add($config->application->frontendUri."/staff", array(
-    'module' => 'frontend_dept',
-    'controller' => 'staff',
-    'action' => 'index'
 ));
 
 
@@ -111,4 +107,18 @@ $router->add($config->application->frontendUri.'/api/changelanguage/:int', array
     'controller' => 'index',
     'action' => 'changelanguage',
     'id' => 1,
+));
+
+/***********************StaffController***********************/
+$router->add($config->application->frontendUri."/staff/{staff:[a-zA-Z0-9_-]+}", array(
+    'module' => 'frontend_dept',
+    'controller' => 'staff',
+    'action' => 'single',
+    'staff' => 1,
+));
+
+$router->add($config->application->frontendUri."/staff", array(
+    'module' => 'frontend_dept',
+    'controller' => 'staff',
+    'action' => 'index'
 ));

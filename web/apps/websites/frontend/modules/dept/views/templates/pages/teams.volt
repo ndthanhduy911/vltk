@@ -122,7 +122,7 @@ use Models\Staff;
                                     <img src="{{ helper.getLinkImage(staff.featured_image,'/assets/frontend/images/team-member-1.jpg') }}" alt="{{ staff.title }}" width="100%">
                                 </div>
                                 <div class="body">
-                                    <h5 class="margin-clear text-uppercase"><a href="{{ staffModel.getUrl(staff) }}" title="{{ staff.title }}">{{ staff.title }}</a></h5>
+                                    <h5 class="margin-clear text-uppercase"><a href="{{ staffModel.getUrl(dept,staff) }}" title="{{ staff.title }}">{{ staff.title }}</a></h5>
                                     <small class="text-uppercase">{{ helper.getDean(staff.dean) }}</small>
                                     <div class="separator mt-10"></div>
                                     {% if staff.email %}
@@ -152,7 +152,7 @@ use Models\Staff;
                                     </div>
                                     <div class="col-md-9 p-sm-0">
                                         <div class="body mt-3">
-                                            <h5 class="title margin-clear"><a href="{{ staffModel.getUrl(staff) }}" title="{{ staff.title }}">{{ staff.title }}</a></h5>
+                                            <h5 class="title margin-clear"><a href="{{ staffModel.getUrl(dept, staff) }}" title="{{ staff.title }}">{{ staff.title }}</a></h5>
                                             <div class="separator-2 mt-2"></div>
                                             <h5 class="m-0 text-uppercase">{{ helper.getPosition(staff.dept_position) }}</h5>
                                             {% if staff.email %}
