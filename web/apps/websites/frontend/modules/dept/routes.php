@@ -52,6 +52,19 @@ $router->add($config->application->frontendUri."/staff/{staff:[a-zA-Z0-9_-]+}", 
     'staff' => 1,
 ));
 
+$router->add($config->application->frontendUri."/{dept:[a-zA-Z0-9_-]+}/staff", array(
+    'module' => 'frontend_dept',
+    'controller' => 'staff',
+    'action' => 'index',
+    'dept' => 1,
+));
+
+$router->add($config->application->frontendUri."/staff", array(
+    'module' => 'frontend_dept',
+    'controller' => 'staff',
+    'action' => 'index'
+));
+
 
 // ======================================
 // HOMEPAGE

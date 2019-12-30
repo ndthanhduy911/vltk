@@ -6,9 +6,29 @@ use Models\Departments;
 use Models\DepartmentsLang;
 use Models\Staff;
 use Models\StaffLang;
+use Models\Pages;
+use Models\PagesLang;
+
 
 class StaffController extends \FrontendController
 {
+    public function indexAction(){
+        $dept = $this->dispatcher->getReturnedValue();
+        $lang_id = $this->session->get('lang_id');
+        if(!$page = Pages::findFirst(["status = 1 AND dept_id = $dept->id AND attribute_id = 2"])){
+            $this->view->title = '404';
+            return $this->view->pick('templates/404');
+        }
+        if(!$page_lang = PagesLang::findFirst(["lang_id = $lang_id AND page_id = $page->id"])){
+            $this->view->title = '404';
+            return $this->view->pick('templates/404');
+        }
+        $this->view->title = $page_lang->title;
+        $this->view->page = $page;
+        $this->view->page_lang = $page_lang;
+        return $this->view->pick('templates/pages/teams');
+    }
+
     public function singleAction($slug = null){
         $slug = $this->helper->slugify($slug);
         $lang_id = $this->session->get('lang_id');
