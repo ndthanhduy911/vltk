@@ -62,6 +62,7 @@ class StaffController  extends \BackendController {
                     'featured_image' => $this->request->getPost('featured_image'),
                     'dept_position' => $this->request->getPost('dept_position'),
                     'email' => $this->request->getPost('email'),
+                    'sort' => $this->request->getPost('sort'),
                     'dept_id' => $this->request->getPost('dept_id')
                 ];
 

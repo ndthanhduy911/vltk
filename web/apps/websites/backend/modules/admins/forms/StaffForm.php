@@ -2,7 +2,7 @@
 namespace Backend\Modules\Admins\Forms;
 
 use Models\Departments;
-use Phalcon\Forms\Element\Email;
+use Phalcon\Forms\Element\Numeric;
 use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\Textarea;
 use Phalcon\Forms\Element\Select;
@@ -117,6 +117,14 @@ class StaffForm extends Form
             ]),
         ));
         $this->add($email);
+
+        $sort = new Numeric('sort');
+        $sort->setAttributes(array(
+            'class' => 'form-control',
+            'placeholder' => 'Sắp xếp',
+            'maxlength' => "999",
+        ));
+        $this->add($sort);
 
 
         $featured_image = new Hidden('featured_image');

@@ -33,6 +33,14 @@
     font-family: "Roboto", sans-serif
 }
 
+.w-30  {
+    width: 30% !important;
+}
+
+.w-40  {
+    width: 40% !important;
+}
+
 h2 {
     font-size: 36px;
     text-transform: initial;
@@ -96,6 +104,13 @@ ul.dropdown-menu > li:last-of-type > a
     .col-xs-12 {
         width: 100%;
     }
+    .w-30  {
+        width: 100% !important;
+    }
+    
+    .w-40  {
+        width: 100% !important;
+    }
 }
 
 
@@ -143,6 +158,10 @@ ul.dropdown-menu > li:last-of-type > a
 
 .object-fit-contain {
     object-fit: contain;
+}
+
+.object-fit-cover {
+    object-fit: cover;
 }
 
 .page-link.disabled {

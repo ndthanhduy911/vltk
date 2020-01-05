@@ -20,7 +20,7 @@ use Models\Staff;
         ->from($npStaff)
         ->leftJoin("Models\StaffLang", "SL.staff_id = $npStaff.id AND SL.lang_id = $lang_id",'SL')
         ->where("$npStaff.status = 1 AND ($npStaff.dean = 1 OR $npStaff.dean = 2)")
-        ->orderBy("$npStaff.dean ASC")
+        ->orderBy("$npStaff.sort ASC, $npStaff.dean ASC")
         ->limit(3)
         ->getQuery()
         ->execute();
@@ -41,7 +41,7 @@ use Models\Staff;
         ->leftJoin("Models\StaffLang", "SL.staff_id = $npStaff.id AND SL.lang_id = $lang_id",'SL')
         ->where("$npStaff.status = 1")
         ->inWhere("$npStaff.dept_position", [1,2])
-        ->orderBy("$npStaff.dept_id ASC, $npStaff.dept_position ASC")
+        ->orderBy("$npStaff.dept_id ASC, $npStaff.dept_position ASC, $npStaff.sort ASC")
         ->getQuery()
         ->execute();
     }else{
@@ -115,8 +115,8 @@ use Models\Staff;
                     <h3 class="text-primary">{{ ml._ml_system('main_staff', 'BAN CHỦ NHIỆM') }}</h3>
                     <div class="separator-2"></div>
                     <div class="row grid-space-10">
-                        {% for staff in deanStaffs %}
-                        <div class="col-md-4">
+                        {% for key,staff in deanStaffs %}
+                        <div class="w-{{ key === 1 ? '40' : '30' }} pl-1 pr-1 mt-3">
                             <div class="team-member image-box style-2 dark-bg text-center">
                                 <div class="overlay-container overlay-visible">
                                     <img src="{{ helper.getLinkImage(staff.featured_image,'/assets/frontend/images/team-member-1.jpg') }}" alt="{{ staff.title }}" width="100%">

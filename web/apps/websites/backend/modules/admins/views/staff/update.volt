@@ -76,15 +76,23 @@
                                         <div class="invalid-tooltip"></div>
                                     </div>
                                 </div>
-                                <div class="d-inline-block w-100 mb-2">
-                                    <h5 class="text-primary font-weight-normal">Slug</h5>
-                                    <div class="form-group mt-1">
-                                        <div class="input-group">
-                                            {{form_staff.render('slug')}}
-                                            <div class="invalid-tooltip"></div>
-                                        </div>
+
+                                <h5 class="text-primary font-weight-normal">Slug</h5>
+                                <div class="form-group mt-1">
+                                    <div class="input-group">
+                                        {{form_staff.render('slug')}}
+                                        <div class="invalid-tooltip"></div>
                                     </div>
                                 </div>
+
+                                <h5 class="text-primary font-weight-normal">Sắp xếp</h5>
+                                <div class="form-group mt-1">
+                                    <div class="input-group">
+                                        {{form_staff.render('sort')}}
+                                        <div class="invalid-tooltip"></div>
+                                    </div>
+                                </div>
+
                             </div>
     
                             <div class="col-md-12 p-0">

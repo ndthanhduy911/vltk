@@ -23,6 +23,8 @@ class Staff extends \Phalcon\Mvc\Model
 
     public $status;
 
+    public $sort;
+
     public $deleled;
 
     public function getSource()
