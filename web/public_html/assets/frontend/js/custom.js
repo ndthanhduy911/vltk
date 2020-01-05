@@ -45,6 +45,12 @@
 			let lang_id = $(this).attr('data-id');
 			changeLang(lang_id);
 		});
+
+		if($(window).width() < 720){
+			$('.slider-revolution-5-container .slider-banner-fullwidth .slider-content').each(function (index, element) {
+				$(this).html(trim_text($(this).text(), 100));
+			});
+		}
 	}); // End document ready
 
 })(jQuery);

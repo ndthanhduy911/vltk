@@ -26,15 +26,15 @@
                         </div>
 
                         <!-- LAYER NR. 1 -->
-                        <div class="tp-caption sfb fadeout caption-box text-<?= $key % 2 == 0 ? 'left' : 'right' ?> rounded"
-                            style="background-color: rgba(0, 0, 0, 0.8);" data-x="right" data-y="center"
+                        <div class="tp-caption sfb fadeout caption-box text-left rounded"
+                            style="background-color: rgba(0, 0, 0, 0.8);" data-x="<?= $key % 2 == 0 ? 'left' : 'right' ?>" data-y="center"
                             data-start="600" data-whitespace="normal" data-transform_idle="o:1;"
                             data-transform_in="y:[100%];sX:1;sY:1;o:0;s:1150;e:Power4.easeInOut;"
                             data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;"
                             data-mask_in="x:0px;y:[100%];s:inherit;e:inherit;"
                             data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;">
                             <h2 class="title slider-title">{{ banner.name }}</h2>
-                            <div class="separator-2 clearfix"></div>
+                            <div class="separator-2 clearfix m-0"></div>
                             <p class="slider-content">{{ banner.description }}</p>
                             <div class="text-right"><a class="btn btn-small btn-default margin-clear" href="{{ banner.button_link }}">{{ banner.button_text }}</a></div>
                         </div>

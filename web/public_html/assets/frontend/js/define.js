@@ -41,3 +41,28 @@ const changeTitleToSlug = (title, slug) => {
         $(slug).val(changeToSlug($(this).val()));
     });
 }
+
+const trim_text = (input, length, ellipses = true, strip_html = true) => {
+    //strip tags, if desired
+    if(!trim_text){
+        return '';
+    }
+    if (strip_html) {
+        input = input.replace(/<\/?[^>]+>/ig, "");
+    }
+
+    //no need to trim, already shorter than trim length
+    if (input.length <= length) {
+        return input;
+    }
+
+    //find last space within length
+    trimmed_text = input.substr(0, length);
+
+    //add ellipses (...)
+    if (ellipses) {
+        trimmed_text += '...';
+    }
+
+    return trimmed_text;
+}
