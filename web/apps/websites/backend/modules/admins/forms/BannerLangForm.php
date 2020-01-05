@@ -36,6 +36,26 @@ class BannerLangForm extends Form
         ));
         $this->add($name);
 
+        $button_text = new Text('button_text');
+        $button_text->setAttributes(array(
+            'class' => 'form-control',
+            'placeholder' => 'Text button',
+            'required' => '',
+            'data-required-error' => "Vui lòng nhập tiêu đề.",
+            'maxlength' => "15",
+            'data-error' => "Text button không đúng quy định.",
+        ));
+        $button_text->addValidators(array(
+            new PresenceOf(array(
+                'message' => 'Text button không được bỏ trống.',
+            )),
+            new StringLength([
+                "max" => 15,
+                "messageMaximum" => "Text button không được dài quá 15 ký tự",
+            ]),
+        ));
+        $this->add($button_text);
+
         $description = new Textarea('description');
         $description->setAttributes(array(
             'class' => 'form-control',

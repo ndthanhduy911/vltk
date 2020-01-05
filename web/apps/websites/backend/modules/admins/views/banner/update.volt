@@ -29,36 +29,33 @@
                             {% for key, lang in languages %}
                             <div class="tab-pane fade {{ !key ? 'active show' : '' }}" id="lang{{lang.id}}">
                                 <h5 class="text-primary font-weight-normal">Tiêu đề</h5>
-                                <div class="tile p-3 mb-3">
-                                    <div class="modal-body p-0">
-                                        <div class="form-row">
-                                            <div class="form-group col-md-12 m-0">
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text fa fa-header"></div>
-                                                    </div>
-                                                    {{forms_lang[lang.id].render('name', ['id' : 'name'~lang.id,'name' : 'name['~lang.id~']'])}}
-                                                    <div class="invalid-tooltip"></div>
-                                                </div>
-                                            </div>
+                                <div class="form-group mb-3">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text fa fa-header"></div>
                                         </div>
+                                        {{forms_lang[lang.id].render('name', ['id' : 'name'~lang.id,'name' : 'name['~lang.id~']'])}}
+                                        <div class="invalid-tooltip"></div>
                                     </div>
                                 </div>
-    
-                                <h5 class="text-primary font-weight-normal">Nội dung</h5>
-                                <div class="tile p-0">
-                                    <div class="modal-body pb-0">
-                                        <div class="form-row">
-                                            <div class="form-group col-md-12">
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text fa fa-tags"></div>
-                                                    </div>
-                                                    {{forms_lang[lang.id].render('description', ['id' : 'description'~lang.id, 'name' : 'description['~lang.id~']'])}}
-                                                    <div class="invalid-tooltip"></div>
-                                                </div>
-                                            </div>
+                                <h5 class="text-primary font-weight-normal">Tên nút</h5>
+                                <div class="form-group mb-3">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text fa fa-header"></div>
                                         </div>
+                                        {{forms_lang[lang.id].render('button_text', ['id' : 'button_text'~lang.id,'name' : 'button_text['~lang.id~']'])}}
+                                        <div class="invalid-tooltip"></div>
+                                    </div>
+                                </div>
+                                <h5 class="text-primary font-weight-normal">Nội dung</h5>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text fa fa-tags"></div>
+                                        </div>
+                                        {{forms_lang[lang.id].render('description', ['id' : 'description'~lang.id, 'name' : 'description['~lang.id~']'])}}
+                                        <div class="invalid-tooltip"></div>
                                     </div>
                                 </div>
                             </div>

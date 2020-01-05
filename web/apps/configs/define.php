@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: CHARIZARD
- * Date: 7/17/2015
- * Time: 8:43 PM
- */
-
 if (isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] == 'demo.phys.honeynet.vn') {
     define("FRONTEND_URL", "http://demo.phys.honeynet.vn");
 } else {

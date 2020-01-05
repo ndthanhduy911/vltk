@@ -51,6 +51,7 @@ class BannerController  extends \BackendController {
                 $error = [];
                 $p_name = $this->request->getPost('name');
                 $p_description = $this->request->getPost('description');
+                $p_button_text = $this->request->getPost('button_text');
                 $req_banner = [
                     'status' => $this->request->getPost('status'),
                     'image' => $this->request->getPost('image'),
@@ -68,6 +69,7 @@ class BannerController  extends \BackendController {
                     $req_banner_lang[$lang->id] = [
                         'name' => $p_name[$lang->id],
                         'description' => $p_description[$lang->id],
+                        'button_text' => $p_button_text[$lang->id],
                         'lang_id' => $lang->id,
                     ];
 
