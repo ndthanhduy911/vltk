@@ -8,6 +8,7 @@ use Models\Home;
 use Models\Staff;
 use Models\Partner;
 use Models\Banner;
+use Models\ConectionSystem;
 use Models\Posts;
 use Models\Social;
 
@@ -130,7 +131,6 @@ class IndexController extends \FrontendController
         ->orderBy("$npPartner.sort ASC")
         ->getQuery()
         ->execute();
-        
         $this->view->home = $home;
         $this->view->socials = Social::find(["status = 1 AND dept_id = 1", "order" => "sort ASC"]);
         $this->view->banners = $banners->count() ? $banners : [] ;
@@ -140,6 +140,7 @@ class IndexController extends \FrontendController
         $this->view->partners = $partners->count() ? $partners : [];
         $this->view->postModel = new Posts();
         $this->get_js_css();
+        return true;
     }
 
     public function changelanguageAction($lang_id = 1){

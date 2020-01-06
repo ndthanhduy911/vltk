@@ -123,8 +123,8 @@
                         <span class="info-box-icon"><i class="fa fa-home"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">Truy cập web</span>
-                            <span class="info-box-number">5,200</span>
+                            <span class="info-box-text">Đăng nhập</span>
+                            <span class="info-box-number">{{count_conection_web}}</span>
                         </div>
                     </div>
                     <div class="info-box mb-3 bg-gradient-success">
@@ -132,7 +132,7 @@
 
                         <div class="info-box-content">
                             <span class="info-box-text">Xem bài viết</span>
-                            <span class="info-box-number">92,050</span>
+                            <span class="info-box-number">{{count_conection_post}}</span>
                         </div>
                     </div>
                     <div class="info-box mb-3 bg-gradient-danger">
@@ -140,7 +140,7 @@
 
                         <div class="info-box-content">
                             <span class="info-box-text">Xem lịch học</span>
-                            <span class="info-box-number">114,381</span>
+                            <span class="info-box-number">{{count_conection_calendar}}</span>
                         </div>
                     </div>
                     <div class="info-box mb-3 bg-gradient-info">
@@ -148,7 +148,7 @@
 
                         <div class="info-box-content">
                             <span class="info-box-text">Truy cập khác</span>
-                            <span class="info-box-number">163,921</span>
+                            <span class="info-box-number">{{count_conection_other}}</span>
                         </div>
                     </div>
                 </div>

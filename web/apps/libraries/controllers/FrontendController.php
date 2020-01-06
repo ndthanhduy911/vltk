@@ -6,6 +6,8 @@ use Phalcon\Mvc\Controller;
 use Phalcon\Mvc\Dispatcher;
 use Models\Language;
 use Models\Social;
+use Models\ConectionSystem;
+
 
 class FrontendController extends Controller
 {

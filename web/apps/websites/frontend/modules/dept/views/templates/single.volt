@@ -22,7 +22,7 @@
                         {% if post.featured_image %}
                         <div class="w-100">
                             <div class="overlay-container d-flex justify-content-center">
-                                <img src="{{ helper.getLinkImage(post.featured_image) }}" alt="{{post.title}}">
+                                <img src="{{ helper.getLinkImage(post.featured_image) }}" alt="{{title}}">
                             </div>
                         </div>
                         {% endif %}

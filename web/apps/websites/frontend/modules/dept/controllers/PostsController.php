@@ -3,6 +3,7 @@
 namespace Frontend\Modules\Dept\Controllers;
 use Models\Posts;
 use Models\Categories;
+use Models\ConectionSystem;
 use Models\Departments;
 use Models\DepartmentsLang;
 use Models\PostsLang;
@@ -33,6 +34,7 @@ class PostsController extends \FrontendController
         $dept = $this->dispatcher->getReturnedValue();
         $lang_id = $this->session->get('lang_id');
         $slug = (int)$dept->id === 1 ? $slug1 : $slug2;
+        ConectionSystem::plus(2, $dept->id);
         if(!$post = Posts::findFirst(["status = 1 AND slug = :slug: AND dept_id = $dept->id", 'bind' => ['slug' => $slug]])){
             $this->view->title = '404';
             return $this->view->pick('templates/404');
