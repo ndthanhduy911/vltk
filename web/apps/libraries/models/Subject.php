@@ -1,27 +1,30 @@
 <?php
+
 namespace Models;
 
-class Research extends \Phalcon\Mvc\Model
+use Models\SubjectLang;
+
+class Subject extends \Phalcon\Mvc\Model
 {
     public $id;
-
-    public $dept_id;
-
+    
     public $slug;
 
-    public $email;
-
-    public $featured_image;
-
-    public $created_at;
-    
-    public $updated_at;
+    public $attribute_id;
 
     public $status;
 
-    public $sort;
+    public $dept_id;
 
-    public $deleled;
+    public $created_at;
+
+    public $updated_at;
+
+    public $featured_image;
+
+    public $background_image;
+
+    public $deleted;
 
     public function getSource()
     {
@@ -29,7 +32,7 @@ class Research extends \Phalcon\Mvc\Model
     }
 
     public static function getNamepace (){
-        return 'Models\Research';
+        return 'Models\Subject';
     }
 
     public static function findFirstId($id, $columns = "*")
@@ -38,15 +41,34 @@ class Research extends \Phalcon\Mvc\Model
             "conditions" => "id = :id:",
             "bind" => array('id' => $id),
             "columns" => $columns
-        ]);
+        ]);   
     }
 
-    public static function getUrl($dept, $subject = NULL)
+    public static function getUrlById($id = null)
     {
-        if($dept->id !== 1){
-            return FRONTEND_URL.'/subject/'.$subject->slug;
+        
+        if($subject = parent::findFirst($id)){
+            return FRONTEND_URL.'/'.$subject->slug;
         }else{
-            return FRONTEND_URL."/$dept->slug".'/subject/'.$subject->slug;
+            return null;
+        }
+    }
+
+    public static function getTitleById($id = null)
+    {
+        if($subject = SubjectLang::findFirst(['subject_id = :subject_id:','bind' => ['subject_id' => $id]])){
+            return $subject->name;
+        }else{
+            return null;
+        }
+    }
+
+    public static function getUrl($dept = NULL, $subject = NULL)
+    {
+        if($subject && $dept){
+            return FRONTEND_URL.($dept->id != 1 ? "/$dept->slug" : '' ).'/subject/'.$subject->slug;
+        }else{
+            return '';
         }
     }
 }
