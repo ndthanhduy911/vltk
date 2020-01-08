@@ -82,6 +82,42 @@ class Menus extends \Phalcon\Mvc\Model
         }
     }
 
+    public static function getItem($menu , $slug = ''){
+        $item = [
+            'actived' => false,
+            'link' => ''
+        ];
+
+        switch ((int)$menu->type) {
+            case 1: {
+                $item['link'] = ($post = Posts::findFirstId($menu->post_id)) ? FRONTEND_URL.($slug != '/' ? '/'.$slug : '')."/news/".$post->slug : '#';
+                break;
+            }    
+            case 2: {
+                $item['link'] = ($page = Pages::findFirstId($menu->page_id)) ? FRONTEND_URL.($slug != '/' ? '/'.$slug : '').'/'.$page->slug.'.html' : '#';
+                break;
+            } 
+            case 3: {
+                $item['link'] = ($cat = Categories::findFirstId($menu->cat_id)) ? FRONTEND_URL.($slug != '/' ? '/'.$slug : '').'/category/'.$cat->slug : '#';
+                break;
+            }   
+            case 4: {
+                $item['link'] = ($dept = Departments::findFirstId($menu->dept)) ? FRONTEND_URL.($slug != '/' ? '/'.$slug : '').'/'.$dept->slug : '#';
+                break;
+            } 
+            case 5: {
+                $item['link'] = $menu->links;
+                break;
+            }        
+            default: {
+                $item['link'] = '#';
+                break;
+            }
+        }
+
+        return $item;
+    }
+
     public static function getName($menu_id, $lang_id = 1){
         $menu_lang = MenusLang::findFirst(['lang_id =:lang_id: AND menu_id = :menu_id:', 'bind'=>['lang_id' => $lang_id, 'menu_id' => $menu_id]]);
         return $menu_lang ? $menu_lang->name : '';

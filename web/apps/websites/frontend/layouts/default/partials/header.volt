@@ -97,7 +97,6 @@
                                             <h3 class="title text-default mb-0">{{ dept.code }}</h3>
                                             {% endif %}
                                         </a>
-                                        
                                     </div>
                                     <div class="site-slogan logo-font">
                                         {{dept_lang.name}}
