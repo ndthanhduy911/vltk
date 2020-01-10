@@ -10,6 +10,7 @@ use Models\Staff;
 use Models\Partner;
 use Models\Banner;
 use Models\Posts;
+use Models\Researches;
 use Models\Social;
 
 class DeptController extends \FrontendController
@@ -87,6 +88,19 @@ class DeptController extends \FrontendController
             ->execute();
         }
 
+        $npResearch = Researches::getNamepace();
+        $researches = $this->modelsManager->createBuilder()
+        ->columns(array(
+            $npResearch.'.id',
+            $npResearch.'.slug',
+            $npResearch.'.featured_image',
+            'SL.title research_name',
+        ))
+        ->from($npResearch)
+        ->leftJoin('Models\ResearchesLang', 'SL.research_id = '.$npResearch.'.id','SL')
+        ->where('SL.lang_id = :lang_id: AND status = 1 AND '.$npResearch.'.id != 1',['lang_id' => $lang_id])
+        ->getQuery()
+        ->execute();
 
         $npStaff = Staff::getNamepace();
         $staffs = $this->modelsManager->createBuilder()
@@ -129,6 +143,7 @@ class DeptController extends \FrontendController
         $this->view->socials = Social::find(["status = 1 AND dept_id = $dept->id", "order" => "sort ASC"]);
         $this->view->banners = $banners;
         $this->view->cats = $cats;
+        $this->view->researches = $researches;
         $this->view->staffs = $staffs;
         $this->view->partners = $partners;
         $this->view->postModel = new Posts();

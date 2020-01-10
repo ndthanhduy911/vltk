@@ -1,6 +1,4 @@
 {% if banners %}
-<!-- banner start -->
-<!-- ================ -->
 <div class="banner clearfix">
     <!-- slideshow start -->
     <!-- ================ -->
@@ -49,13 +47,11 @@
     </div>
     <!-- slideshow end -->
 </div>
-<!-- banner end -->
+
 {% endif %}
 
 <div id="page-start"></div>
 {% if cats %}
-<!-- section start thông báo-->
-<!-- ================ -->
 <section id="section1" class="section clearfix pt-5">
     <div class="container mt-4">
         <div class="row">
@@ -109,12 +105,9 @@
         </div>
     </div>
 </section>
-<!-- section end thông báo-->
 {% endif %}
 
 {% if depts %}
-<!-- section start các bộ môn-->
-<!-- ================ -->
 <section class="pt-5 pb-5 section dark-translucent-bg fixed-bg" style="background-position: 50% 42%; background-image: url({{ helper.getLinkImage(home['specialized_bg'], './assets/frontend/images/education-4.jpg') }})">
     {% if home['specialized_title'] %}
     <div class="container mt-4">
@@ -146,12 +139,9 @@
         {% endfor %}
     </div>
 </section>
-<!-- section end các bộ môn -->
 {% endif %}
 
 {% if staffs %}
-<!-- section start lãnh đạo-->
-<!-- ================ -->
 <section class="clearfix pt-5 pb-5">
     <div class="container">
         {% if home['staff_title'] %}
@@ -188,7 +178,6 @@
         </div>
     </div>
 </section>
-<!-- section end lãnh đạo-->
 {% endif %}
 
 {% if partners %}

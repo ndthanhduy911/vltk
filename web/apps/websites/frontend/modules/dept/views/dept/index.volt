@@ -1,4 +1,4 @@
-{% if banners %}
+{% if banners.count() %}
 <!-- ================ -->
 <div class="banner clearfix">
     <!-- slideshow start -->
@@ -105,7 +105,41 @@
 </section>
 {% endif %}
 
-{% if staffs %}
+{% if researches.count() %}
+<section class="pt-5 pb-5 section dark-translucent-bg fixed-bg" style="background-position: 50% 42%; background-image: url({{ helper.getLinkImage(home['specialized_bg'], './assets/frontend/images/education-4.jpg') }})">
+    {% if home['specialized_title'] %}
+    <div class="container mt-4">
+        <div class="row justify-content-lg-center">
+            <div class="col-lg-8 text-center">
+                <h2 class="page-title text-center"><strong>{{ home['specialized_title'] }}</strong></h2>
+                <div class="separator"></div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    <div class="row mb-4 mr-0 ml-0">
+        {% for research in researches %}
+        <div class="col-lg-3 col-md-6 isotope-item">
+            <div class="image-box shadow-2 bordered text-center mb-20">
+                <div class="overlay-container rounded overlay-visible">
+                    <img src="{{ helper.getLinkImage(research.featured_image) }}"
+                        alt="{{ research.research_name }}">
+                    <a href="{{ constant('FRONTEND_URL')~'/'~research.slug }}" class="overlay-link"><i
+                            class="fa fa-graduation-cap"></i></a>
+                    <div class="overlay-bottom hidden-xs">
+                        <div class="text">
+                            {{ research.research_name }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+{% if staffs.count() %}
 <section class="clearfix pb-5">
     <div class="container">
         {% if home['staff_title'] %}
