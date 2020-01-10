@@ -1,12 +1,12 @@
 <main class="app-content">
     <div class="app-title mb-3">
         <div>
-            <h1><i class="fa fa-th-list"></i> TRANG</h1>
-            <p>Quản lý trang</p>
+            <h1><i class="fa fa-th-list"></i> MÔN HỌC</h1>
+            <p>Quản lý môn học</p>
         </div>
         <ul class="app-breadcrumb breadcrumb side">
             <li class="breadcrumb-item"><a class="link" href="{{ config.application.backenduri }}"><i class="fa fa-home fa-lg"></i></a></li>
-            <li class="breadcrumb-item">Trang</li>
+            <li class="breadcrumb-item">Môn học</li>
         </ul>
     </div>
 
