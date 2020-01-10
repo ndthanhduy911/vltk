@@ -16,11 +16,11 @@
 			</ul>
 		</li>
 		<li><a class="app-menu__item {% if dispatcher.getControllerName()=='pages' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/pages"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">Trang</span></a></li>
-		<li class="treeview {% if dispatcher.getControllerName() in ['subjects','calendars','researchs'] %} {{ 'is-expanded' }}{% endif %}"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-list"></i><span class="app-menu__label">Đào tạo</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+		<li class="treeview {% if dispatcher.getControllerName() in ['subjects','calendars','researches'] %} {{ 'is-expanded' }}{% endif %}"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-list"></i><span class="app-menu__label">Đào tạo</span><i class="treeview-indicator fa fa-angle-right"></i></a>
 			<ul class="treeview-menu">
 				<li><a class="treeview-item {% if dispatcher.getControllerName()=='subjects' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/subjects"><i class="icon fa fa-link"></i> Môn học</a></li>
 				<li><a class="treeview-item {% if dispatcher.getActionName()=='calendars' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/calendars"><i class="icon fa fa-link"></i> Lịch học</a></li>
-				<li><a class="treeview-item {% if dispatcher.getActionName()=='researchs' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/researchs"><i class="icon fa fa-link"></i> Hướng nghiên cứu</a></li>
+				<li><a class="treeview-item {% if dispatcher.getActionName()=='researches' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/researches"><i class="icon fa fa-link"></i> Hướng nghiên cứu</a></li>
 			</ul>
 		</li>
 		<li><a class="app-menu__item {% if dispatcher.getControllerName()=='banner' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/banner"><i class="app-menu__icon fa fa-image"></i><span class="app-menu__label">Banners</span></a></li>

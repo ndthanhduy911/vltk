@@ -2,15 +2,13 @@
 
 namespace Models;
 
-use Models\ResearchLang;
+use Models\CalendarsLang;
 
-class Research extends \Phalcon\Mvc\Model
+class Calendars extends \Phalcon\Mvc\Model
 {
     public $id;
     
     public $slug;
-
-    public $attribute_id;
 
     public $status;
 
@@ -28,11 +26,11 @@ class Research extends \Phalcon\Mvc\Model
 
     public function getSource()
     {
-        return 'research';
+        return 'calendars';
     }
 
     public static function getNamepace (){
-        return 'Models\Research';
+        return 'Models\Calendars';
     }
 
     public static function findFirstId($id, $columns = "*")
@@ -47,8 +45,8 @@ class Research extends \Phalcon\Mvc\Model
     public static function getUrlById($id = null)
     {
         
-        if($research = parent::findFirst($id)){
-            return FRONTEND_URL.'/'.$research->slug;
+        if($calendar = parent::findFirst($id)){
+            return FRONTEND_URL.'/'.$calendar->slug;
         }else{
             return null;
         }
@@ -56,17 +54,17 @@ class Research extends \Phalcon\Mvc\Model
 
     public static function getTitleById($id = null)
     {
-        if($research = ResearchLang::findFirst(['research_id = :research_id:','bind' => ['research_id' => $id]])){
-            return $research->name;
+        if($calendar = CalendarsLang::findFirst(['calendar_id = :calendar_id:','bind' => ['calendar_id' => $id]])){
+            return $calendar->name;
         }else{
             return null;
         }
     }
 
-    public static function getUrl($dept = NULL, $research = NULL)
+    public static function getUrl($dept = NULL, $calendar = NULL)
     {
-        if($research && $dept){
-            return FRONTEND_URL.($dept->id != 1 ? "/$dept->slug" : '' ).'/research/'.$research->slug;
+        if($calendar && $dept){
+            return FRONTEND_URL.($dept->id != 1 ? "/$dept->slug" : '' ).'/calendar/'.$calendar->slug;
         }else{
             return '';
         }
