@@ -2,16 +2,11 @@
 namespace Backend\Modules\Admins\Forms;
 
 
-use Phalcon\Forms\Element\Email;
 use Phalcon\Forms\Element\Numeric;
-use Phalcon\Forms\Element\Text;
-use Phalcon\Forms\Element\Textarea;
 use Phalcon\Forms\Element\Select;
 use Phalcon\Forms\Element\Hidden;
 use Phalcon\Forms\Form;
-use Phalcon\Validation\Validator\StringLength as StringLength;
 use Phalcon\Validation\Validator\PresenceOf;
-use Phalcon\Validation\Validator\Date as DateValidator;
 use Models\Categories;
 use Models\Departments;
 
