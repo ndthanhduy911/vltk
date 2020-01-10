@@ -1,12 +1,12 @@
 <main class="app-content">
     <div class="app-title mb-3">
         <div>
-            <h1><i class="fa fa-th-list"></i> MÔN HỌC</h1>
-            <p>Quản lý môn học</p>
+            <h1><i class="fa fa-th-list"></i> HƯỚNG NGHIÊN CỨU</h1>
+            <p>Quản lý hướng ngiên cứu</p>
         </div>
         <ul class="app-breadcrumb breadcrumb side">
             <li class="breadcrumb-item"><a class="link" href="{{ config.application.backenduri }}"><i class="fa fa-home fa-lg"></i></a></li>
-            <li class="breadcrumb-item">Môn học</li>
+            <li class="breadcrumb-item">Hướng ngiên cứu</li>
         </ul>
     </div>
 
@@ -18,10 +18,10 @@
         <div class="col-md-12 p-0">
             <div class="tile">
                 <div class="col-12 p-0 mb-2">
-                    <a id="addSubjects" href="{{ config.application.backendUri }}/subjects/update" title="Tạo" class="btn btn-success fa fa-plus pull-right pull-right"></a>
+                    <a id="addResearches" href="{{ config.application.backendUri }}/researches/update" title="Tạo" class="btn btn-success fa fa-plus pull-right pull-right"></a>
                 </div>
                 <div class="tile-body">
-                    <table id="subjects" class="table table-bordered table-hover">
+                    <table id="researches" class="table table-bordered table-hover">
                         <thead>
                             <tr class="bg-primary">
                                 <th class="align-middle text-center text-white w-20-px">#</th>

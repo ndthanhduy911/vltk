@@ -1,11 +1,11 @@
 <main class="app-content">
     <div class="app-title mb-3">
         <div>
-            <h1><i class="fa fa-th-list"></i> {{subjects_lang[1].title ? 'Cập nhật môn học': 'Thêm môn học mới'}}</h1>
+            <h1><i class="fa fa-th-list"></i> {{calendars_lang[1].title ? 'Cập nhật môn học': 'Thêm môn học mới'}}</h1>
         </div>
         <ul class="app-breadcrumb breadcrumb side">
             <li class="breadcrumb-item"><a class="link" href="{{ config.application.backendUri }}"><i class="fa fa-home fa-lg"></i></a></li>
-            <li class="breadcrumb-item"><a class="link" href="{{ config.application.backendUri }}/subjects">Môn học</a></li>
+            <li class="breadcrumb-item"><a class="link" href="{{ config.application.backendUri }}/calendars">Môn học</a></li>
             <li class="breadcrumb-item">{{title}}</li>
         </ul>
     </div>
@@ -59,7 +59,7 @@
                                 <div class="form-group col-md-12">
                                     <div class="input-group">
                                         <textarea id="editor{{lang.id}}" name="content[{{lang.id}}]" class="rounded">
-                                            {{subject_content[lang.id]}}
+                                            {{calendar_content[lang.id]}}
                                         </textarea>
                                         <div class="invalid-tooltip"></div>
                                     </div>
@@ -80,7 +80,7 @@
                                 <h6 class="text-primary font-weight-normal">Trạng thái</h6>
                                 <div class="form-group mt-1">
                                     <div class="input-group">
-                                        {{form_subject.render('status')}}
+                                        {{form_calendar.render('status')}}
                                         <div class="invalid-tooltip"></div>
                                     </div>
                                 </div>
@@ -89,7 +89,7 @@
                                 <h6 class="text-primary font-weight-normal">Slug</h6>
                                 <div class="form-group mt-1">
                                     <div class="input-group">
-                                        {{form_subject.render('slug')}}
+                                        {{form_calendar.render('slug')}}
                                         <div class="invalid-tooltip"></div>
                                     </div>
                                 </div>
@@ -105,10 +105,10 @@
                 <div class="tile p-3 mb-3">
                     <div class="row m-0">
                         <div class="col-md-12 p-0">
-                            <img id="showImg" class="w-100 d-block" src="{{ subject.featured_image ? subject.featured_image : '' }}" alt="{{ subject.featured_image ? subject.featured_image : '' }}">
-                            {{form_subject.render('featured_image')}}
+                            <img id="showImg" class="w-100 d-block" src="{{ calendar.featured_image ? calendar.featured_image : '' }}" alt="{{ calendar.featured_image ? calendar.featured_image : '' }}">
+                            {{form_calendar.render('featured_image')}}
                             <a id="uploadImage" href="#" class="link">Đặt ảnh đại diện</a>
-                            <a id="removeImage" href="#" class="link text-danger {{ subject.featured_image ? '' : 'hidden' }}">Xóa</a>
+                            <a id="removeImage" href="#" class="link text-danger {{ calendar.featured_image ? '' : 'hidden' }}">Xóa</a>
                         </div>
                     </div>
                 </div>
@@ -116,11 +116,11 @@
                 <div class="tile p-3 mb-3">
                     <div class="row m-0">
                         <div class="col-md-12 p-0">
-                            <img id="showBackgroundImg" class="w-100 d-block" src="{{ subject.background_image ? subject.background_image : '' }}"
-                                alt="{{ subject.background_image ? subject.background_image : '' }}">
-                            {{form_subject.render('background_image')}}
+                            <img id="showBackgroundImg" class="w-100 d-block" src="{{ calendar.background_image ? calendar.background_image : '' }}"
+                                alt="{{ calendar.background_image ? calendar.background_image : '' }}">
+                            {{form_calendar.render('background_image')}}
                             <a id="uploadBackgroundImage" href="#" class="link">Đặt ảnh nền</a>
-                            <a id="removeBackgroundImage" href="#" class="link text-danger {{ subject.background_image ? '' : 'hidden' }}">Xóa</a>
+                            <a id="removeBackgroundImage" href="#" class="link text-danger {{ calendar.background_image ? '' : 'hidden' }}">Xóa</a>
                         </div>
                     </div>
                 </div>
