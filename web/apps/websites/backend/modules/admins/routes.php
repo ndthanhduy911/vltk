@@ -184,15 +184,15 @@ $router->add($config->application->backendUri . '/media/:action/:int', array(
 
 
 /***********************SubjectsController***********************/
-$router->add($config->application->backendUri . '/calendars', array(
+$router->add($config->application->backendUri . '/subjects', array(
     'module' => 'backend_admins',
-    'controller' => 'calendars',
+    'controller' => 'subjects',
     'action' => 'index',
 ));
 
-$router->add($config->application->backendUri . '/calendars/:action', array(
+$router->add($config->application->backendUri . '/subjects/:action', array(
     'module' => 'backend_admins',
-    'controller' => 'calendars',
+    'controller' => 'subjects',
     'action' => 1,
 ));
 $router->add($config->application->backendUri . '/subjects/:action/:int', array(

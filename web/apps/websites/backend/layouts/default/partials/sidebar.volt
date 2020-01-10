@@ -9,18 +9,18 @@
 		<li class="treeview {% if dispatcher.getControllerName() in ['posts','categories'] %} {{ 'is-expanded' }}{% endif %}">
 			<a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-tags"></i><span class="app-menu__label">Bài viết</span><i class="treeview-indicator fa fa-angle-right"></i></a>
 			<ul class="treeview-menu">
-				<li><a class="treeview-item {% if dispatcher.getControllerName()=='posts' AND (dispatcher.getActionName() in ['index','update']) AND dispatcher.getParam('id') %} {{ 'actived' }} {% endif %}" href="{{ config.application.backendUri }}/posts"><i class="icon fa fa-circle-o"></i>Tất cả</a></li>
-				<li><a class="treeview-item {% if dispatcher.getControllerName()=='posts' AND (dispatcher.getActionName() in ['update']) AND !dispatcher.getParam('id') %} {{ 'actived' }} {% endif %}" href="{{ config.application.backendUri }}/posts/update"><i class="icon fa fa-circle-o"></i>Bài viết mới</a></li>
-				<li><a class="treeview-item {% if dispatcher.getControllerName()=='categories' %} {{ 'actived' }} {% endif %}" href="{{ config.application.backendUri }}/categories"><i class="icon fa fa-circle-o"></i> Danh mục</a></li>
+				<li><a class="treeview-item {% if dispatcher.getControllerName()=='posts' AND (dispatcher.getActionName() in ['index','update']) AND dispatcher.getParam('id') %} {{ 'actived' }} {% endif %}" href="{{ config.application.backendUri }}/posts"><i class="icon fa fa-arrow-circle-right"></i>Tất cả</a></li>
+				<li><a class="treeview-item {% if dispatcher.getControllerName()=='posts' AND (dispatcher.getActionName() in ['update']) AND !dispatcher.getParam('id') %} {{ 'actived' }} {% endif %}" href="{{ config.application.backendUri }}/posts/update"><i class="icon fa fa-arrow-circle-right"></i>Bài viết mới</a></li>
+				<li><a class="treeview-item {% if dispatcher.getControllerName()=='categories' %} {{ 'actived' }} {% endif %}" href="{{ config.application.backendUri }}/categories"><i class="icon fa fa-arrow-circle-right"></i> Danh mục</a></li>
 				<!-- <li><a class="treeview-item" href="{{ config.application.backendUri }}/tag"><i class="icon fa fa-circle-o"></i> Thẻ</a></li> -->
 			</ul>
 		</li>
 		<li><a class="app-menu__item {% if dispatcher.getControllerName()=='pages' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/pages"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">Trang</span></a></li>
 		<li class="treeview {% if dispatcher.getControllerName() in ['subjects','calendars','researches'] %} {{ 'is-expanded' }}{% endif %}"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-list"></i><span class="app-menu__label">Đào tạo</span><i class="treeview-indicator fa fa-angle-right"></i></a>
 			<ul class="treeview-menu">
-				<li><a class="treeview-item {% if dispatcher.getControllerName()=='subjects' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/subjects"><i class="icon fa fa-link"></i> Môn học</a></li>
-				<li><a class="treeview-item {% if dispatcher.getActionName()=='calendars' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/calendars"><i class="icon fa fa-link"></i> Lịch học</a></li>
-				<li><a class="treeview-item {% if dispatcher.getActionName()=='researches' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/researches"><i class="icon fa fa-link"></i> Hướng nghiên cứu</a></li>
+				<li><a class="treeview-item {% if dispatcher.getControllerName()=='subjects' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/subjects"><i class="icon fa fa-arrow-circle-right"></i> Môn học</a></li>
+				<li><a class="treeview-item {% if dispatcher.getActionName()=='calendars' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/calendars"><i class="icon fa fa-arrow-circle-right"></i> Lịch học</a></li>
+				<li><a class="treeview-item {% if dispatcher.getActionName()=='researches' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/researches"><i class="icon fa fa-arrow-circle-right"></i> Hướng nghiên cứu</a></li>
 			</ul>
 		</li>
 		<li><a class="app-menu__item {% if dispatcher.getControllerName()=='banner' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/banner"><i class="app-menu__icon fa fa-image"></i><span class="app-menu__label">Banners</span></a></li>
@@ -31,9 +31,9 @@
 		<li><a class="app-menu__item {% if dispatcher.getControllerName()=='users' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/users"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Tài khoản</span></a></li>
 		<li class="treeview {% if dispatcher.getControllerName() in ['departments','social','links'] %} {{ 'is-expanded' }}{% endif %}"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-cogs"></i><span class="app-menu__label">Hệ thống</span><i class="treeview-indicator fa fa-angle-right"></i></a>
 			<ul class="treeview-menu">
-				<li><a class="treeview-item {% if dispatcher.getControllerName()=='departments' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/departments/update"><i class="icon fa fa-cog"></i> Cài đặt</a></li>
-				<li><a class="treeview-item {% if dispatcher.getActionName()=='social' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/setting/socials"><i class="icon fa fa-link"></i> Biểu tượng</a></li>
-				<li><a class="treeview-item {% if dispatcher.getActionName()=='links' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/setting/links"><i class="icon fa fa-link"></i> Links</a></li>
+				<li><a class="treeview-item {% if dispatcher.getControllerName()=='departments' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/departments/update"><i class="icon fa fa-arrow-circle-right"></i> Cài đặt</a></li>
+				<li><a class="treeview-item {% if dispatcher.getActionName()=='social' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/setting/socials"><i class="icon fa fa-arrow-circle-right"></i> Biểu tượng</a></li>
+				<li><a class="treeview-item {% if dispatcher.getActionName()=='links' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/setting/links"><i class="icon fa fa-arrow-circle-right"></i> Links</a></li>
 			</ul>
 		</li>
 	</ul>
