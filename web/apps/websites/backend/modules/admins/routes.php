@@ -184,15 +184,15 @@ $router->add($config->application->backendUri . '/media/:action/:int', array(
 
 
 /***********************SubjectsController***********************/
-$router->add($config->application->backendUri . '/subjects', array(
+$router->add($config->application->backendUri . '/calendars', array(
     'module' => 'backend_admins',
-    'controller' => 'subjects',
+    'controller' => 'calendars',
     'action' => 'index',
 ));
 
-$router->add($config->application->backendUri . '/subjects/:action', array(
+$router->add($config->application->backendUri . '/calendars/:action', array(
     'module' => 'backend_admins',
-    'controller' => 'subjects',
+    'controller' => 'calendars',
     'action' => 1,
 ));
 $router->add($config->application->backendUri . '/subjects/:action/:int', array(
@@ -202,5 +202,42 @@ $router->add($config->application->backendUri . '/subjects/:action/:int', array(
     'id' => 2
 ));
 
+/***********************CalendarsController***********************/
+$router->add($config->application->backendUri . '/calendars', array(
+    'module' => 'backend_admins',
+    'controller' => 'calendars',
+    'action' => 'index',
+));
+
+$router->add($config->application->backendUri . '/calendars/:action', array(
+    'module' => 'backend_admins',
+    'controller' => 'calendars',
+    'action' => 1,
+));
+$router->add($config->application->backendUri . '/calendars/:action/:int', array(
+    'module' => 'backend_admins',
+    'controller' => 'calendars',
+    'action'  => 1,
+    'id' => 2
+));
+
+/***********************ResearchesController***********************/
+$router->add($config->application->backendUri . '/researches', array(
+    'module' => 'backend_admins',
+    'controller' => 'researches',
+    'action' => 'index',
+));
+
+$router->add($config->application->backendUri . '/researches/:action', array(
+    'module' => 'backend_admins',
+    'controller' => 'researches',
+    'action' => 1,
+));
+$router->add($config->application->backendUri . '/researches/:action/:int', array(
+    'module' => 'backend_admins',
+    'controller' => 'researches',
+    'action'  => 1,
+    'id' => 2
+));
 
 
