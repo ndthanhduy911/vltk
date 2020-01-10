@@ -12,7 +12,7 @@ use Phalcon\Validation\Validator\StringLength as StringLength;
 use Phalcon\Validation\Validator\PresenceOf;
 use Phalcon\Validation\Validator\Date as DateValidator;
 
-class SubjectsLangForm extends Form
+class CalendarsLangForm extends Form
 {
     public function initialize($entity = null, $options = null)
     {
