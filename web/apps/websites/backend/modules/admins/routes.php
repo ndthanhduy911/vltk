@@ -34,7 +34,6 @@ $router->add($config->application->backendUri . '/posts/:action/:int', array(
 ));
 
 /***********************PagesController***********************/
-
 $router->add($config->application->backendUri . '/pages', array(
     'module' => 'backend_admins',
     'controller' => 'pages',
@@ -183,6 +182,25 @@ $router->add($config->application->backendUri . '/media/:action/:int', array(
     'id' => 2
 ));
 
+
+/***********************SubjectsController***********************/
+$router->add($config->application->backendUri . '/subjects', array(
+    'module' => 'backend_admins',
+    'controller' => 'subjects',
+    'action' => 'index',
+));
+
+$router->add($config->application->backendUri . '/subjects/:action', array(
+    'module' => 'backend_admins',
+    'controller' => 'subjects',
+    'action' => 1,
+));
+$router->add($config->application->backendUri . '/subjects/:action/:int', array(
+    'module' => 'backend_admins',
+    'controller' => 'subjects',
+    'action'  => 1,
+    'id' => 2
+));
 
 
 

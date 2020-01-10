@@ -44,15 +44,6 @@ class PagesForm extends Form
         ));
         $this->add($status);
 
-        $attribute_id = new Select('attribute_id', Attributes::find(), [
-            'using' => array('id', 'name'),
-            'useEmpty' => true,
-            'emptyText' => 'Mặc định',
-            'emptyValue' => '',
-            'class' => 'form-control pull-right w-100',
-        ]);
-        $this->add($attribute_id);
-
         $featured_image = new Hidden('featured_image');
         $this->add($featured_image);
 
