@@ -16,7 +16,7 @@
 			</ul>
 		</li>
 		<li><a class="app-menu__item {% if dispatcher.getControllerName()=='pages' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/pages"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">Trang</span></a></li>
-		<li class="treeview {% if dispatcher.getControllerName() in ['subject','calendar','research'] %} {{ 'is-expanded' }}{% endif %}"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-list"></i><span class="app-menu__label">Đào tạo</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+		<li class="treeview {% if dispatcher.getControllerName() in ['subjects','calendars','researchs'] %} {{ 'is-expanded' }}{% endif %}"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-list"></i><span class="app-menu__label">Đào tạo</span><i class="treeview-indicator fa fa-angle-right"></i></a>
 			<ul class="treeview-menu">
 				<li><a class="treeview-item {% if dispatcher.getControllerName()=='subjects' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/subjects"><i class="icon fa fa-link"></i> Môn học</a></li>
 				<li><a class="treeview-item {% if dispatcher.getActionName()=='calendar' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/calendar"><i class="icon fa fa-link"></i> Lịch học</a></li>
