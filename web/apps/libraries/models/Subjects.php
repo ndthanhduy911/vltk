@@ -12,6 +12,8 @@ class Subjects extends \Phalcon\Mvc\Model
 
     public $status;
 
+    public $code;
+
     public $dept_id;
 
     public $created_at;
