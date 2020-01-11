@@ -25,7 +25,7 @@ class SubjectsForm extends Form
         ));
         $this->add($slug);
 
-        $code = new Textarea('code');
+        $code = new Text('code');
         $code->setAttributes(array(
             'class' => 'form-control',
             'data-error' => "Mã môn học",
