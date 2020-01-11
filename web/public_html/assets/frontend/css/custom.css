@@ -22,7 +22,7 @@
      border-radius: 10px;
      box-shadow: inset 0 0 6px rgba(0,0,0,.3);
      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-     background-color: #09afdf;
+     background-color: #003d7c;
  }
 
  a {
@@ -140,12 +140,12 @@ ul.dropdown-menu > li:last-of-type > a
     color: #000;
     text-shadow: none;    
     font-weight: 400;
-    border-color: #09afdf;
+    border-color: #003d7c;
 }
 
 .dark.header .dropdown-menu > li > a:hover {
     color: #ffffff;
-    background-color: #09afdf;
+    background-color: #003d7c;
 }
 
 .dark.header .dropdown-menu {
