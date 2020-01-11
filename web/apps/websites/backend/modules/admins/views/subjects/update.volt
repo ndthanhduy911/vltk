@@ -94,6 +94,15 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="d-inline-block w-100">
+                                <h6 class="text-primary font-weight-normal">Mã môn học</h6>
+                                <div class="form-group mt-1">
+                                    <div class="input-group">
+                                        {{form_subject.render('code')}}
+                                        <div class="invalid-tooltip"></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="col-md-12 p-0">

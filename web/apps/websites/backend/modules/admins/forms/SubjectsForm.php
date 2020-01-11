@@ -25,6 +25,14 @@ class SubjectsForm extends Form
         ));
         $this->add($slug);
 
+        $code = new Textarea('code');
+        $code->setAttributes(array(
+            'class' => 'form-control',
+            'data-error' => "Mã môn học",
+            'rows' => 4
+        ));
+        $this->add($code);
+
         $status = new Select('status', [
             1 => "Hoạt động",
             0 => "Khóa",

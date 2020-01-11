@@ -59,6 +59,7 @@ class SubjectsController  extends \BackendController {
                 $p_excerpt = $this->request->getPost('excerpt');
                 $req_subject = [
                     'status' => $this->request->getPost('status'),
+                    'code' => $this->request->getPost('code'),
                     'slug' => $p_slug ? $p_slug : $this->helper->slugify($p_title[1]),
                     'featured_image' => $this->request->getPost('featured_image'),
                     'background_image' => $this->request->getPost('background_image')
@@ -190,6 +191,7 @@ class SubjectsController  extends \BackendController {
                 $npSubjects.'.id',
                 $npSubjects.'.slug',
                 $npSubjects.'.status',
+                $npSubjects.'.code',
                 $npSubjects.'.dept_id',
                 $npSubjects.'.created_at',
                 'PL.excerpt excerpt',
