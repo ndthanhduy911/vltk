@@ -7,6 +7,7 @@ use Phalcon\Forms\Element\Hidden;
 use Phalcon\Forms\Form;
 use Phalcon\Validation\Validator\StringLength as StringLength;
 use Phalcon\Validation\Validator\PresenceOf;
+use Phalcon\Validation\Validator\Date as DateValidator;
 use Models\Categories;
 
 class PostsForm extends Form
