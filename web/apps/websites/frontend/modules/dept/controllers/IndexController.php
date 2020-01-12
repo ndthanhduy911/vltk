@@ -139,6 +139,7 @@ class IndexController extends \FrontendController
         $this->view->staffs = $staffs->count() ? $staffs : [];
         $this->view->partners = $partners->count() ? $partners : [];
         $this->view->postModel = new Posts();
+        $this->view->catModel = new Categories();
         $this->get_js_css();
         return true;
     }

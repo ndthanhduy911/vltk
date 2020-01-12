@@ -97,8 +97,8 @@ class DeptController extends \FrontendController
             'SL.title research_name',
         ))
         ->from($npResearch)
-        ->leftJoin('Models\ResearchesLang', 'SL.research_id = '.$npResearch.'.id','SL')
-        ->where('SL.lang_id = :lang_id: AND status = 1 AND '.$npResearch.'.id != 1',['lang_id' => $lang_id])
+        ->where("$npResearch.dept_id = $dept->id AND $npResearch.status = 1 AND $npResearch.deleted = 0")
+        ->leftJoin('Models\ResearchesLang', "SL.research_id = $npResearch.id AND SL.lang_id = $lang_id",'SL')
         ->getQuery()
         ->execute();
 
@@ -147,6 +147,7 @@ class DeptController extends \FrontendController
         $this->view->staffs = $staffs;
         $this->view->partners = $partners;
         $this->view->postModel = new Posts();
+        $this->view->catModel = new Categories();
         $this->get_js_css();
     }
 

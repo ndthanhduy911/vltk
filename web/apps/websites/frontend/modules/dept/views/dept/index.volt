@@ -95,7 +95,7 @@
                         {% endfor %}
                     </div>
                     <footer class="clearfix">
-                        <div class="link pull-right small"><i class="fa fa-link pr-1"></i><a href="{{ constant('FRONTEND_URL')~'/category/'~cat.slug }}">{{ ml._ml_system('more', 'Xem thêm') }}</a></div>
+                        <div class="link pull-right small"><i class="fa fa-link pr-1"></i><a href="{{ catModel.getUrl(dept, cat) }}">{{ ml._ml_system('more', 'Xem thêm') }}</a></div>
                     </footer>
                 </div>
             </div>
@@ -118,29 +118,33 @@
     </div>
     {% endif %}
     <div class="row mb-4 mr-0 ml-0">
-        {% for research in researches %}
-        <div class="col-lg-3 col-md-6 isotope-item">
-            <div class="image-box shadow-2 bordered text-center mb-20">
-                <div class="overlay-container rounded overlay-visible">
-                    <img src="{{ helper.getLinkImage(research.featured_image) }}"
-                        alt="{{ research.research_name }}">
-                    <a href="{{ constant('FRONTEND_URL')~'/'~research.slug }}" class="overlay-link"><i
-                            class="fa fa-graduation-cap"></i></a>
-                    <div class="overlay-bottom hidden-xs">
-                        <div class="text">
-                            {{ research.research_name }}
+        <div class="col-md-12 pv-20">
+            <div class="slick-carousel carousel">
+                {% for research in researches %}
+                <div class="col-lg-3 col-md-6">
+                    <div class="image-box shadow-2 bordered text-center mb-20">
+                        <div class="overlay-container rounded overlay-visible">
+                            <img src="{{ helper.getLinkImage(research.featured_image) }}"
+                                alt="{{ research.research_name }}">
+                            <a href="{{ constant('FRONTEND_URL')~'/'~research.slug }}" class="overlay-link"><i
+                                    class="fa fa-graduation-cap"></i></a>
+                            <div class="overlay-bottom hidden-xs">
+                                <div class="text">
+                                    {{ research.research_name }}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
         </div>
-        {% endfor %}
     </div>
 </section>
 {% endif %}
 
 {% if staffs.count() %}
-<section class="clearfix pb-5">
+<section class="clearfix pt-5 pb-5">
     <div class="container">
         {% if home['staff_title'] %}
         <div class="row justify-content-lg-center pv-20">
@@ -156,7 +160,7 @@
             <div class="col-md-4">
                 <div class="image-box team-member shadow-2 mb-20">
                     <div class="overlay-container rounded overlay-visible">
-                        <img src="{{ helper.getLinkImage(staff.featured_image,'/assets/frontend/images/education-4.jpg') }}" alt="{{staff.title}}">
+                        <img width="100%" src="{{ helper.getLinkImage(staff.featured_image,'/assets/frontend/images/education-4.jpg') }}" alt="{{staff.title}}">
                         <a href="{{ constant('FRONTEND_URL')~'/staff/'~staff.slug }}" class="overlay-link" title="{{staff.title}}"><i class="fa fa-graduation-cap"></i></a>
                         <div class="overlay-bottom">
                             <div class="text p-0">
@@ -178,15 +182,16 @@
 </section>
 {% endif %}
 
-{% if partners.count() %}
-<section class="pb-5 section background-img-1 dark-translucent-bg fixed-bg" style="background-position: 50% 42%;">
-    {% if partner_info['name'] %}
+
+{% if partners %}
+<section class="pt-5 pb-5 section dark-translucent-bg fixed-bg" style="background-position: 50% 42%; background-image: url({{ helper.getLinkImage(home['partner_bg'], './assets/frontend/images/education-4.jpg') }})">
+    {% if home['partner_title'] %}
     <div class="container pv-20">
         <div class="row justify-content-lg-center">
             <div class="col-lg-8">
-                <h2 class="text-center"> <strong>{{partner_info['name']}}</strong></h2>
+                <h2 class="text-center"> <strong>{{ home['partner_title'] }}</strong></h2>
                 <div class="separator"></div>
-                <p class="large text-center">{{partner_info['des']}}</p>
+                <p class="large text-center">{{ home['partner_des'] }}</p>
             </div>
         </div>
     </div>
@@ -197,7 +202,7 @@
             <div class="col-lg-3 col-md-6">
                 <div class="ph-20 feature-box text-center object-non-visible" data-animation-effect="fadeInDownSmall"
                     data-effect-delay="100">
-                    <span class="icon large circle"><img class="rounded-circle" alt="{{partner.title}}" src="{{ helper.getLinkImage(staff.featured_image,'/assets/frontend/images/beauty-1.jpg') }}"></span>
+                    <span class="icon large circle"><img class="rounded-circle" alt="{{partner.title}}" src="{{ helper.getLinkImage(partner.featured_image,'/assets/frontend/images/beauty-1.jpg') }}"></span>
                     <h3>{{partner.title}}</h3>
                 </div>
             </div>

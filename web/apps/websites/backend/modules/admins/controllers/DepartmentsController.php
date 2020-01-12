@@ -45,6 +45,7 @@ class DepartmentsController  extends \BackendController {
                     'code' => $this->request->getPost('code'),
                     'image' => $this->request->getPost('image'),
                     'logo' => $this->request->getPost('logo'),
+                    'icon' => $this->request->getPost('icon'),
                     'post_connect' => 0,
                 ];
 

@@ -139,7 +139,7 @@
                         <div class="row m-0">
                             <div class="col-md-12 p-0">
                                 <img id="showIcon" src="<?php echo $department->icon ? $department->icon : '' ?>" alt="" width="100%">
-                                    {{form_department.render('logo')}}
+                                    {{form_department.render('icon')}}
                                 <a id="uploadIcon" href="#" class="link">Đặt ảnh favicon</a>
                             </div>
                         </div>

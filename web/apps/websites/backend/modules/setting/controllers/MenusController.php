@@ -24,9 +24,14 @@ class MenusController  extends \BackendController
         $languages = Language::find(['status = 1']);
         $dept_id = $this->session->get('dept_id');
         $id = $this->request->get('id');
+        if(!MenuLocation::findFirst(['id = :id: AND dept_id = :dept_id:','bind' => ['id' => $location_id, 'dept_id' => $dept_id]])){
+            $this->flashSession->error("Vị trí menu không đúng");
+            return $this->response->redirect(BACKEND_URL.'/menu');
+        }
         if($id){
             if(!$menu = Menus::findFirst(["id = $id AND menu_location_id = $location_id AND dept_id = $dept_id"])){
-                echo 'Không tìm thấy dữ liệu'; die;
+                $this->flashSession->error("Không tìm thấy menu này");
+                return $this->response->redirect(BACKEND_URL.'/menu');
             }
             $menu->updated_at = date('Y-m-d H:i:s');
             $title = 'Cập nhật';
@@ -45,6 +50,7 @@ class MenusController  extends \BackendController
             $menu = new Menus();
             $menu->created_at = date('Y-m-d H:i:s');
             $menu->updated_at = $menu->created_at;
+            $menu->menu_location_id = $location_id;
             $title = 'Thêm mới';
             foreach ($languages as $key => $lang) {
                 $forms_lang[$lang->id] = new MenusLangForm();
@@ -72,6 +78,11 @@ class MenusController  extends \BackendController
                     'status' => $this->request->getPost('status'),
                     'target' => $this->request->getPost('target')
                 ];
+                $req_menu['parent_id'] = $req_menu['parent_id'] ? $req_menu['parent_id'] : NULL;
+
+                if($req_menu['parent_id'] && Menus::findFirst(['parent_id = :parent_id:','bind' => ['parent_id' => $menu->id ? $menu->id : 0]])){
+                    array_push($error, "Menu chỉ hỗ trợ 2 cấp");
+                }
                 
                 $form_menu->bind($req_menu, $menu);
                 if (!$form_menu->isValid()) {
@@ -128,7 +139,7 @@ class MenusController  extends \BackendController
     }
 
     public function deleteAction($id = null){
-        if ($menu = Menus::findFirstId($id) && !in_array((int)$id, [1,2,3,4,5])) {
+        if ($menu = Menus::findFirstId($id)) {
             $menu->status = 4;
             if (!$menu->save()) {
                 if ($this->request->isAjax()) {

@@ -97,7 +97,7 @@
                         {% endfor %}
                     </div>
                     <footer class="clearfix">
-                        <div class="link pull-right small"><i class="fa fa-link pr-1"></i><a href="{{ constant('FRONTEND_URL')~'/category/'~cat.slug }}">{{ ml._ml_system('more', 'Xem thêm') }}</a></div>
+                        <div class="link pull-right small"><i class="fa fa-link pr-1"></i><a href="{{ catModel.getUrl(dept, cat) }}">{{ ml._ml_system('more', 'Xem thêm') }}</a></div>
                     </footer>
                 </div>
             </div>

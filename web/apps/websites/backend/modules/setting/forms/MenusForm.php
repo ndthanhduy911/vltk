@@ -24,13 +24,18 @@ class MenusForm extends Form
     {
         $dept_id = isset($_SESSION['dept_id']) ? $_SESSION['dept_id'] : 0;
         $npMenu = Menus::getNamepace();
+        if(isset($entity->menu_location_id)){
+            $params_menu = "$npMenu.dept_id = $dept_id AND $npMenu.parent_id is NULL AND $npMenu.menu_location_id = $entity->menu_location_id" ;
+        }else{
+            $params_menu = "$npMenu.dept_id = $dept_id AND $npMenu.parent_id is NULL";
+        }
         $menus = $this->modelsManager->createBuilder()
         ->columns(array(
             $npMenu.'.id',
             'ML.name name',
         ))
         ->from($npMenu)
-        ->where("$npMenu.dept_id = $dept_id AND $npMenu.parent_id is NULL")
+        ->where($params_menu)
         ->join('Models\MenusLang', "ML.menu_id = $npMenu.id AND ML.lang_id = 1",'ML')
         ->getQuery()
         ->execute();

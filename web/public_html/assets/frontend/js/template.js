@@ -289,6 +289,8 @@
 				arrows: false,
 				slidesToShow: 4,
 				slidesToScroll: 4,
+				autoplay: true,
+				autoplaySpeed: 3000,
 				responsive: [
 					{
 						breakpoint: 1200,
