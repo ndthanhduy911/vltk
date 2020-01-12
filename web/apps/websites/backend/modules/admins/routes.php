@@ -221,7 +221,7 @@ $router->add($config->application->backendUri . '/calendars/:action/:int', array
     'id' => 2
 ));
 
-/***********************ResearchesController***********************/
+/***********************ClassesController***********************/
 $router->add($config->application->backendUri . '/researches', array(
     'module' => 'backend_admins',
     'controller' => 'researches',
@@ -236,6 +236,25 @@ $router->add($config->application->backendUri . '/researches/:action', array(
 $router->add($config->application->backendUri . '/researches/:action/:int', array(
     'module' => 'backend_admins',
     'controller' => 'researches',
+    'action'  => 1,
+    'id' => 2
+));
+
+/***********************ClassesController***********************/
+$router->add($config->application->backendUri . '/classes', array(
+    'module' => 'backend_admins',
+    'controller' => 'classes',
+    'action' => 'index',
+));
+
+$router->add($config->application->backendUri . '/classes/:action', array(
+    'module' => 'backend_admins',
+    'controller' => 'classes',
+    'action' => 1,
+));
+$router->add($config->application->backendUri . '/classes/:action/:int', array(
+    'module' => 'backend_admins',
+    'controller' => 'classes',
     'action'  => 1,
     'id' => 2
 ));
