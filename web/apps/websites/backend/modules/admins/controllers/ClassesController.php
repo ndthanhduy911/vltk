@@ -1,12 +1,12 @@
 <?php
 namespace Backend\Modules\Admins\Controllers;
-use Models\Subjects;
-use Models\SubjectsLang;
+use Models\Classes;
+use Models\ClassesLang;
 use Models\Language;
-use Backend\Modules\Admins\Forms\SubjectsForm;
-use Backend\Modules\Admins\Forms\SubjectsLangForm;
+use Backend\Modules\Admins\Forms\ClassesForm;
+use Backend\Modules\Admins\Forms\ClassesLangForm;
 
-class SubjectsController  extends \BackendController {
+class ClassesController  extends \BackendController {
 
     public function indexAction(){
         $this->get_js_css();
@@ -15,40 +15,40 @@ class SubjectsController  extends \BackendController {
 
     public function updateAction($id = 0){
         $forms_lang = [];
-        $subjects_lang = [];
-        $subject_content = [];
+        $classes_lang = [];
+        $class_content = [];
         $languages = Language::find(['status = 1']);
         if($id){
-            if(!$subject = Subjects::findFirstId($id)){
+            if(!$class = Classes::findFirstId($id)){
                 echo 'Không tìm thấy dữ liệu'; die;
             }
-            $subject->updated_at = date('Y-m-d H:i:s');
+            $class->updated_at = date('Y-m-d H:i:s');
             $title = 'Cập nhật';
             foreach ($languages as $key => $lang) {
-                $subject_lang = SubjectsLang::findFirst(['subject_id = :id: AND lang_id = :lang_id:','bind' => ['id' => $subject->id, 'lang_id' => $lang->id]]);
-                if($subject_lang){
-                    $form_lang = new SubjectsLangForm($subject_lang);
-                    $subjects_lang[$lang->id] = $subject_lang;
+                $class_lang = ClassesLang::findFirst(['class_id = :id: AND lang_id = :lang_id:','bind' => ['id' => $class->id, 'lang_id' => $lang->id]]);
+                if($class_lang){
+                    $form_lang = new ClassesLangForm($class_lang);
+                    $classes_lang[$lang->id] = $class_lang;
                     $forms_lang[$lang->id] = $form_lang;
-                    $subject_content[$lang->id] = $subject_lang->content;
+                    $class_content[$lang->id] = $class_lang->content;
                 }else{
                     echo 'Nội dung không phù hợp'; die;
                 }
             }   
         }else{
-            $subject = new Subjects();
-            $subject->dept_id = $this->session->get('dept_id');
-            $subject->created_at = date('Y-m-d H:i:s');
-            $subject->updated_at = $subject->created_at;
+            $class = new Classes();
+            $class->dept_id = $this->session->get('dept_id');
+            $class->created_at = date('Y-m-d H:i:s');
+            $class->updated_at = $class->created_at;
             $title = 'Thêm mới';
             foreach ($languages as $key => $lang) {
-                $forms_lang[$lang->id] = new SubjectsLangForm();
-                $subjects_lang[$lang->id] = new SubjectsLang();
-                $subject_content[$lang->id] = '';
+                $forms_lang[$lang->id] = new ClassesLangForm();
+                $classes_lang[$lang->id] = new ClassesLang();
+                $class_content[$lang->id] = '';
             }
         }
 
-        $form_subject = new SubjectsForm($subject);
+        $form_class = new ClassesForm($class);
         if ($this->request->isPost()) {
             if ($this->security->checkToken()) {
                 $error = [];
@@ -56,42 +56,42 @@ class SubjectsController  extends \BackendController {
                 $p_slug = $this->request->getPost('slug');
                 $p_content = $this->request->getPost('content');
                 $p_excerpt = $this->request->getPost('excerpt');
-                $req_subject = [
+                $req_class = [
                     'status' => $this->request->getPost('status'),
-                    'code' => $this->request->getPost('code'),
                     'slug' => $p_slug ? $p_slug : $this->helper->slugify($p_title[1]),
-                    'featured_image' => $this->request->getPost('featured_image'),
-                    'background_image' => $this->request->getPost('background_image')
+                    'background_image' => $this->request->getPost('background_image'),
+                    'code' => $this->request->getPost('code'),
+                    
                 ];
 
-                $form_subject->bind($req_subject, $subject);
-                if (!$form_subject->isValid()) {
-                    foreach ($form_subject->getMessages() as $message) {
+                $form_class->bind($req_class, $class);
+                if (!$form_class->isValid()) {
+                    foreach ($form_class->getMessages() as $message) {
                         array_push($error, $message->getMessage());
                     }
                 }
 
-                $check_slug = Subjects::findFirst([
+                $check_slug = Classes::findFirst([
                     "slug = :slug: AND id != :id:",
                     "bind" => [
-                        "slug" => $req_subject['slug'],
+                        "slug" => $req_class['slug'],
                         'id'    => $id,
                     ]
                 ]);
     
                 if($check_slug){
-                    $req_subject['slug'] = $req_subject['slug'] .'-'. strtotime('now'); 
+                    $req_class['slug'] = $req_class['slug'] .'-'. strtotime('now'); 
                 }
 
                 foreach ($languages as $key => $lang) {
-                    $req_subject_lang[$lang->id] = [
+                    $req_class_lang[$lang->id] = [
                         'title' => $p_title[$lang->id],
                         'content' => $p_content[$lang->id],
                         'excerpt' => $p_excerpt[$lang->id],
                         'lang_id' => $lang->id,
                     ];
 
-                    $forms_lang[$lang->id]->bind($req_subject_lang[$lang->id], $subjects_lang[$lang->id]);
+                    $forms_lang[$lang->id]->bind($req_class_lang[$lang->id], $classes_lang[$lang->id]);
                     if (!$forms_lang[$lang->id]->isValid()) {
                         foreach ($forms_lang[$lang->id]->getMessages() as $message) {
                             array_push($error, $message->getMessage());
@@ -100,17 +100,17 @@ class SubjectsController  extends \BackendController {
                 }
 
                 if (!count($error)) {
-                    if (!$subject->save()) {
-                        foreach ($subject->getMessages() as $message) {
+                    if (!$class->save()) {
+                        foreach ($class->getMessages() as $message) {
                             $this->flashSession->error($message);
                         }
                     } else {
                         foreach ($languages as $key => $lang) {
-                            $subjects_lang[$lang->id]->subject_id = $subject->id;
-                            $subjects_lang[$lang->id]->save();
+                            $classes_lang[$lang->id]->class_id = $class->id;
+                            $classes_lang[$lang->id]->save();
                         }
                         $this->flashSession->success($title." thành công");
-                        return $this->response->redirect(BACKEND_URL.'/subjects');
+                        return $this->response->redirect(BACKEND_URL.'/classes');
                     }
                 }else{
                     foreach ($error as $value) {
@@ -123,22 +123,22 @@ class SubjectsController  extends \BackendController {
         }
 
         $this->view->languages = $languages;
-        $this->view->subject_content = $subject_content;
+        $this->view->class_content = $class_content;
         $this->view->forms_lang = $forms_lang;
-        $this->view->form_subject = $form_subject;
-        $this->view->subject = $subject;
-        $this->view->subjects_lang = $subjects_lang;
+        $this->view->form_class = $form_class;
+        $this->view->class = $class;
+        $this->view->classes_lang = $classes_lang;
         $this->view->title = $title;
         $this->assets->addJs('/elfinder/js/require.min.js');
         $this->get_js_css();
     }
 
     public function deleteAction($id = null){
-        if ($subject = Subjects::findFirstId($id)) {
-            $subject->deleted = 1;
-            if (!$subject->save()) {
+        if ($class = Classes::findFirstId($id)) {
+            $class->deleted = 1;
+            if (!$class->save()) {
                 if ($this->request->isAjax()) {
-                    foreach ($subject->getMessages() as $message) {
+                    foreach ($class->getMessages() as $message) {
                         array_push($error, $message->getMessage());
                     }
                     $data['error'] = $error;
@@ -146,14 +146,14 @@ class SubjectsController  extends \BackendController {
                     $this->response->setJsonContent($data);
                     return $this->response->send();
                 } else {
-                    foreach ($subject->getMessages() as $message) {
+                    foreach ($class->getMessages() as $message) {
                         $this->flashSession->error($message);
                     }
                     return $this->response->redirect(BACKEND_URL.'/trashs');
                 }
             }else{
                 if ($this->request->isAjax()) {
-                    $data['data'] = $subject->toArray();
+                    $data['data'] = $class->toArray();
                     $this->response->setStatusCode(200, 'OK');
                     $this->response->setJsonContent($data);
                     return $this->response->send();
@@ -184,23 +184,22 @@ class SubjectsController  extends \BackendController {
     public function getdataAction(){
         if($this->request->isAjax()){
             $dept_id = $this->session->get('dept_id');
-            $npSubjects = Subjects::getNamepace();
+            $npClasses = Classes::getNamepace();
             $data = $this->modelsManager->createBuilder()
             ->columns(array(
-                $npSubjects.'.id',
-                $npSubjects.'.slug',
-                $npSubjects.'.status',
-                $npSubjects.'.code',
-                $npSubjects.'.dept_id',
-                $npSubjects.'.created_at',
+                $npClasses.'.id',
+                $npClasses.'.slug',
+                $npClasses.'.status',
+                $npClasses.'.dept_id',
+                $npClasses.'.created_at',
                 'PL.excerpt excerpt',
                 'PL.title title',
                 'PL.content content',
             ))
-            ->from($npSubjects)
-            ->where("$npSubjects.deleted = 0 AND $npSubjects.dept_id = $dept_id")
-            ->leftJoin('Models\SubjectsLang', 'PL.subject_id = '.$npSubjects.'.id AND PL.lang_id = 1','PL')
-            ->orderBy($npSubjects.'.dept_id ASC, '.$npSubjects.'.created_at DESC');
+            ->from($npClasses)
+            ->where("$npClasses.deleted = 0 AND $npClasses.dept_id = $dept_id")
+            ->leftJoin('Models\ClassesLang', 'PL.class_id = '.$npClasses.'.id AND PL.lang_id = 1','PL')
+            ->orderBy($npClasses.'.dept_id ASC, '.$npClasses.'.created_at DESC');
     
             $search = 'PL.title LIKE :search:';
             $this->response->setStatusCode(200, 'OK');
@@ -214,6 +213,6 @@ class SubjectsController  extends \BackendController {
     }
 
     private function get_js_css (){
-        $this->assets->addJs($this->config->application->baseUri.'/assets/backend/js/modules/subjects.js');
+        $this->assets->addJs($this->config->application->baseUri.'/assets/backend/js/modules/classes.js');
     }
 }

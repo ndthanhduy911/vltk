@@ -37,7 +37,6 @@ class ResearchesController  extends \BackendController {
             }   
         }else{
             $research = new Researches();
-            $research->author = $this->session->get('user_id');
             $research->dept_id = $this->session->get('dept_id');
             $research->created_at = date('Y-m-d H:i:s');
             $research->updated_at = $research->created_at;
