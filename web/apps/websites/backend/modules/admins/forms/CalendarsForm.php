@@ -189,7 +189,6 @@ class CalendarsForm extends Form
             1 => "1",
             2 => "2",
             3 => "3",
-
         ], [
             'useEmpty' => true,
             'emptyText' => 'Chọn học kỳ',

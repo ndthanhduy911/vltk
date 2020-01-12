@@ -17,7 +17,6 @@
                             {% if post.featured_image %}
                             <div class="overlay-container">
                                 <img class="ml-auto mr-auto" src="{{ helper.getLinkImage(post.featured_image) }}" alt="{{ post.title }}">
-                                <a class="overlay-link" href="<?= Posts::getUrl($dept, $post) ?>"><i class="fa fa-link"></i></a>
                             </div>
                             {% endif %}
                             <header>

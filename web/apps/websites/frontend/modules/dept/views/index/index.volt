@@ -20,7 +20,7 @@
                         <div class="tp-caption" data-x="center" data-y="center" data-start="0"
                             data-transform_idle="o:1;" data-transform_in="o:0;s:600;e:Power2.easeInOut;"
                             data-transform_out="o:0;s:600;" data-width="5000" data-height="5000"
-                            style="background-color: rgba(0, 0, 0, 0.2);">
+                            style="background-color: rgba(0, 0, 0, 0.1);">
                         </div>
 
                         <!-- LAYER NR. 1 -->
