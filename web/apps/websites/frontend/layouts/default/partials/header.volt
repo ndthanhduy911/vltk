@@ -5,11 +5,11 @@
     use Models\Menus;
 
 
-    $socials = Social::find(["status = 1 AND dept_id = $dept->id", "order" => "sort ASC"]);
-    $links = Link::find(["status = 1 AND dept_id = $dept->id", "order" => "sort ASC"]);
+    $socials = Social::find(["deleted = 0 AND status = 1 AND dept_id = $dept->id", "order" => "sort ASC"]);
+    $links = Link::find(["deleted = 0 AND status = 1 AND dept_id = $dept->id", "order" => "sort ASC"]);
     $menuParents = [];
     if($menuLocation = MenuLocation::findFirst(["status =  1 AND dept_id = $dept->id AND type = 1"])) {
-        $menuParents = Menus::find(["status = 1 AND dept_id = $dept->id AND menu_location_id = {$menuLocation->id} AND parent_id is NULL",'order' => 'sort ASC']);
+        $menuParents = Menus::find(["deleted = 0 AND status = 1 AND dept_id = $dept->id AND menu_location_id = {$menuLocation->id} AND parent_id is NULL",'order' => 'sort ASC']);
     }
 ?>
 <div class="header-container">
