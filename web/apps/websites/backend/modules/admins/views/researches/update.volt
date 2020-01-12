@@ -1,11 +1,11 @@
 <main class="app-content">
     <div class="app-title mb-3">
         <div>
-            <h1><i class="fa fa-th-list"></i> {{sesearches_lang[1].title ? 'Cập nhật hướng ngiên cứu': 'Thêm hướng ngiên cứu mới'}}</h1>
+            <h1><i class="fa fa-th-list"></i>{{title}} hướng nghiên cứu</h1>
         </div>
         <ul class="app-breadcrumb breadcrumb side">
             <li class="breadcrumb-item"><a class="link" href="{{ config.application.backendUri }}"><i class="fa fa-home fa-lg"></i></a></li>
-            <li class="breadcrumb-item"><a class="link" href="{{ config.application.backendUri }}/sesearches">Hướng ngiên cứu</a></li>
+            <li class="breadcrumb-item"><a class="link" href="{{ config.application.backendUri }}/researches">Hướng ngiên cứu</a></li>
             <li class="breadcrumb-item">{{title}}</li>
         </ul>
     </div>
@@ -59,7 +59,7 @@
                                 <div class="form-group col-md-12">
                                     <div class="input-group">
                                         <textarea id="editor{{lang.id}}" name="content[{{lang.id}}]" class="rounded">
-                                            {{sesearch_content[lang.id]}}
+                                            {{research_content[lang.id]}}
                                         </textarea>
                                         <div class="invalid-tooltip"></div>
                                     </div>
@@ -80,7 +80,7 @@
                                 <h6 class="text-primary font-weight-normal">Trạng thái</h6>
                                 <div class="form-group mt-1">
                                     <div class="input-group">
-                                        {{form_sesearch.render('status')}}
+                                        {{form_research.render('status')}}
                                         <div class="invalid-tooltip"></div>
                                     </div>
                                 </div>
@@ -89,7 +89,7 @@
                                 <h6 class="text-primary font-weight-normal">Slug</h6>
                                 <div class="form-group mt-1">
                                     <div class="input-group">
-                                        {{form_sesearch.render('slug')}}
+                                        {{form_research.render('slug')}}
                                         <div class="invalid-tooltip"></div>
                                     </div>
                                 </div>
@@ -105,10 +105,10 @@
                 <div class="tile p-3 mb-3">
                     <div class="row m-0">
                         <div class="col-md-12 p-0">
-                            <img id="showImg" class="w-100 d-block" src="{{ sesearch.featured_image ? sesearch.featured_image : '' }}" alt="{{ sesearch.featured_image ? sesearch.featured_image : '' }}">
-                            {{form_sesearch.render('featured_image')}}
+                            <img id="showImg" class="w-100 d-block" src="{{ research.featured_image ? research.featured_image : '' }}" alt="{{ research.featured_image ? research.featured_image : '' }}">
+                            {{form_research.render('featured_image')}}
                             <a id="uploadImage" href="#" class="link">Đặt ảnh đại diện</a>
-                            <a id="removeImage" href="#" class="link text-danger {{ sesearch.featured_image ? '' : 'hidden' }}">Xóa</a>
+                            <a id="removeImage" href="#" class="link text-danger {{ research.featured_image ? '' : 'hidden' }}">Xóa</a>
                         </div>
                     </div>
                 </div>
@@ -116,11 +116,11 @@
                 <div class="tile p-3 mb-3">
                     <div class="row m-0">
                         <div class="col-md-12 p-0">
-                            <img id="showBackgroundImg" class="w-100 d-block" src="{{ sesearch.background_image ? sesearch.background_image : '' }}"
-                                alt="{{ sesearch.background_image ? sesearch.background_image : '' }}">
-                            {{form_sesearch.render('background_image')}}
+                            <img id="showBackgroundImg" class="w-100 d-block" src="{{ research.background_image ? research.background_image : '' }}"
+                                alt="{{ research.background_image ? research.background_image : '' }}">
+                            {{form_research.render('background_image')}}
                             <a id="uploadBackgroundImage" href="#" class="link">Đặt ảnh nền</a>
-                            <a id="removeBackgroundImage" href="#" class="link text-danger {{ sesearch.background_image ? '' : 'hidden' }}">Xóa</a>
+                            <a id="removeBackgroundImage" href="#" class="link text-danger {{ research.background_image ? '' : 'hidden' }}">Xóa</a>
                         </div>
                     </div>
                 </div>
