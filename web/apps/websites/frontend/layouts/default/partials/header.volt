@@ -73,7 +73,7 @@
                         <div id="logo" class="logo" dept-id = "{{ dept.id }}">
                             <a href="<?php echo FRONTEND_URL ?>/{{ dept.id != 1 ? dept.slug : ''}}">
                                 {% if dept.logo %}
-                                <img src="{{ helper.getLinkImage(dept.logo) }}" alt="{{ dept_lang.name }}">
+                                <img height="30px" src="{{ helper.getLinkImage(dept.logo) }}" alt="{{ dept_lang.name }}">
                                 {% else %}
                                 <h3 class="title text-default mb-0">{{ dept.code }}</h3>
                                 {% endif %}
@@ -100,9 +100,11 @@
                                             {% endif %}
                                         </a>
                                     </div>
+                                    {% if !dept.logo %}
                                     <div class="site-slogan logo-font">
                                         {{dept_lang.name}}
                                     </div>
+                                    {% endif %}
 
                                 </div>
 
