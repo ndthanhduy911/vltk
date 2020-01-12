@@ -99,6 +99,7 @@ class PostsController extends \FrontendController
         $this->view->title = Categories::getTitleById($category->id);
         $this->view->posts = $posts;
         $this->view->paging = $paging;
+        $this->view->slug_now = $category->slug;
         $this->view->pick('templates/blog');   
     }
 

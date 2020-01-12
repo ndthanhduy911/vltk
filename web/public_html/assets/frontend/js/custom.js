@@ -51,6 +51,7 @@
 				$(this).html(trim_text($(this).text(), 100));
 			});
 		}
+		$('.dropdown-menu > li > a.active').parents('.dropdown-menu').prev('a.nav-link').addClass('active').parent('.nav-item.dropdown').addClass('show active');
 	}); // End document ready
 
 })(jQuery);

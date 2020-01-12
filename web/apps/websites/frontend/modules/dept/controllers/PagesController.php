@@ -23,6 +23,7 @@ class PagesController extends \FrontendController
         }
         $this->view->title = $page_lang->title;
         $this->view->page = $page;
+        $this->view->slug_now = $page->slug;
         $this->view->page_lang = $page_lang;
         if(!$page->attribute_id){
             return $this->view->pick('templates/pages/default');

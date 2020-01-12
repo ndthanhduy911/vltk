@@ -117,14 +117,18 @@
                                 <div class="collapse navbar-collapse" id="navbar-collapse-1">
                                     <ul class="navbar-nav ml-xl-auto">
                                         {%for menu in menuParents%}
-                                        <?php $menuChild = Menus::find(['parent_id = :parent_id:','bind' => ['parent_id' => $menu->id]]); ?>
+                                        <?php $menuChild = Menus::find(['deleted = 0 AND parent_id = :parent_id:','bind' => ['parent_id' => $menu->id]]); ?>
                                         <li class="nav-item dropdown">
                                             <a target="{{ helper.getTarget(menu.target)}}" href="<?= Menus::getLink($menu, $dept->slug) ?>" class="nav-link <?= $menuChild->count() ? 'dropdown-toggle' : '' ?>" <?= $menuChild->count() ? 'data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"' : '' ?>><?= Menus::getName($menu->id, $lang_id) ?></a>
                                             <?php if($menuChild->count()){ ?>
                                                 <ul class="dropdown-menu">
-                                                {%for child in menuChild%}
-                                                    <li><a target="{{ helper.getTarget(child.target)}}" href="<?= Menus::getLink($child, $dept->slug) ?>" class=""><?= Menus::getName($child->id, $lang_id) ?></a></li>
-                                                {%endfor%}
+                                                {% for child in menuChild %}
+                                                    <?php 
+                                                    $slug_now = isset($slug_now) ? $slug_now : '';
+                                                    $menuItem = Menus::getItem($child, $dept->slug, $slug_now);
+                                                    ?>
+                                                    <li><a target="{{ helper.getTarget(child.target)}}" href="{{ menuItem['link'] }}" class="{{ menuItem['actived'] ? 'active' : '' }}"><?= Menus::getName($child->id, $lang_id) ?></a></li>
+                                                {% endfor %}
                                                 </ul>
                                             <?php } ?>
                                         </li>

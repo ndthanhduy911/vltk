@@ -82,7 +82,7 @@ class Menus extends \Phalcon\Mvc\Model
         }
     }
 
-    public static function getItem($menu , $slug = ''){
+    public static function getItem($menu , $slug = '', $slug_now = false){
         $item = [
             'actived' => false,
             'link' => ''
@@ -91,18 +91,22 @@ class Menus extends \Phalcon\Mvc\Model
         switch ((int)$menu->type) {
             case 1: {
                 $item['link'] = ($post = Posts::findFirstId($menu->post_id)) ? FRONTEND_URL.($slug != '/' ? '/'.$slug : '')."/news/".$post->slug : '#';
+                $item['actived'] = (isset($post->slug) ? $post->slug : '#4')  == $slug_now ? true : false;
                 break;
             }    
             case 2: {
                 $item['link'] = ($page = Pages::findFirstId($menu->page_id)) ? FRONTEND_URL.($slug != '/' ? '/'.$slug : '').'/'.$page->slug.'.html' : '#';
+                $item['actived'] = (isset($page->slug) ? $page->slug : '#4') == $slug_now ? true : false;
                 break;
             } 
             case 3: {
                 $item['link'] = ($cat = Categories::findFirstId($menu->cat_id)) ? FRONTEND_URL.($slug != '/' ? '/'.$slug : '').'/category/'.$cat->slug : '#';
+                $item['actived'] = (isset($cat->slug) ? $cat->slug : '#4') == $slug_now ? true : false;
                 break;
             }   
             case 4: {
                 $item['link'] = ($dept = Departments::findFirstId($menu->dept)) ? FRONTEND_URL.($slug != '/' ? '/'.$slug : '').'/'.$dept->slug : '#';
+                $item['actived'] = (isset($dept->slug) ? $dept->slug : '#4') == $slug_now ? true : false;
                 break;
             } 
             case 5: {

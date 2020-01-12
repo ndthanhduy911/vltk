@@ -73,6 +73,18 @@ ul.dropdown-menu > li:last-of-type > a
     border: none !important;
 }
 
+.nav-item.dropdown.active {
+    background-color: #ffffff;
+    border-bottom-color: #ffffff;
+    border-right: 1px solid #f5f5f5;
+    border-left: 1px solid #f5f5f5;
+    z-index: 106;
+}
+
+.nav-item.dropdown.active a.active{
+    color: #3F51B5 !important;
+}
+
 .transparent-header .dark.header .navbar-nav li .nav-link {
     color: #ffffff;
 }
