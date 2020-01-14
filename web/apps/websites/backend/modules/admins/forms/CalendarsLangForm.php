@@ -13,48 +13,26 @@ class CalendarsLangForm extends Form
 {
     public function initialize($entity = null, $options = null)
     {
-        $title = new Text('title');
-        $title->setAttributes(array(
-            'class' => 'form-control',
-            'placeholder' => 'Tiêu đề',
-            'required' => '',
-            'data-required-error' => "Vui lòng nhập tiêu đề.",
-            'maxlength' => "255",
-            'data-error' => "Tiêu đề không đúng quy định.",
-        ));
-        $title->addValidators(array(
-            new PresenceOf(array(
-                'message' => 'Tiêu đề không được bỏ trống.',
-            )),
-            new StringLength([
-                "max" => 255,
-                "messageMaximum" => "Tiêu đề không được dài quá 255 ký tự",
-            ]),
-        ));
-        $this->add($title);
 
         $excerpt = new Textarea('excerpt');
         $excerpt->setAttributes(array(
             'class' => 'form-control',
-            'placeholder' => 'Tóm tắt',
+            'placeholder' => 'Mô tả/ Chú thích',
             'maxlength' => "255",
-            'data-error' => "Tóm tắt không đúng quy định.",
+            'data-error' => "Mô tả/ Chú thích không đúng quy định.",
             'rows' => 4
         ));
 
         $excerpt->addValidators(array(
             new StringLength([
                 "max" => 255,
-                "messageMaximum" => "Tóm tắt không được dài quá 255 ký tự",
+                "messageMaximum" => "Mô tả/chú thích không được dài quá 255 ký tự",
             ]),
         ));
         $this->add($excerpt);
 
-        $content = new Hidden('content');
-        $this->add($content);
-
-        $post_id = new Hidden('post_id');
-        $this->add($post_id);
+        $calendar_id = new Hidden('calendar_id');
+        $this->add($calendar_id);
 
         $lang_id = new Hidden('lang_id');
         $this->add($lang_id);

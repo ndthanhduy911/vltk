@@ -72,7 +72,7 @@ class CalendarsForm extends Form
 
         $begin_date = new Text('begin_date');
         $begin_date->setAttributes(array(
-            'class' => 'form-control-sm date-basic w-100',
+            'class' => 'form-control date-basic w-100',
             'placeholder' => 'dd/mm/yyyy',
             'maxlength' => "10",
             'required' => '',
@@ -87,7 +87,7 @@ class CalendarsForm extends Form
             new DateValidator(
                 [
                     "format"  => "d/m/Y",
-                    "message" => "Không đúng định dạng thời gian",
+                    "message" => "Ngày bắt đầu không đúng định dạng thời gian",
                 ]
             )
         ));
@@ -118,8 +118,8 @@ class CalendarsForm extends Form
 
         $begin_time = new Text('begin_time');
         $begin_time->setAttributes(array(
-            'class' => 'form-control-sm time-basic',
-            'placeholder' => 'HH/mm',
+            'class' => 'form-control time-basic',
+            'placeholder' => 'Thời gian bắt đầu (HH:mm)',
             'maxlength' => "10",
             'required' => '',
             'data-required-error' => 'Vui lòng điền đầy đủ thông tin',
@@ -133,7 +133,7 @@ class CalendarsForm extends Form
             new DateValidator(
                 [
                     "format"  => "H:i",
-                    "message" => "Không đúng định dạng thời gian",
+                    "message" => "Bắt đầu không đúng định dạng thời gian",
                 ]
             )
         ));
@@ -141,8 +141,8 @@ class CalendarsForm extends Form
 
         $end_time = new Text('end_time');
         $end_time->setAttributes(array(
-            'class' => 'form-control-sm time-basic',
-            'placeholder' => 'HH/mm',
+            'class' => 'form-control time-basic',
+            'placeholder' => 'Thời gian kết thúc (HH:mm)',
             'maxlength' => "10",
             'required' => '',
             'data-required-error' => 'Vui lòng điền đầy đủ thông tin',
@@ -156,7 +156,7 @@ class CalendarsForm extends Form
             new DateValidator(
                 [
                     "format"  => "H:i",
-                    "message" => "Không đúng định dạng thời gian",
+                    "message" => "Kết thúc không đúng định dạng thời gian",
                 ]
             )
         ));
@@ -164,7 +164,7 @@ class CalendarsForm extends Form
 
         $year = new Text('year');
         $year->setAttributes(array(
-            'class' => 'form-control-sm time-basic',
+            'class' => 'form-control year-basic',
             'placeholder' => 'YYYY',
             'maxlength' => "4",
             'required' => '',
@@ -178,8 +178,8 @@ class CalendarsForm extends Form
             )),
             new DateValidator(
                 [
-                    "format"  => "yyyy",
-                    "message" => "Không đúng định dạng thời gian",
+                    "format"  => "Y",
+                    "message" => "Năm không đúng định dạng thời gian",
                 ]
             )
         ));
@@ -203,41 +203,41 @@ class CalendarsForm extends Form
             )),
         ));
         $this->add($semester);
-        
 
-        $location = new Text('location');
-        $location->setAttributes(array(
-            'class' => 'form-control',
-            'placeholder' => 'Phòng học',
+        $location = new Select('location', [
+            1 => "CS1: Nguyễn Văn Cừ",
+            2 => "CS2: Linh Trung"
+        ], [
+            'useEmpty' => true,
+            'emptyText' => 'Chọn cơ sở',
+            'emptyValue' => '',
+            'class' => 'form-control pull-right w-100',
             'required' => '',
-            'data-required-error' => "Vui lòng nhập đầy đủ thông tin",
-            'maxlength' => "255",
-            'data-error' => "Phòng học không đúng quy định.",
-        ));
+            'data-required-error' => 'Vui lòng điền đầy đủ thông tin.',
+        ]);
         $location->addValidators(array(
             new PresenceOf(array(
-                'message' => 'Phòng học không được bỏ trống.',
+                'message' => 'Cơ sở không được để trống.',
             )),
-            new StringLength([
-                "max" => 255,
-                "messageMaximum" => "Phòng học không được dài quá 255 ký tự",
-            ]),
         ));
         $this->add($location);
 
-        $slug = new Text('slug');
-        $slug->setAttributes(array(
+        $room = new Text('room');
+        $room->setAttributes(array(
             'class' => 'form-control',
-            'placeholder' => 'Slug',
+            'placeholder' => 'Phòng học',
             'maxlength' => "200",
         ));
-        $slug->addValidators(array(
+        $room->addValidators(array(
             new StringLength([
                 "max" => 200,
-                "messageMaximum" => "Slug không được dài quá 255 ký tự",
+                "messageMaximum" => "Phòng hòng không được dài quá 255 ký tự",
+            ]),
+            new PresenceOf([
+                "message" => "Phòng học không được để trống",
             ]),
         ));
-        $this->add($slug);
+        $this->add($room);
 
         $status = new Select('status', [
             1 => "Hoạt động",

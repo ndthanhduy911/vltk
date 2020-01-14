@@ -38,6 +38,14 @@
 		format: "DD/MM/YYYY",
 	});
 
+	$('.time-basic').datetimepicker({
+		format: "HH:mm",
+	});
+
+	$('.year-basic').datetimepicker({
+		format: "YYYY",
+	});
+
 	$('.datetime-basic').datetimepicker({
 		format: 'DD/MM/YYYY HH:mm',
 	});

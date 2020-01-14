@@ -22,6 +22,7 @@ class CalendarsController  extends \BackendController {
             if(!$calendar = Calendars::findFirstId($id)){
                 echo 'Không tìm thấy dữ liệu'; die;
             }
+            $calendar->begin_date = $this->helper->datetime_vn($calendar->begin_date);
             $calendar->updated_at = date('Y-m-d H:i:s');
             $title = 'Cập nhật';
             foreach ($languages as $key => $lang) {
@@ -37,7 +38,6 @@ class CalendarsController  extends \BackendController {
             }   
         }else{
             $calendar = new Calendars();
-            $calendar->author = $this->session->get('user_id');
             $calendar->dept_id = $this->session->get('dept_id');
             $calendar->created_at = date('Y-m-d H:i:s');
             $calendar->updated_at = $calendar->created_at;
@@ -53,15 +53,21 @@ class CalendarsController  extends \BackendController {
         if ($this->request->isPost()) {
             if ($this->security->checkToken()) {
                 $error = [];
-                $p_title = $this->request->getPost('title');
-                $p_slug = $this->request->getPost('slug');
-                $p_content = $this->request->getPost('content');
                 $p_excerpt = $this->request->getPost('excerpt');
                 $req_calendar = [
                     'status' => $this->request->getPost('status'),
-                    'slug' => $p_slug ? $p_slug : $this->helper->slugify($p_title[1]),
                     'featured_image' => $this->request->getPost('featured_image'),
-                    'background_image' => $this->request->getPost('background_image')
+                    'background_image' => $this->request->getPost('background_image'),
+                    'class_id' => $this->request->getPost('class_id'),
+                    'subject_id' => $this->request->getPost('subject_id'),
+                    'year' => $this->request->getPost('year'),
+                    'semester' => $this->request->getPost('semester'),
+                    'location' => $this->request->getPost('location'),
+                    'begin_date' => $this->request->getPost('begin_date'),
+                    'day' => $this->request->getPost('day'),
+                    'begin_time' => $this->request->getPost('begin_time'),
+                    'end_time' => $this->request->getPost('end_time'),
+                    'room' => $this->request->getPost('room'),
                 ];
 
                 $form_calendar->bind($req_calendar, $calendar);
@@ -71,22 +77,8 @@ class CalendarsController  extends \BackendController {
                     }
                 }
 
-                $check_slug = Calendars::findFirst([
-                    "slug = :slug: AND id != :id:",
-                    "bind" => [
-                        "slug" => $req_calendar['slug'],
-                        'id'    => $id,
-                    ]
-                ]);
-    
-                if($check_slug){
-                    $req_calendar['slug'] = $req_calendar['slug'] .'-'. strtotime('now'); 
-                }
-
                 foreach ($languages as $key => $lang) {
                     $req_calendar_lang[$lang->id] = [
-                        'title' => $p_title[$lang->id],
-                        'content' => $p_content[$lang->id],
                         'excerpt' => $p_excerpt[$lang->id],
                         'lang_id' => $lang->id,
                     ];
@@ -100,6 +92,7 @@ class CalendarsController  extends \BackendController {
                 }
 
                 if (!count($error)) {
+                    $calendar->begin_date = $this->helper->datetime_mysql($calendar->begin_date);
                     if (!$calendar->save()) {
                         foreach ($calendar->getMessages() as $message) {
                             $this->flashSession->error($message);
@@ -188,20 +181,32 @@ class CalendarsController  extends \BackendController {
             $data = $this->modelsManager->createBuilder()
             ->columns(array(
                 $npCalendars.'.id',
-                $npCalendars.'.slug',
                 $npCalendars.'.status',
                 $npCalendars.'.dept_id',
                 $npCalendars.'.created_at',
-                'PL.excerpt excerpt',
-                'PL.title title',
-                'PL.content content',
+                $npCalendars.'.class_id',
+                $npCalendars.'.subject_id',
+                $npCalendars.'.year',
+                $npCalendars.'.created_at',
+                $npCalendars.'.semester',
+                $npCalendars.'.location',
+                $npCalendars.'.begin_date',
+                $npCalendars.'.day',
+                $npCalendars.'.begin_time',
+                $npCalendars.'.room',
+                $npCalendars.'.end_time',
+                'CL.excerpt excerpt',
+                'SL.title subject_name',
+                'CLL.title class_name',
             ))
             ->from($npCalendars)
             ->where("$npCalendars.deleted = 0 AND $npCalendars.dept_id = $dept_id")
-            ->leftJoin('Models\CalendarsLang', 'PL.calendar_id = '.$npCalendars.'.id AND PL.lang_id = 1','PL')
+            ->leftJoin('Models\CalendarsLang', 'CL.calendar_id = '.$npCalendars.'.id AND CL.lang_id = 1','CL')
+            ->leftJoin('Models\SubjectsLang', 'SL.subject_id = '.$npCalendars.'.subject_id AND SL.lang_id = 1','SL')
+            ->leftJoin('Models\ClassesLang', 'CLL.class_id = '.$npCalendars.'.class_id AND CLL.lang_id = 1','CLL')
             ->orderBy($npCalendars.'.dept_id ASC, '.$npCalendars.'.created_at DESC');
     
-            $search = 'PL.title LIKE :search:';
+            $search = 'CL.excerpt LIKE :search:';
             $this->response->setStatusCode(200, 'OK');
             $this->response->setJsonContent($this->ssp->data_output($this->request->get(), $data,$search));
             return $this->response->send();
@@ -213,6 +218,6 @@ class CalendarsController  extends \BackendController {
     }
 
     private function get_js_css (){
-        $this->assets->addJs($this->config->application->baseUri.'/assets/backend/js/modules/calendars.js');
+        $this->assets->addJs($this->config->apCLication->baseUri.'/assets/backend/js/modules/calendars.js');
     }
 }

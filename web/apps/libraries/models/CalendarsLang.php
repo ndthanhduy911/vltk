@@ -10,10 +10,6 @@ class CalendarsLang extends \Phalcon\Mvc\Model
     
     public $lang_id;
 
-    public $title;
-
-    public $content;
-
     public $excerpt;
 
     public function getSource()

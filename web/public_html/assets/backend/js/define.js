@@ -19,8 +19,12 @@ const number_format = (number, decimals, dec_point, thousands_sep, unit = "") =>
 }
 
 // Format date Viet Nam
-const vi_moment = (date, type) => {
+const vi_moment = (date, type = "DD/MM/YYYY HH:mm:ss") => {
     return moment(date, 'YYYY-MM-DD HH:mm:ss').format(type)
+}
+
+const vi_moment_time = (time, type = 'HH:mm:ss') => {
+    return moment(time, 'HH:mm:ss').format(type)
 }
 
 const changeTitleToSlug = (title) =>

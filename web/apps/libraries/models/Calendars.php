@@ -7,8 +7,6 @@ use Models\CalendarsLang;
 class Calendars extends \Phalcon\Mvc\Model
 {
     public $id;
-    
-    public $slug;
 
     public $status;
 
@@ -23,6 +21,28 @@ class Calendars extends \Phalcon\Mvc\Model
     public $background_image;
 
     public $deleted;
+
+    public $class_id;
+
+    public $subject_id;
+
+    public $year;
+
+    public $semester;
+
+    public $location;
+
+    public $begin_date;
+
+    public $day;
+
+    public $begin_time;
+
+    public $end_time;
+
+    public $room;
+
+
 
     public function getSource()
     {

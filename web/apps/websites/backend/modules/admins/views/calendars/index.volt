@@ -25,11 +25,14 @@
                         <thead>
                             <tr class="bg-primary">
                                 <th class="align-middle text-center text-white w-20-px">#</th>
-                                <th class="align-middle text-center text-white">Tiêu đề</th>
-                                <th class="align-middle text-center text-white">Mô tả</th>
-                                <th class="align-middle text-center text-white w-150-px">Ngày đăng</th>
-                                <th class="align-middle text-center text-white w-70-px">Trạng thái</th>
-                                <th class="align-middle text-center text-white w-70-px">Thao tác</th>
+                                <th class="align-middle text-center text-white">Tên môn học</th>
+                                <th class="align-middle text-center text-white">Học kỳ</th>
+                                <th class="align-middle text-center text-white">Ngày bắt đầu</th>
+                                <th class="align-middle text-center text-white">Bắt đầu</th>
+                                <th class="align-middle text-center text-white">Kết thúc</th>
+                                <th class="align-middle text-center text-white">Phòng học</th>
+                                <th class="align-middle text-center text-white">Trạng thái</th>
+                                <th class="align-middle text-center text-white">Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>

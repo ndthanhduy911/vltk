@@ -20,8 +20,8 @@
 			<ul class="treeview-menu">
 				<li><a class="treeview-item {% if dispatcher.getControllerName()=='classes' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/classes"><i class="icon fa fa-arrow-circle-right"></i> Danh sách lớp</a></li>
 				<li><a class="treeview-item {% if dispatcher.getControllerName()=='subjects' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/subjects"><i class="icon fa fa-arrow-circle-right"></i> Môn học</a></li>
-				<li><a class="treeview-item {% if dispatcher.getActionName()=='calendars' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/calendars"><i class="icon fa fa-arrow-circle-right"></i> Lịch học</a></li>
-				<li><a class="treeview-item {% if dispatcher.getActionName()=='researches' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/researches"><i class="icon fa fa-arrow-circle-right"></i> Hướng nghiên cứu</a></li>
+				<li><a class="treeview-item {% if dispatcher.getControllerName()=='calendars' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/calendars"><i class="icon fa fa-arrow-circle-right"></i> Lịch học</a></li>
+				<li><a class="treeview-item {% if dispatcher.getControllerName()=='researches' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/researches"><i class="icon fa fa-arrow-circle-right"></i> Hướng nghiên cứu</a></li>
 			</ul>
 		</li>
 		<li><a class="app-menu__item {% if dispatcher.getControllerName()=='banner' %} {{ 'active' }} {% endif %}" href="{{ config.application.backendUri }}/banner"><i class="app-menu__icon fa fa-image"></i><span class="app-menu__label">Banners</span></a></li>

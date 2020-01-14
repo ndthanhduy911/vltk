@@ -10,6 +10,22 @@ const showStatus = (id = '') => {
     }
 }
 
+const showLocation = (id = '') => {
+    switch (parseInt(id)) {
+        case 1:
+            return `Cơ sở NVC`;
+        case 2:
+            return `Cơ sở LT`;
+        default:
+            return `Cơ sở khác`;
+    }
+}
+
+const showYear = (year) => {
+    year = parseInt(year);
+    return year + ' - ' + (year+1)
+}
+
 const loadTablePages = () => {
     if ($('#calendars').length) {
         let dt = $('#calendars').DataTable({
@@ -25,13 +41,22 @@ const loadTablePages = () => {
                     "data": "no"
                 },
                 {
-                    "data": "title"
+                    "data": "subject_name"
                 },
                 {
-                    "data": "excerpt"
+                    "data": "year"
                 },
                 {
-                    "data": "created_at"
+                    "data": "begin_date"
+                },
+                {
+                    "data": "begin_time"
+                },
+                {
+                    "data": "end_time"
+                },
+                {
+                    "data": "location"
                 },
                 {
                     "data": "status"
@@ -43,12 +68,16 @@ const loadTablePages = () => {
             'createdRow': function (row, item, dataIndex) {
                 $(row).addClass('text-center');
                 $('td', row).addClass('align-middle');
-                $('td:eq(3)', row).html(vi_moment(item.created_at, 'DD/MM/YYYY HH:mm'));
-                $('td:eq(4)', row).html(showStatus(item.status));
-                $('td:eq(5)', row).html(`
+                $('td:eq(2)', row).html(item.semester+' ('+showYear(item.year) +')');
+                $('td:eq(3)', row).html(vi_moment(item.begin_date, 'DD/MM/YYYY'));
+                $('td:eq(4)', row).html(vi_moment_time(item.begin_time, 'HH:mm'));
+                $('td:eq(5)', row).html(vi_moment_time(item.end_time, 'HH:mm'));
+                $('td:eq(6)', row).html(showLocation(item.location)+' - ' + item.room);
+                $('td:eq(7)', row).html(showStatus(item.status));
+                $('td:eq(8)', row).html(`
                     <a href="${backendUrl}/calendars/update/${item.id}" class="fa fa-pencil btn btn-info btn-sm editPage" title="Cập nhật"></a>
                 `);
-                $('td:eq(5)', row).append(`<a href="#" data-href="${backendUrl}/calendars/delete/${item.id}" class="fa fa-trash btn btn-danger btn-sm deletePage" title="Xóa"></a>`);
+                $('td:eq(8)', row).append(`<a href="#" data-href="${backendUrl}/calendars/delete/${item.id}" class="fa fa-trash btn btn-danger btn-sm deletePage" title="Xóa"></a>`);
             },
             "deferRender": true,
             "language": {
