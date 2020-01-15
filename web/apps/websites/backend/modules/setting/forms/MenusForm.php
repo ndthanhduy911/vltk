@@ -83,7 +83,7 @@ class MenusForm extends Form
             'PL.title title',
         ))
         ->from($npPosts)
-        ->where("$npPosts.dept_id = $dept_id $npPosts.deleted = 0")
+        ->where("$npPosts.dept_id = $dept_id AND $npPosts.deleted = 0")
         ->join('Models\PostsLang', "PL.post_id = $npPosts.id AND PL.lang_id = 1",'PL')
         ->getQuery()
         ->execute();
