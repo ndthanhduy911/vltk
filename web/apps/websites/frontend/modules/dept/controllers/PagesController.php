@@ -30,7 +30,7 @@ class PagesController extends \FrontendController
         }
 
         if(($attribute = Attributes::findFirst($page->attribute_id))){
-            return $this->view->pick('templates/pages/'.$attribute->path);
+        return $this->view->pick('templates/pages/'.$attribute->path);
         }
 
         return $this->view->pick('templates/pages/default');

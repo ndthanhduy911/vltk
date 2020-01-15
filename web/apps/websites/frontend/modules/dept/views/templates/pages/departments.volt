@@ -2,8 +2,7 @@
     use Models\Departments;
     use Models\Researches;
 
-die;
-    if($dept->id === 1){
+    if((int)$dept->id === 1){
         $npDept = Departments::getNamepace();
         $depts = $this->modelsManager->createBuilder()
         ->columns(array(
@@ -53,10 +52,10 @@ die;
 <section class="main-container pt-5">
     <div class="container">
         <div class="row">
-            <div class="main col-md-9">
-                {% if depts %}
+            <div class="main col-md-9 row">
+                <?php if(!empty($depts)): ?>
                 {% for dept_item in depts %}
-                <div class="col-lg-3 col-md-6 isotope-item">
+                <div class="col-lg-6 col-md-6 isotope-item">
                     <div class="image-box shadow-2 bordered text-center mb-20">
                         <div class="overlay-container rounded overlay-visible">
                             <img src="{{ helper.getLinkImage(dept_item.image) }}"
@@ -72,9 +71,9 @@ die;
                     </div>
                 </div>
                 {% endfor %}
-                {% endif %}
+                <?php endif ?>
 
-                {% if researches %}
+                <?php if(!empty($researches)): ?>
                 {% for research in researches %}
                 <div class="col-lg-3 col-md-6 isotope-item">
                     <div class="image-box shadow-2 bordered text-center mb-20">
@@ -92,7 +91,7 @@ die;
                     </div>
                 </div>
                 {% endfor %}
-                {% endif %}
+                <?php endif ?>
 
             </div>
 

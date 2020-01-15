@@ -24,8 +24,8 @@
                         </div>
 
                         <!-- LAYER NR. 1 -->
-                        <div class="tp-caption sfb fadeout caption-box text-left rounded"
-                            style="background-color: rgba(0, 0, 0, 0.8);" data-x="<?= $key % 2 == 0 ? 'left' : 'right' ?>" data-y="center"
+                        <div class="tp-caption sfb fadeout caption-box text-left rounded mb-5"
+                            style="background-color: rgba(0, 0, 0, 0.5);" data-x="<?= $key % 2 == 0 ? 'left' : 'right' ?>" data-y="bottom"
                             data-start="600" data-whitespace="normal" data-transform_idle="o:1;"
                             data-transform_in="y:[100%];sX:1;sY:1;o:0;s:1150;e:Power4.easeInOut;"
                             data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;"

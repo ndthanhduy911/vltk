@@ -47,7 +47,7 @@ class MenusForm extends Form
             'CL.name name',
         ))
         ->from($npCat)
-        ->where("$npCat.dept_id = $dept_id")
+        ->where("$npCat.dept_id = $dept_id AND $npCat.deleted = 0")
         ->join('Models\CategoriesLang', "CL.cat_id = $npCat.id AND CL.lang_id = 1",'CL')
         ->orderBy('CL.name ASC')
         ->getQuery()
@@ -71,7 +71,7 @@ class MenusForm extends Form
             'PL.title title',
         ))
         ->from($npPages)
-        ->where("$npPages.dept_id = $dept_id")
+        ->where("$npPages.dept_id = $dept_id AND $npPages.deleted = 0")
         ->join('Models\PagesLang', "PL.page_id = $npPages.id AND PL.lang_id = 1",'PL')
         ->getQuery()
         ->execute();
@@ -83,7 +83,7 @@ class MenusForm extends Form
             'PL.title title',
         ))
         ->from($npPosts)
-        ->where("$npPosts.dept_id = $dept_id")
+        ->where("$npPosts.dept_id = $dept_id $npPosts.deleted = 0")
         ->join('Models\PostsLang', "PL.post_id = $npPosts.id AND PL.lang_id = 1",'PL')
         ->getQuery()
         ->execute();
