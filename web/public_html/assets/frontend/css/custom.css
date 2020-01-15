@@ -94,6 +94,10 @@ ul.dropdown-menu > li:last-of-type > a
     font-weight: 600;
 }
 
+.header .navbar-nav li.dropdown .nav-link {
+    padding-right: 15px;
+}
+
 .transparent-header .dark.header .navbar-nav li .nav-link {
     color: #ffffff;
 }
