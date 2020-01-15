@@ -173,7 +173,7 @@
             {% endfor %}
         </div>
         <div class="col-lg-12 text-center">
-            <?php $staff_link = $dept->slug != '/' ? FRONTEND_URL.$dept->slug.'/staff' : FRONTEND_URL.'/staff'; ?>
+            <?php $staff_link = $dept->slug != '/' ? FRONTEND_URL.'/'.$dept->slug.'/staff' : FRONTEND_URL.'/staff'; ?>
             <a href="{{ staff_link }}" class="btn btn-default btn-lg btn-animated radius-50">{{ ml._ml_system('more', 'Xem thêm') }} <i class="fa fa-arrow-right"></i></a>
         </div>
     </div>

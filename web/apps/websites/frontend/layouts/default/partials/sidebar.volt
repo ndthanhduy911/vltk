@@ -10,7 +10,7 @@
         'CL.name cat_name',
     ))
     ->from($npCat)
-    ->where("$npCat.status = 1 AND $npCat.dept_id = $dept->id AND $npCat.id != 1")
+    ->where("$npCat.status = 1 AND $npCat.deleted = 1 AND $npCat.dept_id = $dept->id AND $npCat.id != 1")
     ->leftJoin('Models\CategoriesLang', "CL.cat_id = $npCat.id AND CL.lang_id = $lang_id",'CL')
     ->getQuery()
     ->execute();
@@ -25,8 +25,8 @@
         'PL.title title',
     ))
     ->from($npPost)
-    ->leftJoin('Models\PostsLang', "PL.post_id = $npPost.id AND PL.lang_id = $lang_id",'PL')
     ->where("$npPost.deleted = 0 AND $npPost.status = 1 AND $npPost.dept_id = $dept->id")
+    ->leftJoin('Models\PostsLang', "PL.post_id = $npPost.id AND PL.lang_id = $lang_id",'PL')
     ->orderBy("$npPost.calendar DESC")
     ->limit(5)
     ->getQuery()
