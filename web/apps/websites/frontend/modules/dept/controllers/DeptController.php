@@ -148,6 +148,7 @@ class DeptController extends \FrontendController
         $this->view->partners = $partners;
         $this->view->postModel = new Posts();
         $this->view->catModel = new Categories();
+        $this->view->researchModel = new Researches();
         $this->get_js_css();
     }
 

@@ -124,10 +124,8 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="image-box shadow-2 bordered text-center mb-20">
                         <div class="overlay-container rounded overlay-visible">
-                            <img src="{{ helper.getLinkImage(research.featured_image) }}"
-                                alt="{{ research.research_name }}">
-                            <a href="{{ constant('FRONTEND_URL')~'/'~research.slug }}" class="overlay-link"><i
-                                    class="fa fa-graduation-cap"></i></a>
+                            <img class="grow" src="{{ helper.getLinkImage(research.featured_image) }}" alt="{{ research.research_name }}">
+                            <a href="{{ researchModel.getUrl(dept,research) }}" class="overlay-link"><i class="fa fa-graduation-cap"></i></a>
                             <div class="overlay-bottom hidden-xs">
                                 <div class="text">
                                     {{ research.research_name }}

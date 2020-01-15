@@ -122,3 +122,12 @@ $router->add($config->application->frontendUri."/staff", array(
     'controller' => 'staff',
     'action' => 'index'
 ));
+
+/***********************ResearchesController***********************/
+$router->add($config->application->frontendUri."/{dept:[a-zA-Z0-9_-]+}/research/{research:[a-zA-Z0-9_-]+}", array(
+    'module' => 'frontend_dept',
+    'controller' => 'researches',
+    'action' => 'index',
+    'dept' => 1,
+    'research' => 2,
+));
