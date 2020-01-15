@@ -33,8 +33,6 @@
     $paging = $this->helper->getPaging($post_count, $current_page);
 ?>
 
-<?php use Models\Posts; ?>
-
 {{ partial('breadcrumb') }}
 
 <section class="main-container">
