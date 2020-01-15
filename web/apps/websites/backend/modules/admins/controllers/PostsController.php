@@ -72,13 +72,6 @@ class PostsController  extends \BackendController {
                     'featured_image' => $this->request->getPost('featured_image'),
                 ];
 
-                $form_post->bind($req_post, $post);
-                if (!$form_post->isValid()) {
-                    foreach ($form_post->getMessages() as $message) {
-                        array_push($error, $message->getMessage());
-                    }
-                }
-
                 $check_slug = Posts::findFirst([
                     "slug = :slug: AND id != :id:",
                     "bind" => [
@@ -89,6 +82,13 @@ class PostsController  extends \BackendController {
     
                 if($check_slug){
                     $req_post['slug'] = $req_post['slug'] .'-'. strtotime('now'); 
+                }
+
+                $form_post->bind($req_post, $post);
+                if (!$form_post->isValid()) {
+                    foreach ($form_post->getMessages() as $message) {
+                        array_push($error, $message->getMessage());
+                    }
                 }
 
                 foreach ($languages as $key => $lang) {

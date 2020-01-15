@@ -65,13 +65,6 @@ class PagesController  extends \BackendController {
                     'attribute_id' => $this->request->getPost('attribute_id'),
                 ];
 
-                $form_page->bind($req_page, $page);
-                if (!$form_page->isValid()) {
-                    foreach ($form_page->getMessages() as $message) {
-                        array_push($error, $message->getMessage());
-                    }
-                }
-
                 $check_slug = Pages::findFirst([
                     "slug = :slug: AND id != :id:",
                     "bind" => [
@@ -79,9 +72,16 @@ class PagesController  extends \BackendController {
                         'id'    => $id,
                     ]
                 ]);
-    
+
                 if($check_slug){
                     $req_page['slug'] = $req_page['slug'] .'-'. strtotime('now'); 
+                }
+
+                $form_page->bind($req_page, $page);
+                if (!$form_page->isValid()) {
+                    foreach ($form_page->getMessages() as $message) {
+                        array_push($error, $message->getMessage());
+                    }
                 }
 
                 foreach ($languages as $key => $lang) {

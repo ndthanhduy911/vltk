@@ -92,13 +92,6 @@ class CategoriesController  extends \BackendController {
                     'status' => $this->request->getPost('status'),
                 ];
                 
-                $form_cat->bind($req_cat, $category);
-                if (!$form_cat->isValid()) {
-                    foreach ($form_cat->getMessages() as $message) {
-                        array_push($error, $message->getMessage());
-                    }
-                }
-
                 $check_slug = Categories::findFirst([
                     "slug = :slug: AND id != :id:",
                     "bind" => [
@@ -110,6 +103,15 @@ class CategoriesController  extends \BackendController {
                 if($check_slug){
                     $req_cat['slug'] = $req_cat['slug'] .'-'. strtotime('now'); 
                 }
+
+                $form_cat->bind($req_cat, $category);
+                if (!$form_cat->isValid()) {
+                    foreach ($form_cat->getMessages() as $message) {
+                        array_push($error, $message->getMessage());
+                    }
+                }
+
+
 
                 foreach ($languages as $key => $lang) {
                     $req_cat_lang[$lang->id] = [

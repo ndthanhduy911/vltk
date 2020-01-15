@@ -2,7 +2,7 @@
     use Models\Departments;
     use Models\Researches;
 
-
+die;
     if($dept->id === 1){
         $npDept = Departments::getNamepace();
         $depts = $this->modelsManager->createBuilder()

@@ -63,13 +63,6 @@ class ResearchesController  extends \BackendController {
                     'background_image' => $this->request->getPost('background_image')
                 ];
 
-                $form_research->bind($req_research, $research);
-                if (!$form_research->isValid()) {
-                    foreach ($form_research->getMessages() as $message) {
-                        array_push($error, $message->getMessage());
-                    }
-                }
-
                 $check_slug = Researches::findFirst([
                     "slug = :slug: AND id != :id:",
                     "bind" => [
@@ -81,6 +74,15 @@ class ResearchesController  extends \BackendController {
                 if($check_slug){
                     $req_research['slug'] = $req_research['slug'] .'-'. strtotime('now'); 
                 }
+
+                $form_research->bind($req_research, $research);
+                if (!$form_research->isValid()) {
+                    foreach ($form_research->getMessages() as $message) {
+                        array_push($error, $message->getMessage());
+                    }
+                }
+
+
 
                 foreach ($languages as $key => $lang) {
                     $req_research_lang[$lang->id] = [

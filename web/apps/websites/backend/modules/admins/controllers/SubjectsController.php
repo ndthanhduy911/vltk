@@ -64,13 +64,6 @@ class SubjectsController  extends \BackendController {
                     'background_image' => $this->request->getPost('background_image')
                 ];
 
-                $form_subject->bind($req_subject, $subject);
-                if (!$form_subject->isValid()) {
-                    foreach ($form_subject->getMessages() as $message) {
-                        array_push($error, $message->getMessage());
-                    }
-                }
-
                 $check_slug = Subjects::findFirst([
                     "slug = :slug: AND id != :id:",
                     "bind" => [
@@ -82,6 +75,15 @@ class SubjectsController  extends \BackendController {
                 if($check_slug){
                     $req_subject['slug'] = $req_subject['slug'] .'-'. strtotime('now'); 
                 }
+
+                $form_subject->bind($req_subject, $subject);
+                if (!$form_subject->isValid()) {
+                    foreach ($form_subject->getMessages() as $message) {
+                        array_push($error, $message->getMessage());
+                    }
+                }
+
+
 
                 foreach ($languages as $key => $lang) {
                     $req_subject_lang[$lang->id] = [

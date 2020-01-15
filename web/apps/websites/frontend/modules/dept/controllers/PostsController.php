@@ -11,21 +11,7 @@ use Models\PostsLang;
 class PostsController extends \FrontendController
 {
     public function indexAction(){
-        $dept = $this->dispatcher->getReturnedValue();
-        $lang_id = $this->session->get('lang_id');
 
-        $current_page = (int)$this->request->get('page');
-        $posts = Posts::find([
-            'dept_id = 1',
-            'offset' => 10 * ($current_page >= 0 ? ($current_page - 1) : 0),
-            'limit' => 10,
-        ]);
-        $paging = $this->helper->getPaging(Posts::find(['dept_id = 1 AND status = 1'])->count(), $current_page);
-        $this->view->title = 'Tin tức';
-        $this->view->posts = $posts;
-        $this->view->paging = $paging;
-        $this->view->dept_id = $dept->id;
-        $this->view->pick('templates/blog');
     }
 
     public function singleAction($slug1 = null, $slug2 = null){

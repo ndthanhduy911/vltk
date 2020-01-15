@@ -70,13 +70,6 @@ class StaffController  extends \BackendController {
                     $req_staff['dean'] = $this->request->getPost('dean');
                 }
 
-                $form_staff->bind($req_staff, $staff);
-                if (!$form_staff->isValid()) {
-                    foreach ($form_staff->getMessages() as $message) {
-                        array_push($error, $message->getMessage());
-                    }
-                }
-
                 $check_slug = Staff::findFirst([
                     "slug = :slug: AND id != :id:",
                     "bind" => [
@@ -88,6 +81,15 @@ class StaffController  extends \BackendController {
                 if($check_slug){
                     $req_staff['slug'] = $req_staff['slug'] .'-'. strtotime('now'); 
                 }
+
+                $form_staff->bind($req_staff, $staff);
+                if (!$form_staff->isValid()) {
+                    foreach ($form_staff->getMessages() as $message) {
+                        array_push($error, $message->getMessage());
+                    }
+                }
+
+
 
                 foreach ($languages as $key => $lang) {
                     $req_staff_lang[$lang->id] = [
