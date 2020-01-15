@@ -16,7 +16,7 @@
                             data-animation-effect="fadeInUpSmall" data-effect-delay="100">
                             {% if post.featured_image %}
                             <div class="overlay-container">
-                                <img class="ml-auto mr-auto" src="{{ helper.getLinkImage(post.featured_image) }}" alt="{{ post.title }}">
+                                <img class="ml-auto mr-auto grow" src="{{ helper.getLinkImage(post.featured_image) }}" alt="{{ post.title }}">
                             </div>
                             {% endif %}
                             <header>

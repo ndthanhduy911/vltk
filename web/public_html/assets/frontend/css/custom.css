@@ -35,6 +35,9 @@
      text-decoration: none !important;
  }
 
+.overlay-container .grow { transition: all 1s ease-in-out; }
+.overlay-container .grow:hover { transform: scale(1.1); }
+
  h1, h2, h3, h4, h5, h6, .navbar .navbar-nav {
     font-family: "Roboto", sans-serif
 }
@@ -83,6 +86,12 @@ ul.dropdown-menu > li:last-of-type > a
 
 .nav-item.dropdown.active a.active{
     color: #3F51B5 !important;
+    font-weight: 600;
+}
+
+.header .navbar-nav .active > .nav-link, .header .navbar-nav li .nav-link.active {
+    color: #3F51B5 !important;
+    font-weight: 600;
 }
 
 .transparent-header .dark.header .navbar-nav li .nav-link {

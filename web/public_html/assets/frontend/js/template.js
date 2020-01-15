@@ -16,13 +16,18 @@
 		//Show dropdown on hover only for desktop devices
 		//-----------------------------------------------
 		if ($(window).width() > 975) {
-		$('.main-navigation:not(.onclick) .navbar-nav>li.dropdown, .main-navigation:not(.onclick) li.dropdown>ul>li.dropdown').hover(
+			$('.main-navigation:not(.onclick) .navbar-nav>li.dropdown, .main-navigation:not(.onclick) li.dropdown>ul>li.dropdown').hover(
 			function() {
 				$(this).addClass('show');
 				$(this).find('>.dropdown-menu').addClass('show');
 			}, function() {
 				$(this).removeClass('show');
 				$(this).find('>.dropdown-menu').removeClass('show');
+			});
+
+			$('.main-navigation .navbar-nav > li.dropdown > a.nav-link').click(function(e) {
+				e.preventDefault();
+				window.location.href = $(this).attr('href');
 			});
 		};
 
