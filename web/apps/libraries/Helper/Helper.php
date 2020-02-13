@@ -160,7 +160,7 @@ class Helper extends Component
         return $date ? date_format(date_create($date), "Y-m-d H:i:s") : NULL;
     }
 
-public function datetime_vn($date = null, $type = "d/m/Y H:i")
+    public function datetime_vn($date = null, $type = "d/m/Y H:i")
     {
         return $date ? date_format(date_create($date), $type) : NULL;
     }
