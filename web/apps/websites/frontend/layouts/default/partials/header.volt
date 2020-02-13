@@ -80,7 +80,7 @@
                             </a>
                         </div>
                         {% if !dept.logo %}
-                        <div class="site-slogan logo-font">
+                        <div class="site-slogan font-weight-bold">
                             {{dept_lang.name}}
                         </div>
                         {% endif %}
@@ -139,7 +139,7 @@
                 <div class="col-auto hidden-md-down p-0">
                     <div class="header-dropdown-buttons" id="lang_id" data-lang="{{ lang_id }}">
                         <a href="<?= FRONTEND_URL ?>/api/changelanguage/{{ lang_id == 1 ? 2 : 1  }}" data-id="{{ lang_id == 1 ? 2 : 1  }}" class="d-flex align-items-center">
-                            <img src="<?= FRONTEND_URL ?>{{language.path}}/{{language.icon}}" class="user-image" alt="{{ language.name }}" width="36px">
+                            <img src="<?= FRONTEND_URL ?><?= $language->id == 1 ? '/language_file/eng' : '/language_file/vie' ?>/<?= $language->id == 1 ? 'united-states.png' : 'vietnam.png' ?>" class="user-image" alt="{{ language.name }}" width="36px">
                         </a>
                     </div>
                 </div>

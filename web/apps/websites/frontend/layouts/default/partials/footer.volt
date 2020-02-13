@@ -8,18 +8,19 @@ if($menuLocation = MenuLocation::findFirst(["status =  1 AND dept_id = $dept->id
 ?>
 
 <footer id="footer" class="clearfix">
-    <div class="footer">
+    <div class="footer" style="background-color: #eee;">
         <div class="container">
             <div class="footer-inner">
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="footer-content">
                             <div class="media-wrap">
+                                <h3 class="title text-default mb-0 text-center">{{ dept.code }}</h3>
                                 <a href="<?php echo FRONTEND_URL ?>/">
                                     {% if dept.logo %}
                                     <img src="{{ helper.getLinkImage(dept.logo) }}" alt="{{ dept_lang.name }}">
                                     {% else %}
-                                    <h3 class="title logo-font text-default text-center">{{dept_lang.name}}</h3>
+                                    <h3 class="title text-default text-center">{{dept_lang.name}}</h3>
                                     {% endif %}
                                 </a>
                             </div>
