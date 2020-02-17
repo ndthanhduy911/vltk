@@ -158,6 +158,9 @@ use Models\Staff;
                                             {% if staff.email %}
                                             <a href="mailto:{{staff.email}}" class="btn btn-link pl-0 text-left"><i class="pr-10 margin-clear fa fa-envelope-o"></i>{{staff.email}}</a>
                                             {% endif %}
+                                            <div class="w-100">
+                                                <a href="" class="btn btn-default btn-sm btn-animated radius-50">{{ ml._ml_system('more', 'Xem thêm') }} <i class="fa fa-arrow-right"></i></a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -188,7 +191,6 @@ use Models\Staff;
                                 <h4 class="title mt-3">{{ ml._ml_system('contact', 'Liên hệ') }}</h4>
                                 <ul class="list-icons">
                                     <li><a href="mailto:{{ staff.email }}" class="text-info"><i class="fa fa-envelope-o pr-10"></i>{{ staff.email }}</a></li>
-                                </ul>
                                 {% endif %}
                                 </div>
                             </div>
