@@ -31,6 +31,9 @@ const loadTableSubjects = () => {
                     "data": "excerpt"
                 },
                 {
+                    "data": "slug"
+                },
+                {
                     "data": "created_at"
                 },
                 {
@@ -43,12 +46,13 @@ const loadTableSubjects = () => {
             'createdRow': function (row, item, dataIndex) {
                 $(row).addClass('text-center');
                 $('td', row).addClass('align-middle');
-                $('td:eq(3)', row).html(vi_moment(item.created_at, 'DD/MM/YYYY HH:mm'));
-                $('td:eq(4)', row).html(showStatus(item.status));
-                $('td:eq(5)', row).html(`
+                $('td:eq(3)', row).html(`${fontendUrl}/subjects/${item.slug}`);
+                $('td:eq(4)', row).html(vi_moment(item.created_at, 'DD/MM/YYYY HH:mm'));
+                $('td:eq(5)', row).html(showStatus(item.status));
+                $('td:eq(6)', row).html(`
                     <a href="${backendUrl}/subjects/update/${item.id}" class="fa fa-pencil btn btn-info btn-sm editPage" title="Cập nhật"></a>
                 `);
-                $('td:eq(5)', row).append(`<a href="#" data-href="${backendUrl}/subjects/delete/${item.id}" class="fa fa-trash btn btn-danger btn-sm deletePage" title="Xóa"></a>`);
+                $('td:eq(6)', row).append(`<a href="#" data-href="${backendUrl}/subjects/delete/${item.id}" class="fa fa-trash btn btn-danger btn-sm deletePage" title="Xóa"></a>`);
             },
             "deferRender": true,
             "language": {

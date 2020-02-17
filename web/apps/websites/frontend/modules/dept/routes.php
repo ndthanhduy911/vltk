@@ -131,3 +131,11 @@ $router->add($config->application->frontendUri."/{dept:[a-zA-Z0-9_-]+}/research/
     'dept' => 1,
     'research' => 2,
 ));
+
+/***********************SubjectsController***********************/
+$router->add($config->application->frontendUri."/subjects/{subject:[a-zA-Z0-9_-]+}", array(
+    'module' => 'frontend_dept',
+    'controller' => 'subjects',
+    'action' => 'single',
+    'subject' => 1,
+));
