@@ -214,3 +214,15 @@ ul.dropdown-menu > li:last-of-type > a
 .sidebar .nav.flex-column > li .nav-link{
     font-size: 15px;
 } 
+.table td, .table th {
+    vertical-align: middle;
+} 
+
+.table td {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+}
+
+.table p {
+    margin: 0;
+}

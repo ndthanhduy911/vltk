@@ -22,10 +22,10 @@ class SubjectsController extends \FrontendController
             return $this->view->pick('templates/404');
         }
 
-        if($subject_lang = SubjectsLang::findFirst(["lang_id = $lang_id AND staff_id = $subject->id"])){
+        if($subject_lang = SubjectsLang::findFirst(["lang_id = $lang_id AND subject_id = $subject->id"])){
             $this->view->title = $subject_lang->title;
-            $this->view->staff = $subject;
-            $this->view->staff_lang = $subject_lang;
+            $this->view->subject = $subject;
+            $this->view->subject_lang = $subject_lang;
         }
     }
 }
