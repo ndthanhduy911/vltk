@@ -15,112 +15,100 @@ class ProfileController extends \BackendController
         $id = $this->session->get('user_id');
         if ($profile = Users::findFirstId($id)) {
             if ($this->request->isPost()) {
-                // $password = $this->request->getPost('password');
-                // $user = Users::findFirstId($this->session->get("user_id"));
-                // if ($this->security->checkHash($password, $user->password)) {
-                    if ($this->security->checkToken()) { 
-                        $data['token'] = ['key' => $this->security->getTokenKey(), 'value' => $this->security->getToken()];
-                        $save = $profile;
-                        $form = new ProfileForm();
+                if ($this->security->checkToken()) { 
+                    $data['token'] = ['key' => $this->security->getTokenKey(), 'value' => $this->security->getToken()];
+                    $save = $profile;
+                    $form = new ProfileForm();
 
-                        $post = [
-                            'name' => $this->request->getPost('name'),
-                            'email' => $this->request->getPost('email'),
-                            'phone' => $this->request->getPost('phone'),
-                        ];
+                    $post = [
+                        'name' => $this->request->getPost('name'),
+                        'email' => $this->request->getPost('email'),
+                        'phone' => $this->request->getPost('phone'),
+                    ];
 
-                        $checkMail = Users::findFirst([
-                            "email = :email: AND id != :id:",
-                            "bind" => [
-                                "email" => $post['email'],
-                                "id" => $profile->id,
-                            ],
-                        ]);
+                    $checkMail = Users::findFirst([
+                        "email = :email: AND id != :id:",
+                        "bind" => [
+                            "email" => $post['email'],
+                            "id" => $profile->id,
+                        ],
+                    ]);
 
-                        $checkPhone = Users::findFirst([
-                            "phone = :phone: AND id != :id:",
-                            "bind" => [
-                                "phone" => $post['phone'],
-                                "id" => $profile->id,
-                            ],
-                        ]);
+                    $checkPhone = Users::findFirst([
+                        "phone = :phone: AND id != :id:",
+                        "bind" => [
+                            "phone" => $post['phone'],
+                            "id" => $profile->id,
+                        ],
+                    ]);
 
-                        if ($checkMail) {
-                            array_push($error, "E-mail đã tồn tại");
+                    if ($checkMail) {
+                        array_push($error, "E-mail đã tồn tại");
+                    }
+                    
+                    if ($checkPhone) {
+                        array_push($error, "Số điện thoại đã tồn tại");
+                    }
+
+                    $form->bind($post, $profile);
+                    if (!$form->isValid()) {
+                        foreach ($form->getMessages() as $message) {
+                            array_push($error, $message->getMessage());
                         }
-                        
-                        if ($checkPhone) {
-                            array_push($error, "Số điện thoại đã tồn tại");
-                        }
+                    }
 
-                        $form->bind($post, $profile);
-                        if (!$form->isValid()) {
-                            foreach ($form->getMessages() as $message) {
-                                array_push($error, $message->getMessage());
-                            }
-                        }
-
-                        if (!count($error)) {
-                            if (!$profile->save()) {
-                                if ($this->request->isAjax()) {
-                                    $error = [];
-                                    foreach ($profile->getMessages() as $message) {
-                                        array_push($error, $message->getMessage());
-                                    }
-                                    $data['error'] = $error;
-                                    $this->response->setStatusCode(400, 'error');
-                                    $this->response->setJsonContent($data);
-                                    return $this->response->send();
-                                } else {
-                                    foreach ($profile->getMessages() as $message) {
-                                        $this->flash->error($message);
-                                    }
-                                }
-                            } else {
-                                if ($this->request->isAjax()) {
-                                    $data['data'] = $profile->toArray();
-                                    $this->response->setStatusCode(200, 'OK');
-                                    $this->response->setJsonContent($data);
-                                    return $this->response->send();
-                                } else {
-                                    $this->logs->write_log(2, 1, 'Cập nhật tài khoản ID: ' . $save->id, json_encode($save->toArray()), $this->session->get("user_id"));
-                                    $this->flashSession->success("Cập nhật tài khoản thành công");
-                                    return $this->response->redirect(BACKEND_URL.'/profile');
-                                }
-                            }
-                        }else{
+                    if (!count($error)) {
+                        if (!$profile->save()) {
                             if ($this->request->isAjax()) {
+                                $error = [];
+                                foreach ($profile->getMessages() as $message) {
+                                    array_push($error, $message->getMessage());
+                                }
                                 $data['error'] = $error;
                                 $this->response->setStatusCode(400, 'error');
                                 $this->response->setJsonContent($data);
                                 return $this->response->send();
                             } else {
-                                foreach ($error as $value) {
-                                    $this->flashSession->error($value . ". ");
+                                foreach ($profile->getMessages() as $message) {
+                                    $this->flash->error($message);
                                 }
                             }
+                        } else {
+                            if ($this->request->isAjax()) {
+                                $data['data'] = $profile->toArray();
+                                $this->response->setStatusCode(200, 'OK');
+                                $this->response->setJsonContent($data);
+                                return $this->response->send();
+                            } else {
+                                $this->logs->write_log(2, 1, 'Cập nhật tài khoản ID: ' . $save->id, json_encode($save->toArray()), $this->session->get("user_id"));
+                                $this->flashSession->success("Cập nhật tài khoản thành công");
+                                return $this->response->redirect(BACKEND_URL.'/profile');
+                            }
                         }
-                        
                     }else{
                         if ($this->request->isAjax()) {
-                            $data['token'] = ['key' => $this->security->getTokenKey(), 'value' => $this->security->getToken()];
-                            $data['error'] = ['Token không chính xác'];
+                            $data['error'] = $error;
                             $this->response->setStatusCode(400, 'error');
                             $this->response->setJsonContent($data);
                             return $this->response->send();
                         } else {
-                            $this->flashSession->error("Token không chính xác");
+                            foreach ($error as $value) {
+                                $this->flashSession->error($value . ". ");
+                            }
                         }
                     }
-                // }else{
-                //     if ($this->request->isAjax()) {
-                //         $this->response->setStatusCode(400, 'error');
-                //         $this->response->setJsonContent(['error' => ['Mật khẩu không chính xác']]);
-                //         return $this->response->send();
-                //     } else {
-                //         $this->flashSession->error("Mật khẩu không chính xác");
-                //     }
-                // }
+                    
+                }else{
+                    if ($this->request->isAjax()) {
+                        $data['token'] = ['key' => $this->security->getTokenKey(), 'value' => $this->security->getToken()];
+                        $data['error'] = ['Token không chính xác'];
+                        $this->response->setStatusCode(400, 'error');
+                        $this->response->setJsonContent($data);
+                        return $this->response->send();
+                    } else {
+                        $this->flashSession->error("Token không chính xác");
+                    }
+                }
             }
             $this->view->form = new ProfileForm($profile);
             $this->view->formPW = new ChangePWForm();

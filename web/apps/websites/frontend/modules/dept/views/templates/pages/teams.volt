@@ -173,7 +173,33 @@ use Models\Staff;
                 {% else %}
                     <h2 class="page-title">{{ ml._ml_system('main_staff', 'Cán bộ cơ hữu') }}</h2>
                     <div class="separator-2"></div>
- 
+                    {% for staff in mainStaffs %}
+                    <div class="image-box team-member style-3-b">
+                        <div class="row">
+                            <div class="col-md-3 col-lg-3">
+                                <div class="overlay-container overlay-visible">
+                                <img width="100%" src="{{ helper.getLinkImage(staff.featured_image,'/assets/frontend/images/team-member-1.jpg') }}" alt="{{ staff.title }}">
+                                <a href="{{ helper.getLinkImage(staff.featured_image,'/assets/frontend/images/team-member-1.jpg') }}" class="popup-img overlay-link" title="{{ staff.title }}"><i class="fa fa-plus"></i></a>
+                                </div>
+                            </div>
+                            <div class="col-md-9 col-lg-9">
+                                <div class="body">
+                                <h3 class="title margin-clear">{{ staff.title }} - <small>{{ helper.getPosition(staff.dept_position) }}</small></h3>
+                                <div class="separator-2 mt-10"></div>
+                                {{ staff.content }}
+                                {% if staff.email %}
+                                <h4 class="title mt-3">{{ ml._ml_system('contact', 'Liên hệ') }}</h4>
+                                <ul class="list-icons">
+                                    <li><a href="mailto:{{ staff.email }}" class="text-info"><i class="fa fa-envelope-o pr-10"></i>{{ staff.email }}</a></li>
+                                {% endif %}
+                                <div class="w-100">
+                                    <a href="{{ staffModel.getUrl(dept, staff) }}" class="btn btn-default btn-sm btn-animated radius-50">{{ ml._ml_system('more', 'Xem thêm') }} <i class="fa fa-arrow-right"></i></a>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
 
                     <h2 class="page-title">{{ ml._ml_system('employ_staff', 'Cán bộ thỉnh giảng') }}</h2>
                     <div class="separator-2"></div>
@@ -182,7 +208,7 @@ use Models\Staff;
                         <div class="row">
                             <div class="col-md-3 col-lg-3">
                                 <div class="overlay-container overlay-visible">
-                                <img src="{{ helper.getLinkImage(staff.featured_image,'/assets/frontend/images/team-member-1.jpg') }}" alt="{{ staff.title }}">
+                                <img width="100%" src="{{ helper.getLinkImage(staff.featured_image,'/assets/frontend/images/team-member-1.jpg') }}" alt="{{ staff.title }}">
                                 <a href="{{ helper.getLinkImage(staff.featured_image,'/assets/frontend/images/team-member-1.jpg') }}" class="popup-img overlay-link" title="{{ staff.title }}"><i class="fa fa-plus"></i></a>
                                 </div>
                             </div>
