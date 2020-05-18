@@ -59,7 +59,7 @@ CKEDITOR.on('dialogDefinition', function (event) {
 												url: '/elfinder/php/connector.minimal.php?dept_id='+deptId,
 												lang:'vi',
 												getFileCallback: function (file) {
-														file.url = file.url.replace("/elfinder/php/../../", fontendUrl+'/');
+														file.url = file.url.replace("/elfinder/php/../../", '/');
 														var url = file.url;
 														var dialog = CKEDITOR.dialog.getCurrent();
 														if (dialogName == 'image') {

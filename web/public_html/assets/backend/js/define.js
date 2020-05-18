@@ -256,7 +256,7 @@ const showSelectImage = (button, showImg, uploadImageValue, buttonRemoveImg) => 
                             }
                         },
                         getFileCallback: function (file) {
-                            file.url = file.url.replace("/elfinder/php/../../", fontendUrl+'/');
+                            file.url = file.url.replace("/elfinder/php/../../", '/');
                             let url = file.url;
                             if($(buttonRemoveImg).length){
                                 $(buttonRemoveImg).removeClass('hidden');
