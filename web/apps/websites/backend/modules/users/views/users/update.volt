@@ -33,7 +33,7 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="control-label">Bộ môn </label>
-                                <div class="input-group d-flex flex-row">
+                                <div class="input-group d-flex">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text fa fa-building-o"></div>
                                     </div>

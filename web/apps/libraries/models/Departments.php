@@ -150,7 +150,7 @@ class Departments extends \Phalcon\Mvc\Model
 
     public static function getBySlug($slug = null)
     {
-        if($dept = parent::findFirst(['slug = :slug:','bind' => ['slug' => $slug]])){
+        if($dept = parent::findFirst(['slug = :slug: AND status = 1','bind' => ['slug' => $slug]])){
             return $dept;
         }else{
             return false;

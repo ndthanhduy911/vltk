@@ -212,31 +212,37 @@ class UsersController  extends \BackendController {
     // ============================
 
     public function getdataAction(){
-        $npUsers = Users::getNamepace();
-        $data = $this->modelsManager->createBuilder()
-        ->columns(array(
-            $npUsers.'.id',
-            $npUsers.'.name',
-            $npUsers.'.username',
-            $npUsers.'.email',
-            $npUsers.'.phone',
-            $npUsers.'.status',
-            $npUsers.'.avatar',
-            $npUsers.'.role',
-            $npUsers.'.dept_id',
-            'DL.name dept_name',
-            'R.name role_name',
-        ))
-        ->from($npUsers)
-        ->join('Models\DepartmentsLang', "DL.dept_id = $npUsers.dept_id AND DL.lang_id = 1",'DL')
-        ->join(Roles::getNamepace(), 'R.id = '.$npUsers.'.role','R')
-        ->orderBy($npUsers.'.name ASC')
-        ->where("1 = 1");
+        $this->view->disable();
+        if ($this->request->isAjax()) {
+            $npUsers = Users::getNamepace();
+            $data = $this->modelsManager->createBuilder()
+            ->columns(array(
+                $npUsers.'.id',
+                $npUsers.'.name',
+                $npUsers.'.username',
+                $npUsers.'.email',
+                $npUsers.'.phone',
+                $npUsers.'.status',
+                $npUsers.'.avatar',
+                $npUsers.'.role',
+                $npUsers.'.dept_id',
+                'DL.name dept_name',
+                'R.name role_name',
+            ))
+            ->from($npUsers)
+            ->where("$npUsers.id != 1");
+            if($this->session->get('user_id') != 1){
+                $data = $data->andWhere("$npUsers.dept_id IN (".implode(',',$this->session->get('dept_mg')).")");
+            }
+            $data = $data->join('Models\DepartmentsLang', "DL.dept_id = $npUsers.dept_id AND DL.lang_id = 1",'DL')
+            ->join(Roles::getNamepace(), 'R.id = '.$npUsers.'.role','R')
+            ->orderBy($npUsers.'.name ASC');
 
-        $search = $npUsers.'.name LIKE :search:';
-        $this->response->setStatusCode(200, 'OK');
-        $this->response->setJsonContent($this->ssp->data_output($this->request->get(), $data,$search));
-        return $this->response->send();
+            $search = $npUsers.'.name LIKE :search:';
+            $this->response->setStatusCode(200, 'OK');
+            $this->response->setJsonContent($this->ssp->data_output($this->request->get(), $data,$search));
+            return $this->response->send();
+        }
     }
 
 

@@ -49,7 +49,7 @@
                 <div class="tab-pane fade" id="user-settings">
                     <div class="tile user-settings">
                         <h4 class="line-head mb-2">Đổi mật khẩu</h4>
-                        <form action="<?php echo BACKEND_URL ?>/profile/changepassword" class="login-form" data-toggle="validator" role="form" method="POST">
+                        <form action="<?php echo BACKEND_URL ?>/profile/changepw" class="login-form" data-toggle="validator" role="form" method="POST">
                         {% for element in formPW %}
                         <div class="row">
                             <div class="col-md-8">

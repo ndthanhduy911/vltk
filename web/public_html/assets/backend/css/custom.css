@@ -65,8 +65,7 @@ body {
 }
 
 .select2-container {
-    width: auto !important;
-    flex: 0 0 100%;
+    width: calc(100% - 40px) !important;
 }
 
 .bg-gradient-primary {

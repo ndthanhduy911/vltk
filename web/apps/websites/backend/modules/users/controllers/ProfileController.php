@@ -133,48 +133,49 @@ class ProfileController extends \BackendController
         $error = [];
         if ($profile = Users::findFirstId($this->session->get("user_id"))) {
             if ($this->request->isPost()) {
-                $user_id = $this->session->get("user_id");
-                $profile = Users::findFirstId($user_id);
-                if (!$profile) {
-                    array_push($error, "Tài khoản không tồn tại");
-                    if ($this->request->isAjax()) {
-                        $data['error'] = $error;
-                        $this->response->setStatusCode(400, 'error');
-                        $this->response->setJsonContent($data);
-                        return $this->response->send();
-                    } else {
-                        foreach ($error as $value) {
-                            $this->flashSession->error($value . ". ");
-                        }
-                        return $this->response->redirect(BACKEND_URL.'/profile');
-                    }
-                } else {
-                    if ($this->security->checkToken()) {
-                        $password = $this->request->getPost('oldPassword');
-                        $newpassword = $this->request->getPost('password');
-                        if ($this->security->checkHash($password, $profile->password)) {
-                            $profile->password = $this->security->hash($newpassword);
-                            if (!$profile->update()) {
-                                $this->flashSession->error("Đổi mật khẩu thất bại.");
-                                return $this->response->redirect('/profile/changepassword');
-                            } else {
-                                $this->flashSession->success("Đổi mật khẩu thành công.");
-                                return $this->response->redirect(BACKEND_URL.'/profile/changepassword');
-                            }
-                        } else {
-                            $this->flashSession->error("Mật khẩu hiện tại không chính xác.");
-                            return $this->response->redirect(BACKEND_URL.'/profile/changepassword');
-                        }
-                    }else {
+                if ($this->security->checkToken()) {
+                    $user_id = $this->session->get("user_id");
+                    $profile = Users::findFirstId($user_id);
+                    if (!$profile) {
+                        array_push($error, "Tài khoản không tồn tại");
                         if ($this->request->isAjax()) {
-                            $data['token'] = ['key' => $this->security->getTokenKey(), 'value' => $this->security->getToken()];
-                            $data['error'] = ['Token không chính xác'];
+                            $data['error'] = $error;
                             $this->response->setStatusCode(400, 'error');
                             $this->response->setJsonContent($data);
                             return $this->response->send();
                         } else {
-                            $this->flashSession->error("Token không chính xác");
+                            foreach ($error as $value) {
+                                $this->flashSession->error($value . ". ");
+                            }
+                            return $this->response->redirect(BACKEND_URL.'/profile');
                         }
+                    } else {
+                            $password = $this->request->getPost('oldPassword');
+                            $newpassword = $this->request->getPost('password');
+                            if ($this->security->checkHash($password, $profile->password)) {
+                                $profile->password = $this->security->hash($newpassword);
+                                if (!$profile->update()) {
+                                    $this->flashSession->error("Đổi mật khẩu thất bại.");
+                                    return $this->response->redirect('/profile/changepassword');
+                                } else {
+                                    $this->flashSession->success("Đổi mật khẩu thành công.");
+                                    return $this->response->redirect(BACKEND_URL.'/profile/changepw');
+                                }
+                            } else {
+                                $this->flashSession->error("Mật khẩu hiện tại không chính xác.");
+                                return $this->response->redirect(BACKEND_URL.'/profile/changepw');
+                            }
+    
+                    }
+                }else {
+                    if ($this->request->isAjax()) {
+                        $data['token'] = ['key' => $this->security->getTokenKey(), 'value' => $this->security->getToken()];
+                        $data['error'] = ['Token không chính xác'];
+                        $this->response->setStatusCode(400, 'error');
+                        $this->response->setJsonContent($data);
+                        return $this->response->send();
+                    } else {
+                        $this->flashSession->error("Token không chính xác");
                     }
                 }
             }
@@ -182,7 +183,6 @@ class ProfileController extends \BackendController
             $form = new ProfileForm($profile);
             $this->view->form = $form;
             $this->view->formPW = new ChangePWForm();
-            
         }
     }
 }

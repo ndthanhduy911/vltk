@@ -1,5 +1,10 @@
-const backendUrl = 'http://demo.phys.honeynet.vn/admin';
-const fontendUrl = 'http://demo.phys.honeynet.vn';
+const backendUrl = '/admin';
+const fontendUrl = '';
+if(window.location.hostname == 'demo.phys.honeynet.vn'){
+    backendUrl = 'http://demo.phys.honeynet.vn/admin';
+    fontendUrl = 'http://demo.phys.honeynet.vn';
+}
+
 const deptId = parseInt($('body').attr('dept-id'));
 
 //Format number money
