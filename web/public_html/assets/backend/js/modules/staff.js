@@ -13,9 +13,9 @@ const showStatus = (id = '') => {
 const showDean = (dean = '') => {
     switch (parseInt(dean)) {
         case 1:
-            return `<span class="badge badge-primary p-2">Trưởng khoa</span>`;
+            return `Trưởng khoa`;
         case 2:
-            return `<span class="badge badge-primary p-2">Phó trưởng khoa</span>`;
+            return `Phó trưởng khoa `;
         default:
             return "";
     }
@@ -24,17 +24,17 @@ const showDean = (dean = '') => {
 const showPosition = (pos = '') => {
     switch (parseInt(pos)) {
         case 1:
-            return `<span class="badge badge-primary p-2">Trưởng bộ môn</span>`;
+            return `Trưởng bộ môn`;
         case 2:
-            return `<span class="badge badge-primary p-2">Phó bộ môn</span>`;
+            return `Phó bộ môn`;
         case 3:
-            return `<span class="badge badge-primary p-2">Giáo vụ</span>`;
+            return `Giáo vụ`;
         case 4:
-            return `<span class="badge badge-primary p-2">Giảng viên</span>`;
+            return `Giảng viên`;
         case 5:
-            return `<span class="badge badge-primary p-2">Giảng viên thỉnh giản</span>`;
+            return `Giảng viên thỉnh giản`;
         case 6:
-            return `<span class="badge badge-primary p-2">Nhân viên</span>`;
+            return `Nhân viên`;
         default:
             return "";
     }
@@ -81,7 +81,13 @@ const loadTablePages = () => {
                 let image = `<img src="${getPathImage(item.featured_image, '/assets/frontend/images/defaut_img.png')}" width="50px">`;
                 $('td:eq(1)', row).html(image);
                 $('td', row).addClass('align-middle');
-                $('td:eq(5)', row).html(showDean(item.dean)+showPosition(item.dept_position))
+                let dean = showDean(item.dean)
+                let position = showPosition(item.dept_position);
+                if(dean && position){
+                    $('td:eq(3)', row).html(dean +'<br>'+ position);
+                }else{
+                    $('td:eq(3)', row).html(`${dean}${position}`);
+                }
                 $('td:eq(5)', row).html(vi_moment(item.created_at, 'DD/MM/YYYY HH:mm'));
                 $('td:eq(6)', row).html(showStatus(item.status));
                 $('td:eq(7)', row).html(`
