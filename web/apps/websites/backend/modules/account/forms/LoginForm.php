@@ -15,10 +15,10 @@ class LoginForm extends \Phalcon\Forms\Form
             'class' => 'form-control',
             'placeholder' => 'Tên đăng nhập',
             'required' => '',
-            'data-required-error' => "Vui lòng nhập tài khoản.",
+            'data-required-error' => "Vui lòng nhập thông tin",
             'maxlength' => "100",
             'pattern' => "^[_A-z0-9]{1,}$",
-            'data-error' => "Tên đăng nhập chưa hợp lệ.",
+            'data-error' => "Thông tin không hợp lệ",
         ));
         $username->addValidators([
             new PresenceOf([
@@ -39,9 +39,9 @@ class LoginForm extends \Phalcon\Forms\Form
             'class' => 'form-control',
             'placeholder' => 'Mật khẩu',
             'required' => '',
-            'data-required-error' => "Vui lòng điền đầy đủ thông tin.",
+            'data-required-error' => "Vui lòng nhập thông tin",
             'maxlength' => "60",
-            'data-error' => "Mật khẩu không đúng quy định.",
+            'data-error' => "Thông tin không hợp lệ",
         ));
         $password->addValidators([
             new PresenceOf([

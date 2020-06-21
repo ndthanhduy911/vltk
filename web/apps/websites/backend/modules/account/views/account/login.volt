@@ -41,7 +41,7 @@
                     <label class="control-label">Mã xác thực</label>
                     <img class="mb-3 border rounded" src="/admin/account/captcha" alt="captcha" width="100%">
                     <div class="input-group">
-                        <input name="captcha" type="text" maxlength="6" class="form-control" placeholder="Vui lòng nhập mã xác thực" required>
+                        <input name="captcha" type="text" maxlength="6" class="form-control" placeholder="Vui lòng nhập mã xác thực" required data-required-error="Vui lòng nhập thông tin">
                         <div class="invalid-tooltip"></div>
                     </div>
                 </div>
