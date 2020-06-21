@@ -8,7 +8,7 @@ class Banner extends \Phalcon\Mvc\Model
     public $dept_id;
 
     public $image;
-
+    
     public $button_link;
 
     public $sort;

@@ -55,7 +55,7 @@ class BannerController  extends \BackendController {
                 $req_banner = [
                     'status' => $this->request->getPost('status'),
                     'image' => $this->request->getPost('image'),
-                    'link' => $this->request->getPost('link'),
+                    'button_link' => $this->request->getPost('button_link'),
                 ];
 
                 $form_banner->bind($req_banner, $banner);
