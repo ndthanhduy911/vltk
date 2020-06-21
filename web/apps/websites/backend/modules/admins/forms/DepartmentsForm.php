@@ -43,6 +43,20 @@ class DepartmentsForm extends Form
         ));
         $this->add($slug);
 
+        $links = new Text('links');
+        $links->setAttributes(array(
+            'class' => 'form-control',
+            'placeholder' => 'Link (Nếu bộ môn website riêng)',
+            'maxlength' => "200",
+        ));
+        $links->addValidators(array(
+            new StringLength([
+                "max" => 200,
+                "messageMaximum" => "Link web",
+            ]),
+        ));
+        $this->add($links);
+
         $phone = new Text('phone');
         $phone->setAttributes(array(
             'class' => 'form-control',
