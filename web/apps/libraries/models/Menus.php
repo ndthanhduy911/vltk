@@ -105,7 +105,7 @@ class Menus extends \Phalcon\Mvc\Model
                 break;
             }   
             case 4: {
-                $item['link'] = ($dept = Departments::findFirstId($menu->dept)) ? FRONTEND_URL.($slug != '/' ? '/'.$slug : '').'/'.$dept->slug : '#';
+                $item['link'] = ($dept = Departments::findFirstId($menu->dept)) ? ($dept->links?$dept->links:FRONTEND_URL.($slug != '/' ? '/'.$slug : '').'/'.$dept->slug) : '#';
                 $item['actived'] = (isset($dept->slug) ? $dept->slug : '#4') == $slug_now ? true : false;
                 break;
             } 
