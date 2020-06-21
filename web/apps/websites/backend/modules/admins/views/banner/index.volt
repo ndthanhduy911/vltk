@@ -1,12 +1,12 @@
 <main class="app-content">
     <div class="app-title mb-3">
         <div>
-            <h1><i class="fa fa-th-list"></i> BANNER</h1>
-            <p>Quản lý banner</p>
+            <h1><i class="fa fa-th-list"></i> BANNERS</h1>
+            <p>Quản lý banners</p>
         </div>
         <ul class="app-breadcrumb breadcrumb side">
             <li class="breadcrumb-item"><a class="link" href="{{ config.application.backenduri }}"><i class="fa fa-home fa-lg"></i></a></li>
-            <li class="breadcrumb-item">Banner</li>
+            <li class="breadcrumb-item">Banners</li>
         </ul>
     </div>
 
