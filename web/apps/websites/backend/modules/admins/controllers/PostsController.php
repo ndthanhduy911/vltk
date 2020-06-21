@@ -309,10 +309,6 @@ class PostsController  extends \BackendController {
         ->join('Models\PostsLang', 'PL.post_id = p.id AND PL.lang_id = 1','PL')
         ->orderBy('p.calendar DESC');
 
-        // if($this->session->get('role') !== 1){
-        //     $data = $data->andWhere($npPosts.".dept_id IN (".implode(',',$this->session->get('dept_mg')).")");
-        // }
-
         $search = 'PL.title LIKE :search:';
         $this->response->setStatusCode(200, 'OK');
         $this->response->setJsonContent($this->ssp->data_output($this->request->get(), $data,$search));

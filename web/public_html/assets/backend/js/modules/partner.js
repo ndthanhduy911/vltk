@@ -72,7 +72,7 @@ const loadTablePages = () => {
                 }
             }
         });
-        showConfrimDelete('.deletePage',()=>{
+        showConfrimDelete('.deletePartner',()=>{
             dt.draw();
         })
     }

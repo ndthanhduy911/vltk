@@ -109,7 +109,7 @@ const loadTablePages = () => {
                 }
             }
         });
-        showConfrimDelete('.deletePage',()=>{
+        showConfrimDelete('.deleteStaff',()=>{
             dt.draw();
         })
     }
