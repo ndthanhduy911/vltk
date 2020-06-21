@@ -108,6 +108,15 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="d-inline-block w-100">
+                                    <span class="text-primary">Trạng thái:</span>
+                                    <div class="form-group mt-1">
+                                        <div class="input-group">
+                                            {{form_department.render('status')}}
+                                            <div class="invalid-tooltip"></div>
+                                        </div>
+                                    </div>
+                                </div>
                                 {% if session.get('dept_id') != 1 %}
                                 <div class="animated-checkbox mb-3">
                                     <label class="m-0">

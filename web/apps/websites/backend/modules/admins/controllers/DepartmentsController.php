@@ -40,6 +40,7 @@ class DepartmentsController  extends \BackendController {
                     'status' => 1,
                     'level' => 0,
                     'slug' => $department->slug,
+                    'status' => $this->request->getPost('status'),
                     'links' => $this->request->getPost('links'),
                     'phone' => $this->request->getPost('phone'),
                     'email' => $this->request->getPost('email'),
