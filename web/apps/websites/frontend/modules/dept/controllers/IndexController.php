@@ -8,7 +8,6 @@ use Models\Home;
 use Models\Staff;
 use Models\Partner;
 use Models\Banner;
-use Models\ConectionSystem;
 use Models\Posts;
 use Models\Social;
 
@@ -86,6 +85,7 @@ class IndexController extends \FrontendController
         ->columns(array(
             $npDept.'.id',
             $npDept.'.slug',
+            $npDept.'.links',
             $npDept.'.image',
             'DL.name dept_name',
         ))
