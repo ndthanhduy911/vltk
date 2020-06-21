@@ -52,7 +52,7 @@ const loadTableSubjects = () => {
                 $('td:eq(6)', row).html(`
                     <a href="${backendUrl}/subjects/update/${item.id}" class="fa fa-pencil btn btn-info btn-sm editPage" title="Cập nhật"></a>
                 `);
-                $('td:eq(6)', row).append(`<a href="#" data-href="${backendUrl}/subjects/delete/${item.id}" class="fa fa-trash btn btn-danger btn-sm deletePage" title="Xóa"></a>`);
+                $('td:eq(6)', row).append(`<a href="#" data-href="${backendUrl}/subjects/delete/${item.id}" class="fa fa-trash btn btn-danger btn-sm deleteSubject" title="Xóa"></a>`);
             },
             "deferRender": true,
             "language": {
@@ -73,7 +73,7 @@ const loadTableSubjects = () => {
                 }
             }
         });
-        showConfrimDelete('.deletePage',()=>{
+        showConfrimDelete('.deleteSubject',()=>{
             dt.draw();
         })
     }

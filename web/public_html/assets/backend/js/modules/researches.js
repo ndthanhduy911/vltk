@@ -10,7 +10,7 @@ const showStatus = (id = '') => {
     }
 }
 
-const loadTablePages = () => {
+const loadTableResearches = () => {
     if ($('#researches').length) {
         let dt = $('#researches').DataTable({
             "scrollX": true,
@@ -46,9 +46,9 @@ const loadTablePages = () => {
                 $('td:eq(3)', row).html(vi_moment(item.created_at, 'DD/MM/YYYY HH:mm'));
                 $('td:eq(4)', row).html(showStatus(item.status));
                 $('td:eq(5)', row).html(`
-                    <a href="${backendUrl}/researches/update/${item.id}" class="fa fa-pencil btn btn-info btn-sm editPage" title="Cập nhật"></a>
+                    <a href="${backendUrl}/researches/update/${item.id}" class="fa fa-pencil btn btn-info btn-sm editResearch" title="Cập nhật"></a>
                 `);
-                $('td:eq(5)', row).append(`<a href="#" data-href="${backendUrl}/researches/delete/${item.id}" class="fa fa-trash btn btn-danger btn-sm deletePage" title="Xóa"></a>`);
+                $('td:eq(5)', row).append(`<a href="#" data-href="${backendUrl}/researches/delete/${item.id}" class="fa fa-trash btn btn-danger btn-sm deleteResearch" title="Xóa"></a>`);
             },
             "deferRender": true,
             "language": {
@@ -69,13 +69,13 @@ const loadTablePages = () => {
                 }
             }
         });
-        showConfrimDelete('.deletePage',()=>{
+        showConfrimDelete('.deleteResearch',()=>{
             dt.draw();
         })
     }
 }
 
-loadTablePages();
+loadTableResearches();
 
 changeTitleToSlug('#title', '#slug');
 
