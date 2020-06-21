@@ -47,5 +47,10 @@ class StaffController extends \FrontendController
             $this->view->dept_info = $dept_info;
             $this->view->dept_lang_info = DepartmentsLang::findFirst(["lang_id = $lang_id AND dept_id = $dept_info->id"]);
         }
+
+        if($page = Pages::findFirst(["attribute_id = 2 AND dept_id = $staff->dept_id"])){
+            $this->view->title2 = PagesLang::findFirst(["lang_id = $lang_id AND page_id = $page->id"]);
+            $this->view->slug2 = $page->slug;
+        }
     }
 }

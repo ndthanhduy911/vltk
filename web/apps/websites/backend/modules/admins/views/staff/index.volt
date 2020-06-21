@@ -2,7 +2,7 @@
     <div class="app-title mb-3">
         <div>
             <h1><i class="fa fa-th-list"></i> Nhân sự</h1>
-            <p>Quản lý nhận sự</p>
+            <p>Quản lý nhân sự</p>
         </div>
         <ul class="app-breadcrumb breadcrumb side">
             <li class="breadcrumb-item"><a class="link" href="{{ config.application.backenduri }}"><i class="fa fa-home fa-lg"></i></a></li>
