@@ -5,6 +5,8 @@ use Models\PostsLang;
 use Models\Language;
 use Backend\Modules\Admins\Forms\PostsForm;
 use Backend\Modules\Admins\Forms\PostsLangForm;
+use Models\Categories;
+use Models\CatStatus;
 
 class PostsController  extends \BackendController {
 
@@ -82,6 +84,10 @@ class PostsController  extends \BackendController {
     
                 if($check_slug){
                     $req_post['slug'] = $req_post['slug'] .'-'. strtotime('now'); 
+                }
+
+                if(!$cat = Categories::findFirst(["dept_id = $post->dept_id AND id = :cat_id:", 'bind' => ['cat_id' => $req_post['cat_id']]])){
+                    $this->flashSession->error("Danh mục không tôn tại");
                 }
 
                 $form_post->bind($req_post, $post);
