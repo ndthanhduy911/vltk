@@ -32,6 +32,7 @@ class AccountController extends \Phalcon\Mvc\Controller
                                 $this->session->set("user_id", $user->id);
                                 $this->session->set("username", $user->username);
                                 $this->session->set("name", $user->name);
+                                $this->session->set("avatar", $user->avatar);
                                 $this->session->set("role", (int)$user->role);
                                 $this->session->set("dept_mg", $dept_mg ? $dept_mg : []);
                                 $this->session->set("dept_id", (int)$user->dept_id);
