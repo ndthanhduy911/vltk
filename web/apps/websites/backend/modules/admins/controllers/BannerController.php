@@ -39,9 +39,9 @@ class BannerController  extends \BackendController {
             $banner->created_at = date('Y-m-d H:i:s');
             $banner->updated_at = $banner->created_at;
             $title = 'Thêm mới';
-            foreach ($languages as $key => $lang) {
+            foreach ($languages as $lang) {
                 $forms_lang[$lang->id] = new BannerLangForm();
-                $banner_lang[$lang->id] = new BannerLang();
+                $banners_lang[$lang->id] = new BannerLang();
             }
         }
 
@@ -64,7 +64,6 @@ class BannerController  extends \BackendController {
                         array_push($error, $message->getMessage());
                     }
                 }
-
                 foreach ($languages as $key => $lang) {
                     $req_banner_lang[$lang->id] = [
                         'name' => $p_name[$lang->id],

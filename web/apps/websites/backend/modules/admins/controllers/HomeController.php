@@ -43,10 +43,10 @@ class HomeController  extends \BackendController {
                 $req_home = [
                     'specialized_bg' => $this->request->getPost('specialized_bg'),
                     'partner_bg' => $this->request->getPost('partner_bg'),
-                    'cat_list' => $this->request->getPost('cat_list'),
+                    '' => $this->request->getPost(''),
                 ];
 
-                $req_home['cat_list'] = $req_home['cat_list'] ? json_encode($req_home ['cat_list']) : NULL;
+                $req_home[''] = $req_home[''] ? json_encode($req_home ['']) : NULL;
 
                 $form_home->bind($req_home, $home);
                 if (!$form_home->isValid()) {
