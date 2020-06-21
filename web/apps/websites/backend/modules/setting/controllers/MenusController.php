@@ -142,20 +142,35 @@ class MenusController  extends \BackendController
         if ($menu = Menus::findFirstId($id)) {
             $menu->deleted = 1;
             if (!$menu->save()) {
-                foreach ($menu->getMessages() as $message) {
-                    $this->flashSession->error($message);
+                if ($this->request->isAjax()) {
+                    foreach ($menu->getMessages() as $message) {
+                        array_push($error, $message->getMessage());
+                    }
+                    $data['error'] = $error;
+                    $this->response->setStatusCode(400, 'error');
+                    $this->response->setJsonContent($data);
+                    return $this->response->send();
+                } else {
+                    foreach ($menu->getMessages() as $message) {
+                        $this->flashSession->error($message);
+                    }
+                    return $this->response->redirect(BACKEND_URL.'/menu');
                 }
-                return $this->response->redirect(BACKEND_URL.'/menu');
             }else{
-                $this->flashSession->success("Xóa thành công");
-                return $this->response->redirect(BACKEND_URL.'/menu');
+                if ($this->request->isAjax()) {
+                    $data['data'] = $menu->toArray();
+                    $this->response->setStatusCode(200, 'OK');
+                    $this->response->setJsonContent($data);
+                    return $this->response->send();
+                } else {
+                    $this->flashSession->success("Xóa thành công");
+                    return $this->response->redirect(BACKEND_URL.'/menu');
+                }
             }
         }else{
-            // $this->logs->write_log(3, 1, 'Xóa trang', json_encode($save),$this->session->get("user_id"));
             $this->flashSession->error("Không tìm thấy");
             return $this->response->redirect(BACKEND_URL.'/menu');
         }
-        
     }
 
     // =================================

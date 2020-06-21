@@ -259,7 +259,6 @@ class PostsController  extends \BackendController {
                     $this->flashSession->success("Xóa bài viết khoản thành công");
                     return $this->response->redirect(BACKEND_URL.'/trashs');
                 }
-
             }
         }else{
             if ($this->request->isAjax()) {
