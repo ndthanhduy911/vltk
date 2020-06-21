@@ -256,7 +256,6 @@ class PostsController  extends \BackendController {
                     $this->response->setJsonContent($data);
                     return $this->response->send();
                 } else {
-                    // $this->logs->write_log(3, 1, 'Xóa trang', json_encode($save),$this->session->get("user_id"));
                     $this->flashSession->success("Xóa bài viết khoản thành công");
                     return $this->response->redirect(BACKEND_URL.'/trashs');
                 }
@@ -289,26 +288,26 @@ class PostsController  extends \BackendController {
         $npPosts = Posts::getNamepace();
         $data = $this->modelsManager->createBuilder()
         ->columns(array(
-            $npPosts.'.id',
+            'p.id',
             'PL.title',
-            $npPosts.'.slug',
-            $npPosts.'.cat_id',
+            'p.slug',
+            'p.cat_id',
             'PL.content',
-            $npPosts.'.status',
+            'p.status',
             'PL.excerpt',
-            $npPosts.'.dept_id',
-            $npPosts.'.created_at',
-            $npPosts.'.calendar',
-            $npPosts.'.featured_image',
+            'p.dept_id',
+            'p.created_at',
+            'p.calendar',
+            'p.featured_image',
             'U.name author_name',
             'C.name cat_name',
         ))
-        ->from($npPosts)
-        ->where("$npPosts.deleted = 0 AND $npPosts.dept_id = $dept_id")
-        ->join('Models\Users', 'U.id = '.$npPosts.'.author','U')
-        ->join('Models\CategoriesLang', 'C.cat_id = '.$npPosts.'.cat_id AND C.lang_id = 1','C')
-        ->join('Models\PostsLang', 'PL.post_id = '.$npPosts.'.id AND PL.lang_id = 1','PL')
-        ->orderBy($npPosts.'.calendar DESC');
+        ->from(['p' => $npPosts])
+        ->where("p.deleted = 0 AND p.dept_id = $dept_id AND p.status != 4")
+        ->join('Models\Users', 'U.id = p.author','U')
+        ->join('Models\CategoriesLang', 'C.cat_id = p.cat_id AND C.lang_id = 1','C')
+        ->join('Models\PostsLang', 'PL.post_id = p.id AND PL.lang_id = 1','PL')
+        ->orderBy('p.calendar DESC');
 
         // if($this->session->get('role') !== 1){
         //     $data = $data->andWhere($npPosts.".dept_id IN (".implode(',',$this->session->get('dept_mg')).")");
