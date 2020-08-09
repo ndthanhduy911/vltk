@@ -278,7 +278,7 @@ class SettingController  extends \BackendController
             ))
             ->from($npLink)
             ->where("$npLink.deleted = 0 AND $npLink.dept_id = $dept_id")
-            ->join('Models\LinkLang', 'L.link_id = '.$npLink.'.id AND L.lang_id = 1','L')
+            ->leftJoin('Models\LinkLang', 'L.link_id = '.$npLink.'.id AND L.lang_id = 1','L')
             ->orderBy($npLink.'.sort ASC');
     
             $search = $npLink.'.name LIKE :search:';

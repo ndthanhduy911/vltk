@@ -234,8 +234,8 @@ class UsersController  extends \BackendController {
             if($this->session->get('user_id') != 1){
                 $data = $data->andWhere("$npUsers.dept_id IN (".implode(',',$this->session->get('dept_mg')).")");
             }
-            $data = $data->join('Models\DepartmentsLang', "DL.dept_id = $npUsers.dept_id AND DL.lang_id = 1",'DL')
-            ->join(Roles::getNamepace(), 'R.id = '.$npUsers.'.role','R')
+            $data = $data->leftJoin('Models\DepartmentsLang', "DL.dept_id = $npUsers.dept_id AND DL.lang_id = 1",'DL')
+            ->leftJoin(Roles::getNamepace(), 'R.id = '.$npUsers.'.role','R')
             ->orderBy($npUsers.'.name ASC');
 
             $search = $npUsers.'.name LIKE :search:';

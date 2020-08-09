@@ -309,9 +309,9 @@ class PostsController  extends \BackendController {
         ))
         ->from(['p' => $npPosts])
         ->where("p.deleted = 0 AND p.dept_id = $dept_id AND p.status != 4")
-        ->join('Models\Users', 'U.id = p.author','U')
-        ->join('Models\CategoriesLang', 'C.cat_id = p.cat_id AND C.lang_id = 1','C')
-        ->join('Models\PostsLang', 'PL.post_id = p.id AND PL.lang_id = 1','PL')
+        ->leftJoin('Models\Users', 'U.id = p.author','U')
+        ->leftJoin('Models\CategoriesLang', 'C.cat_id = p.cat_id AND C.lang_id = 1','C')
+        ->leftJoin('Models\PostsLang', 'PL.post_id = p.id AND PL.lang_id = 1','PL')
         ->orderBy('p.calendar DESC');
 
         $search = 'PL.title LIKE :search:';
@@ -343,9 +343,9 @@ class PostsController  extends \BackendController {
             ))
             ->from($npPosts)
             ->where("$npPosts.deleted = 0 AND $npPosts.status = 4 AND $npPosts.dept_id = $dept_id")
-            ->join('Models\Users', 'U.id = '.$npPosts.'.author','U')
-            ->join('Models\CategoriesLang', 'C.cat_id = '.$npPosts.'.cat_id AND C.lang_id = 1','C')
-            ->join('Models\PostsLang', 'PL.post_id = '.$npPosts.'.id AND PL.lang_id = 1','PL')
+            ->leftJoin('Models\Users', 'U.id = '.$npPosts.'.author','U')
+            ->leftJoin('Models\CategoriesLang', 'C.cat_id = '.$npPosts.'.cat_id AND C.lang_id = 1','C')
+            ->leftJoin('Models\PostsLang', 'PL.post_id = '.$npPosts.'.id AND PL.lang_id = 1','PL')
             ->orderBy($npPosts.'.calendar DESC');
             // if($this->session->get('role') !== 1){
             //     $data = $data->andWhere("dept_id IN (".implode(',',$this->session->get('dept_mg')).")");

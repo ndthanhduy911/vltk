@@ -23,7 +23,7 @@ class CalendarsForm extends Form
             'CL.title title',
         ))
         ->from($npClasses)
-        ->join('Models\ClassesLang', "CL.class_id = $npClasses.id AND CL.lang_id = 1",'CL')
+        ->leftJoin('Models\ClassesLang', "CL.class_id = $npClasses.id AND CL.lang_id = 1",'CL')
         ->orderBy('CL.title ASC')
         ->where("$npClasses.dept_id = $dept_id")
         ->getQuery()
@@ -36,7 +36,7 @@ class CalendarsForm extends Form
             'CL.title title',
         ))
         ->from($npSubjects)
-        ->join('Models\SubjectsLang', "CL.subject_id = $npSubjects.id AND CL.lang_id = 1",'CL')
+        ->leftJoin('Models\SubjectsLang', "CL.subject_id = $npSubjects.id AND CL.lang_id = 1",'CL')
         ->orderBy('CL.title ASC')
         ->where("$npSubjects.dept_id = $dept_id")
         ->getQuery()

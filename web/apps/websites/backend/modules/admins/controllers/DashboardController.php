@@ -43,7 +43,7 @@ class DashboardController  extends \BackendController {
         ))
         ->from($npPosts)
         ->where("$npPosts.deleted = 0 AND $npPosts.dept_id = $dept_id")
-        ->join('Models\PostsLang', 'PL.post_id = '.$npPosts.'.id AND PL.lang_id = 1','PL')
+        ->leftJoin('Models\PostsLang', 'PL.post_id = '.$npPosts.'.id AND PL.lang_id = 1','PL')
         ->orderBy($npPosts.'.calendar DESC')
         ->limit(5)
         ->getQuery()

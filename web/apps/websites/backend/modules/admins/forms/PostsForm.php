@@ -22,7 +22,7 @@ class PostsForm extends Form
             'CL.name name',
         ))
         ->from($npCat)
-        ->join('Models\CategoriesLang', "CL.cat_id = $npCat.id AND CL.lang_id = 1",'CL')
+        ->leftJoin('Models\CategoriesLang', "CL.cat_id = $npCat.id AND CL.lang_id = 1",'CL')
         ->orderBy('CL.name ASC')
         ->where("$npCat.dept_id = $dept_id")
         ->getQuery()

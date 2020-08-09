@@ -204,7 +204,7 @@ class MenusController  extends \BackendController
         ))
         ->from($npMenu)
         ->where("$npMenu.parent_id is NULL AND $npMenu.deleted = 0 AND $npMenu.status = 1 AND $npMenu.menu_location_id = $menu_location_id")
-        ->join('Models\MenusLang', 'ML.menu_id = '.$npMenu.'.id AND ML.lang_id = 1','ML')
+        ->leftJoin('Models\MenusLang', 'ML.menu_id = '.$npMenu.'.id AND ML.lang_id = 1','ML')
         ->orderBy("$npMenu.sort ASC, $npMenu.id ASC");
 
 
@@ -237,7 +237,7 @@ class MenusController  extends \BackendController
             'ML.name menu_name',
         ))
         ->from($npMenu)
-        ->join('Models\MenusLang', 'ML.menu_id = '.$npMenu.'.id AND ML.lang_id = 1','ML')
+        ->leftJoin('Models\MenusLang', 'ML.menu_id = '.$npMenu.'.id AND ML.lang_id = 1','ML')
         ->orderBy("$npMenu.sort ASC, ML.name ASC")
         ->where("$npMenu.deleted = 0 AND $npMenu.parent_id = :parent_id:",['parent_id' => $parent_id])
         ->getQuery()

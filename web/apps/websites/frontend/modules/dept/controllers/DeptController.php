@@ -2,9 +2,6 @@
 
 namespace Frontend\Modules\Dept\Controllers;
 use Models\Categories;
-use Models\Departments;
-use Models\DepartmentsLang;
-use Models\HomeLang;
 use Models\Home;
 use Models\Staff;
 use Models\Partner;

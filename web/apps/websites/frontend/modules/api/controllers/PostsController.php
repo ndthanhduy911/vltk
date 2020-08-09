@@ -34,8 +34,8 @@ class PostsController extends \FrontendController
                     'CL.name cat_name',
                 ))
                 ->from($npPosts)
-                ->join('Models\CategoriesLang', 'CL.cat_id = '.$npPosts.'.cat_id AND CL.lang_id = '.$this->session->get('lang_id'),'CL')
-                ->join('Models\PostsLang', 'PL.post_id = '.$npPosts.'.id AND PL.lang_id = '.$this->session->get('lang_id'),'PL')
+                ->leftJoin('Models\CategoriesLang', 'CL.cat_id = '.$npPosts.'.cat_id AND CL.lang_id = '.$this->session->get('lang_id'),'CL')
+                ->leftJoin('Models\PostsLang', 'PL.post_id = '.$npPosts.'.id AND PL.lang_id = '.$this->session->get('lang_id'),'PL')
                 ->orderBy("$npPosts.calendar DESC")
                 ->where($npPosts.'.deleted = 0 AND '.$npPosts.'.cat_id = :cat_id: AND '.$npPosts.'.status = 1 AND '.$npPosts.'.dept_id = :dept_id:',['dept_id' => $dept_id, 'cat_id' => $cat_id])
                 ->limit($limit, 0)
@@ -60,8 +60,8 @@ class PostsController extends \FrontendController
                     'C.name cat_name',
                 ))
                 ->from($npPosts)
-                ->join('Models\CategoriesLang', 'C.cat_id = '.$npPosts.'.cat_id AND C.lang_id = 1','C')
-                ->join('Models\PostsLang', 'PL.post_id = '.$npPosts.'.id AND PL.lang_id = 1','PL')
+                ->leftJoin('Models\CategoriesLang', 'C.cat_id = '.$npPosts.'.cat_id AND C.lang_id = 1','C')
+                ->leftJoin('Models\PostsLang', 'PL.post_id = '.$npPosts.'.id AND PL.lang_id = 1','PL')
                 ->orderBy($npPosts.'.id DESC')
                 ->where($npPosts.'.deleted = 0 AND '.$npPosts.'.status = 1 AND '.$npPosts.'.dept_id = :dept_id:',['dept_id' => $dept_id])
                 ->limit($limit, 0)

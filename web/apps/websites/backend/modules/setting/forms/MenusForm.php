@@ -36,7 +36,7 @@ class MenusForm extends Form
         ))
         ->from($npMenu)
         ->where($params_menu)
-        ->join('Models\MenusLang', "ML.menu_id = $npMenu.id AND ML.lang_id = 1",'ML')
+        ->leftJoin('Models\MenusLang', "ML.menu_id = $npMenu.id AND ML.lang_id = 1",'ML')
         ->getQuery()
         ->execute();
 
@@ -48,7 +48,7 @@ class MenusForm extends Form
         ))
         ->from($npCat)
         ->where("$npCat.dept_id = $dept_id AND $npCat.deleted = 0")
-        ->join('Models\CategoriesLang', "CL.cat_id = $npCat.id AND CL.lang_id = 1",'CL')
+        ->leftJoin('Models\CategoriesLang', "CL.cat_id = $npCat.id AND CL.lang_id = 1",'CL')
         ->orderBy('CL.name ASC')
         ->getQuery()
         ->execute();
@@ -60,7 +60,7 @@ class MenusForm extends Form
             'DL.name name',
         ))
         ->from($npDept)
-        ->join('Models\DepartmentsLang', "DL.dept_id = $npDept.id AND DL.lang_id = 1",'DL')
+        ->leftJoin('Models\DepartmentsLang', "DL.dept_id = $npDept.id AND DL.lang_id = 1",'DL')
         ->getQuery()
         ->execute();
 
@@ -72,7 +72,7 @@ class MenusForm extends Form
         ))
         ->from($npPages)
         ->where("$npPages.dept_id = $dept_id AND $npPages.deleted = 0")
-        ->join('Models\PagesLang', "PL.page_id = $npPages.id AND PL.lang_id = 1",'PL')
+        ->leftJoin('Models\PagesLang', "PL.page_id = $npPages.id AND PL.lang_id = 1",'PL')
         ->getQuery()
         ->execute();
 
@@ -84,7 +84,7 @@ class MenusForm extends Form
         ))
         ->from($npPosts)
         ->where("$npPosts.dept_id = $dept_id AND $npPosts.deleted = 0")
-        ->join('Models\PostsLang', "PL.post_id = $npPosts.id AND PL.lang_id = 1",'PL')
+        ->leftJoin('Models\PostsLang', "PL.post_id = $npPosts.id AND PL.lang_id = 1",'PL')
         ->getQuery()
         ->execute();
 

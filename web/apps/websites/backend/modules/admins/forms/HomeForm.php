@@ -26,16 +26,21 @@ class HomeForm extends Form
         ->columns(array(
             $npCat.'.id',
             'CL.name name',
+            $npCat.'.dept_id',
         ))
         ->from($npCat)
         ->inWhere("$npCat.dept_id", $array_dept)
-        ->join('Models\CategoriesLang', "CL.cat_id = $npCat.id AND CL.lang_id = 1",'CL')
-        ->orderBy('CL.name ASC')
+        ->leftJoin('Models\CategoriesLang', "CL.cat_id = $npCat.id AND CL.lang_id = 1",'CL')
+        ->orderBy($npCat.'.dept_id DESC, CL.name ASC')
         ->getQuery()
         ->execute();
 
-        $cat_list_array = new Select('cat_list[]', $cats, array(
-            'using' => array('id', 'name'),
+        $dataCat = [];
+        foreach ($cats as $key => $value) {
+            $dataCat[$value->id] = $value->dept_id == 1 ? $value->name.' (Khoa)' : $value->name;
+        }
+
+        $cat_list_array = new Select('cat_list[]', $dataCat, array(
             'class' => 'form-control pull-right',
             'data-error' => "Chưa đúng định dạng",
             'name' => 'cat_list[]',

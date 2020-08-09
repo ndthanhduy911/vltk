@@ -70,7 +70,7 @@ class PostsController extends \FrontendController
         ))
         ->from($npPosts)
         ->where("$npPosts.deleted = 0 AND $npPosts.status = 1 AND $npPosts.cat_id = $category->id AND $npPosts.dept_id = $dept->id")
-        ->join('Models\PostsLang', "PL.post_id = $npPosts.id AND PL.lang_id = $lang_id",'PL')
+        ->leftJoin('Models\PostsLang', "PL.post_id = $npPosts.id AND PL.lang_id = $lang_id",'PL')
         ->orderBy("$npPosts.calendar DESC");
         $post_count = $posts->getQuery()
         ->execute()
@@ -110,7 +110,7 @@ class PostsController extends \FrontendController
             $npPosts.'.featured_image',
         ))
         ->from($npPosts)
-        ->join('Models\PostsLang', "PL.post_id = $npPosts.id AND PL.lang_id = $lang_id AND $npPosts.dept_id = $dept->id",'PL')
+        ->leftJoin('Models\PostsLang', "PL.post_id = $npPosts.id AND PL.lang_id = $lang_id AND $npPosts.dept_id = $dept->id",'PL')
         ->orderBy("$npPosts.calendar DESC")
         ->where("$npPosts.deleted = 0 AND $npPosts.status = 1");
         

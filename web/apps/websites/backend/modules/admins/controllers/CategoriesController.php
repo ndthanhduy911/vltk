@@ -30,8 +30,8 @@ class CategoriesController  extends \BackendController {
             ))
             ->from($npCat)
             ->where("$npCat.deleted = 0 AND $npCat.dept_id = $dept_id")
-            ->join('Models\Users', 'U.id = '.$npCat.'.author','U')
-            ->join('Models\CategoriesLang', 'CL.cat_id = '.$npCat.'.id AND CL.lang_id = 1','CL')
+            ->leftJoin('Models\Users', 'U.id = '.$npCat.'.author','U')
+            ->leftJoin('Models\CategoriesLang', 'CL.cat_id = '.$npCat.'.id AND CL.lang_id = 1','CL')
             ->orderBy($npCat.'.dept_id ASC');
     
             $search = $npCat.'.name LIKE :search:';
@@ -160,7 +160,7 @@ class CategoriesController  extends \BackendController {
 
     public function deleteAction($id = 0){
         
-        if ($cat = Categories::findFirstId($id) && !in_array((int)$id, [1,2,3,4,5])) {
+        if (!in_array((int)$id, [1,2,3,4,5]) && $cat = Categories::findFirstId($id)) {
             $cat->deleted = 1;
             if (!$cat->save()) {
                 if ($this->request->isAjax()) {
@@ -201,7 +201,6 @@ class CategoriesController  extends \BackendController {
                 return $this->response->redirect(BACKEND_URL.'/posts');
             }
         }
-        
     }
 
     private function get_js_css (){
