@@ -42,10 +42,10 @@ class HomeController  extends \BackendController {
                 $p_contact_des = $this->request->getPost('contact_des');
                 $req_home = [
                     'specialized_bg' => $this->request->getPost('specialized_bg'),
-                    'partner_bg' => $this->request->getPost('partner_bg')
+                    'partner_bg' => $this->request->getPost('partner_bg'),
+                    'cat_list' => $this->request->getPost('cat_list'),
                 ];
                 $req_home['cat_list'] = $req_home['cat_list'] ? json_encode($req_home ['cat_list']) : NULL;
-
                 $form_home->bind($req_home, $home);
                 if (!$form_home->isValid()) {
                     foreach ($form_home->getMessages() as $message) {
