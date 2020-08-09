@@ -30,7 +30,7 @@
                             <li><a href="mailto:{{ staff.email }}" class="text-info"><i class="fa fa-envelope-o pr-10"></i>{{ staff.email }}</a></li>
                         </ul>
                     </div>
-                    <div class="col-xl-4 col-md-5">
+                    <div class="col-md-8">
                         {{staff_lang.content}}
                     </div>
                 </div>
