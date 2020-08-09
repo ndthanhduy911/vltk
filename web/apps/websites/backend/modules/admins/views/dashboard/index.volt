@@ -135,9 +135,8 @@
                             <span class="info-box-number">{{count_conection_post}}</span>
                         </div>
                     </div>
-                    <div class="info-box mb-3 bg-gradient-danger">
+                    <!-- <div class="info-box mb-3 bg-gradient-danger">
                         <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
-
                         <div class="info-box-content">
                             <span class="info-box-text">Xem lịch học</span>
                             <span class="info-box-number">{{count_conection_calendar}}</span>
@@ -150,7 +149,7 @@
                             <span class="info-box-text">Truy cập khác</span>
                             <span class="info-box-number">{{count_conection_other}}</span>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
