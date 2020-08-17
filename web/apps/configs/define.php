@@ -1,6 +1,8 @@
 <?php
 if (isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] == 'phys.hcmus.edu.vn') {
     define("FRONTEND_URL", $_SERVER['REQUEST_SCHEME']."://phys.hcmus.edu.vn");
+} else if(isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] == 'www.phys.hcmus.edu.vn'){
+    define("FRONTEND_URL", $_SERVER['REQUEST_SCHEME']."://www.phys.hcmus.edu.vn");
 } else {
     define("FRONTEND_URL", "http://local.vlkt.hcmus.edu.vn");
 }

@@ -1,5 +1,5 @@
-backendUrl = window.location.hostname == 'phys.hcmus.edu.vn' ? window.location.protocol+'://phys.hcmus.edu.vn/admin' : '/admin';
-fontendUrl = window.location.hostname == 'phys.hcmus.edu.vn' ? window.location.protocol+'://phys.hcmus.edu.vn' : '';
+let backendUrl = window.location.protocol+'://'+window.location.hostname+'/admin';
+fontendUrl = window.location.protocol+'://'+window.location.hostname;
 
 const deptId = parseInt($('body').attr('dept-id'));
 
