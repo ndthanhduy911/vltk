@@ -1,5 +1,5 @@
-backendUrl = window.location.hostname == 'demo.phys.honeynet.vn' ? 'http://demo.phys.honeynet.vn/admin' : '/admin';
-fontendUrl = window.location.hostname == 'demo.phys.honeynet.vn' ? 'http://demo.phys.honeynet.vn' : '';
+backendUrl = window.location.hostname == 'phys.hcmus.edu.vn' ? window.location.protocol+'://phys.hcmus.edu.vn/admin' : '/admin';
+fontendUrl = window.location.hostname == 'phys.hcmus.edu.vn' ? window.location.protocol+'://phys.hcmus.edu.vn' : '';
 
 const deptId = parseInt($('body').attr('dept-id'));
 
