@@ -186,7 +186,7 @@ use Models\Staff;
                                 <div class="body">
                                 <h3 class="title margin-clear">{{ staff.title }} - <small>{{ helper.getPosition(staff.dept_position) }}</small></h3>
                                 <div class="separator-2 mt-10"></div>
-                                {{ staff.content }}
+                                {#{ helper.getExcerpt(staff.content,0,400) }#}
                                 {% if staff.email %}
                                 <h4 class="title mt-3">{{ ml._ml_system('contact', 'Liên hệ') }}</h4>
                                 <ul class="list-icons">
@@ -216,7 +216,7 @@ use Models\Staff;
                                 <div class="body">
                                     <h3 class="title margin-clear">{{ staff.title }}</small></h3>
                                     <div class="separator-2 mt-10"></div>
-                                    {{ staff.content }}
+                                    {#{ helper.getExcerpt(staff.content,0,400) }#}
                                     {% if staff.email %}
                                     <h4 class="title mt-3">{{ ml._ml_system('contact', 'Liên hệ') }}</h4>
                                     <ul class="list-icons">

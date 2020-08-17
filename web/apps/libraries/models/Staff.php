@@ -48,7 +48,7 @@ class Staff extends \Phalcon\Mvc\Model
 
     public static function getUrl($dept, $staff = NULL)
     {
-        if($dept->id !== 1){
+        if($dept->id == 1){
             return FRONTEND_URL.'/staff/'.$staff->slug;
         }else{
             return FRONTEND_URL."/$dept->slug".'/staff/'.$staff->slug;

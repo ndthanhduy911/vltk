@@ -2,7 +2,7 @@
 if (isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] == 'demo.phys.honeynet.vn') {
     define("FRONTEND_URL", "http://demo.phys.honeynet.vn");
 } else {
-    define("FRONTEND_URL", "");
+    define("FRONTEND_URL", "http://local.vlkt.hcmus.edu.vn");
 }
 
 define("FRONTEND_URI", "");
