@@ -1,6 +1,5 @@
-let backendUrl = window.location.protocol+'://'+window.location.hostname+'/admin';
+let backendUrl = '/admin';
 fontendUrl = window.location.protocol+'://'+window.location.hostname;
-
 const deptId = parseInt($('body').attr('dept-id'));
 
 //Format number money
