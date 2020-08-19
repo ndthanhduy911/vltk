@@ -26,7 +26,7 @@
     <meta property="og:description" content="{{ dept_lang.name }}" />
     <meta property="og:site_name" content="{{ dept_lang.name }}" />
     <link rel="apple-touch-icon" sizes="76x76" href="{{ helper.getLinkImage(dept.icon, '/favicon.ico') }}" />
-    <link rel="icon" type="image/png" href="{{ helper.getLinkImage(dept.icon, '/favicon.ico') }}" />4
+    <link rel="icon" type="image/png" href="{{ helper.getLinkImage(dept.icon, '/favicon.ico') }}" />
     <link rel="canonical" href="<?= FRONTEND_URL ?>/" />
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,700" rel="stylesheet">

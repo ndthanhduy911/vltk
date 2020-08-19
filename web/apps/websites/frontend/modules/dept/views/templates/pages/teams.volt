@@ -119,7 +119,7 @@ use Models\Staff;
                         <div class="w-{{ key === 1 ? '40' : '30' }} pl-1 pr-1 mt-3">
                             <div class="team-member image-box style-2 dark-bg text-center">
                                 <div class="overlay-container overlay-visible">
-                                    <img src="{{ helper.getLinkImage(staff.featured_image,'/assets/frontend/images/team-member-1.jpg') }}" alt="{{ staff.title }}" width="100%">
+                                    <img src="{{ helper.getLinkImage(staff.featured_image,'/assets/frontend/images/teams.jpg') }}" alt="{{ staff.title }}" width="100%">
                                 </div>
                                 <div class="body">
                                     <h5 class="margin-clear text-uppercase"><a href="{{ staffModel.getUrl(dept,staff) }}" title="{{ staff.title }}">{{ staff.title }}</a></h5>
@@ -147,7 +147,7 @@ use Models\Staff;
                                 <div class="row">
                                     <div class="col-md-3 col-lg-3 col-xl-3">
                                         <div class="overlay-container overlay-visible">
-                                            <img src="{{ helper.getLinkImage(staff.featured_image,'/assets/frontend/images/team-member-1.jpg') }}" alt="{{staff.title}}" width="100%">
+                                            <img src="{{ helper.getLinkImage(staff.featured_image,'/assets/frontend/images/teams.jpg') }}" alt="{{staff.title}}" width="100%">
                                         </div>
                                     </div>
                                     <div class="col-md-9 p-sm-0">
@@ -178,8 +178,8 @@ use Models\Staff;
                         <div class="row">
                             <div class="col-md-3 col-lg-3">
                                 <div class="overlay-container overlay-visible">
-                                <img width="100%" src="{{ helper.getLinkImage(staff.featured_image,'/assets/frontend/images/team-member-1.jpg') }}" alt="{{ staff.title }}">
-                                <a href="{{ helper.getLinkImage(staff.featured_image,'/assets/frontend/images/team-member-1.jpg') }}" class="popup-img overlay-link" title="{{ staff.title }}"><i class="fa fa-plus"></i></a>
+                                <img width="100%" src="{{ helper.getLinkImage(staff.featured_image,'/assets/frontend/images/teams.jpg') }}" alt="{{ staff.title }}">
+                                <a href="{{ helper.getLinkImage(staff.featured_image,'/assets/frontend/images/teams.jpg') }}" class="popup-img overlay-link" title="{{ staff.title }}"><i class="fa fa-plus"></i></a>
                                 </div>
                             </div>
                             <div class="col-md-9 col-lg-9">
@@ -208,8 +208,8 @@ use Models\Staff;
                         <div class="row">
                             <div class="col-md-3 col-lg-3">
                                 <div class="overlay-container overlay-visible">
-                                <img width="100%" src="{{ helper.getLinkImage(staff.featured_image,'/assets/frontend/images/team-member-1.jpg') }}" alt="{{ staff.title }}">
-                                <a href="{{ helper.getLinkImage(staff.featured_image,'/assets/frontend/images/team-member-1.jpg') }}" class="popup-img overlay-link" title="{{ staff.title }}"><i class="fa fa-plus"></i></a>
+                                <img width="100%" src="{{ helper.getLinkImage(staff.featured_image,'/assets/frontend/images/teams.jpg') }}" alt="{{ staff.title }}">
+                                <a href="{{ helper.getLinkImage(staff.featured_image,'/assets/frontend/images/teams.jpg') }}" class="popup-img overlay-link" title="{{ staff.title }}"><i class="fa fa-plus"></i></a>
                                 </div>
                             </div>
                             <div class="col-md-9 col-lg-9">

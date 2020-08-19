@@ -108,7 +108,7 @@
 {% endif %}
 
 {% if depts %}
-<section class="pt-5 pb-5 section dark-translucent-bg fixed-bg" style="background-position: 50% 42%; background-image: url({{ helper.getLinkImage(home['specialized_bg'], './assets/frontend/images/education-4.jpg') }})">
+<section class="pt-5 pb-5 section dark-translucent-bg fixed-bg" style="background-position: 50% 42%; background-image: url({{ helper.getLinkImage(home['specialized_bg'], './assets/frontend/images/education.jpg') }})">
     {% if home['specialized_title'] %}
     <div class="container mt-4">
         <div class="row justify-content-lg-center">
@@ -158,7 +158,7 @@
             <div class="col-md-4">
                 <div class="image-box team-member shadow-2 mb-20">
                     <div class="overlay-container rounded overlay-visible">
-                        <img width="100%" class="object-fit-fill" src="{{ helper.getLinkImage(staff.featured_image,'/assets/frontend/images/education-4.jpg') }}" alt="{{staff.title}}">
+                        <img width="100%" class="object-fit-fill" src="{{ helper.getLinkImage(staff.featured_image,'/assets/frontend/images/education.jpg') }}" alt="{{staff.title}}">
                         <a href="{{ constant('FRONTEND_URL')~'/staff/'~staff.slug }}" class="overlay-link" title="{{staff.title}}"><i class="fa fa-graduation-cap"></i></a>
                         <div class="overlay-bottom">
                             <div class="text p-0">
@@ -181,7 +181,7 @@
 {% endif %}
 
 {% if partners %}
-<section class="pt-5 pb-5 section dark-translucent-bg fixed-bg" style="background-position: 50% 42%; background-image: url({{ helper.getLinkImage(home['partner_bg'], './assets/frontend/images/education-4.jpg') }})">
+<section class="pt-5 pb-5 section dark-translucent-bg fixed-bg" style="background-position: 50% 42%; background-image: url({{ helper.getLinkImage(home['partner_bg'], './assets/frontend/images/education.jpg') }})">
     {% if home['partner_title'] %}
     <div class="container pv-20">
         <div class="row justify-content-lg-center">
@@ -199,7 +199,7 @@
             <div class="col-lg-3 col-md-6">
                 <div class="ph-20 feature-box text-center object-non-visible" data-animation-effect="fadeInDownSmall"
                     data-effect-delay="100">
-                    <span class="icon large circle"><img class="rounded-circle" alt="{{partner.title}}" src="{{ helper.getLinkImage(partner.featured_image,'/assets/frontend/images/beauty-1.jpg') }}"></span>
+                    <span class="icon large circle"><img class="rounded-circle" alt="{{partner.title}}" src="{{ helper.getLinkImage(partner.featured_image,'/assets/frontend/images/beauty.jpg') }}"></span>
                     <h3>{{partner.title}}</h3>
                 </div>
             </div>

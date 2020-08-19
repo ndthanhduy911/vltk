@@ -10,8 +10,8 @@
                     <div class="col-md-4">
                         <div class="image-box team-member shadow mb-20">
                             <div class="overlay-container overlay-visible">
-                                <img width="100%" src="{{ helper.getLinkImage(staff.featured_image, '/assets/frontend/images/team-member-1.jpg') }}" alt="{{staff_lang.title}}">
-                                <a href="{{ helper.getLinkImage(staff.featured_image, '/assets/frontend/images/team-member-1.jpg') }}" class="popup-img overlay-link" title="{{staff_lang.title}}"><i class="fa fa-plus"></i></a>
+                                <img width="100%" src="{{ helper.getLinkImage(staff.featured_image, '/assets/frontend/images/teams.jpg') }}" alt="{{staff_lang.title}}">
+                                <a href="{{ helper.getLinkImage(staff.featured_image, '/assets/frontend/images/teams.jpg') }}" class="popup-img overlay-link" title="{{staff_lang.title}}"><i class="fa fa-plus"></i></a>
                                 <div class="overlay-bottom">
                                 <div class="text">
                                     {% if staff.dean %}
