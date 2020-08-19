@@ -119,12 +119,12 @@
                                         {%for menu in menuParents%}
                                         <?php $slug_now = isset($slug_now) ? $slug_now : ''; $menuP = Menus::getItem($menu, $dept->slug, $slug_now); $menuChild = Menus::find(['deleted = 0 AND parent_id = :parent_id:','bind' => ['parent_id' => $menu->id]]); ?>
                                         <li class="nav-item dropdown {{ menuP['actived'] ? 'active' : '' }}">
-                                            <a target="{{ helper.getTarget(menu.target)}}" href="{{ menuP['link'] }}" class="{{ menuP['actived'] ? 'active' : '' }} nav-link {{ menuChild.count() ? 'dropdown-toggle' : '' }}" {{ menuChild.count() ? 'data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"' : '' }}><?= Menus::getName($menu->id, $lang_id) ?></a>
+                                            <a target="{{ helper.getTarget(menu.target)}}" rel="noopener" href="{{ menuP['link'] }}" class="{{ menuP['actived'] ? 'active' : '' }} nav-link {{ menuChild.count() ? 'dropdown-toggle' : '' }}" {{ menuChild.count() ? 'data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"' : '' }}><?= Menus::getName($menu->id, $lang_id) ?></a>
                                             <?php if($menuChild->count()){ ?>
                                                 <ul class="dropdown-menu">
                                                 {% for child in menuChild %}
                                                     <?php $menuItem = Menus::getItem($child, $dept->slug, $slug_now); ?>
-                                                    <li><a target="{{ helper.getTarget(child.target)}}" href="{{ menuItem['link'] }}" class="{{ menuItem['actived'] ? 'active' : '' }}"><?= Menus::getName($child->id, $lang_id) ?></a></li>
+                                                    <li><a target="{{ helper.getTarget(child.target)}}" rel="noopener" href="{{ menuItem['link'] }}" class="{{ menuItem['actived'] ? 'active' : '' }}"><?= Menus::getName($child->id, $lang_id) ?></a></li>
                                                 {% endfor %}
                                                 </ul>
                                             <?php } ?>
