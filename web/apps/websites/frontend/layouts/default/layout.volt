@@ -42,7 +42,7 @@
     <link href="https://fonts.googleapis.com/css?family=PT+Serif" rel="stylesheet">
 
     <!-- Bootstrap core CSS -->
-    <link href="<?php echo FRONTEND_URL ?>/assets/frontend/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="<?php echo FRONTEND_URL ?>/assets/frontend/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Font Awesome CSS -->
     <link href="<?php echo FRONTEND_URL ?>/assets/frontend/fonts/font-awesome/css/font-awesome.css" rel="stylesheet">

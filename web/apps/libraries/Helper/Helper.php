@@ -242,7 +242,7 @@ class Helper extends Component
             case 0: 
                 return  '_self' ;
             case 1: 
-                return '__blank';       
+                return '_blank';       
             case 2: 
                 return '_parent';      
             case 3: 
