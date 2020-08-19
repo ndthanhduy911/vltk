@@ -39,7 +39,8 @@
 .overlay-container .grow:hover { transform: scale(1.1); }
 
  h1, h2, h3, h4, h5, h6, .navbar .navbar-nav {
-    font-family: "Roboto", sans-serif
+    font-family: "Roboto", sans-serif;
+    text-transform: none;
 }
 
 .w-30  {

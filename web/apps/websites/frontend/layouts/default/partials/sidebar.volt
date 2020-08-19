@@ -56,13 +56,13 @@
         <div class="media margin-clear">
             <div class="d-flex pr-2">
                 <div class="overlay-container">
-                    <img class="media-object" src="{{ helper.getLinkImage(post.featured_image, '/assets/frontend/images/blog-thumb-1.jpg') }}" alt="{{ post.title }}">
+                    <img class="media-object" src="{{ helper.getLinkImage(post.featured_image, '/assets/frontend/images/defaut_img.png') }}" alt="{{ post.title }}">
                     <a href="<?= Posts::getUrl($dept, $post) ?>" class="overlay-link small"><i class="fa fa-link"></i></a>
                 </div>
             </div>
 
             <div class="media-body">
-                <h5 class="media-heading"><a href="<?= Posts::getUrl($dept, $post) ?>" title="{{ post.title }}">{{ helper.getExcerpt(post.title, 0, 60) }}</a></h5>
+                <h5 class="media-heading"><a href="<?= Posts::getUrl($dept, $post) ?>" title="{{ post.title }}">{{ helper.getExcerpt(post.title, 0, 70) }}</a></h5>
                 <p class="small margin-clear"><i class="fa fa-calendar pr-10"></i>{{ helper.datetime_vn(post.calendar) }}</p>
             </div>
         </div>

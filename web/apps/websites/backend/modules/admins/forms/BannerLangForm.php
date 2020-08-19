@@ -59,7 +59,6 @@ class BannerLangForm extends Form
         $description->setAttributes(array(
             'class' => 'form-control',
             'placeholder' => 'Giới thiệu',
-            'maxlength' => "255",
             'data-error' => "Giới thiệu",
             'rows' => 4
         ));
