@@ -158,7 +158,7 @@
             <div class="col-md-4">
                 <div class="image-box team-member shadow-2 mb-20">
                     <div class="overlay-container rounded overlay-visible">
-                        <img width="100%" src="{{ helper.getLinkImage(staff.featured_image,'/assets/frontend/images/education-4.jpg') }}" alt="{{staff.title}}">
+                        <img width="100%" class="object-fit-fill" src="{{ helper.getLinkImage(staff.featured_image,'/assets/frontend/images/education-4.jpg') }}" alt="{{staff.title}}">
                         <a href="{{ constant('FRONTEND_URL')~'/staff/'~staff.slug }}" class="overlay-link" title="{{staff.title}}"><i class="fa fa-graduation-cap"></i></a>
                         <div class="overlay-bottom">
                             <div class="text p-0">

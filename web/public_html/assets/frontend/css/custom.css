@@ -107,14 +107,6 @@ ul.dropdown-menu > li:last-of-type > a
     margin-right: 10px;
 }
 
-/* #section1 .media-body {
-    height: 50px;
-} */
-
-/* #section1 .overlay-container img {
-    height: 45px;
-} */
-
 #section1 .media-heading a {
     text-transform: initial;
 }
@@ -186,8 +178,15 @@ ul.dropdown-menu > li:last-of-type > a
     background-color: #ffffff;
 }
 
+#section1 .media {
+    min-height: 55px;
+    display: flex;
+    align-items: center;
+}
+
 .media-object {
     object-fit: contain;
+    height: 50px;
 }
 
 .object-fit-contain {
@@ -196,6 +195,9 @@ ul.dropdown-menu > li:last-of-type > a
 
 .object-fit-cover {
     object-fit: cover;
+}
+.object-fit-fill {
+    object-fit: fill;
 }
 
 .page-link.disabled {
