@@ -102,8 +102,13 @@ ul.dropdown-menu > li:last-of-type > a
 .transparent-header .dark.header .navbar-nav li .nav-link {
     color: #ffffff;
 }
-.media-heading {
+.product-title,.media-heading {
     text-align: justify;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 #section1 .overlay-container {
     background: #ffffff;

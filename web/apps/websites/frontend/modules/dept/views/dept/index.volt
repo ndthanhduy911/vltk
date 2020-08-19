@@ -88,7 +88,7 @@
                                 <a href="{{ postModel.getUrl(dept, post) }}" class="overlay-link small"><i class="fa fa-graduation-cap"></i></a>
                             </div>
                             <div class="media-body">
-                                <h5 class="media-heading"><a href="{{ postModel.getUrl(dept, post) }}" title="{{ post.title }}">{{ helper.getExcerpt(post.title, 0, 115) }}</a></h5>
+                                <h5 class="media-heading"><a href="{{ postModel.getUrl(dept, post) }}" title="{{ post.title }}">{{ post.title }}</a></h5>
                                 <div class="small"><i class="fa fa-calendar pr-10"></i>{{ helper.datetime_vn(post.calendar, 'd/m/Y') }}</div>
                             </div>
                         </div>
