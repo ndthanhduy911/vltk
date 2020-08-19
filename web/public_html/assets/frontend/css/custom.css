@@ -102,7 +102,9 @@ ul.dropdown-menu > li:last-of-type > a
 .transparent-header .dark.header .navbar-nav li .nav-link {
     color: #ffffff;
 }
-
+.media-heading {
+    text-align: justify;
+}
 #section1 .overlay-container {
     background: #ffffff;
     margin-right: 10px;
