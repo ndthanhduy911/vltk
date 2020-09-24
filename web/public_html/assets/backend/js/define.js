@@ -251,6 +251,7 @@ const showSelectImage = (button, showImg, uploadImageValue, buttonRemoveImg) => 
                             }
                         },
                         getFileCallback: function (file) {
+                            console.log(file.url);
                             file.url = file.url.replace("/elfinder/php/../../", '/');
                             let url = file.url;
                             if($(buttonRemoveImg).length){

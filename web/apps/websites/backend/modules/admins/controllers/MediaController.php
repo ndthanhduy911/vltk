@@ -37,7 +37,7 @@ class MediaController  extends \BackendController {
                 array(
                     'driver'        => 'LocalFileSystem',           // driver for accessing file system (REQUIRED)
                     'path'          => PUBLIC_DIR."/uploads/{$deptArray[$d_id]}",                 // path to files (REQUIRED)
-                    'URL'           => PUBLIC_DIR."/uploads/{$deptArray[$d_id]}", // URL to files (REQUIRED)
+                    'URL'           => "/uploads/{$deptArray[$d_id]}", // URL to files (REQUIRED)
                     'trashHash'     => 't1_Lw',                     // elFinder's hash of trash folder
                     'winHashFix'    => DIRECTORY_SEPARATOR !== '/', // to make hash same to Linux one on windows too
                     'uploadDeny'    => array('all'),                // All Mimetypes not allowed to upload
@@ -51,7 +51,7 @@ class MediaController  extends \BackendController {
                     'id'            => '1',
                     'driver'        => 'Trash',
                     'path'          => PUBLIC_DIR."/uploads/{$deptArray[$d_id]}"."/.trash/",
-                    'tmbURL'        => PUBLIC_DIR."/uploads/{$deptArray[$d_id]}".'/.trash/.tmb/',
+                    'tmbURL'        => "/uploads/{$deptArray[$d_id]}".'/.trash/.tmb/',
                     'winHashFix'    => DIRECTORY_SEPARATOR !== '/', // to make hash same to Linux one on windows too
                     'uploadDeny'    => array('all'),                // Recomend the same settings as the original volume that uses the trash
                     'uploadAllow'   => array('image/x-ms-bmp', 'image/gif', 'image/jpeg', 'image/png', 'image/x-icon', 'text/plain'), // Same as above
