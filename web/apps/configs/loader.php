@@ -20,8 +20,8 @@ $loader->registerClasses(
 );
 
 $loader->registerDirs(
-    array(
-        LIB_DIR . '/',
-    ));
+array(
+    LIB_DIR . '/',
+));
 
 $loader->register();

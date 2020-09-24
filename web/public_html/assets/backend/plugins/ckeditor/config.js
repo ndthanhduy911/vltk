@@ -56,7 +56,7 @@ CKEDITOR.on('dialogDefinition', function (event) {
 												resizable: false,
 												width: '100%',
 												onlyMimes: ['image'],
-												url: '/elfinder/php/connector.minimal.php?dept_id='+deptId,
+												url: '/admin/media/connector?dept_id='+deptId,
 												lang:'vi',
 												getFileCallback: function (file) {
 														file.url = file.url.replace("/elfinder/php/../../", '/');

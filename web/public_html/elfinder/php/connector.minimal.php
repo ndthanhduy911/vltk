@@ -118,6 +118,10 @@ function access($attr, $path, $data, $volume, $isDir, $relpath) {
 // https://github.com/Studio-42/elFinder/wiki/Connector-configuration-options
 
 $d_id = isset($_GET['dept_id']) ? $_GET['dept_id'] : 0;
+$depts = [0,1,2,3,4,5,6,7,8,9,10];
+if(!in_array($d_id,$depts)){
+	die;
+}
 $deptArray = [
 	0 => '/404',
 	1 => 'khoa-vat-ly',
