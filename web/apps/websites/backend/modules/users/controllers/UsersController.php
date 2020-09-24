@@ -30,14 +30,14 @@ class UsersController  extends \BackendController {
                 if ($this->security->checkToken()) {
                     $error = [];
                     $post = [
-                        'name' => $this->request->getPost('name'),
-                        'email' => $this->request->getPost('email'),
-                        'phone' => $this->request->getPost('phone'),
-                        'status' => $this->request->getPost('status'),
-                        'role' => $this->request->getPost('role'),
-                        'username' => $this->request->getPost('username'),
-                        'dept_id' => $this->request->getPost('dept_id'),
-                        'password' => $user->password ? $user->password : $this->security->hash($this->request->getPost('password')),
+                        'name' => $this->request->getPost('name',['string','trim']),
+                        'email' => $this->request->getPost('email',['string','trim']),
+                        'phone' => $this->request->getPost('phone',['string','trim']),
+                        'status' => $this->request->getPost('status',['int','trim']),
+                        'role' => $this->request->getPost('role',['int','trim']),
+                        'username' => $this->request->getPost('username',['string','trim']),
+                        'dept_id' => $this->request->getPost('dept_id',['int','trim']),
+                        'password' => $user->password ? $user->password : $this->security->hash($this->request->getPost('password',['string','trim'])),
                     ];
 
                     if((int)$id === 1){
@@ -124,7 +124,7 @@ class UsersController  extends \BackendController {
             if($this->security->checkToken()) {
                 if($user = Users::findFirstId($id)){
                     $form = new UserForm();
-                    $password = $this->request->getPost('password');
+                    $password = $this->request->getPost('password',['string','trim']);
                     if(!$this->rmt->checkDeptId($user->dept_id, $this->session->get('dept_mg'))){
                         $this->flash->error('Khu vực/ Bộ môn không cho phép.');
                         return $this->response->redirect('/users/edit/'.$id);

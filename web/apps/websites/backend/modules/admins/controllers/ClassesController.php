@@ -52,15 +52,15 @@ class ClassesController  extends \BackendController {
         if ($this->request->isPost()) {
             if ($this->security->checkToken()) {
                 $error = [];
-                $p_title = $this->request->getPost('title');
-                $p_slug = $this->request->getPost('slug');
-                $p_content = $this->request->getPost('content');
-                $p_excerpt = $this->request->getPost('excerpt');
+                $p_title = $this->request->getPost('title',['string','trim']);
+                $p_slug = $this->request->getPost('slug',['string','trim']);
+                $p_content = $this->request->getPost('content',['string','trim']);
+                $p_excerpt = $this->request->getPost('excerpt',['string','trim']);
                 $req_class = [
-                    'status' => $this->request->getPost('status'),
+                    'status' => $this->request->getPost('status',['string','trim']),
                     'slug' => $p_slug ? $p_slug : $this->helper->slugify($p_title[1]),
-                    'background_image' => $this->request->getPost('background_image'),
-                    'code' => $this->request->getPost('code'),
+                    'background_image' => $this->request->getPost('background_image',['string','trim']),
+                    'code' => $this->request->getPost('code',['string','trim']),
                     
                 ];
 

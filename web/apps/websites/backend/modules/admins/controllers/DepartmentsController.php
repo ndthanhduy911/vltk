@@ -33,26 +33,26 @@ class DepartmentsController  extends \BackendController {
         if ($this->request->isPost()) {
             if ($this->security->checkToken()) {
                 $error = [];
-                $p_name = $this->request->getPost('name');
-                $p_description = $this->request->getPost('description');
-                $p_address = $this->request->getPost('address');
+                $p_name = $this->request->getPost('name',['string','trim']);
+                $p_description = $this->request->getPost('description',['string','trim']);
+                $p_address = $this->request->getPost('address',['string','trim']);
                 $req_department = [
                     'status' => 1,
                     'level' => 0,
                     'slug' => $department->slug,
-                    'status' => $this->request->getPost('status'),
-                    'links' => $this->request->getPost('links'),
-                    'phone' => $this->request->getPost('phone'),
-                    'email' => $this->request->getPost('email'),
-                    'code' => $this->request->getPost('code'),
-                    'image' => $this->request->getPost('image'),
-                    'logo' => $this->request->getPost('logo'),
-                    'icon' => $this->request->getPost('icon'),
+                    'status' => $this->request->getPost('status',['string','trim']),
+                    'links' => $this->request->getPost('links',['string','trim']),
+                    'phone' => $this->request->getPost('phone',['string','trim']),
+                    'email' => $this->request->getPost('email',['string','trim']),
+                    'code' => $this->request->getPost('code',['string','trim']),
+                    'image' => $this->request->getPost('image',['string','trim']),
+                    'logo' => $this->request->getPost('logo',['string','trim']),
+                    'icon' => $this->request->getPost('icon',['string','trim']),
                     'post_connect' => 0,
                 ];
 
                 if($dept_id != 1){
-                    $req_department['post_connect'] = $this->request->getPost('post_connect');
+                    $req_department['post_connect'] = $this->request->getPost('post_connect',['string','trim']);
                     $req_department['post_connect'] = $req_department['post_connect'] ? $req_department['post_connect'] : 0;
                 }
 

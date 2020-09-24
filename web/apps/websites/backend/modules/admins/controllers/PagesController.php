@@ -53,16 +53,16 @@ class PagesController  extends \BackendController {
         if ($this->request->isPost()) {
             if ($this->security->checkToken()) {
                 $error = [];
-                $p_title = $this->request->getPost('title');
-                $p_slug = $this->request->getPost('slug');
-                $p_content = $this->request->getPost('content');
-                $p_excerpt = $this->request->getPost('excerpt');
+                $p_title = $this->request->getPost('title',['string','trim']);
+                $p_slug = $this->request->getPost('slug',['string','trim']);
+                $p_content = $this->request->getPost('content',['string','trim']);
+                $p_excerpt = $this->request->getPost('excerpt',['string','trim']);
                 $req_page = [
-                    'status' => $this->request->getPost('status'),
+                    'status' => $this->request->getPost('status',['string','trim']),
                     'slug' => $p_slug ? $p_slug : $this->helper->slugify($p_title[1]),
-                    'featured_image' => $this->request->getPost('featured_image'),
-                    'background_image' => $this->request->getPost('background_image'),
-                    'attribute_id' => $this->request->getPost('attribute_id'),
+                    'featured_image' => $this->request->getPost('featured_image',['string','trim']),
+                    'background_image' => $this->request->getPost('background_image',['string','trim']),
+                    'attribute_id' => $this->request->getPost('attribute_id',['int','trim']),
                 ];
 
                 $check_slug = Pages::findFirst([

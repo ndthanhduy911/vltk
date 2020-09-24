@@ -21,9 +21,9 @@ class ProfileController extends \BackendController
                     $form = new ProfileForm();
 
                     $post = [
-                        'name' => $this->request->getPost('name'),
-                        'email' => $this->request->getPost('email'),
-                        'phone' => $this->request->getPost('phone'),
+                        'name' => $this->request->getPost('name',['string','trim']),
+                        'email' => $this->request->getPost('email',['string','trim']),
+                        'phone' => $this->request->getPost('phone',['string','trim']),
                     ];
 
                     $checkMail = Users::findFirst([
@@ -150,8 +150,8 @@ class ProfileController extends \BackendController
                             return $this->response->redirect(BACKEND_URL.'/profile');
                         }
                     } else {
-                            $password = $this->request->getPost('oldPassword');
-                            $newpassword = $this->request->getPost('password');
+                            $password = $this->request->getPost('oldPassword',['string','trim']);
+                            $newpassword = $this->request->getPost('password',['string','trim']);
                             if ($this->security->checkHash($password, $profile->password)) {
                                 $profile->password = $this->security->hash($newpassword);
                                 if (!$profile->update()) {

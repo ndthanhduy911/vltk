@@ -54,12 +54,12 @@ class SettingController  extends \BackendController
                 return $this->response->redirect(BACKEND_URL.'/setting/links');
             }
             $error = [];
-            $l_name = $this->request->getPost('name');
+            $l_name = $this->request->getPost('name',['string','trim']);
             $req_link = [
-                'icon' => $this->request->getPost('icon'),
-                'link' => $this->request->getPost('link'),
-                'sort' => $this->request->getPost('sort'),
-                'status' => $this->request->getPost('status'),
+                'icon' => $this->request->getPost('icon',['string','trim']),
+                'link' => $this->request->getPost('link',['string','trim']),
+                'sort' => $this->request->getPost('sort',['string','trim']),
+                'status' => $this->request->getPost('status',['int','trim']),
             ];
             
             $form_link->bind($req_link, $link);
@@ -179,12 +179,12 @@ class SettingController  extends \BackendController
                 return $this->response->redirect(BACKEND_URL.'/setting/socials');
             }
             $error = [];
-            $l_name = $this->request->getPost('name');
+            $l_name = $this->request->getPost('name',['string','trim']);
             $req_social = [
-                'icon' => $this->request->getPost('icon'),
-                'social' => $this->request->getPost('social'),
-                'sort' => $this->request->getPost('sort'),
-                'status' => $this->request->getPost('status'),
+                'icon' => $this->request->getPost('icon',['string','trim']),
+                'social' => $this->request->getPost('social',['string','trim']),
+                'sort' => $this->request->getPost('sort',['int','trim']),
+                'status' => $this->request->getPost('status',['int','trim']),
             ];
             
             $form_social->bind($req_social, $social);

@@ -61,17 +61,17 @@ class PostsController  extends \BackendController {
             if ($this->security->checkToken()) {
                 $data['token'] = ['key' => $this->security->getTokenKey(), 'value' => $this->security->getToken()];
                 $error = [];
-                $p_title = $this->request->getPost('title');
-                $p_slug = $this->request->getPost('slug');
-                $p_content = $this->request->getPost('content');
-                $p_excerpt = $this->request->getPost('excerpt');
-                $p_calendar = $this->request->getPost('calendar');
+                $p_title = $this->request->getPost('title',['string','trim']);
+                $p_slug = $this->request->getPost('slug',['string','trim']);
+                $p_content = $this->request->getPost('content',['string','trim']);
+                $p_excerpt = $this->request->getPost('excerpt',['string','trim']);
+                $p_calendar = $this->request->getPost('calendar',['string','trim']);
                 $req_post = [
-                    'cat_id' => $this->request->getPost('cat_id'),
-                    'status' => $this->request->getPost('status'),
+                    'cat_id' => $this->request->getPost('cat_id',['int','trim']),
+                    'status' => $this->request->getPost('status',['int','trim']),
                     'slug' => $p_slug ? $p_slug : $this->helper->slugify($p_title[1]),
                     'calendar' => $p_calendar ? $p_calendar : date('d/m/Y H:i'),
-                    'featured_image' => $this->request->getPost('featured_image'),
+                    'featured_image' => $this->request->getPost('featured_image',['string','trim']),
                 ];
 
                 $check_slug = Posts::findFirst([

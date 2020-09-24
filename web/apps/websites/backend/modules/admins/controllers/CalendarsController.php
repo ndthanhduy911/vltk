@@ -53,21 +53,21 @@ class CalendarsController  extends \BackendController {
         if ($this->request->isPost()) {
             if ($this->security->checkToken()) {
                 $error = [];
-                $p_excerpt = $this->request->getPost('excerpt');
+                $p_excerpt = $this->request->getPost('excerpt',['string','trim']);
                 $req_calendar = [
                     'status' => $this->request->getPost('status'),
-                    'featured_image' => $this->request->getPost('featured_image'),
-                    'background_image' => $this->request->getPost('background_image'),
-                    'class_id' => $this->request->getPost('class_id'),
-                    'subject_id' => $this->request->getPost('subject_id'),
-                    'year' => $this->request->getPost('year'),
-                    'semester' => $this->request->getPost('semester'),
-                    'location' => $this->request->getPost('location'),
-                    'begin_date' => $this->request->getPost('begin_date'),
-                    'day' => $this->request->getPost('day'),
-                    'begin_time' => $this->request->getPost('begin_time'),
-                    'end_time' => $this->request->getPost('end_time'),
-                    'room' => $this->request->getPost('room'),
+                    'featured_image' => $this->request->getPost('featured_image',['string','trim']),
+                    'background_image' => $this->request->getPost('background_image',['string','trim']),
+                    'class_id' => $this->request->getPost('class_id',['int','trim']),
+                    'subject_id' => $this->request->getPost('subject_id',['int','trim']),
+                    'year' => $this->request->getPost('year',['int','trim']),
+                    'semester' => $this->request->getPost('semester',['string','trim']),
+                    'location' => $this->request->getPost('location',['string','trim']),
+                    'begin_date' => $this->request->getPost('begin_date',['string','trim']),
+                    'day' => $this->request->getPost('day',['string','trim']),
+                    'begin_time' => $this->request->getPost('begin_time',['string','trim']),
+                    'end_time' => $this->request->getPost('end_time',['string','trim']),
+                    'room' => $this->request->getPost('room',['string','trim']),
                 ];
 
                 $form_calendar->bind($req_calendar, $calendar);

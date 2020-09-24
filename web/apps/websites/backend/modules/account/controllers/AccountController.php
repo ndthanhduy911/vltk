@@ -23,10 +23,10 @@ class AccountController extends \Phalcon\Mvc\Controller
             ];
             if ($this->security->checkToken()) {
                 if($this->session->has("captcha")){
-                    if($this->request->getPost("captcha") === $this->session->get("captcha")) {
-                        $user = Users::findFirstUsername($this->request->getPost('username'));
+                    if($this->request->getPost("captcha",['int','trim']) === $this->session->get("captcha")) {
+                        $user = Users::findFirstUsername($this->request->getPost('username',['string','trim']));
                         if ($user) {
-                            $password = $this->request->getPost('password');
+                            $password = $this->request->getPost('password',['string','trim']);
                             if ($this->security->checkHash($password,$user->password)) {
                                 $dept_mg = json_decode($user->dept_mg);
                                 $this->session->set("user_id", $user->id);

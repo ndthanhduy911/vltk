@@ -49,13 +49,13 @@ class BannerController  extends \BackendController {
         if ($this->request->isPost()) {
             if ($this->security->checkToken()) {
                 $error = [];
-                $p_name = $this->request->getPost('name');
-                $p_description = $this->request->getPost('description');
-                $p_button_text = $this->request->getPost('button_text');
+                $p_name = $this->request->getPost('name',['string','trim']);
+                $p_description = $this->request->getPost('description',['string','trim']);
+                $p_button_text = $this->request->getPost('button_text',['string','trim']);
                 $req_banner = [
-                    'status' => $this->request->getPost('status'),
-                    'image' => $this->request->getPost('image'),
-                    'button_link' => $this->request->getPost('button_link'),
+                    'status' => $this->request->getPost('status',['int','trim']),
+                    'image' => $this->request->getPost('image',['string','trim']),
+                    'button_link' => $this->request->getPost('button_link',['string','trim']),
                 ];
 
                 $form_banner->bind($req_banner, $banner);

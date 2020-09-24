@@ -33,17 +33,17 @@ class HomeController  extends \BackendController {
         if ($this->request->isPost()) {
             if ($this->security->checkToken()) {
                 $error = [];
-                $p_specialized_title = $this->request->getPost('specialized_title');
-                $p_staff_title = $this->request->getPost('staff_title');
-                $p_staff_des = $this->request->getPost('staff_des');
-                $p_partner_title = $this->request->getPost('partner_title');
-                $p_partner_des = $this->request->getPost('partner_des');
-                $p_contact_title = $this->request->getPost('contact_title');
-                $p_contact_des = $this->request->getPost('contact_des');
+                $p_specialized_title = $this->request->getPost('specialized_title',['string','trim']);
+                $p_staff_title = $this->request->getPost('staff_title',['string','trim']);
+                $p_staff_des = $this->request->getPost('staff_des',['string','trim']);
+                $p_partner_title = $this->request->getPost('partner_title',['string','trim']);
+                $p_partner_des = $this->request->getPost('partner_des',['string','trim']);
+                $p_contact_title = $this->request->getPost('contact_title',['string','trim']);
+                $p_contact_des = $this->request->getPost('contact_des',['string','trim']);
                 $req_home = [
-                    'specialized_bg' => $this->request->getPost('specialized_bg'),
-                    'partner_bg' => $this->request->getPost('partner_bg'),
-                    'cat_list' => $this->request->getPost('cat_list'),
+                    'specialized_bg' => $this->request->getPost('specialized_bg',['string','trim']),
+                    'partner_bg' => $this->request->getPost('partner_bg',['string','trim']),
+                    'cat_list' => $this->request->getPost('cat_list',['string','trim']),
                 ];
                 $req_home['cat_list'] = $req_home['cat_list'] ? json_encode($req_home ['cat_list']) : NULL;
                 $form_home->bind($req_home, $home);

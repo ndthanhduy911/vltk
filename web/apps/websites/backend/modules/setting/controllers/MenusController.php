@@ -61,22 +61,22 @@ class MenusController  extends \BackendController
         if ($this->request->isPost()) {
             if ($this->security->checkToken()) {
                 $error = [];
-                $m_name = $this->request->getPost('name');
+                $m_name = $this->request->getPost('name',['string','trim']);
                 $req_menu = [
                     'dept_id' => $menu->dept_id ? $menu->dept_id : $dept_id,
                     'menu_location_id' => $location_id,
-                    'type' => $this->request->getPost('type'),
-                    'status' => $this->request->getPost('status'),
-                    'post_id' => $this->request->getPost('post_id'),
-                    'page_id' => $this->request->getPost('page_id'),
-                    'cat_id' => $this->request->getPost('cat_id'),
-                    'dept' => $this->request->getPost('dept'),
-                    'links' => $this->request->getPost('links'),
-                    'icon' => $this->request->getPost('icon'),
-                    'parent_id' => $this->request->getPost('parent_id'),
-                    'sort' => $this->request->getPost('sort'),
-                    'status' => $this->request->getPost('status'),
-                    'target' => $this->request->getPost('target')
+                    'type' => $this->request->getPost('type',['int','trim']),
+                    'status' => $this->request->getPost('status',['int','trim']),
+                    'post_id' => $this->request->getPost('post_id',['int','trim']),
+                    'page_id' => $this->request->getPost('page_id',['int','trim']),
+                    'cat_id' => $this->request->getPost('cat_id',['int','trim']),
+                    'dept' => $this->request->getPost('dept',['string','trim']),
+                    'links' => $this->request->getPost('links',['string','trim']),
+                    'icon' => $this->request->getPost('icon',['string','trim']),
+                    'parent_id' => $this->request->getPost('parent_id',['int','trim']),
+                    'sort' => $this->request->getPost('sort',['int','trim']),
+                    'status' => $this->request->getPost('status',['int','trim']),
+                    'target' => $this->request->getPost('target',['string','trim'])
                 ];
                 $req_menu['parent_id'] = $req_menu['parent_id'] ? $req_menu['parent_id'] : NULL;
 

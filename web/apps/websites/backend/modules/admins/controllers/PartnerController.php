@@ -50,12 +50,12 @@ class PartnerController  extends \BackendController {
         if ($this->request->isPost()) {
             if ($this->security->checkToken()) {
                 $error = [];
-                $p_title = $this->request->getPost('title');
-                $p_link = $this->request->getPost('link');
+                $p_title = $this->request->getPost('title',['string','trim']);
+                $p_link = $this->request->getPost('link',['string','trim']);
                 $req_partner = [
-                    'status' => $this->request->getPost('status'),
-                    'featured_image' => $this->request->getPost('featured_image'),
-                    'link' => $this->request->getPost('link'),
+                    'status' => $this->request->getPost('status',['int','trim']),
+                    'featured_image' => $this->request->getPost('featured_image',['string','trim']),
+                    'link' => $this->request->getPost('link',['string','trim']),
                 ];
 
                 $form_partner->bind($req_partner, $partner);

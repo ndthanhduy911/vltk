@@ -83,13 +83,13 @@ class CategoriesController  extends \BackendController {
             // if ($this->security->checkToken()) {
                 // $data['token'] = ['key' => $this->security->getTokenKey(), 'value' => $this->security->getToken()];
                 $error = [];
-                $c_name = $this->request->getPost('name');
-                $c_slug = $this->request->getPost('slug');
-                $c_description = $this->request->getPost('description');
+                $c_name = $this->request->getPost('name',['string','trim']);
+                $c_slug = $this->request->getPost('slug',['string','trim']);
+                $c_description = $this->request->getPost('description',['string','trim']);
                 $req_cat = [
                     'slug' => $c_slug ? $c_slug : $this->helper->slugify($c_name[1]),
-                    'featured_image' => $this->request->getPost('featured_image'),
-                    'status' => $this->request->getPost('status'),
+                    'featured_image' => $this->request->getPost('featured_image',['string','trim']),
+                    'status' => $this->request->getPost('status',['int','trim']),
                 ];
                 
                 $check_slug = Categories::findFirst([

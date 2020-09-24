@@ -53,21 +53,21 @@ class StaffController  extends \BackendController {
         if ($this->request->isPost()) {
             if ($this->security->checkToken()) {
                 $error = [];
-                $p_title = $this->request->getPost('title');
-                $p_slug = $this->request->getPost('slug');
-                $p_content = $this->request->getPost('content');
+                $p_title = $this->request->getPost('title',['string','trim']);
+                $p_slug = $this->request->getPost('slug',['string','trim']);
+                $p_content = $this->request->getPost('content',['string','trim']);
                 $req_staff = [
-                    'status' => $this->request->getPost('status'),
+                    'status' => $this->request->getPost('status',['int','trim']),
                     'slug' => $p_slug ? $p_slug : $this->helper->slugify($p_title[1]),
-                    'featured_image' => $this->request->getPost('featured_image'),
-                    'dept_position' => $this->request->getPost('dept_position'),
-                    'email' => $this->request->getPost('email'),
-                    'sort' => $this->request->getPost('sort'),
-                    'dept_id' => $this->request->getPost('dept_id')
+                    'featured_image' => $this->request->getPost('featured_image',['string','trim']),
+                    'dept_position' => $this->request->getPost('dept_position',['string','trim']),
+                    'email' => $this->request->getPost('email',['string','trim']),
+                    'sort' => $this->request->getPost('sort',['int','trim']),
+                    'dept_id' => $this->request->getPost('dept_id',['int','trim'])
                 ];
 
                 if($dept_id == 1){
-                    $req_staff['dean'] = $this->request->getPost('dean');
+                    $req_staff['dean'] = $this->request->getPost('dean',['string','trim']);
                 }
 
                 $check_slug = Staff::findFirst([
