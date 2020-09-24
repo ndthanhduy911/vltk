@@ -245,6 +245,7 @@ const showSelectImage = (button, showImg, uploadImageValue, buttonRemoveImg) => 
                     $(this).elfinder({
                         resizable: false,
                         url: "/admin/media/connector?dept_id="+deptId,
+                        lang:'vi',
                         commandsOptions: {
                             getfile: {
                                 oncomplete: 'destroy'
