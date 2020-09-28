@@ -55,7 +55,7 @@ class StaffController  extends \BackendController {
                 $error = [];
                 $p_title = $this->request->getPost('title',['string','trim']);
                 $p_slug = $this->request->getPost('slug',['string','trim']);
-                $p_content = $this->request->getPost('content',['string','trim']);
+                $p_content = $this->request->getPost('content',['trim']);
                 $req_staff = [
                     'status' => $this->request->getPost('status',['int','trim']),
                     'slug' => $p_slug ? $p_slug : $this->helper->slugify($p_title[1]),

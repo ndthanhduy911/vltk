@@ -63,7 +63,7 @@ class PostsController  extends \BackendController {
                 $error = [];
                 $p_title = $this->request->getPost('title',['string','trim']);
                 $p_slug = $this->request->getPost('slug',['string','trim']);
-                $p_content = $this->request->getPost('content',['string','trim']);
+                $p_content = $this->request->getPost('content',['trim']);
                 $p_excerpt = $this->request->getPost('excerpt',['string','trim']);
                 $p_calendar = $this->request->getPost('calendar',['string','trim']);
                 $req_post = [
