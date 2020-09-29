@@ -32,8 +32,7 @@ class Categories extends \Phalcon\Mvc\Model
         return 'Models\Categories';
     }
 
-    public static function findFirstId($id, $columns = "*")
-    {
+    public static function findFirstId($id, $columns = "*"){
         return parent::findFirst([
             "conditions" => "id = :id:",
             "bind" => array('id' => $id),
@@ -41,8 +40,7 @@ class Categories extends \Phalcon\Mvc\Model
         ]);
     }
 
-    public static function getUrlById($id = null)
-    {
+    public static function getUrlById($id = null){
         if($cat = parent::findFirst($id)){
             return FRONTEND_URL.'/category/'.$cat->slug;
         }else{
@@ -50,8 +48,7 @@ class Categories extends \Phalcon\Mvc\Model
         }
     }
 
-    public static function getUrl($dept = NULL, $cat = NULL)
-    {
+    public static function getUrl($dept = NULL, $cat = NULL){
         if($cat && $dept){
             return FRONTEND_URL.($dept->id != 1 ? "/$dept->slug" : '' ).'/category/'.$cat->slug;
         }else{
@@ -67,8 +64,7 @@ class Categories extends \Phalcon\Mvc\Model
         }
     }
     
-    public static function getTitleById($cat_id = null)
-    {
+    public static function getTitleById($cat_id = null){
         if($cat = CategoriesLang::findFirst(['cat_id = :cat_id: AND lang_id = :lang_id:','bind' => ['cat_id' => $cat_id, 'lang_id' => $_SESSION['lang_id']]])){
             return $cat->name;
         }else{

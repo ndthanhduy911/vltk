@@ -28,7 +28,7 @@
     ->where("$npPost.deleted = 0 AND $npPost.status = 1 AND $npPost.dept_id = $dept->id")
     ->leftJoin('Models\PostsLang', "PL.post_id = $npPost.id AND PL.lang_id = $lang_id",'PL')
     ->orderBy("$npPost.calendar DESC")
-    ->limit(5)
+    ->limit(10)
     ->getQuery()
     ->execute();
 ?>
@@ -67,9 +67,11 @@
             </div>
         </div>
         {% endfor %}
+        {#
         <div class="text-right space-top">
             <a href="<?= Categories::getUrl($dept) ?>" class="link-dark"><i class="fa fa-plus-circle pl-1 pr-1"></i>{{ ml._ml_system('more', 'Xem thêm') }}</a>
         </div>
+        #}
     </div>
     {% endif %}
 </div>
