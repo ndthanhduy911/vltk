@@ -1,29 +1,7 @@
 <?php
 
-use Models\SubjectsLang;
-
 class Subjects extends \Phalcon\Mvc\Model
 {
-    public $id;
-    
-    public $slug;
-
-    public $status;
-
-    public $code;
-
-    public $dept_id;
-
-    public $created_at;
-
-    public $updated_at;
-
-    public $featured_image;
-
-    public $background_image;
-
-    public $deleted;
-
     public function getSource()
     {
         return 'subjects';

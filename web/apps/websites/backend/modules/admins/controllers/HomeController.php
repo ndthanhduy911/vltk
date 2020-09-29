@@ -1,8 +1,5 @@
 <?php
 namespace Backend\Modules\Admins\Controllers;
-use Models\Language;
-use Models\Home;
-use Models\HomeLang;
 use Backend\Modules\Admins\Forms\HomeForm;
 use Backend\Modules\Admins\Forms\HomeLangForm;
 
@@ -11,15 +8,15 @@ class HomeController  extends \BackendController {
     public function indexAction(){
         $forms_lang = [];
         $homes_lang = [];
-        $languages = Language::find(['status = 1']);
+        $languages = \Language::find(['status = 1']);
         $dept_id = $this->session->get('dept_id');
-        if(!$home = Home::findFirstByDept_id($dept_id)){
+        if(!$home = \Home::findFirstByDept_id($dept_id)){
             echo 'Không tìm thấy dữ liệu'; die;
         }
         $home->updated_at = date('Y-m-d H:i:s');
         $title = 'Cài đặt';
         foreach ($languages as $key => $lang) {
-            $home_lang = HomeLang::findFirst(['home_id = :home_id: AND lang_id = :lang_id:','bind' => ['home_id' => $home->id, 'lang_id' => $lang->id]]);
+            $home_lang = \HomeLang::findFirst(['home_id = :home_id: AND lang_id = :lang_id:','bind' => ['home_id' => $home->id, 'lang_id' => $lang->id]]);
             if($home_lang){
                 $form_lang = new HomeLangForm($home_lang);
                 $homes_lang[$lang->id] = $home_lang;

@@ -10,7 +10,6 @@ use Phalcon\Forms\Element\Hidden;
 use Phalcon\Forms\Form;
 use Phalcon\Validation\Validator\StringLength as StringLength;
 use Phalcon\Validation\Validator\PresenceOf;
-use Models\Categories;
 
 class BannerForm extends Form
 {

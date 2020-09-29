@@ -1,27 +1,6 @@
 <?php
-use Models\CategoriesLang;
 class Categories extends \Phalcon\Mvc\Model
 {
-    public $id;
-
-    public $slug;
-
-    public $status;
-
-    public $dept_id;
-
-    public $author;
-
-    public $featured_image;
-
-    public $created_at;
-
-    public $updated_at;
-
-    public $deleted;
-
-
-
     public function getSource()
     {
         return 'categories';
@@ -52,7 +31,7 @@ class Categories extends \Phalcon\Mvc\Model
     }
 
     public static function getLang($cat_id =  null){
-        if($cat = CategoriesLang::findFirst(['cat_id = :cat_id: AND lang_id = :lang_id:','bind' => ['cat_id' => $cat_id, 'lang_id' => $_SESSION['lang_id']]])){
+        if($cat = \CategoriesLang::findFirst(['cat_id = :cat_id: AND lang_id = :lang_id:','bind' => ['cat_id' => $cat_id, 'lang_id' => $_SESSION['lang_id']]])){
             return $cat;
         }else{
             return false;
@@ -60,7 +39,7 @@ class Categories extends \Phalcon\Mvc\Model
     }
     
     public static function getTitleById($cat_id = null){
-        if($cat = CategoriesLang::findFirst(['cat_id = :cat_id: AND lang_id = :lang_id:','bind' => ['cat_id' => $cat_id, 'lang_id' => $_SESSION['lang_id']]])){
+        if($cat = \CategoriesLang::findFirst(['cat_id = :cat_id: AND lang_id = :lang_id:','bind' => ['cat_id' => $cat_id, 'lang_id' => $_SESSION['lang_id']]])){
             return $cat->name;
         }else{
             return false;

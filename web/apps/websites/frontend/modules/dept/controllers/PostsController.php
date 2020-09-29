@@ -103,7 +103,7 @@ class PostsController extends \FrontendController
             'p.featured_image',
         ))
         ->from(['p'=>'Posts'])
-        ->leftJoin('Models\PostsLang', "pl.post_id = p.id AND pl.lang_id = $lang_id AND p.dept_id = $dept->id",'pl')
+        ->leftJoin('PostsLang', "pl.post_id = p.id AND pl.lang_id = $lang_id AND p.dept_id = $dept->id",'pl')
         ->orderBy("p.calendar DESC")
         ->where("p.deleted = 0 AND p.status = 1");
         

@@ -1,29 +1,6 @@
 <?php
-
-use Models\PagesLang;
-
 class Pages extends \Phalcon\Mvc\Model
 {
-    public $id;
-    
-    public $slug;
-
-    public $attribute_id;
-
-    public $status;
-
-    public $dept_id;
-
-    public $created_at;
-
-    public $updated_at;
-
-    public $featured_image;
-
-    public $background_image;
-
-    public $deleted;
-
     public function getSource()
     {
         return 'pages';

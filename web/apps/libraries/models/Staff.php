@@ -1,30 +1,6 @@
 <?php
 class Staff extends \Phalcon\Mvc\Model
 {
-    public $id;
-
-    public $dept_id;
-
-    public $slug;
-
-    public $email;
-
-    public $featured_image;
-
-    public $dean;
-
-    public $dept_position;
-
-    public $created_at;
-    
-    public $updated_at;
-
-    public $status;
-
-    public $sort;
-
-    public $deleled;
-
     public function getSource()
     {
         return 'staff';

@@ -1,7 +1,5 @@
 <?php
 namespace Backend\Modules\Users\Forms;
-
-use Models\Roles as Roles;
 use Phalcon\Forms\Element\Email;
 use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Form;
@@ -14,9 +12,9 @@ class ProfileForm extends Form
 {
     public function initialize($entity = null, $options = null)
     {
-        $roles = Roles::findFirstId($_SESSION['user_id']);
+        $roles = \Roles::findFirstId($_SESSION['user_id']);
         if ($this->session->get('role') !== 1) {
-            $department = Roles::findFirstId($_SESSION['dept_id']);
+            $department = \Roles::findFirstId($_SESSION['dept_id']);
         } else {
             $department = false;
         }

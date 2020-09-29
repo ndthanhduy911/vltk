@@ -1,8 +1,5 @@
 <?php
 namespace Backend\Modules\Admins\Controllers;
-use Models\Partner;
-use Models\PartnerLang;
-use Models\Language;
 use Backend\Modules\Admins\Forms\PartnerForm;
 use Backend\Modules\Admins\Forms\PartnerLangForm;
 
@@ -17,15 +14,15 @@ class PartnerController  extends \BackendController {
         $forms_lang = [];
         $partners_lang = [];
         $partner_content = [];
-        $languages = Language::find(['status = 1']);
+        $languages = \Language::find(['status = 1']);
         if($id){
-            if(!$partner = Partner::findFirstId($id)){
+            if(!$partner = \Partner::findFirstId($id)){
                 echo 'Không tìm thấy dữ liệu'; die;
             }
             $partner->updated_at = date('Y-m-d H:i:s');
             $title = 'Cập nhật';
             foreach ($languages as $key => $lang) {
-                $partner_lang = PartnerLang::findFirst(['partner_id = :id: AND lang_id = :lang_id:','bind' => ['id' => $partner->id, 'lang_id' => $lang->id]]);
+                $partner_lang = \PartnerLang::findFirst(['partner_id = :id: AND lang_id = :lang_id:','bind' => ['id' => $partner->id, 'lang_id' => $lang->id]]);
                 if($partner_lang){
                     $form_lang = new PartnerLangForm($partner_lang);
                     $partners_lang[$lang->id] = $partner_lang;
@@ -35,14 +32,14 @@ class PartnerController  extends \BackendController {
                 }
             }   
         }else{
-            $partner = new Partner();
+            $partner = new \Partner();
             $partner->dept_id = $this->session->get('dept_id');
             $partner->created_at = date('Y-m-d H:i:s');
             $partner->updated_at = $partner->created_at;
             $title = 'Thêm mới';
             foreach ($languages as $key => $lang) {
                 $forms_lang[$lang->id] = new PartnerLangForm();
-                $partners_lang[$lang->id] = new PartnerLang();
+                $partners_lang[$lang->id] = new \PartnerLang();
             }
         }
 
@@ -115,7 +112,7 @@ class PartnerController  extends \BackendController {
     }
     
     public function deleteAction($id = null){
-        if ($partner = Partner::findFirstId($id)) {
+        if ($partner = \Partner::findFirstId($id)) {
             $partner->deleted = 1;
             if (!$partner->save()) {
                 if ($this->request->isAjax()) {

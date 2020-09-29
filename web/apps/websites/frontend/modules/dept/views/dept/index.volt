@@ -84,17 +84,17 @@
                         <div class="media mb-3">
                             <div class="overlay-container rounded">
                                 <img class="media-object" src="{{ helper.getLinkImage(post.featured_image) }}" alt="{{ post.title }}">
-                                <a href="{{ Posts.getUrl(dept, post) }}" class="overlay-link small"><i class="fa fa-graduation-cap"></i></a>
+                                <a href="<?= Posts::getUrl($dept, $post) ?>" class="overlay-link small"><i class="fa fa-graduation-cap"></i></a>
                             </div>
                             <div class="media-body">
-                                <h5 class="media-heading"><a href="{{ Posts.getUrl(dept, post) }}" title="{{ post.title }}">{{ post.title }}</a></h5>
+                                <h5 class="media-heading"><a href="<?= Posts::getUrl($dept, $post) ?>" title="{{ post.title }}">{{ post.title }}</a></h5>
                                 <div class="small"><i class="fa fa-calendar pr-10"></i>{{ helper.datetime_vn(post.calendar, 'd/m/Y') }}</div>
                             </div>
                         </div>
                         {% endfor %}
                     </div>
                     <footer class="clearfix">
-                        <div class="link pull-right small"><i class="fa fa-link pr-1"></i><a href="{{ Categories.getUrl(dept, cat) }}">{{ ml._ml_system('more', 'Xem thêm') }}</a></div>
+                        <div class="link pull-right small"><i class="fa fa-link pr-1"></i><a href="<?= Categories::getUrl($dept, $cat) ?>">{{ ml._ml_system('more', 'Xem thêm') }}</a></div>
                     </footer>
                 </div>
             </div>
@@ -124,7 +124,7 @@
                     <div class="image-box shadow-2 bordered text-center mb-20">
                         <div class="overlay-container rounded overlay-visible">
                             <img class="grow" src="{{ helper.getLinkImage(research.featured_image) }}" alt="{{ research.research_name }}">
-                            <a href="{{ researchModel.getUrl(dept,research) }}" class="overlay-link"><i class="fa fa-graduation-cap"></i></a>
+                            <a href="<?= Researches::getUrl($dept,$research) ?>" class="overlay-link"><i class="fa fa-graduation-cap"></i></a>
                             <div class="overlay-bottom hidden-xs">
                                 <div class="text">
                                     {{ research.research_name }}

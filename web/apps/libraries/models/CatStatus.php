@@ -2,10 +2,6 @@
 class CatStatus extends \Phalcon\Mvc\Model
 {
 
-    public $id;
-
-    public $name;
-
     public function getSource()
     {
         return 'cat_status';

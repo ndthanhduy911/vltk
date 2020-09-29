@@ -2,14 +2,11 @@
 namespace Backend\Modules\Setting\Forms;
 use Phalcon\Forms\Element\Numeric;
 use Phalcon\Forms\Element\Text;
-use Phalcon\Forms\Element\Textarea;
 use Phalcon\Forms\Element\Select;
 use Phalcon\Forms\Element\Hidden;
 use Phalcon\Forms\Form;
 use Phalcon\Validation\Validator\StringLength as StringLength;
 use Phalcon\Validation\Validator\PresenceOf;
-
-use Models\Link;
 
 class LinkForm extends Form
 {

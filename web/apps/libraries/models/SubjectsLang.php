@@ -2,18 +2,6 @@
 
 class SubjectsLang extends \Phalcon\Mvc\Model
 {
-    public $id;
-
-    public $subject_id;
-    
-    public $lang_id;
-
-    public $title;
-
-    public $content;
-
-    public $excerpt;
-
     public function getSource()
     {
         return 'subjects_lang';

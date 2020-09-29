@@ -2,38 +2,6 @@
 class Departments extends \Phalcon\Mvc\Model
 {
 
-    public $id;
-
-    public $code;
-
-    public $name;
-
-    public $slug;
-
-    public $links;
-
-    public $image;
-
-    public $icon;
-
-    public $logo;
-
-    public $email;
-
-    public $phone;
-
-    public $post_connect;
-
-    public $parent_id;
-
-    public $level;
-
-    public $status;
-
-    public $created_at;
-
-    public $updated_at;
-
     public function getSource()
     {
         return 'departments';

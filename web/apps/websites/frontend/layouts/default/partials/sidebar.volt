@@ -1,7 +1,4 @@
 <?php 
-    use Models\Categories;
-    use Models\Posts;
-    
     $cats = $this->modelsManager->createBuilder()
     ->columns(array(
         'c.id',

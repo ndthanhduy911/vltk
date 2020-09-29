@@ -1,29 +1,8 @@
 <?php
 
-use Models\ClassesLang;
-
 class Classes extends \Phalcon\Mvc\Model
 {
-    public $id;
     
-    public $slug;
-
-    public $status;
-
-    public $code;
-
-    public $dept_id;
-
-    public $featured_image;
-
-    public $background_image;
-
-    public $created_at;
-
-    public $updated_at;
-
-    public $deleted;
-
     public function getSource()
     {
         return 'classes';

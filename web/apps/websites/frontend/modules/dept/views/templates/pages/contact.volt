@@ -1,4 +1,4 @@
-<?php $socials = \Models\Social::find(["status = 1 AND dept_id = $dept->id", "order" => "sort ASC"]) ?>
+<?php $socials = \Social::find(["status = 1 AND dept_id = $dept->id", "order" => "sort ASC"]) ?>
 <div class="banner dark-translucent-bg fixed-bg"
     style="background-image:url('<?php echo WEB_URL ?>/assets/frontend/images/page-about-banner-1.jpg'); background-position: 50% 27%;">
     {{ partial('breadcrumb') }}

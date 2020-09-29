@@ -2,18 +2,6 @@
 
 class PagesLang extends \Phalcon\Mvc\Model
 {
-    public $id;
-
-    public $page_id;
-    
-    public $lang_id;
-
-    public $title;
-
-    public $content;
-
-    public $excerpt;
-
     public function getSource()
     {
         return 'pages_lang';

@@ -2,17 +2,6 @@
 
 class ClassesLang extends \Phalcon\Mvc\Model
 {
-    public $id;
-
-    public $class_id;
-    
-    public $lang_id;
-
-    public $title;
-
-    public $content;
-
-    public $excerpt;
 
     public function getSource()
     {

@@ -1,47 +1,7 @@
 <?php
 
-use Models\CalendarsLang;
-
 class Calendars extends \Phalcon\Mvc\Model
 {
-    public $id;
-
-    public $status;
-
-    public $dept_id;
-
-    public $created_at;
-
-    public $updated_at;
-
-    public $featured_image;
-
-    public $background_image;
-
-    public $deleted;
-
-    public $class_id;
-
-    public $subject_id;
-
-    public $year;
-
-    public $semester;
-
-    public $location;
-
-    public $begin_date;
-
-    public $day;
-
-    public $begin_time;
-
-    public $end_time;
-
-    public $room;
-
-
-
     public function getSource()
     {
         return 'calendars';

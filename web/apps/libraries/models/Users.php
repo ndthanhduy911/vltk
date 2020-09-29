@@ -1,31 +1,6 @@
 <?php
 class Users extends \Phalcon\Mvc\Model
 {
-    public $id;
-
-    public $name;
-
-    public $username;
-
-    public $password;
-
-    public $email;
-
-    public $phone;
-
-    public $avatar;
-
-    public $role;
-
-    public $dept_id;
-
-    public $dept_mg;
-
-    public $status;
-
-    public $created_at;
-
-    public $updated_at;
 
     public function getSource()
     {

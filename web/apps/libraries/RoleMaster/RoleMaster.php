@@ -1,8 +1,5 @@
 <?php
 namespace Library\RoleMaster;
-use Models\Roles;
-use Models\Permission;
-
 
 class RoleMaster
 {
@@ -23,13 +20,13 @@ class RoleMaster
     static function getUserPermission($roleID){
         $arrayPermission = [];
         if(!empty($roleID)){
-            if($permission = Roles::findFirst($roleID)){
+            if($permission = \Roles::findFirst($roleID)){
                 if(!$permission->active){
                     return $arrayPermission;
                 }
                 $permissionList = json_decode($permission->permission_id);
                 foreach ($permissionList as $id) {
-                    if($permissionArray = Permission::findFirst($id)){
+                    if($permissionArray = \Permission::findFirst($id)){
                         if((int)$id === 1){
                             return 1;
                         }
@@ -54,7 +51,7 @@ class RoleMaster
     //Ham get cac private
     static function getPrivate(){
         $private = [];
-        $privateTmp = Permission::find(['id != 1 AND status =1']);
+        $privateTmp = \Permission::find(['id != 1 AND status =1']);
         foreach ($privateTmp as $key => $value) {
             if(isset($private[$value->controller])){
                 array_push($private[$value->controller], $value->action);

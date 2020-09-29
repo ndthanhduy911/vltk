@@ -1,8 +1,5 @@
 <?php
 namespace Backend\Modules\Admins\Forms;
-
-use Models\Classes;
-use Models\Subjects;
 use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\Select;
 use Phalcon\Forms\Element\Hidden;
@@ -22,7 +19,7 @@ class CalendarsForm extends Form
             'cl.title title',
         ))
         ->from(['c' => 'Classes'])
-        ->leftJoin('Models\ClassesLang', "cl.class_id = c.id AND cl.lang_id = 1",'cl')
+        ->leftJoin('ClassesLang', "cl.class_id = c.id AND cl.lang_id = 1",'cl')
         ->orderBy('cl.title ASC')
         ->where("c.dept_id = $dept_id")
         ->getQuery()

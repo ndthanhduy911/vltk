@@ -10,7 +10,6 @@ $loader->registerDirs([
 
 $loader->registerNamespaces(array(
     'Library'   => LIB_DIR . '/',
-    'Models'    => LIB_DIR . '/models',
 ));
 
 // Register some classes

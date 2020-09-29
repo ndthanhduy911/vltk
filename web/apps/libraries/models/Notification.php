@@ -2,22 +2,6 @@
 
 class Notification extends \Phalcon\Mvc\Model
 {
-
-    public $id;
-
-    public $type;
-
-    public $content;
-
-    public $link;
-
-    public $viewed;
-
-    public $status;
-
-    public $created_at;
-
-
     public function getSource()
     {
         return 'notification';

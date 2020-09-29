@@ -2,18 +2,6 @@
 
 class PostsLang extends \Phalcon\Mvc\Model
 {
-    public $id;
-
-    public $post_id;
-
-    public $title;
-
-    public $content;
-
-    public $excerpt;
-
-    public $lang_id;
-
     public function getSource()
     {
         return 'posts_lang';

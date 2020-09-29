@@ -1,24 +1,6 @@
 <?php
 class Banner extends \Phalcon\Mvc\Model
 {
-    public $id;
-
-    public $dept_id;
-
-    public $image;
-    
-    public $button_link;
-
-    public $sort;
-
-    public $created_at;
-    
-    public $updated_at;
-
-    public $status;
-
-    public $deleted;
-
     public function getSource()
     {
         return 'banner';

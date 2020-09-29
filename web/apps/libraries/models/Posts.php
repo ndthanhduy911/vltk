@@ -1,27 +1,6 @@
 <?php
-use Models\PostsLang;
 class Posts extends \Phalcon\Mvc\Model
 {
-    public $id;
-
-    public $slug;
-
-    public $cat_id;
-
-    public $status;
-
-    public $dept_id;
-
-    public $calendar;
-
-    public $featured_image;
-
-    public $created_at;
-
-    public $updated_at;
-    
-    public $deleted;
-
     public function getSource()
     {
         return 'posts';

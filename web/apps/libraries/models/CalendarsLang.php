@@ -2,13 +2,6 @@
 
 class CalendarsLang extends \Phalcon\Mvc\Model
 {
-    public $id;
-
-    public $calendar_id;
-    
-    public $lang_id;
-
-    public $excerpt;
 
     public function getSource()
     {

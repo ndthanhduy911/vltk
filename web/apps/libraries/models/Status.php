@@ -3,20 +3,6 @@
 class Status extends \Phalcon\Mvc\Model
 {
 
-    public $code;
-
-    public $name;
-
-    public function initialize()
-    {
-        $this->hasMany('code', 'Properties', 'status', ['alias' => 'Properties']);
-    }
-
-    /**
-     * Returns table name mapped in the model.
-     *
-     * @return string
-     */
     public function getSource()
     {
         return 'status';

@@ -2,17 +2,6 @@
 class CategoriesLang extends \Phalcon\Mvc\Model
 {
 
-    public $id;
-
-    public $cat_id;
-
-    public $lang_id;
-
-    public $name;
-
-    public $description;
-
-
     public function getSource()
     {
         return 'categories_lang';

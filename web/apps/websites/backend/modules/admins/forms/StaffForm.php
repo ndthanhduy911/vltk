@@ -1,7 +1,6 @@
 <?php
 namespace Backend\Modules\Admins\Forms;
 
-use Models\Departments;
 use Phalcon\Forms\Element\Numeric;
 use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\Select;

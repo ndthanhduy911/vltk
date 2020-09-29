@@ -1,11 +1,8 @@
 <?php
 
 namespace Backend\Modules\Account\Controllers;
-use Models\Users;
-
 use Phalcon\Mvc\View;
 use Backend\Modules\Account\Forms\LoginForm;
-use Models\ConectionSystem;
 
 class AccountController extends \Phalcon\Mvc\Controller
 {
@@ -24,7 +21,7 @@ class AccountController extends \Phalcon\Mvc\Controller
             if ($this->security->checkToken()) {
                 if($this->session->has("captcha")){
                     if($this->request->getPost("captcha",['int','trim']) === $this->session->get("captcha")) {
-                        $user = Users::findFirstUsername($this->request->getPost('username',['string','trim']));
+                        $user = \Users::findFirstUsername($this->request->getPost('username',['string','trim']));
                         if ($user) {
                             $password = $this->request->getPost('password',['string','trim']);
                             if ($this->security->checkHash($password,$user->password)) {
@@ -36,7 +33,7 @@ class AccountController extends \Phalcon\Mvc\Controller
                                 $this->session->set("role", (int)$user->role);
                                 $this->session->set("dept_mg", $dept_mg ? $dept_mg : []);
                                 $this->session->set("dept_id", (int)$user->dept_id);
-                                ConectionSystem::plus(1, (int)$user->dept_id);
+                                \ConectionSystem::plus(1, (int)$user->dept_id);
                                 // $this->logs->write_log(4, 1, 'Tài khoản đã đăng nhập',null,$this->session->get("user_id"));
                                 return $this->response->redirect("/admin");
                             }else{

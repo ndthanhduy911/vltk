@@ -2,19 +2,6 @@
 
 class Managers extends \Phalcon\Mvc\Model
 {
-
-    public $id;
-
-    public $code;
-
-    public $name;
-
-    public $dept_id;
-
-    public $note;
-
-    public $status;
-
     public function getSource()
     {
         return 'managers';

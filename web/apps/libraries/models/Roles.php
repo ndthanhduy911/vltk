@@ -1,15 +1,6 @@
 <?php
 class Roles extends \Phalcon\Mvc\Model
 {
-
-    public $id;
-
-    public $name;
-
-    public $permission_id;
-
-    public $active;
-
     public function getSource()
     {
         return 'roles';

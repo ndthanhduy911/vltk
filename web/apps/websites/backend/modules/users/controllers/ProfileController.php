@@ -3,7 +3,6 @@ namespace Backend\Modules\Users\Controllers;
 
 use Backend\Modules\Users\Forms\ChangePWForm;
 use Backend\Modules\Users\Forms\ProfileForm;
-use Models\Users;
 
 class ProfileController extends \BackendController
 {
@@ -26,7 +25,7 @@ class ProfileController extends \BackendController
                         'phone' => $this->request->getPost('phone',['string','trim']),
                     ];
 
-                    $checkMail = Users::findFirst([
+                    $checkMail = \Users::findFirst([
                         "email = :email: AND id != :id:",
                         "bind" => [
                             "email" => $post['email'],
@@ -34,7 +33,7 @@ class ProfileController extends \BackendController
                         ],
                     ]);
 
-                    $checkPhone = Users::findFirst([
+                    $checkPhone = \Users::findFirst([
                         "phone = :phone: AND id != :id:",
                         "bind" => [
                             "phone" => $post['phone'],
@@ -131,11 +130,11 @@ class ProfileController extends \BackendController
     public function changepwAction()
     {
         $error = [];
-        if ($profile = Users::findFirstId($this->session->get("user_id"))) {
+        if ($profile = \Users::findFirstId($this->session->get("user_id"))) {
             if ($this->request->isPost()) {
                 if ($this->security->checkToken()) {
                     $user_id = $this->session->get("user_id");
-                    $profile = Users::findFirstId($user_id);
+                    $profile = \Users::findFirstId($user_id);
                     if (!$profile) {
                         array_push($error, "Tài khoản không tồn tại");
                         if ($this->request->isAjax()) {

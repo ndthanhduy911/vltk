@@ -7,7 +7,6 @@ use Phalcon\Forms\Element\Hidden;
 use Phalcon\Forms\Form;
 use Phalcon\Validation\Validator\StringLength as StringLength;
 use Phalcon\Validation\Validator\PresenceOf;
-use Models\Attributes;
 class PagesForm extends Form
 {
     public function initialize($entity = null, $options = null)

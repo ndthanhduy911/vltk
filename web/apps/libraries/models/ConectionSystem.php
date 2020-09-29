@@ -1,17 +1,6 @@
 <?php
 class ConectionSystem extends \Phalcon\Mvc\Model
 {
-    public $id;
-
-    public $dept_id;
-
-    public $type;
-
-    public $number;
-
-    public $created_at;
-    
-    public $updated_at;
 
     public function getSource()
     {
