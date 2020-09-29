@@ -236,3 +236,33 @@ ul.dropdown-menu > li:last-of-type > a
 .table p {
     margin: 0;
 }
+
+.main table:not(.table){
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    width: 100%;
+    min-width: 400px;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15)
+}
+
+.main table:not(.table) thead tr{
+    background-color: #009879;
+    color: white;
+    text-align: left;
+    font-weight: bold;
+}
+.main table:not(.table) th, table:not(.table) td{
+    padding: 12px 15px;
+}
+.main table:not(.table) tbody tr{
+    border-bottom: 1px solid #dddddd;
+}
+.main table:not(.table) tbody tr:nth-of-type(even){
+    background-color: #f3f3f3;
+}
+.main table:not(.table) tbody tr:last-of-type{
+    border-bottom: 2px solid #009879;
+}
