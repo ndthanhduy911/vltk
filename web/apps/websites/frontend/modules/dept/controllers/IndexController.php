@@ -2,39 +2,29 @@
 
 namespace Frontend\Modules\Dept\Controllers;
 
-use Models\Categories;
-use Models\Departments;
-use Models\Home;
-use Models\Staff;
-use Models\Partner;
-use Models\Banner;
-use Models\Posts;
-use Models\Social;
-
 class IndexController extends \FrontendController
 {
     public function indexAction(){
         $lang_id = $this->session->get('lang_id');
-        $npHome = Home::getNamepace();
         $homeSetting = $this->modelsManager->createBuilder()
         ->columns(array(
-            $npHome.'.id',
-            $npHome.'.dept_id',
-            $npHome.'.cat_list',
-            $npHome.'.post_number',
-            $npHome.'.specialized_bg',
-            $npHome.'.partner_bg',
-            'HL.specialized_title specialized_title',
-            'HL.staff_title staff_title',
-            'HL.staff_des staff_des',
-            'HL.partner_title partner_title',
-            'HL.partner_des partner_des',
-            'HL.contact_title contact_title',
-            'HL.contact_des contact_des'
+            'h.id',
+            'h.dept_id',
+            'h.cat_list',
+            'h.post_number',
+            'h.specialized_bg',
+            'h.partner_bg',
+            'hl.specialized_title specialized_title',
+            'hl.staff_title staff_title',
+            'hl.staff_des staff_des',
+            'hl.partner_title partner_title',
+            'hl.partner_des partner_des',
+            'hl.contact_title contact_title',
+            'hl.contact_des contact_des'
         ))
-        ->from($npHome)
-        ->where("$npHome.dept_id = 1")
-        ->leftJoin('Models\HomeLang', "HL.home_id = $npHome.id AND HL.lang_id = $lang_id",'HL')
+        ->from(['h'=>'Home'])
+        ->where("h.dept_id = 1")
+        ->leftJoin('HomeLang', "hl.home_id = h.id AND hl.lang_id = $lang_id",'hl')
         ->limit(1)
         ->getQuery()
         ->execute();
@@ -44,102 +34,95 @@ class IndexController extends \FrontendController
         }
 
         $home = $homeSetting->toArray()[0];
-        $npBanner = Banner::getNamepace();
         $banners = $this->modelsManager->createBuilder()
         ->columns(array(
-            $npBanner.'.id',
-            $npBanner.'.image',
-            $npBanner.'.button_link',
-            $npBanner.'.sort',
-            'BL.name name',
-            'BL.description description',
-            'BL.button_text button_text'
+            'b.id',
+            'b.image',
+            'b.button_link',
+            'b.sort',
+            'bl.name name',
+            'bl.description description',
+            'bl.button_text button_text'
         ))
-        ->from($npBanner)
-        ->where("$npBanner.deleted = 0 AND $npBanner.status = 1 AND $npBanner.dept_id = 1")
-        ->leftJoin('Models\BannerLang', "BL.banner_id = $npBanner.id AND BL.lang_id = $lang_id",'BL')
-        ->orderBy("$npBanner.sort = 0 ASC")
+        ->from(['b'=>'Banner'])
+        ->where("b.deleted = 0 AND b.status = 1 AND b.dept_id = 1")
+        ->leftJoin('BannerLang', "bl.banner_id = b.id AND bl.lang_id = $lang_id",'bl')
+        ->orderBy("b.sort = 0 ASC")
         ->getQuery()
         ->execute();
 
         
         $cats = [];
         if($listCats = json_decode($home['cat_list'])){
-            $npCat = Categories::getNamepace();
             $cats = $this->modelsManager->createBuilder()
             ->columns(array(
-                $npCat.'.id',
-                $npCat.'.slug',
-                'CL.name cat_name',
+                'c.id',
+                'c.slug',
+                'cl.name cat_name',
             ))
-            ->from($npCat)
-            ->leftJoin('Models\CategoriesLang', 'CL.cat_id = '.$npCat.'.id','CL')
-            ->where('CL.lang_id = :lang_id: AND status = 1 AND dept_id = 1',['lang_id' => $lang_id])
-            ->inWhere($npCat.".id", $listCats)
+            ->from(['c'=>'Categories'])
+            ->leftJoin('CategoriesLang', 'cl.cat_id = c.id','cl')
+            ->where('cl.lang_id = :lang_id: AND status = 1 AND dept_id = 1',['lang_id' => $lang_id])
+            ->inWhere("c.id", $listCats)
             ->getQuery()
             ->execute();
         }
 
-        $npDept = Departments::getNamepace();
         $depts = $this->modelsManager->createBuilder()
         ->columns(array(
-            $npDept.'.id',
-            $npDept.'.slug',
-            $npDept.'.links',
-            $npDept.'.image',
-            'DL.name dept_name',
+            'd.id',
+            'd.slug',
+            'd.links',
+            'd.image',
+            'dl.name dept_name',
         ))
-        ->from($npDept)
-        ->leftJoin('Models\DepartmentsLang', 'DL.dept_id = '.$npDept.'.id','DL')
-        ->where('DL.lang_id = :lang_id: AND status = 1 AND '.$npDept.'.id != 1',['lang_id' => $lang_id])
+        ->from(['d'=>'Departments'])
+        ->leftJoin('DepartmentsLang', 'dl.dept_id = d.id','dl')
+        ->where('dl.lang_id = :lang_id: AND status = 1 AND d.id != 1',['lang_id' => $lang_id])
         ->getQuery()
         ->execute();
 
-        $npStaff = Staff::getNamepace();
         $staffs = $this->modelsManager->createBuilder()
         ->columns(array(
-            $npStaff.'.id',
-            $npStaff.'.slug',
-            $npStaff.'.featured_image',
-            $npStaff.'.dean',
-            $npStaff.'.dept_position',
-            $npStaff.'.email',
-            $npStaff.'.dept_id',
-            'SL.title title',
-            'SL.content content'
+            's.id',
+            's.slug',
+            's.featured_image',
+            's.dean',
+            's.dept_position',
+            's.email',
+            's.dept_id',
+            'sl.title title',
+            'sl.content content'
         ))
-        ->from($npStaff)
-        ->where("$npStaff.status = 1 AND $npStaff.deleted = 0 AND ($npStaff.dean = 1 OR $npStaff.dean = 2)")
-        ->leftJoin("Models\StaffLang", "SL.staff_id = $npStaff.id AND SL.lang_id = $lang_id",'SL')
-        ->orderBy("$npStaff.sort ASC, $npStaff.dean ASC")
+        ->from(['s'=>'Staff'])
+        ->where("s.status = 1 AND s.deleted = 0 AND (s.dean = 1 OR s.dean = 2)")
+        ->leftJoin("StaffLang", "sl.staff_id = s.id AND sl.lang_id = $lang_id",'sl')
+        ->orderBy("s.sort ASC, s.dean ASC")
         ->limit(3)
         ->getQuery()
         ->execute();
         
 
-        $npPartner = Partner::getNamepace();
         $partners = $this->modelsManager->createBuilder()
         ->columns(array(
-            $npPartner.'.id',
-            $npPartner.'.link',
-            $npPartner.'.featured_image',
-            'PL.title title',
+            'p.id',
+            'p.link',
+            'p.featured_image',
+            'pl.title title',
         ))
-        ->from($npPartner)
-        ->where("$npPartner.status = 1 AND $npPartner.deleted = 0 AND $npPartner.dept_id = 1")
-        ->leftJoin('Models\PartnerLang', "PL.partner_id = $npPartner.id AND PL.lang_id = {$lang_id}",'PL')
-        ->orderBy("$npPartner.sort ASC")
+        ->from(['p'=>'Partner'])
+        ->where("p.status = 1 AND p.deleted = 0 AND p.dept_id = 1")
+        ->leftJoin('PartnerLang', "pl.partner_id = p.id AND pl.lang_id = {$lang_id}",'pl')
+        ->orderBy("p.sort ASC")
         ->getQuery()
         ->execute();
         $this->view->home = $home;
-        $this->view->socials = Social::find(["status = 1 AND dept_id = 1", "order" => "sort ASC"]);
+        $this->view->socials = \Social::find(["status = 1 AND dept_id = 1", "order" => "sort ASC"]);
         $this->view->banners = $banners->count() ? $banners : [] ;
         $this->view->cats = $cats;
         $this->view->depts = $depts->count() ? $depts : [];
         $this->view->staffs = $staffs->count() ? $staffs : [];
         $this->view->partners = $partners->count() ? $partners : [];
-        $this->view->postModel = new Posts();
-        $this->view->catModel = new Categories();
         $this->get_js_css();
         return true;
     }

@@ -1,6 +1,4 @@
 <?php
-namespace Models;
-
 class MenuLocation extends \Phalcon\Mvc\Model
 {
     public $id;
@@ -20,9 +18,5 @@ class MenuLocation extends \Phalcon\Mvc\Model
     public function getSource()
     {
         return 'menu_location';
-    }
-
-    public static function getNamepace (){
-        return 'Models\MenuLocation';
     }
 }

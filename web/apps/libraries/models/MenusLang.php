@@ -1,6 +1,4 @@
 <?php
-namespace Models;
-
 class MenusLang extends \Phalcon\Mvc\Model
 {
     public $id;
@@ -14,9 +12,5 @@ class MenusLang extends \Phalcon\Mvc\Model
     public function getSource()
     {
         return 'menus_lang';
-    }
-
-    public static function getNamepace (){
-        return 'Models\MenusLang';
     }
 }

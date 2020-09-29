@@ -16,29 +16,27 @@ class CalendarsForm extends Form
     {
 
         $dept_id = isset($_SESSION['dept_id']) ? $_SESSION['dept_id'] : 0;
-        $npClasses = Classes::getNamepace();
         $classes = $this->modelsManager->createBuilder()
         ->columns(array(
-            $npClasses.'.id',
-            'CL.title title',
+            'c.id',
+            'cl.title title',
         ))
-        ->from($npClasses)
-        ->leftJoin('Models\ClassesLang', "CL.class_id = $npClasses.id AND CL.lang_id = 1",'CL')
-        ->orderBy('CL.title ASC')
-        ->where("$npClasses.dept_id = $dept_id")
+        ->from(['c' => 'Classes'])
+        ->leftJoin('Models\ClassesLang', "cl.class_id = c.id AND cl.lang_id = 1",'cl')
+        ->orderBy('cl.title ASC')
+        ->where("c.dept_id = $dept_id")
         ->getQuery()
         ->execute();
 
-        $npSubjects = Subjects::getNamepace();
         $subjects = $this->modelsManager->createBuilder()
         ->columns(array(
-            $npSubjects.'.id',
-            'CL.title title',
+            's.id',
+            'sl.title title',
         ))
-        ->from($npSubjects)
-        ->leftJoin('Models\SubjectsLang', "CL.subject_id = $npSubjects.id AND CL.lang_id = 1",'CL')
-        ->orderBy('CL.title ASC')
-        ->where("$npSubjects.dept_id = $dept_id")
+        ->from(['s' => 'Subjects'])
+        ->leftJoin('SubjectsLang', "sl.subject_id = s.id AND sl.lang_id = 1",'sl')
+        ->orderBy('sl.title ASC')
+        ->where("s.dept_id = $dept_id")
         ->getQuery()
         ->execute();
 

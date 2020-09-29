@@ -1,7 +1,5 @@
 <?php
 
-namespace Models;
-
 use Models\PagesLang;
 
 class Pages extends \Phalcon\Mvc\Model
@@ -29,10 +27,6 @@ class Pages extends \Phalcon\Mvc\Model
     public function getSource()
     {
         return 'pages';
-    }
-
-    public static function getNamepace (){
-        return 'Models\Pages';
     }
 
     public static function findFirstId($id, $columns = "*")

@@ -1,8 +1,5 @@
 <?php
 namespace Backend\Modules\Admins\Controllers;
-use Models\Pages;
-use Models\PagesLang;
-use Models\Language;
 use Backend\Modules\Admins\Forms\PagesForm;
 use Backend\Modules\Admins\Forms\PagesLangForm;
 
@@ -17,15 +14,15 @@ class PagesController  extends \BackendController {
         $forms_lang = [];
         $pages_lang = [];
         $page_content = [];
-        $languages = Language::find(['status = 1']);
+        $languages = \Language::find(['status = 1']);
         if($id){
-            if(!$page = Pages::findFirstId($id)){
+            if(!$page = \Pages::findFirstId($id)){
                 echo 'Không tìm thấy dữ liệu'; die;
             }
             $page->updated_at = date('Y-m-d H:i:s');
             $title = 'Cập nhật';
             foreach ($languages as $key => $lang) {
-                $page_lang = PagesLang::findFirst(['page_id = :id: AND lang_id = :lang_id:','bind' => ['id' => $page->id, 'lang_id' => $lang->id]]);
+                $page_lang = \PagesLang::findFirst(['page_id = :id: AND lang_id = :lang_id:','bind' => ['id' => $page->id, 'lang_id' => $lang->id]]);
                 if($page_lang){
                     $form_lang = new PagesLangForm($page_lang);
                     $pages_lang[$lang->id] = $page_lang;
@@ -36,7 +33,7 @@ class PagesController  extends \BackendController {
                 }
             }   
         }else{
-            $page = new Pages();
+            $page = new \Pages();
             $page->author = $this->session->get('user_id');
             $page->dept_id = $this->session->get('dept_id');
             $page->created_at = date('Y-m-d H:i:s');
@@ -44,7 +41,7 @@ class PagesController  extends \BackendController {
             $title = 'Thêm mới';
             foreach ($languages as $key => $lang) {
                 $forms_lang[$lang->id] = new PagesLangForm();
-                $pages_lang[$lang->id] = new PagesLang();
+                $pages_lang[$lang->id] = new \PagesLang();
                 $page_content[$lang->id] = '';
             }
         }
@@ -65,7 +62,7 @@ class PagesController  extends \BackendController {
                     'attribute_id' => (int)$this->request->getPost('attribute_id',['int','trim']),
                 ];
 
-                $check_slug = Pages::findFirst([
+                $check_slug = \Pages::findFirst([
                     "slug = :slug: AND id != :id:",
                     "bind" => [
                         "slug" => $req_page['slug'],
@@ -135,7 +132,7 @@ class PagesController  extends \BackendController {
     }
 
     public function deleteAction($id = null){
-        if ($page = Pages::findFirstId($id)) {
+        if ($page = \Pages::findFirstId($id)) {
             $page->deleted = 1;
             if (!$page->save()) {
                 if ($this->request->isAjax()) {
@@ -185,25 +182,24 @@ class PagesController  extends \BackendController {
     public function getdataAction(){
         if($this->request->isAjax()){
             $dept_id = $this->session->get('dept_id');
-            $npPages = Pages::getNamepace();
             $data = $this->modelsManager->createBuilder()
             ->columns(array(
-                $npPages.'.id',
-                $npPages.'.slug',
-                $npPages.'.attribute_id',
-                $npPages.'.status',
-                $npPages.'.dept_id',
-                $npPages.'.created_at',
-                'PL.excerpt excerpt',
-                'PL.title title',
-                'PL.content content',
+                'p.id',
+                'p.slug',
+                'p.attribute_id',
+                'p.status',
+                'p.dept_id',
+                'p.created_at',
+                'pl.excerpt excerpt',
+                'pl.title title',
+                'pl.content content',
             ))
-            ->from($npPages)
-            ->where("$npPages.deleted = 0 AND $npPages.dept_id = $dept_id")
-            ->leftJoin('Models\PagesLang', 'PL.page_id = '.$npPages.'.id AND PL.lang_id = 1','PL')
-            ->orderBy($npPages.'.dept_id ASC, '.$npPages.'.created_at DESC');
+            ->from(['p' => 'Pages'])
+            ->where("p.deleted = 0 AND p.dept_id = {$dept_id}")
+            ->leftJoin('PagesLang', 'pl.page_id = p.id AND pl.lang_id = 1','pl')
+            ->orderBy('p.dept_id ASC, p.created_at DESC');
     
-            $search = 'PL.title LIKE :search:';
+            $search = 'pl.title LIKE :search:';
             $this->response->setStatusCode(200, 'OK');
             $this->response->setJsonContent($this->ssp->data_output($this->request->get(), $data,$search));
             return $this->response->send();

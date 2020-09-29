@@ -1,10 +1,8 @@
 <?php
 namespace Backend\Modules\Admins\Controllers;
-use Models\Language;
 use Backend\Modules\Admins\Forms\BannerForm;
 use Backend\Modules\Admins\Forms\BannerLangForm;
-use Models\Banner;
-use Models\BannerLang;
+
 
 class BannerController  extends \BackendController {
 
@@ -16,15 +14,15 @@ class BannerController  extends \BackendController {
     public function updateAction($id = 0){
         $forms_lang = [];
         $banners_lang = [];
-        $languages = Language::find(['status = 1']);
+        $languages = \Language::find(['status = 1']);
         if($id){
-            if(!$banner = Banner::findFirstId($id)){
+            if(!$banner = \Banner::findFirstId($id)){
                 echo 'Không tìm thấy dữ liệu'; die;
             }
             $banner->updated_at = date('Y-m-d H:i:s');
             $title = 'Cập nhật';
             foreach ($languages as $key => $lang) {
-                $banner_lang = BannerLang::findFirst(['banner_id = :id: AND lang_id = :lang_id:','bind' => ['id' => $banner->id, 'lang_id' => $lang->id]]);
+                $banner_lang = \BannerLang::findFirst(['banner_id = :id: AND lang_id = :lang_id:','bind' => ['id' => $banner->id, 'lang_id' => $lang->id]]);
                 if($banner_lang){
                     $form_lang = new BannerLangForm($banner_lang);
                     $banners_lang[$lang->id] = $banner_lang;
@@ -34,14 +32,14 @@ class BannerController  extends \BackendController {
                 }
             }   
         }else{
-            $banner = new Banner();
+            $banner = new \Banner();
             $banner->dept_id = $this->session->get('dept_id');
             $banner->created_at = date('Y-m-d H:i:s');
             $banner->updated_at = $banner->created_at;
             $title = 'Thêm mới';
             foreach ($languages as $lang) {
                 $forms_lang[$lang->id] = new BannerLangForm();
-                $banners_lang[$lang->id] = new BannerLang();
+                $banners_lang[$lang->id] = new \BannerLang();
             }
         }
 
@@ -114,7 +112,7 @@ class BannerController  extends \BackendController {
     }
 
     public function deleteAction($id = null){
-        if ($banner = Banner::findFirstId($id)) {
+        if ($banner = \Banner::findFirstId($id)) {
             $banner->deleted = 1;
             if (!$banner->save()) {
                 if ($this->request->isAjax()) {
@@ -164,27 +162,26 @@ class BannerController  extends \BackendController {
     public function getdataAction(){
         if($this->request->isAjax()){
             $dept_id = $this->session->get('dept_id');
-            $npBanner = Banner::getNamepace();
             $data = $this->modelsManager->createBuilder()
             ->columns(array(
-                $npBanner.'.id',
-                $npBanner.'.dept_id',
-                $npBanner.'.image',
-                $npBanner.'.button_link',
-                $npBanner.'.dept_id',
-                $npBanner.'.status',
-                $npBanner.'.created_at',
-                'BL.name name',
-                'BL.description description',
-                'BL.button_text button_text',
+                'b.id',
+                'b.dept_id',
+                'b.image',
+                'b.button_link',
+                'b.dept_id',
+                'b.status',
+                'b.created_at',
+                'bl.name name',
+                'bl.description description',
+                'bl.button_text button_text',
             ))
-            ->from($npBanner)
-            ->where("$npBanner.deleted = 0 AND $npBanner.dept_id = $dept_id")
-            ->leftJoin('Models\BannerLang', 'BL.banner_id = '.$npBanner.'.id AND BL.lang_id = 1','BL')
-            ->orderBy($npBanner.'.dept_id ASC, '.$npBanner.'.status DESC');
+            ->from(['b' => 'Banner'])
+            ->where("b.deleted = 0 AND b.dept_id = {$dept_id}")
+            ->leftJoin('BannerLang', 'bl.banner_id = b.id AND bl.lang_id = 1','bl')
+            ->orderBy('b.dept_id ASC, b.status DESC');
 
     
-            $search = 'BL.name LIKE :search:';
+            $search = 'bl.name LIKE :search:';
             $this->response->setStatusCode(200, 'OK');
             $this->response->setJsonContent($this->ssp->data_output($this->request->get(), $data,$search));
             return $this->response->send();

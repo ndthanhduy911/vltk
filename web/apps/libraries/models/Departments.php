@@ -1,6 +1,4 @@
 <?php
-namespace Models;
-
 class Departments extends \Phalcon\Mvc\Model
 {
 
@@ -167,9 +165,5 @@ class Departments extends \Phalcon\Mvc\Model
         }else{
             return null;
         }
-    }
-
-    public static function getNamepace (){
-        return 'Models\Departments';
     }
 }

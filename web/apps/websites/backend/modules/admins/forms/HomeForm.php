@@ -7,31 +7,29 @@ use Phalcon\Forms\Element\Select;
 use Phalcon\Forms\Element\Hidden;
 use Phalcon\Forms\Form;
 use Phalcon\Validation\Validator\PresenceOf;
-use Models\Categories;
-use Models\Departments;
 
 class HomeForm extends Form
 {
     public function initialize($entity = null, $options = null)
     {
         $dept_id = isset($_SESSION['dept_id']) ? $_SESSION['dept_id'] : 0;
-        $dept = Departments::findFirstId($dept_id);
+        $dept = \Departments::findFirstId($dept_id);
         if($dept && $dept->post_connect){
             $array_dept = [$dept_id, 1];
         }else{
             $array_dept = [$dept_id];
         }
-        $npCat = Categories::getNamepace();
+
         $cats = $this->modelsManager->createBuilder()
         ->columns(array(
-            $npCat.'.id',
-            'CL.name name',
-            $npCat.'.dept_id',
+            'c.id',
+            'cl.name name',
+            'c.dept_id',
         ))
-        ->from($npCat)
-        ->inWhere("$npCat.dept_id", $array_dept)
-        ->leftJoin('Models\CategoriesLang', "CL.cat_id = $npCat.id AND CL.lang_id = 1",'CL')
-        ->orderBy($npCat.'.dept_id DESC, CL.name ASC')
+        ->from(['c'=>'Categories'])
+        ->inWhere("c.dept_id", $array_dept)
+        ->leftJoin('CategoriesLang', "cl.cat_id = c.id AND cl.lang_id = 1",'cl')
+        ->orderBy('c.dept_id DESC, cl.name ASC')
         ->getQuery()
         ->execute();
 

@@ -1,8 +1,5 @@
 <?php
 namespace Backend\Modules\Admins\Controllers;
-use Models\Classes;
-use Models\ClassesLang;
-use Models\Language;
 use Backend\Modules\Admins\Forms\ClassesForm;
 use Backend\Modules\Admins\Forms\ClassesLangForm;
 
@@ -17,15 +14,15 @@ class ClassesController  extends \BackendController {
         $forms_lang = [];
         $classes_lang = [];
         $class_content = [];
-        $languages = Language::find(['status = 1']);
+        $languages = \Language::find(['status = 1']);
         if($id){
-            if(!$class = Classes::findFirstId($id)){
+            if(!$class = \Classes::findFirstId($id)){
                 echo 'Không tìm thấy dữ liệu'; die;
             }
             $class->updated_at = date('Y-m-d H:i:s');
             $title = 'Cập nhật';
             foreach ($languages as $key => $lang) {
-                $class_lang = ClassesLang::findFirst(['class_id = :id: AND lang_id = :lang_id:','bind' => ['id' => $class->id, 'lang_id' => $lang->id]]);
+                $class_lang = \ClassesLang::findFirst(['class_id = :id: AND lang_id = :lang_id:','bind' => ['id' => $class->id, 'lang_id' => $lang->id]]);
                 if($class_lang){
                     $form_lang = new ClassesLangForm($class_lang);
                     $classes_lang[$lang->id] = $class_lang;
@@ -36,14 +33,14 @@ class ClassesController  extends \BackendController {
                 }
             }   
         }else{
-            $class = new Classes();
+            $class = new \Classes();
             $class->dept_id = $this->session->get('dept_id');
             $class->created_at = date('Y-m-d H:i:s');
             $class->updated_at = $class->created_at;
             $title = 'Thêm mới';
             foreach ($languages as $key => $lang) {
                 $forms_lang[$lang->id] = new ClassesLangForm();
-                $classes_lang[$lang->id] = new ClassesLang();
+                $classes_lang[$lang->id] = new \ClassesLang();
                 $class_content[$lang->id] = '';
             }
         }
@@ -71,7 +68,7 @@ class ClassesController  extends \BackendController {
                     }
                 }
 
-                $check_slug = Classes::findFirst([
+                $check_slug = \Classes::findFirst([
                     "slug = :slug: AND id != :id:",
                     "bind" => [
                         "slug" => $req_class['slug'],
@@ -134,7 +131,7 @@ class ClassesController  extends \BackendController {
     }
 
     public function deleteAction($id = null){
-        if ($class = Classes::findFirstId($id)) {
+        if ($class = \Classes::findFirstId($id)) {
             $class->deleted = 1;
             if (!$class->save()) {
                 if ($this->request->isAjax()) {
@@ -184,24 +181,23 @@ class ClassesController  extends \BackendController {
     public function getdataAction(){
         if($this->request->isAjax()){
             $dept_id = $this->session->get('dept_id');
-            $npClasses = Classes::getNamepace();
             $data = $this->modelsManager->createBuilder()
             ->columns(array(
-                $npClasses.'.id',
-                $npClasses.'.slug',
-                $npClasses.'.status',
-                $npClasses.'.dept_id',
-                $npClasses.'.created_at',
-                'PL.excerpt excerpt',
-                'PL.title title',
-                'PL.content content',
+                'c.id',
+                'c.slug',
+                'c.status',
+                'c.dept_id',
+                'c.created_at',
+                'cl.excerpt excerpt',
+                'cl.title title',
+                'cl.content content',
             ))
-            ->from($npClasses)
-            ->where("$npClasses.deleted = 0 AND $npClasses.dept_id = $dept_id")
-            ->leftJoin('Models\ClassesLang', 'PL.class_id = '.$npClasses.'.id AND PL.lang_id = 1','PL')
-            ->orderBy($npClasses.'.dept_id ASC, '.$npClasses.'.created_at DESC');
+            ->from(['c' => 'Classes'])
+            ->where("c.deleted = 0 AND c.dept_id = {$dept_id}")
+            ->leftJoin('ClassesLang', 'cl.class_id = c.id AND cl.lang_id = 1','cl')
+            ->orderBy('c.dept_id ASC, c.created_at DESC');
     
-            $search = 'PL.title LIKE :search:';
+            $search = 'cl.title LIKE :search:';
             $this->response->setStatusCode(200, 'OK');
             $this->response->setJsonContent($this->ssp->data_output($this->request->get(), $data,$search));
             return $this->response->send();

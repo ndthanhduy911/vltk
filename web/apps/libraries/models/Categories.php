@@ -1,5 +1,4 @@
 <?php
-namespace Models;
 use Models\CategoriesLang;
 class Categories extends \Phalcon\Mvc\Model
 {
@@ -26,10 +25,6 @@ class Categories extends \Phalcon\Mvc\Model
     public function getSource()
     {
         return 'categories';
-    }
-
-    public static function getNamepace (){
-        return 'Models\Categories';
     }
 
     public static function findFirstId($id, $columns = "*"){

@@ -1,6 +1,4 @@
 <?php
-namespace Models;
-
 class Banner extends \Phalcon\Mvc\Model
 {
     public $id;
@@ -24,10 +22,6 @@ class Banner extends \Phalcon\Mvc\Model
     public function getSource()
     {
         return 'banner';
-    }
-
-    public static function getNamepace (){
-        return 'Models\Banner';
     }
 
     public static function findFirstId($id, $columns = "*")

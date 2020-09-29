@@ -1,6 +1,4 @@
 <?php
-namespace Models;
-
 class HomeLang extends \Phalcon\Mvc\Model
 {
     public $id;
@@ -26,9 +24,5 @@ class HomeLang extends \Phalcon\Mvc\Model
     public function getSource()
     {
         return 'home_lang';
-    }
-
-    public static function getNamepace (){
-        return 'Models\HomeLang';
     }
 }

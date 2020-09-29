@@ -4,10 +4,6 @@ namespace Backend\Modules\Setting\Controllers;
 use Backend\Modules\Setting\Forms\LinkForm;
 use Backend\Modules\Setting\Forms\LinkLangForm;
 use Backend\Modules\Setting\Forms\SocialForm;
-use Models\Language;
-use Models\Link;
-use Models\LinkLang;
-use Models\Social;
 
 class SettingController  extends \BackendController
 {
@@ -18,15 +14,15 @@ class SettingController  extends \BackendController
     public function updatelinkAction($id = 0){
         $forms_lang = [];
         $links_lang = [];
-        $languages = Language::find(['status = 1']);
+        $languages = \Language::find(['status = 1']);
         if($id){
-            if(!$link = Link::findFirstId($id)){
+            if(!$link = \Link::findFirstId($id)){
                 echo 'Không tìm thấy dữ liệu'; die;
             }
             $link->updated_at = date('Y-m-d H:i:s');
             $title = 'Cập nhật';
             foreach ($languages as $key => $lang) {
-                $link_lang = LinkLang::findFirst(['link_id = :id: AND lang_id = :lang_id:','bind' => ['id' => $link->id, 'lang_id' => $lang->id]]);
+                $link_lang = \LinkLang::findFirst(['link_id = :id: AND lang_id = :lang_id:','bind' => ['id' => $link->id, 'lang_id' => $lang->id]]);
                 if($link_lang){
                     $form_lang = new LinkLangForm($link_lang);
                     $links_lang[$lang->id] = $link_lang;
@@ -37,14 +33,14 @@ class SettingController  extends \BackendController
             }
             $form_link = new LinkForm($link);   
         }else{
-            $link = new Link();
+            $link = new \Link();
             $link->dept_id = $this->session->get('dept_id');
             $link->created_at = date('Y-m-d H:i:s');
             $link->updated_at = $link->created_at;
             $title = 'Thêm mới';
             foreach ($languages as $key => $lang) {
                 $forms_lang[$lang->id] = new LinkLangForm();
-                $links_lang[$lang->id] = new LinkLang();
+                $links_lang[$lang->id] = new \LinkLang();
             }
             $form_link = new LinkForm($link);
         }
@@ -109,7 +105,7 @@ class SettingController  extends \BackendController
     }
 
     public function deletelinkAction($id = 0){
-        if ($link = Link::findFirstId($id)) {
+        if ($link = \Link::findFirstId($id)) {
             $link->deleted = 1;
             if (!$link->save()) {
                 if ($this->request->isAjax()) {
@@ -159,14 +155,14 @@ class SettingController  extends \BackendController
 
     public function updatesocialAction($id = 0){
         if($id){
-            if(!$social = Social::findFirstId($id)){
+            if(!$social = \Social::findFirstId($id)){
                 echo 'Không tìm thấy dữ liệu'; die;
             }
             $social->updated_at = date('Y-m-d H:i:s');
             $title = 'Cập nhật';
             $form_social = new SocialForm($social);   
         }else{
-            $social = new Social();
+            $social = new \Social();
             $social->dept_id = $this->session->get('dept_id');
             $social->created_at = date('Y-m-d H:i:s');
             $social->updated_at = $social->created_at;
@@ -214,7 +210,7 @@ class SettingController  extends \BackendController
     }
 
     public function deletesocialAction($id = 0){
-        if ($social = Social::findFirstId($id)) {
+        if ($social = \Social::findFirstId($id)) {
             $social->deleted = 1;
             if (!$social->save()) {
                 if ($this->request->isAjax()) {
@@ -266,22 +262,21 @@ class SettingController  extends \BackendController
     public function getdatalinksAction(){
         if($this->request->isAjax()){
             $dept_id = $this->session->get('dept_id');
-            $npLink = Link::getNamepace();
             $data = $this->modelsManager->createBuilder()
             ->columns(array(
-                $npLink.'.id',
-                $npLink.'.icon',
-                $npLink.'.link',
-                $npLink.'.sort',
-                $npLink.'.status',
-                'L.name name',
+                'l.id',
+                'l.icon',
+                'l.link',
+                'l.sort',
+                'l.status',
+                'll.name name',
             ))
-            ->from($npLink)
-            ->where("$npLink.deleted = 0 AND $npLink.dept_id = $dept_id")
-            ->leftJoin('Models\LinkLang', 'L.link_id = '.$npLink.'.id AND L.lang_id = 1','L')
-            ->orderBy($npLink.'.sort ASC');
+            ->from(['l'=>'Link'])
+            ->where("l.deleted = 0 AND l.dept_id = $dept_id")
+            ->leftJoin('LinkLang', 'll.link_id = l.id AND ll.lang_id = 1','ll')
+            ->orderBy('l.sort ASC');
     
-            $search = $npLink.'.name LIKE :search:';
+            $search = 'll.name LIKE :search:';
             $this->response->setStatusCode(200, 'OK');
             $this->response->setJsonContent($this->ssp->data_output($this->request->get(), $data,$search));
             return $this->response->send();
@@ -295,21 +290,20 @@ class SettingController  extends \BackendController
     public function getdatasocialsAction(){
         if($this->request->isAjax()){
             $dept_id = $this->session->get('dept_id');
-            $npSocial = Social::getNamepace();
             $data = $this->modelsManager->createBuilder()
             ->columns(array(
-                $npSocial.'.id',
-                $npSocial.'.icon',
-                $npSocial.'.link',
-                $npSocial.'.sort',
-                $npSocial.'.status',
-                $npSocial.'.name',
+                's.id',
+                's.icon',
+                's.link',
+                's.sort',
+                's.status',
+                's.name',
             ))
-            ->from($npSocial)
-            ->where("$npSocial.deleted = 0 AND $npSocial.dept_id = $dept_id")
-            ->orderBy($npSocial.'.sort ASC');
+            ->from(['s' => 'Social'])
+            ->where("s.deleted = 0 AND s.dept_id = $dept_id")
+            ->orderBy('s.sort ASC');
     
-            $search = $npSocial.'.name LIKE :search:';
+            $search = 's.name LIKE :search:';
             $this->response->setStatusCode(200, 'OK');
             $this->response->setJsonContent($this->ssp->data_output($this->request->get(), $data,$search));
             return $this->response->send();

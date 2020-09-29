@@ -1,12 +1,10 @@
 <?php
 namespace Library\LogManager;
 
-use Models\Logs as Logs;
-
 class LogManager {
 
     public function write_log($type = null, $page=null, $name = null, $detail = '[]',$user_id = null){
-        $log =  new Logs();
+        $log =  new \Logs();
         $log->type = $type;
         $log->user_id = $user_id ? $user_id : $_SESSION['user_id'];
         $log->name = $name;

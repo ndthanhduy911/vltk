@@ -1,8 +1,5 @@
 <?php
 namespace Backend\Modules\Admins\Controllers;
-use Models\Categories;
-use Models\Language;
-use Models\CategoriesLang;
 use Backend\Modules\Admins\Forms\CategoriesForm;
 use Backend\Modules\Admins\Forms\CategoriesLangForm;
 
@@ -17,24 +14,23 @@ class CategoriesController  extends \BackendController {
     public function getdataAction(){
         if($this->request->isAjax()){
             $dept_id = $this->session->get('dept_id');
-            $npCat = Categories::getNamepace();
             $data = $this->modelsManager->createBuilder()
             ->columns(array(
-                $npCat.'.id',
-                'CL.name name',
-                $npCat.'.slug',
-                'CL.description description',
-                $npCat.'.status',
-                $npCat.'.created_at',
-                'U.name author_name',
+                'c.id',
+                'cl.name name',
+                'c.slug',
+                'cl.description description',
+                'c.status',
+                'c.created_at',
+                'u.name author_name',
             ))
-            ->from($npCat)
-            ->where("$npCat.deleted = 0 AND $npCat.dept_id = $dept_id")
-            ->leftJoin('Models\Users', 'U.id = '.$npCat.'.author','U')
-            ->leftJoin('Models\CategoriesLang', 'CL.cat_id = '.$npCat.'.id AND CL.lang_id = 1','CL')
-            ->orderBy($npCat.'.dept_id ASC');
+            ->from(['c' => "Categories"])
+            ->where("c.deleted = 0 AND c.dept_id = {$dept_id}")
+            ->leftJoin('Users', 'u.id = c.author','u')
+            ->leftJoin('CategoriesLang', 'cl.cat_id = c.id AND cl.lang_id = 1','cl')
+            ->orderBy('c.dept_id ASC');
     
-            $search = $npCat.'.name LIKE :search:';
+            $search = 'c.name LIKE :search:';
             $this->response->setStatusCode(200, 'OK');
             $this->response->setJsonContent($this->ssp->data_output($this->request->get(), $data,$search));
             return $this->response->send();
@@ -48,15 +44,15 @@ class CategoriesController  extends \BackendController {
     public function updateAction($id = 0){
         $forms_lang = [];
         $cats_lang = [];
-        $languages = Language::find(['status = 1']);
+        $languages = \Language::find(['status = 1']);
         if($id){
-            if(!$category = Categories::findFirstId($id)){
+            if(!$category = \Categories::findFirstId($id)){
                 echo 'Không tìm thấy dữ liệu'; die;
             }
             $category->updated_at = date('Y-m-d H:i:s');
             $title = 'Cập nhật';
             foreach ($languages as $key => $lang) {
-                $cat_lang = CategoriesLang::findFirst(['cat_id = :id: AND lang_id = :lang_id:','bind' => ['id' => $category->id, 'lang_id' => $lang->id]]);
+                $cat_lang = \CategoriesLang::findFirst(['cat_id = :id: AND lang_id = :lang_id:','bind' => ['id' => $category->id, 'lang_id' => $lang->id]]);
                 if($cat_lang){
                     $form_lang = new CategoriesLangForm($cat_lang);
                     $cats_lang[$lang->id] = $cat_lang;
@@ -67,7 +63,7 @@ class CategoriesController  extends \BackendController {
             }
             $form_cat = new CategoriesForm($category);   
         }else{
-            $category = new Categories();
+        $category = new \Categories();
             $category->author = $this->session->get('user_id');
             $category->dept_id = $this->session->get('dept_id');
             $category->created_at = date('Y-m-d H:i:s');
@@ -75,7 +71,7 @@ class CategoriesController  extends \BackendController {
             $title = 'Thêm mới';
             foreach ($languages as $key => $lang) {
                 $forms_lang[$lang->id] = new CategoriesLangForm();
-                $cats_lang[$lang->id] = new CategoriesLang();
+                $cats_lang[$lang->id] = new \CategoriesLang();
             }
             $form_cat = new CategoriesForm($category);
         }
@@ -92,7 +88,7 @@ class CategoriesController  extends \BackendController {
                     'status' => $this->request->getPost('status',['int','trim']),
                 ];
                 
-                $check_slug = Categories::findFirst([
+                $check_slug = \Categories::findFirst([
                     "slug = :slug: AND id != :id:",
                     "bind" => [
                         "slug" => $req_cat['slug'],
@@ -160,7 +156,7 @@ class CategoriesController  extends \BackendController {
 
     public function deleteAction($id = 0){
         
-        if (!in_array((int)$id, [1,2,3,4,5]) && $cat = Categories::findFirstId($id)) {
+        if (!in_array((int)$id, [1,2,3,4,5]) && $cat = \Categories::findFirstId($id)) {
             $cat->deleted = 1;
             if (!$cat->save()) {
                 if ($this->request->isAjax()) {

@@ -1,6 +1,4 @@
 <?php
-namespace Models;
-
 
 
 class Home extends \Phalcon\Mvc\Model
@@ -20,9 +18,5 @@ class Home extends \Phalcon\Mvc\Model
     public function getSource()
     {
         return 'home';
-    }
-
-    public static function getNamepace (){
-        return 'Models\Home';
     }
 }

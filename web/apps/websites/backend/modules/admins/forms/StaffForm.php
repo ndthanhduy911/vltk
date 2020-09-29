@@ -28,16 +28,15 @@ class StaffForm extends Form
         ));
         $this->add($slug);
 
-        $npDept = Departments::getNamepace();
         $depts = $this->modelsManager->createBuilder()
         ->columns(array(
-            $npDept.'.id',
-            'DL.name name',
+            'd.id',
+            'dl.name name',
         ))
-        ->from($npDept)
-        ->leftJoin('Models\DepartmentsLang', "DL.dept_id = $npDept.id AND DL.lang_id = 1",'DL')
-        ->orderBy('DL.id ASC')
-        ->where("$npDept.status = 1")
+        ->from(['d'=>'Departments'])
+        ->leftJoin('DepartmentsLang', "dl.dept_id = d.id AND dl.lang_id = 1",'dl')
+        ->orderBy('dl.id ASC')
+        ->where("d.status = 1")
         ->getQuery()
         ->execute();
 

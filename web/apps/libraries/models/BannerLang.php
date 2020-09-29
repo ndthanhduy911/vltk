@@ -1,6 +1,4 @@
 <?php
-namespace Models;
-
 class BannerLang extends \Phalcon\Mvc\Model
 {
     public $id;
@@ -20,7 +18,4 @@ class BannerLang extends \Phalcon\Mvc\Model
         return 'banner_lang';
     }
 
-    public static function getNamepace (){
-        return 'Models\BannerLang';
-    }
 }

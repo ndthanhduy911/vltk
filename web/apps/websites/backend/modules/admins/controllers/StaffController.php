@@ -1,8 +1,5 @@
 <?php
 namespace Backend\Modules\Admins\Controllers;
-use Models\Staff;
-use Models\StaffLang;
-use Models\Language;
 use Backend\Modules\Admins\Forms\StaffForm;
 use Backend\Modules\Admins\Forms\StaffLangForm;
 
@@ -17,16 +14,16 @@ class StaffController  extends \BackendController {
         $forms_lang = [];
         $staffs_lang = [];
         $staff_content = [];
-        $languages = Language::find(['status = 1']);
+        $languages = \Language::find(['status = 1']);
         $dept_id = $this->session->get('dept_id');
         if($id){
-            if(!$staff = Staff::findFirstId($id)){
+            if(!$staff = \Staff::findFirstId($id)){
                 echo 'Không tìm thấy dữ liệu'; die;
             }
             $staff->updated_at = date('Y-m-d H:i:s');
             $title = 'Cập nhật';
             foreach ($languages as $key => $lang) {
-                $staff_lang = StaffLang::findFirst(['staff_id = :id: AND lang_id = :lang_id:','bind' => ['id' => $staff->id, 'lang_id' => $lang->id]]);
+                $staff_lang = \StaffLang::findFirst(['staff_id = :id: AND lang_id = :lang_id:','bind' => ['id' => $staff->id, 'lang_id' => $lang->id]]);
                 if($staff_lang){
                     $form_lang = new StaffLangForm($staff_lang);
                     $staffs_lang[$lang->id] = $staff_lang;
@@ -37,14 +34,14 @@ class StaffController  extends \BackendController {
                 }
             }   
         }else{
-            $staff = new Staff();
+            $staff = new \Staff();
             $staff->dept_id = $this->session->get('dept_id');
             $staff->created_at = date('Y-m-d H:i:s');
             $staff->updated_at = $staff->created_at;
             $title = 'Thêm mới';
             foreach ($languages as $key => $lang) {
                 $forms_lang[$lang->id] = new StaffLangForm();
-                $staffs_lang[$lang->id] = new StaffLang();
+                $staffs_lang[$lang->id] = new \StaffLang();
                 $staff_content[$lang->id] = '';
             }
         }
@@ -70,7 +67,7 @@ class StaffController  extends \BackendController {
                     $req_staff['dean'] = $this->request->getPost('dean',['string','trim']);
                 }
 
-                $check_slug = Staff::findFirst([
+                $check_slug = \Staff::findFirst([
                     "slug = :slug: AND id != :id:",
                     "bind" => [
                         "slug" => $req_staff['slug'],
@@ -142,7 +139,7 @@ class StaffController  extends \BackendController {
     }
 
     public function deleteAction($id = null){
-        if ($staff = Staff::findFirstId($id)) {
+        if ($staff = \Staff::findFirstId($id)) {
             $staff->deleted = 1;
             if (!$staff->save()) {
                 if ($this->request->isAjax()) {
@@ -192,34 +189,33 @@ class StaffController  extends \BackendController {
     public function getdataAction(){
         if($this->request->isAjax()){
             $dept_id = $this->session->get('dept_id');
-            $npStaff = Staff::getNamepace();
             $data = $this->modelsManager->createBuilder()
             ->columns(array(
-                $npStaff.'.id',
-                $npStaff.'.slug',
-                $npStaff.'.featured_image',
-                $npStaff.'.status',
-                $npStaff.'.dept_id',
-                $npStaff.'.email',
-                $npStaff.'.dean',
-                $npStaff.'.dept_position',
-                $npStaff.'.created_at',
-                'SL.title title',
-                'SL.content content',
-                'D.name dept_name',
+                's.id',
+                's.slug',
+                's.featured_image',
+                's.status',
+                's.dept_id',
+                's.email',
+                's.dean',
+                's.dept_position',
+                's.created_at',
+                'sl.title title',
+                'sl.content content',
+                'd.name dept_name',
             ))
-            ->from($npStaff)
-            ->where("$npStaff.deleted = 0");
+            ->from(['s'=>'Staff'])
+            ->where("s.deleted = 0");
             
             if($dept_id != 1){
-                $data = $data->andWhere("$npStaff.dept_id = $dept_id");
+                $data = $data->andWhere("s.dept_id = $dept_id");
             }
 
-            $data = $data->leftJoin('Models\DepartmentsLang', 'D.dept_id = '.$npStaff.".dept_id AND D.lang_id = 1",'D')
-            ->leftJoin('Models\StaffLang', 'SL.staff_id = '.$npStaff.'.id AND SL.lang_id = 1','SL')
-            ->orderBy("$npStaff.dean ASC, $npStaff.dept_id ASC, $npStaff.dept_position ASC");
+            $data = $data->leftJoin('DepartmentsLang', 'd.dept_id = s.dept_id AND d.lang_id = 1','d')
+            ->leftJoin('StaffLang', 'sl.staff_id = s.id AND sl.lang_id = 1','sl')
+            ->orderBy("s.dean ASC, s.dept_id ASC, s.dept_position ASC");
     
-            $search = 'SL.title LIKE :search:';
+            $search = 'sl.title LIKE :search:';
             $this->response->setStatusCode(200, 'OK');
             $this->response->setJsonContent($this->ssp->data_output($this->request->get(), $data,$search));
             return $this->response->send();

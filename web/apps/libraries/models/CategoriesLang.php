@@ -1,5 +1,4 @@
-<?php
-namespace Models;
+<?php 
 class CategoriesLang extends \Phalcon\Mvc\Model
 {
 
@@ -17,10 +16,6 @@ class CategoriesLang extends \Phalcon\Mvc\Model
     public function getSource()
     {
         return 'categories_lang';
-    }
-
-    public static function getNamepace (){
-        return 'Models\CategoriesLang';
     }
 
     public static function findFirstId($id, $columns = "*")

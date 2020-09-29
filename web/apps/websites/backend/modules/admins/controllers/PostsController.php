@@ -1,12 +1,8 @@
 <?php
 namespace Backend\Modules\Admins\Controllers;
-use Models\Posts;
-use Models\PostsLang;
-use Models\Language;
 use Backend\Modules\Admins\Forms\PostsForm;
 use Backend\Modules\Admins\Forms\PostsLangForm;
-use Models\Categories;
-use Models\CatStatus;
+
 
 class PostsController  extends \BackendController {
 
@@ -23,16 +19,16 @@ class PostsController  extends \BackendController {
         $forms_lang = [];
         $posts_lang = [];
         $post_content = [];
-        $languages = Language::find(['status = 1']);
+        $languages = \Language::find(['status = 1']);
         if($id){
-            if(!$post = Posts::findFirstId($id)){
+            if(!$post = \Posts::findFirstId($id)){
                 echo 'Không tìm thấy dữ liệu'; die;
             }
             $post->updated_at = date('Y-m-d H:i:s');
             $post->calendar = $this->helper->datetime_vn($post->calendar);
             $title = 'Cập nhật';
             foreach ($languages as $key => $lang) {
-                $post_lang = PostsLang::findFirst(['post_id = :id: AND lang_id = :lang_id:','bind' => ['id' => $post->id, 'lang_id' => $lang->id]]);
+                $post_lang = \PostsLang::findFirst(['post_id = :id: AND lang_id = :lang_id:','bind' => ['id' => $post->id, 'lang_id' => $lang->id]]);
                 if($post_lang){
                     $form_lang = new PostsLangForm($post_lang);
                     $posts_lang[$lang->id] = $post_lang;
@@ -43,7 +39,7 @@ class PostsController  extends \BackendController {
                 }
             }   
         }else{
-            $post = new Posts();
+            $post = new \Posts();
             $post->author = $this->session->get('user_id');
             $post->dept_id = $this->session->get('dept_id');
             $post->created_at = date('Y-m-d H:i:s');
@@ -51,7 +47,7 @@ class PostsController  extends \BackendController {
             $title = 'Thêm mới';
             foreach ($languages as $key => $lang) {
                 $forms_lang[$lang->id] = new PostsLangForm();
-                $posts_lang[$lang->id] = new PostsLang();
+                $posts_lang[$lang->id] = new \PostsLang();
                 $post_content[$lang->id] = '';
             }
         }
@@ -74,7 +70,7 @@ class PostsController  extends \BackendController {
                     'featured_image' => $this->request->getPost('featured_image',['string','trim']),
                 ];
 
-                $check_slug = Posts::findFirst([
+                $check_slug = \Posts::findFirst([
                     "slug = :slug: AND id != :id:",
                     "bind" => [
                         "slug" => $req_post['slug'],
@@ -86,7 +82,7 @@ class PostsController  extends \BackendController {
                     $req_post['slug'] = $req_post['slug'] .'-'. strtotime('now'); 
                 }
 
-                if(!$cat = Categories::findFirst(["dept_id = $post->dept_id AND id = :cat_id:", 'bind' => ['cat_id' => $req_post['cat_id']]])){
+                if(!$cat = \Categories::findFirst(["dept_id = $post->dept_id AND id = :cat_id:", 'bind' => ['cat_id' => $req_post['cat_id']]])){
                     $this->flashSession->error("Danh mục không tôn tại");
                 }
 
@@ -149,7 +145,7 @@ class PostsController  extends \BackendController {
     }
 
     public function restoreAction($id = null){
-        if ($post = Posts::findFirstId($id)) {
+        if ($post = \Posts::findFirstId($id)) {
             $post->status = 1;
             if (!$post->save()) {
                 if ($this->request->isAjax()) {
@@ -193,7 +189,7 @@ class PostsController  extends \BackendController {
 
     public function trashAction($id = null){
 
-        if ($post = Posts::findFirstId($id)) {
+        if ($post = \Posts::findFirstId($id)) {
             $post->status = 4;
             if (!$post->save()) {
                 if ($this->request->isAjax()) {
@@ -238,7 +234,7 @@ class PostsController  extends \BackendController {
     }
 
     public function deleteAction($id = null){
-        if ($post = Posts::findFirstId($id)) {
+        if ($post = \Posts::findFirstId($id)) {
             $post->deleted = 1;
             if (!$post->save()) {
                 if ($this->request->isAjax()) {
@@ -290,31 +286,30 @@ class PostsController  extends \BackendController {
         }
 
         $dept_id = $this->session->get('dept_id');
-        $npPosts = Posts::getNamepace();
         $data = $this->modelsManager->createBuilder()
         ->columns(array(
             'p.id',
-            'PL.title',
+            'p.title',
             'p.slug',
             'p.cat_id',
-            'PL.content',
+            'p.content',
             'p.status',
-            'PL.excerpt',
+            'p.excerpt',
             'p.dept_id',
             'p.created_at',
             'p.calendar',
             'p.featured_image',
-            'U.name author_name',
-            'C.name cat_name',
+            'u.name author_name',
+            'c.name cat_name',
         ))
-        ->from(['p' => $npPosts])
+        ->from(['p' => "Posts"])
         ->where("p.deleted = 0 AND p.dept_id = $dept_id AND p.status != 4")
-        ->leftJoin('Models\Users', 'U.id = p.author','U')
-        ->leftJoin('Models\CategoriesLang', 'C.cat_id = p.cat_id AND C.lang_id = 1','C')
-        ->leftJoin('Models\PostsLang', 'PL.post_id = p.id AND PL.lang_id = 1','PL')
+        ->leftJoin('Users', 'u.id = p.author','u')
+        ->leftJoin('CategoriesLang', 'c.cat_id = p.cat_id AND c.lang_id = 1','c')
+        ->leftJoin('PostsLang', 'p.post_id = p.id AND PL.lang_id = 1','PL')
         ->orderBy('p.calendar DESC');
 
-        $search = 'PL.title LIKE :search:';
+        $search = 'pl.title LIKE :search:';
         $this->response->setStatusCode(200, 'OK');
         $this->response->setJsonContent($this->ssp->data_output($this->request->get(), $data,$search));
         return $this->response->send();
@@ -324,34 +319,33 @@ class PostsController  extends \BackendController {
     public function getdatatrashAction(){
         if($this->request->isAjax()){
             $dept_id = $this->session->get('dept_id');
-            $npPosts = Posts::getNamepace();
             $data = $this->modelsManager->createBuilder()
             ->columns(array(
-                $npPosts.'.id',
-                'PL.title',
-                $npPosts.'.slug',
-                $npPosts.'.cat_id',
-                'PL.content',
-                $npPosts.'.status',
-                'PL.excerpt',
-                $npPosts.'.dept_id',
-                $npPosts.'.created_at',
-                $npPosts.'.calendar',
-                $npPosts.'.featured_image',
-                'U.name author_name',
-                'C.name cat_name',
+                'p.id',
+                'pl.title',
+                'p.slug',
+                'p.cat_id',
+                'pl.content',
+                'p.status',
+                'pl.excerpt',
+                'p.dept_id',
+                'p.created_at',
+                'p.calendar',
+                'p.featured_image',
+                'u.name author_name',
+                'c.name cat_name',
             ))
-            ->from($npPosts)
-            ->where("$npPosts.deleted = 0 AND $npPosts.status = 4 AND $npPosts.dept_id = $dept_id")
-            ->leftJoin('Models\Users', 'U.id = '.$npPosts.'.author','U')
-            ->leftJoin('Models\CategoriesLang', 'C.cat_id = '.$npPosts.'.cat_id AND C.lang_id = 1','C')
-            ->leftJoin('Models\PostsLang', 'PL.post_id = '.$npPosts.'.id AND PL.lang_id = 1','PL')
-            ->orderBy($npPosts.'.calendar DESC');
+            ->from(['p'=>'Posts'])
+            ->where("p.deleted = 0 AND p.status = 4 AND p.dept_id = {$dept_id}")
+            ->leftJoin('Users', 'u.id = p.author','u')
+            ->leftJoin('CategoriesLang', 'c.cat_id = p.cat_id AND c.lang_id = 1','c')
+            ->leftJoin('PostsLang', 'pl.post_id = p.id AND pl.lang_id = 1','pl')
+            ->orderBy('p.calendar DESC');
             // if($this->session->get('role') !== 1){
             //     $data = $data->andWhere("dept_id IN (".implode(',',$this->session->get('dept_mg')).")");
             // }
     
-            $search = $npPosts.'.title LIKE :search:';
+            $search = 'pl.title LIKE :search:';
             $this->response->setStatusCode(200, 'OK');
             $this->response->setJsonContent($this->ssp->data_output($this->request->get(), $data,$search));
             return $this->response->send();

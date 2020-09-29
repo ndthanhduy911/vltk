@@ -1,6 +1,4 @@
 <?php
-
-namespace Models;
 use Models\PostsLang;
 class Posts extends \Phalcon\Mvc\Model
 {
@@ -27,10 +25,6 @@ class Posts extends \Phalcon\Mvc\Model
     public function getSource()
     {
         return 'posts';
-    }
-
-    public static function getNamepace (){
-        return 'Models\Posts';
     }
 
     public static function findFirstId($id, $columns = "*")

@@ -1,12 +1,6 @@
 <?php
 
 namespace Frontend\Modules\Dept\Controllers;
-use Models\Posts;
-use Models\Categories;
-use Models\ConectionSystem;
-use Models\Departments;
-use Models\DepartmentsLang;
-use Models\PostsLang;
 
 class PostsController extends \FrontendController
 {
@@ -20,13 +14,13 @@ class PostsController extends \FrontendController
         $dept = $this->dispatcher->getReturnedValue();
         $lang_id = $this->session->get('lang_id');
         $slug = (int)$dept->id === 1 ? $slug1 : $slug2;
-        ConectionSystem::plus(2, $dept->id);
-        if(!$post = Posts::findFirst(["status = 1 AND slug = :slug: AND dept_id = $dept->id", 'bind' => ['slug' => $slug]])){
+        \ConectionSystem::plus(2, $dept->id);
+        if(!$post = \Posts::findFirst(["status = 1 AND slug = :slug: AND dept_id = $dept->id", 'bind' => ['slug' => $slug]])){
             $this->view->title = '404';
             return $this->view->pick('templates/404');
         }
 
-        if($posts_lang = PostsLang::findFirst(["lang_id = $lang_id AND post_id = $post->id"])){
+        if($posts_lang = \PostsLang::findFirst(["lang_id = $lang_id AND post_id = $post->id"])){
             $this->view->title = $posts_lang->title;
             $post->content = $posts_lang->content;
             $post->excerpt = $posts_lang->excerpt;
@@ -47,31 +41,30 @@ class PostsController extends \FrontendController
         }
         $slug = (int)$dept->id === 1 ? $slug1 : $slug2;
 
-        if(!$category = Categories::findFirst(["slug = :slug: AND status = 1 AND dept_id = $dept->id", 'bind' => ['slug' => $slug]])){
+        if(!$category = \Categories::findFirst(["slug = :slug: AND status = 1 AND dept_id = $dept->id", 'bind' => ['slug' => $slug]])){
             $this->view->title = '404';
             return $this->view->pick('templates/404');
         }
 
         $current_page = (int)$this->request->get('page');
-        $npPosts = Posts::getNamepace();
         $posts = $this->modelsManager->createBuilder()
         ->columns(array(
-            $npPosts.'.id',
-            'PL.title',
-            $npPosts.'.slug',
-            $npPosts.'.cat_id',
-            'PL.content',
-            $npPosts.'.status',
-            'PL.excerpt',
-            $npPosts.'.dept_id',
-            $npPosts.'.created_at',
-            $npPosts.'.calendar',
-            $npPosts.'.featured_image',
+            'p.id',
+            'pl.title',
+            'p.slug',
+            'p.cat_id',
+            'pl.content',
+            'p.status',
+            'pl.excerpt',
+            'p.dept_id',
+            'p.created_at',
+            'p.calendar',
+            'p.featured_image',
         ))
-        ->from($npPosts)
-        ->where("$npPosts.deleted = 0 AND $npPosts.status = 1 AND $npPosts.cat_id = $category->id AND $npPosts.dept_id = $dept->id")
-        ->leftJoin('Models\PostsLang', "PL.post_id = $npPosts.id AND PL.lang_id = $lang_id",'PL')
-        ->orderBy("$npPosts.calendar DESC");
+        ->from(['p'=>'Posts'])
+        ->where("p.deleted = 0 AND p.status = 1 AND p.cat_id = $category->id AND p.dept_id = $dept->id")
+        ->leftJoin('PostsLang', "pl.post_id = p.id AND pl.lang_id = $lang_id",'pl')
+        ->orderBy("p.calendar DESC");
         $post_count = $posts->getQuery()
         ->execute()
         ->count();
@@ -82,7 +75,7 @@ class PostsController extends \FrontendController
         ->execute();
 
         $paging = $this->helper->getPaging($post_count, $current_page);
-        $this->view->title = Categories::getTitleById($category->id);
+        $this->view->title = \Categories::getTitleById($category->id);
         $this->view->posts = $posts;
         $this->view->paging = $paging;
         $this->view->slug_now = $category->slug;
@@ -94,25 +87,25 @@ class PostsController extends \FrontendController
         $dept = $this->dispatcher->getReturnedValue();
         $lang_id = $this->session->get('lang_id');
         $current_page = (int)$this->request->get('page');
-        $npPosts = Posts::getNamepace();
+
         $posts = $this->modelsManager->createBuilder()
         ->columns(array(
-            $npPosts.'.id',
-            'PL.title',
-            $npPosts.'.slug',
-            $npPosts.'.cat_id',
-            'PL.content',
-            $npPosts.'.status',
-            'PL.excerpt',
-            $npPosts.'.dept_id',
-            $npPosts.'.created_at',
-            $npPosts.'.calendar',
-            $npPosts.'.featured_image',
+            'p.id',
+            'pl.title',
+            'p.slug',
+            'p.cat_id',
+            'pl.content',
+            'p.status',
+            'pl.excerpt',
+            'p.dept_id',
+            'p.created_at',
+            'p.calendar',
+            'p.featured_image',
         ))
-        ->from($npPosts)
-        ->leftJoin('Models\PostsLang', "PL.post_id = $npPosts.id AND PL.lang_id = $lang_id AND $npPosts.dept_id = $dept->id",'PL')
-        ->orderBy("$npPosts.calendar DESC")
-        ->where("$npPosts.deleted = 0 AND $npPosts.status = 1");
+        ->from(['p'=>'Posts'])
+        ->leftJoin('Models\PostsLang', "pl.post_id = p.id AND pl.lang_id = $lang_id AND p.dept_id = $dept->id",'pl')
+        ->orderBy("p.calendar DESC")
+        ->where("p.deleted = 0 AND p.status = 1");
         
         $post_count = $posts->getQuery()
         ->execute()

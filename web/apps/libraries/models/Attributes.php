@@ -1,7 +1,5 @@
 <?php
 
-namespace Models;
-
 class Attributes extends \Phalcon\Mvc\Model
 {
     public $id;

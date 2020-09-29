@@ -1,6 +1,4 @@
 <?php
-namespace Models;
-
 class Roles extends \Phalcon\Mvc\Model
 {
 
@@ -24,9 +22,5 @@ class Roles extends \Phalcon\Mvc\Model
             "bind" => array('id' => $id),
             "columns" => $columns
         ]);
-    }
-
-    public static function getNamepace (){
-        return 'Models\Roles';
     }
 }

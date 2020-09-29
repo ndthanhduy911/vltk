@@ -17,16 +17,16 @@ class CalendarsController  extends \BackendController {
         $forms_lang = [];
         $calendars_lang = [];
         $calendar_content = [];
-        $languages = Language::find(['status = 1']);
+        $languages = \Language::find(['status = 1']);
         if($id){
-            if(!$calendar = Calendars::findFirstId($id)){
+            if(!$calendar = \Calendars::findFirstId($id)){
                 echo 'Không tìm thấy dữ liệu'; die;
             }
             $calendar->begin_date = $this->helper->datetime_vn($calendar->begin_date);
             $calendar->updated_at = date('Y-m-d H:i:s');
             $title = 'Cập nhật';
             foreach ($languages as $key => $lang) {
-                $calendar_lang = CalendarsLang::findFirst(['calendar_id = :id: AND lang_id = :lang_id:','bind' => ['id' => $calendar->id, 'lang_id' => $lang->id]]);
+                $calendar_lang = \CalendarsLang::findFirst(['calendar_id = :id: AND lang_id = :lang_id:','bind' => ['id' => $calendar->id, 'lang_id' => $lang->id]]);
                 if($calendar_lang){
                     $form_lang = new CalendarsLangForm($calendar_lang);
                     $calendars_lang[$lang->id] = $calendar_lang;
@@ -37,14 +37,14 @@ class CalendarsController  extends \BackendController {
                 }
             }   
         }else{
-            $calendar = new Calendars();
+            $calendar = new \Calendars();
             $calendar->dept_id = $this->session->get('dept_id');
             $calendar->created_at = date('Y-m-d H:i:s');
             $calendar->updated_at = $calendar->created_at;
             $title = 'Thêm mới';
             foreach ($languages as $key => $lang) {
                 $forms_lang[$lang->id] = new CalendarsLangForm();
-                $calendars_lang[$lang->id] = new CalendarsLang();
+                $calendars_lang[$lang->id] = new \CalendarsLang();
                 $calendar_content[$lang->id] = '';
             }
         }
@@ -127,7 +127,7 @@ class CalendarsController  extends \BackendController {
     }
 
     public function deleteAction($id = null){
-        if ($calendar = Calendars::findFirstId($id)) {
+        if ($calendar = \Calendars::findFirstId($id)) {
             $calendar->deleted = 1;
             if (!$calendar->save()) {
                 if ($this->request->isAjax()) {
@@ -177,36 +177,35 @@ class CalendarsController  extends \BackendController {
     public function getdataAction(){
         if($this->request->isAjax()){
             $dept_id = $this->session->get('dept_id');
-            $npCalendars = Calendars::getNamepace();
             $data = $this->modelsManager->createBuilder()
             ->columns(array(
-                $npCalendars.'.id',
-                $npCalendars.'.status',
-                $npCalendars.'.dept_id',
-                $npCalendars.'.created_at',
-                $npCalendars.'.class_id',
-                $npCalendars.'.subject_id',
-                $npCalendars.'.year',
-                $npCalendars.'.created_at',
-                $npCalendars.'.semester',
-                $npCalendars.'.location',
-                $npCalendars.'.begin_date',
-                $npCalendars.'.day',
-                $npCalendars.'.begin_time',
-                $npCalendars.'.room',
-                $npCalendars.'.end_time',
-                'CL.excerpt excerpt',
-                'SL.title subject_name',
-                'CLL.title class_name',
+                'c.id',
+                'c.status',
+                'c.dept_id',
+                'c.created_at',
+                'c.class_id',
+                'c.subject_id',
+                'c.year',
+                'c.created_at',
+                'c.semester',
+                'c.location',
+                'c.begin_date',
+                'c.day',
+                'c.begin_time',
+                'c.room',
+                'c.end_time',
+                'cl.excerpt excerpt',
+                'sl.title subject_name',
+                'cll.title class_name',
             ))
-            ->from($npCalendars)
-            ->where("$npCalendars.deleted = 0 AND $npCalendars.dept_id = $dept_id")
-            ->leftJoin('Models\CalendarsLang', 'CL.calendar_id = '.$npCalendars.'.id AND CL.lang_id = 1','CL')
-            ->leftJoin('Models\SubjectsLang', 'SL.subject_id = '.$npCalendars.'.subject_id AND SL.lang_id = 1','SL')
-            ->leftJoin('Models\ClassesLang', 'CLL.class_id = '.$npCalendars.'.class_id AND CLL.lang_id = 1','CLL')
-            ->orderBy($npCalendars.'.dept_id ASC, '.$npCalendars.'.created_at DESC');
+            ->from(['c' => 'Calendars'])
+            ->where("c.deleted = 0 AND c.dept_id = {$dept_id}")
+            ->leftJoin('CalendarsLang', 'cl.calendar_id = c.id AND cl.lang_id = 1','cl')
+            ->leftJoin('SubjectsLang', 'sl.subject_id = c.subject_id AND sl.lang_id = 1','sl')
+            ->leftJoin('ClassesLang', 'cll.class_id = c.class_id AND cll.lang_id = 1','cll')
+            ->orderBy('c.dept_id ASC, c.created_at DESC');
     
-            $search = 'CL.excerpt LIKE :search:';
+            $search = 'cl.excerpt LIKE :search:';
             $this->response->setStatusCode(200, 'OK');
             $this->response->setJsonContent($this->ssp->data_output($this->request->get(), $data,$search));
             return $this->response->send();

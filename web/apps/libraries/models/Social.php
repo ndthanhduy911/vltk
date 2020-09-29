@@ -1,6 +1,4 @@
 <?php
-namespace Models;
-
 class Social extends \Phalcon\Mvc\Model
 {
     public $id;
@@ -25,11 +23,7 @@ class Social extends \Phalcon\Mvc\Model
     {
         return 'social';
     }
-
-    public static function getNamepace (){
-        return 'Models\Social';
-    }
-
+    
     public static function findFirstId($id, $columns = "*")
     {
         return parent::findFirst([

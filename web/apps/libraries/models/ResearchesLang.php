@@ -1,7 +1,5 @@
 <?php
 
-namespace Models;
-
 class ResearchesLang extends \Phalcon\Mvc\Model
 {
     public $id;
@@ -19,10 +17,6 @@ class ResearchesLang extends \Phalcon\Mvc\Model
     public function getSource()
     {
         return 'researches_lang';
-    }
-
-    public static function getNamepace (){
-        return 'Models\ResearchesLang';
     }
 
     public static function findFirstId($id, $columns = "*")

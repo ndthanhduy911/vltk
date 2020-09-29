@@ -1,26 +1,24 @@
 
 <?php
-    use Models\Posts;
-    $current_page = (int)$this->request->get('page');
-    $npPosts = Posts::getNamepace();
+    $current_page = (int)$this->request->get('page',['trim','int']);
     $posts = $this->modelsManager->createBuilder()
     ->columns(array(
-        $npPosts.'.id',
-        'PL.title',
-        $npPosts.'.slug',
-        $npPosts.'.cat_id',
-        'PL.content',
-        $npPosts.'.status',
-        'PL.excerpt',
-        $npPosts.'.dept_id',
-        $npPosts.'.created_at',
-        $npPosts.'.calendar',
-        $npPosts.'.featured_image',
+        'p.id',
+        'pl.title',
+        'p.slug',
+        'p.cat_id',
+        'pl.content',
+        'p.status',
+        'pl.excerpt',
+        'p.dept_id',
+        'p.created_at',
+        'p.calendar',
+        'p.featured_image',
     ))
-    ->from($npPosts)
-    ->where("$npPosts.deleted = 0 AND $npPosts.status = 1 AND $npPosts.dept_id = $dept->id")
-    ->leftJoin('Models\PostsLang', "PL.post_id = $npPosts.id AND PL.lang_id = $lang_id",'PL')
-    ->orderBy("$npPosts.calendar DESC");
+    ->from(['p'=>'Posts'])
+    ->where("p.deleted = 0 AND p.status = 1 AND p.dept_id = $dept->id")
+    ->leftJoin('PostsLang', "pl.post_id = p.id AND pl.lang_id = $lang_id",'pl')
+    ->orderBy("p.calendar DESC");
     $post_count = $posts->getQuery()
     ->execute()
     ->count();
@@ -29,7 +27,6 @@
     ->offset(10 * ($current_page > 0 ? ($current_page - 1) : 0))
     ->getQuery()
     ->execute();
-
     $paging = $this->helper->getPaging($post_count, $current_page);
 ?>
 
@@ -53,7 +50,7 @@
                             </div>
                             {% endif %}
                             <header>
-                                <h2><a href="<?= Posts::getUrl($dept, $post) ?>">{{post.title}}</a></h2>
+                                <h2><a href="<?= \Posts::getUrl($dept, $post) ?>">{{post.title}}</a></h2>
                                 <div class="post-info">
                                     <span class="post-date">
                                         <i class="fa fa-calendar-o pr-1"></i>
@@ -65,9 +62,7 @@
                                 <p>{{post.excerpt}}</p>
                             </div>
                             <footer class="clearfix">
-                                <!-- <div class="tags pull-left"><i class="fa fa-tags pr-1"></i> <a href="#">tag 1</a>,
-                                    <a href="#">tag 2</a>, <a href="#">long tag 3</a></div> -->
-                                <div class="link pull-right"><i class="fa fa-link pr-1"></i><a href="<?= Posts::getUrl($dept, $post) ?>">{{ ml._ml_system('more', 'Xem thêm') }}</a></div>
+                                <div class="link pull-right"><i class="fa fa-link pr-1"></i><a href="<?= \Posts::getUrl($dept, $post) ?>">{{ ml._ml_system('more', 'Xem thêm') }}</a></div>
                             </footer>
                         </article>
                     </div>

@@ -1,5 +1,4 @@
-<?php
-namespace Models;
+<?php 
 use Models\LinkLang;
 
 class Link extends \Phalcon\Mvc\Model
@@ -27,10 +26,6 @@ class Link extends \Phalcon\Mvc\Model
     public function getSource()
     {
         return 'link';
-    }
-
-    public static function getNamepace (){
-        return 'Models\Link';
     }
 
     public static function getName($link_id, $lang_id = 1){

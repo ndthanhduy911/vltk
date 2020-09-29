@@ -1,6 +1,4 @@
 <?php
-namespace Models;
-
 class Staff extends \Phalcon\Mvc\Model
 {
     public $id;
@@ -30,10 +28,6 @@ class Staff extends \Phalcon\Mvc\Model
     public function getSource()
     {
         return 'staff';
-    }
-
-    public static function getNamepace (){
-        return 'Models\Staff';
     }
 
     public static function findFirstId($id, $columns = "*")

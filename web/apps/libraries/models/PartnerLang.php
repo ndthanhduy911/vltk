@@ -1,6 +1,4 @@
 <?php
-namespace Models;
-
 class PartnerLang extends \Phalcon\Mvc\Model
 {
     public $id;
@@ -14,9 +12,5 @@ class PartnerLang extends \Phalcon\Mvc\Model
     public function getSource()
     {
         return 'partner_lang';
-    }
-
-    public static function getNamepace (){
-        return 'Models\PartnerLang';
     }
 }

@@ -165,23 +165,22 @@ class PartnerController  extends \BackendController {
     public function getdataAction(){
         if($this->request->isAjax()){
             $dept_id = $this->session->get('dept_id');
-            $npPartner = Partner::getNamepace();
             $data = $this->modelsManager->createBuilder()
             ->columns(array(
-                $npPartner.'.id',
-                $npPartner.'.link',
-                $npPartner.'.featured_image',
-                $npPartner.'.status',
-                $npPartner.'.dept_id',
-                $npPartner.'.created_at',
-                'PL.title title',
+                'p.id',
+                'p.link',
+                'p.featured_image',
+                'p.status',
+                'p.dept_id',
+                'p.created_at',
+                'pl.title title',
             ))
-            ->from($npPartner)
-            ->where("$npPartner.deleted = 0 AND $npPartner.dept_id = $dept_id")
-            ->leftJoin('Models\PartnerLang', 'PL.partner_id = '.$npPartner.'.id AND PL.lang_id = 1','PL')
-            ->orderBy($npPartner.'.dept_id ASC');
+            ->from(['p' => 'Partner'])
+            ->where("p.deleted = 0 AND p.dept_id = {$dept_id}")
+            ->leftJoin('PartnerLang', 'pl.partner_id = p.id AND pl.lang_id = 1','pl')
+            ->orderBy('p.dept_id ASC');
     
-            $search = 'PL.title LIKE :search:';
+            $search = 'pl.title LIKE :search:';
             $this->response->setStatusCode(200, 'OK');
             $this->response->setJsonContent($this->ssp->data_output($this->request->get(), $data,$search));
             return $this->response->send();

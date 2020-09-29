@@ -1,6 +1,4 @@
 <?php
-namespace Models;
-
 use Models\MenusLang;
 use Models\Posts;
 use Models\Pages;
@@ -47,10 +45,6 @@ class Menus extends \Phalcon\Mvc\Model
     public function getSource()
     {
         return 'menus';
-    }
-
-    public static function getNamepace (){
-        return 'Models\Menus';
     }
 
     public static function getLink($menu , $slug = ''){

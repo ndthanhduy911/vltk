@@ -1,8 +1,5 @@
 <?php
 namespace Backend\Modules\Users\Controllers;
-use Models\Users;
-use Models\Roles;
-use Models\Departments;
 use Backend\Modules\Users\Forms\UserForm;
 
 class UsersController  extends \BackendController {
@@ -14,11 +11,11 @@ class UsersController  extends \BackendController {
 
     public function updateAction($id = null){
         if($id){
-            $user = Users::findFirstId($id);
+            $user = \Users::findFirstId($id);
             $user->updated_at = date('Y-m-d H:i:s');
             $title = 'Cập nhật';
         }else{
-            $user = new Users();
+            $user = new \Users();
             $title = 'Thêm mới';
             $user->created_at = date('Y-m-d H:i:s');
             $user->updated_at = $user->created_at;
@@ -47,7 +44,7 @@ class UsersController  extends \BackendController {
                         $post['username'] = 'admin';
                     }
     
-                    $checkUsename = Users::findFirst([
+                    $checkUsename = \Users::findFirst([
                         "username = :username: AND id != :id:",
                         "bind" => [
                             "username" => $post['username'],
@@ -55,7 +52,7 @@ class UsersController  extends \BackendController {
                         ]
                     ]);
     
-                    $checkEmail = Users::findFirst([
+                    $checkEmail = \Users::findFirst([
                         "email = :email: AND id != :id:",
                         "bind" => [
                             "email" => $post['email'],
@@ -63,7 +60,7 @@ class UsersController  extends \BackendController {
                         ]
                     ]);
     
-                    $checkPhone = Users::findFirst([
+                    $checkPhone = \Users::findFirst([
                         "phone = :phone: AND id != :id:",
                         "bind" => [
                             "phone" => $post['phone'],
@@ -122,7 +119,7 @@ class UsersController  extends \BackendController {
         if ($this->request->isPost()) {
             
             if($this->security->checkToken()) {
-                if($user = Users::findFirstId($id)){
+                if($user = \Users::findFirstId($id)){
                     $form = new UserForm();
                     $password = $this->request->getPost('password',['string','trim']);
                     if(!$this->rmt->checkDeptId($user->dept_id, $this->session->get('dept_mg'))){
@@ -174,7 +171,7 @@ class UsersController  extends \BackendController {
     }
 
     public function deleteAction($id = null){
-        $user = Users::findFirstId($id);
+        $user = \Users::findFirstId($id);
         if ($user !== false && (int)$id !== 1) {
             if (!$user->delete()) {
                 if ($this->request->isAjax()) {
@@ -214,31 +211,30 @@ class UsersController  extends \BackendController {
     public function getdataAction(){
         $this->view->disable();
         if ($this->request->isAjax()) {
-            $npUsers = Users::getNamepace();
             $data = $this->modelsManager->createBuilder()
             ->columns(array(
-                $npUsers.'.id',
-                $npUsers.'.name',
-                $npUsers.'.username',
-                $npUsers.'.email',
-                $npUsers.'.phone',
-                $npUsers.'.status',
-                $npUsers.'.avatar',
-                $npUsers.'.role',
-                $npUsers.'.dept_id',
-                'DL.name dept_name',
-                'R.name role_name',
+                'u.id',
+                'u.name',
+                'u.username',
+                'u.email',
+                'u.phone',
+                'u.status',
+                'u.avatar',
+                'u.role',
+                'u.dept_id',
+                'dl.name dept_name',
+                'r.name role_name',
             ))
-            ->from($npUsers)
-            ->where("$npUsers.id != 1");
+            ->from(['u'=>'Users'])
+            ->where("u.id != 1");
             if($this->session->get('user_id') != 1){
-                $data = $data->andWhere("$npUsers.dept_id IN (".implode(',',$this->session->get('dept_mg')).")");
+                $data = $data->andWhere("u.dept_id IN (".implode(',',$this->session->get('dept_mg')).")");
             }
-            $data = $data->leftJoin('Models\DepartmentsLang', "DL.dept_id = $npUsers.dept_id AND DL.lang_id = 1",'DL')
-            ->leftJoin(Roles::getNamepace(), 'R.id = '.$npUsers.'.role','R')
-            ->orderBy($npUsers.'.name ASC');
+            $data = $data->leftJoin('DepartmentsLang', "dl.dept_id = u.dept_id AND dl.lang_id = 1",'dl')
+            ->leftJoin('Roles', 'r.id = u.role','r')
+            ->orderBy('u.name ASC');
 
-            $search = $npUsers.'.name LIKE :search:';
+            $search = 'u.name LIKE :search:';
             $this->response->setStatusCode(200, 'OK');
             $this->response->setJsonContent($this->ssp->data_output($this->request->get(), $data,$search));
             return $this->response->send();

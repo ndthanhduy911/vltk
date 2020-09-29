@@ -1,7 +1,5 @@
 <?php
 
-namespace Models;
-
 class Logs extends \Phalcon\Mvc\Model
 {
     public $id;

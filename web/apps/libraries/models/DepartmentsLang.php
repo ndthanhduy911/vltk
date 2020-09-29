@@ -1,6 +1,4 @@
 <?php
-namespace Models;
-
 class DepartmentsLang extends \Phalcon\Mvc\Model
 {
 

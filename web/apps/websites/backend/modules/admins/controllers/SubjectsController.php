@@ -1,8 +1,5 @@
 <?php
 namespace Backend\Modules\Admins\Controllers;
-use Models\Subjects;
-use Models\SubjectsLang;
-use Models\Language;
 use Backend\Modules\Admins\Forms\SubjectsForm;
 use Backend\Modules\Admins\Forms\SubjectsLangForm;
 
@@ -17,15 +14,15 @@ class SubjectsController  extends \BackendController {
         $forms_lang = [];
         $subjects_lang = [];
         $subject_content = [];
-        $languages = Language::find(['status = 1']);
+        $languages = \Language::find(['status = 1']);
         if($id){
-            if(!$subject = Subjects::findFirstId($id)){
+            if(!$subject = \Subjects::findFirstId($id)){
                 echo 'Không tìm thấy dữ liệu'; die;
             }
             $subject->updated_at = date('Y-m-d H:i:s');
             $title = 'Cập nhật';
             foreach ($languages as $key => $lang) {
-                $subject_lang = SubjectsLang::findFirst(['subject_id = :id: AND lang_id = :lang_id:','bind' => ['id' => $subject->id, 'lang_id' => $lang->id]]);
+                $subject_lang = \SubjectsLang::findFirst(['subject_id = :id: AND lang_id = :lang_id:','bind' => ['id' => $subject->id, 'lang_id' => $lang->id]]);
                 if($subject_lang){
                     $form_lang = new SubjectsLangForm($subject_lang);
                     $subjects_lang[$lang->id] = $subject_lang;
@@ -36,14 +33,14 @@ class SubjectsController  extends \BackendController {
                 }
             }   
         }else{
-            $subject = new Subjects();
+            $subject = new \Subjects();
             $subject->dept_id = $this->session->get('dept_id');
             $subject->created_at = date('Y-m-d H:i:s');
             $subject->updated_at = $subject->created_at;
             $title = 'Thêm mới';
             foreach ($languages as $key => $lang) {
                 $forms_lang[$lang->id] = new SubjectsLangForm();
-                $subjects_lang[$lang->id] = new SubjectsLang();
+                $subjects_lang[$lang->id] = new \SubjectsLang();
                 $subject_content[$lang->id] = '';
             }
         }
@@ -64,7 +61,7 @@ class SubjectsController  extends \BackendController {
                     'background_image' => $this->request->getPost('background_image',['string','trim'])
                 ];
 
-                $check_slug = Subjects::findFirst([
+                $check_slug = \Subjects::findFirst([
                     "slug = :slug: AND id != :id:",
                     "bind" => [
                         "slug" => $req_subject['slug'],
@@ -136,7 +133,7 @@ class SubjectsController  extends \BackendController {
     }
 
     public function deleteAction($id = null){
-        if ($subject = Subjects::findFirstId($id)) {
+        if ($subject = \Subjects::findFirstId($id)) {
             $subject->deleted = 1;
             if (!$subject->save()) {
                 if ($this->request->isAjax()) {
@@ -186,25 +183,24 @@ class SubjectsController  extends \BackendController {
     public function getdataAction(){
         if($this->request->isAjax()){
             $dept_id = $this->session->get('dept_id');
-            $npSubjects = Subjects::getNamepace();
             $data = $this->modelsManager->createBuilder()
             ->columns(array(
-                $npSubjects.'.id',
-                $npSubjects.'.slug',
-                $npSubjects.'.status',
-                $npSubjects.'.code',
-                $npSubjects.'.dept_id',
-                $npSubjects.'.created_at',
-                'PL.excerpt excerpt',
-                'PL.title title',
-                'PL.content content',
+                's.id',
+                's.slug',
+                's.status',
+                's.code',
+                's.dept_id',
+                's.created_at',
+                'sl.excerpt excerpt',
+                'sl.title title',
+                'sl.content content',
             ))
-            ->from($npSubjects)
-            ->where("$npSubjects.deleted = 0 AND $npSubjects.dept_id = $dept_id")
-            ->leftJoin('Models\SubjectsLang', 'PL.subject_id = '.$npSubjects.'.id AND PL.lang_id = 1','PL')
-            ->orderBy($npSubjects.'.dept_id ASC, '.$npSubjects.'.created_at DESC');
+            ->from(['s'=>'Subjects'])
+            ->where("s.deleted = 0 AND s.dept_id = {$dept_id}")
+            ->leftJoin('SubjectsLang', 'sl.subject_id = s.id AND sl.lang_id = 1','sl')
+            ->orderBy('s.dept_id ASC, s.created_at DESC');
     
-            $search = 'PL.title LIKE :search:';
+            $search = 'sl.title LIKE :search:';
             $this->response->setStatusCode(200, 'OK');
             $this->response->setJsonContent($this->ssp->data_output($this->request->get(), $data,$search));
             return $this->response->send();

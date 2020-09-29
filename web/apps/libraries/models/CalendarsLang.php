@@ -1,7 +1,5 @@
 <?php
 
-namespace Models;
-
 class CalendarsLang extends \Phalcon\Mvc\Model
 {
     public $id;
@@ -15,10 +13,6 @@ class CalendarsLang extends \Phalcon\Mvc\Model
     public function getSource()
     {
         return 'calendars_lang';
-    }
-
-    public static function getNamepace (){
-        return 'Models\CalendarsLang';
     }
 
     public static function findFirstId($id, $columns = "*")

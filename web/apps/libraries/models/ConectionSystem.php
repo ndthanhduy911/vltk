@@ -1,6 +1,4 @@
 <?php
-namespace Models;
-
 class ConectionSystem extends \Phalcon\Mvc\Model
 {
     public $id;
@@ -18,10 +16,6 @@ class ConectionSystem extends \Phalcon\Mvc\Model
     public function getSource()
     {
         return 'conection';
-    }
-
-    public static function getNamepace (){
-        return 'Models\ConectionSystem';
     }
 
     public static function findFirstId($id, $columns = "*")

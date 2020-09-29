@@ -1,8 +1,5 @@
 <?php
 namespace Backend\Modules\Admins\Controllers;
-use Models\Researches;
-use Models\ResearchesLang;
-use Models\Language;
 use Backend\Modules\Admins\Forms\ResearchesForm;
 use Backend\Modules\Admins\Forms\ResearchesLangForm;
 
@@ -17,15 +14,15 @@ class ResearchesController  extends \BackendController {
         $forms_lang = [];
         $researches_lang = [];
         $research_content = [];
-        $languages = Language::find(['status = 1']);
+        $languages = \Language::find(['status = 1']);
         if($id){
-            if(!$research = Researches::findFirstId($id)){
+            if(!$research = \Researches::findFirstId($id)){
                 echo 'Không tìm thấy dữ liệu'; die;
             }
             $research->updated_at = date('Y-m-d H:i:s');
             $title = 'Cập nhật';
             foreach ($languages as $key => $lang) {
-                $research_lang = ResearchesLang::findFirst(['research_id = :id: AND lang_id = :lang_id:','bind' => ['id' => $research->id, 'lang_id' => $lang->id]]);
+                $research_lang = \ResearchesLang::findFirst(['research_id = :id: AND lang_id = :lang_id:','bind' => ['id' => $research->id, 'lang_id' => $lang->id]]);
                 if($research_lang){
                     $form_lang = new ResearchesLangForm($research_lang);
                     $researches_lang[$lang->id] = $research_lang;
@@ -36,14 +33,14 @@ class ResearchesController  extends \BackendController {
                 }
             }   
         }else{
-            $research = new Researches();
+            $research = new \Researches();
             $research->dept_id = $this->session->get('dept_id');
             $research->created_at = date('Y-m-d H:i:s');
             $research->updated_at = $research->created_at;
             $title = 'Thêm mới';
             foreach ($languages as $key => $lang) {
                 $forms_lang[$lang->id] = new ResearchesLangForm();
-                $researches_lang[$lang->id] = new ResearchesLang();
+                $researches_lang[$lang->id] = new \ResearchesLang();
                 $research_content[$lang->id] = '';
             }
         }
@@ -63,7 +60,7 @@ class ResearchesController  extends \BackendController {
                     'background_image' => $this->request->getPost('background_image',['string','trim'])
                 ];
 
-                $check_slug = Researches::findFirst([
+                $check_slug = \Researches::findFirst([
                     "slug = :slug: AND id != :id:",
                     "bind" => [
                         "slug" => $req_research['slug'],
@@ -135,7 +132,7 @@ class ResearchesController  extends \BackendController {
     }
 
     public function deleteAction($id = null){
-        if ($research = Researches::findFirstId($id)) {
+        if ($research = \Researches::findFirstId($id)) {
             $research->deleted = 1;
             if (!$research->save()) {
                 if ($this->request->isAjax()) {
@@ -185,24 +182,23 @@ class ResearchesController  extends \BackendController {
     public function getdataAction(){
         if($this->request->isAjax()){
             $dept_id = $this->session->get('dept_id');
-            $npResearches = Researches::getNamepace();
             $data = $this->modelsManager->createBuilder()
             ->columns(array(
-                $npResearches.'.id',
-                $npResearches.'.slug',
-                $npResearches.'.status',
-                $npResearches.'.dept_id',
-                $npResearches.'.created_at',
-                'PL.excerpt excerpt',
-                'PL.title title',
-                'PL.content content',
+                'r.id',
+                'r.slug',
+                'r.status',
+                'r.dept_id',
+                'r.created_at',
+                'rl.excerpt excerpt',
+                'rl.title title',
+                'rl.content content',
             ))
-            ->from($npResearches)
-            ->where("$npResearches.deleted = 0 AND $npResearches.dept_id = $dept_id")
-            ->leftJoin('Models\ResearchesLang', 'PL.research_id = '.$npResearches.'.id AND PL.lang_id = 1','PL')
-            ->orderBy($npResearches.'.dept_id ASC, '.$npResearches.'.created_at DESC');
+            ->from(['r' => 'Researches'])
+            ->where("r.deleted = 0 AND r.dept_id = {$dept_id}")
+            ->leftJoin('ResearchesLang', 'pl.research_id = r.id AND rl.lang_id = 1','rl')
+            ->orderBy('r.dept_id ASC, r.created_at DESC');
     
-            $search = 'PL.title LIKE :search:';
+            $search = 'rl.title LIKE :search:';
             $this->response->setStatusCode(200, 'OK');
             $this->response->setJsonContent($this->ssp->data_output($this->request->get(), $data,$search));
             return $this->response->send();

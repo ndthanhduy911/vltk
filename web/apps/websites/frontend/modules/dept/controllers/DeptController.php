@@ -1,14 +1,5 @@
 <?php
-
 namespace Frontend\Modules\Dept\Controllers;
-use Models\Categories;
-use Models\Home;
-use Models\Staff;
-use Models\Partner;
-use Models\Banner;
-use Models\Posts;
-use Models\Researches;
-use Models\Social;
 
 class DeptController extends \FrontendController
 {
@@ -17,26 +8,25 @@ class DeptController extends \FrontendController
         $dept = $this->dispatcher->getReturnedValue();
         $lang_id = $this->session->get('lang_id');
 
-        $npHome = Home::getNamepace();
         $homeSetting = $this->modelsManager->createBuilder()
         ->columns(array(
-            $npHome.'.id',
-            $npHome.'.dept_id',
-            $npHome.'.cat_list',
-            $npHome.'.post_number',
-            $npHome.'.specialized_bg',
-            $npHome.'.partner_bg',
-            'HL.specialized_title specialized_title',
-            'HL.staff_title staff_title',
-            'HL.staff_des staff_des',
-            'HL.partner_title partner_title',
-            'HL.partner_des partner_des',
-            'HL.contact_title contact_title',
-            'HL.contact_des contact_des'
+            'h.id',
+            'h.dept_id',
+            'h.cat_list',
+            'h.post_number',
+            'h.specialized_bg',
+            'h.partner_bg',
+            'hl.specialized_title specialized_title',
+            'hl.staff_title staff_title',
+            'hl.staff_des staff_des',
+            'hl.partner_title partner_title',
+            'hl.partner_des partner_des',
+            'hl.contact_title contact_title',
+            'hl.contact_des contact_des'
         ))
-        ->from($npHome)
-        ->where("$npHome.dept_id = $dept->id")
-        ->leftJoin('Models\HomeLang', "HL.home_id = $npHome.id AND HL.lang_id = $lang_id",'HL')
+        ->from(['h'=>'Home'])
+        ->where("h.dept_id = $dept->id")
+        ->leftJoin('HomeLang', "hl.home_id = h.id AND hl.lang_id = $lang_id",'hl')
         ->limit(1)
         ->getQuery()
         ->execute();
@@ -48,104 +38,98 @@ class DeptController extends \FrontendController
         $home = $homeSetting->toArray()[0];
 
         $banners = [];
-        $npBanner = Banner::getNamepace();
         $banners = $this->modelsManager->createBuilder()
         ->columns(array(
-            $npBanner.'.id',
-            $npBanner.'.image',
-            $npBanner.'.button_link',
-            'BL.name name',
-            'BL.description description',
-            'BL.button_text button_text'
+            'b.id',
+            'b.image',
+            'b.button_link',
+            'bl.name name',
+            'bl.description description',
+            'bl.button_text button_text'
         ))
-        ->from($npBanner)
-        ->where("$npBanner.status = 1 AND $npBanner.deleted = 0 AND $npBanner.dept_id = $dept->id")
-        ->leftJoin('Models\BannerLang', "BL.banner_id = $npBanner.id AND BL.lang_id = $lang_id",'BL')
+        ->from(['b'=>'Banner'])
+        ->where("b.status = 1 AND b.deleted = 0 AND b.dept_id = $dept->id")
+        ->leftJoin('BannerLang', "bl.banner_id = b.id AND bl.lang_id = $lang_id",'bl')
         ->getQuery()
         ->execute();
         
         $cats = [];
         $listCats = json_decode($home['cat_list']);
         if($listCats){
-            $npCat = Categories::getNamepace();
             $cats = $this->modelsManager->createBuilder()
             ->columns(array(
-                $npCat.'.id',
-                $npCat.'.slug',
-                'CL.name cat_name',
+                'c.id',
+                'c.slug',
+                'cl.name cat_name',
             ))
-            ->from($npCat)
-            ->where("$npCat.status = 1")
-            ->inWhere($npCat.".id", $listCats);
+            ->from(['c'=>'Categories'])
+            ->where("c.status = 1")
+            ->inWhere("c.id", $listCats);
             if(!(int)$dept->post_connect) {
-                $cats = $cats->andWhere("$npCat.dept_id = $dept->id");
+                $cats = $cats->andWhere("c.dept_id = $dept->id");
             }
-            $cats = $cats->leftJoin('Models\CategoriesLang', "CL.cat_id = $npCat.id AND CL.lang_id = $lang_id",'CL')
+            $cats = $cats->leftJoin('CategoriesLang', "cl.cat_id = c.id AND cl.lang_id = $lang_id",'cl')
             ->getQuery()
             ->execute();
         }
 
-        $npResearch = Researches::getNamepace();
         $researches = $this->modelsManager->createBuilder()
         ->columns(array(
-            $npResearch.'.id',
-            $npResearch.'.slug',
-            $npResearch.'.featured_image',
-            'SL.title research_name',
+            'r.id',
+            'r.slug',
+            'r.featured_image',
+            'rl.title research_name',
         ))
-        ->from($npResearch)
-        ->where("$npResearch.dept_id = $dept->id AND $npResearch.status = 1 AND $npResearch.deleted = 0")
-        ->leftJoin('Models\ResearchesLang', "SL.research_id = $npResearch.id AND SL.lang_id = $lang_id",'SL')
+        ->from(['r'=>'Researches'])
+        ->where("r.dept_id = $dept->id AND r.status = 1 AND r.deleted = 0")
+        ->leftJoin('ResearchesLang', "rl.research_id = r.id AND rl.lang_id = $lang_id",'rl')
         ->getQuery()
         ->execute();
 
-        $npStaff = Staff::getNamepace();
+
         $staffs = $this->modelsManager->createBuilder()
         ->columns(array(
-            $npStaff.'.id',
-            $npStaff.'.slug',
-            $npStaff.'.featured_image',
-            $npStaff.'.dean',
-            $npStaff.'.dept_position',
-            $npStaff.'.email',
-            $npStaff.'.dept_id',
-            'SL.title title',
-            'SL.content content'
+            's.id',
+            's.slug',
+            's.featured_image',
+            's.dean',
+            's.dept_position',
+            's.email',
+            's.dept_id',
+            'sl.title title',
+            'sl.content content'
         ))
-        ->from($npStaff)
-        ->where("$npStaff.dept_id = $dept->id AND $npStaff.status = 1 AND $npStaff.deleted = 0 AND ($npStaff.dept_position = 1 OR $npStaff.dept_position = 2)")
-        ->leftJoin("Models\StaffLang", "SL.staff_id = $npStaff.id AND SL.lang_id = $lang_id",'SL')
-        ->orderBy("$npStaff.dean ASC")
+        ->from(['s'=>'Staff'])
+        ->where("s.dept_id = $dept->id AND s.status = 1 AND s.deleted = 0 AND (s.dept_position = 1 OR s.dept_position = 2)")
+        ->leftJoin("StaffLang", "sl.staff_id = s.id AND sl.lang_id = $lang_id",'sl')
+        ->orderBy("s.dean ASC")
         ->limit(3)
         ->getQuery()
         ->execute();
         
 
-        $npPartner = Partner::getNamepace();
         $partners = $this->modelsManager->createBuilder()
         ->columns(array(
-            $npPartner.'.id',
-            $npPartner.'.link',
-            $npPartner.'.featured_image',
-            'PL.title title',
+            'p.id',
+            'p.link',
+            'p.featured_image',
+            'pl.title title',
         ))
-        ->from($npPartner)
-        ->where("$npPartner.status = 1 AND $npPartner.deleted = 0 AND $npPartner.dept_id = $dept->id")
-        ->leftJoin('Models\PartnerLang', "PL.partner_id = $npPartner.id AND PL.lang_id = $lang_id",'PL')
+        ->from(['p' => 'Partner'])
+        ->where("p.status = 1 AND p.deleted = 0 AND p.dept_id = $dept->id")
+        ->leftJoin('PartnerLang', "pl.partner_id = p.id AND pl.lang_id = $lang_id",'pl')
         ->getQuery()
         ->execute();
         
         
         $this->view->home = $home;
-        $this->view->socials = Social::find(["status = 1 AND dept_id = $dept->id", "order" => "sort ASC"]);
+        $this->view->socials = \Social::find(["status = 1 AND dept_id = $dept->id", "order" => "sort ASC"]);
         $this->view->banners = $banners;
         $this->view->cats = $cats;
         $this->view->researches = $researches;
         $this->view->staffs = $staffs;
         $this->view->partners = $partners;
-        $this->view->postModel = new Posts();
-        $this->view->catModel = new Categories();
-        $this->view->researchModel = new Researches();
+        $this->view->researchModel = new \Researches();
         $this->get_js_css();
     }
 

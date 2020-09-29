@@ -1,33 +1,29 @@
 <?php
-    use Models\Departments;
-    use Models\Researches;
 
     if((int)$dept->id === 1){
-        $npDept = Departments::getNamepace();
         $depts = $this->modelsManager->createBuilder()
         ->columns(array(
-            $npDept.'.id',
-            $npDept.'.slug',
-            $npDept.'.image',
-            'DL.name dept_name',
+            'd.id',
+            'd.slug',
+            'd.image',
+            'dl.name dept_name',
         ))
-        ->from($npDept)
-        ->leftJoin('Models\DepartmentsLang', 'DL.dept_id = '.$npDept.'.id','DL')
-        ->where('DL.lang_id = :lang_id: AND status = 1 AND '.$npDept.'.id != 1',['lang_id' => $lang_id])
+        ->from(['d'=>'Departments'])
+        ->leftJoin('DepartmentsLang', 'dl.dept_id = d.id','dl')
+        ->where('dl.lang_id = :lang_id: AND d.status = 1 AND d.id != 1',['lang_id' => $lang_id])
         ->getQuery()
         ->execute();
     }else{
-        $npResearch = Researches::getNamepace();
         $researches = $this->modelsManager->createBuilder()
         ->columns(array(
-            $npResearch.'.id',
-            $npResearch.'.slug',
-            $npResearch.'.featured_image',
-            'SL.title research_name',
+            'r.id',
+            'r.slug',
+            'r.featured_image',
+            'rl.title research_name',
         ))
-        ->from($npResearch)
-        ->where("$npResearch.dept_id = $dept->id AND $npResearch.status = 1 AND $npResearch.deleted = 0")
-        ->leftJoin('Models\ResearchesLang', "SL.research_id = $npResearch.id AND SL.lang_id = $lang_id",'SL')
+        ->from(['r'=>'Researches'])
+        ->where("r.dept_id = $dept->id AND r.status = 1 AND r.deleted = 0")
+        ->leftJoin('ResearchesLang', "rl.research_id = r.id AND rl.lang_id = $lang_id",'rl')
         ->getQuery()
         ->execute();
     }
@@ -80,7 +76,7 @@
                         <div class="overlay-container rounded overlay-visible">
                             <img src="{{ helper.getLinkImage(research.featured_image) }}"
                                 alt="{{ dept_item.dept_name }}">
-                            <a href="<?php Researches::getUrl($dept, $research) ?>" class="overlay-link"><i
+                            <a href="<?php \Researches::getUrl($dept, $research) ?>" class="overlay-link"><i
                                     class="fa fa-graduation-cap"></i></a>
                             <div class="overlay-bottom hidden-xs">
                                 <div class="text">

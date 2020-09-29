@@ -1,6 +1,4 @@
 <?php
-namespace Models;
-
 class Users extends \Phalcon\Mvc\Model
 {
     public $id;
@@ -59,9 +57,5 @@ class Users extends \Phalcon\Mvc\Model
             "bind" => array('username' => $username),
             "columns" => $columns
         ]);
-    }
-
-    public static function getNamepace (){
-        return 'Models\Users';
     }
 }

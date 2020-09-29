@@ -2,10 +2,6 @@
 namespace Library\Helper;
 use Phalcon\Mvc\User\Component;
 use Library\ML\ML as MLML;
-use Models\Logs as Logs;
-// use Models\Emails;
-// use Models\GenaralSetting;
-// use Models\Notification;
 
 
 class Helper extends Component
@@ -73,7 +69,7 @@ class Helper extends Component
     }
 
     public function write_log($type = null, $page=null, $name = null, $detail = '[]',$user_id = null){
-        $log =  new Logs();
+        $log =  new \Logs();
         $log->type = $type;
         $log->user_id = $user_id ? $user_id : $this->auth->getIdentity()['id'];
         $log->name = $name;

@@ -1,94 +1,80 @@
 <?php
 namespace Backend\Modules\Setting\Forms;
 
-
-use Phalcon\Forms\Element\Email;
 use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\Numeric;
-use Phalcon\Forms\Element\Textarea;
 use Phalcon\Forms\Element\Select;
 use Phalcon\Forms\Element\Hidden;
 use Phalcon\Forms\Form;
 use Phalcon\Validation\Validator\StringLength as StringLength;
 use Phalcon\Validation\Validator\PresenceOf;
-use Models\Categories;
-use Models\Departments;
-use Models\MenuLocation;
-use Models\Menus;
-use Models\Pages;
-use Models\Posts;
 
 class MenusForm extends Form
 {
     public function initialize($entity = null, $options = null)
     {
         $dept_id = isset($_SESSION['dept_id']) ? $_SESSION['dept_id'] : 0;
-        $npMenu = Menus::getNamepace();
         if(isset($entity->menu_location_id)){
-            $params_menu = "$npMenu.dept_id = $dept_id AND $npMenu.parent_id is NULL AND $npMenu.menu_location_id = $entity->menu_location_id" ;
+            $params_menu = "m.dept_id = $dept_id AND m.parent_id is NULL AND m.menu_location_id = $entity->menu_location_id" ;
         }else{
-            $params_menu = "$npMenu.dept_id = $dept_id AND $npMenu.parent_id is NULL";
+            $params_menu = "m.dept_id = $dept_id AND m.parent_id is NULL";
         }
         $menus = $this->modelsManager->createBuilder()
         ->columns(array(
-            $npMenu.'.id',
-            'ML.name name',
+            'm.id',
+            'ml.name name',
         ))
-        ->from($npMenu)
+        ->from(['m'=>'Menus'])
         ->where($params_menu)
-        ->leftJoin('Models\MenusLang', "ML.menu_id = $npMenu.id AND ML.lang_id = 1",'ML')
+        ->leftJoin('MenusLang', "ml.menu_id = m.id AND ml.lang_id = 1",'ml')
         ->getQuery()
         ->execute();
 
-        $npCat = Categories::getNamepace();
         $cats = $this->modelsManager->createBuilder()
         ->columns(array(
-            $npCat.'.id',
-            'CL.name name',
+            'c.id',
+            'cl.name name',
         ))
-        ->from($npCat)
-        ->where("$npCat.dept_id = $dept_id AND $npCat.deleted = 0")
-        ->leftJoin('Models\CategoriesLang', "CL.cat_id = $npCat.id AND CL.lang_id = 1",'CL')
-        ->orderBy('CL.name ASC')
+        ->from(['c'=>'Categories'])
+        ->where("c.dept_id = $dept_id AND c.deleted = 0")
+        ->leftJoin('CategoriesLang', "cl.cat_id = c.id AND cl.lang_id = 1",'cl')
+        ->orderBy('cl.name ASC')
         ->getQuery()
         ->execute();
 
-        $npDept = Departments::getNamepace();
         $depts = $this->modelsManager->createBuilder()
         ->columns(array(
-            $npDept.'.id',
-            'DL.name name',
+            '.id',
+            'dl.name name',
         ))
-        ->from($npDept)
-        ->leftJoin('Models\DepartmentsLang', "DL.dept_id = $npDept.id AND DL.lang_id = 1",'DL')
+        ->from(['d'=>'Departments'])
+        ->leftJoin('DepartmentsLang', "dl.dept_id = dl.id AND dl.lang_id = 1",'dl')
         ->getQuery()
         ->execute();
 
-        $npPages = Pages::getNamepace();
         $pages = $this->modelsManager->createBuilder()
         ->columns(array(
-            $npPages.'.id',
-            'PL.title title',
+            'p.id',
+            'pl.title title',
         ))
-        ->from($npPages)
-        ->where("$npPages.dept_id = $dept_id AND $npPages.deleted = 0")
-        ->leftJoin('Models\PagesLang', "PL.page_id = $npPages.id AND PL.lang_id = 1",'PL')
+        ->from(['p'=>'Pages'])
+        ->where("p.dept_id = $dept_id AND p.deleted = 0")
+        ->leftJoin('PagesLang', "pl.page_id = p.id AND pl.lang_id = 1",'pl')
         ->getQuery()
         ->execute();
 
-        $npPosts = Posts::getNamepace();
         $posts = $this->modelsManager->createBuilder()
         ->columns(array(
-            $npPosts.'.id',
-            'PL.title title',
+            'p.id',
+            'pl.title title',
         ))
-        ->from($npPosts)
-        ->where("$npPosts.dept_id = $dept_id AND $npPosts.deleted = 0")
-        ->leftJoin('Models\PostsLang', "PL.post_id = $npPosts.id AND PL.lang_id = 1",'PL')
+        ->from(['p'=>'Posts'])
+        ->where("p.dept_id = $dept_id AND p.deleted = 0")
+        ->leftJoin('PostsLang', "pl.post_id = p.id AND pl.lang_id = 1",'pl')
         ->getQuery()
         ->execute();
 
-        $menu_location_id = new Select('menu_location_id', MenuLocation::find(["dept_id = $dept_id"]), array(
+        $menu_location_id = new Select('menu_location_id', \MenuLocation::find(["dept_id = $dept_id"]), array(
             'using' => array('id', 'name'),
             'class' => 'form-control',
             'useEmpty' => true,

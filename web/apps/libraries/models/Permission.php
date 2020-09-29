@@ -1,6 +1,4 @@
 <?php
-namespace Models;
-
 class Permission extends \Phalcon\Mvc\Model
 {
     public $id;
@@ -25,9 +23,5 @@ class Permission extends \Phalcon\Mvc\Model
 
 	public function getSource(){
         return 'permission';
-    }
-
-    public static function getNamepace (){
-        return 'Models\Permission';
     }
 }

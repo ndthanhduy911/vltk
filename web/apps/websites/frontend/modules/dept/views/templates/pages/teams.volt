@@ -1,85 +1,80 @@
 <?php
-
-use Models\Departments;
-use Models\Staff; 
-    $staffModel = new Staff();
-    $npStaff = Staff::getNamepace();
     if($dept->id == 1){
         $deanStaffs = $this->modelsManager->createBuilder()
         ->columns(array(
-            $npStaff.'.id',
-            $npStaff.'.slug',
-            $npStaff.'.featured_image',
-            $npStaff.'.dean',
-            $npStaff.'.dept_position',
-            $npStaff.'.email',
-            $npStaff.'.dept_id',
-            'SL.title title',
-            'SL.content content'
+            's.id',
+            's.slug',
+            's.featured_image',
+            's.dean',
+            's.dept_position',
+            's.email',
+            's.dept_id',
+            'sl.title title',
+            'sl.content content'
         ))
-        ->from($npStaff)
-        ->leftJoin("Models\StaffLang", "SL.staff_id = $npStaff.id AND SL.lang_id = $lang_id",'SL')
-        ->where("$npStaff.status = 1 AND ($npStaff.dean = 1 OR $npStaff.dean = 2)")
-        ->orderBy("$npStaff.sort ASC, $npStaff.dean ASC")
+        ->from(['s'=>'Staff'])
+        ->leftJoin("StaffLang", "sl.staff_id = s.id AND sl.lang_id = $lang_id",'sl')
+        ->where("s.status = 1 AND (s.dean = 1 OR s.dean = 2)")
+        ->orderBy("s.sort ASC, s.dean ASC")
         ->limit(3)
         ->getQuery()
         ->execute();
         
         $otherStaffs = $this->modelsManager->createBuilder()
         ->columns(array(
-            $npStaff.'.id',
-            $npStaff.'.slug',
-            $npStaff.'.featured_image',
-            $npStaff.'.dean',
-            $npStaff.'.dept_position',
-            $npStaff.'.email',
-            $npStaff.'.dept_id',
-            'SL.title title',
-            'SL.content content'
+            's.id',
+            's.slug',
+            's.featured_image',
+            's.dean',
+            's.dept_position',
+            's.email',
+            's.dept_id',
+            'sl.title title',
+            'sl.content content'
         ))
-        ->from($npStaff)
-        ->leftJoin("Models\StaffLang", "SL.staff_id = $npStaff.id AND SL.lang_id = $lang_id",'SL')
-        ->where("$npStaff.status = 1")
-        ->inWhere("$npStaff.dept_position", [1,2])
-        ->orderBy("$npStaff.dept_id ASC, $npStaff.dept_position ASC, $npStaff.sort ASC")
+        ->from(['s'=>'Staff'])
+        ->leftJoin("StaffLang", "sl.staff_id = s.id AND sl.lang_id = $lang_id",'sl')
+        ->where("s.status = 1")
+        ->inWhere("s.dept_position", [1,2])
+        ->orderBy("s.dept_id ASC, s.dept_position ASC, s.sort ASC")
         ->getQuery()
         ->execute();
     }else{
         $mainStaffs = $this->modelsManager->createBuilder()
         ->columns(array(
-            $npStaff.'.id',
-            $npStaff.'.slug',
-            $npStaff.'.featured_image',
-            $npStaff.'.dean',
-            $npStaff.'.dept_position',
-            $npStaff.'.email',
-            $npStaff.'.dept_id',
-            'SL.title title',
-            'SL.content content'
+            's.id',
+            's.slug',
+            's.featured_image',
+            's.dean',
+            's.dept_position',
+            's.email',
+            's.dept_id',
+            'sl.title title',
+            'sl.content content'
         ))
-        ->from($npStaff)
-        ->where("$npStaff.deleted = 0 AND $npStaff.status = 1 AND $npStaff.dept_position != 5 AND $npStaff.dept_id = $dept->id")
-        ->leftJoin("Models\StaffLang", "SL.staff_id = $npStaff.id AND SL.lang_id = $lang_id",'SL')
-        ->orderBy("$npStaff.dept_position ASC")
+        ->from(['s'=>'Staff'])
+        ->where("s.deleted = 0 AND s.status = 1 AND s.dept_position != 5 AND s.dept_id = $dept->id")
+        ->leftJoin("StaffLang", "sl.staff_id = s.id AND sl.lang_id = $lang_id",'sl')
+        ->orderBy("s.dept_position ASC")
         ->getQuery()
         ->execute();
         
         $employStaff = $this->modelsManager->createBuilder()
         ->columns(array(
-            $npStaff.'.id',
-            $npStaff.'.slug',
-            $npStaff.'.featured_image',
-            $npStaff.'.dean',
-            $npStaff.'.dept_position',
-            $npStaff.'.email',
-            $npStaff.'.dept_id',
-            'SL.title title',
-            'SL.content content'
+            's.id',
+            's.slug',
+            's.featured_image',
+            's.dean',
+            's.dept_position',
+            's.email',
+            's.dept_id',
+            'sl.title title',
+            'sl.content content'
         ))
-        ->from($npStaff)
-        ->where("$npStaff.deleted = 0 AND $npStaff.status = 1 AND $npStaff.dept_position = 5 AND $npStaff.dept_id = $dept->id")
-        ->leftJoin("Models\StaffLang", "SL.staff_id = $npStaff.id AND SL.lang_id = $lang_id",'SL')
-        ->orderBy("$npStaff.dept_position ASC")
+        ->from(['s'=>'Staff'])
+        ->where("s.deleted = 0 AND s.status = 1 AND s.dept_position = 5 AND s.dept_id = $dept->id")
+        ->leftJoin("StaffLang", "sl.staff_id = s.id AND sl.lang_id = $lang_id",'sl')
+        ->orderBy("s.dept_position ASC")
         ->getQuery()
         ->execute();
     } 
@@ -122,7 +117,7 @@ use Models\Staff;
                                     <img src="{{ helper.getLinkImage(staff.featured_image,'/assets/frontend/images/teams.jpg') }}" alt="{{ staff.title }}" width="100%">
                                 </div>
                                 <div class="body">
-                                    <h5 class="margin-clear text-uppercase"><a href="{{ staffModel.getUrl(dept,staff) }}" title="{{ staff.title }}">{{ staff.title }}</a></h5>
+                                    <h5 class="margin-clear text-uppercase"><a href="<?= \Staff::getUrl($dept,$staff) ?>" title="{{ staff.title }}">{{ staff.title }}</a></h5>
                                     <small class="text-uppercase">{{ helper.getDean(staff.dean) }}</small>
                                     <div class="separator mt-10"></div>
                                     {% if staff.email %}
@@ -152,14 +147,14 @@ use Models\Staff;
                                     </div>
                                     <div class="col-md-9 p-sm-0">
                                         <div class="body mt-3">
-                                            <h5 class="title margin-clear"><a href="{{ staffModel.getUrl(dept, staff) }}" title="{{ staff.title }}">{{ staff.title }}</a></h5>
+                                            <h5 class="title margin-clear"><a href="<?= \Staff::getUrl($dept, $staff) ?>" title="{{ staff.title }}">{{ staff.title }}</a></h5>
                                             <div class="separator-2 mt-2"></div>
                                             <h5 class="m-0 text-uppercase">{{ helper.getPosition(staff.dept_position) }}</h5>
                                             {% if staff.email %}
                                             <a href="mailto:{{staff.email}}" class="btn btn-link pl-0 text-left"><i class="pr-10 margin-clear fa fa-envelope-o"></i>{{staff.email}}</a>
                                             {% endif %}
                                             <div class="w-100">
-                                                <a href="{{ staffModel.getUrl(dept, staff) }}" class="btn btn-default btn-sm btn-animated radius-50">{{ ml._ml_system('more', 'Xem thêm') }} <i class="fa fa-arrow-right"></i></a>
+                                                <a href="<?= \Staff::getUrl($dept, $staff) ?>" class="btn btn-default btn-sm btn-animated radius-50">{{ ml._ml_system('more', 'Xem thêm') }} <i class="fa fa-arrow-right"></i></a>
                                             </div>
                                         </div>
                                     </div>
@@ -193,7 +188,7 @@ use Models\Staff;
                                     <li><a href="mailto:{{ staff.email }}" class="text-info"><i class="fa fa-envelope-o pr-10"></i>{{ staff.email }}</a></li>
                                 {% endif %}
                                 <div class="w-100">
-                                    <a href="{{ staffModel.getUrl(dept, staff) }}" class="btn btn-default btn-sm btn-animated radius-50">{{ ml._ml_system('more', 'Xem thêm') }} <i class="fa fa-arrow-right"></i></a>
+                                    <a href="<?= \Staff::getUrl($dept, $staff) ?>" class="btn btn-default btn-sm btn-animated radius-50">{{ ml._ml_system('more', 'Xem thêm') }} <i class="fa fa-arrow-right"></i></a>
                                 </div>
                                 </div>
                             </div>
@@ -224,7 +219,7 @@ use Models\Staff;
                                     </ul>
                                     {% endif %}
                                     <div class="w-100">
-                                        <a href="{{ staffModel.getUrl(dept, staff) }}" class="btn btn-default btn-sm btn-animated radius-50">{{ ml._ml_system('more', 'Xem thêm') }} <i class="fa fa-arrow-right"></i></a>
+                                        <a href="<?= \Staff::getUrl($dept, $staff) ?>" class="btn btn-default btn-sm btn-animated radius-50">{{ ml._ml_system('more', 'Xem thêm') }} <i class="fa fa-arrow-right"></i></a>
                                     </div>
                                 </div>
                             </div>
