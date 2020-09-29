@@ -10,7 +10,7 @@
         'CL.name cat_name',
     ))
     ->from($npCat)
-    ->where("$npCat.status = 1 AND $npCat.deleted = 1 AND $npCat.dept_id = $dept->id AND $npCat.id != 1")
+    ->where("$npCat.status = 1 AND $npCat.deleted = 0 AND $npCat.dept_id = $dept->id AND $npCat.id != 1")
     ->leftJoin('Models\CategoriesLang', "CL.cat_id = $npCat.id AND CL.lang_id = $lang_id",'CL')
     ->getQuery()
     ->execute();
