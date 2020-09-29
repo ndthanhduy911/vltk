@@ -53,7 +53,7 @@ class Posts extends \Phalcon\Mvc\Model
     public static function getUrlById($id = null)
     {
         if($post = parent::findFirst($id)){
-            return FRONTEND_URL.'/'.$post->slug;
+            return WEB_URL.'/'.$post->slug;
         }else{
             return false;
         }
@@ -79,7 +79,7 @@ class Posts extends \Phalcon\Mvc\Model
     public static function getUrl($dept = NULL, $post = NULL)
     {
         if($post && $dept){
-            return FRONTEND_URL.($dept->id != 1 ? "/$dept->slug" : '' ).'/news/'.$post->slug;
+            return WEB_URL.($dept->id != 1 ? "/$dept->slug" : '' ).'/news/'.$post->slug;
         }else{
             return '';
         }

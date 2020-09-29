@@ -48,7 +48,7 @@ class Subjects extends \Phalcon\Mvc\Model
     {
         
         if($subject = parent::findFirst($id)){
-            return FRONTEND_URL.'/'.$subject->slug;
+            return WEB_URL.'/'.$subject->slug;
         }else{
             return null;
         }
@@ -66,7 +66,7 @@ class Subjects extends \Phalcon\Mvc\Model
     public static function getUrl($dept = NULL, $subject = NULL)
     {
         if($subject && $dept){
-            return FRONTEND_URL.($dept->id != 1 ? "/$dept->slug" : '' ).'/subject/'.$subject->slug;
+            return WEB_URL.($dept->id != 1 ? "/$dept->slug" : '' ).'/subject/'.$subject->slug;
         }else{
             return '';
         }

@@ -138,7 +138,7 @@ class CategoriesController  extends \BackendController {
                             $cats_lang[$lang->id]->save();
                         }
                         $this->flashSession->success($title." thành công");
-                        return $this->response->redirect(BACKEND_URL.'/categories');
+                        return $this->response->redirect(WEB_ADMIN_URL.'/categories');
                     }
                 }else{
                     foreach ($error as $value) {
@@ -175,7 +175,7 @@ class CategoriesController  extends \BackendController {
                     foreach ($cat->getMessages() as $message) {
                         $this->flashSession->error($message);
                     }
-                    return $this->response->redirect(BACKEND_URL.'/trashs');
+                    return $this->response->redirect(WEB_ADMIN_URL.'/trashs');
                 }
             }else{
                 if ($this->request->isAjax()) {
@@ -186,7 +186,7 @@ class CategoriesController  extends \BackendController {
                 } else {
                     // $this->logs->write_log(3, 1, 'Xóa trang', json_encode($save),$this->session->get("user_id"));
                     $this->flashSession->success("Chuyển bài viết đến thùng rác thành công");
-                    return $this->response->redirect(BACKEND_URL.'/posts');
+                    return $this->response->redirect(WEB_ADMIN_URL.'/posts');
                 }
             }
         }else{
@@ -198,7 +198,7 @@ class CategoriesController  extends \BackendController {
             } else {
                 // $this->logs->write_log(3, 1, 'Xóa trang', json_encode($save),$this->session->get("user_id"));
                 $this->flashSession->error("Không tìm thấy bài viết");
-                return $this->response->redirect(BACKEND_URL.'/posts');
+                return $this->response->redirect(WEB_ADMIN_URL.'/posts');
             }
         }
     }

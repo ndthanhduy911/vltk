@@ -111,7 +111,7 @@ class ResearchesController  extends \BackendController {
                             $researches_lang[$lang->id]->save();
                         }
                         $this->flashSession->success($title." thành công");
-                        return $this->response->redirect(BACKEND_URL.'/researches');
+                        return $this->response->redirect(WEB_ADMIN_URL.'/researches');
                     }
                 }else{
                     foreach ($error as $value) {
@@ -150,7 +150,7 @@ class ResearchesController  extends \BackendController {
                     foreach ($research->getMessages() as $message) {
                         $this->flashSession->error($message);
                     }
-                    return $this->response->redirect(BACKEND_URL.'/trashs');
+                    return $this->response->redirect(WEB_ADMIN_URL.'/trashs');
                 }
             }else{
                 if ($this->request->isAjax()) {
@@ -161,7 +161,7 @@ class ResearchesController  extends \BackendController {
                 } else {
                     // $this->logs->write_log(3, 1, 'Xóa trang', json_encode($save),$this->session->get("user_id"));
                     $this->flashSession->success("Xóa bài viết khoản thành công");
-                    return $this->response->redirect(BACKEND_URL.'/trashs');
+                    return $this->response->redirect(WEB_ADMIN_URL.'/trashs');
                 }
 
             }
@@ -173,7 +173,7 @@ class ResearchesController  extends \BackendController {
                 return $this->response->send();
             } else {
                 $this->flashSession->error("Không tìm thấy bài viết");
-                return $this->response->redirect(BACKEND_URL.'/trashs');
+                return $this->response->redirect(WEB_ADMIN_URL.'/trashs');
             }
         }
     }

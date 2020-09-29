@@ -144,7 +144,7 @@ class Departments extends \Phalcon\Mvc\Model
     public static function getUrlById($id = null)
     {
         if($dept = parent::findFirst($id)){
-            return FRONTEND_URL.'/'.$dept->slug;
+            return WEB_URL.'/'.$dept->slug;
         }else{
             return null;
         }

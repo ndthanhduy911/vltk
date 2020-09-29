@@ -26,12 +26,12 @@ class MenusController  extends \BackendController
         $id = $this->request->get('id');
         if(!MenuLocation::findFirst(['id = :id: AND dept_id = :dept_id:','bind' => ['id' => $location_id, 'dept_id' => $dept_id]])){
             $this->flashSession->error("Vị trí menu không đúng");
-            return $this->response->redirect(BACKEND_URL.'/menu');
+            return $this->response->redirect(WEB_ADMIN_URL.'/menu');
         }
         if($id){
             if(!$menu = Menus::findFirst(["id = $id AND menu_location_id = $location_id AND dept_id = $dept_id"])){
                 $this->flashSession->error("Không tìm thấy menu này");
-                return $this->response->redirect(BACKEND_URL.'/menu');
+                return $this->response->redirect(WEB_ADMIN_URL.'/menu');
             }
             $menu->updated_at = date('Y-m-d H:i:s');
             $title = 'Cập nhật';
@@ -115,7 +115,7 @@ class MenusController  extends \BackendController
                             $menus_lang[$lang->id]->save();
                         }
                         $this->flashSession->success($title." thành công");
-                        return $this->response->redirect(BACKEND_URL.'/menu');
+                        return $this->response->redirect(WEB_ADMIN_URL.'/menu');
                     }
                 }else{
                     foreach ($error as $value) {
@@ -124,7 +124,7 @@ class MenusController  extends \BackendController
                 }
             }else{
                 $this->flashSession->error("Token không chính xác");
-                return $this->response->redirect(BACKEND_URL.'/menu');
+                return $this->response->redirect(WEB_ADMIN_URL.'/menu');
             }
         }
         $this->view->location_id = $location_id;
@@ -154,7 +154,7 @@ class MenusController  extends \BackendController
                     foreach ($menu->getMessages() as $message) {
                         $this->flashSession->error($message);
                     }
-                    return $this->response->redirect(BACKEND_URL.'/menu');
+                    return $this->response->redirect(WEB_ADMIN_URL.'/menu');
                 }
             }else{
                 if ($this->request->isAjax()) {
@@ -164,12 +164,12 @@ class MenusController  extends \BackendController
                     return $this->response->send();
                 } else {
                     $this->flashSession->success("Xóa thành công");
-                    return $this->response->redirect(BACKEND_URL.'/menu');
+                    return $this->response->redirect(WEB_ADMIN_URL.'/menu');
                 }
             }
         }else{
             $this->flashSession->error("Không tìm thấy");
-            return $this->response->redirect(BACKEND_URL.'/menu');
+            return $this->response->redirect(WEB_ADMIN_URL.'/menu');
         }
     }
 

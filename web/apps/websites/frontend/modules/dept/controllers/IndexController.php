@@ -155,6 +155,6 @@ class IndexController extends \FrontendController
     // FUNCTION
     // =================================
     private function get_js_css (){
-        $this->assets->addJs(FRONTEND_URL.'/assets/frontend/js/modules/dept/index.js');
+        $this->assets->addJs(WEB_URL.'/assets/frontend/js/modules/dept/index.js');
     }
 }

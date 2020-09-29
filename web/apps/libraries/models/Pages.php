@@ -47,7 +47,7 @@ class Pages extends \Phalcon\Mvc\Model
     public static function getUrlById($id = null)
     {
         if($page = parent::findFirst($id)){
-            return FRONTEND_URL.'/'.$page->slug;
+            return WEB_URL.'/'.$page->slug;
         }else{
             return null;
         }

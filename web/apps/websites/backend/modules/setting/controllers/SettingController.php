@@ -51,7 +51,7 @@ class SettingController  extends \BackendController
         if ($this->request->isPost()) {
             if (!$this->security->checkToken()) {
                 $this->flashSession->error("Token không chính xác");
-                return $this->response->redirect(BACKEND_URL.'/setting/links');
+                return $this->response->redirect(WEB_ADMIN_URL.'/setting/links');
             }
             $error = [];
             $l_name = $this->request->getPost('name',['string','trim']);
@@ -93,7 +93,7 @@ class SettingController  extends \BackendController
                         $links_lang[$lang->id]->save();
                     }
                     $this->flashSession->success($title." thành công");
-                    return $this->response->redirect(BACKEND_URL.'/setting/links');
+                    return $this->response->redirect(WEB_ADMIN_URL.'/setting/links');
                 }
             }else{
                 foreach ($error as $value) {
@@ -124,7 +124,7 @@ class SettingController  extends \BackendController
                     foreach ($link->getMessages() as $message) {
                         $this->flashSession->error($message);
                     }
-                    return $this->response->redirect(BACKEND_URL.'/trashs');
+                    return $this->response->redirect(WEB_ADMIN_URL.'/trashs');
                 }
             }else{
                 if ($this->request->isAjax()) {
@@ -135,7 +135,7 @@ class SettingController  extends \BackendController
                 } else {
                     // $this->logs->write_log(3, 1, 'Xóa trang', json_encode($save),$this->session->get("user_id"));
                     $this->flashSession->success("Xóa thành công");
-                    return $this->response->redirect(BACKEND_URL.'/posts');
+                    return $this->response->redirect(WEB_ADMIN_URL.'/posts');
                 }
             }
         }else{
@@ -147,7 +147,7 @@ class SettingController  extends \BackendController
             } else {
                 // $this->logs->write_log(3, 1, 'Xóa trang', json_encode($save),$this->session->get("user_id"));
                 $this->flashSession->error("Không tìm thấy link");
-                return $this->response->redirect(BACKEND_URL.'/posts');
+                return $this->response->redirect(WEB_ADMIN_URL.'/posts');
             }
         }
         
@@ -176,7 +176,7 @@ class SettingController  extends \BackendController
         if ($this->request->isPost()) {
             if (!$this->security->checkToken()) {
                 $this->flashSession->error("Token không chính xác");
-                return $this->response->redirect(BACKEND_URL.'/setting/socials');
+                return $this->response->redirect(WEB_ADMIN_URL.'/setting/socials');
             }
             $error = [];
             $l_name = $this->request->getPost('name',['string','trim']);
@@ -201,7 +201,7 @@ class SettingController  extends \BackendController
                     }
                 } else {
                     $this->flashSession->success($title." thành công");
-                    return $this->response->redirect(BACKEND_URL.'/setting/socials');
+                    return $this->response->redirect(WEB_ADMIN_URL.'/setting/socials');
                 }
             }else{
                 foreach ($error as $value) {
@@ -229,7 +229,7 @@ class SettingController  extends \BackendController
                     foreach ($social->getMessages() as $message) {
                         $this->flashSession->error($message);
                     }
-                    return $this->response->redirect(BACKEND_URL.'/trashs');
+                    return $this->response->redirect(WEB_ADMIN_URL.'/trashs');
                 }
             }else{
                 if ($this->request->isAjax()) {
@@ -240,7 +240,7 @@ class SettingController  extends \BackendController
                 } else {
                     // $this->logs->write_log(3, 1, 'Xóa trang', json_encode($save),$this->session->get("user_id"));
                     $this->flashSession->success("Xóa thành công");
-                    return $this->response->redirect(BACKEND_URL.'/setting/socials');
+                    return $this->response->redirect(WEB_ADMIN_URL.'/setting/socials');
                 }
             }
         }else{
@@ -252,7 +252,7 @@ class SettingController  extends \BackendController
             } else {
                 // $this->logs->write_log(3, 1, 'Xóa trang', json_encode($save),$this->session->get("user_id"));
                 $this->flashSession->error("Không tìm thấy tượng");
-                return $this->response->redirect(BACKEND_URL.'/posts');
+                return $this->response->redirect(WEB_ADMIN_URL.'/posts');
             }
         }
         

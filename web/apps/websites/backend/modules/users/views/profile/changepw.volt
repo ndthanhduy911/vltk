@@ -30,7 +30,7 @@
 
                         <h4 class="line-head">Cập nhật thông tin</h4>
                         <div class="post-content">
-                            <form action="<?php echo BACKEND_URL ?>/profile" class="login-form" data-toggle="validator"
+                            <form action="<?php echo WEB_ADMIN_URL ?>/profile" class="login-form" data-toggle="validator"
                                 role="form" method="POST">
                                 {% for element in form %}
                                 <div class="col-md-8 p-0">

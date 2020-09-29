@@ -46,7 +46,7 @@ class Researches extends \Phalcon\Mvc\Model
     {
         
         if($research = parent::findFirst($id)){
-            return FRONTEND_URL.'/'.$research->slug;
+            return WEB_URL.'/'.$research->slug;
         }else{
             return null;
         }
@@ -64,7 +64,7 @@ class Researches extends \Phalcon\Mvc\Model
     public static function getUrl($dept = NULL, $research = NULL)
     {
         if($research && $dept){
-            return FRONTEND_URL.($dept->id != 1 ? "/$dept->slug" : '' ).'/research/'.$research->slug;
+            return WEB_URL.($dept->id != 1 ? "/$dept->slug" : '' ).'/research/'.$research->slug;
         }else{
             return '';
         }

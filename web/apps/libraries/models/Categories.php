@@ -42,7 +42,7 @@ class Categories extends \Phalcon\Mvc\Model
 
     public static function getUrlById($id = null){
         if($cat = parent::findFirst($id)){
-            return FRONTEND_URL.'/category/'.$cat->slug;
+            return WEB_URL.'/category/'.$cat->slug;
         }else{
             return null;
         }
@@ -50,7 +50,7 @@ class Categories extends \Phalcon\Mvc\Model
 
     public static function getUrl($dept = NULL, $cat = NULL){
         if($cat && $dept){
-            return FRONTEND_URL.($dept->id != 1 ? "/$dept->slug" : '' ).'/category/'.$cat->slug;
+            return WEB_URL.($dept->id != 1 ? "/$dept->slug" : '' ).'/category/'.$cat->slug;
         }else{
             return '';
         }

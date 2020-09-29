@@ -125,7 +125,7 @@ class PostsController  extends \BackendController {
                             $posts_lang[$lang->id]->save();
                         }
                         $this->flashSession->success($title." thành công");
-                        return $this->response->redirect(BACKEND_URL.'/posts');
+                        return $this->response->redirect(WEB_ADMIN_URL.'/posts');
                     }
                 }else{
                     foreach ($error as $value) {
@@ -164,7 +164,7 @@ class PostsController  extends \BackendController {
                     foreach ($post->getMessages() as $message) {
                         $this->flashSession->error($message);
                     }
-                    return $this->response->redirect(BACKEND_URL.'/trashs');
+                    return $this->response->redirect(WEB_ADMIN_URL.'/trashs');
                 }
             }else{
                 if ($this->request->isAjax()) {
@@ -174,7 +174,7 @@ class PostsController  extends \BackendController {
                     return $this->response->send();
                 } else {
                     $this->flashSession->success("Khôi phục bài viết thành công");
-                    return $this->response->redirect(BACKEND_URL.'/posts');
+                    return $this->response->redirect(WEB_ADMIN_URL.'/posts');
                 }
             }
         }else{
@@ -185,7 +185,7 @@ class PostsController  extends \BackendController {
                 return $this->response->send();
             } else {
                 $this->flashSession->error("Không tìm thấy bài viết");
-                return $this->response->redirect(BACKEND_URL.'/posts');
+                return $this->response->redirect(WEB_ADMIN_URL.'/posts');
             }
         }
         
@@ -208,7 +208,7 @@ class PostsController  extends \BackendController {
                     foreach ($post->getMessages() as $message) {
                         $this->flashSession->error($message);
                     }
-                    return $this->response->redirect(BACKEND_URL.'/trashs');
+                    return $this->response->redirect(WEB_ADMIN_URL.'/trashs');
                 }
             }else{
                 if ($this->request->isAjax()) {
@@ -219,7 +219,7 @@ class PostsController  extends \BackendController {
                 } else {
                     // $this->logs->write_log(3, 1, 'Xóa trang', json_encode($save),$this->session->get("user_id"));
                     $this->flashSession->success("Chuyển bài viết đến thùng rác thành công");
-                    return $this->response->redirect(BACKEND_URL.'/posts');
+                    return $this->response->redirect(WEB_ADMIN_URL.'/posts');
                 }
             }
         }else{
@@ -231,7 +231,7 @@ class PostsController  extends \BackendController {
             } else {
                 // $this->logs->write_log(3, 1, 'Xóa trang', json_encode($save),$this->session->get("user_id"));
                 $this->flashSession->error("Không tìm thấy bài viết");
-                return $this->response->redirect(BACKEND_URL.'/posts');
+                return $this->response->redirect(WEB_ADMIN_URL.'/posts');
             }
         }
         
@@ -253,7 +253,7 @@ class PostsController  extends \BackendController {
                     foreach ($post->getMessages() as $message) {
                         $this->flashSession->error($message);
                     }
-                    return $this->response->redirect(BACKEND_URL.'/trashs');
+                    return $this->response->redirect(WEB_ADMIN_URL.'/trashs');
                 }
             }else{
                 if ($this->request->isAjax()) {
@@ -263,7 +263,7 @@ class PostsController  extends \BackendController {
                     return $this->response->send();
                 } else {
                     $this->flashSession->success("Xóa bài viết khoản thành công");
-                    return $this->response->redirect(BACKEND_URL.'/trashs');
+                    return $this->response->redirect(WEB_ADMIN_URL.'/trashs');
                 }
             }
         }else{
@@ -274,7 +274,7 @@ class PostsController  extends \BackendController {
                 return $this->response->send();
             } else {
                 $this->flashSession->error("Không tìm thấy bài viết");
-                return $this->response->redirect(BACKEND_URL.'/trashs');
+                return $this->response->redirect(WEB_ADMIN_URL.'/trashs');
             }
         }
     }

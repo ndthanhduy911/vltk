@@ -139,7 +139,7 @@
                         <div class="col-md-12 text-center">
                             <button type="submit"
                                 class="btn btn-success">{{title}}</button>
-                            <a href="<?php echo BACKEND_URL.'/users' ?>" class="btn btn-secondary">Quay lại</a>
+                            <a href="<?php echo WEB_ADMIN_URL.'/users' ?>" class="btn btn-secondary">Quay lại</a>
                         </div>
                     </form>
                 </div>
@@ -188,7 +188,7 @@
                             value="<?php echo $this->security->getToken() ?>" />
                         <div class="col-md-12 text-center">
                             <button type="submit" class="btn btn-success">Thay đổi</button>
-                            <a href="<?php echo BACKEND_URL.'/users' ?>" class="btn btn-secondary">Quay lại</a>
+                            <a href="<?php echo WEB_ADMIN_URL.'/users' ?>" class="btn btn-secondary">Quay lại</a>
                         </div>
                     </form>
                 </div>

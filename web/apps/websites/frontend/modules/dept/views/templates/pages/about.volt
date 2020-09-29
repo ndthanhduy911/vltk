@@ -1,7 +1,7 @@
 <!-- banner start -->
 <!-- ================ -->
 <div class="banner dark-translucent-bg fixed-bg"
-    style="background-image:url('<?php echo FRONTEND_URL ?>/assets/frontend/images/page-about-banner-1.jpg'); background-position: 50% 27%;">
+    style="background-image:url('<?php echo WEB_URL ?>/assets/frontend/images/page-about-banner-1.jpg'); background-position: 50% 27%;">
     <!-- breadcrumb start -->
     <!-- ================ -->
     {{ partial('breadcrumb') }}

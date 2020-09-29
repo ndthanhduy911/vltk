@@ -99,7 +99,7 @@ class UsersController  extends \BackendController {
                         } else {
                             // $this->logs->write_log(2, 1, 'Cập nhật tài khoản ID: '.$save->id,json_encode($save->toArray()),$this->session->get("user_id"));
                             $this->flashSession->success($title." thành công.");
-                            return $this->response->redirect(BACKEND_URL.'/users/update/'.$user->id);
+                            return $this->response->redirect(WEB_ADMIN_URL.'/users/update/'.$user->id);
                         }
                     }
                 }
@@ -109,7 +109,7 @@ class UsersController  extends \BackendController {
             $this->view->title = $title;
         }else{
             $this->flashSession->error('Không tìm thấy tài khoản này');
-            return $this->response->redirect(BACKEND_URL.'/users');
+            return $this->response->redirect(WEB_ADMIN_URL.'/users');
         }
 
 
@@ -144,18 +144,18 @@ class UsersController  extends \BackendController {
                         foreach ($form->getMessages() as $message) {                            
                             $this->flashSession->error($message->getMessage());
                         }
-                        return $this->response->redirect(BACKEND_URL.'/users/update/'.$id);
+                        return $this->response->redirect(WEB_ADMIN_URL.'/users/update/'.$id);
                     }else{
                         $user->password = $this->security->hash($password);
                         if (!$user->save()) {
                             foreach ($user->getMessages() as $message) {
                                 $this->flashSession->error($message->getMessage());
                             }
-                            return $this->response->redirect(BACKEND_URL.'/users/update/'.$id);
+                            return $this->response->redirect(WEB_ADMIN_URL.'/users/update/'.$id);
                         } else {
                             // $this->logs->write_log(2, 1, 'Đã thay đổi mật khẩu','',$this->session->get("user_id"));
                             $this->flashSession->success("Thay đổi mật khẩu thành công.");
-                            return $this->response->redirect(BACKEND_URL.'/users/update/'.$id);
+                            return $this->response->redirect(WEB_ADMIN_URL.'/users/update/'.$id);
                         }
                     }
 
@@ -169,7 +169,7 @@ class UsersController  extends \BackendController {
             }
 
         }else{
-            return $this->response->redirect(BACKEND_URL.'/users');
+            return $this->response->redirect(WEB_ADMIN_URL.'/users');
         }
     }
 
@@ -189,7 +189,7 @@ class UsersController  extends \BackendController {
                     foreach ($user->getMessages() as $message) {
                         $this->flashSession->error($message);
                     }
-                    return $this->response->redirect(BACKEND_URL.'/users');
+                    return $this->response->redirect(WEB_ADMIN_URL.'/users');
                 }
             }else{
                 if ($this->request->isAjax()) {
@@ -200,7 +200,7 @@ class UsersController  extends \BackendController {
                 } else {
                     // $this->logs->write_log(3, 1, 'Xóa trang', json_encode($save),$this->session->get("user_id"));
                     // $this->flashSession->success("Xóa tài khoản thành công");
-                    return $this->response->redirect(BACKEND_URL.'/users');
+                    return $this->response->redirect(WEB_ADMIN_URL.'/users');
                 }
 
             }

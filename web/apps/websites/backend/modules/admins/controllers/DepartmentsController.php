@@ -90,7 +90,7 @@ class DepartmentsController  extends \BackendController {
                             $departments_lang[$lang->id]->save();
                         }
                         $this->flashSession->success($title." thành công");
-                        return $this->response->redirect(BACKEND_URL.'/departments/update');
+                        return $this->response->redirect(WEB_ADMIN_URL.'/departments/update');
                     }
                 }else{
                     foreach ($error as $value) {
@@ -99,7 +99,7 @@ class DepartmentsController  extends \BackendController {
                 }
             }else{
                 $this->flashSession->error("Token không chính xác");
-                return $this->response->redirect(BACKEND_URL."/departments/update");
+                return $this->response->redirect(WEB_ADMIN_URL."/departments/update");
             }
         }
 

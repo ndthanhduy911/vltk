@@ -112,7 +112,7 @@ class SubjectsController  extends \BackendController {
                             $subjects_lang[$lang->id]->save();
                         }
                         $this->flashSession->success($title." thành công");
-                        return $this->response->redirect(BACKEND_URL.'/subjects');
+                        return $this->response->redirect(WEB_ADMIN_URL.'/subjects');
                     }
                 }else{
                     foreach ($error as $value) {
@@ -151,7 +151,7 @@ class SubjectsController  extends \BackendController {
                     foreach ($subject->getMessages() as $message) {
                         $this->flashSession->error($message);
                     }
-                    return $this->response->redirect(BACKEND_URL.'/trashs');
+                    return $this->response->redirect(WEB_ADMIN_URL.'/trashs');
                 }
             }else{
                 if ($this->request->isAjax()) {
@@ -162,7 +162,7 @@ class SubjectsController  extends \BackendController {
                 } else {
                     // $this->logs->write_log(3, 1, 'Xóa trang', json_encode($save),$this->session->get("user_id"));
                     $this->flashSession->success("Xóa bài viết khoản thành công");
-                    return $this->response->redirect(BACKEND_URL.'/trashs');
+                    return $this->response->redirect(WEB_ADMIN_URL.'/trashs');
                 }
 
             }
@@ -174,7 +174,7 @@ class SubjectsController  extends \BackendController {
                 return $this->response->send();
             } else {
                 $this->flashSession->error("Không tìm thấy bài viết");
-                return $this->response->redirect(BACKEND_URL.'/trashs');
+                return $this->response->redirect(WEB_ADMIN_URL.'/trashs');
             }
         }
     }

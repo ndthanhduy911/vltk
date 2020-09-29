@@ -60,7 +60,7 @@
                         <div class="overlay-container rounded overlay-visible">
                             <img src="{{ helper.getLinkImage(dept_item.image) }}"
                                 alt="{{ dept_item.dept_name }}">
-                            <a href="{{ constant('FRONTEND_URL')~'/'~dept_item.slug }}" class="overlay-link"><i
+                            <a href="{{ constant('WEB_URL')~'/'~dept_item.slug }}" class="overlay-link"><i
                                     class="fa fa-graduation-cap"></i></a>
                             <div class="overlay-bottom hidden-xs">
                                 <div class="text">

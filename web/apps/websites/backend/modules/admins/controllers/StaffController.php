@@ -117,7 +117,7 @@ class StaffController  extends \BackendController {
                             $staffs_lang[$lang->id]->save();
                         }
                         $this->flashSession->success($title." thành công");
-                        return $this->response->redirect(BACKEND_URL.'/staff');
+                        return $this->response->redirect(WEB_ADMIN_URL.'/staff');
                     }
                 }else{
                     foreach ($error as $value) {
@@ -157,7 +157,7 @@ class StaffController  extends \BackendController {
                     foreach ($staff->getMessages() as $message) {
                         $this->flashSession->error($message);
                     }
-                    return $this->response->redirect(BACKEND_URL.'/trashs');
+                    return $this->response->redirect(WEB_ADMIN_URL.'/trashs');
                 }
             }else{
                 if ($this->request->isAjax()) {
@@ -168,7 +168,7 @@ class StaffController  extends \BackendController {
                 } else {
                     // $this->logs->write_log(3, 1, 'Xóa trang', json_encode($save),$this->session->get("user_id"));
                     $this->flashSession->success("Xóa bài viết khoản thành công");
-                    return $this->response->redirect(BACKEND_URL.'/trashs');
+                    return $this->response->redirect(WEB_ADMIN_URL.'/trashs');
                 }
 
             }
@@ -180,7 +180,7 @@ class StaffController  extends \BackendController {
                 return $this->response->send();
             } else {
                 $this->flashSession->error("Không tìm thấy bài viết");
-                return $this->response->redirect(BACKEND_URL.'/trashs');
+                return $this->response->redirect(WEB_ADMIN_URL.'/trashs');
             }
         }
     }

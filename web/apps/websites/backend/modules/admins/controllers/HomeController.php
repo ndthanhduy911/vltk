@@ -84,7 +84,7 @@ class HomeController  extends \BackendController {
                             $homes_lang[$lang->id]->save();
                         }
                         $this->flashSession->success($title." thành công");
-                        return $this->response->redirect(BACKEND_URL.'/home');
+                        return $this->response->redirect(WEB_ADMIN_URL.'/home');
                     }
                 }else{
                     foreach ($error as $value) {
@@ -93,7 +93,7 @@ class HomeController  extends \BackendController {
                 }
             }else{
                 $this->flashSession->error("Token không chính xác");
-                return $this->response->redirect(BACKEND_URL.'/home');
+                return $this->response->redirect(WEB_ADMIN_URL.'/home');
             }
         }
 

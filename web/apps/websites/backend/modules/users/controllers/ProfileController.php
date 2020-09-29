@@ -82,7 +82,7 @@ class ProfileController extends \BackendController
                             } else {
                                 $this->logs->write_log(2, 1, 'Cập nhật tài khoản ID: ' . $save->id, json_encode($save->toArray()), $this->session->get("user_id"));
                                 $this->flashSession->success("Cập nhật tài khoản thành công");
-                                return $this->response->redirect(BACKEND_URL.'/profile');
+                                return $this->response->redirect(WEB_ADMIN_URL.'/profile');
                             }
                         }
                     }else{
@@ -123,7 +123,7 @@ class ProfileController extends \BackendController
                 foreach ($error as $value) {
                     $this->flashSession->error($value . ". ");
                 }
-                return $this->response->redirect(BACKEND_URL.'/profile');
+                return $this->response->redirect(WEB_ADMIN_URL.'/profile');
             }
         }
     }
@@ -147,7 +147,7 @@ class ProfileController extends \BackendController
                             foreach ($error as $value) {
                                 $this->flashSession->error($value . ". ");
                             }
-                            return $this->response->redirect(BACKEND_URL.'/profile');
+                            return $this->response->redirect(WEB_ADMIN_URL.'/profile');
                         }
                     } else {
                             $password = $this->request->getPost('oldPassword',['string','trim']);
@@ -159,11 +159,11 @@ class ProfileController extends \BackendController
                                     return $this->response->redirect('/profile/changepassword');
                                 } else {
                                     $this->flashSession->success("Đổi mật khẩu thành công.");
-                                    return $this->response->redirect(BACKEND_URL.'/profile/changepw');
+                                    return $this->response->redirect(WEB_ADMIN_URL.'/profile/changepw');
                                 }
                             } else {
                                 $this->flashSession->error("Mật khẩu hiện tại không chính xác.");
-                                return $this->response->redirect(BACKEND_URL.'/profile/changepw');
+                                return $this->response->redirect(WEB_ADMIN_URL.'/profile/changepw');
                             }
     
                     }

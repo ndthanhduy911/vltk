@@ -199,7 +199,7 @@ class Helper extends Component
 
     public function getLinkImage($path, $path_default = '/assets/frontend/images/defaut_img.png')
     {
-        return $path ? FRONTEND_URL.$path : FRONTEND_URL.$path_default;
+        return $path ? WEB_URL.$path : WEB_URL.$path_default;
     }
 
     public function getDean($dean = "")

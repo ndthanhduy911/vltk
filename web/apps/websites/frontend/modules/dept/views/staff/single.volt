@@ -23,7 +23,7 @@
                             </div>
                         </div>
                         <h3 class="title">{{ ml._ml_system('department', 'Đơn vị') }}</h3>
-                        <a href="<?= FRONTEND_URL ?>/{{ dept_info.slug }}" class="text-info">{{ dept_lang_info.name }}</a>
+                        <a href="<?= WEB_URL ?>/{{ dept_info.slug }}" class="text-info">{{ dept_lang_info.name }}</a>
 
                         <h3 class="title mt-3">{{ ml._ml_system('contact', 'Liên hệ') }}</h3>
                         <ul class="list-icons">

@@ -66,7 +66,7 @@ class Calendars extends \Phalcon\Mvc\Model
     {
         
         if($calendar = parent::findFirst($id)){
-            return FRONTEND_URL.'/'.$calendar->slug;
+            return WEB_URL.'/'.$calendar->slug;
         }else{
             return null;
         }
@@ -84,7 +84,7 @@ class Calendars extends \Phalcon\Mvc\Model
     public static function getUrl($dept = NULL, $calendar = NULL)
     {
         if($calendar && $dept){
-            return FRONTEND_URL.($dept->id != 1 ? "/$dept->slug" : '' ).'/calendar/'.$calendar->slug;
+            return WEB_URL.($dept->id != 1 ? "/$dept->slug" : '' ).'/calendar/'.$calendar->slug;
         }else{
             return '';
         }

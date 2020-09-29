@@ -11,8 +11,8 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Admin">
     <meta property="og:title" content="Admin">
-    <meta property="og:url" content="<?php echo FRONTEND_URL ?>/uploads/khoa-vat-ly/logo96x96.png">
-    <meta property="og:image" content="<?php echo FRONTEND_URL ?>/uploads/khoa-vat-ly/logo96x96.png">
+    <meta property="og:url" content="<?php echo WEB_URL ?>/uploads/khoa-vat-ly/logo96x96.png">
+    <meta property="og:image" content="<?php echo WEB_URL ?>/uploads/khoa-vat-ly/logo96x96.png">
     <meta property="og:description" content="">
     <title>ADMIN</title>
     <meta charset="utf-8">

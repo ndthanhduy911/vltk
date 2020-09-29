@@ -71,7 +71,7 @@
                 <div class="col-md-auto hidden-md-down pl-md-0">
                     <div class="header-first clearfix">
                         <div id="logo" class="logo" dept-id = "{{ dept.id }}">
-                            <a href="<?php echo FRONTEND_URL ?>/{{ dept.id != 1 ? dept.slug : ''}}">
+                            <a href="<?php echo WEB_URL ?>/{{ dept.id != 1 ? dept.slug : ''}}">
                                 {% if dept.logo %}
                                 <img height="30px" src="{{ helper.getLinkImage(dept.logo) }}" alt="{{ dept_lang.name }}">
                                 {% else %}
@@ -92,7 +92,7 @@
                             <nav class="navbar navbar-expand-lg navbar-light p-0 d-flex">
                                 <div class="navbar-brand clearfix hidden-lg-up">
                                     <div id="logo-mobile" class="logo">
-                                        <a href="<?php echo FRONTEND_URL ?>/">
+                                        <a href="<?php echo WEB_URL ?>/">
                                             {% if dept.logo %}
                                             <img id="logo-img-mobile" src="{{ helper.getLinkImage(dept.logo) }}" alt="{{ dept_lang.name }}">
                                             {% else %}
@@ -138,8 +138,8 @@
                 </div>
                 <div class="col-auto hidden-md-down p-0">
                     <div class="header-dropdown-buttons" id="lang_id" data-lang="{{ lang_id }}">
-                        <a href="<?= FRONTEND_URL ?>/api/changelanguage/{{ lang_id == 1 ? 2 : 1  }}" data-id="{{ lang_id == 1 ? 2 : 1  }}" class="d-flex align-items-center">
-                            <img src="<?= FRONTEND_URL ?><?= $language->id == 1 ? '/language_file/eng' : '/language_file/vie' ?>/<?= $language->id == 1 ? 'united-states.png' : 'vietnam.png' ?>" class="user-image" alt="{{ language.name }}" width="36px">
+                        <a href="<?= WEB_URL ?>/api/changelanguage/{{ lang_id == 1 ? 2 : 1  }}" data-id="{{ lang_id == 1 ? 2 : 1  }}" class="d-flex align-items-center">
+                            <img src="<?= WEB_URL ?><?= $language->id == 1 ? '/language_file/eng' : '/language_file/vie' ?>/<?= $language->id == 1 ? 'united-states.png' : 'vietnam.png' ?>" class="user-image" alt="{{ language.name }}" width="36px">
                         </a>
                     </div>
                 </div>

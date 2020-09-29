@@ -27,7 +27,7 @@
 
 .idea
 ide
-config.php
+define.php
 
 #public_html/public/assets/js/lib/datatables/datatables-init.js
 ################################################

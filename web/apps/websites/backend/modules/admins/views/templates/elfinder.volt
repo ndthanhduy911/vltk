@@ -11,8 +11,8 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Admin">
     <meta property="og:title" content="Admin">
-    <meta property="og:url" content="<?php echo FRONTEND_URL ?>/">
-    <meta property="og:image" content="<?php echo FRONTEND_URL ?>/">
+    <meta property="og:url" content="<?php echo WEB_URL ?>/">
+    <meta property="og:image" content="<?php echo WEB_URL ?>/">
     <meta property="og:description" content="">
     <title>QUẢN LÝ TẬP TIN</title>
     <meta charset="utf-8">
