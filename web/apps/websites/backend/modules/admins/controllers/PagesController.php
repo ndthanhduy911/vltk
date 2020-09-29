@@ -62,7 +62,7 @@ class PagesController  extends \BackendController {
                     'slug' => $p_slug ? $p_slug : $this->helper->slugify($p_title[1]),
                     'featured_image' => $this->request->getPost('featured_image',['string','trim']),
                     'background_image' => $this->request->getPost('background_image',['string','trim']),
-                    'attribute_id' => $this->request->getPost('attribute_id',['int','trim']),
+                    'attribute_id' => (int)$this->request->getPost('attribute_id',['int','trim']),
                 ];
 
                 $check_slug = Pages::findFirst([
