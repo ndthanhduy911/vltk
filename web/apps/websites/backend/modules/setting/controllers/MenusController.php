@@ -196,7 +196,7 @@ class MenusController  extends \BackendController
         ))
         ->from(['m' => 'Menus'])
         ->where("m.parent_id is NULL AND m.deleted = 0 AND m.status = 1 AND m.menu_location_id = $menu_location_id")
-        ->leftJoin('Models\MenusLang', 'ml.menu_id = m.id AND ml.lang_id = 1','ml')
+        ->leftJoin('MenusLang', 'ml.menu_id = m.id AND ml.lang_id = 1','ml')
         ->orderBy("m.sort ASC, m.id ASC");
 
 

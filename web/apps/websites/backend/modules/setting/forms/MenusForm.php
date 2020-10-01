@@ -44,7 +44,7 @@ class MenusForm extends Form
 
         $depts = $this->modelsManager->createBuilder()
         ->columns(array(
-            '.id',
+            'd.id',
             'dl.name name',
         ))
         ->from(['d'=>'Departments'])
