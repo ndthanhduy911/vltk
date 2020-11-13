@@ -46,7 +46,7 @@ class PostsController extends \FrontendController
             return $this->view->pick('templates/404');
         }
 
-        $current_page = (int)$this->request->get('page');
+        $paged = (int)$this->request->get('paged','int');
         $posts = $this->modelsManager->createBuilder()
         ->columns(array(
             'p.id',
@@ -65,19 +65,18 @@ class PostsController extends \FrontendController
         ->where("p.deleted = 0 AND p.status = 1 AND p.cat_id = $category->id AND p.dept_id = $dept->id")
         ->leftJoin('PostsLang', "pl.post_id = p.id AND pl.lang_id = $lang_id",'pl')
         ->orderBy("p.calendar DESC");
-        $post_count = $posts->getQuery()
+        $postCount = $posts->getQuery()
         ->execute()
         ->count();
 
         $posts = $posts->limit(10)
-        ->offset(10 * ($current_page > 0 ? ($current_page - 1) : 0))
+        ->offset(10 * ($paged > 0 ? $paged : 0))
         ->getQuery()
         ->execute();
 
-        $paging = $this->helper->getPaging($post_count, $current_page);
         $this->view->title = \Categories::getTitleById($category->id);
         $this->view->posts = $posts;
-        $this->view->paging = $paging;
+        $this->view->pagination = \Posts::createPaging($paged,$postCount);
         $this->view->slug_now = $category->slug;
         $this->view->pick('templates/blog');   
     }
@@ -86,7 +85,7 @@ class PostsController extends \FrontendController
         $slug = $this->helper->slugify($slug);
         $dept = $this->dispatcher->getReturnedValue();
         $lang_id = $this->session->get('lang_id');
-        $current_page = (int)$this->request->get('page');
+        $paged = $this->request->get('paged','int');
 
         $posts = $this->modelsManager->createBuilder()
         ->columns(array(
@@ -103,23 +102,22 @@ class PostsController extends \FrontendController
             'p.featured_image',
         ))
         ->from(['p'=>'Posts'])
-        ->leftJoin('PostsLang', "pl.post_id = p.id AND pl.lang_id = $lang_id AND p.dept_id = $dept->id",'pl')
+        ->leftJoin('PostsLang', "pl.post_id = p.id AND pl.lang_id = {$lang_id} AND p.dept_id = {$dept->id}",'pl')
         ->orderBy("p.calendar DESC")
         ->where("p.deleted = 0 AND p.status = 1");
         
-        $post_count = $posts->getQuery()
+        $postCount = $posts->getQuery()
         ->execute()
         ->count();
 
         $posts = $posts->limit(10)
-        ->offset(10 * ($current_page > 0 ? ($current_page - 1) : 0))
+        ->offset(10 * ($paged > 0 ? $paged : 0))
         ->getQuery()
         ->execute();
 
-        $paging = $this->helper->getPaging($post_count, $current_page);
         $this->view->title = $this->ml->_ml_system('news', "Tin tức");
+        $this->view->pagination = \Posts::createPaging($paged,$postCount);
         $this->view->posts = $posts;
-        $this->view->paging = $paging;
         $this->view->pick('templates/blog');   
     }
 }

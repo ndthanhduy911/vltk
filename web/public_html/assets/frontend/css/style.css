@@ -5711,7 +5711,7 @@ fieldset[disabled] .form-control {
 
 /*Second level*/
 .header .navbar-nav li ul {
-  min-width: 14rem;
+  min-width: 250px;
   -webkit-border-radius: 0px;
   -moz-border-radius: 0px;
   border-radius: 0px;
@@ -5729,7 +5729,7 @@ fieldset[disabled] .form-control {
 }
 
 .header .navbar-nav li li a {
-  padding: 10px 20px;
+  padding: 10px 17px;
   display: block;
   font-size: 14px;
   color: #333333;

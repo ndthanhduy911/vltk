@@ -22,7 +22,8 @@
                                 <div class="post-info">
                                     <span class="post-date">
                                         <i class="fa fa-calendar-o pr-1"></i>
-                                        <span class="day">{{ helper.datetime_vn(post.calendar) }}</span>
+                                        <span class="day">{{helper.getWVN(post.calendar)}}, {{ ml._ml_system('day', 'ngày') }} {{ helper.datetime_vn(post.calendar) }}</span>
+                                        
                                     </span>
                                 </div>
                             </header>
@@ -39,58 +40,9 @@
                     {% endfor %}
                 </div>
 
-                <?php if($paging !== false) : ?>
+                <?php if($pagination) : ?>
                 <nav aria-label="Page navigation">
-                    <ul class="pagination justify-content-center">
-                    <?php if($paging['total_page'] < 10) { ?>
-                        <?php if($paging['current_page'] > 1): ?>
-                        <li class="page-item">
-                            <a class="page-link" href="?page=<?php echo $paging['current_page'] - 1 ?>" aria-label="Trước">
-                                <i aria-hidden="true" class="fa fa-angle-left"></i>
-                                <span class="sr-only">Trước</span>
-                            </a>
-                        </li>
-                        <?php endif ?>
-
-                        <?php for ($i = 1; $i <= $paging['total_page']; $i++) { ?>
-                        <li class="page-item <?php echo $i == $paging['current_page'] ? 'active' : ''  ?>"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
-                        <?php } ?>
-                        <?php if((int)$paging['current_page'] !== (int)$paging['total_page']): ?>
-                        <li class="page-item">
-                            <a class="page-link" href="?page=<?php echo $paging['current_page'] + 1 ?>" aria-label="Sau">
-                                <i aria-hidden="true" class="fa fa-angle-right"></i>
-                                <span class="sr-only">Sau</span>
-                            </a>
-                        </li>
-                        <?php endif ?>
-                    <?php } else{ ?>
-                        <?php if($paging['current_page'] > 1): ?>
-                        <li class="page-item">
-                            <a class="page-link" href="?page=<?php echo $paging['current_page'] - 1 ?>" aria-label="Trước">
-                                <i aria-hidden="true" class="fa fa-angle-left"></i>
-                                <span class="sr-only">Trước</span>
-                            </a>
-                        </li>
-                        <?php endif ?>
-
-                        <?php for ($i = 1; $i <= 4; $i++) { ?>
-                        <li class="page-item <?php echo $i == $paging['current_page'] ? 'active' : ''  ?>"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
-                        <?php } ?>
-                        <li class="page-item"><a class="page-link disabled">...</a></li>
-                        <?php for ($i = ($paging['total_page'] - 3); $i <= $paging['total_page']; $i++) { ?>
-                        <li class="page-item <?php echo $i == $paging['current_page'] ? 'active' : ''  ?>"><a class="page-link" href="?page={{(i)}}">{{(i)}}</a></li>
-                        <?php } ?>
-
-                        <?php if((int)$paging['current_page'] !== (int)$paging['total_page']): ?>
-                        <li class="page-item">
-                            <a class="page-link" href="?page=<?php echo $paging['current_page'] + 1 ?>" aria-label="Sau">
-                                <i aria-hidden="true" class="fa fa-angle-right"></i>
-                                <span class="sr-only">Sau</span>
-                            </a>
-                        </li>
-                        <?php endif ?>
-                    <?php } ?>
-                    </ul>
+                    <?= $pagination ?>
                 </nav>
                 <?php endif ?>
             </div>

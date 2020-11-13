@@ -119,6 +119,13 @@ ul.dropdown-menu > li:last-of-type > a
     text-transform: initial;
 }
 
+/* .masonry-grid-item img {
+    object-fit: contain;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+} */
+
 @media (min-width: 1400px) {
     .header .navbar-nav > li {
         margin: 0px 0px 0px 0px;

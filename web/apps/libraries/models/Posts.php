@@ -57,4 +57,82 @@ class Posts extends \Phalcon\Mvc\Model
             return '';
         }
     }
+
+    public static function createPaging($startPage,$total,$length = 25){
+        $text = "";
+        if($total <= $length){
+            return $text;
+        }
+
+        $totalPage = ceil($total / $length);
+        if ($startPage > $totalPage){
+            $startPage = $totalPage;
+        }else if ($startPage < 1){
+            $startPage = 0;
+        }
+        if($totalPage){
+            $text = "<ul class=\"pagination justify-content-center\">";
+            if($totalPage < 5){
+                if($startPage > 0){
+                    $text .=  "<li class=\"page-item\">
+                                <a class=\"page-link\" data-page=".($startPage - 1)." href=\"?paged=".($startPage - 1)."\" aria-label=\"Trước\">
+                                    <i aria-hidden=\"true\" class=\"fa fa-angle-left\"></i>
+                                    <span class=\"sr-only\">Trước</span>
+                                </a>
+                            </li>";
+                }
+                for ($i=0; $i < $totalPage; $i++) { 
+                    $text .= "<li class=\"page-item ".($i == $startPage ? 'active' : '')."\"><a class=\"page-link\" data-page=\"{$i}\" href=\"?paged={$i}\">".($i+1)."</a></li>";
+                }
+    
+                if($startPage !== $totalPage){
+                    $text .="<li class=\"page-item\">
+                                <a class=\"page-link\" data-page=".($startPage+1)." href=\"?paged=".($startPage+1)."\" aria-label=\"Sau\">
+                                    <i aria-hidden=\"true\" class=\"fa fa-angle-right\"></i>
+                                    <span class=\"sr-only\">Sau</span>
+                                </a>
+                            </li>";
+                }
+            }else{
+                if($startPage > 0){
+                    $text .=  "<li class=\"page-item\">
+                                <a class=\"page-link\" data-page=".($startPage - 1)." href=\"?paged=".($startPage - 1)."\" aria-label=\"Trước\">
+                                    <i aria-hidden=\"true\" class=\"fa fa-angle-left\"></i>
+                                    <span class=\"sr-only\">Trước</span>
+                                </a>
+                            </li>";
+                }
+                $text .= "<li class=\"page-item ".($startPage == 0 ? 'active' : '')."\"><a class=\"page-link\" data-page=0 href=\"?paged=0\">1</a></li>";
+                if($startPage > 2){
+                    $text .= "<li class=\"page-item\"><a class=\"page-link disabled\">...</a></li>";
+                }
+    
+                $snumber = $startPage > 2 ? ($startPage - 1) : 1;
+                $enumber = ($snumber + 3) >= $totalPage ? $totalPage : ($snumber + 3);
+                for ($i=$snumber; $i < $enumber; $i++) { 
+                    $text .= "<li class=\"page-item ".($i == $startPage ? 'active' : '')."\"><a class=\"page-link\" data-page={$i} href=\"?paged={$i}\">".($i+1)."</a></li>";
+                }
+                if(($totalPage - $startPage) > 3){
+                    $text .= "<li class=\"page-item\"><a class=\"page-link disabled\">...</a></li>";
+                }
+    
+                if(($totalPage - $startPage) > 2){
+                    $text .= "<li class=\"page-item ".(($totalPage - 1) == $startPage ? 'active' : '')."\"><a class=\"page-link\" data-page=".($totalPage-1)." href=\"?paged=".($totalPage-1)."\">{$totalPage}</a></li>";
+                }        
+        
+                if($startPage < ($totalPage-1)){
+                    $text .="<li class=\"page-item\">
+                                <a class=\"page-link\" data-page=".($startPage+1)." href=\"?paged=".($startPage+1)."\" aria-label=\"Sau\">
+                                    <i aria-hidden=\"true\" class=\"fa fa-angle-right\"></i>
+                                    <span class=\"sr-only\">Sau</span>
+                                </a>
+                            </li>";
+                }
+            }
+        }
+        $text .= "</ul>";
+
+        return $text;
+
+    }
 }

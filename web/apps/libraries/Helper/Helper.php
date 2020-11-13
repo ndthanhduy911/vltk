@@ -58,6 +58,34 @@ class Helper extends Component
         );
     }
 
+    public static function getWVN($date)
+    {
+        if ($date == '0000-00-00 00:00:00' || $date == null) {
+            return '';
+        }
+
+        switch ((int)date('w', strtotime($date))) {
+            case 0: 
+                return MLML::_ml_system('sunday',"Chủ Nhật");
+            case 1: 
+                return MLML::_ml_system('monday',"Thứ Hai");
+            case 2: 
+                return MLML::_ml_system('tuesday',"Thứ Ba");
+            case 3: 
+                return MLML::_ml_system('wednesday',"Thứ Tư");
+            case 4: 
+                return MLML::_ml_system('thursday',"Thứ Năm");
+            case 5: 
+                return MLML::_ml_system('friday',"Thứ Sáu");
+            case 6: 
+                return MLML::_ml_system('saturday',"Thứ Bảy");
+        
+            default:
+                return "";
+                break;
+        }
+    }
+
     public function checkValidEmail($email){
         return preg_match('/^[A-z0-9_\-]+[@][A-z0-9_\-]+([.][A-z0-9_\-]+)+[A-z.]{2,4}$/', $email);
     }
