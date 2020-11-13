@@ -1,4 +1,4 @@
-<?php if(!NOTSHOW) { ?>
+
 <div class="content-header">
     <div class="container-fluid">
         <div class="row">
@@ -93,4 +93,3 @@
         </div>
     </div>
 </section>
-<?php } ?>

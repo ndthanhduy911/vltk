@@ -1,7 +1,7 @@
 <aside class="main-sidebar elevation-4 sidebar-light-primary">
     <a href="<?= WEB_ADMIN_URL ?>" class="brand-link">
         <img src="<?= LOGO ?>" alt="<?= DEPT ?>" class="brand-image img-circle elevation-3">
-        <span class="brand-text font-weight-bold text-uppercase text-primary"><?= WEB_NAME ?></span>
+        <span class="brand-text font-weight-bold text-uppercase text-primary">QUẢN TRỊ THÔNG TIN</span>
     </a>
 
     <div class="sidebar">
@@ -332,7 +332,6 @@
                         #}
                     </ul>
                 </li>
-                <?php if(!NOTSHOW) { ?>
                 <li
                     class="nav-item has-treeview {% if dispatcher.getControllerName() in ['user','role', 'setting'] %} {{ 'menu-open' }} {% endif %}">
                     <a href="#"
@@ -364,7 +363,6 @@
                         {% endif %}
                     </ul>
                 </li>
-                <?php } ?>
                 <li
                     class="nav-item has-treeview {% if dispatcher.getControllerName() in ['logs'] %} {{ 'menu-open' }} {% endif %}">
                     <a href="#"

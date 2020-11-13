@@ -16,7 +16,6 @@ class RoleController extends \BackendController
         
         $this->view->form = new RoleForm();
         $this->view->form_search = new SearchRoleForm();
-        $this->view->dashboards = \Dashboard::findNoDelete("id,name,sort");
     }
 
     // ===============================
@@ -73,8 +72,6 @@ class RoleController extends \BackendController
         if ($data = \Role::findFirstIdNoDelete($id)) {
             $data = $data->toArray();
             $data['permissions'] = $this->getPermissonList($data['id']);
-            $data['dashboards'] = $this->getDashboardList($data['id']);
-            $data['fgroup'] = $this->getGroupFieldList($data['id']);
             $this->helper->responseJson($this, $data);
         } else {
             $this->helper->responseJson($this, ['error' => ['Không tìm thấy dữ liệu']]);
@@ -96,30 +93,6 @@ class RoleController extends \BackendController
 
         $userid = $this->session->get('userid');
         $data['token'] = ['key' => $this->security->getTokenKey(), 'value' => $this->security->getToken()];
-
-        $dashboards = $this->request->getPost('dashboards',['string', 'trim']);
-        $dashboards = $dashboards ? $dashboards : [];
-        if (!is_array($dashboards)) {
-            $data['error'] = ["Dữ liệu không hợp lệ"];
-            $this->helper->responseJson($this, $data);
-        }
-
-        $assetfiled = $this->request->getPost('asset');
-        $assetfiled = $assetfiled ? $assetfiled : [];
-        $inventoryfiled = $this->request->getPost('inventory');
-        $inventoryfiled = $inventoryfiled ? $inventoryfiled : [];
-        $estimatefiled = $this->request->getPost('estimate');
-        $estimatefiled = $estimatefiled ? $estimatefiled : [];
-        $reductionfiled = $this->request->getPost('reduction');
-        $reductionfiled = $reductionfiled ? $reductionfiled : [];
-        $planfiled = $this->request->getPost('pcplan');
-        $planfiled = $planfiled ? $planfiled : [];
-        $furnishfiled = $this->request->getPost('furnish');
-        $furnishfiled = $furnishfiled ? $furnishfiled : [];
-        if (!is_array($dashboards)) {
-            $data['error'] = ["Dữ liệu không hợp lệ"];
-            $this->helper->responseJson($this, $data);
-        }
 
         if($id == 1){
             $data['error'] = ["ID 1: Không được phép thay đổi"];
@@ -165,19 +138,6 @@ class RoleController extends \BackendController
                 $permission = explode(",",(string)$string);
                 $this->addPermissionOne($permission, $role->id);
             }
-
-            $query = new Query("UPDATE DashboardList SET deleted = 1 WHERE roleid = $role->id", $this->getDI());
-            $query->execute();
-            foreach ($dashboards as $id) {
-                $this->addDashboardOne($id,$role->id);
-            }
-
-            $this->addFiledGroup('asset',$role->id,$assetfiled);
-            $this->addFiledGroup('inventory',$role->id,$inventoryfiled);
-            $this->addFiledGroup('estimate',$role->id,$estimatefiled);
-            $this->addFiledGroup('reduction',$role->id,$reductionfiled);
-            $this->addFiledGroup('pcplan',$role->id,$planfiled);
-            $this->addFiledGroup('furnish',$role->id,$furnishfiled);
             
             if($id){
                 \Logs::saveLogs($this, 2, 'Cập nhật nhóm quyền '.$role->name, $role_old, $role->toArray());
@@ -223,36 +183,7 @@ class RoleController extends \BackendController
 
     private function getJsCss (){
         // And some local JavaScript resources
-        $this->assets->addJs(WEB_URL.'/assets/js/modules/master/role.js?v='.VS_SCRIPT);
-    }
-
-    private function addDashboardOne($id, $roleid)
-    {
-        $userid = $this->session->get('userid');
-        if($dashboardList = \DashboardList::findFirst(["dashboardid = :dashboardid: AND roleid = :roleid:","bind" => ['dashboardid' => $id, 'roleid' => $roleid]])){
-            $dashboardList->deleted = 0;
-            $dashboardList->updatedby = $userid;
-            $dashboardList->updatedat = date('Y-m-d H:i:s');
-            if($dashboardList->save()){
-                foreach ($dashboardList->getMessages() as $message) {
-                    throw new \Exception($message->getMessage());                    
-                }
-            }
-        }else{
-            $dashboardList = new \DashboardList();
-            $dashboardList->roleid = $roleid;
-            $dashboardList->dashboardid = $id;
-            $dashboardList->createdby = $userid;
-            $dashboardList->updatedby = $userid;
-            $dashboardList->createdat = date('Y-m-d H:i:s');
-            $dashboardList->updatedat = $dashboardList->createdat;
-            $dashboardList->deleted = 0;
-            if($dashboardList->save()){
-                foreach ($dashboardList->getMessages() as $message) {
-                    throw new \Exception($message->getMessage());                    
-                }
-            }
-        }
+        $this->assets->addJs(WEB_URL.'/assets/backend/js/modules/master/role.js?v='.VS_SCRIPT);
     }
 
     private function addPermissionOne($per, $roleid)
@@ -314,56 +245,10 @@ class RoleController extends \BackendController
         \Logs::saveLogs($this, 3, "Xóa nhóm người dùng: $role->name", ['table' => 'Role','id' => $role->id]);
     }
 
-    private function addFiledGroup($fkey,$roleid,$datas) {
-        $userid = $this->session->get('userid');
-        if($groups = \FieldGroup::findFirstKey($fkey, $roleid)){
-            $groups->updatedby = $userid;
-            $groups->updatedat = date('Y-m-d H:i:s');
-            $groups->datas = json_encode($datas);
-        }else{
-            $groups = new \FieldGroup();
-            $groups->roleid = $roleid;
-            $groups->fieldkey = $fkey;
-            $groups->deleted = 0;
-            $groups->createdby = $userid;
-            $groups->updatedby = $userid;
-            $groups->createdat = date('Y-m-d H:i:s');
-            $groups->updatedat = $groups->createdat;
-            $groups->datas = json_encode($datas);
-        }
-        if(!$groups->save()){
-            foreach ($groups->getMessages() as $message) {
-                throw new \Exception($message->getMessage());                    
-            }
-        }
-    }
 
     private function getPermissonList($id = 0)
     {
         $data = \PermissionList::find(["roleid = :roleid: AND deleted = 0", "columns" => "permissionid, depted, roleid", 'bind' => ['roleid' => $id]]);
         return $data = $data->toArray();
-    }
-
-    private function getDashboardList($id = 0)
-    {
-        $data = \DashboardList::find(["roleid = :roleid: AND deleted = 0", "columns" => "dashboardid", 'bind' => ['roleid' => $id]]);
-        return $data = $data->toArray();
-    }
-
-    private function getGroupFieldList($id = 0)
-    {
-        $asset = \FieldGroup::findFirstKey('asset',$id);
-        $data['asset'] = empty($asset->datas) ? [] :  json_decode($asset->datas);
-        $inventory = \FieldGroup::findFirstKey('inventory',$id);
-        $data['inventory'] = empty($inventory->datas) ? [] :  json_decode($inventory->datas);
-        $estimate = \FieldGroup::findFirstKey('estimate',$id);
-        $data['estimate'] = empty($estimate->datas) ? [] :  json_decode($estimate->datas);
-        $reduction = \FieldGroup::findFirstKey('reduction',$id);
-        $data['reduction'] = empty($reduction->datas) ? [] :  json_decode($reduction->datas);
-        $plan = \FieldGroup::findFirstKey('pcplan',$id);
-        $data['pcplan'] = empty($plan->datas) ? [] :  json_decode($plan->datas);
-        $furnish = \FieldGroup::findFirstKey('furnish',$id);
-        $data['furnish'] = empty($furnish->datas) ? [] :  json_decode($furnish->datas);
-        return $data;
     }
 }

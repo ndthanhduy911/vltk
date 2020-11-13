@@ -307,7 +307,7 @@ class BackupController extends \BackendController
         // And some local JavaScript resources
         $this->assets->addCss(WEB_URL.'/assets/dist/plugins/timepicker/dist/wickedpicker.min.css');
         $this->assets->addJs(WEB_URL.'/assets/dist/plugins/timepicker/dist/wickedpicker.min.js');
-        $this->assets->addJs(WEB_URL.'/assets/js/modules/master/backup.js');
+        $this->assets->addJs(WEB_URL.'/assets/backend/js/modules/master/backup.js');
     }
 
     private function getScheduleCronjob($period, $periodValue){

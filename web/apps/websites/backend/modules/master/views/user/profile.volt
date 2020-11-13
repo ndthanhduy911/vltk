@@ -36,8 +36,7 @@
                             <div class="profile-img hidden">
                                 <input data-id="<?= $this->session->get('userid'); ?>" id="avatar" name="avatar" type="file" accept=".jpg,.png">
                             </div>
-                            <span class="btn btn-hnn btn-hnn-info" style="cursor: pointer;"><span>Đổi ảnh đại
-                                    diện</span></span>
+                            <span class="btn btn-hnn btn-hnn-info" style="cursor: pointer;"><span>Đổi ảnh đại diện</span></span>
                         </label>
                     </div>
                 </div>
@@ -46,8 +45,10 @@
         <div class="row d-flex align-items-stretch">
             <form class="col-md-7 d-flex align-items-stretch" action="" id="profile_info" method="post" enctype="multipart/form-data" data-toggle="validator" role="form" novalidate="true">
                 <div class="card card-primary card-outline w-100">
+                    <div class="card-header">
+                        <h3 class="card-title"><i class="fas fa-info mr-2"></i>Thông tin</h3>
+                    </div>
                     <div class="card-body box-profile">
-                        <h3 class="text-primary m-0">Thông tin</h3>
                         <div class="row">
                             {% for element in form %}
                             <div class="form-group col-md-6 label-floating">
@@ -63,7 +64,7 @@
                     </div>
                     <div class="card-footer">
                         <div class="text-center">
-                            <button type="submit" class="btn btn-hnn btn-hnn-success"><span>Cập nhật</span></button>
+                            <button type="submit" class="btn btn-hnn btn-hnn-primary"><span>Cập nhật</span></button>
                             <a href="<?= WEB_ADMIN_URL ?>/user" class="btn btn-hnn btn-hnn-default"><span>Quay lại</span></a>
                         </div>
                     </div>
@@ -71,8 +72,10 @@
             </form>
             <form class="col-md-5 d-flex align-items-stretch" action="<?= WEB_ADMIN_URL ?>/user/changepassword" id="profile_password" method="post" enctype="multipart/form-data" data-toggle="validator" role="form" novalidate="true">
                 <div class="card card-primary card-outline w-100">
+                    <div class="card-header">
+                        <h3 class="card-title"><i class="fas fa-lock mr-1"></i>Đổi mật khẩu</h3>
+                    </div>
                     <div class="card-body box-profile">
-                        <h3 class="text-primary m-0">Đổi mật khẩu</h3>
                         <div class="row">
                             {% for element in formPW %}
                             <div class="form-group col-md-12 label-floating">
@@ -88,7 +91,7 @@
                     </div>
                     <div class="card-footer">
                         <div class="text-center">
-                            <button type="submit" class="btn btn-hnn btn-hnn-success"><span>Cập nhật</span></button>
+                            <button type="submit" class="btn btn-hnn btn-hnn-primary"><span>Cập nhật</span></button>
                             <a href="<?= WEB_ADMIN_URL ?>/user" class="btn btn-hnn btn-hnn-default"><span>Quay lại</span></a>
                         </div>
                     </div>

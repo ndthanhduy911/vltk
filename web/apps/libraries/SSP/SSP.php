@@ -2,14 +2,15 @@
 namespace Library\SSP;
 
 class SSP
-{
-    public function data_output($get, $input, $search_text, $array_row = [])
+{     
+    public function dataOutput($_this, $input, $search_text, $array_row = [], $options = [])
     {
-        $start = isset($get['start']) ? $get['start'] : 0 ;
-        $length = isset($get['length']) ? (int)$get['length'] : 0;
-        $search = isset($get['search']['value']) ? $get['search']['value'] : false ;
+        $start = (int)$_this->request->get('start','int');
+        $length = $_this->request->get('length','int');
+        $search = $_this->request->get('search','int');
+        $search = isset($search['value']) ? $search['value'] : '';
         $data = $input;
-        if($search){
+        if($search && !$search_text){
             $data = $data->andWhere($search_text,['search' => '%'.$search.'%']);
         }
 
@@ -18,28 +19,48 @@ class SSP
         ->execute()
         ->count();
 
-        if($length > 0){
-            $data = $data->limit($length);
+        if (!empty($options['extra'])) {
+            $selectExtra = $options['extra'];
+        }
+        if (!empty($options['unlimit'])) {
+            $data = $data->getQuery()
+                ->execute();
+        }else{
+            $data = $data->limit($length)
+                ->offset($start)
+                ->getQuery()
+                ->execute();
         }
 
-        $data = $data->offset($start)
-        ->getQuery()
-        ->execute()
-        ->toArray();
-
-        $no = $start + 1;
-        foreach ($data as $key => $value) {
-            $data[$key]['no'] = $no + $key;
+        $no = $start+1;
+        $res = [];
+        foreach ($data as $key => $item) {
+            $res[$key] = $item->toArray();
+            $res[$key]['no'] = $no + $key;
             if(count($array_row)){
-                $data[$key]['private'] = $array_row;
+                $res[$key]['private'] = $array_row;
+            }
+            if (isset($selectExtra)) {
+                foreach ($selectExtra as $kse => $valse) {
+                    $res[$key][$kse] = $this->selectExtra($valse[0], $valse[1], $valse[2], $item->{$valse[3]});
+                }
             }
         }
 
         return [
-            'draw' => isset($get['draw']) ? (int)$get['draw'] : 0,
+            'draw' => (int)$_this->request->get('draw','int'),
             'recordsTotal' => $count,
             'recordsFiltered' => $count,
-            'data' => $data,
+            'data' => $res,
         ];
+    }
+
+    public function selectExtra($modelDst, $columnDst, $columnName, $valFind){
+        $data = $modelDst::findFirst([
+            'columns' => $columnName,
+            'conditions' => "{$columnDst} = :coldst:",
+            'bind' => ["coldst" => $valFind]
+        ]);
+        return $data ? $data->{$columnName} : '';
     }
 }

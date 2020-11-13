@@ -1,49 +1,42 @@
 <?php
-
-use Library\RoleMaster\RoleMaster;
-use Phalcon\Mvc\Controller;
-use Phalcon\Mvc\Dispatcher;
-
-class BackendController extends Controller
+class BackendController extends \Phalcon\Mvc\Controller
 {
-
-    public function getBackendUrl()
+    public function beforeExecuteRoute(\Phalcon\Mvc\Dispatcher $dispatcher)
     {
-        return $this->getDi()->get('config')->application->backendUrl;
-    }
-
-    public function beforeExecuteRoute(Dispatcher $dispatcher)
-    {
-        // if (!$this->session->has("short_name")) {
-        //     $lang_short = Language::findFirst(["actived = 1 AND status = 1",'columns' => 'id, name']);
-        //     $this->session->set("short_name", $lang_short ? strtolower($lang_short->short_name) : 'vie');
-        //     $this->session->set("lang_id", $lang_short ? strtolower($lang_short->id) : 1);
-        // }
-
-        if ($this->session->get("user_id")) {
-            if ($this->session->has("private")) {
-                $private = $this->session->get("private");
-            } else {
-                $private = RoleMaster::getPrivate();
-                $this->session->set("private", $private);
+        if ($this->session->has("userid")) {
+            $userid = $this->session->get('userid');
+            if(!Online::check($userid)){
+                $this->session->destroy();
+                if($this->request->isAjax()){
+                    $this->helper->responseJson($this, ["logout" => true]);
+                }else{
+                    header('Location: /');
+                }
             }
-            if ($this->session->has("permission")) {
-                $permission = $this->session->get("permission");
-            } else {
-                $permission = RoleMaster::getUserPermission($this->session->get('role'));
-                $this->session->set("permission", $permission);
-            }
-            $roleMaster = new RoleMaster($permission, $private, $dispatcher->getControllerName(), $dispatcher->getActionName());
-            if ($roleMaster->isPrivate()) {
-                $this->view->dept = \Departments::findFirstId($this->session->get('dept_id'));
-            } else {
-                echo "Không có quyền truy cập";
-                die;
+            if(!$this->master->checkMaster($this)){
+                if($this->request->isAjax()){
+                    $this->helper->responseJson($this, ["error" => ["Truy cập không được phép"]]);
+                }else{
+                    require ERROR_FILE;die;
+                }
             }
         } else {
-            $this->session->destroy();
-            header('Location: '.$this->getBackendUrl().'/account/login');
-            die;
+            if($this->request->isAjax()){
+                $this->helper->responseJson($this, ["logout" => true]);
+            }else{
+                header('Location: /');
+            }
+            exit;
         }
+    }
+
+    public function queryRaw($from,$columns="*",$params=[],$group=[],$order=[]){
+        $where = count(empty($params[0]) ? [] : $params[0]) ? "WHERE " . implode(" AND ",$params[0]) : "";
+        $bind = empty($params[1]) ? [] : $params[1];
+        $group = count($group) ? "GROUP BY " . implode(",",$group) : "";
+        $order = count($order) ? "ORDER BY " . implode(",",$order) : "";
+        // var_dump("SELECT {$columns} FROM {$from} {$where} {$group}");die;
+        $result = $this->db->fetchAll("SELECT {$columns} FROM {$from} {$where} {$group} {$order}", \Phalcon\Db::FETCH_BOTH, $bind);
+        return $result;
     }
 }

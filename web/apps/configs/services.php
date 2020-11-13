@@ -1,30 +1,11 @@
 <?php
+use Library\ML\ML;
 
-use Phalcon\DI\FactoryDefault;
-use Phalcon\Mvc\Url as UrlResolver;
-use Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
-use Phalcon\Mvc\Model\Metadata\Files as MetaDataAdapter;
-use Phalcon\Mvc\Model\Metadata\Memory as MemoryMetaDataAdapter;
-use Phalcon\Session\Adapter\Files as SessionAdapter;
-use Phalcon\Flash\Direct as Flash;
-use Phalcon\Mvc\Collection\Manager as CollectionManager;
-use Library\Helper\Helper as Helper;
-use Library\SSP\SSP as SSP;
-use Library\ML\ML as ML;
-use Library\RoleMaster\RoleMaster as RoleMaster;
-use Library\LogManager\LogManager as LogManager;
+date_default_timezone_set(TIMEZONE);
 
-
-date_default_timezone_set("Asia/Bangkok");
-
-$di = new FactoryDefault();
+$di = new \Phalcon\DI\FactoryDefault();
 
 $di->set('config', $config);
-
-//$config->application->debug = false;
-/**
- * Loading routes from the routes.php file
- */
 
 $di->set('router', function () use ($config) {
     return require __DIR__ . '/routes.php';
@@ -33,7 +14,7 @@ $di->set('router', function () use ($config) {
  * The URL component is used to generate all kind of urls in the application
  */
 $di->set('url', function () use ($config) {
-    $url = new UrlResolver();
+    $url = new \Phalcon\Mvc\Url();
     $url->setBaseUri($config->application->baseUri);
     return $url;
 }, true);
@@ -42,8 +23,7 @@ $di->set('url', function () use ($config) {
 $di->set(
     'db',
     function () use ($config) {
-
-        $connection = new DbAdapter($config->database->toArray());
+        $connection = new \Phalcon\Db\Adapter\Pdo\Mysql($config->database->toArray());
         return $connection;
     }
 );
@@ -55,12 +35,12 @@ $di->set(
     function () use ($config) {
 
         if (DEBUG == TRUE) {
-            return new MemoryMetaDataAdapter();
+            return new \Phalcon\Mvc\Model\Metadata\Memory();
         }
 
-        return new MetaDataAdapter(array(
+        return new \Phalcon\Mvc\Model\Metadata\Files([
             'metaDataDir' => $config->application->cacheDir  . 'metaData/'
-        ));
+        ]);
 
     },
     true
@@ -69,15 +49,14 @@ $di->set(
 /**
  * Start the session the first time some component request the session service
  */
-$di['session'] = function () {
-    $session = new SessionAdapter();
+$di->setShared('session', function () {
+    $session = new \Phalcon\Session\Adapter\Files();
     $session->start();
-
     return $session;
-};
+});
 
 $di->set('cookies', function() {
-    $cookies = new Phalcon\Http\Response\Cookies();
+    $cookies = new \Phalcon\Http\Response\Cookies();
     $cookies->useEncryption(false);
     return $cookies;
 });
@@ -85,32 +64,26 @@ $di->set('cookies', function() {
 /**
  * Flash service with custom CSS classes
  */
-$di->set('flash', function () {
-    $flash = new Flash(
-        array(
-            'error'   => 'alert alert-danger',
-            'success' => 'alert alert-success',
-            'notice'  => 'alert alert-info',
-            'warning' => 'alert alert-warning'
-        )
-    );
-    return $flash;
+$di->setShared('flash', function () {
+    return new \Phalcon\Flash\Direct([
+        'error'   => 'alert alert-danger',
+        'success' => 'alert alert-success',
+        'notice'  => 'alert alert-info',
+        'warning' => 'alert alert-warning'
+    ]);
 });
 
 /**
  * Register the session flash service with the Twitter Bootstrap classes
  */
-$di->set(
-    'flashSession',
-    function () {
-        return new Phalcon\Flash\Session(array(
-            'error'   => 'alert alert-danger',
-            'success' => 'alert alert-success',
-            'notice'  => 'alert alert-info',
-            'warning' => 'alert alert-warning'
-        ));
-    }
-);
+$di->setShared('flashSession', function () {
+    return new \Phalcon\Flash\Session([
+        'error'   => 'alert alert-danger',
+        'success' => 'alert alert-success',
+        'notice'  => 'alert alert-info',
+        'warning' => 'alert alert-warning'
+    ]);
+});
 /**
  * Cache
  */
@@ -154,42 +127,31 @@ $di->set('modelsManager', function() {
 });
 
 
-//Collection manager
-$di['collectionManager'] = function() {
-        return new CollectionManager();
-};
-
-/*
- * Helper
- */
-$di->set('helper',function(){
-    return new Helper();
-});
+$di->setShared(
+    "helper",
+    function() {
+        return new \Library\Helper\Helper();
+    }
+);
 
 $di->set(
     "ssp",
     function() {
-        return new SSP();
+        return new \Library\SSP\SSP();
     }
 );
 
-$di->set(
-    "rmt",
+$di->setShared(
+    "master",
     function() {
-        return new RoleMaster();
+        return new \Library\Master\Master();
     }
 );
+
 
 $di->set(
     "ml",
     function() {
         return new ML();
-    }
-);
-
-$di->set(
-    "logs",
-    function() {
-        return new LogManager();
     }
 );

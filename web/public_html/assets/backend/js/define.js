@@ -1,4 +1,4 @@
-const webAdminUrl = '/adcp';
+const webAdminUrl = '/admin';
 const webUrl = window.location.protocol+'://'+window.location.hostname;
 const webUri = "";
 const loaderHtml = `

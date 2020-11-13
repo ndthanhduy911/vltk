@@ -173,7 +173,7 @@
                 style="max-width: 450px !important">
                 <div class="card-header d-flex justify-content-center mt-3">
                     <a target="_blank" href="<?= WEB_ADMIN_URL ?>">
-                        <h1 class="mb-0 text-center text-primary font-weight-bold"><?= WEB_NAME ?></h1>
+                        <h1 class="mb-0 text-center text-primary font-weight-bold"><?= WEB_TITLE ?></h1>
                     </a>
                 </div>
                 <div class="card-body pb-4">

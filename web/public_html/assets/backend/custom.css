@@ -573,11 +573,6 @@ html {
     color: #000000;
 }
 
-.sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active,
-.sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active {
-    color: #000000;
-}
-
 .small-box {
     margin-bottom: 12px;
 }

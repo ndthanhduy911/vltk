@@ -105,13 +105,12 @@
                             title="Xóa dữ liệu" data-toggle="tooltip">Xóa</span></a>
                 </span>
                 {% endif %}
-                <?php if(!NOTSHOW) { ?>
+
                 {% if master.checkPermission('sync', 'lock') %}
                 <button id="lockSync" type="button" class="btn btn-hnn btn-hnn-warning float-right mr-2"
                     title="Khóa thông tin" data-toggle="tooltip"
                     data-href="<?= WEB_ADMIN_URI.'/sync/lock' ?>"><span>Khóa</span></button>
                 {% endif %}
-                <?php } ?>
             </div>
         </div>
     </div>

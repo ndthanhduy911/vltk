@@ -3,12 +3,14 @@
         <li class="nav-item">
             <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
         </li>
+        {#
         <li class="nav-item d-none d-sm-inline-block">
             <a href="<?= WEB_ADMIN_URL ?>/help/about" class="nav-link {% if dispatcher.getControllerName()=='help' AND dispatcher.getActionName()=='about'  %} {{ 'active' }} {% endif %}">Giới thiệu</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
             <a href="<?= WEB_ADMIN_URL ?>/help/contact" class="nav-link {% if dispatcher.getControllerName()=='help' AND dispatcher.getActionName()=='contact'  %} {{ 'active' }} {% endif %}">Liên hệ</a>
         </li>
+        #}
     </ul>
 
     <ul class="navbar-nav ml-auto">

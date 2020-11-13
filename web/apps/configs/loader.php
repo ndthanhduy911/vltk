@@ -20,8 +20,8 @@ $loader->registerClasses(
     )
 );
 
-// $loader->registerFiles([
-// 	LIB_DIR . '/vendor/autoload.php'
-// ]);
+$loader->registerFiles([
+	LIB_DIR . '/vendor/autoload.php'
+]);
 
 $loader->register();

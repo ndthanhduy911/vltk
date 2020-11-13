@@ -539,7 +539,7 @@ class SyncController extends \BackendController
 
     private function getJsCss(){
         // And some local JavaScript resources
-        $this->assets->addJs(WEB_URL.'/assets/js/modules/master/sync.js?v='.VS_SCRIPT);
+        $this->assets->addJs(WEB_URL.'/assets/backend/js/modules/master/sync.js?v='.VS_SCRIPT);
     }
 
     private function deleteOne($sync,$perL){

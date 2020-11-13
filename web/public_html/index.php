@@ -16,6 +16,11 @@ try
 
     $define = include APP_DIR . '/configs/define.php';
     /**
+     * Include functions
+     */
+    $config = include APP_DIR . '/configs/functions.php';
+
+    /**
      * Read the configuration
      */
     $config = include APP_DIR . '/configs/config.php';
@@ -49,16 +54,17 @@ try
 }
 catch (Phalcon\Exception $e)
 {
-   echo $e->getMessage();
-    require ERROR_FILE;
+    echo $e->getMessage();
+    require ERROR_FILE;die;
+    
 }
 catch (PDOException $e)
 {
     echo $e->getMessage();
-    //  require ERROR_FILE;
+    require ERROR_FILE; die;
 }
 catch (Exception $e)
 {
     echo $e->getMessage();
-     require ERROR_FILE;
+    require ERROR_FILE; die;
 }
