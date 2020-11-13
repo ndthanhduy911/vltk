@@ -5,7 +5,6 @@ namespace Backend\Modules\Account;
 use Phalcon\Loader;
 use Phalcon\Mvc\View;
 use Phalcon\Mvc\View\Engine\Volt as VoltEngine;
-use Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
 use Phalcon\Mvc\ModuleDefinitionInterface;
 
 
@@ -20,8 +19,7 @@ class Module implements ModuleDefinitionInterface
 
         $loader->registerNamespaces(array(
             'Backend\Modules\Account\Controllers' => __DIR__ . '/controllers/',
-            'Backend\Modules\Account\Models' => __DIR__ . '/models/',
-            'Backend\Modules\Account\Forms' => __DIR__ . '/forms/',
+            'Backend\Modules\Account\Forms' => __DIR__ . '/forms/'
         ));
         $loader->register();
     }

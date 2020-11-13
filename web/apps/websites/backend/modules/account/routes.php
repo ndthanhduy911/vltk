@@ -1,19 +1,18 @@
 <?php
 /***********************AccountController***********************/
-$router->add($config->application->backendUri . '/login', array(
+$router->add(WEB_ADMIN_URI . '/login', array(
     'module' => 'backend_account',
     'controller' => 'account',
-    'action' => 'login',
+    'action' => 'login'
 ));
 
-$router->add($config->application->backendUri . '/account/:action', array(
+$router->add(WEB_ADMIN_URI . '/login/captcha', array(
     'module' => 'backend_account',
     'controller' => 'account',
-    'action' => 1,
+    'action' => 'captcha'
 ));
-$router->add($config->application->backendUri . '/account/:action/:int', array(
+$router->add(WEB_ADMIN_URI . '/logout', array(
     'module' => 'backend_account',
     'controller' => 'account',
-    'action'  => 1,
-    'id' => 2
+    'action'  => 'logout',
 ));

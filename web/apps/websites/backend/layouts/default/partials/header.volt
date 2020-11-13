@@ -1,14 +1,38 @@
-<header class="app-header pr-3"><a class="app-header__logo" href="<?php echo WEB_ADMIN_URL; ?>">{{ dept.code }} </a>
-    <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
-    <ul class="app-nav d-flex align-items-center">
-        <!-- User Menu-->
-        <li class="dropdown"><a class="app-nav__item p-0" href="#" data-toggle="dropdown" aria-label="">{{session.get('name')}} <img style="width: 30px;" class="ml-1 rounded-circle" src="{{ helper.getLinkImage(session.get('avatar'),'/assets/frontend/images/avatar.jpg') }}" alt="{{session.get('name')}}"></a>
-            <ul class="dropdown-menu settings-menu dropdown-menu-right">
-                <!-- <li><a class="dropdown-item" href="<?php echo WEB_ADMIN_URL; ?>"><i class="fa fa-cog fa-lg"></i> Cài đặt</a></li> -->
-                <li><a class="dropdown-item" href="<?php echo WEB_ADMIN_URL; ?>/profile"><i class="fa fa-user fa-lg"></i> Cá nhân</a></li>
-                <li><a class="dropdown-item" href="<?php echo WEB_ADMIN_URL; ?>/account/logout"><i class="fa fa-sign-out fa-lg"></i> Đăng xuất</a></li>
-            </ul>
+<nav class="main-header navbar navbar-expand navbar-white text-sm">
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
         </li>
-
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="<?= WEB_ADMIN_URL ?>/help/about" class="nav-link {% if dispatcher.getControllerName()=='help' AND dispatcher.getActionName()=='about'  %} {{ 'active' }} {% endif %}">Giới thiệu</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="<?= WEB_ADMIN_URL ?>/help/contact" class="nav-link {% if dispatcher.getControllerName()=='help' AND dispatcher.getActionName()=='contact'  %} {{ 'active' }} {% endif %}">Liên hệ</a>
+        </li>
     </ul>
-</header>
+
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item dropdown">
+            <a class="nav-link pt-0 pb-0" data-toggle="dropdown" href="#">
+                <?php $avatar = $this->session->get('avatar'); ?>
+                <img class="border rounded-circle mr-2 header-avatar" width="30px" height="30px"
+                    src="<?= $avatar ? '/uploads/avatar/'.$avatar : '/img/avatar.png' ?>"
+                    alt="{{ session.get('fullname') }}" /><span>Xin chào, {{ session.get('fullname') }}</span>
+                <i class="fas fa-caret-down"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+                <a href="<?= WEB_ADMIN_URL ?>/user/profile" class="dropdown-item">
+                    <i class="fas fa-user mr-2"></i> Thông tin cá nhân
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item">
+                    <i class="fa fa-bell mr-2"></i> Thông báo từ hệ thống
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="<?= WEB_URL ?>/account/logout" class="dropdown-item">
+                    <i class="fa fa-power-off mr-2"></i> Đăng xuất
+                </a>
+            </div>
+        </li>
+    </ul>
+</nav>

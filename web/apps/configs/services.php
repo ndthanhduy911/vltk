@@ -88,10 +88,10 @@ $di->set('cookies', function() {
 $di->set('flash', function () {
     $flash = new Flash(
         array(
-            'error'   => 'alert bg-danger',
-            'success' => 'alert bg-success',
-            'notice'  => 'alert bg-info',
-            'warning' => 'alert bg-warning'
+            'error'   => 'alert alert-danger',
+            'success' => 'alert alert-success',
+            'notice'  => 'alert alert-info',
+            'warning' => 'alert alert-warning'
         )
     );
     return $flash;
@@ -104,9 +104,10 @@ $di->set(
     'flashSession',
     function () {
         return new Phalcon\Flash\Session(array(
-            'error'   => 'alert bg-danger text-white',
-            'success' => 'alert bg-success text-white',
-            'notice'  => 'alert bg-info text-white',
+            'error'   => 'alert alert-danger',
+            'success' => 'alert alert-success',
+            'notice'  => 'alert alert-info',
+            'warning' => 'alert alert-warning'
         ));
     }
 );

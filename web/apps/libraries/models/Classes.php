@@ -1,6 +1,6 @@
 <?php
 
-class Classes extends \Phalcon\Mvc\Model
+class Classes extends \ModelCore
 {
     
     public function getSource()
@@ -8,18 +8,8 @@ class Classes extends \Phalcon\Mvc\Model
         return 'classes';
     }
 
-    public static function findFirstId($id, $columns = "*")
-    {
-        return parent::findFirst([
-            "conditions" => "id = :id:",
-            "bind" => array('id' => $id),
-            "columns" => $columns
-        ]);   
-    }
-
     public static function getUrlById($id = null)
     {
-        
         if($class = parent::findFirst($id)){
             return WEB_URL.'/'.$class->slug;
         }else{

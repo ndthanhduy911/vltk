@@ -1,74 +1,96 @@
-<!DOCTYPE html>
-<html lang="en">
 
+<!DOCTYPE html>
+<html lang="vi">
 <head>
-    <meta name="description" content="Admin">
-    <!-- Twitter meta-->
-    <meta property="twitter:card" content="admin">
-    <meta property="twitter:site" content="@admin">
-    <meta property="twitter:creator" content="@admin">
-    <!-- Open Graph Meta-->
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Admin">
-    <meta property="og:title" content="Admin">
-    <meta property="og:url" content="<?php echo WEB_URL ?>/uploads/khoa-vat-ly/logo96x96.png">
-    <meta property="og:image" content="<?php echo WEB_URL ?>/uploads/khoa-vat-ly/logo96x96.png">
-    <meta property="og:description" content="">
-    <title>ADMIN</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title><?= WEB_TITLE ?></title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Quản lý tài sản | Honeynet">
+    <link rel="shortcut icon" href="<?= WEB_URL ?>/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="<?= WEB_URL ?>/logo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Font Awesome -->
+    <style>
+        @font-face {
+            font-family: "Roboto";
+            src: url(/assets/dist/fonts/roboto/Roboto-Regular.ttf);
+        }
+    </style>
 
-    <link rel="icon" type="image/png" sizes="16x16" href="/uploads/khoa-vat-ly/logo96x96.png">
+    <link rel="stylesheet" href="<?= WEB_URL.'/assets/dist/' ?>plugins/fontawesome-free/css/all.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="<?= WEB_URL.'/assets/dist/' ?>plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="<?= WEB_URL.'/assets/dist/' ?>plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">  
+    <!-- Daterangepicker -->
+    <link rel="stylesheet" href="<?= WEB_URL.'/assets/dist/' ?>plugins/daterangepicker/daterangepicker.css">  
+    <!-- Select2 -->
+    <link rel="stylesheet" href="<?= WEB_URL.'/assets/dist/' ?>plugins/select2/css/select2.min.css">  
+    <!-- Select2 -->
+    <link rel="stylesheet" href="<?= WEB_URL.'/assets/dist/' ?>plugins/smoothproducts/css/smoothproducts.css">  
+    <!-- OverlayScrollbars -->
+    <link type="text/css" href="<?= WEB_URL.'/assets/dist/' ?>plugins/overlayScrollbars/css/OverlayScrollbars.min.css" rel="stylesheet"/>
+    <!-- Theme style -->
+    <link rel="stylesheet" href="<?= WEB_URL.'/assets/dist/' ?>/css/adminlte.min.css">
+    <link rel="stylesheet" href="<?= WEB_URL.'/assets/' ?>material-dashboard.css?v=<?= VS_SCRIPT ?>">
+    <!-- custom -->
+    <link rel="stylesheet" href="<?= WEB_URL.'/assets/' ?>custom.css?v=<?= VS_SCRIPT ?>">
+    <!-- Google Font: Roboto -->
+    <!-- <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700&display=swap" rel="stylesheet"> -->
+    <?php $this->assets->outputCss(); ?>
 
-    <!-- Font-icon css-->
-    <link rel="stylesheet" type="text/css" href="/assets/backend/fonts/font-awesome/css/font-awesome.min.css">
-
-    <!-- Main CSS-->
-    <link rel="stylesheet" type="text/css" href="/assets/backend/css/main.css">
-
-    <link rel="stylesheet" type="text/css" href="/assets/backend/plugins/ckeditor/samples/css/samples.css">
-    <link rel="stylesheet" type="text/css" href="/assets/backend/plugins/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">
-
-    <link rel="stylesheet" type="text/css" href="/assets/backend/css/boostrap-datetimepicker.min.css">
-
-    <link rel="stylesheet" type="text/css" href="/assets/backend/css/custom.css">
-    {{ assets.outputCss() }}
+    
 </head>
 
-<body class="app sidebar-mini rtl" dept-id="{{session.get('dept_id')}}">
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed text-sm navbar-white navbar-light">
+    <div class="wrapper">
+        {{ partial('header') }}
+        {{ partial('sidebar') }}
+        <div class="content-wrapper">
+            <div id="singleCore">
+                {{ content() }}
+            </div>
+        </div>
+        {{ partial('footer') }}
+    </div>
 
-    <!-- header header  -->
-    {{ partial('header') }}
-    <!-- Left Sidebar  -->
-    {{ partial('sidebar') }}
-
-    {{ content() }}
-
-    {{ partial('footer') }}
-
-
-    <!-- Inclue Javascript -->
-    <!-- Essential javascripts for application to work-->
-    <script src="/assets/backend/js/jquery-3.2.1.min.js"></script>
-    <script src="/assets/backend/js/popper.min.js"></script>
-    <script src="/assets/backend/js/bootstrap.min.js"></script>
-    <script src="/assets/backend/js/plugins/jquery.dataTables.min.js"></script>
-    <script src="/assets/backend/js/plugins/dataTables.bootstrap.min.js"></script>
-    <script src="/assets/backend/js/plugins/select2.min.js"></script>
-    <script src="/assets/backend/js/plugins/moment.min.js"></script>
-    <!-- <script src="/assets/backend/js/plugins/bootstrap-datepicker.min.js"></script> -->
-    <script src="/assets/backend/js/plugins/boostrap-datetimepicker.min.js"></script>
-    <script src="/assets/backend/js/plugins/sweetalert.min.js"></script>
-    <script src="/assets/backend/js/plugins/validator.min.js"></script>
-    <script src="/assets/backend/plugins/ckeditor/ckeditor.js"></script>
-    <script src="/assets/backend/plugins/ckeditor/samples/js/sample.js"></script>
-
-    <script src="/assets/backend/js/define.js"></script>
-    {{ assets.outputJs() }}
-    <script src="/assets/backend/js/main.js"></script>
-    <script src="/assets/backend/js/plugins/pace.min.js"></script>
-
+    <!-- jQuery -->
+    <script src="<?= WEB_URL.'/assets/dist/' ?>plugins/jquery/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="<?= WEB_URL.'/assets/dist/' ?>plugins/jquery-ui/jquery-ui.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="<?= WEB_URL.'/assets/dist/' ?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="<?= WEB_URL.'/assets/dist/' ?>plugins/sweetalert2/sweetalert2.min.js"></script>
+    <!-- Select2 -->
+    <script src="<?= WEB_URL.'/assets/dist/' ?>plugins/select2/js/select2.full.min.js"></script>
+    <!-- Daterangepicker -->
+    <script src="<?= WEB_URL.'/assets/dist/' ?>plugins/moment/moment.min.js"></script>
+    <script src="<?= WEB_URL.'/assets/dist/' ?>plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- Validation -->
+    <script src="<?= WEB_URL ?>/js/validator.min.js"></script>
+    <!-- DataTable -->
+    <script src="<?= WEB_URL.'/assets/dist/' ?>plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="<?= WEB_URL.'/assets/dist/' ?>plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+    <!-- overlayScrollbars JS -->
+    <script src="<?= WEB_URL.'/assets/dist/' ?>plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <!-- custom-file-input -->
+    <script src="<?= WEB_URL.'/assets/dist/' ?>plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+    <!-- barcode -->
+    <script src="<?= WEB_URL.'/assets/dist/' ?>plugins/barcode/jquery-barcode.min.js"></script>
+    <!-- smoothproducts -->
+    <script src="<?= WEB_URL.'/assets/dist/' ?>plugins/smoothproducts/js/smoothproducts.min.js"></script>
+    <!-- Call API -->
+    <script src="<?= WEB_URL.'/assets/' ?>js/callapi.js?v=<?= VS_SCRIPT ?>"></script>
+    <!-- Define -->
+    <script src="<?= WEB_URL.'/assets/' ?>js/define.js?v=<?= VS_SCRIPT ?>"></script>
+    <!-- Define ChartJs -->
+    <script src="<?= WEB_URL.'/assets/' ?>js/definechartjs.js?v=<?= VS_SCRIPT ?>"></script>
+    <script src="<?= WEB_URL.'/assets/dist/' ?>js/adminlte.js"></script>
+    <?php $this->assets->outputJs(); ?>
+    <script src="<?= WEB_URL.'/assets/' ?>js/init.js?v=<?= VS_SCRIPT ?>"></script>
 </body>
 
 </html>
