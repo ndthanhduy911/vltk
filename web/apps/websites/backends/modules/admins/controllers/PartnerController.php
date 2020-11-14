@@ -77,7 +77,7 @@ class PartnerController  extends \BackendController {
                 }
 
                 if (!count($error)) {
-                    $partner->calendar = $this->helper->datetime_mysql($partner->calendar);
+                    $partner->calendar = $this->helper->datetimeMysql($partner->calendar);
                     if (!$partner->save()) {
                         foreach ($partner->getMessages() as $message) {
                             $this->flashSession->error($message);

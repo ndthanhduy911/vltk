@@ -1,68 +1,13 @@
 <?php
 namespace Library\Helper;
-
 use Sinergi\BrowserDetector\Os;
 use Sinergi\BrowserDetector\Device;
 use Sinergi\BrowserDetector\Browser;
+use Library\ML\ML as MLML;
 
 class Helper
 {
-    public function show_row_child($items, $stt = 0, $height_level = 0)
-    {
-        if (!empty($items['child'])) {
-            foreach ($items['child'] as $item) {
-                $text_baby = '';
-                if (!empty($item['level'])) {
-                    for ($i =  $height_level; $i < (int) $item['level']; $i++) {
-                        $text_baby .= '&mdash;';
-                    }
-                }
-
-                ?>
-                <tr class-id="<?=$item['id']?>">
-                    <td class="text-center">
-                        <?=$stt++?>
-                    </td>
-                    <td><?=$item['code']?></td>
-                    <td><?=$text_baby . ' ' . $item['name']?></td>
-                    <td class="text-center">
-                        <a href="/departments/edit/<?php echo $item['id'] ?>" data-get="/departments/getdatadepartments/<?php echo $item['id'] ?>" class="btn btn-hnn btn-hnn-info btn-icon editDepartments" data-toggle="tooltip" title="Cập nhật"><span class="fa fa-pencil"></span></a>
-                        <a href="/departments/delete/<?php echo $item['id'] ?>" class="btn btn-hnn btn-hnn-danger btn-icon" data-toggle="tooltip" title="Xóa"><span class="fa fa-trash"></span></a>
-                    </td>
-                </tr>
-                <?php if (!empty($item['child'])) {
-                    $stt = $this->show_row_child($item, $stt);
-                }
-            }
-        }
-        return $stt;
-    }
-
-    public function check_type_file($name)
-    {
-        if (preg_match('/(\.|\/)(gif|jpe?g|png|zip|docx|xlsx|xls|doc)$/i', $name)) {
-            return true;
-        }
-        return false;
-    }
-
-    public function check_size_file($size)
-    {
-        if ($size < 8096) {
-            return true;
-        }
-        return false;
-    }
-
-    public function maxValueInArrayObject($array, $prop)
-    {
-        return max(array_map(function ($o) use ($prop) {
-            return $o->$prop;
-        },
-            $array));
-    }
-
-    public function trim_text($input, $length, $ellipses = true, $strip_html = true){
+    public function trimText($input, $length, $ellipses = true, $strip_html = true){
         //strip tags, if desired
         if ($strip_html) {
             $input = strip_tags($input);
@@ -85,23 +30,23 @@ class Helper
         return $trimmed_text;
     }
 
-    public function datetime_mysql($date = null, $type = 'Y-m-d H:i:s'){
+    public function datetimeMysql($date = null, $type = 'Y-m-d H:i:s'){
         $date = str_replace('/', '-', $date );
         $dateCreate = date_create($date);
         return $date ? ($dateCreate ? date_format($dateCreate, $type): $date) : NULL;
     }
 
-    public function date_mysql($date = null, $type = 'Y-m-d'){
+    public function dateMysql($date = null, $type = 'Y-m-d'){
         $date = str_replace('/', '-', $date );
         $dateCreate = date_create($date);
         return $date ? ($dateCreate ? date_format($dateCreate, $type): $date) : NULL;
     }
 
-    public function datetime_vn($date = null, $type = "d/m/Y H:i"){
+    public function datetimeVn($date = null, $type = "d/m/Y H:i"){
         return $date ? date_format(date_create($date), $type) : NULL;
     }
 
-    public function date_vn($date = null, $type = "d/m/Y"){
+    public function dateVn($date = null, $type = "d/m/Y"){
         return $date ? date_format(date_create($date), $type) : NULL;
     }
 
@@ -119,7 +64,7 @@ class Helper
         die;
     }
 
-    public function get_client_ip() {
+    public function getClientIp() {
         $ipaddress = '';
         if (getenv('HTTP_CLIENT_IP'))
             $ipaddress = getenv('HTTP_CLIENT_IP');
@@ -143,12 +88,12 @@ class Helper
         return $os->getName().' '.$os->getVersion();
     }
 
-    function getBrowser() {
+    public function getBrowser() {
         $browser = new Browser();
         return $browser->getName().' '.$browser->getVersion();
     }
 
-    function getDevice() {
+    public function getDevice() {
         $device = new Device();
         return $device->getName();
     }
@@ -730,7 +675,7 @@ class Helper
         return $mark->run($params);
     }
 
-    public static function showSort($order,$_this,$fkey,$text){
+    public function showSort($order,$_this,$fkey,$text){
         $dirs = $_this->request->get('dir',['string', 'trim']);
         $orders = $_this->request->get('order',['string', 'trim']);
         $dirArray = explode(",",$dirs);
@@ -752,17 +697,7 @@ class Helper
         return "<a href='#' order='{$order}' dir='1' class='orderby text-white d-flex text-nowrap justify-content-between'>{$text}<i class='ml-1 fa fa-sort float-right text-dark'></i></a>";
     }
 
-    public function generateRandomString($length = 10){
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $charactersLength = strlen($characters);
-        $randomString = '';
-        for ($i = 0; $i < $length; $i++) {
-            $randomString .= $characters[rand(0, $charactersLength - 1)];
-        }
-        return $randomString;
-    }
-
-    public static function createNumber($className,$columName,$text = ""){
+    public function createNumber($className,$columName,$text = ""){
         if($object = $className::findFirst(['order' => "id DESC"])){
             $stt = (int)$object->id + 1;
             $number = $text.str_pad($stt,5,"0",STR_PAD_LEFT);
@@ -776,5 +711,131 @@ class Helper
         }
     }
 
-    
+    public function slugify($str) {
+        if($str){
+            $str = trim(mb_strtolower($str));
+            $str = preg_replace('/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/', 'a', $str);
+            $str = preg_replace('/(è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ)/', 'e', $str);
+            $str = preg_replace('/(ì|í|ị|ỉ|ĩ)/', 'i', $str);
+            $str = preg_replace('/(ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ)/', 'o', $str);
+            $str = preg_replace('/(ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ)/', 'u', $str);
+            $str = preg_replace('/(ỳ|ý|ỵ|ỷ|ỹ)/', 'y', $str);
+            $str = preg_replace('/(đ)/', 'd', $str);
+            $str = preg_replace('/[^a-z0-9-\s]/', '', $str);
+            $str = preg_replace('/([\s]+)/', '-', $str);
+        }
+
+        return $str;
+    }
+
+    public function getPaging($total_records, $current_page, $limit = 10)
+    {
+        if($total_records <= $limit){
+            return false;
+        }
+
+        $total_page = CEIL($total_records / $limit);
+
+        if ($current_page > $total_page){
+            $current_page = $total_page;
+        }
+        else if ($current_page < 1){
+            $current_page = 1;
+        }
+
+        $paging = [
+            'total_page' => $total_page,
+            'current_page' => $current_page,
+        ];
+        return $paging;
+    }
+
+    public function getPageById($pages = [], $id = null)
+    {
+        foreach ($pages as $key => $page) {
+            if((int)$page->id === (int)$id){
+                return $page;
+            }
+        }
+        return NULL;
+    }
+
+    public function getPosition($pos = "")
+    {
+        switch ((int)$pos) {
+            case 1: 
+                return  MLML::_ml_system('dean_dept',"Trưởng bộ môn") ;
+            case 2: 
+                return MLML::_ml_system('vice_dean_dept',"Phó bộ môn");       
+            case 3: 
+                return MLML::_ml_system('managing_lecturer',"Giáo vụ");      
+            case 4: 
+                return MLML::_ml_system('lecturer',"Giảng viên");  
+            case 5: 
+                return MLML::_ml_system('visiting_lecturer',"Cán bộ thỉnh giảng");  
+            case 6: 
+                return MLML::_ml_system('staff',"Nhân viên");  
+            default:
+                return "";
+                break;
+        }
+    }
+
+    public function getTarget($pos = "")
+    {
+        switch ((int)$pos) {
+            case 0: 
+                return  '_self' ;
+            case 1: 
+                return '_blank';       
+            case 2: 
+                return '_parent';      
+            case 3: 
+                return '_top';   
+            default:
+                return "_self";
+                break;
+        }
+    }
+
+    public function getDean($dean = "")
+    {
+        switch ((int)$dean) {
+            case 1: 
+                return MLML::_ml_system('dean',"Trưởng khoa");
+            case 2: 
+                return MLML::_ml_system('vice_dean',"Phó trưởng khoa");            
+            default:
+                return "";
+                break;
+        }
+    }
+
+    public function getWVN($date)
+    {
+        if ($date == '0000-00-00 00:00:00' || $date == null) {
+            return '';
+        }
+
+        switch ((int)date('w', strtotime($date))) {
+            case 0: 
+                return MLML::_ml_system('sunday',"Chủ Nhật");
+            case 1: 
+                return MLML::_ml_system('monday',"Thứ Hai");
+            case 2: 
+                return MLML::_ml_system('tuesday',"Thứ Ba");
+            case 3: 
+                return MLML::_ml_system('wednesday',"Thứ Tư");
+            case 4: 
+                return MLML::_ml_system('thursday',"Thứ Năm");
+            case 5: 
+                return MLML::_ml_system('friday',"Thứ Sáu");
+            case 6: 
+                return MLML::_ml_system('saturday',"Thứ Bảy");
+        
+            default:
+                return "";
+                break;
+        }
+    }
 }

@@ -28,7 +28,7 @@ class RoleController extends \BackendController
         }
 
         $nameSearch = $this->request->get('nameSearch',['string', 'trim']);
-        $createddateSearch = $this->helper->date_mysql($this->request->get('createddateSearch', ['string', 'trim']));
+        $createddateSearch = $this->helper->dateMysql($this->request->get('createddateSearch', ['string', 'trim']));
         $statusSearch = $this->request->get('statusSearch',['string', 'trim']);
 
         $data = $this->modelsManager->createBuilder()

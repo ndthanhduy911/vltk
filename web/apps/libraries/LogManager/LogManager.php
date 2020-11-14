@@ -10,7 +10,7 @@ class LogManager {
         $log->name = $name;
         $log->page = $page;
         $log->detail = $detail;
-        $log->ip = $this->get_client_ip();
+        $log->ip = $this->getClientIp();
         $log->device = $this->get_device_client();
         $log->created_at = date('Y-m-d H:i:s');
         if(!$log->save()){
@@ -20,7 +20,7 @@ class LogManager {
         }
     }
 
-    public function get_client_ip() {
+    public function getClientIp() {
         $ipaddress = '';
         if (getenv('HTTP_CLIENT_IP'))
             $ipaddress = getenv('HTTP_CLIENT_IP');

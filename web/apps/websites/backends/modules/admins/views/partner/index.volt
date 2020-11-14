@@ -23,7 +23,7 @@
                 <div class="tile-body">
                     <table id="partner" class="table table-bordered table-hover">
                         <thead>
-                            <tr class="bg-primary">
+                            <tr>
                                 <th class="align-middle text-center text-white w-20-px">#</th>
                                 <th class="align-middle text-center text-white">Ảnh đại diện</th>
                                 <th class="align-middle text-center text-white">Tên liên kết</th>

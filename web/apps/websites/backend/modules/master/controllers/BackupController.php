@@ -112,7 +112,7 @@ class BackupController extends \BackendController
         }
 
         $nameSearch = $this->request->get('nameSearch', ['string', 'trim']);
-        $createddateSearch = $this->helper->date_mysql($this->request->get('createddateSearch', ['string', 'trim']));
+        $createddateSearch = $this->helper->dateMysql($this->request->get('createddateSearch', ['string', 'trim']));
 
         $data = $this->modelsManager->createBuilder()
         ->columns(array(

@@ -153,7 +153,7 @@
                         <div class="table-responsive">
                             <table id="sync" class="table table-bordered table-hover rounded">
                                 <thead>
-                                    <tr class="bg-browm">
+                                    <tr>
                                         <th data-col="no" class="align-middle text-center" style="width: 20px;"><input id="syncCheckboxAll" type="checkbox" value="1"></th>
                                         <th data-col="no" class="align-middle text-center" style="width: 30px;">STT</th>
                                         {% for key,table in fTables %}

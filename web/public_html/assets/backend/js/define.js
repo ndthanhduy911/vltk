@@ -15,7 +15,7 @@ const vi_moment = (date, type = 'DD/MM/YYYY HH:mm:ss') => {
     return date ? moment(date, 'YYYY-MM-DD HH:mm:ss').format(type) : '';
 }
 //Show excerpt textshowViewDetail
-const trim_text = (input, length, ellipses = true, strip_html = true) => {
+const trimText = (input, length, ellipses = true, strip_html = true) => {
     //strip tags, if desired
     if (strip_html) {
         input = input.replace(/<\/?[^>]+>/ig, "");

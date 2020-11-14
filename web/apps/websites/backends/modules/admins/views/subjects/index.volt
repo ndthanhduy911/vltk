@@ -23,7 +23,7 @@
                 <div class="tile-body">
                     <table id="subjects" class="table table-bordered table-hover">
                         <thead>
-                            <tr class="bg-primary">
+                            <tr>
                                 <th class="align-middle text-center text-white w-20-px">#</th>
                                 <th class="align-middle text-center text-white">Tiêu đề</th>
                                 <th class="align-middle text-center text-white">Mô tả</th>

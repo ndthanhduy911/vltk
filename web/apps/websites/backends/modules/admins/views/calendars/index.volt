@@ -23,7 +23,7 @@
                 <div class="tile-body">
                     <table id="calendars" class="table table-bordered table-hover">
                         <thead>
-                            <tr class="bg-primary">
+                            <tr>
                                 <th class="align-middle text-center text-white w-20-px">#</th>
                                 <th class="align-middle text-center text-white">Tên môn học</th>
                                 <th class="align-middle text-center text-white">Học kỳ</th>

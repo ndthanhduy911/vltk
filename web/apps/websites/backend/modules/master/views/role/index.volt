@@ -80,7 +80,7 @@
                         <div class="table-responsive">
                             <table id="role" class="table table-bordered table-hover rounded">
                                 <thead>
-                                    <tr class="bg-browm">
+                                    <tr>
                                         <th class="align-middle text-center" style="width: 30px;">
                                             <input id="roleCheckboxAll" type="checkbox" value="1">
                                         </th>

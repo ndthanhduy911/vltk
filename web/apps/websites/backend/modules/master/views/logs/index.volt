@@ -63,7 +63,7 @@
                         <div class="table-responsive">
                             <table id="logs" class="table table-bordered table-hover rounded">
                                 <thead>
-                                    <tr class="bg-browm">
+                                    <tr>
                                         <th class="align-middle text-center">#</th>
                                         <th class="align-middle text-center">Loại</th>
                                         <th class="align-middle text-center">Tiêu đề</th>

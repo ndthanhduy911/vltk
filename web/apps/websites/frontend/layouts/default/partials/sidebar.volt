@@ -58,7 +58,7 @@
 
             <div class="media-body">
                 <h5 class="media-heading"><a href="<?= \Posts::getUrl($dept, $post) ?>" title="{{ post.title }}">{{ post.title }}</a></h5>
-                <p class="small margin-clear"><i class="fa fa-calendar pr-10"></i>{{ helper.datetime_vn(post.calendar) }}</p>
+                <p class="small margin-clear"><i class="fa fa-calendar pr-10"></i>{{ helper.datetimeVn(post.calendar) }}</p>
             </div>
         </div>
         {% endfor %}

@@ -158,7 +158,7 @@
                                 <table data-id="{{syncId}}" id="syncdetail"
                                     class="table table-bordered table-hover rounded border">
                                     <thead>
-                                        <tr class="bg-browm">
+                                        <tr>
                                             <th data-col="no" class="align-middle text-center" style="width: 20px;">
                                                 <input id="syncDetailCheckboxAll" type="checkbox" value="1"></th>
                                             <th data-col="no" class="align-middle text-center" style="width: 30px;">STT

@@ -60,8 +60,8 @@ class SyncController extends \BackendController
         }
         $title = "Chi tiết";
         $type = $sync->status ? "lock" :"edit";
-        $sync->syncdate = $this->helper->datetime_vn($sync->syncdate);
-        $sync->rpdate = $this->helper->date_vn($sync->rpdate,'d/m/Y');
+        $sync->syncdate = $this->helper->datetimeVn($sync->syncdate);
+        $sync->rpdate = $this->helper->dateVn($sync->rpdate,'d/m/Y');
         $form = new SyncForm($sync);
         $isAcceptChangeDept = $this->isAcceptChangeDept($id);
 
@@ -307,8 +307,8 @@ class SyncController extends \BackendController
             $sync->deleted = 0;
         }
         $sync->number = $this->request->getPost('number',['string', 'trim']);
-        $sync->rpdate = $this->helper->date_mysql($this->request->getPost('rpdate', ['string', 'trim']));
-        $sync->syncdate = $this->helper->datetime_mysql($this->request->getPost('syncdate', ['string', 'trim']));
+        $sync->rpdate = $this->helper->dateMysql($this->request->getPost('rpdate', ['string', 'trim']));
+        $sync->syncdate = $this->helper->datetimeMysql($this->request->getPost('syncdate', ['string', 'trim']));
         $sync->reason = $this->request->getPost('reason',['string', 'trim']);
         $sync->note = $this->request->getPost('note',['string', 'trim']);
         $sync->deptid = $deptId;
@@ -402,7 +402,7 @@ class SyncController extends \BackendController
         $restcosts = (float)str_replace(",", "", $this->request->getPost('restcosts',['string', 'trim']));
 
         $detail->aunumber = $this->request->getPost('aunumber', ['string', 'trim']);
-        $detail->audate = $this->helper->date_mysql($this->request->getPost('audate', ['string', 'trim']));
+        $detail->audate = $this->helper->dateMysql($this->request->getPost('audate', ['string', 'trim']));
         $detail->name = $this->request->getPost('name', ['string', 'trim']);
         $detail->specifications = $this->request->getPost('specifications', ['string', 'trim']);
         $detail->madeid = $mades ? $mades->id : NULL;
@@ -417,7 +417,7 @@ class SyncController extends \BackendController
         $detail->ddcosts = $detail->decosts + $detail->discosts;
         $detail->accumulated = $accumulated ? $accumulated : 0;
         $detail->renumber = $this->request->getPost('renumber', ['string', 'trim']);
-        $detail->redate = $this->helper->date_mysql($this->request->getPost('redate', ['string', 'trim']));
+        $detail->redate = $this->helper->dateMysql($this->request->getPost('redate', ['string', 'trim']));
         $detail->rereason = $this->request->getPost('rereason', ['string', 'trim']);
         $detail->restcosts = $restcosts ? $restcosts : 0;
 

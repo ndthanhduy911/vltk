@@ -168,7 +168,7 @@
                         <div class="table-responsive">
                             <table id="backup" class="table table-bordered table-hover rounded">
                                 <thead>
-                                    <tr class="bg-browm">
+                                    <tr>
                                         <th class="align-middle text-center" style="width: 30px;">STT</th>
                                         <th class="align-middle">Thời gian</th>
                                         <th class="align-middle">Tên tập tin</th>

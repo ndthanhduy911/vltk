@@ -32,7 +32,7 @@
                 <div class="tile-body">
                     <table id="menus" class="table table-bordered table-hover">
                         <thead>
-                            <tr class="bg-primary">
+                            <tr>
                                 <th class="align-middle text-center text-white">Tên</th>
                                 <th class="align-middle text-center text-white">Trạng thái</th>
                                 <th class="align-middle text-center text-white">Thao tác</th>

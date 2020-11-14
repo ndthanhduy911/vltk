@@ -19,7 +19,7 @@ class CalendarsController  extends \BackendController {
             if(!$calendar = \Calendars::findFirstId($id)){
                 echo 'Không tìm thấy dữ liệu'; die;
             }
-            $calendar->begin_date = $this->helper->datetime_vn($calendar->begin_date);
+            $calendar->begin_date = $this->helper->datetimeVn($calendar->begin_date);
             $calendar->updated_at = date('Y-m-d H:i:s');
             $title = 'Cập nhật';
             foreach ($languages as $key => $lang) {
@@ -89,7 +89,7 @@ class CalendarsController  extends \BackendController {
                 }
 
                 if (!count($error)) {
-                    $calendar->begin_date = $this->helper->datetime_mysql($calendar->begin_date);
+                    $calendar->begin_date = $this->helper->datetimeMysql($calendar->begin_date);
                     if (!$calendar->save()) {
                         foreach ($calendar->getMessages() as $message) {
                             $this->flashSession->error($message);

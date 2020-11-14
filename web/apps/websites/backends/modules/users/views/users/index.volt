@@ -23,7 +23,7 @@
                 <div class="tile-body">
                     <table id="users" class="table table-bordered table-hover">
                         <thead>
-                            <tr class="bg-primary">
+                            <tr>
                                 <th class="align-middle text-center text-white" style="width: 10px">#</th>
                                 <th class="align-middle text-center text-white" style="width: 100px">Họ và tên</th>
                                 <th class="align-middle text-center text-white">Ảnh đại diện</th>

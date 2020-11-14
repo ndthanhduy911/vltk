@@ -48,7 +48,7 @@
 
 		if($(window).width() < 720){
 			$('.slider-revolution-5-container .slider-banner-fullwidth .slider-content').each(function (index, element) {
-				$(this).html(trim_text($(this).text(), 100));
+				$(this).html(trimText($(this).text(), 100));
 			});
 		}
 		$('.dropdown-menu > li > a.active').parents('.dropdown-menu').prev('a.nav-link').addClass('active').parent('.nav-item.dropdown').addClass('show active');

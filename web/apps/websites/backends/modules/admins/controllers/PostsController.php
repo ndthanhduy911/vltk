@@ -25,7 +25,7 @@ class PostsController  extends \BackendController {
                 echo 'Không tìm thấy dữ liệu'; die;
             }
             $post->updated_at = date('Y-m-d H:i:s');
-            $post->calendar = $this->helper->datetime_vn($post->calendar);
+            $post->calendar = $this->helper->datetimeVn($post->calendar);
             $title = 'Cập nhật';
             foreach ($languages as $key => $lang) {
                 $post_lang = \PostsLang::findFirst(['post_id = :id: AND lang_id = :lang_id:','bind' => ['id' => $post->id, 'lang_id' => $lang->id]]);
@@ -110,7 +110,7 @@ class PostsController  extends \BackendController {
                 }
 
                 if (!count($error)) {
-                    $post->calendar = $this->helper->datetime_mysql($post->calendar);
+                    $post->calendar = $this->helper->datetimeMysql($post->calendar);
                     if (!$post->save()) {
                         foreach ($post->getMessages() as $message) {
                             $this->flashSession->error($message);

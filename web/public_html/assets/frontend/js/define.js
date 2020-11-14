@@ -42,9 +42,9 @@ const changeTitleToSlug = (title, slug) => {
     });
 }
 
-const trim_text = (input, length, ellipses = true, strip_html = true) => {
+const trimText = (input, length, ellipses = true, strip_html = true) => {
     //strip tags, if desired
-    if(!trim_text){
+    if(!trimText){
         return '';
     }
     if (strip_html) {

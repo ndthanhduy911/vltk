@@ -354,9 +354,6 @@ table .form-control, table .form-group .form-control {
 .dataTable.table-bordered thead th {
     border-left-width: 1px !important;
     border-right-width: 1px !important;
-    border-left-color: #C55A11 !important;
-    border-top-color: #C55A11 !important;
-    /* border-bottom-color: #C55A11 !important; */
 }
 
 .dataTable.table-bordered thead tr:first th:first-of-type {
