@@ -8,239 +8,167 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
-                    <a href="<?= WEB_ADMIN_URL ?>"
+                    <a href="<?= WEB_ADMIN_URL ?>/dashboard"
                         class="nav-link {% if dispatcher.getControllerName()=='index' AND dispatcher.getActionName() == 'index' %} {{ 'active' }} {% endif %}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Bảng điều khiển</p>
                     </a>
                 </li>
                 <li
-                    class="nav-item has-treeview {% if dispatcher.getControllerName() in ['checkout','checkin','asset', 'pcplan', 'furnish', 'reduction', 'transfer', 'revoke','inventory','repair','failing', 'estimate','history'] %} {{ 'menu-open' }} {% endif %}">
+                    class="nav-item has-treeview {% if dispatcher.getControllerName() in ['posts','categories'] %} {{ 'menu-open' }} {% endif %}">
                     <a href="#"
-                        class="nav-link {% if dispatcher.getControllerName() in ['checkout','checkin','asset', 'pcplan', 'furnish', 'reduction', 'transfer', 'revoke','inventory','repair','failing', 'estimate','history'] %} {{ 'active' }} {% endif %}">
-                        <i class="nav-icon fas fa-server"></i>
-                        <p>
-                            Tài sản
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
+                        class="nav-link {% if dispatcher.getControllerName() in ['posts','categories'] %} {{ 'active' }} {% endif %}">
+                        <i class="nav-icon fas fa-newspaper"></i>
+                        <p>Bài viết<i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview mt-1">
-                        {% if master.checkPermission('checkin', 'index') %}
+                        {% if master.checkPermission('posts', 'index') %}
                         <li class="nav-item">
-                            <a href="<?= WEB_ADMIN_URL ?>/checkin"
-                                class="nav-link {% if dispatcher.getControllerName()=='checkin' AND dispatcher.getActionName() !='checkinasset' %} {{ 'active' }} {% endif %}">
+                            <a href="<?= WEB_ADMIN_URL ?>/posts"
+                                class="nav-link {% if dispatcher.getControllerName()=='posts' AND dispatcher.getActionName()=='index' %} {{ 'active' }} {% endif %}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Phiếu nhập</p>
+                                <p>Tất cả</p>
                             </a>
                         </li>
                         {% endif %}
-                        {% if master.checkPermission('checkout', 'index') %}
+                        {% if master.checkPermission('posts', 'update') %}
                         <li class="nav-item">
-                            <a href="<?= WEB_ADMIN_URL ?>/checkout"
-                                class="nav-link {% if dispatcher.getControllerName()=='checkout' %} {{ 'active' }} {% endif %}">
+                            <a href="<?= WEB_ADMIN_URL ?>/posts/update"
+                                class="nav-link {% if dispatcher.getControllerName()=='posts' AND dispatcher.getActionName()=='update' %} {{ 'active' }} {% endif %}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Phiếu xuất</p>
+                                <p>Bài viết mới</p>
                             </a>
                         </li>
                         {% endif %}
-                        {% if master.checkPermission(['checkout','checkin'], 'index') %}
+                        {% if master.checkPermission('categories', 'index') %}
                         <li class="nav-item">
-                            <a href="<?= WEB_ADMIN_URL ?>/checkin/checkinasset"
-                                class="nav-link {% if dispatcher.getControllerName()=='checkin' AND dispatcher.getActionName()=='checkinasset' %} {{ 'active' }} {% endif %}">
+                            <a href="<?= WEB_ADMIN_URL ?>/categories"
+                                class="nav-link {% if dispatcher.getControllerName()=='categories' %} {{ 'active' }} {% endif %}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Tài sản nhập/xuất</p>
-                            </a>
-                        </li>
-                        {% endif %}
-                        <hr class="mt-1 mb-1">
-                        {% if master.checkPermission('asset', 'index') %}
-                        <li class="nav-item">
-                            <a href="<?= WEB_ADMIN_URL ?>/asset"
-                                class="nav-link {% if dispatcher.getControllerName()=='asset' %} {{ 'active' }} {% endif %}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Tài sản sử dụng</p>
-                            </a>
-                        </li>
-                        {% endif %}
-                        {% if master.checkPermission('inventory', 'index') %}
-                        <li class="nav-item">
-                            <a href="<?= WEB_ADMIN_URL ?>/inventory"
-                                class="nav-link {% if dispatcher.getControllerName()=='inventory' %} {{ 'active' }} {% endif %}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Kiểm kê Tài sản</p>
-                            </a>
-                        </li>
-                        {% endif %}
-                        {% if master.checkPermission('estimate', 'index') %}
-                        <li class="nav-item">
-                            <a href="<?= WEB_ADMIN_URL ?>/estimate"
-                                class="nav-link {% if dispatcher.getControllerName()=='estimate' %} {{ 'active' }} {% endif %}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Đánh giá lại Tài sản</p>
-                            </a>
-                        </li>
-                        {% endif %}
-                        {% if master.checkPermission('transfer', 'index') %}
-                        <li class="nav-item">
-                            <a href="<?= WEB_ADMIN_URL ?>/transfer"
-                                class="nav-link {% if dispatcher.getControllerName()=='transfer' %} {{ 'active' }} {% endif %}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Điều chuyển Tài sản</p>
-                            </a>
-                        </li>
-                        {% endif %}
-                        {% if master.checkPermission('revoke', 'index') %}
-                        <li class="nav-item">
-                            <a href="<?= WEB_ADMIN_URL ?>/revoke"
-                                class="nav-link {% if dispatcher.getControllerName()=='revoke' %} {{ 'active' }} {% endif %}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Thu hồi Tài sản</p>
-                            </a>
-                        </li>
-                        {% endif %}
-                        {% if master.checkPermission('failing', 'index') %}
-                        <li class="nav-item">
-                            <a href="<?= WEB_ADMIN_URL ?>/failing"
-                                class="nav-link {% if dispatcher.getControllerName()=='failing' %} {{ 'active' }} {% endif %}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Báo hỏng Tài sản</p>
-                            </a>
-                        </li>
-                        {% endif %}
-                        {% if master.checkPermission('repair', 'index') %}
-                        <li class="nav-item">
-                            <a href="<?= WEB_ADMIN_URL ?>/repair"
-                                class="nav-link {% if dispatcher.getControllerName()=='repair' %} {{ 'active' }} {% endif %}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Nâng cấp/Sửa chữa</p>
-                            </a>
-                        </li>
-                        {% endif %}
-                        <hr class="mt-1 mb-1">
-                        {% if master.checkPermission('reduction', 'index') %}
-                        <li class="nav-item">
-                            <a href="<?= WEB_ADMIN_URL ?>/reduction"
-                                class="nav-link {% if dispatcher.getControllerName()=='reduction' AND (dispatcher.getActionName() in ['view','update','index']) %} {{ 'active' }} {% endif %}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Ghi giảm Tài sản</p>
-                            </a>
-                        </li>
-                        {% endif %}
-                        {% if master.checkPermission('reduction', 'index') %}
-                        <li class="nav-item">
-                            <a href="<?= WEB_ADMIN_URL ?>/reduction/list"
-                                class="nav-link {% if dispatcher.getControllerName()=='reduction' AND dispatcher.getActionName()=='list' %} {{ 'active' }} {% endif %}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Tài sản ghi giảm</p>
-                            </a>
-                        </li>
-                        {% endif %}
-                        <hr class="mt-1 mb-1">
-                        {% if master.checkPermission('pcplan', 'index') %}
-                        <li class="nav-item">
-                            <a href="<?= WEB_ADMIN_URL ?>/pcplan"
-                                class="nav-link {% if dispatcher.getControllerName()=='pcplan' %} {{ 'active' }} {% endif %}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Kế hoạch mua sắm</p>
-                            </a>
-                        </li>
-                        {% endif %}
-                        {% if master.checkPermission('furnish', 'index') %}
-                        <li class="nav-item">
-                            <a href="<?= WEB_ADMIN_URL ?>/furnish"
-                                class="nav-link {% if dispatcher.getControllerName()=='furnish' %} {{ 'active' }} {% endif %}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Đề nghị trang cấp</p>
-                            </a>
-                        </li>
-                        {% endif %}
-                        <hr class="mt-1 mb-1">
-                        {% if master.checkPermission('history', 'index') %}
-                        <li class="nav-item">
-                            <a href="<?= WEB_ADMIN_URL ?>/history"
-                                class="nav-link {% if dispatcher.getControllerName()=='history' %} {{ 'active' }} {% endif %}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Lịch sử sử dụng</p>
+                                <p>Chuyên mục</p>
                             </a>
                         </li>
                         {% endif %}
                     </ul>
                 </li>
+                <li class="nav-item">
+                    <a href="<?= WEB_ADMIN_URL ?>/pages"
+                        class="nav-link {% if dispatcher.getControllerName()=='pages' %} {{ 'active' }} {% endif %}">
+                        <i class="nav-icon fas fa-globe"></i>
+                        <p>Trang</p>
+                    </a>
+                </li>
                 <li
-                    class="nav-item has-treeview {% if dispatcher.getControllerName() in ['upasset','deasset','uptool','detool','fixedbook','toolbook'] %} {{ 'menu-open' }} {% endif %}">
+                    class="nav-item has-treeview {% if dispatcher.getControllerName() in ['subjects','categories'] %} {{ 'menu-open' }} {% endif %}">
                     <a href="#"
-                        class="nav-link {% if dispatcher.getControllerName() in ['upasset','deasset','uptool','detool','fixedbook','toolbook'] %} {{ 'active' }} {% endif %}">
-                        <i class="nav-icon fas fa-search-dollar"></i>
+                        class="nav-link {% if dispatcher.getControllerName() in ['subjects','categories'] %} {{ 'active' }} {% endif %}">
+                        <i class="nav-icon fas fa-list"></i>
                         <p>
-                            Kế toán
+                            Đào tạo
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview mt-1">
-                        {% if master.checkPermission('upasset', 'index') %}
+                        {% if master.checkPermission('subjects', 'index') %}
                         <li class="nav-item">
-                            <a href="<?= WEB_ADMIN_URL ?>/upasset"
-                                class="nav-link {% if dispatcher.getControllerName()=='upasset' %} {{ 'active' }} {% endif %}">
+                            <a href="<?= WEB_ADMIN_URL ?>/subjects"
+                                class="nav-link {% if dispatcher.getControllerName()=='subjects' %} {{ 'active' }} {% endif %}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Ghi tăng TSCĐ</p>
+                                <p>Môn học</p>
                             </a>
                         </li>
                         {% endif %}
-                        {% if master.checkPermission('deasset', 'index') %}
+                        {% if master.checkPermission('researches', 'index') %}
                         <li class="nav-item">
-                            <a href="<?= WEB_ADMIN_URL ?>/deasset"
-                                class="nav-link {% if dispatcher.getControllerName()=='deasset' %} {{ 'active' }} {% endif %}">
+                            <a href="<?= WEB_ADMIN_URL ?>/researches"
+                                class="nav-link {% if dispatcher.getControllerName()=='researches' %} {{ 'active' }} {% endif %}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Khấu hao, hao mòn</p>
+                                <p>Hướng nghiên cứu</p>
                             </a>
                         </li>
                         {% endif %}
-                        {#
-                        {% if master.checkPermission('fixedbook', 'index') %}
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= WEB_ADMIN_URL ?>/banner"
+                        class="nav-link {% if dispatcher.getControllerName()=='banner' %} {{ 'active' }} {% endif %}">
+                        <i class="nav-icon fas fa-images"></i>
+                        <p>Banners</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= WEB_ADMIN_URL ?>/staff"
+                        class="nav-link {% if dispatcher.getControllerName()=='staff' %} {{ 'active' }} {% endif %}">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>Nhân viên</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= WEB_ADMIN_URL ?>/partner"
+                        class="nav-link {% if dispatcher.getControllerName()=='partner' %} {{ 'active' }} {% endif %}">
+                        <i class="nav-icon fas fa-handshake"></i>
+                        <p>Liên kết</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= WEB_ADMIN_URL ?>/home"
+                        class="nav-link {% if dispatcher.getControllerName()=='home' %} {{ 'active' }} {% endif %}">
+                        <i class="nav-icon fas fa-home"></i>
+                        <p>Trang chủ</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= WEB_ADMIN_URL ?>/home"
+                        class="nav-link {% if dispatcher.getControllerName()=='home' %} {{ 'active' }} {% endif %}">
+                        <i class="nav-icon fas fa-list-alt"></i>
+                        <p>Menus</p>
+                    </a>
+                </li>
+                <li
+                    class="nav-item has-treeview {% if dispatcher.getControllerName() in ['setting'] %} {{ 'menu-open' }} {% endif %}">
+                    <a href="#"
+                        class="nav-link {% if dispatcher.getControllerName() in ['setting'] %} {{ 'active' }} {% endif %}">
+                        <i class="nav-icon fas fa-cog"></i>
+                        <p>
+                            Thiết lập chung
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview mt-1">
+                        {% if master.checkPermission('setting', 'depts') %}
                         <li class="nav-item">
-                            <a href="<?= WEB_ADMIN_URL ?>/fixedbook"
-                                class="nav-link {% if dispatcher.getControllerName()=='fixedbook' %} {{ 'active' }} {% endif %}">
+                            <a href="<?= WEB_ADMIN_URL ?>/setting/depts"
+                                class="nav-link {% if dispatcher.getControllerName()=='setting' AND dispatcher.getActionName()=='depts' %} {{ 'active' }} {% endif %}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Sổ Tài sản Cố định</p>
+                                <p>Thông tin chung</p>
                             </a>
                         </li>
                         {% endif %}
-                        <hr class="mt-1 mb-1">
-                        {% if master.checkPermission('uptool', 'index') %}
+                        {% if master.checkPermission('setting', 'socials') %}
                         <li class="nav-item">
-                            <a href="<?= WEB_ADMIN_URL ?>/uptool"
-                                class="nav-link {% if dispatcher.getControllerName()=='uptool' %} {{ 'active' }} {% endif %}">
+                            <a href="<?= WEB_ADMIN_URL ?>/setting/socials"
+                                class="nav-link {% if dispatcher.getControllerName()=='setting' AND dispatcher.getActionName()=='socials' %} {{ 'active' }} {% endif %}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Ghi tăng CCDC</p>
+                                <p>Biểu tượng</p>
                             </a>
                         </li>
                         {% endif %}
-                        {% if master.checkPermission('detool', 'index') %}
+                        {% if master.checkPermission('setting', 'links') %}
                         <li class="nav-item">
-                            <a href="<?= WEB_ADMIN_URL ?>/detool"
-                                class="nav-link {% if dispatcher.getControllerName()=='detool' %} {{ 'active' }} {% endif %}">
+                            <a href="<?= WEB_ADMIN_URL ?>/setting/links"
+                                class="nav-link {% if dispatcher.getControllerName()=='setting' AND dispatcher.getActionName()=='links' %} {{ 'active' }} {% endif %}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Phân bổ</p>
+                                <p>Links</p>
                             </a>
                         </li>
                         {% endif %}
-                        {% if master.checkPermission('toolbook', 'index') %}
-                        <li class="nav-item">
-                            <a href="<?= WEB_ADMIN_URL ?>/toolbook"
-                                class="nav-link {% if dispatcher.getControllerName()=='toolbook' %} {{ 'active' }} {% endif %}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Sổ Công cụ Dụng cụ</p>
-                            </a>
-                        </li>
-                        {% endif %}
-                        #}
                     </ul>
                 </li>
                 <li
                     class="nav-item has-treeview {% if dispatcher.getControllerName() in ['assettype','assetorigin','assetpurchase','depts','assetmadein','employee','supplier','assetunit','location'] %} {{ 'menu-open' }} {% endif %}">
                     <a href="#"
                         class="nav-link {% if dispatcher.getControllerName() in ['assettype','assetorigin','assetpurchase','depts','assetmadein','employee','supplier','assetunit','location'] %} {{ 'active' }} {% endif %}">
-                        <i class="nav-icon fas fa-list"></i>
+                        <i class="nav-icon fas fa-recycle"></i>
                         <p>
                             Danh mục
                             <i class="right fas fa-angle-left"></i>
@@ -411,65 +339,6 @@
                         </li>
                         {% endif %}
                     </ul>
-                </li>
-                <li
-                    class="nav-item has-treeview {% if dispatcher.getControllerName() in ['reports'] %} {{ 'menu-open' }} {% endif %}">
-                    <a href="#"
-                        class="nav-link {% if dispatcher.getControllerName() in ['reports'] %} {{ 'active' }} {% endif %}">
-                        <i class="nav-icon fas fa-chart-bar"></i>
-                        <p>
-                            Thống kê/báo cáo
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview mt-1">
-                        <li class="nav-item">
-                            <a href="<?= WEB_ADMIN_URL ?>/reports"
-                                class="nav-link {% if dispatcher.getControllerName()=='reports' AND dispatcher.getActionName() == 'index' %} {{ 'active' }} {% endif %}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Danh sách thống kê/báo cáo</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= WEB_ADMIN_URL ?>/reports/list"
-                                class="nav-link {% if dispatcher.getControllerName()=='reports' AND dispatcher.getActionName() == 'list' %} {{ 'active' }} {% endif %}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Thiết lập thống kê/báo cáo</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                {% if master.checkPermission('sync', 'index') %}
-                <li class="nav-item">
-                    <a href="<?= WEB_ADMIN_URL ?>/sync"
-                        class="nav-link {% if dispatcher.getControllerName()=='sync' %} {{ 'active' }} {% endif %}">
-                        <i class="nav-icon fas fa-file-excel"></i>
-                        <p>Nhập dữ liệu ban đầu</p>
-                    </a>
-                </li>
-                {% endif %}
-                {% if master.checkPermission('backup', 'index') %}
-                <li class="nav-item">
-                    <a href="<?= WEB_ADMIN_URL ?>/backup"
-                        class="nav-link {% if dispatcher.getControllerName()=='backup' AND dispatcher.getActionName() == 'index' %} {{ 'active' }} {% endif %}">
-                        <i class="nav-icon fas fa-database"></i>
-                        <p>Sao lưu dự phòng</p>
-                    </a>
-                </li>
-                {% endif %}
-                <li class="nav-item">
-                    <a href="<?= WEB_ADMIN_URL ?>/help"
-                        class="nav-link {% if dispatcher.getControllerName()=='help' AND dispatcher.getActionName() == 'index' %} {{ 'active' }} {% endif %}">
-                        <i class="nav-icon fas fa-people-carry"></i>
-                        <p>Hướng dẫn</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="<?= WEB_ADMIN_URL ?>/help/faqs"
-                        class="nav-link {% if dispatcher.getControllerName()=='help' AND dispatcher.getActionName() == 'faqs' %} {{ 'active' }} {% endif %}">
-                        <i class="nav-icon fas fa-question-circle"></i>
-                        <p>Câu hỏi thường gặp</p>
-                    </a>
                 </li>
                 <li class="nav-item">
                     <a id="btnLogOut" href="#" data-href="<?= WEB_URL ?>/account/logout" class="nav-link">

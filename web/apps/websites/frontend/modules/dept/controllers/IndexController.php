@@ -76,8 +76,8 @@ class IndexController extends \FrontendController
             'd.image',
             'dl.name dept_name',
         ))
-        ->from(['d'=>'Departments'])
-        ->leftJoin('DepartmentsLang', 'dl.dept_id = d.id','dl')
+        ->from(['d'=>'Depts'])
+        ->leftJoin('DeptsLang', 'dl.dept_id = d.id','dl')
         ->where('dl.lang_id = :lang_id: AND status = 1 AND d.id != 1',['lang_id' => $lang_id])
         ->getQuery()
         ->execute();

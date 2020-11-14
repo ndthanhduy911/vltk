@@ -211,7 +211,7 @@ class StaffController  extends \BackendController {
                 $data = $data->andWhere("s.dept_id = $dept_id");
             }
 
-            $data = $data->leftJoin('DepartmentsLang', 'd.dept_id = s.dept_id AND d.lang_id = 1','d')
+            $data = $data->leftJoin('DeptsLang', 'd.dept_id = s.dept_id AND d.lang_id = 1','d')
             ->leftJoin('StaffLang', 'sl.staff_id = s.id AND sl.lang_id = 1','sl')
             ->orderBy("s.dean ASC, s.dept_id ASC, s.dept_position ASC");
     

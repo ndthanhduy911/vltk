@@ -677,7 +677,7 @@ const showActionDetailButton = (item, controller, className, typeBtn = {
 //
 const showViewDetail = (item,controller,action = 'getsingleview',classes = 'Detail') => {
     return `<div class="btn-group btn-group-sm">
-            <a data-href="#" href="#" data-get="/adcp/${controller}/${action}/${item.id}" class="btn btn-hnn btn-hnn-purple view${classes}">
+            <a data-href="#" href="#" data-get="/admin/${controller}/${action}/${item.id}" class="btn btn-hnn btn-hnn-purple view${classes}">
                 <span data-toggle="tooltip" title="" data-original-title="Xem chi tiết"><i class="fas fa-eye"></i></span>
             </a>
         </div>`

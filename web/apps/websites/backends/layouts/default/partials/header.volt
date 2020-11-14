@@ -1,4 +1,4 @@
-<header class="app-header pr-3"><a class="app-header__logo" href="<?php echo WEB_ADMIN_URL; ?>">{{ dept.code }} </a>
+<header class="app-header pr-3"><a class="app-header__logo" href="<?php echo WEB_ADMIN_URL; ?>">{{ dept.dcode }} </a>
     <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
     <ul class="app-nav d-flex align-items-center">
         <!-- User Menu-->

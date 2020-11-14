@@ -24,7 +24,7 @@ class BackendController extends \Phalcon\Mvc\Controller
             if($this->request->isAjax()){
                 $this->helper->responseJson($this, ["logout" => true]);
             }else{
-                header('Location: /');
+                header('Location: /admin/login');
             }
             exit;
         }

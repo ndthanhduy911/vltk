@@ -53,7 +53,7 @@ class AccountController extends \Phalcon\Mvc\Controller
                     if($this->request->isAjax()){
                         $this->helper->responseJson($this, $data);
                     }else{
-                        return $this->response->redirect("/adcp");
+                        return $this->response->redirect("/admin");
                     }
                 } catch (\Throwable $e) {
                     $this->db->rollback();

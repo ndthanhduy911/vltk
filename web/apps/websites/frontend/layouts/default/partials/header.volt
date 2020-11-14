@@ -69,7 +69,7 @@
                                 {% if dept.logo %}
                                 <img height="30px" src="{{ helper.getLinkImage(dept.logo) }}" alt="{{ dept_lang.name }}">
                                 {% else %}
-                                <h3 class="title text-default mb-0">{{ dept.code }}</h3>
+                                <h3 class="title text-default mb-0">{{ dept.dcode }}</h3>
                                 {% endif %}
                             </a>
                         </div>
@@ -90,7 +90,7 @@
                                             {% if dept.logo %}
                                             <img id="logo-img-mobile" src="{{ helper.getLinkImage(dept.logo) }}" alt="{{ dept_lang.name }}">
                                             {% else %}
-                                            <h3 class="title text-default mb-0">{{ dept.code }}</h3>
+                                            <h3 class="title text-default mb-0">{{ dept.dcode }}</h3>
                                             {% endif %}
                                         </a>
                                     </div>

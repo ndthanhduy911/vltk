@@ -22,7 +22,7 @@ class Menus extends \Phalcon\Mvc\Model
                 break;
             }   
             case 4: {
-                return ($dept = \Departments::findFirstId($menu->dept)) ? WEB_URL.($slug != '/' ? '/'.$slug : '').'/'.$dept->slug : '#';
+                return ($dept = \Depts::findFirstId($menu->dept)) ? WEB_URL.($slug != '/' ? '/'.$slug : '').'/'.$dept->slug : '#';
                 break;
             } 
             case 5: {
@@ -59,7 +59,7 @@ class Menus extends \Phalcon\Mvc\Model
                 break;
             }   
             case 4: {
-                $item['link'] = ($dept = \Departments::findFirstId($menu->dept)) ? ($dept->links?$dept->links:WEB_URL.($slug != '/' ? '/'.$slug : '').'/'.$dept->slug) : '#';
+                $item['link'] = ($dept = \Depts::findFirstId($menu->dept)) ? ($dept->links?$dept->links:WEB_URL.($slug != '/' ? '/'.$slug : '').'/'.$dept->slug) : '#';
                 $item['actived'] = (isset($dept->slug) ? $dept->slug : '#4') == $slug_now ? true : false;
                 break;
             } 

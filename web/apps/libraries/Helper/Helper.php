@@ -838,4 +838,9 @@ class Helper
                 break;
         }
     }
+
+    public function getLinkImage($path, $path_default = '/assets/frontend/images/defaut_img.png')
+    {
+        return $path ? WEB_URL.$path : WEB_URL.$path_default;
+    }
 }

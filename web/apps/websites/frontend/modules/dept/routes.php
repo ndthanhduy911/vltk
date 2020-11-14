@@ -1,6 +1,6 @@
 <?php
 // ======================================
-// DEPARTMENT
+// DEPT
 // ======================================
 /***********************PostsController***********************/
 $router->add($config->application->frontendUri."/{dept:[a-zA-Z0-9_-]+}/news/{post:[a-zA-Z0-9_-]+}", array(

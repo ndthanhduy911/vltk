@@ -11,7 +11,7 @@ use Phalcon\Forms\Form;
 use Phalcon\Validation\Validator\StringLength as StringLength;
 use Phalcon\Validation\Validator\PresenceOf;
 
-class DepartmentsForm extends Form
+class DeptsForm extends Form
 {
     public function initialize($entity = null, $options = null)
     {

@@ -38,9 +38,9 @@ class StaffController extends \FrontendController
             $this->view->staff_lang = $staff_lang;
         }
 
-        if($dept_info = \Departments::findFirstId($staff->dept_id)){
+        if($dept_info = \Depts::findFirstId($staff->dept_id)){
             $this->view->dept_info = $dept_info;
-            $this->view->dept_lang_info = \DepartmentsLang::findFirst(["lang_id = $lang_id AND dept_id = $dept_info->id"]);
+            $this->view->dept_lang_info = \DeptsLang::findFirst(["lang_id = $lang_id AND dept_id = $dept_info->id"]);
         }
 
         if($page = \Pages::findFirst(["attribute_id = 2 AND dept_id = $staff->dept_id"])){

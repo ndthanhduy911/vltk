@@ -13,7 +13,7 @@ class HomeForm extends Form
     public function initialize($entity = null, $options = null)
     {
         $dept_id = isset($_SESSION['dept_id']) ? $_SESSION['dept_id'] : 0;
-        $dept = \Departments::findFirstId($dept_id);
+        $dept = \Depts::findFirstId($dept_id);
         if($dept && $dept->post_connect){
             $array_dept = [$dept_id, 1];
         }else{

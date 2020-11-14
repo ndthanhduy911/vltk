@@ -134,7 +134,7 @@
                     {% set dept_o_id = 0 %}
                     {% for key, staff in otherStaffs %}
                         {% if dept_o_id != staff.dept_id %}
-                            <h3 class="text-primary text-uppercase">{{ ml._ml_system('subject', 'Bộ môn') }} <?= Departments::getTitleById($staff->dept_id, $lang_id) ?></h3>
+                            <h3 class="text-primary text-uppercase">{{ ml._ml_system('subject', 'Bộ môn') }} <?= Depts::getTitleById($staff->dept_id, $lang_id) ?></h3>
                             <div class="separator-2"></div>
                             <div class="w-100">
                         {% endif %}

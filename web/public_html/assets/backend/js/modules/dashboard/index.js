@@ -1,4 +1,4 @@
-drawBarChartAjax('#assetUseBarChart', false, ['Tổng TS', 'TS thêm mới', 'TS ghi giảm'], '/adcp/dashboard/assetbarchart', {
+drawBarChartAjax('#assetUseBarChart', false, ['Tổng TS', 'TS thêm mới', 'TS ghi giảm'], '/admin/dashboard/assetbarchart', {
 	scales: {
 		yAxes: [{
 			ticks: {
@@ -19,11 +19,11 @@ drawBarChartAjax('#assetUseBarChart', false, ['Tổng TS', 'TS thêm mới', 'TS
 	},
 });
 
-drawChartPieDonutAjax('#assetPieChart', false, '/adcp/dashboard/assetpiechart');
+drawChartPieDonutAjax('#assetPieChart', false, '/admin/dashboard/assetpiechart');
 
-drawBarChartAjax('#assetBarChartDepartment', false, ['TS đang sử dụng', 'TS chưa sử dụng'], '/adcp/dashboard/assetbardeptchart');
+drawBarChartAjax('#assetBarChartDepartment', false, ['TS đang sử dụng', 'TS chưa sử dụng'], '/admin/dashboard/assetbardeptchart');
 
-drawBarChartAjax('#assetCostsBarChartOne', false, ['Tổng TS', 'TS thêm mới', 'TS ghi giảm'], '/adcp/dashboard/assetbarchart', {
+drawBarChartAjax('#assetCostsBarChartOne', false, ['Tổng TS', 'TS thêm mới', 'TS ghi giảm'], '/admin/dashboard/assetbarchart', {
 	scales: {
 		yAxes: [{
 			ticks: {
@@ -44,7 +44,7 @@ drawBarChartAjax('#assetCostsBarChartOne', false, ['Tổng TS', 'TS thêm mới'
 	},
 });
 
-drawBarChartAjax('#assetCostsBarChartTwo', false, ['Tổng nguyên giá', 'Còn lại', 'Khấu hao/hao mòn'], '/adcp/dashboard/costsbarchart2',{
+drawBarChartAjax('#assetCostsBarChartTwo', false, ['Tổng nguyên giá', 'Còn lại', 'Khấu hao/hao mòn'], '/admin/dashboard/costsbarchart2',{
 	scales: {
 		yAxes: [{
 			ticks: {
@@ -65,9 +65,9 @@ drawBarChartAjax('#assetCostsBarChartTwo', false, ['Tổng nguyên giá', 'Còn 
 	},
 })
 
-drawLineChartAjax('#assetUseLineChartOne', false, ['Tổng', 'Tăng', 'Giảm'], '/adcp/dashboard/assetlinechart1')
+drawLineChartAjax('#assetUseLineChartOne', false, ['Tổng', 'Tăng', 'Giảm'], '/admin/dashboard/assetlinechart1')
 
-drawLineChartAjax('#assetUseLineChartTwo', false, ['Tổng', 'Tăng', 'Giảm'], '/adcp/dashboard/assetlinechart2')
+drawLineChartAjax('#assetUseLineChartTwo', false, ['Tổng', 'Tăng', 'Giảm'], '/admin/dashboard/assetlinechart2')
 
 let data8 = {
 	label: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
@@ -104,31 +104,31 @@ let data11 = {
 drawLineChart('#purchaseLineChartTwo', false, ['Mua sắm'], data11)
 // drawLineChartAjax('#purchaseLineChartTwo',false,['Mua sắm'])
 
-drawBarChartAjax('#checksBarChart', false, ['Nhập', 'Xuất'], '/adcp/dashboard/checkbarchart')
+drawBarChartAjax('#checksBarChart', false, ['Nhập', 'Xuất'], '/admin/dashboard/checkbarchart')
 
-drawChartPieDonutAjax('#checkInDoughnutChart', false, '/adcp/dashboard/checkinpiechart', 'doughnut');
+drawChartPieDonutAjax('#checkInDoughnutChart', false, '/admin/dashboard/checkinpiechart', 'doughnut');
 
-drawBarChartAjax('#checkYearsBarChart', false, ['Nhập', 'Xuất'], '/adcp/dashboard/checkyearbarchart');
+drawBarChartAjax('#checkYearsBarChart', false, ['Nhập', 'Xuất'], '/admin/dashboard/checkyearbarchart');
 
-drawChartPieDonutAjax('#checkOutDoughnutChart', false, '/adcp/dashboard/checkoutpiechart', 'doughnut');
+drawChartPieDonutAjax('#checkOutDoughnutChart', false, '/admin/dashboard/checkoutpiechart', 'doughnut');
 
-drawBarChartAjax('#assetUpBarChart', false, ['Tăng'], '/adcp/dashboard/upbarchart')
+drawBarChartAjax('#assetUpBarChart', false, ['Tăng'], '/admin/dashboard/upbarchart')
 
-drawChartPieDonutAjax('#assetUpDoughnutChart', false, '/adcp/dashboard/uppiechart', 'doughnut');
+drawChartPieDonutAjax('#assetUpDoughnutChart', false, '/admin/dashboard/uppiechart', 'doughnut');
 
-drawBarChartAjax('#assetUpDeptBarChart', false, ['Tăng'], '/adcp/dashboard/uplinechart')
+drawBarChartAjax('#assetUpDeptBarChart', false, ['Tăng'], '/admin/dashboard/uplinechart')
 
-drawBarChartAjax('#assetDownBarChart', false, ['Tăng'], '/adcp/dashboard/downbarchart')
+drawBarChartAjax('#assetDownBarChart', false, ['Tăng'], '/admin/dashboard/downbarchart')
 
-drawChartPieDonutAjax('#assetDownDoughnutChart', false, '/adcp/dashboard/downpiechart', 'doughnut');
+drawChartPieDonutAjax('#assetDownDoughnutChart', false, '/admin/dashboard/downpiechart', 'doughnut');
 
-drawBarChartAjax('#assetDownDeptBarChart', false, ['Giảm'], '/adcp/dashboard/downlinechart')
+drawBarChartAjax('#assetDownDeptBarChart', false, ['Giảm'], '/admin/dashboard/downlinechart')
 
-drawBarChartAjax('#assetDownBarChart', false, ['Thanh lý', 'Tiêu hủy',['Khác']], '/adcp/dashboard/downbarchart')
+drawBarChartAjax('#assetDownBarChart', false, ['Thanh lý', 'Tiêu hủy',['Khác']], '/admin/dashboard/downbarchart')
 
-drawChartPieDonutAjax('#assetDownDoughnutChart', false, '/adcp/dashboard/downpiechart', 'doughnut');
+drawChartPieDonutAjax('#assetDownDoughnutChart', false, '/admin/dashboard/downpiechart', 'doughnut');
 
-drawLineChartAjax('#assetDownLineChart', false, ['Thanh lý', 'Tiêu hủy', 'Khác'], '/adcp/dashboard/downlinechart')
+drawLineChartAjax('#assetDownLineChart', false, ['Thanh lý', 'Tiêu hủy', 'Khác'], '/admin/dashboard/downlinechart')
 
 $('#dashboardTab a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 	// e.relatedTarget

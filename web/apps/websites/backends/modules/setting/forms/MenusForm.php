@@ -47,8 +47,8 @@ class MenusForm extends Form
             'd.id',
             'dl.name name',
         ))
-        ->from(['d'=>'Departments'])
-        ->leftJoin('DepartmentsLang', "dl.dept_id = dl.id AND dl.lang_id = 1",'dl')
+        ->from(['d'=>'Depts'])
+        ->leftJoin('DeptsLang', "dl.dept_id = dl.id AND dl.lang_id = 1",'dl')
         ->getQuery()
         ->execute();
 

@@ -128,7 +128,7 @@ $router->add($config->application->backendUri . '/home/:action/:int', array(
     'id' => 2
 ));
 
-/***********************DepartmentsController***********************/
+/***********************DeptsController***********************/
 $router->add($config->application->backendUri . '/departments/:action', array(
     'module' => 'backend_admins',
     'controller' => 'departments',

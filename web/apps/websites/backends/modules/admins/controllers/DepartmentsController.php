@@ -1,24 +1,24 @@
 <?php
 namespace Backend\Modules\Admins\Controllers;
-use Backend\Modules\Admins\Forms\DepartmentsForm;
-use Backend\Modules\Admins\Forms\DepartmentsLangForm;
+use Backend\Modules\Admins\Forms\DeptsForm;
+use Backend\Modules\Admins\Forms\DeptsLangForm;
 
-class DepartmentsController  extends \BackendController {
+class DeptsController  extends \BackendController {
 
     public function updateAction(){
         $forms_lang = [];
         $departments_lang = [];
         $languages = \Language::find(['status = 1']);
         $dept_id = $this->session->get('dept_id');
-        if(!$department = \Departments::findFirstId($dept_id)){
+        if(!$department = \Depts::findFirstId($dept_id)){
             echo 'Không tìm thấy dữ liệu'; die;
         }
         $department->updated_at = date('Y-m-d H:i:s');
         $title = 'Cài đặt';
         foreach ($languages as $key => $lang) {
-            $department_lang = \DepartmentsLang::findFirst(['dept_id = :dept_id: AND lang_id = :lang_id:','bind' => ['dept_id' => $department->id, 'lang_id' => $lang->id]]);
+            $department_lang = \DeptsLang::findFirst(['dept_id = :dept_id: AND lang_id = :lang_id:','bind' => ['dept_id' => $department->id, 'lang_id' => $lang->id]]);
             if($department_lang){
-                $form_lang = new DepartmentsLangForm($department_lang);
+                $form_lang = new DeptsLangForm($department_lang);
                 $departments_lang[$lang->id] = $department_lang;
                 $forms_lang[$lang->id] = $form_lang;
             }else{
@@ -26,7 +26,7 @@ class DepartmentsController  extends \BackendController {
             }
         }   
 
-        $form_department = new DepartmentsForm($department);
+        $form_department = new DeptsForm($department);
         if ($this->request->isPost()) {
             if ($this->security->checkToken()) {
                 $error = [];

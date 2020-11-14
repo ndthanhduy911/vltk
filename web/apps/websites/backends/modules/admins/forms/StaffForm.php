@@ -32,8 +32,8 @@ class StaffForm extends Form
             'd.id',
             'dl.name name',
         ))
-        ->from(['d'=>'Departments'])
-        ->leftJoin('DepartmentsLang', "dl.dept_id = d.id AND dl.lang_id = 1",'dl')
+        ->from(['d'=>'Depts'])
+        ->leftJoin('DeptsLang', "dl.dept_id = d.id AND dl.lang_id = 1",'dl')
         ->orderBy('dl.id ASC')
         ->where("d.status = 1")
         ->getQuery()

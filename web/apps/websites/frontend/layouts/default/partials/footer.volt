@@ -13,7 +13,7 @@ if($menuLocation = MenuLocation::findFirst(["status =  1 AND dept_id = $dept->id
                     <div class="col-lg-3">
                         <div class="footer-content">
                             <div class="media-wrap">
-                                <h3 class="title text-default mb-0">{{ dept.code }}</h3>
+                                <h3 class="title text-default mb-0">{{ dept.dcode }}</h3>
                                 <a href="<?php echo WEB_URL ?>/">
                                     {% if dept.logo %}
                                     <img src="{{ helper.getLinkImage(dept.logo) }}" alt="{{ dept_lang.name }}">

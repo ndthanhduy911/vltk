@@ -10,10 +10,8 @@ use Phalcon\Mvc\ModuleDefinitionInterface;
 
 class Module implements ModuleDefinitionInterface
 {
-    /**
-     * Registers the module auto-loader
-     */
-    public function registerAutoloaders(\Phalcon\DiInterface $dependencyInjector = null) // <- here it is
+
+    public function registerAutoloaders(\Phalcon\DiInterface $dependencyInjector = null)
     {
         $loader = new Loader();
 
@@ -25,22 +23,8 @@ class Module implements ModuleDefinitionInterface
         $loader->register();
     }
 
-    /**
-     * Registers the module-only services
-     *
-     * @param Phalcon\DI $di
-     */
     public function registerServices(\Phalcon\DiInterface $di)
     {
-        /**
-         * Read configuration
-         */
-        //$config = include APP_DIR . "/config/config.php";
-        //$config = include APP_DIR . '/config/config.php';
-        /**
-         * Setting up the views component
-         */
-
         $di['view'] = function () {
             $config = include APP_DIR . '/configs/config.php';
             $view = new View();

@@ -37,7 +37,7 @@
                         <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
                             data-parent="#faqExample">
                             <div class="card-body">
-                                <b>Trả lời:</b> Bạn vào mục Tài sản ở mục menu bên trái sau đó nhấn nút thêm để thêm mơi tài sản. <br/>Bạn có thể đọc thêm hướng dẫn sử dụng.<br/><a href="/adcp/help/faqs">Tài liệu hướng dẫn</a> 
+                                <b>Trả lời:</b> Bạn vào mục Tài sản ở mục menu bên trái sau đó nhấn nút thêm để thêm mơi tài sản. <br/>Bạn có thể đọc thêm hướng dẫn sử dụng.<br/><a href="/admin/help/faqs">Tài liệu hướng dẫn</a> 
                             </div>
                         </div>
                     </div>
@@ -59,7 +59,7 @@
                                 <br/>Bước 2: Chọn Tải biểu mẫu để về tập tin excel.
                                 <br/>Bước 3: Điền thông tin tài sản theo hướng dẫn trên tập tin excel đã tài về.
                                 <br/>Bước 4: Quay lại giao diện nhập tài sản sau đó tải tập tin đã điền thông tin và nhấn nút nhập dữ liệu để hoàn tất.
-                                <br/><a href="/adcp/help/faqs">Tài liệu hướng dẫn</a> 
+                                <br/><a href="/admin/help/faqs">Tài liệu hướng dẫn</a> 
                             </div>
                         </div>
                     </div>
@@ -75,7 +75,7 @@
                         <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
                             data-parent="#faqExample">
                             <div class="card-body">
-                                <b>Trả lời:</b> Bạn vào mục Tài sản ở mục menu bên trái sau đó nhấn vào tài sản bạn muốn chỉnh sửa để mở giao diện xem chi tiết sau đó nhấn vào nút sửa để cập nhật lại thông tin bạn muốn. <br/>Bạn có thể đọc thêm hướng dẫn sử dụng. <br/><a href="/adcp/help/faqs">Tài liệu hướng dẫn</a>
+                                <b>Trả lời:</b> Bạn vào mục Tài sản ở mục menu bên trái sau đó nhấn vào tài sản bạn muốn chỉnh sửa để mở giao diện xem chi tiết sau đó nhấn vào nút sửa để cập nhật lại thông tin bạn muốn. <br/>Bạn có thể đọc thêm hướng dẫn sử dụng. <br/><a href="/admin/help/faqs">Tài liệu hướng dẫn</a>
                             </div>
                         </div>
                     </div>
@@ -92,7 +92,7 @@
                         <div id="collapseFour" class="collapse" aria-labelledby="headingFour"
                             data-parent="#faqExample">
                             <div class="card-body">
-                                <b>Trả lời:</b> Bạn vào mục Quản trị hệ thống > Cài đặt > Tính năng bỏ chọn những tính năng bạn cho là không cần thiết. Chú ý: Tài khoản bạn phải có quyền tương ứng mới có thể thực hiện thao tác này. <br/>Bạn có thể đọc thêm hướng dẫn sử dụng. <br/><a href="/adcp/help/faqs">Tài liệu hướng dẫn</a>
+                                <b>Trả lời:</b> Bạn vào mục Quản trị hệ thống > Cài đặt > Tính năng bỏ chọn những tính năng bạn cho là không cần thiết. Chú ý: Tài khoản bạn phải có quyền tương ứng mới có thể thực hiện thao tác này. <br/>Bạn có thể đọc thêm hướng dẫn sử dụng. <br/><a href="/admin/help/faqs">Tài liệu hướng dẫn</a>
                             </div>
                         </div>
                     </div>
@@ -109,7 +109,7 @@
                         <div id="collapseFive" class="collapse" aria-labelledby="headingFive"
                             data-parent="#faqExample">
                             <div class="card-body">
-                                <b>Trả lời:</b> Bạn vào mục Quản trị hệ thống > Tài khoản người dùng sau đó chọn Thêm để mới tài khoản. Chú ý: Tài khoản bạn phải có quyền tương ứng mới có thể thực hiện thao tác này. <br/>Bạn có thể đọc thêm hướng dẫn sử dụng. <br/><a href="/adcp/help/faqs">Tài liệu hướng dẫn</a>
+                                <b>Trả lời:</b> Bạn vào mục Quản trị hệ thống > Tài khoản người dùng sau đó chọn Thêm để mới tài khoản. Chú ý: Tài khoản bạn phải có quyền tương ứng mới có thể thực hiện thao tác này. <br/>Bạn có thể đọc thêm hướng dẫn sử dụng. <br/><a href="/admin/help/faqs">Tài liệu hướng dẫn</a>
                             </div>
                         </div>
                     </div>
@@ -126,7 +126,7 @@
                         <div id="collapseSix" class="collapse" aria-labelledby="headingSix"
                             data-parent="#faqExample">
                             <div class="card-body">
-                                <b>Trả lời:</b> Bạn vào mục Quản trị hệ thống > Tài khoản người dùng sau đó chọn Thêm để mới tài khoản. Chú ý: Tài khoản bạn phải có quyền tương ứng mới có thể thực hiện thao tác này. <br/>Bạn có thể đọc thêm hướng dẫn sử dụng. <br/><a href="/adcp/help/faqs">Tài liệu hướng dẫn</a>
+                                <b>Trả lời:</b> Bạn vào mục Quản trị hệ thống > Tài khoản người dùng sau đó chọn Thêm để mới tài khoản. Chú ý: Tài khoản bạn phải có quyền tương ứng mới có thể thực hiện thao tác này. <br/>Bạn có thể đọc thêm hướng dẫn sử dụng. <br/><a href="/admin/help/faqs">Tài liệu hướng dẫn</a>
                             </div>
                         </div>
                     </div>
@@ -150,7 +150,7 @@
                                     <li>Bước 3: Tại giao diện ở bước này, điền đầy đủ các thông tin cần thiết để tạo tài khoản như Tên tài khoản, Họ và Tên, Mật khẩu,  … và lưu ý chọn đúng Nhóm người dùng để gán đúng quyền – tương ứng với vai trò của người đó trên hệ thống</li>
                                     <li>Bước 4: Nhấn nút Thêm mới để hoàn tất thao tác tạo tài khoản người dùng</li>
                                 </ul>
-                                <br/>Bạn có thể đọc thêm hướng dẫn sử dụng. <br/><a href="/adcp/help/faqs">Tài liệu hướng dẫn</a>
+                                <br/>Bạn có thể đọc thêm hướng dẫn sử dụng. <br/><a href="/admin/help/faqs">Tài liệu hướng dẫn</a>
                             </div>
                         </div>
                     </div>
@@ -173,7 +173,7 @@
                                     <li>Bước 2: Tại giao diện ở bước này, điền các thông tin về Trang thiết bị. Nếu các thông tin về Loại trang thiết bị hay Danh mục trang thiết bị chưa có (do chưa khai báo thông tin) thì xem thêm hướng dẫn cách Tạo loại vật tư và tạo Danh mục trang thiết bị</li>
                                     <li>Bước 3: Nhấn nút Thêm để hoàn tất thao tác thêm một vật tư mới</li>
                                 </ul>
-                                <br/>Bạn có thể đọc thêm hướng dẫn sử dụng. <br/><a href="/adcp/help/faqs">Tài liệu hướng dẫn</a>
+                                <br/>Bạn có thể đọc thêm hướng dẫn sử dụng. <br/><a href="/admin/help/faqs">Tài liệu hướng dẫn</a>
                             </div>
                         </div>
                     </div>
@@ -199,7 +199,7 @@
                                     <li>Bước 5: Tại giao diện thêm mới vật tư: chọn Trang thiết bị từ danh sách xổ xuống, và điền vào số lượng tương ứng</li>
                                     <li>Bước 6: Nhấn Thêm mới để thêm vật tư cho phiếu nhập</li>
                                 </ul>
-                                <br/>Bạn có thể đọc thêm hướng dẫn sử dụng. <br/><a href="/adcp/help/faqs">Tài liệu hướng dẫn</a>
+                                <br/>Bạn có thể đọc thêm hướng dẫn sử dụng. <br/><a href="/admin/help/faqs">Tài liệu hướng dẫn</a>
                             </div>
                         </div>
                     </div>
@@ -222,7 +222,7 @@
                                     <li>Bước 2: Tại giao diện ở bước này, thêm các thông tin cần thiết cho Phiếu</li>
                                     <li>Bước 3: Nhấn nút Thêm để hoàn thành việc tạo Phiếu xuất vật tư</li>
                                 </ul>
-                                <br/>Bạn có thể đọc thêm hướng dẫn sử dụng. <br/><a href="/adcp/help/faqs">Tài liệu hướng dẫn</a>
+                                <br/>Bạn có thể đọc thêm hướng dẫn sử dụng. <br/><a href="/admin/help/faqs">Tài liệu hướng dẫn</a>
                             </div>
                         </div>
                     </div>
@@ -246,7 +246,7 @@
                                     <li>Bước 3: Tại giao diện thêm mới vật tư, chọn Trang thiết bị tương ứng từ danh sách xổ xuống và điền thông tin số lượng tương ứng</li>
                                     <li>Bước 4: Nhấn nút Thêm mới để hoàn thành</li>
                                 </ul>
-                                <br/>Bạn có thể đọc thêm hướng dẫn sử dụng. <br/><a href="/adcp/help/faqs">Tài liệu hướng dẫn</a>
+                                <br/>Bạn có thể đọc thêm hướng dẫn sử dụng. <br/><a href="/admin/help/faqs">Tài liệu hướng dẫn</a>
                             </div>
                         </div>
                     </div>
