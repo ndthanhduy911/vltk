@@ -13,13 +13,13 @@
                 {% if master.checkPermission('posts', 'trashs') %}
                 <div class="btn-group float-right">
                     <a id="deletePosts" data-href="<?= WEB_ADMIN_URL ?>/posts/trashs" title="Thùng rác"
-                        class="ml-2 btn btn-hnn btn-hnn-danger"><span>Thùng rác</span></a>
+                        class="ml-2 btn btn-hnn btn-hnn-danger"><span><i class="fas fa-trash"></i></span></a>
                 </div>
                 {% endif %}
                 {% if master.checkPermission('posts', 'update') %}
                 <div class="btn-group float-right">
                     <a id="addPosts" href="#" data-href="<?= WEB_ADMIN_URL ?>/posts/update" title="Tạo mới"
-                        class="ml-2 btn btn-hnn btn-hnn-success"><span>Thêm</span></a>
+                        class="ml-2 btn btn-hnn btn-hnn-success"><span><i class="fas fa-plus"></i></span></a>
                 </div>
                 {% endif %}
             </div>
@@ -61,7 +61,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group col-auto mt-s-0">
-                                    <button title="TÌm kiếm" data-toggle="tooltip" class="btn btn-hnn btn-hnn-info" type="submit"><span>Tìm</span></button>
+                                    <button title="TÌm kiếm" data-toggle="tooltip" class="btn btn-hnn btn-hnn-info" type="submit"><span><i class="fas fa-search"></i></span></button>
                                 </div>
                             </div>
                         </form>

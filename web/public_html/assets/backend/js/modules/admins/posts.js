@@ -9,6 +9,17 @@ const showStatus = (id = '') => {
     }
 }
 
+const showTitle = (text,length = 100) => {
+    return `<span title="${text}">${trimText(text,length)}</span>`
+}
+
+const getPostLink = (item) => {
+    if(item.dslug != '/'){
+        return `<a href="${webUri}/${item.dslug}/news/${item.slug}">Link</a>`;
+    }
+    return `<a href="${webUri}/news/${item.slug}">Link</a>`;
+}
+
 const loadTablePosts = (table = '#posts', cb = () => {}) => {
     if ($(table).length) {
         let formSearch = $('#searchPosts');
@@ -39,14 +50,14 @@ const loadTablePosts = (table = '#posts', cb = () => {}) => {
                 let page = pageInfo.page;
                 let pageLength = pageInfo.length;
                 $('td:eq(1)', row).html((dataIndex+1)+(page*pageLength));
-                let image = `<img src="${getPathImage(item.featured_image, '/assets/frontend/images/defaut_img.png')}" width="50px">`;
+                let image = `<img src="${getPathImage(item.featured_image, '/assets/frontend/images/defaut_img.png')}" height="30px">`;
+                $(`td:eq(${fkeys.indexOf('title')})`, row).html(showTitle(item.title,30));
+                $(`td:eq(${fkeys.indexOf('excerpt')})`, row).html(showTitle(item.excerpt,30));
                 $(`td:eq(${fkeys.indexOf('featured_image')})`, row).html(image);
-                $(`td:eq(${fkeys.indexOf('calendar')})`, row).html(vi_moment(item.createdat, 'DD/MM/YYYY HH:mm'));
-                $('td:eq(5)', row).html(vi_moment(item.createdat, 'DD/MM/YYYY HH:mm'));
-                $('td:eq(6)', row).html(showStatus(item.status));
-                $('td:last', row).addClass('text-nowrap').html(`
-                    <a href="${webAdminUrl}/posts/update/${item.id}" data-href="${webAdminUrl}/posts/update/${item.id}" title="Sửa" class="btn btn-sm btn-hnn btn-hnn-info"><span>Sửa</span></a>
-                `)
+                $(`td:eq(${fkeys.indexOf('slug')})`, row).html(getPostLink(item));
+                $(`td:eq(${fkeys.indexOf('calendar')})`, row).html(vi_moment(item.calendar, 'DD/MM/YYYY HH:mm'));
+                $(`td:eq(${fkeys.indexOf('status')})`, row).html(showStatus(item.status));
+                $('td:last', row).addClass('text-nowrap').html(showButtonEdit(item,'posts','Posts'));
             },
             "language": {
                 "sProcessing": "Đang xử lý...",

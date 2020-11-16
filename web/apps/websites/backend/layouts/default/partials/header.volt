@@ -31,7 +31,7 @@
                     <i class="fa fa-bell mr-2"></i> Thông báo từ hệ thống
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="<?= WEB_URL ?>/account/logout" class="dropdown-item">
+                <a href="<?= WEB_ADMIN_URL ?>/logout" class="dropdown-item">
                     <i class="fa fa-power-off mr-2"></i> Đăng xuất
                 </a>
             </div>

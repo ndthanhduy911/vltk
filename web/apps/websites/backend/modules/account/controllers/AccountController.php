@@ -53,7 +53,7 @@ class AccountController extends \Phalcon\Mvc\Controller
                     if($this->request->isAjax()){
                         $this->helper->responseJson($this, $data);
                     }else{
-                        return $this->response->redirect("/admin");
+                        return $this->response->redirect(WEB_ADMIN_URI);
                     }
                 } catch (\Throwable $e) {
                     $this->db->rollback();
@@ -75,7 +75,7 @@ class AccountController extends \Phalcon\Mvc\Controller
     {
         // Destroy the whole session
         $this->session->destroy();
-        $this->response->redirect("/");
+        $this->response->redirect(WEB_ADMIN_URI);
     }
 
     public function captchaAction()

@@ -168,7 +168,6 @@
                                                         <th class="text-center align-middle">Thêm</th>
                                                         <th class="text-center align-middle">Sửa</th>
                                                         <th class="text-center align-middle">Xóa</th>
-                                                        <th class="text-center align-middle">Khóa</th>
                                                         <th class="text-center align-middle" style="width: 95px;">Đơn
                                                             vị(*)</th>
                                                     </tr>
@@ -183,12 +182,10 @@
                                                         <td colspan="9" class="font-weight-bold">{{group.name}}</td>
                                                     </tr>
                                                     {% for index,role in roles %}
-
                                                     <?php $permissionAdd = \Permission::getPermissionByType($group->id, $role->id, 1); ?>
                                                     <?php $permissionEdit = \Permission::getPermissionByType($group->id, $role->id, 2) ?>
                                                     <?php $permissionDelete = \Permission::getPermissionByType($group->id, $role->id, 3) ?>
                                                     <?php $permissionView = \Permission::getPermissionByType($group->id, $role->id, 4) ?>
-                                                    <?php $permissionLock = \Permission::getPermissionByType($group->id, $role->id, 5) ?>
 
                                                     <tr>
                                                         <td>{{(index + 1)}}</td>
@@ -207,9 +204,6 @@
                                                         <td class="text-center align-middle"><input
                                                                 {{permissionDelete ? 'id = "permission'~permissionDelete.id~'" name="permissions[]" value="'~permissionDelete.id~','~role.id~'"' : 'disabled change="false"'}}
                                                                 class="roleDelete" type="checkbox"></td>
-                                                        <td class="text-center align-middle"><input
-                                                                {{permissionLock ? 'id = "permission'~permissionLock.id~'" name="permissions[]" value="'~permissionLock.id~','~role.id~'"' : 'disabled change="false"'}}
-                                                                class="roleLock" type="checkbox"></td>
                                                         <td class="text-center align-middle pt-0 pb-0">
                                                             <select name="roleDept{{role.id}}" id="roleDept{{role.id}}" <?= in_array($role->id,$notRole) ? 'disabled' : '' ?>
                                                                 class="roleDept form-control-sm mw-85px">

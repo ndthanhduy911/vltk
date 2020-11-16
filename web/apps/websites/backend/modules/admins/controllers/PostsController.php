@@ -321,6 +321,7 @@ class PostsController  extends \BackendController {
             'pl.excerpt',
             'u.fullname authorname',
             'c.name catname',
+            'd.slug dslug',
         ];
 
         $data = $this->modelsManager->createBuilder()
@@ -330,6 +331,7 @@ class PostsController  extends \BackendController {
         ->leftJoin('User', 'u.id = p.author','u')
         ->leftJoin('CategoriesLang', 'c.catid = p.catid AND c.langid = 1','c')
         ->leftJoin('PostsLang', 'pl.postid = p.id AND pl.langid = 1','pl')
+        ->leftJoin('Depts', 'd.id = p.deptid','d')
         ->orderBy('p.calendar DESC');
 
         $data = $this->master::builderPermission($data,$perL,'p');
