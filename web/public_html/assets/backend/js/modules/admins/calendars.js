@@ -47,7 +47,7 @@ const loadTablePages = () => {
                     "data": "year"
                 },
                 {
-                    "data": "begin_date"
+                    "data": "begindate"
                 },
                 {
                     "data": "begin_time"
@@ -69,7 +69,7 @@ const loadTablePages = () => {
                 $(row).addClass('text-center');
                 $('td', row).addClass('align-middle');
                 $('td:eq(2)', row).html(item.semester+' ('+showYear(item.year) +')');
-                $('td:eq(3)', row).html(vi_moment(item.begin_date, 'DD/MM/YYYY'));
+                $('td:eq(3)', row).html(vi_moment(item.begindate, 'DD/MM/YYYY'));
                 $('td:eq(4)', row).html(vi_moment_time(item.begin_time, 'HH:mm'));
                 $('td:eq(5)', row).html(vi_moment_time(item.end_time, 'HH:mm'));
                 $('td:eq(6)', row).html(showLocation(item.location)+' - ' + item.room);

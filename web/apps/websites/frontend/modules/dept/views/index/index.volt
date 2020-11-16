@@ -34,7 +34,7 @@
                             <h2 class="title slider-title">{{ banner.name }}</h2>
                             <div class="separator-2 clearfix m-0"></div>
                             <p class="slider-content">{{ banner.description }}</p>
-                            <div class="text-right"><a class="btn btn-small btn-default margin-clear" href="{{ banner.button_link }}">{{ banner.button_text }}</a></div>
+                            <div class="text-right"><a class="btn btn-small btn-default margin-clear" href="{{ banner.buttonlink }}">{{ banner.button_text }}</a></div>
                         </div>
                     </li>
                     {% endfor %}

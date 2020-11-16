@@ -27,7 +27,7 @@
                                     <h6 class="text-primary font-weight-normal">Lớp</h6>
                                     <div class="form-group mt-1">
                                         <div class="input-group">
-                                            {{form_calendar.render('class_id')}}
+                                            {{form_calendar.render('classid')}}
                                             <div class="invalid-tooltip"></div>
                                         </div>
                                     </div>
@@ -36,7 +36,7 @@
                                     <h6 class="text-primary font-weight-normal">Môn học</h6>
                                     <div class="form-group mt-1">
                                         <div class="input-group">
-                                            {{form_calendar.render('subject_id')}}
+                                            {{form_calendar.render('subjectid')}}
                                             <div class="invalid-tooltip"></div>
                                         </div>
                                     </div>
@@ -98,7 +98,7 @@
                                     <h6 class="text-primary font-weight-normal">Ngày bắt đầu</h6>
                                     <div class="form-group mt-1">
                                         <div class="input-group">
-                                            {{form_calendar.render('begin_date')}}
+                                            {{form_calendar.render('begindate')}}
                                             <div class="invalid-tooltip"></div>
                                         </div>
                                     </div>

@@ -87,7 +87,7 @@ class PostsController  extends \BackendController {
                 $p_content = $this->request->getPost('content',['trim']);
                 $p_excerpt = $this->request->getPost('excerpt',['string','trim']);
                 $p_calendar = $this->request->getPost('calendar',['string','trim']);
-                $req_post = [
+                $reqPost = [
                     'catid' => $this->request->getPost('catid',['int','trim']),
                     'status' => $this->request->getPost('status',['int','trim']),
                     'slug' => $p_slug ? $p_slug : $this->helper->slugify($p_title[1]),
@@ -98,20 +98,20 @@ class PostsController  extends \BackendController {
                 $check_slug = \Posts::findFirst([
                     "slug = :slug: AND id != :id:",
                     "bind" => [
-                        "slug" => $req_post['slug'],
+                        "slug" => $reqPost['slug'],
                         'id'    => $id,
                     ]
                 ]);
     
                 if($check_slug){
-                    $req_post['slug'] = $req_post['slug'] .'-'. strtotime('now'); 
+                    $reqPost['slug'] = $reqPost['slug'] .'-'. strtotime('now'); 
                 }
 
-                if(!$cat = \Categories::findFirst(["deptid = $post->deptid AND id = :catid:", 'bind' => ['catid' => $req_post['catid']]])){
+                if(!$cat = \Categories::findFirst(["deptid = $post->deptid AND id = :catid:", 'bind' => ['catid' => $reqPost['catid']]])){
                     $this->flashSession->error("Danh mục không tôn tại");
                 }
 
-                $form_post->bind($req_post, $post);
+                $form_post->bind($reqPost, $post);
                 if (!$form_post->isValid()) {
                     foreach ($form_post->getMessages() as $message) {
                         array_push($error, $message->getMessage());
@@ -119,14 +119,14 @@ class PostsController  extends \BackendController {
                 }
 
                 foreach ($languages as $key => $lang) {
-                    $req_post_lang[$lang->id] = [
+                    $reqPost_lang[$lang->id] = [
                         'title' => $p_title[$lang->id],
                         'content' => $p_content[$lang->id],
                         'excerpt' => $p_excerpt[$lang->id],
                         'langid' => $lang->id,
                     ];
 
-                    $forms_lang[$lang->id]->bind($req_post_lang[$lang->id], $posts_lang[$lang->id]);
+                    $forms_lang[$lang->id]->bind($reqPost_lang[$lang->id], $posts_lang[$lang->id]);
                     if (!$forms_lang[$lang->id]->isValid()) {
                         foreach ($forms_lang[$lang->id]->getMessages() as $message) {
                             array_push($error, $message->getMessage());
@@ -166,7 +166,7 @@ class PostsController  extends \BackendController {
         $this->view->posts_lang = $posts_lang;
         $this->view->title = $title;
         $this->assets->addJs('/elfinder/js/require.min.js');
-        $this->get_js_css();
+        $this->getJsCss();
     }
 
     public function restoreAction($id = null){

@@ -50,8 +50,7 @@ if($menuLocation = MenuLocation::findFirst(["status =  1 AND deptid = $dept->id 
             <div class="subfooter-inner">
                 <div class="row">
                     <div class="col-12">
-                        <p class="text-center"><span class="logo-font pr-10">VL-VLKT</span> Copyright © 2018 VL-VLKT.
-                            All Rights Reserved</p>
+                        <p class="text-center">Bản quyền © 2020 Khoa Vật Lý - Vật Lý Kỹ Thuật.</p>
                     </div>
                 </div>
             </div>

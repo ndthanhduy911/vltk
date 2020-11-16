@@ -22,7 +22,7 @@ class BannerController  extends \BackendController {
             $banner->updatedat = date('Y-m-d H:i:s');
             $title = 'Cập nhật';
             foreach ($languages as $key => $lang) {
-                $banner_lang = \BannerLang::findFirst(['banner_id = :id: AND langid = :langid:','bind' => ['id' => $banner->id, 'langid' => $lang->id]]);
+                $banner_lang = \BannerLang::findFirst(['bannerid = :id: AND langid = :langid:','bind' => ['id' => $banner->id, 'langid' => $lang->id]]);
                 if($banner_lang){
                     $form_lang = new BannerLangForm($banner_lang);
                     $banners_lang[$lang->id] = $banner_lang;
@@ -53,7 +53,7 @@ class BannerController  extends \BackendController {
                 $req_banner = [
                     'status' => $this->request->getPost('status',['int','trim']),
                     'image' => $this->request->getPost('image',['string','trim']),
-                    'button_link' => $this->request->getPost('button_link',['string','trim']),
+                    'buttonlink' => $this->request->getPost('buttonlink',['string','trim']),
                 ];
 
                 $form_banner->bind($req_banner, $banner);
@@ -85,7 +85,7 @@ class BannerController  extends \BackendController {
                         }
                     } else {
                         foreach ($languages as $key => $lang) {
-                            $banners_lang[$lang->id]->banner_id = $banner->id;
+                            $banners_lang[$lang->id]->bannerid = $banner->id;
                             $banners_lang[$lang->id]->save();
                         }
                         $this->flashSession->success($title." thành công");
@@ -167,7 +167,7 @@ class BannerController  extends \BackendController {
                 'b.id',
                 'b.deptid',
                 'b.image',
-                'b.button_link',
+                'b.buttonlink',
                 'b.deptid',
                 'b.status',
                 'b.createdat',
@@ -177,7 +177,7 @@ class BannerController  extends \BackendController {
             ))
             ->from(['b' => 'Banner'])
             ->where("b.deleted = 0 AND b.deptid = {$deptid}")
-            ->leftJoin('BannerLang', 'bl.banner_id = b.id AND bl.langid = 1','bl')
+            ->leftJoin('BannerLang', 'bl.bannerid = b.id AND bl.langid = 1','bl')
             ->orderBy('b.deptid ASC, b.status DESC');
 
     

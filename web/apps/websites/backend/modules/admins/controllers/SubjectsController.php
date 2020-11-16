@@ -22,7 +22,7 @@ class SubjectsController  extends \BackendController {
             $subject->updatedat = date('Y-m-d H:i:s');
             $title = 'Cập nhật';
             foreach ($languages as $key => $lang) {
-                $subject_lang = \SubjectsLang::findFirst(['subject_id = :id: AND langid = :langid:','bind' => ['id' => $subject->id, 'langid' => $lang->id]]);
+                $subject_lang = \SubjectsLang::findFirst(['subjectid = :id: AND langid = :langid:','bind' => ['id' => $subject->id, 'langid' => $lang->id]]);
                 if($subject_lang){
                     $form_lang = new SubjectsLangForm($subject_lang);
                     $subjects_lang[$lang->id] = $subject_lang;
@@ -105,7 +105,7 @@ class SubjectsController  extends \BackendController {
                         }
                     } else {
                         foreach ($languages as $key => $lang) {
-                            $subjects_lang[$lang->id]->subject_id = $subject->id;
+                            $subjects_lang[$lang->id]->subjectid = $subject->id;
                             $subjects_lang[$lang->id]->save();
                         }
                         $this->flashSession->success($title." thành công");
@@ -197,7 +197,7 @@ class SubjectsController  extends \BackendController {
             ))
             ->from(['s'=>'Subjects'])
             ->where("s.deleted = 0 AND s.deptid = {$deptid}")
-            ->leftJoin('SubjectsLang', 'sl.subject_id = s.id AND sl.langid = 1','sl')
+            ->leftJoin('SubjectsLang', 'sl.subjectid = s.id AND sl.langid = 1','sl')
             ->orderBy('s.deptid ASC, s.createdat DESC');
     
             $search = 'sl.title LIKE :search:';

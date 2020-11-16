@@ -15,19 +15,19 @@ class BannerForm extends Form
 {
     public function initialize($entity = null, $options = null)
     {
-        $button_link = new Text('button_link');
-        $button_link->setAttributes(array(
+        $buttonlink = new Text('buttonlink');
+        $buttonlink->setAttributes(array(
             'class' => 'form-control',
             'placeholder' => 'Link',
             'maxlength' => "200",
         ));
-        $button_link->addValidators(array(
+        $buttonlink->addValidators(array(
             new StringLength([
                 "max" => 200,
                 "messageMaximum" => "Links không được dài quá 255 ký tự",
             ]),
         ));
-        $this->add($button_link);
+        $this->add($buttonlink);
 
         $status = new Select('status', [
             1 => "Hoạt động",

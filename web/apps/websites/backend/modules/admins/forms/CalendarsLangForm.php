@@ -31,8 +31,8 @@ class CalendarsLangForm extends Form
         ));
         $this->add($excerpt);
 
-        $calendar_id = new Hidden('calendar_id');
-        $this->add($calendar_id);
+        $calendarid = new Hidden('calendarid');
+        $this->add($calendarid);
 
         $langid = new Hidden('langid');
         $this->add($langid);

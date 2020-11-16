@@ -19,11 +19,11 @@ class CalendarsController  extends \BackendController {
             if(!$calendar = \Calendars::findFirstId($id)){
                 echo 'Không tìm thấy dữ liệu'; die;
             }
-            $calendar->begin_date = $this->helper->datetimeVn($calendar->begin_date);
+            $calendar->begindate = $this->helper->datetimeVn($calendar->begindate);
             $calendar->updatedat = date('Y-m-d H:i:s');
             $title = 'Cập nhật';
             foreach ($languages as $key => $lang) {
-                $calendar_lang = \CalendarsLang::findFirst(['calendar_id = :id: AND langid = :langid:','bind' => ['id' => $calendar->id, 'langid' => $lang->id]]);
+                $calendar_lang = \CalendarsLang::findFirst(['calendarid = :id: AND langid = :langid:','bind' => ['id' => $calendar->id, 'langid' => $lang->id]]);
                 if($calendar_lang){
                     $form_lang = new CalendarsLangForm($calendar_lang);
                     $calendars_lang[$lang->id] = $calendar_lang;
@@ -55,12 +55,12 @@ class CalendarsController  extends \BackendController {
                     'status' => $this->request->getPost('status'),
                     'featured_image' => $this->request->getPost('featured_image',['string','trim']),
                     'background_image' => $this->request->getPost('background_image',['string','trim']),
-                    'class_id' => $this->request->getPost('class_id',['int','trim']),
-                    'subject_id' => $this->request->getPost('subject_id',['int','trim']),
+                    'classid' => $this->request->getPost('classid',['int','trim']),
+                    'subjectid' => $this->request->getPost('subjectid',['int','trim']),
                     'year' => $this->request->getPost('year',['int','trim']),
                     'semester' => $this->request->getPost('semester',['string','trim']),
                     'location' => $this->request->getPost('location',['string','trim']),
-                    'begin_date' => $this->request->getPost('begin_date',['string','trim']),
+                    'begindate' => $this->request->getPost('begindate',['string','trim']),
                     'day' => $this->request->getPost('day',['string','trim']),
                     'begin_time' => $this->request->getPost('begin_time',['string','trim']),
                     'end_time' => $this->request->getPost('end_time',['string','trim']),
@@ -89,14 +89,14 @@ class CalendarsController  extends \BackendController {
                 }
 
                 if (!count($error)) {
-                    $calendar->begin_date = $this->helper->datetimeMysql($calendar->begin_date);
+                    $calendar->begindate = $this->helper->datetimeMysql($calendar->begindate);
                     if (!$calendar->save()) {
                         foreach ($calendar->getMessages() as $message) {
                             $this->flashSession->error($message);
                         }
                     } else {
                         foreach ($languages as $key => $lang) {
-                            $calendars_lang[$lang->id]->calendar_id = $calendar->id;
+                            $calendars_lang[$lang->id]->calendarid = $calendar->id;
                             $calendars_lang[$lang->id]->save();
                         }
                         $this->flashSession->success($title." thành công");
@@ -180,13 +180,13 @@ class CalendarsController  extends \BackendController {
                 'c.status',
                 'c.deptid',
                 'c.createdat',
-                'c.class_id',
-                'c.subject_id',
+                'c.classid',
+                'c.subjectid',
                 'c.year',
                 'c.createdat',
                 'c.semester',
                 'c.location',
-                'c.begin_date',
+                'c.begindate',
                 'c.day',
                 'c.begin_time',
                 'c.room',
@@ -197,9 +197,9 @@ class CalendarsController  extends \BackendController {
             ))
             ->from(['c' => 'Calendars'])
             ->where("c.deleted = 0 AND c.deptid = {$deptid}")
-            ->leftJoin('CalendarsLang', 'cl.calendar_id = c.id AND cl.langid = 1','cl')
-            ->leftJoin('SubjectsLang', 'sl.subject_id = c.subject_id AND sl.langid = 1','sl')
-            ->leftJoin('ClassesLang', 'cll.class_id = c.class_id AND cll.langid = 1','cll')
+            ->leftJoin('CalendarsLang', 'cl.calendarid = c.id AND cl.langid = 1','cl')
+            ->leftJoin('SubjectsLang', 'sl.subjectid = c.subjectid AND sl.langid = 1','sl')
+            ->leftJoin('ClassesLang', 'cll.classid = c.classid AND cll.langid = 1','cll')
             ->orderBy('c.deptid ASC, c.createdat DESC');
     
             $search = 'cl.excerpt LIKE :search:';

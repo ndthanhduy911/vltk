@@ -38,7 +38,7 @@ class IndexController extends \FrontendController
         ->columns(array(
             'b.id',
             'b.image',
-            'b.button_link',
+            'b.buttonlink',
             'b.sort',
             'bl.name name',
             'bl.description description',
@@ -46,7 +46,7 @@ class IndexController extends \FrontendController
         ))
         ->from(['b'=>'Banner'])
         ->where("b.deleted = 0 AND b.status = 1 AND b.deptid = 1")
-        ->leftJoin('BannerLang', "bl.banner_id = b.id AND bl.langid = $langid",'bl')
+        ->leftJoin('BannerLang', "bl.bannerid = b.id AND bl.langid = $langid",'bl')
         ->orderBy("b.sort = 0 ASC")
         ->getQuery()
         ->execute();

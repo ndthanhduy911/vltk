@@ -42,14 +42,14 @@ class DeptController extends \FrontendController
         ->columns(array(
             'b.id',
             'b.image',
-            'b.button_link',
+            'b.buttonlink',
             'bl.name name',
             'bl.description description',
             'bl.button_text button_text'
         ))
         ->from(['b'=>'Banner'])
         ->where("b.status = 1 AND b.deleted = 0 AND b.deptid = $dept->id")
-        ->leftJoin('BannerLang', "bl.banner_id = b.id AND bl.langid = $langid",'bl')
+        ->leftJoin('BannerLang', "bl.bannerid = b.id AND bl.langid = $langid",'bl')
         ->getQuery()
         ->execute();
         

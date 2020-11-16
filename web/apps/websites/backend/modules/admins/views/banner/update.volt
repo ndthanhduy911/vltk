@@ -91,7 +91,7 @@
                                     <span class="text-primary">Link:</span>
                                     <div class="form-group mt-1">
                                         <div class="input-group">
-                                            {{form_banner.render('button_link')}}
+                                            {{form_banner.render('buttonlink')}}
                                             <div class="invalid-tooltip"></div>
                                         </div>
                                     </div>

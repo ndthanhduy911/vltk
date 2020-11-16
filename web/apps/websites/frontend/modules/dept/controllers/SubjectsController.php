@@ -16,7 +16,7 @@ class SubjectsController extends \FrontendController
             return $this->view->pick('templates/404');
         }
 
-        if($subject_lang = \SubjectsLang::findFirst(["langid = $langid AND subject_id = $subject->id"])){
+        if($subject_lang = \SubjectsLang::findFirst(["langid = $langid AND subjectid = $subject->id"])){
             $this->view->title = $subject_lang->title;
             $this->view->subject = $subject;
             $this->view->subject_lang = $subject_lang;

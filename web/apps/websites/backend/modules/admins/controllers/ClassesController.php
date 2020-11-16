@@ -22,7 +22,7 @@ class ClassesController  extends \BackendController {
             $class->updatedat = date('Y-m-d H:i:s');
             $title = 'Cập nhật';
             foreach ($languages as $key => $lang) {
-                $class_lang = \ClassesLang::findFirst(['class_id = :id: AND langid = :langid:','bind' => ['id' => $class->id, 'langid' => $lang->id]]);
+                $class_lang = \ClassesLang::findFirst(['classid = :id: AND langid = :langid:','bind' => ['id' => $class->id, 'langid' => $lang->id]]);
                 if($class_lang){
                     $form_lang = new ClassesLangForm($class_lang);
                     $classes_lang[$lang->id] = $class_lang;
@@ -103,7 +103,7 @@ class ClassesController  extends \BackendController {
                         }
                     } else {
                         foreach ($languages as $key => $lang) {
-                            $classes_lang[$lang->id]->class_id = $class->id;
+                            $classes_lang[$lang->id]->classid = $class->id;
                             $classes_lang[$lang->id]->save();
                         }
                         $this->flashSession->success($title." thành công");
@@ -194,7 +194,7 @@ class ClassesController  extends \BackendController {
             ))
             ->from(['c' => 'Classes'])
             ->where("c.deleted = 0 AND c.deptid = {$deptid}")
-            ->leftJoin('ClassesLang', 'cl.class_id = c.id AND cl.langid = 1','cl')
+            ->leftJoin('ClassesLang', 'cl.classid = c.id AND cl.langid = 1','cl')
             ->orderBy('c.deptid ASC, c.createdat DESC');
     
             $search = 'cl.title LIKE :search:';

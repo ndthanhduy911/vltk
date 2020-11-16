@@ -67,8 +67,8 @@ class BannerLangForm extends Form
         $content = new Hidden('content');
         $this->add($content);
 
-        $banner_id = new Hidden('banner_id');
-        $this->add($banner_id);
+        $bannerid = new Hidden('bannerid');
+        $this->add($bannerid);
 
         $langid = new Hidden('langid');
         $this->add($langid);

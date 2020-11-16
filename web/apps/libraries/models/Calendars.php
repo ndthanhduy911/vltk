@@ -28,7 +28,7 @@ class Calendars extends \Phalcon\Mvc\Model
 
     public static function getTitleById($id = null)
     {
-        if($calendar = CalendarsLang::findFirst(['calendar_id = :calendar_id:','bind' => ['calendar_id' => $id]])){
+        if($calendar = CalendarsLang::findFirst(['calendarid = :calendarid:','bind' => ['calendarid' => $id]])){
             return $calendar->name;
         }else{
             return null;

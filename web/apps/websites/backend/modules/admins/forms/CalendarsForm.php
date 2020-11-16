@@ -19,7 +19,7 @@ class CalendarsForm extends Form
             'cl.title title',
         ))
         ->from(['c' => 'Classes'])
-        ->leftJoin('ClassesLang', "cl.class_id = c.id AND cl.langid = 1",'cl')
+        ->leftJoin('ClassesLang', "cl.classid = c.id AND cl.langid = 1",'cl')
         ->orderBy('cl.title ASC')
         ->where("c.deptid = $deptid")
         ->getQuery()
@@ -31,42 +31,42 @@ class CalendarsForm extends Form
             'sl.title title',
         ))
         ->from(['s' => 'Subjects'])
-        ->leftJoin('SubjectsLang', "sl.subject_id = s.id AND sl.langid = 1",'sl')
+        ->leftJoin('SubjectsLang', "sl.subjectid = s.id AND sl.langid = 1",'sl')
         ->orderBy('sl.title ASC')
         ->where("s.deptid = $deptid")
         ->getQuery()
         ->execute();
 
-        $class_id = new Select('class_id', $classes, array(
+        $classid = new Select('classid', $classes, array(
             'using' => array('id', 'title'),
             'class' => 'form-control',
             'data-error' => "Chưa đúng định dạng",
             'required' => '',
             'data-required-error' => 'Vui lòng điền đầy đủ thông tin',
         ));
-        $class_id->addValidators(array(
+        $classid->addValidators(array(
             new PresenceOf(array(
                 'message' => 'Lớp học không được để trống',
             )),
         ));
-        $this->add($class_id);
+        $this->add($classid);
 
-        $subject_id = new Select('subject_id', $subjects, array(
+        $subjectid = new Select('subjectid', $subjects, array(
             'using' => array('id', 'title'),
             'class' => 'form-control',
             'data-error' => "Chưa đúng định dạng",
             'required' => '',
             'data-required-error' => 'Vui lòng điền đầy đủ thông tin',
         ));
-        $subject_id->addValidators(array(
+        $subjectid->addValidators(array(
             new PresenceOf(array(
                 'message' => 'Môn học không được để trống',
             )),
         ));
-        $this->add($subject_id);
+        $this->add($subjectid);
 
-        $begin_date = new Text('begin_date');
-        $begin_date->setAttributes(array(
+        $begindate = new Text('begindate');
+        $begindate->setAttributes(array(
             'class' => 'form-control date-basic w-100',
             'placeholder' => 'dd/mm/yyyy',
             'maxlength' => "10",
@@ -75,7 +75,7 @@ class CalendarsForm extends Form
             // 'pattern' =>"^(0[1-9]|1\d|2\d|3[01])\/(0[1-9]|1[0-2])\/(19|20)\d{2}$",
             // 'data-pattern-error' => "Định đạng không đúng. Chỉ cho phép ngày theo định dạng dd/mm/yyyy"
         ));
-        $begin_date->addValidators(array(
+        $begindate->addValidators(array(
             new PresenceOf(array(
                 'message' => 'Ngày bắt đầu không được để trống',
             )),
@@ -86,7 +86,7 @@ class CalendarsForm extends Form
                 ]
             )
         ));
-        $this->add($begin_date);
+        $this->add($begindate);
 
         $day = new Select('day', [
             'Monday' => "Thứ Hai",

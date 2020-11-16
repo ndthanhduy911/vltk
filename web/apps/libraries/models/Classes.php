@@ -19,7 +19,7 @@ class Classes extends \ModelCore
 
     public static function getTitleById($id = null)
     {
-        if($class = ClassesLang::findFirst(['class_id = :class_id:','bind' => ['class_id' => $id]])){
+        if($class = ClassesLang::findFirst(['classid = :classid:','bind' => ['classid' => $id]])){
             return $class->name;
         }else{
             return null;

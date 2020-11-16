@@ -28,7 +28,7 @@ class Subjects extends \Phalcon\Mvc\Model
 
     public static function getTitleById($id = null)
     {
-        if($subject = SubjectsLang::findFirst(['subject_id = :subject_id:','bind' => ['subject_id' => $id]])){
+        if($subject = SubjectsLang::findFirst(['subjectid = :subjectid:','bind' => ['subjectid' => $id]])){
             return $subject->name;
         }else{
             return null;
