@@ -1,7 +1,7 @@
 <?php 
 $menuParents = [];
-if($menuLocation = MenuLocation::findFirst(["status =  1 AND dept_id = $dept->id AND type = 2"])) {
-    $menuParents = Menus::find(["status = 1 AND dept_id = $dept->id AND menu_location_id = {$menuLocation->id} AND parent_id is NULL",'order' => 'sort ASC','limit' => 3]);
+if($menuLocation = MenuLocation::findFirst(["status =  1 AND deptid = $dept->id AND type = 2"])) {
+    $menuParents = Menus::find(["status = 1 AND deptid = $dept->id AND menu_location_id = {$menuLocation->id} AND parent_id is NULL",'order' => 'sort ASC','limit' => 3]);
 }
 ?>
 
@@ -27,13 +27,13 @@ if($menuLocation = MenuLocation::findFirst(["status =  1 AND dept_id = $dept->id
                     {%for menu in menuParents%}
                     <div class="col-lg-3">
                         <div class="footer-content">
-                            <h4 class="title text-default">{% if menu.icon %}<i class="fa {{ menu.icon }} pr-10"></i> {% endif %} <?= Menus::getName($menu->id, $lang_id) ?></h4>
+                            <h4 class="title text-default">{% if menu.icon %}<i class="fa {{ menu.icon }} pr-10"></i> {% endif %} <?= Menus::getName($menu->id, $langid) ?></h4>
                             <?php $menuChild = Menus::find(['parent_id = :parent_id:','bind' => ['parent_id' => $menu->id]]); ?>
                             {% if menuChild.count() %}
                             <nav class="mb-20">
                                 <ul class="nav flex-column list-style-icons">
                                     {% for child in menuChild %}
-                                    <li class="nav-item"><a class="nav-link" rel="noopener" target="{{ helper.getTarget(menu.target)}}" href="<?= Menus::getLink($child) ?>"><i class="fa fa-chevron-circle-right"></i><?= Menus::getName($child->id, $lang_id) ?></a></li>
+                                    <li class="nav-item"><a class="nav-link" rel="noopener" target="{{ helper.getTarget(menu.target)}}" href="<?= Menus::getLink($child) ?>"><i class="fa fa-chevron-circle-right"></i><?= Menus::getName($child->id, $langid) ?></a></li>
                                     {% endfor %}
                                 </ul>
                             </nav>

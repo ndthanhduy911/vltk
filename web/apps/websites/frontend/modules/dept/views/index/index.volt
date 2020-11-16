@@ -67,7 +67,7 @@
                                 'p.id',
                                 'pl.title',
                                 'p.slug',
-                                'p.cat_id',
+                                'p.catid',
                                 'pl.content',
                                 'p.status',
                                 'pl.excerpt',
@@ -75,8 +75,8 @@
                                 'p.featured_image',
                             ))
                             ->from(['p'=>'Posts'])
-                            ->where("p.deleted = 0 AND p.cat_id = $cat->id AND p.status = 1")
-                            ->leftJoin('PostsLang', 'pl.post_id = p.id AND pl.lang_id = '.$this->session->get('lang_id'),'pl')
+                            ->where("p.deleted = 0 AND p.catid = $cat->id AND p.status = 1")
+                            ->leftJoin('PostsLang', 'pl.postid = p.id AND pl.langid = '.$this->session->get('langid'),'pl')
                             ->orderBy("p.calendar DESC")
                             ->limit(5, 0)
                             ->getQuery()

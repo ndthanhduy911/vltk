@@ -1,0 +1,192 @@
+const showStatus = (id = '') => {
+    switch (parseInt(id)) {
+        case 0:
+            return `<span class="badge badge-danger p-2">Khóa</span>`;
+        case 1:
+            return `<span class="badge badge-success p-2">Hoạt động</span>`;
+        default:
+            return `<span class="badge badge-warning p-2">Chờ</span>`;
+    }
+}
+
+const loadTablePosts = (table = '#posts', cb = () => {}) => {
+    if ($(table).length) {
+        let formSearch = $('#searchPosts');
+        let paramsUrl = getParams();
+
+        let columns = [];
+        let fkeys = [];
+        $(`${table} thead th`).each((key,element) => {
+            let fkey = $(element).data('col');
+            fkeys.push(fkey);
+            if(['ddcosts'].indexOf(fkey) === -1){
+                columns.push({data : $(element).data('col')})
+            }else{
+                columns.push({data : 'no'})
+            }
+        });
+
+        let options = {
+            "serverSide": true,
+            "ajax": `${webAdminUrl}/posts/ajaxgetdata?${paramsUrl}`,
+            "columns":columns,
+            'createdRow': function (row, item, dataIndex) {
+                $('td', row).addClass('align-middle text-center');
+                $('td:first', row).addClass('select-box').html(`
+                    <input name="assetCheckbox[]" class="assetCheckbox" type="checkbox" value="${item.id}" data-dept=${item.deptid}>
+                `)
+                let pageInfo = $(table).DataTable().page.info();
+                let page = pageInfo.page;
+                let pageLength = pageInfo.length;
+                $('td:eq(1)', row).html((dataIndex+1)+(page*pageLength));
+                let image = `<img src="${getPathImage(item.featured_image, '/assets/frontend/images/defaut_img.png')}" width="50px">`;
+                $(`td:eq(${fkeys.indexOf('featured_image')})`, row).html(image);
+                $(`td:eq(${fkeys.indexOf('calendar')})`, row).html(vi_moment(item.createdat, 'DD/MM/YYYY HH:mm'));
+                $('td:eq(5)', row).html(vi_moment(item.createdat, 'DD/MM/YYYY HH:mm'));
+                $('td:eq(6)', row).html(showStatus(item.status));
+                $('td:last', row).addClass('text-nowrap').html(`
+                    <a href="${webAdminUrl}/posts/update/${item.id}" data-href="${webAdminUrl}/posts/update/${item.id}" title="Sửa" class="btn btn-sm btn-hnn btn-hnn-info"><span>Sửa</span></a>
+                `)
+            },
+            "language": {
+                "sProcessing": "Đang xử lý...",
+                "sLengthMenu": "Xem _MENU_",
+                "sZeroRecords": "Không tìm thấy dữ liệu",
+                "sInfo": "Đang xem _START_ đến _END_ trong tổng số _TOTAL_ bài viết",
+                "sInfoEmpty": "Đang xem 0 đến 0 trong tổng số 0 bài viết",
+                "sInfoFiltered": "(được lọc từ _MAX_ bài viết)",
+                "sInfoPostFix": "",
+                "sSearch": "Tìm:",
+                "sUrl": "",
+                "oPaginate": {
+                    "sFirst": "Đầu",
+                    "sPrevious": "Trước",
+                    "sNext": "Tiếp",
+                    "sLast": "Cuối"
+                }
+            }
+        }
+        dataTableCt(table,options).then((dt) => {
+            $(table).on( 'page.dt', function (e) {
+                e.preventDefault();
+                let paged = dt.page.info().page;
+                let paramsUrl = setParam('paged',paged);
+                window.history.pushState({}, "Search parade", `${webAdminUrl}/posts?${paramsUrl}`);
+            });
+
+            formSearch.submit(function (e) { 
+                e.preventDefault();
+                let dataSearch = formSearch.serializeArray();
+                let textGetSearch = "?paged=";
+                dataSearch.forEach((element, index) => {
+                    if(element.name != "paged"){
+                        textGetSearch += `&${element.name}=${element.value}`
+                    }
+                })            
+                dt.ajax.url( `${webAdminUrl}/posts/ajaxgetdata${textGetSearch}` ).load();
+                window.history.pushState({}, "Search parade", `${webAdminUrl}/posts${textGetSearch}`);
+            });
+
+            checkboxAll('#postCheckboxAll','.postCheckbox');
+            deleteAll('#deletePosts', '.postCheckbox',(data) => {
+                showSweetAlertOk('Xóa thành công');
+                dt.draw()
+            });
+        })
+        cb();
+    }
+}
+
+const loadTablePostsTrash = (table = '#posts_trash', cb = () => {}) => {
+    if ($(table).length) {
+
+        let columns = [];
+        let fkeys = [];
+        $(`${table} thead th`).each((key,element) => {
+            let fkey = $(element).data('col');
+            fkeys.push(fkey);
+            if(['ddcosts'].indexOf(fkey) === -1){
+                columns.push({data : $(element).data('col')})
+            }else{
+                columns.push({data : 'no'})
+            }
+        });
+
+        let formSearch = $('#searchPosts');
+        let paramsUrl = getParams();
+        let options = {
+            "serverSide": true,
+            "ajax": `${webAdminUrl}/posts/ajaxgetdatatrash?${paramsUrl}`,
+            "columns": columns,
+            'createdRow': function (row, item, dataIndex) {
+                let pageInfo = $(table).DataTable().page.info();
+                let page = pageInfo.page;
+                let pageLength = pageInfo.length;
+                $('td:eq(0)', row).html((dataIndex+1)+(page*pageLength));
+                let image = item.featured_image ? `<img src="${item.featured_image}" width="50px">` : '';
+                $(row).addClass('text-center');
+                $('td', row).addClass('align-middle');
+                $('td:eq(1)', row).html(image);
+                $('td:eq(5)', row).html(vi_moment(item.createdat, 'DD/MM/YYYY HH:mm'));
+                $('td:last', row).addClass('text-nowrap').html(`
+                    <a href="#" data-href="${backendUrl}/posts/restore/${item.id}" title="Phục hồi" class="btn btn-sm btn-hnn btn-hnn-success restorePost"><span>Phục hồi</span></a>
+                    <a href="#" data-href="${backendUrl}/posts/delete/${item.id}" title="Xóa vĩnh viễn" class="btn btn-sm btn-hnn btn-hnn-danger deletePost"><span>Xóa</span></a>
+                `)
+            },
+            "language": {
+                "sProcessing": "Đang xử lý...",
+                "sLengthMenu": "Xem _MENU_",
+                "sZeroRecords": "Không tìm thấy dữ liệu",
+                "sInfo": "Đang xem _START_ đến _END_ trong tổng số _TOTAL_ bài viết",
+                "sInfoEmpty": "Đang xem 0 đến 0 trong tổng số 0 bài viết",
+                "sInfoFiltered": "(được lọc từ _MAX_ bài viết)",
+                "sInfoPostFix": "",
+                "sSearch": "Tìm:",
+                "sUrl": "",
+                "oPaginate": {
+                    "sFirst": "Đầu",
+                    "sPrevious": "Trước",
+                    "sNext": "Tiếp",
+                    "sLast": "Cuối"
+                }
+            }
+        }
+
+        dataTableCt(table,options).then((dt) => {
+            $(table).on( 'page.dt', function (e) {
+                e.preventDefault();
+                let paged = dt.page.info().page;
+                let paramsUrl = setParam('paged',paged);
+                window.history.pushState({}, "Search parade", `${webAdminUrl}/posts?${paramsUrl}`);
+            });
+
+            formSearch.submit(function (e) { 
+                e.preventDefault();
+                let dataSearch = formSearch.serializeArray();
+                let textGetSearch = "?paged=";
+                dataSearch.forEach((element, index) => {
+                    if(element.name != "paged"){
+                        textGetSearch += `&${element.name}=${element.value}`
+                    }
+                })            
+                dt.ajax.url( `${webAdminUrl}/posts/ajaxgetdatatrash${textGetSearch}` ).load();
+                window.history.pushState({}, "Search parade", `${webAdminUrl}/posts/trashs${textGetSearch}`);
+            });
+
+            showConfrimDelete('.restorePost',()=>{
+                dt.draw();
+            })
+    
+            showConfrimDelete('.deletePost',()=>{
+                dt.draw();
+            })
+
+        })
+        cb();
+    }
+}
+
+loadTablePosts('#posts');
+loadTablePostsTrash('#posts_trash');
+changeTitleToSlug('#title', '#slug');
+showSelectImage('#uploadImage','#showImg','#featured_image', '#removeImage');

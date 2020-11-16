@@ -290,10 +290,10 @@ class Depts extends \ModelCore
         }
     }
 
-    public static function getTitleById($id = null, $lang_id = 1)
+    public static function getTitleById($id = null, $langid = 1)
     {
         if($dept = parent::findFirst($id)){
-            $dept_lang = DepartmentsLang::findFirst(["lang_id = $lang_id AND dept_id = $dept->id"]);
+            $dept_lang = DepartmentsLang::findFirst(["langid = $langid AND deptid = $dept->id"]);
             return $dept_lang->name;
         }else{
             return null;

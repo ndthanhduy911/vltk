@@ -1,0 +1,198 @@
+<?php
+namespace Backend\Modules\Admins\Controllers;
+use Backend\Modules\Admins\Forms\BannerForm;
+use Backend\Modules\Admins\Forms\BannerLangForm;
+
+
+class BannerController  extends \BackendController {
+
+    public function indexAction(){
+        $this->get_js_css();
+        // $this->view->form = new UserForm();
+    }
+
+    public function updateAction($id = 0){
+        $forms_lang = [];
+        $banners_lang = [];
+        $languages = \Language::find(['status = 1']);
+        if($id){
+            if(!$banner = \Banner::findFirstId($id)){
+                echo 'Không tìm thấy dữ liệu'; die;
+            }
+            $banner->updatedat = date('Y-m-d H:i:s');
+            $title = 'Cập nhật';
+            foreach ($languages as $key => $lang) {
+                $banner_lang = \BannerLang::findFirst(['banner_id = :id: AND langid = :langid:','bind' => ['id' => $banner->id, 'langid' => $lang->id]]);
+                if($banner_lang){
+                    $form_lang = new BannerLangForm($banner_lang);
+                    $banners_lang[$lang->id] = $banner_lang;
+                    $forms_lang[$lang->id] = $form_lang;
+                }else{
+                    echo 'Nội dung không phù hợp'; die;
+                }
+            }   
+        }else{
+            $banner = new \Banner();
+            $banner->deptid = $this->session->get('deptid');
+            $banner->createdat = date('Y-m-d H:i:s');
+            $banner->updatedat = $banner->createdat;
+            $title = 'Thêm mới';
+            foreach ($languages as $lang) {
+                $forms_lang[$lang->id] = new BannerLangForm();
+                $banners_lang[$lang->id] = new \BannerLang();
+            }
+        }
+
+        $form_banner = new BannerForm($banner);
+        if ($this->request->isPost()) {
+            if ($this->security->checkToken()) {
+                $error = [];
+                $p_name = $this->request->getPost('name',['string','trim']);
+                $p_description = $this->request->getPost('description',['string','trim']);
+                $p_button_text = $this->request->getPost('button_text',['string','trim']);
+                $req_banner = [
+                    'status' => $this->request->getPost('status',['int','trim']),
+                    'image' => $this->request->getPost('image',['string','trim']),
+                    'button_link' => $this->request->getPost('button_link',['string','trim']),
+                ];
+
+                $form_banner->bind($req_banner, $banner);
+                if (!$form_banner->isValid()) {
+                    foreach ($form_banner->getMessages() as $message) {
+                        array_push($error, $message->getMessage());
+                    }
+                }
+                foreach ($languages as $key => $lang) {
+                    $req_banner_lang[$lang->id] = [
+                        'name' => $p_name[$lang->id],
+                        'description' => $p_description[$lang->id],
+                        'button_text' => $p_button_text[$lang->id],
+                        'langid' => $lang->id,
+                    ];
+
+                    $forms_lang[$lang->id]->bind($req_banner_lang[$lang->id], $banners_lang[$lang->id]);
+                    if (!$forms_lang[$lang->id]->isValid()) {
+                        foreach ($forms_lang[$lang->id]->getMessages() as $message) {
+                            array_push($error, $message->getMessage());
+                        }
+                    }
+                }
+
+                if (!count($error)) {
+                    if (!$banner->save()) {
+                        foreach ($banner->getMessages() as $message) {
+                            $this->flashSession->error($message);
+                        }
+                    } else {
+                        foreach ($languages as $key => $lang) {
+                            $banners_lang[$lang->id]->banner_id = $banner->id;
+                            $banners_lang[$lang->id]->save();
+                        }
+                        $this->flashSession->success($title." thành công");
+                        return $this->response->redirect(WEB_ADMIN_URL.'/banner');
+                    }
+                }else{
+                    foreach ($error as $value) {
+                        $this->flashSession->error($value);
+                    }
+                }
+            }else{
+                $this->flashSession->error("Token không chính xác");
+            }
+        }
+
+        $this->view->languages = $languages;
+        $this->view->forms_lang = $forms_lang;
+        $this->view->form_banner = $form_banner;
+        $this->view->banner = $banner;
+        $this->view->banners_lang = $banners_lang;
+        $this->view->title = $title;
+        $this->assets->addJs('/elfinder/js/require.min.js');
+        $this->get_js_css();
+    }
+
+    public function deleteAction($id = null){
+        if ($banner = \Banner::findFirstId($id)) {
+            $banner->deleted = 1;
+            if (!$banner->save()) {
+                if ($this->request->isAjax()) {
+                    foreach ($banner->getMessages() as $message) {
+                        array_push($error, $message->getMessage());
+                    }
+                    $data['error'] = $error;
+                    $this->response->setStatusCode(400, 'error');
+                    $this->response->setJsonContent($data);
+                    return $this->response->send();
+                } else {
+                    foreach ($banner->getMessages() as $message) {
+                        $this->flashSession->error($message);
+                    }
+                    return $this->response->redirect(WEB_ADMIN_URL.'/trashs');
+                }
+            }else{
+                if ($this->request->isAjax()) {
+                    $data['data'] = $banner->toArray();
+                    $this->response->setStatusCode(200, 'OK');
+                    $this->response->setJsonContent($data);
+                    return $this->response->send();
+                } else {
+                    // $this->logs->write_log(3, 1, 'Xóa trang', json_encode($save),$this->session->get("user_id"));
+                    $this->flashSession->success("Xóa bài viết khoản thành công");
+                    return $this->response->redirect(WEB_ADMIN_URL.'/trashs');
+                }
+
+            }
+        }else{
+            if ($this->request->isAjax()) {
+                $data['error'] = 'Không tìm thấy bài viết';
+                $this->response->setStatusCode(404, 'Not found');
+                $this->response->setJsonContent($data);
+                return $this->response->send();
+            } else {
+                $this->flashSession->error("Không tìm thấy bài viết");
+                return $this->response->redirect(WEB_ADMIN_URL.'/trashs');
+            }
+        }
+    }
+
+    // =================================
+    // API
+    // =================================
+
+    public function getdataAction(){
+        if($this->request->isAjax()){
+            $deptid = $this->session->get('deptid');
+            $data = $this->modelsManager->createBuilder()
+            ->columns(array(
+                'b.id',
+                'b.deptid',
+                'b.image',
+                'b.button_link',
+                'b.deptid',
+                'b.status',
+                'b.createdat',
+                'bl.name name',
+                'bl.description description',
+                'bl.button_text button_text',
+            ))
+            ->from(['b' => 'Banner'])
+            ->where("b.deleted = 0 AND b.deptid = {$deptid}")
+            ->leftJoin('BannerLang', 'bl.banner_id = b.id AND bl.langid = 1','bl')
+            ->orderBy('b.deptid ASC, b.status DESC');
+
+    
+            $search = 'bl.name LIKE :search:';
+            $this->response->setStatusCode(200, 'OK');
+            $this->response->setJsonContent($this->ssp->data_output($this->request->get(), $data,$search));
+            return $this->response->send();
+        }else{
+            $this->response->setStatusCode(403, 'Failed');
+            $this->response->setJsonContent(['Truy cập không được phép']);
+            return $this->response->send();
+        }
+    }
+
+    private function get_js_css (){
+        $this->assets->addJs($this->config->application->baseUri.'/assets/backend/js/modules/admins/banner.js');
+    }
+}

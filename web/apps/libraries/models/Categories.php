@@ -30,16 +30,16 @@ class Categories extends \Phalcon\Mvc\Model
         }
     }
 
-    public static function getLang($cat_id =  null){
-        if($cat = \CategoriesLang::findFirst(['cat_id = :cat_id: AND lang_id = :lang_id:','bind' => ['cat_id' => $cat_id, 'lang_id' => $_SESSION['lang_id']]])){
+    public static function getLang($catid =  null){
+        if($cat = \CategoriesLang::findFirst(['catid = :catid: AND langid = :langid:','bind' => ['catid' => $catid, 'langid' => $_SESSION['langid']]])){
             return $cat;
         }else{
             return false;
         }
     }
     
-    public static function getTitleById($cat_id = null){
-        if($cat = \CategoriesLang::findFirst(['cat_id = :cat_id: AND lang_id = :lang_id:','bind' => ['cat_id' => $cat_id, 'lang_id' => $_SESSION['lang_id']]])){
+    public static function getTitleById($catid = null){
+        if($cat = \CategoriesLang::findFirst(['catid = :catid: AND langid = :langid:','bind' => ['catid' => $catid, 'langid' => $_SESSION['langid']]])){
             return $cat->name;
         }else{
             return false;

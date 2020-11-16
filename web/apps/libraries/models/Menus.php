@@ -10,7 +10,7 @@ class Menus extends \Phalcon\Mvc\Model
     public static function getLink($menu , $slug = ''){
         switch ((int)$menu->type) {
             case 1: {
-                return ($post = \Posts::findFirstId($menu->post_id)) ? WEB_URL.($slug != '/' ? '/'.$slug : '')."/news/".$post->slug : '#';
+                return ($post = \Posts::findFirstId($menu->postid)) ? WEB_URL.($slug != '/' ? '/'.$slug : '')."/news/".$post->slug : '#';
                 break;
             }    
             case 2: {
@@ -18,7 +18,7 @@ class Menus extends \Phalcon\Mvc\Model
                 break;
             } 
             case 3: {
-                return ($cat = \Categories::findFirstId($menu->cat_id)) ? WEB_URL.($slug != '/' ? '/'.$slug : '').'/category/'.$cat->slug : '#';
+                return ($cat = \Categories::findFirstId($menu->catid)) ? WEB_URL.($slug != '/' ? '/'.$slug : '').'/category/'.$cat->slug : '#';
                 break;
             }   
             case 4: {
@@ -44,7 +44,7 @@ class Menus extends \Phalcon\Mvc\Model
 
         switch ((int)$menu->type) {
             case 1: {
-                $item['link'] = ($post = \Posts::findFirstId($menu->post_id)) ? WEB_URL.($slug != '/' ? '/'.$slug : '')."/news/".$post->slug : '#';
+                $item['link'] = ($post = \Posts::findFirstId($menu->postid)) ? WEB_URL.($slug != '/' ? '/'.$slug : '')."/news/".$post->slug : '#';
                 $item['actived'] = (isset($post->slug) ? $post->slug : '#4')  == $slug_now ? true : false;
                 break;
             }    
@@ -54,7 +54,7 @@ class Menus extends \Phalcon\Mvc\Model
                 break;
             } 
             case 3: {
-                $item['link'] = ($cat = \Categories::findFirstId($menu->cat_id)) ? WEB_URL.($slug != '/' ? '/'.$slug : '').'/category/'.$cat->slug : '#';
+                $item['link'] = ($cat = \Categories::findFirstId($menu->catid)) ? WEB_URL.($slug != '/' ? '/'.$slug : '').'/category/'.$cat->slug : '#';
                 $item['actived'] = (isset($cat->slug) ? $cat->slug : '#4') == $slug_now ? true : false;
                 break;
             }   
@@ -76,8 +76,8 @@ class Menus extends \Phalcon\Mvc\Model
         return $item;
     }
 
-    public static function getName($menu_id, $lang_id = 1){
-        $menu_lang = \MenusLang::findFirst(['lang_id =:lang_id: AND menu_id = :menu_id:', 'bind'=>['lang_id' => $lang_id, 'menu_id' => $menu_id]]);
+    public static function getName($menu_id, $langid = 1){
+        $menu_lang = \MenusLang::findFirst(['langid =:langid: AND menu_id = :menu_id:', 'bind'=>['langid' => $langid, 'menu_id' => $menu_id]]);
         return $menu_lang ? $menu_lang->name : '';
     }
 

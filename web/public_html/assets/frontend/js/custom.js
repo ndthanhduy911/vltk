@@ -40,10 +40,10 @@
 
 		};
 
-		$('#lang_id a').click(function (e) { 
+		$('#langid a').click(function (e) { 
 			e.preventDefault();
-			let lang_id = $(this).attr('data-id');
-			changeLang(lang_id);
+			let langid = $(this).attr('data-id');
+			changeLang(langid);
 		});
 
 		if($(window).width() < 720){

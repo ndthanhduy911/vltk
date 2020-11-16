@@ -244,7 +244,7 @@ const showSelectImage = (button, showImg, uploadImageValue, buttonRemoveImg) => 
                 create: function (event, ui) {
                     $(this).elfinder({
                         resizable: false,
-                        url: "/admin/media/connector?dept_id="+deptId,
+                        url: "/admin/media/connector?deptid="+deptId,
                         lang:'vi',
                         commandsOptions: {
                             getfile: {

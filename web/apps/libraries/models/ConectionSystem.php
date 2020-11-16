@@ -16,24 +16,24 @@ class ConectionSystem extends \Phalcon\Mvc\Model
         ]);
     }
 
-    public static function countType($type, $dept_id)
+    public static function countType($type, $deptid)
     {
         $count = 0;
 
         $count = parent::findFirst([
-            "conditions" => "type = :type: AND dept_id = :dept_id:",
-            "bind" => ['type' => $type, 'dept_id' => $dept_id]
+            "conditions" => "type = :type: AND deptid = :deptid:",
+            "bind" => ['type' => $type, 'deptid' => $deptid]
         ]);
 
         return $count ? $count->number : 0;
     }
 
-    public static function plus($type, $dept_id)
+    public static function plus($type, $deptid)
     {
         $number = 0;
         $conetion = parent::findFirst([
-            "conditions" => "type = :type: AND dept_id = :dept_id:",
-            "bind" => ['type' => $type, 'dept_id' => $dept_id]
+            "conditions" => "type = :type: AND deptid = :deptid:",
+            "bind" => ['type' => $type, 'deptid' => $deptid]
         ]);
 
         if($conetion){

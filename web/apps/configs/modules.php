@@ -21,10 +21,10 @@ $application->registerModules(array(
         'path' => APP_DIR . '/websites/backend/modules/shared/module.php'
     ),
 
-    // 'backend_admins' => array(
-    //     'className' => 'Backend\Modules\Admins\Module',
-    //     'path' => APP_DIR . '/websites/backend/modules/admins/module.php'
-    // ),
+    'backend_admins' => array(
+        'className' => 'Backend\Modules\Admins\Module',
+        'path' => APP_DIR . '/websites/backend/modules/admins/module.php'
+    ),
     // 'backend_setting' => array(
     //     'className' => 'Backend\Modules\Setting\Module',
     //     'path' => APP_DIR . '/websites/backend/modules/setting/module.php'

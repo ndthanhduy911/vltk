@@ -1,26 +1,18 @@
 <?php
-class Posts extends \Phalcon\Mvc\Model
+
+use Library\Helper\HelperValidation;
+
+class Posts extends \ModelCore
 {
+    public function initialize()
+    {
+        $this->setSchema(SCHEMADB);
+        $this->setSource("posts");
+    }
+
     public function getSource()
     {
         return 'posts';
-    }
-
-    public static function findFirstId($id, $columns = "*")
-    {
-        if($_SESSION['role'] === 1){
-            return parent::findFirst([
-                "conditions" => "id = :id:",
-                "bind" => array('id' => $id),
-                "columns" => $columns
-            ]);
-        }else{
-            return parent::findFirst([
-                "conditions" => "id = :id: AND dept_id IN (".implode(',',$_SESSION['dept_mg']).")",
-                "bind" => array('id' => $id),
-                "columns" => $columns
-            ]);
-        }
     }
 
     public static function getUrlById($id = null)
@@ -32,17 +24,17 @@ class Posts extends \Phalcon\Mvc\Model
         }
     }
 
-    public static function getLang($post_id =  null){
-        if($post = PostsLang::findFirst(['post_id = :post_id: AND lang_id = :lang_id:','bind' => ['post_id' => $post_id, 'lang_id' => $_SESSION['lang_id']]])){
+    public static function getLang($postid =  null){
+        if($post = PostsLang::findFirst(['postid = :postid: AND langid = :langid:','bind' => ['postid' => $postid, 'langid' => $_SESSION['langid']]])){
             return $post;
         }else{
             return false;
         }
     }
     
-    public static function getTitleById($post_id = null)
+    public static function getTitleById($postid = null)
     {
-        if($post = PostsLang::findFirst(['post_id = :post_id: AND lang_id = :lang_id:','bind' => ['post_id' => $post_id, 'lang_id' => $_SESSION['lang_id']]])){
+        if($post = PostsLang::findFirst(['postid = :postid: AND langid = :langid:','bind' => ['postid' => $postid, 'langid' => $_SESSION['langid']]])){
             return $post->name;
         }else{
             return false;
@@ -134,5 +126,90 @@ class Posts extends \Phalcon\Mvc\Model
 
         return $text;
 
+    }
+
+    public function vdUpdate($try = false){
+        $helper = new HelperValidation();
+        $helper->setValidation('required', [
+            'name' => 'deptid',
+            'msg' => 'Đơn vị/bộ phận không được để trống'
+        ]);
+        //calendar
+        $helper->setValidation('max', [
+            'name' => 'calendar',
+            'len' => 16,
+            'msg' => 'Ngày đăng không được quá 16 ký tự'
+        ]);
+        if(!empty($this->calendar)){
+            $helper->setValidation('date', [
+                'name' => 'calendar',
+                'format' => 'd/m/Y H:i',
+                'msg' => 'Ngày đăng không đúng định dạng'
+            ]);
+        }
+        //slug
+        $helper->setValidation('max', [
+            'name' => 'slug',
+            'len' => 255,
+            'msg' => 'Slug không được dài quá 255 ký tự'
+        ]);
+        //catid
+        $helper->setValidation('required', [
+            'name' => 'catid',
+            'msg' => 'Chuyên mục không được để trống'
+        ]);
+        //status
+        $helper->setValidation('required', [
+            'name' => 'status',
+            'msg' => 'Trạng thái không được để trống'
+        ]);
+
+        if($try){
+            if(!$this->validate($helper->getValidation())){
+                foreach ($this->getMessages() as $message) {
+                    throw new \Exception($message->getMessage());
+                }
+            }
+        }
+
+        return $this->validate($helper->getValidation());
+    }
+
+    public static function filedName($key){
+        $feilds = [
+            'slug' => 'Links',
+            'catid' => 'Chuyên mục',
+            'catname' => 'Chuyên mục',
+            'status' => 'Trạng thái',
+            'featured_image' => 'Hình đại diện',
+            'author' => 'Tác giả',
+            'authorname' => 'Tác giả',
+            'deptid' => 'Đơn vị/bộ phận',
+            'deptname' => 'Đơn vị/bộ phận',
+            'calendar' => 'Ngày đăng',
+            'title' => 'Tiêu đề',
+            'excerpt' => 'Trích dẫn'
+        ];
+        return isset($feilds[$key]) ? $feilds[$key] : '';
+    }
+
+    public static function arrayFilter(){
+        return [
+            ['title'],
+            ['catid','status'],
+            ['calendar']
+        ];
+    }
+
+    public static function findTables () {
+        return ['featured_image','title','excerpt','catname','authorname','calendar','slug','status'];
+    }
+
+    public static function arrayOrder () {
+        return ['title','catid','status','calendar'];
+    }
+    public static function findFilters () {
+        $filters = \Posts::arrayFilter();
+        return array_merge($filters[0],$filters[1],$filters[2]);
     }
 }

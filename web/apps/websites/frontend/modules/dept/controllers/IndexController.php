@@ -5,11 +5,11 @@ namespace Frontend\Modules\Dept\Controllers;
 class IndexController extends \FrontendController
 {
     public function indexAction(){
-        $lang_id = $this->session->get('lang_id');
+        $langid = $this->session->get('langid');
         $homeSetting = $this->modelsManager->createBuilder()
         ->columns(array(
             'h.id',
-            'h.dept_id',
+            'h.deptid',
             'h.cat_list',
             'h.post_number',
             'h.specialized_bg',
@@ -23,8 +23,8 @@ class IndexController extends \FrontendController
             'hl.contact_des contact_des'
         ))
         ->from(['h'=>'Home'])
-        ->where("h.dept_id = 1")
-        ->leftJoin('HomeLang', "hl.home_id = h.id AND hl.lang_id = $lang_id",'hl')
+        ->where("h.deptid = 1")
+        ->leftJoin('HomeLang', "hl.home_id = h.id AND hl.langid = $langid",'hl')
         ->limit(1)
         ->getQuery()
         ->execute();
@@ -45,8 +45,8 @@ class IndexController extends \FrontendController
             'bl.button_text button_text'
         ))
         ->from(['b'=>'Banner'])
-        ->where("b.deleted = 0 AND b.status = 1 AND b.dept_id = 1")
-        ->leftJoin('BannerLang', "bl.banner_id = b.id AND bl.lang_id = $lang_id",'bl')
+        ->where("b.deleted = 0 AND b.status = 1 AND b.deptid = 1")
+        ->leftJoin('BannerLang', "bl.banner_id = b.id AND bl.langid = $langid",'bl')
         ->orderBy("b.sort = 0 ASC")
         ->getQuery()
         ->execute();
@@ -61,8 +61,8 @@ class IndexController extends \FrontendController
                 'cl.name cat_name',
             ))
             ->from(['c'=>'Categories'])
-            ->leftJoin('CategoriesLang', 'cl.cat_id = c.id','cl')
-            ->where('cl.lang_id = :lang_id: AND status = 1 AND dept_id = 1',['lang_id' => $lang_id])
+            ->leftJoin('CategoriesLang', 'cl.catid = c.id','cl')
+            ->where('cl.langid = :langid: AND status = 1 AND deptid = 1',['langid' => $langid])
             ->inWhere("c.id", $listCats)
             ->getQuery()
             ->execute();
@@ -77,8 +77,8 @@ class IndexController extends \FrontendController
             'dl.name dept_name',
         ))
         ->from(['d'=>'Depts'])
-        ->leftJoin('DeptsLang', 'dl.dept_id = d.id','dl')
-        ->where('dl.lang_id = :lang_id: AND status = 1 AND d.id != 1',['lang_id' => $lang_id])
+        ->leftJoin('DeptsLang', 'dl.deptid = d.id','dl')
+        ->where('dl.langid = :langid: AND status = 1 AND d.id != 1',['langid' => $langid])
         ->getQuery()
         ->execute();
 
@@ -90,13 +90,13 @@ class IndexController extends \FrontendController
             's.dean',
             's.dept_position',
             's.email',
-            's.dept_id',
+            's.deptid',
             'sl.title title',
             'sl.content content'
         ))
         ->from(['s'=>'Staff'])
         ->where("s.status = 1 AND s.deleted = 0 AND (s.dean = 1 OR s.dean = 2)")
-        ->leftJoin("StaffLang", "sl.staff_id = s.id AND sl.lang_id = $lang_id",'sl')
+        ->leftJoin("StaffLang", "sl.staff_id = s.id AND sl.langid = $langid",'sl')
         ->orderBy("s.sort ASC, s.dean ASC")
         ->limit(3)
         ->getQuery()
@@ -111,13 +111,13 @@ class IndexController extends \FrontendController
             'pl.title title',
         ))
         ->from(['p'=>'Partner'])
-        ->where("p.status = 1 AND p.deleted = 0 AND p.dept_id = 1")
-        ->leftJoin('PartnerLang', "pl.partner_id = p.id AND pl.lang_id = {$lang_id}",'pl')
+        ->where("p.status = 1 AND p.deleted = 0 AND p.deptid = 1")
+        ->leftJoin('PartnerLang', "pl.partner_id = p.id AND pl.langid = {$langid}",'pl')
         ->orderBy("p.sort ASC")
         ->getQuery()
         ->execute();
         $this->view->home = $home;
-        $this->view->socials = \Social::find(["status = 1 AND dept_id = 1", "order" => "sort ASC"]);
+        $this->view->socials = \Social::find(["status = 1 AND deptid = 1", "order" => "sort ASC"]);
         $this->view->banners = $banners->count() ? $banners : [] ;
         $this->view->cats = $cats;
         $this->view->depts = $depts->count() ? $depts : [];
@@ -127,10 +127,10 @@ class IndexController extends \FrontendController
         return true;
     }
 
-    public function changelanguageAction($lang_id = 1){
-        $this->session->set("lang_new", $lang_id);
+    public function changelanguageAction($langid = 1){
+        $this->session->set("lang_new", $langid);
         $this->response->setStatusCode(200, 'OK');
-        $this->response->setJsonContent(['lang_id' => $lang_id]);
+        $this->response->setJsonContent(['langid' => $langid]);
         return $this->response->send();
     }
 

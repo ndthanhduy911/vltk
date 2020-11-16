@@ -11,31 +11,31 @@ class PostsController extends \FrontendController
     public function getdatapostsAction(){
         
         if($this->request->isAjax()) {
-            $dept_id = $this->request->get('dept_id');
+            $deptid = $this->request->get('deptid');
             $limit = $this->request->get('limit');
             $limit = $limit ? (int)$limit : 5;
-            $cat_id = $this->request->get('cat_id');
-            if($cat_id){
+            $catid = $this->request->get('catid');
+            if($catid){
                 $posts = $this->modelsManager->createBuilder()
                 ->columns(array(
                     'p.id',
                     'pl.title',
                     'p.slug',
-                    'p.cat_id',
+                    'p.catid',
                     'pl.content',
                     'p.status',
                     'pl.excerpt',
-                    'p.dept_id',
-                    'p.created_at',
+                    'p.deptid',
+                    'p.createdat',
                     'p.calendar',
                     'p.featured_image',
                     'cl.name cat_name',
                 ))
                 ->from(['p'=>'Posts'])
-                ->leftJoin('CategoriesLang', 'cl.cat_id = p.cat_id AND cl.lang_id = '.$this->session->get('lang_id'),'cl')
-                ->leftJoin('PostsLang', 'pl.post_id = p.id AND pl.lang_id = '.$this->session->get('lang_id'),'pl')
+                ->leftJoin('CategoriesLang', 'cl.catid = p.catid AND cl.langid = '.$this->session->get('langid'),'cl')
+                ->leftJoin('PostsLang', 'pl.postid = p.id AND pl.langid = '.$this->session->get('langid'),'pl')
                 ->orderBy("p.calendar DESC")
-                ->where('p.deleted = 0 AND p.cat_id = :cat_id: AND p.status = 1 AND p.dept_id = :dept_id:',['dept_id' => $dept_id, 'cat_id' => $cat_id])
+                ->where('p.deleted = 0 AND p.catid = :catid: AND p.status = 1 AND p.deptid = :deptid:',['deptid' => $deptid, 'catid' => $catid])
                 ->limit($limit, 0)
                 ->getQuery()
                 ->execute()
@@ -46,21 +46,21 @@ class PostsController extends \FrontendController
                     'p.id',
                     'pl.title',
                     'p.slug',
-                    'p.cat_id',
+                    'p.catid',
                     'pl.content',
                     'p.status',
                     'pl.excerpt',
-                    'p.dept_id',
-                    'p.created_at',
+                    'p.deptid',
+                    'p.createdat',
                     'p.calendar',
                     'p.featured_image',
                     'cl.name cat_name',
                 ))
                 ->from(['p'=>'Posts'])
-                ->leftJoin('CategoriesLang', 'cl.cat_id = p.cat_id AND cl.lang_id = 1','cl')
-                ->leftJoin('PostsLang', 'pl.post_id = p.id AND pl.lang_id = 1','pl')
+                ->leftJoin('CategoriesLang', 'cl.catid = p.catid AND cl.langid = 1','cl')
+                ->leftJoin('PostsLang', 'pl.postid = p.id AND pl.langid = 1','pl')
                 ->orderBy('p.id DESC')
-                ->where('p.deleted = 0 AND p.status = 1 AND p.dept_id = :dept_id:',['dept_id' => $dept_id])
+                ->where('p.deleted = 0 AND p.status = 1 AND p.deptid = :deptid:',['deptid' => $deptid])
                 ->limit($limit, 0)
                 ->getQuery()
                 ->execute()

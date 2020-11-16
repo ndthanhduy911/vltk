@@ -6,8 +6,8 @@
         'cl.name cat_name',
     ))
     ->from(['c'=>'Categories'])
-    ->where("c.status = 1 AND c.deleted = 0 AND c.dept_id = $dept->id AND c.id != 1")
-    ->leftJoin('CategoriesLang', "cl.cat_id = c.id AND cl.lang_id = $lang_id",'cl')
+    ->where("c.status = 1 AND c.deleted = 0 AND c.deptid = $dept->id AND c.id != 1")
+    ->leftJoin('CategoriesLang', "cl.catid = c.id AND cl.langid = $langid",'cl')
     ->getQuery()
     ->execute();
 
@@ -20,8 +20,8 @@
         'pl.title title',
     ))
     ->from(['p'=>'Posts'])
-    ->where("p.deleted = 0 AND p.status = 1 AND p.dept_id = $dept->id")
-    ->leftJoin('PostsLang', "pl.post_id = p.id AND pl.lang_id = $lang_id",'pl')
+    ->where("p.deleted = 0 AND p.status = 1 AND p.deptid = $dept->id")
+    ->leftJoin('PostsLang', "pl.postid = p.id AND pl.langid = $langid",'pl')
     ->orderBy("p.calendar DESC")
     ->limit(10)
     ->getQuery()

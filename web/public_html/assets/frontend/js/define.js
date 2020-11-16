@@ -1,4 +1,4 @@
-const langId = $('#lang_id').attr('data-lang');
+const langId = $('#langid').attr('data-lang');
 const fontendUrl = window.location.origin;
 const deptId = $('#logo').attr('dept-id');
 

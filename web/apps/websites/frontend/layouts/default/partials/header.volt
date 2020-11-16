@@ -1,9 +1,9 @@
 <?php 
-    $socials = \Social::find(["deleted = 0 AND status = 1 AND dept_id = $dept->id", "order" => "sort ASC"]);
-    $links = \Link::find(["deleted = 0 AND status = 1 AND dept_id = $dept->id", "order" => "sort ASC"]);
+    $socials = \Social::find(["deleted = 0 AND status = 1 AND deptid = $dept->id", "order" => "sort ASC"]);
+    $links = \Link::find(["deleted = 0 AND status = 1 AND deptid = $dept->id", "order" => "sort ASC"]);
     $menuParents = [];
-    if($menuLocation = \MenuLocation::findFirst(["status =  1 AND dept_id = $dept->id AND type = 1"])) {
-        $menuParents = \Menus::find(["deleted = 0 AND status = 1 AND dept_id = $dept->id AND menu_location_id = {$menuLocation->id} AND parent_id is NULL",'order' => 'sort ASC']);
+    if($menuLocation = \MenuLocation::findFirst(["status =  1 AND deptid = $dept->id AND type = 1"])) {
+        $menuParents = \Menus::find(["deleted = 0 AND status = 1 AND deptid = $dept->id AND menu_location_id = {$menuLocation->id} AND parent_id is NULL",'order' => 'sort ASC']);
     }
 ?>
 <div class="header-container">
@@ -44,7 +44,7 @@
                                         <i class="fa {{ link.icon }} pr-1"></i>
                                         {% endif %}
 
-                                        <?= \Link::getName($link->id, $lang_id) ?>
+                                        <?= \Link::getName($link->id, $langid) ?>
 
                                         {% if link.link %}
                                         </a>
@@ -113,12 +113,12 @@
                                         {%for menu in menuParents%}
                                         <?php $slug_now = isset($slug_now) ? $slug_now : ''; $menuP = \Menus::getItem($menu, $dept->slug, $slug_now); $menuChild = \Menus::find(['deleted = 0 AND parent_id = :parent_id:','bind' => ['parent_id' => $menu->id]]); ?>
                                         <li class="nav-item dropdown {{ menuP['actived'] ? 'active' : '' }}">
-                                            <a target="{{ helper.getTarget(menu.target)}}" rel="noopener" href="{{ menuP['link'] }}" class="{{ menuP['actived'] ? 'active' : '' }} nav-link {{ menuChild.count() ? 'dropdown-toggle' : '' }}" {{ menuChild.count() ? 'data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"' : '' }}><?= \Menus::getName($menu->id, $lang_id) ?></a>
+                                            <a target="{{ helper.getTarget(menu.target)}}" rel="noopener" href="{{ menuP['link'] }}" class="{{ menuP['actived'] ? 'active' : '' }} nav-link {{ menuChild.count() ? 'dropdown-toggle' : '' }}" {{ menuChild.count() ? 'data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"' : '' }}><?= \Menus::getName($menu->id, $langid) ?></a>
                                             <?php if($menuChild->count()){ ?>
                                                 <ul class="dropdown-menu">
                                                 {% for child in menuChild %}
                                                     <?php $menuItem = \Menus::getItem($child, $dept->slug, $slug_now); ?>
-                                                    <li><a target="{{ helper.getTarget(child.target)}}" rel="noopener" href="{{ menuItem['link'] }}" class="{{ menuItem['actived'] ? 'active' : '' }}"><?= \Menus::getName($child->id, $lang_id) ?></a></li>
+                                                    <li><a target="{{ helper.getTarget(child.target)}}" rel="noopener" href="{{ menuItem['link'] }}" class="{{ menuItem['actived'] ? 'active' : '' }}"><?= \Menus::getName($child->id, $langid) ?></a></li>
                                                 {% endfor %}
                                                 </ul>
                                             <?php } ?>
@@ -131,8 +131,8 @@
                     </div>
                 </div>
                 <div class="col-auto hidden-md-down p-0">
-                    <div class="header-dropdown-buttons" id="lang_id" data-lang="{{ lang_id }}">
-                        <a href="<?= WEB_URL ?>/api/changelanguage/{{ lang_id == 1 ? 2 : 1  }}" data-id="{{ lang_id == 1 ? 2 : 1  }}" class="d-flex align-items-center">
+                    <div class="header-dropdown-buttons" id="langid" data-lang="{{ langid }}">
+                        <a href="<?= WEB_URL ?>/api/changelanguage/{{ langid == 1 ? 2 : 1  }}" data-id="{{ langid == 1 ? 2 : 1  }}" class="d-flex align-items-center">
                             <img src="<?= WEB_URL ?><?= $language->id == 1 ? '/language_file/eng' : '/language_file/vie' ?>/<?= $language->id == 1 ? 'united-states.png' : 'vietnam.png' ?>" class="user-image" alt="{{ language.name }}" width="36px">
                         </a>
                     </div>

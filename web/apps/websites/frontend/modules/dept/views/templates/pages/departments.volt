@@ -9,8 +9,8 @@
             'dl.name dept_name',
         ))
         ->from(['d'=>'Depts'])
-        ->leftJoin('DeptsLang', 'dl.dept_id = d.id','dl')
-        ->where('dl.lang_id = :lang_id: AND d.status = 1 AND d.id != 1',['lang_id' => $lang_id])
+        ->leftJoin('DeptsLang', 'dl.deptid = d.id','dl')
+        ->where('dl.langid = :langid: AND d.status = 1 AND d.id != 1',['langid' => $langid])
         ->getQuery()
         ->execute();
     }else{
@@ -22,8 +22,8 @@
             'rl.title research_name',
         ))
         ->from(['r'=>'Researches'])
-        ->where("r.dept_id = $dept->id AND r.status = 1 AND r.deleted = 0")
-        ->leftJoin('ResearchesLang', "rl.research_id = r.id AND rl.lang_id = $lang_id",'rl')
+        ->where("r.deptid = $dept->id AND r.status = 1 AND r.deleted = 0")
+        ->leftJoin('ResearchesLang', "rl.research_id = r.id AND rl.langid = $langid",'rl')
         ->getQuery()
         ->execute();
     }

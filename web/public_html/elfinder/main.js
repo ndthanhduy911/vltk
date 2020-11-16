@@ -121,7 +121,7 @@
 			// Documentation for client options:
 			// https://github.com/Studio-42/elFinder/wiki/Client-configuration-options
 			defaultOpts: {
-				url: '/admin/media/connector?dept_id='+deptId,
+				url: '/admin/media/connector?deptid='+deptId,
 				height: 450, // connector URL (REQUIRED)
 				commandsOptions: {
 					edit: {

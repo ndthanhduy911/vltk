@@ -8,12 +8,12 @@
             's.dean',
             's.dept_position',
             's.email',
-            's.dept_id',
+            's.deptid',
             'sl.title title',
             'sl.content content'
         ))
         ->from(['s'=>'Staff'])
-        ->leftJoin("StaffLang", "sl.staff_id = s.id AND sl.lang_id = $lang_id",'sl')
+        ->leftJoin("StaffLang", "sl.staff_id = s.id AND sl.langid = $langid",'sl')
         ->where("s.status = 1 AND (s.dean = 1 OR s.dean = 2)")
         ->orderBy("s.sort ASC, s.dean ASC")
         ->limit(3)
@@ -28,15 +28,15 @@
             's.dean',
             's.dept_position',
             's.email',
-            's.dept_id',
+            's.deptid',
             'sl.title title',
             'sl.content content'
         ))
         ->from(['s'=>'Staff'])
-        ->leftJoin("StaffLang", "sl.staff_id = s.id AND sl.lang_id = $lang_id",'sl')
+        ->leftJoin("StaffLang", "sl.staff_id = s.id AND sl.langid = $langid",'sl')
         ->where("s.status = 1")
         ->inWhere("s.dept_position", [1,2])
-        ->orderBy("s.dept_id ASC, s.dept_position ASC, s.sort ASC")
+        ->orderBy("s.deptid ASC, s.dept_position ASC, s.sort ASC")
         ->getQuery()
         ->execute();
     }else{
@@ -48,13 +48,13 @@
             's.dean',
             's.dept_position',
             's.email',
-            's.dept_id',
+            's.deptid',
             'sl.title title',
             'sl.content content'
         ))
         ->from(['s'=>'Staff'])
-        ->where("s.deleted = 0 AND s.status = 1 AND s.dept_position != 5 AND s.dept_id = $dept->id")
-        ->leftJoin("StaffLang", "sl.staff_id = s.id AND sl.lang_id = $lang_id",'sl')
+        ->where("s.deleted = 0 AND s.status = 1 AND s.dept_position != 5 AND s.deptid = $dept->id")
+        ->leftJoin("StaffLang", "sl.staff_id = s.id AND sl.langid = $langid",'sl')
         ->orderBy("s.dept_position ASC")
         ->getQuery()
         ->execute();
@@ -67,13 +67,13 @@
             's.dean',
             's.dept_position',
             's.email',
-            's.dept_id',
+            's.deptid',
             'sl.title title',
             'sl.content content'
         ))
         ->from(['s'=>'Staff'])
-        ->where("s.deleted = 0 AND s.status = 1 AND s.dept_position = 5 AND s.dept_id = $dept->id")
-        ->leftJoin("StaffLang", "sl.staff_id = s.id AND sl.lang_id = $lang_id",'sl')
+        ->where("s.deleted = 0 AND s.status = 1 AND s.dept_position = 5 AND s.deptid = $dept->id")
+        ->leftJoin("StaffLang", "sl.staff_id = s.id AND sl.langid = $langid",'sl')
         ->orderBy("s.dept_position ASC")
         ->getQuery()
         ->execute();
@@ -133,8 +133,8 @@
 
                     {% set dept_o_id = 0 %}
                     {% for key, staff in otherStaffs %}
-                        {% if dept_o_id != staff.dept_id %}
-                            <h3 class="text-primary text-uppercase">{{ ml._ml_system('subject', 'Bộ môn') }} <?= Depts::getTitleById($staff->dept_id, $lang_id) ?></h3>
+                        {% if dept_o_id != staff.deptid %}
+                            <h3 class="text-primary text-uppercase">{{ ml._ml_system('subject', 'Bộ môn') }} <?= Depts::getTitleById($staff->deptid, $langid) ?></h3>
                             <div class="separator-2"></div>
                             <div class="w-100">
                         {% endif %}
@@ -160,8 +160,8 @@
                                     </div>
                                 </div>
                             </div>
-                        {% if dept_o_id != staff.dept_id %}
-                            {% set dept_o_id = staff.dept_id %}
+                        {% if dept_o_id != staff.deptid %}
+                            {% set dept_o_id = staff.deptid %}
                             </div>
                         {% endif %}
                     {% endfor %}

@@ -14,6 +14,55 @@ function getRandomInt(max) {
 const vi_moment = (date, type = 'DD/MM/YYYY HH:mm:ss') => {
     return date ? moment(date, 'YYYY-MM-DD HH:mm:ss').format(type) : '';
 }
+//Datatable Custom
+const dataTableCt = (table, opCT = false) => {
+    return new Promise((resolve, reject) => {
+        if ($(table).length) {
+            let paged = getParams('paged')
+            paged = paged ? paged : 0;
+            let options = {
+                "ordering": false,
+                "autoWidth": false,
+                "searching": false,            
+                "pageLength": 25,
+                "dom": '<"top"fpil>rt<"bottom"lip><"clear">',
+                "lengthMenu": [[25, 50, 100, 200], [25, 50, 100, 200]],
+                "displayStart": paged*25,
+                "deferRender": true,
+                "preDrawCallback": function(settings) {
+                    if(!$('body .block-loader').length){
+                        $('body').append(loaderHtml);
+                    }
+                },
+                "drawCallback": function(settings) {
+                    $('body .block-loader').remove();
+                },
+                "language": {
+                    "sProcessing": "Đang xử lý...",
+                    "sLengthMenu": "Xem _MENU_",
+                    "sZeroRecords": "Không tìm thấy dữ liệu",
+                    "sInfo": "Đang xem _START_ đến _END_ trong tổng số _TOTAL_ hàng",
+                    "sInfoEmpty": "Đang xem 0 đến 0 trong tổng số 0 hàng",
+                    "sInfoFiltered": "(được lọc từ _MAX_ hàng)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Tìm:",
+                    "sUrl": "",
+                    "oPaginate": {
+                        "sFirst": "Đầu",
+                        "sPrevious": "Trước",
+                        "sNext": "Tiếp",
+                        "sLast": "Cuối"
+                    }
+                }
+            }
+            let dt = $(table).DataTable(opCT ? $.extend(options, opCT) : options);
+            resolve(dt);
+        }else{
+            reject();
+        }
+    });
+
+}
 //Show excerpt textshowViewDetail
 const trimText = (input, length, ellipses = true, strip_html = true) => {
     //strip tags, if desired
@@ -43,6 +92,89 @@ const isJson = (str) => {
         return false;
     }
     return true;
+}
+const changeTitleToSlug = (title) =>
+{
+    //Đổi chữ hoa thành chữ thường
+    slug = title.toLowerCase();
+ 
+    //Đổi ký tự có dấu thành không dấu
+    slug = slug.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, 'a');
+    slug = slug.replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, 'e');
+    slug = slug.replace(/i|í|ì|ỉ|ĩ|ị/gi, 'i');
+    slug = slug.replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, 'o');
+    slug = slug.replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, 'u');
+    slug = slug.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, 'y');
+    slug = slug.replace(/đ/gi, 'd');
+    //Xóa các ký tự đặt biệt
+    slug = slug.replace(/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi, '');
+    //Đổi khoảng trắng thành ký tự gạch ngang
+    slug = slug.replace(/ /gi, "-");
+    //Đổi nhiều ký tự gạch ngang liên tiếp thành 1 ký tự gạch ngang
+    //Phòng trường hợp người nhập vào quá nhiều ký tự trắng
+    slug = slug.replace(/\-\-\-\-\-/gi, '-');
+    slug = slug.replace(/\-\-\-\-/gi, '-');
+    slug = slug.replace(/\-\-\-/gi, '-');
+    slug = slug.replace(/\-\-/gi, '-');
+    //Xóa các ký tự gạch ngang ở đầu và cuối
+    slug = '@' + slug + '@';
+    slug = slug.replace(/\@\-|\-\@|\@/gi, '');
+    //In slug ra textbox có id “slug”
+    
+    return slug;
+}
+const showSelectImage = (button, showImg, uploadImageValue, buttonRemoveImg) => {
+    if($(button).length){
+        $('body').on('click', button ,function (e) {
+            e.preventDefault();
+            let elfNode = $('<div \>');
+            elfNode.dialog({
+                modal: true,
+                width: "80%",
+                title: "Thư viện",
+                zIndex: 99999,
+                create: function (event, ui) {
+                    $(this).elfinder({
+                        resizable: false,
+                        url: "/admin/media/connector?deptid="+deptId,
+                        lang:'vi',
+                        commandsOptions: {
+                            getfile: {
+                                oncomplete: 'destroy'
+                            }
+                        },
+                        getFileCallback: function (file) {
+                            console.log(file.url);
+                            file.url = file.url.replace("/elfinder/php/../../", '/');
+                            let url = file.url;
+                            if($(buttonRemoveImg).length){
+                                $(buttonRemoveImg).removeClass('hidden');
+                            }
+                            $(showImg).attr('src' , url);
+                            $(showImg).attr('alt' , url);
+                            $(uploadImageValue).val(url);
+                            elfNode.dialog('close');
+                            elfInsrance.disable();
+                        }
+                    }).elfinder('instance')
+                }
+            }).parent().css({'zIndex':'11000','top':'100px', 'position' : 'fixed'});
+        });
+        if($(buttonRemoveImg).length){
+            $('body').on('click', buttonRemoveImg ,function (e) {
+                e.preventDefault();
+                showSweetAlert(()=>{
+                    $(showImg).attr('src' , '');
+                    $(showImg).attr('alt' , '');
+                    $(uploadImageValue).val('');
+                    $(buttonRemoveImg).addClass('hidden');
+                })
+            });
+        }
+    }
+}
+const getPathImage = (path = null, iamgeDefault = '') => {
+    return path ? path : iamgeDefault
 }
 //Show Selet2 by Select2
 const showS2ByS2 = (select1, select2, nameApi, empty = {id: '',text: 'Chọn'}) => {

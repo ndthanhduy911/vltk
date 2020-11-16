@@ -37,7 +37,7 @@ const loadTablePosts = () => {
                     "data": "author_name"
                 },
                 {
-                    "data": "created_at"
+                    "data": "createdat"
                 },
                 {
                     "data": "status"
@@ -51,7 +51,7 @@ const loadTablePosts = () => {
                 $(row).addClass('text-center');
                 $('td', row).addClass('align-middle');
                 $('td:eq(1)', row).html(image);
-                $('td:eq(5)', row).html(vi_moment(item.created_at, 'DD/MM/YYYY HH:mm'));
+                $('td:eq(5)', row).html(vi_moment(item.createdat, 'DD/MM/YYYY HH:mm'));
                 $('td:eq(6)', row).html(showStatus(item.status));
                 $('td:eq(7)', row).html(`
                     <a href="${backendUrl}/posts/update/${item.id}" class="fa fa-pencil btn btn-info btn-sm editPost" title="Cập nhật"></a>
@@ -111,7 +111,7 @@ const loadTablePostsTrash = () => {
                     "data": "author_name"
                 },
                 {
-                    "data": "created_at"
+                    "data": "createdat"
                 },
                 {
                     "data": null
@@ -122,7 +122,7 @@ const loadTablePostsTrash = () => {
                 $(row).addClass('text-center');
                 $('td', row).addClass('align-middle');
                 $('td:eq(1)', row).html(image);
-                $('td:eq(5)', row).html(vi_moment(item.created_at, 'DD/MM/YYYY HH:mm'));
+                $('td:eq(5)', row).html(vi_moment(item.createdat, 'DD/MM/YYYY HH:mm'));
                 $('td:eq(6)', row).html(`
                     <a href="#" data-href="${backendUrl}/posts/restore/${item.id}" class="fa fa-refresh btn btn-info btn-sm restorePost" title="Phục hồi"></a>
                     <a href="#" data-href="${backendUrl}/posts/delete/${item.id}" class="fa fa-remove btn btn-danger btn-sm deletePost" title="Xóa vĩnh viễn"></a>

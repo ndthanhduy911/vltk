@@ -27,22 +27,22 @@ class FrontendController extends Controller
 
         try {
             if($lang_new =  $this->session->get('lang_new')){
-                $this->session->set('lang_id', $lang_new);
+                $this->session->set('langid', $lang_new);
             }else{
-                $this->session->set('lang_id', 1);
+                $this->session->set('langid', 1);
             }
-            if($language = \Language::findFirstId($this->session->get('lang_id'))){
+            if($language = \Language::findFirstId($this->session->get('langid'))){
                 $this->session->set('short_name', strtolower($language->short_name));
             }
-            $lang_id = $this->session->get('lang_id');
+            $langid = $this->session->get('langid');
             $dept_slug = $dispatcher->getParam('dept');
             $dept_slug = $this->helper->slugify($dept_slug);
             $dept = \Depts::getBySlug($dept_slug);
             if($dept = $dept ? $dept : \Depts::findFirstId(1)){
                 $dispatcher->setReturnedValue($dept);
                 $this->view->slug = $dept_slug ? $dept_slug : '';
-                $this->view->lang_id = $this->session->get('lang_id');
-                $this->view->dept_lang = \DeptsLang::findFirst(["dept_id = $dept->id AND lang_id = $lang_id"]);
+                $this->view->langid = $this->session->get('langid');
+                $this->view->dept_lang = \DeptsLang::findFirst(["deptid = $dept->id AND langid = $langid"]);
                 $this->view->dept = $dept;
                 $this->view->language = $language;
             }else{

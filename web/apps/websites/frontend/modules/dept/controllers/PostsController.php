@@ -12,15 +12,15 @@ class PostsController extends \FrontendController
         $slug1 = $this->helper->slugify($slug1);
         $slug2 = $this->helper->slugify($slug2);
         $dept = $this->dispatcher->getReturnedValue();
-        $lang_id = $this->session->get('lang_id');
+        $langid = $this->session->get('langid');
         $slug = (int)$dept->id === 1 ? $slug1 : $slug2;
         \ConectionSystem::plus(2, $dept->id);
-        if(!$post = \Posts::findFirst(["status = 1 AND slug = :slug: AND dept_id = $dept->id", 'bind' => ['slug' => $slug]])){
+        if(!$post = \Posts::findFirst(["status = 1 AND slug = :slug: AND deptid = $dept->id", 'bind' => ['slug' => $slug]])){
             $this->view->title = '404';
             return $this->view->pick('templates/404');
         }
 
-        if($posts_lang = \PostsLang::findFirst(["lang_id = $lang_id AND post_id = $post->id"])){
+        if($posts_lang = \PostsLang::findFirst(["langid = $langid AND postid = $post->id"])){
             $this->view->title = $posts_lang->title;
             $post->content = $posts_lang->content;
             $post->excerpt = $posts_lang->excerpt;
@@ -33,7 +33,7 @@ class PostsController extends \FrontendController
         $slug1 = $this->helper->slugify($slug1);
         $slug2 = $this->helper->slugify($slug2);
         $dept = $this->dispatcher->getReturnedValue();
-        $lang_id = $this->session->get('lang_id');
+        $langid = $this->session->get('langid');
         $slug = (int)$dept->id === 1 ? $slug1 : $slug2;
         if(!$dept->id){
             $this->view->title = '404';
@@ -41,7 +41,7 @@ class PostsController extends \FrontendController
         }
         $slug = (int)$dept->id === 1 ? $slug1 : $slug2;
 
-        if(!$category = \Categories::findFirst(["slug = :slug: AND status = 1 AND dept_id = $dept->id", 'bind' => ['slug' => $slug]])){
+        if(!$category = \Categories::findFirst(["slug = :slug: AND status = 1 AND deptid = $dept->id", 'bind' => ['slug' => $slug]])){
             $this->view->title = '404';
             return $this->view->pick('templates/404');
         }
@@ -52,18 +52,18 @@ class PostsController extends \FrontendController
             'p.id',
             'pl.title',
             'p.slug',
-            'p.cat_id',
+            'p.catid',
             'pl.content',
             'p.status',
             'pl.excerpt',
-            'p.dept_id',
-            'p.created_at',
+            'p.deptid',
+            'p.createdat',
             'p.calendar',
             'p.featured_image',
         ))
         ->from(['p'=>'Posts'])
-        ->where("p.deleted = 0 AND p.status = 1 AND p.cat_id = $category->id AND p.dept_id = $dept->id")
-        ->leftJoin('PostsLang', "pl.post_id = p.id AND pl.lang_id = $lang_id",'pl')
+        ->where("p.deleted = 0 AND p.status = 1 AND p.catid = $category->id AND p.deptid = $dept->id")
+        ->leftJoin('PostsLang', "pl.postid = p.id AND pl.langid = $langid",'pl')
         ->orderBy("p.calendar DESC");
         $postCount = $posts->getQuery()
         ->execute()
@@ -84,7 +84,7 @@ class PostsController extends \FrontendController
     public function blogAction($slug = null){
         $slug = $this->helper->slugify($slug);
         $dept = $this->dispatcher->getReturnedValue();
-        $lang_id = $this->session->get('lang_id');
+        $langid = $this->session->get('langid');
         $paged = $this->request->get('paged','int');
 
         $posts = $this->modelsManager->createBuilder()
@@ -92,17 +92,17 @@ class PostsController extends \FrontendController
             'p.id',
             'pl.title',
             'p.slug',
-            'p.cat_id',
+            'p.catid',
             'pl.content',
             'p.status',
             'pl.excerpt',
-            'p.dept_id',
-            'p.created_at',
+            'p.deptid',
+            'p.createdat',
             'p.calendar',
             'p.featured_image',
         ))
         ->from(['p'=>'Posts'])
-        ->leftJoin('PostsLang', "pl.post_id = p.id AND pl.lang_id = {$lang_id} AND p.dept_id = {$dept->id}",'pl')
+        ->leftJoin('PostsLang', "pl.postid = p.id AND pl.langid = {$langid} AND p.deptid = {$dept->id}",'pl')
         ->orderBy("p.calendar DESC")
         ->where("p.deleted = 0 AND p.status = 1");
         

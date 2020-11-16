@@ -6,18 +6,18 @@
         'p.id',
         'pl.title',
         'p.slug',
-        'p.cat_id',
+        'p.catid',
         'pl.content',
         'p.status',
         'pl.excerpt',
-        'p.dept_id',
-        'p.created_at',
+        'p.deptid',
+        'p.createdat',
         'p.calendar',
         'p.featured_image',
     ))
     ->from(['p'=>'Posts'])
-    ->where("p.deleted = 0 AND p.status = 1 AND p.dept_id = $dept->id")
-    ->leftJoin('PostsLang', "pl.post_id = p.id AND pl.lang_id = $lang_id",'pl')
+    ->where("p.deleted = 0 AND p.status = 1 AND p.deptid = $dept->id")
+    ->leftJoin('PostsLang', "pl.postid = p.id AND pl.langid = $langid",'pl')
     ->orderBy("p.calendar DESC");
     $post_count = $posts->getQuery()
     ->execute()

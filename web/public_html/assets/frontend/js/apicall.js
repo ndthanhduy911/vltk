@@ -1,9 +1,9 @@
-const getPostByCatId = (id, dept_id = 1, limit = 5) => {
+const getPostByCatId = (id, deptid = 1, limit = 5) => {
     return new Promise((resolve, reject) => {
         $.ajax({
             type: "GET",
             url: `/api-posts/getdataposts`,
-            data: {dept_id : dept_id, limit : limit, cat_id : id},
+            data: {deptid : deptid, limit : limit, catid : id},
             dataType: "json",
             success: function (response) {
                 resolve(response);
@@ -15,11 +15,11 @@ const getPostByCatId = (id, dept_id = 1, limit = 5) => {
     })
 }
 
-const changeLang = (lang_id) => {
+const changeLang = (langid) => {
     return new Promise((resolve, reject) => {
         $.ajax({
             type: "GET",
-            url: `/api/changelanguage/${lang_id}`,
+            url: `/api/changelanguage/${langid}`,
             data: null,
             dataType: "json",
             success: function (response) {

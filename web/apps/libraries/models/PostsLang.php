@@ -17,7 +17,7 @@ class PostsLang extends \Phalcon\Mvc\Model
             ]);
         }else{
             return parent::findFirst([
-                "conditions" => "id = :id: AND dept_id IN (".implode(',',$_SESSION['dept_mg']).")",
+                "conditions" => "id = :id: AND deptid IN (".implode(',',$_SESSION['dept_mg']).")",
                 "bind" => array('id' => $id),
                 "columns" => $columns
             ]);
