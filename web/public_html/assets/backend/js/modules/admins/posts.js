@@ -20,6 +20,35 @@ const getPostLink = (item) => {
     return `<a href="${webUri}/news/${item.slug}">Link</a>`;
 }
 
+const updateSettingPosts = (form) => {
+    if ($(form).length) {
+        let filterField = ['code', 'name', 'deptid', 'typeid', 'cstatus'];
+        let tableField = ['codes', 'name', 'typename', 'deptname', 'barcode', 'madename', 'producedyear', 'purchaseddate', 'suppliername', 'quantity', 'cstatus'];
+        showModalForm('#settingPosts', '#modalSettingPosts', 'GET', (data) => {
+            let filters = data.filters.length ? data.filters : filterField;
+            filters.forEach(element => {
+                $(form).find(`#filters-${element}`).prop('checked', true);
+            });
+            let tables = data.tables.length ? data.tables : tableField;
+            tables.forEach(element => {
+                $(form).find(`#tables-${element}`).prop('checked', true);
+            });
+        }, (data, row) => {
+            showSweetAlertOk("Thiết lập thành công");
+            LoadPage(`${webAdminUrl}/posts`).then(() => {
+                loadTablePosts('#posts');
+                updateSettingPosts('#frmSettingPosts');
+                $('body.modal-open').removeClass('modal-open');
+                $('.modal-backdrop.fade.show').remove();
+            });
+        });
+        checkboxAll('#filterSelectAll', 'input[name="filters[]"]');
+        checkboxAll('#tablesSelectAll', 'input[name="tables[]"]');
+
+        settingFiled(form,filterField,tableField)
+    }
+}
+
 const loadTablePosts = (table = '#posts', cb = () => {}) => {
     if ($(table).length) {
         let formSearch = $('#searchPosts');
@@ -103,6 +132,8 @@ const loadTablePosts = (table = '#posts', cb = () => {}) => {
                 showSweetAlertOk('Xóa thành công');
                 dt.draw()
             });
+
+            updateSettingPosts('#frmSettingPosts');
         })
         cb();
     }

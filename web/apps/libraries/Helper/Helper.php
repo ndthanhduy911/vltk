@@ -687,14 +687,14 @@ class Helper
         if(count($dirArray) && in_array($order,$orderArray)){
             foreach ($dirArray as $dir) {
                 if($dir == 1){
-                    return "<a href='#' order='{$order}' dir='2' class='orderby text-white d-flex text-nowrap justify-content-between'>{$text}<i class='ml-1 fa fa-sort-up float-right text-dark'></i></a>";
+                    return "<a href='#' order='{$order}' dir='2' class='orderby text-nowrap text-black'>{$text}<i class='ml-1 fa fa-sort-up float-right text-dark'></i></a>";
                 }
                 if($dir == 2){
-                    return "<a href='#' order='{$order}' dir='0' class='orderby text-white d-flex text-nowrap justify-content-between'>{$text}<i class='ml-1 fa fa-sort-down float-right text-dark'></i></a>";
+                    return "<a href='#' order='{$order}' dir='0' class='orderby text-nowrap text-black'>{$text}<i class='ml-1 fa fa-sort-down float-right text-dark'></i></a>";
                 }
             }
         }
-        return "<a href='#' order='{$order}' dir='1' class='orderby text-white d-flex text-nowrap justify-content-between'>{$text}<i class='ml-1 fa fa-sort float-right text-dark'></i></a>";
+        return "<a href='#' order='{$order}' dir='1' class='orderby text-nowrap text-black'>{$text}<i class='ml-1 fa fa-sort float-right text-dark'></i></a>";
     }
 
     public function createNumber($className,$columName,$text = ""){
