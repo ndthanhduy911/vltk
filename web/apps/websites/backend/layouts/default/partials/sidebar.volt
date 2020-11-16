@@ -8,7 +8,7 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
-                    <a href="<?= WEB_ADMIN_URL ?>/dashboard"
+                    <a href="<?= WEB_ADMIN_URL ?>"
                         class="nav-link {% if dispatcher.getControllerName()=='index' AND dispatcher.getActionName() == 'index' %} {{ 'active' }} {% endif %}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Bảng điều khiển</p>
