@@ -23,7 +23,7 @@ const getPostLink = (item) => {
 const updateSettingPosts = (form) => {
     if ($(form).length) {
         let filterField = ['title', 'catid', 'status', 'calendar'];
-        let tableField = ['featured_image','title','excerpt','catid','authorname','calendar','slug','status'];
+        let tableField = ['image','title','excerpt','catid','authorname','calendar','slug','status'];
         showModalForm('#settingPosts', '#modalSettingPosts', 'GET', (data) => {
             let filters = data.filters.length ? data.filters : filterField;
             filters.forEach(element => {
@@ -78,10 +78,10 @@ const loadTablePosts = (table = '#posts', cb = () => {}) => {
                 let page = pageInfo.page;
                 let pageLength = pageInfo.length;
                 $('td:eq(1)', row).html((dataIndex+1)+(page*pageLength));
-                let image = `<img src="${getPathImage(item.featured_image, '/assets/frontend/images/defaut_img.png')}" height="30px">`;
+                let image = `<img src="${getPathImage(item.image, '/assets/frontend/images/defaut_img.png')}" height="30px">`;
                 $(`td:eq(${fkeys.indexOf('title')})`, row).html(showTitle(item.title,30));
                 $(`td:eq(${fkeys.indexOf('excerpt')})`, row).html(showTitle(item.excerpt,30));
-                $(`td:eq(${fkeys.indexOf('featured_image')})`, row).html(image);
+                $(`td:eq(${fkeys.indexOf('image')})`, row).html(image);
                 $(`td:eq(${fkeys.indexOf('catid')})`, row).html(item.catname);
                 $(`td:eq(${fkeys.indexOf('slug')})`, row).html(getPostLink(item));
                 $(`td:eq(${fkeys.indexOf('calendar')})`, row).html(vi_moment(item.calendar, 'DD/MM/YYYY HH:mm'));
@@ -121,7 +121,7 @@ const loadTablePostsTrash = (table = '#posts_trash', cb = () => {}) => {
                 let page = pageInfo.page;
                 let pageLength = pageInfo.length;
                 $('td:eq(0)', row).html((dataIndex+1)+(page*pageLength));
-                let image = item.featured_image ? `<img src="${item.featured_image}" width="50px">` : '';
+                let image = item.image ? `<img src="${item.image}" width="50px">` : '';
                 $(row).addClass('text-center');
                 $('td', row).addClass('align-middle');
                 $('td:eq(1)', row).html(image);
@@ -187,4 +187,4 @@ const loadTablePostsTrash = (table = '#posts_trash', cb = () => {}) => {
 loadTablePosts('#posts');
 loadTablePostsTrash('#posts_trash');
 changeTitleToSlug('#title', '#slug');
-showSelectImage('#uploadImage','#showImg','#featured_image', '#removeImage');
+showSelectImage('#uploadImage','#showImg','#image', '#removeImage');

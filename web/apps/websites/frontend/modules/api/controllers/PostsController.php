@@ -28,7 +28,7 @@ class PostsController extends \FrontendController
                     'p.deptid',
                     'p.createdat',
                     'p.calendar',
-                    'p.featured_image',
+                    'p.image',
                     'cl.name cat_name',
                 ))
                 ->from(['p'=>'Posts'])
@@ -53,7 +53,7 @@ class PostsController extends \FrontendController
                     'p.deptid',
                     'p.createdat',
                     'p.calendar',
-                    'p.featured_image',
+                    'p.image',
                     'cl.name cat_name',
                 ))
                 ->from(['p'=>'Posts'])

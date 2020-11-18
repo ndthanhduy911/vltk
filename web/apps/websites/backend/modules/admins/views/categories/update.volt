@@ -87,9 +87,9 @@
                 <div class="tile p-3 mb-3">
                     <div class="row m-0">
                         <div class="col-md-12 p-0">
-                            <img id="showImg" src="<?php echo $post->featured_image ? $post->featured_image : '' ?>"
+                            <img id="showImg" src="<?php echo $post->image ? $post->image : '' ?>"
                                 alt="" width="100%">
-                            {{form_cat.render('featured_image')}}
+                            {{form_cat.render('image')}}
                             <a id="uploadImage" href="#" class="link">Đặt ảnh đại diện</a>
                         </div>
                     </div>

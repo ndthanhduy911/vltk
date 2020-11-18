@@ -12,8 +12,8 @@ class BannerController  extends \BackendController {
     }
 
     public function updateAction($id = 0){
-        $forms_lang = [];
-        $banners_lang = [];
+        $formslang = [];
+        $bannerslang = [];
         $languages = \Language::find(['status = 1']);
         if($id){
             if(!$banner = \Banner::findFirstId($id)){
@@ -22,11 +22,11 @@ class BannerController  extends \BackendController {
             $banner->updatedat = date('Y-m-d H:i:s');
             $title = 'Cập nhật';
             foreach ($languages as $key => $lang) {
-                $banner_lang = \BannerLang::findFirst(['bannerid = :id: AND langid = :langid:','bind' => ['id' => $banner->id, 'langid' => $lang->id]]);
-                if($banner_lang){
-                    $form_lang = new BannerLangForm($banner_lang);
-                    $banners_lang[$lang->id] = $banner_lang;
-                    $forms_lang[$lang->id] = $form_lang;
+                $bannerlang = \BannerLang::findFirst(['bannerid = :id: AND langid = :langid:','bind' => ['id' => $banner->id, 'langid' => $lang->id]]);
+                if($bannerlang){
+                    $formlang = new BannerLangForm($bannerlang);
+                    $bannerslang[$lang->id] = $bannerlang;
+                    $formslang[$lang->id] = $formlang;
                 }else{
                     echo 'Nội dung không phù hợp'; die;
                 }
@@ -38,8 +38,8 @@ class BannerController  extends \BackendController {
             $banner->updatedat = $banner->createdat;
             $title = 'Thêm mới';
             foreach ($languages as $lang) {
-                $forms_lang[$lang->id] = new BannerLangForm();
-                $banners_lang[$lang->id] = new \BannerLang();
+                $formslang[$lang->id] = new BannerLangForm();
+                $bannerslang[$lang->id] = new \BannerLang();
             }
         }
 
@@ -63,16 +63,16 @@ class BannerController  extends \BackendController {
                     }
                 }
                 foreach ($languages as $key => $lang) {
-                    $req_banner_lang[$lang->id] = [
+                    $req_bannerlang[$lang->id] = [
                         'name' => $p_name[$lang->id],
                         'description' => $p_description[$lang->id],
                         'button_text' => $p_button_text[$lang->id],
                         'langid' => $lang->id,
                     ];
 
-                    $forms_lang[$lang->id]->bind($req_banner_lang[$lang->id], $banners_lang[$lang->id]);
-                    if (!$forms_lang[$lang->id]->isValid()) {
-                        foreach ($forms_lang[$lang->id]->getMessages() as $message) {
+                    $formslang[$lang->id]->bind($req_bannerlang[$lang->id], $bannerslang[$lang->id]);
+                    if (!$formslang[$lang->id]->isValid()) {
+                        foreach ($formslang[$lang->id]->getMessages() as $message) {
                             array_push($error, $message->getMessage());
                         }
                     }
@@ -85,8 +85,8 @@ class BannerController  extends \BackendController {
                         }
                     } else {
                         foreach ($languages as $key => $lang) {
-                            $banners_lang[$lang->id]->bannerid = $banner->id;
-                            $banners_lang[$lang->id]->save();
+                            $bannerslang[$lang->id]->bannerid = $banner->id;
+                            $bannerslang[$lang->id]->save();
                         }
                         $this->flashSession->success($title." thành công");
                         return $this->response->redirect(WEB_ADMIN_URL.'/banner');
@@ -102,10 +102,10 @@ class BannerController  extends \BackendController {
         }
 
         $this->view->languages = $languages;
-        $this->view->forms_lang = $forms_lang;
+        $this->view->formslang = $formslang;
         $this->view->form_banner = $form_banner;
         $this->view->banner = $banner;
-        $this->view->banners_lang = $banners_lang;
+        $this->view->bannerslang = $bannerslang;
         $this->view->title = $title;
         $this->assets->addJs('/elfinder/js/require.min.js');
         $this->get_js_css();

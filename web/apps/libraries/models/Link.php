@@ -7,8 +7,8 @@ class Link extends \Phalcon\Mvc\Model
     }
 
     public static function getName($link_id, $langid = 1){
-        $menu_lang = \LinkLang::findFirst(['langid =:langid: AND link_id = :link_id:', 'bind'=>['langid' => $langid, 'link_id' => $link_id]]);
-        return $menu_lang ? $menu_lang->name : '';
+        $menulang = \LinkLang::findFirst(['langid =:langid: AND link_id = :link_id:', 'bind'=>['langid' => $langid, 'link_id' => $link_id]]);
+        return $menulang ? $menulang->name : '';
     }
 
     public static function findFirstId($id, $columns = "*")

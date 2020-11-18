@@ -79,6 +79,6 @@ loadTablePages();
 
 changeTitleToSlug('#title', '#slug');
 
-showSelectImage('#uploadImage','#showImg','#featured_image', '#removeImage');
+showSelectImage('#uploadImage','#showImg','#image', '#removeImage');
 
 showSelectImage('#uploadBackgroundImage','#showBackgroundImg','#background_image', '#removeBackgroundImage');

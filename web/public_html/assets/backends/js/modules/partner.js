@@ -25,7 +25,7 @@ const loadTablePages = () => {
                     "data": "no"
                 },
                 {
-                    "data": "featured_image"
+                    "data": "image"
                 },
                 {
                     "data": "title"
@@ -42,7 +42,7 @@ const loadTablePages = () => {
             ],
             'createdRow': function (row, item, dataIndex) {
                 $(row).addClass('text-center');
-                let image = `<img src="${getPathImage(item.featured_image, '/assets/frontend/images/defaut_img.png')}" width="50px">`;
+                let image = `<img src="${getPathImage(item.image, '/assets/frontend/images/defaut_img.png')}" width="50px">`;
                 $('td', row).addClass('align-middle');
                 $('td:eq(1)', row).html(image);
                 $('td:eq(3)', row).html(vi_moment(item.createdat, 'DD/MM/YYYY HH:mm'));
@@ -82,4 +82,4 @@ loadTablePages();
 
 changeTitleToSlug('#title', '#slug');
 
-showSelectImage('#uploadImage','#showImg','#featured_image');
+showSelectImage('#uploadImage','#showImg','#image');

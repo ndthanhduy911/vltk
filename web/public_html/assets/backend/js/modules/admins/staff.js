@@ -55,7 +55,7 @@ const loadTablePages = () => {
                     "data": "no"
                 },
                 {
-                    "data": "featured_image"
+                    "data": "image"
                 },
                 {
                     "data": "title"
@@ -78,7 +78,7 @@ const loadTablePages = () => {
             ],
             'createdRow': function (row, item, dataIndex) {
                 $(row).addClass('text-center');
-                let image = `<img src="${getPathImage(item.featured_image, '/assets/frontend/images/defaut_img.png')}" width="50px">`;
+                let image = `<img src="${getPathImage(item.image, '/assets/frontend/images/defaut_img.png')}" width="50px">`;
                 $('td:eq(1)', row).html(image);
                 $('td', row).addClass('align-middle');
                 $('td:eq(5)', row).html(showDean(item.dean)+showPosition(item.dept_position))
@@ -119,4 +119,4 @@ loadTablePages();
 
 changeTitleToSlug('#title', '#slug');
 
-showSelectImage('#uploadImage','#showImg','#featured_image');
+showSelectImage('#uploadImage','#showImg','#image');

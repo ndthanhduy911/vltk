@@ -11,8 +11,8 @@ class ClassesController  extends \BackendController {
     }
 
     public function updateAction($id = 0){
-        $forms_lang = [];
-        $classes_lang = [];
+        $formslang = [];
+        $classeslang = [];
         $class_content = [];
         $languages = \Language::find(['status = 1']);
         if($id){
@@ -22,12 +22,12 @@ class ClassesController  extends \BackendController {
             $class->updatedat = date('Y-m-d H:i:s');
             $title = 'Cập nhật';
             foreach ($languages as $key => $lang) {
-                $class_lang = \ClassesLang::findFirst(['classid = :id: AND langid = :langid:','bind' => ['id' => $class->id, 'langid' => $lang->id]]);
-                if($class_lang){
-                    $form_lang = new ClassesLangForm($class_lang);
-                    $classes_lang[$lang->id] = $class_lang;
-                    $forms_lang[$lang->id] = $form_lang;
-                    $class_content[$lang->id] = $class_lang->content;
+                $classlang = \ClassesLang::findFirst(['classid = :id: AND langid = :langid:','bind' => ['id' => $class->id, 'langid' => $lang->id]]);
+                if($classlang){
+                    $formlang = new ClassesLangForm($classlang);
+                    $classeslang[$lang->id] = $classlang;
+                    $formslang[$lang->id] = $formlang;
+                    $class_content[$lang->id] = $classlang->content;
                 }else{
                     echo 'Nội dung không phù hợp'; die;
                 }
@@ -39,8 +39,8 @@ class ClassesController  extends \BackendController {
             $class->updatedat = $class->createdat;
             $title = 'Thêm mới';
             foreach ($languages as $key => $lang) {
-                $forms_lang[$lang->id] = new ClassesLangForm();
-                $classes_lang[$lang->id] = new \ClassesLang();
+                $formslang[$lang->id] = new ClassesLangForm();
+                $classeslang[$lang->id] = new \ClassesLang();
                 $class_content[$lang->id] = '';
             }
         }
@@ -81,16 +81,16 @@ class ClassesController  extends \BackendController {
                 }
 
                 foreach ($languages as $key => $lang) {
-                    $req_class_lang[$lang->id] = [
+                    $req_classlang[$lang->id] = [
                         'title' => $p_title[$lang->id],
                         'content' => $p_content[$lang->id],
                         'excerpt' => $p_excerpt[$lang->id],
                         'langid' => $lang->id,
                     ];
 
-                    $forms_lang[$lang->id]->bind($req_class_lang[$lang->id], $classes_lang[$lang->id]);
-                    if (!$forms_lang[$lang->id]->isValid()) {
-                        foreach ($forms_lang[$lang->id]->getMessages() as $message) {
+                    $formslang[$lang->id]->bind($req_classlang[$lang->id], $classeslang[$lang->id]);
+                    if (!$formslang[$lang->id]->isValid()) {
+                        foreach ($formslang[$lang->id]->getMessages() as $message) {
                             array_push($error, $message->getMessage());
                         }
                     }
@@ -103,8 +103,8 @@ class ClassesController  extends \BackendController {
                         }
                     } else {
                         foreach ($languages as $key => $lang) {
-                            $classes_lang[$lang->id]->classid = $class->id;
-                            $classes_lang[$lang->id]->save();
+                            $classeslang[$lang->id]->classid = $class->id;
+                            $classeslang[$lang->id]->save();
                         }
                         $this->flashSession->success($title." thành công");
                         return $this->response->redirect(WEB_ADMIN_URL.'/classes');
@@ -121,10 +121,10 @@ class ClassesController  extends \BackendController {
 
         $this->view->languages = $languages;
         $this->view->class_content = $class_content;
-        $this->view->forms_lang = $forms_lang;
+        $this->view->formslang = $formslang;
         $this->view->form_class = $form_class;
         $this->view->class = $class;
-        $this->view->classes_lang = $classes_lang;
+        $this->view->classeslang = $classeslang;
         $this->view->title = $title;
         $this->assets->addJs('/elfinder/js/require.min.js');
         $this->get_js_css();

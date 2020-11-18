@@ -11,8 +11,8 @@ class PartnerController  extends \BackendController {
     }
 
     public function updateAction($id = 0){
-        $forms_lang = [];
-        $partners_lang = [];
+        $formslang = [];
+        $partnerslang = [];
         $partner_content = [];
         $languages = \Language::find(['status = 1']);
         if($id){
@@ -22,11 +22,11 @@ class PartnerController  extends \BackendController {
             $partner->updatedat = date('Y-m-d H:i:s');
             $title = 'Cập nhật';
             foreach ($languages as $key => $lang) {
-                $partner_lang = \PartnerLang::findFirst(['partner_id = :id: AND langid = :langid:','bind' => ['id' => $partner->id, 'langid' => $lang->id]]);
-                if($partner_lang){
-                    $form_lang = new PartnerLangForm($partner_lang);
-                    $partners_lang[$lang->id] = $partner_lang;
-                    $forms_lang[$lang->id] = $form_lang;
+                $partnerlang = \PartnerLang::findFirst(['partner_id = :id: AND langid = :langid:','bind' => ['id' => $partner->id, 'langid' => $lang->id]]);
+                if($partnerlang){
+                    $formlang = new PartnerLangForm($partnerlang);
+                    $partnerslang[$lang->id] = $partnerlang;
+                    $formslang[$lang->id] = $formlang;
                 }else{
                     echo 'Nội dung không phù hợp'; die;
                 }
@@ -38,8 +38,8 @@ class PartnerController  extends \BackendController {
             $partner->updatedat = $partner->createdat;
             $title = 'Thêm mới';
             foreach ($languages as $key => $lang) {
-                $forms_lang[$lang->id] = new PartnerLangForm();
-                $partners_lang[$lang->id] = new \PartnerLang();
+                $formslang[$lang->id] = new PartnerLangForm();
+                $partnerslang[$lang->id] = new \PartnerLang();
             }
         }
 
@@ -51,7 +51,7 @@ class PartnerController  extends \BackendController {
                 $p_link = $this->request->getPost('link',['string','trim']);
                 $req_partner = [
                     'status' => $this->request->getPost('status',['int','trim']),
-                    'featured_image' => $this->request->getPost('featured_image',['string','trim']),
+                    'image' => $this->request->getPost('image',['string','trim']),
                     'link' => $this->request->getPost('link',['string','trim']),
                 ];
 
@@ -63,14 +63,14 @@ class PartnerController  extends \BackendController {
                 }
 
                 foreach ($languages as $key => $lang) {
-                    $req_partner_lang[$lang->id] = [
+                    $req_partnerlang[$lang->id] = [
                         'title' => $p_title[$lang->id],
                         'langid' => $lang->id,
                     ];
 
-                    $forms_lang[$lang->id]->bind($req_partner_lang[$lang->id], $partners_lang[$lang->id]);
-                    if (!$forms_lang[$lang->id]->isValid()) {
-                        foreach ($forms_lang[$lang->id]->getMessages() as $message) {
+                    $formslang[$lang->id]->bind($req_partnerlang[$lang->id], $partnerslang[$lang->id]);
+                    if (!$formslang[$lang->id]->isValid()) {
+                        foreach ($formslang[$lang->id]->getMessages() as $message) {
                             array_push($error, $message->getMessage());
                         }
                     }
@@ -84,8 +84,8 @@ class PartnerController  extends \BackendController {
                         }
                     } else {
                         foreach ($languages as $key => $lang) {
-                            $partners_lang[$lang->id]->partner_id = $partner->id;
-                            $partners_lang[$lang->id]->save();
+                            $partnerslang[$lang->id]->partner_id = $partner->id;
+                            $partnerslang[$lang->id]->save();
                         }
                         $this->flashSession->success($title." thành công");
                         return $this->response->redirect(WEB_ADMIN_URL.'/partner');
@@ -102,10 +102,10 @@ class PartnerController  extends \BackendController {
 
         $this->view->languages = $languages;
         $this->view->partner_content = $partner_content;
-        $this->view->forms_lang = $forms_lang;
+        $this->view->formslang = $formslang;
         $this->view->form_partner = $form_partner;
         $this->view->partner = $partner;
-        $this->view->partners_lang = $partners_lang;
+        $this->view->partnerslang = $partnerslang;
         $this->view->title = $title;
         $this->assets->addJs('/elfinder/js/require.min.js');
         $this->get_js_css();
@@ -166,7 +166,7 @@ class PartnerController  extends \BackendController {
             ->columns(array(
                 'p.id',
                 'p.link',
-                'p.featured_image',
+                'p.image',
                 'p.status',
                 'p.deptid',
                 'p.createdat',

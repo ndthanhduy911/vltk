@@ -5,7 +5,7 @@ class CalendarsLang extends \Phalcon\Mvc\Model
 
     public function getSource()
     {
-        return 'calendars_lang';
+        return 'calendarslang';
     }
 
     public static function findFirstId($id, $columns = "*")

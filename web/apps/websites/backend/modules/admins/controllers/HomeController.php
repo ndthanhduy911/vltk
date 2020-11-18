@@ -6,8 +6,8 @@ use Backend\Modules\Admins\Forms\HomeLangForm;
 class HomeController  extends \BackendController {
 
     public function indexAction(){
-        $forms_lang = [];
-        $homes_lang = [];
+        $formslang = [];
+        $homeslang = [];
         $languages = \Language::find(['status = 1']);
         $deptid = $this->session->get('deptid');
         if(!$home = \Home::findFirstByDept_id($deptid)){
@@ -16,11 +16,11 @@ class HomeController  extends \BackendController {
         $home->updatedat = date('Y-m-d H:i:s');
         $title = 'Cài đặt';
         foreach ($languages as $key => $lang) {
-            $home_lang = \HomeLang::findFirst(['home_id = :home_id: AND langid = :langid:','bind' => ['home_id' => $home->id, 'langid' => $lang->id]]);
-            if($home_lang){
-                $form_lang = new HomeLangForm($home_lang);
-                $homes_lang[$lang->id] = $home_lang;
-                $forms_lang[$lang->id] = $form_lang;
+            $homelang = \HomeLang::findFirst(['home_id = :home_id: AND langid = :langid:','bind' => ['home_id' => $home->id, 'langid' => $lang->id]]);
+            if($homelang){
+                $formlang = new HomeLangForm($homelang);
+                $homeslang[$lang->id] = $homelang;
+                $formslang[$lang->id] = $formlang;
             }else{
                 echo 'Nội dung không phù hợp'; die;
             }
@@ -51,7 +51,7 @@ class HomeController  extends \BackendController {
                 }
 
                 foreach ($languages as $key => $lang) {
-                    $req_home_lang[$lang->id] = [
+                    $req_homelang[$lang->id] = [
                         'specialized_title' => $p_specialized_title[$lang->id],
                         'staff_title' => $p_staff_title[$lang->id],
                         'staff_des' => $p_staff_des[$lang->id],
@@ -62,9 +62,9 @@ class HomeController  extends \BackendController {
                         'langid' => $lang->id,
                     ];
 
-                    $forms_lang[$lang->id]->bind($req_home_lang[$lang->id], $homes_lang[$lang->id]);
-                    if (!$forms_lang[$lang->id]->isValid()) {
-                        foreach ($forms_lang[$lang->id]->getMessages() as $message) {
+                    $formslang[$lang->id]->bind($req_homelang[$lang->id], $homeslang[$lang->id]);
+                    if (!$formslang[$lang->id]->isValid()) {
+                        foreach ($formslang[$lang->id]->getMessages() as $message) {
                             array_push($error, $message->getMessage());
                         }
                     }
@@ -77,8 +77,8 @@ class HomeController  extends \BackendController {
                         }
                     } else {
                         foreach ($languages as $key => $lang) {
-                            $homes_lang[$lang->id]->home_id = $home->id;
-                            $homes_lang[$lang->id]->save();
+                            $homeslang[$lang->id]->home_id = $home->id;
+                            $homeslang[$lang->id]->save();
                         }
                         $this->flashSession->success($title." thành công");
                         return $this->response->redirect(WEB_ADMIN_URL.'/home');
@@ -95,11 +95,11 @@ class HomeController  extends \BackendController {
         }
 
         $this->view->languages = $languages;
-        $this->view->forms_lang = $forms_lang;
+        $this->view->formslang = $formslang;
         $this->view->form_home = $form_home;
         $this->view->home = $home;
         $this->view->deptid = $deptid;
-        $this->view->homes_lang = $homes_lang;
+        $this->view->homeslang = $homeslang;
         $this->view->title = $title;
         $this->assets->addJs('/elfinder/js/require.min.js');
         $this->get_js_css();

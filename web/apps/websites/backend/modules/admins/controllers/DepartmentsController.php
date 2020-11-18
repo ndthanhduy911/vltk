@@ -6,8 +6,8 @@ use Backend\Modules\Admins\Forms\DeptsLangForm;
 class DeptsController  extends \BackendController {
 
     public function updateAction(){
-        $forms_lang = [];
-        $departments_lang = [];
+        $formslang = [];
+        $departmentslang = [];
         $languages = \Language::find(['status = 1']);
         $deptid = $this->session->get('deptid');
         if(!$department = \Depts::findFirstId($deptid)){
@@ -16,11 +16,11 @@ class DeptsController  extends \BackendController {
         $department->updatedat = date('Y-m-d H:i:s');
         $title = 'Cài đặt';
         foreach ($languages as $key => $lang) {
-            $department_lang = \DeptsLang::findFirst(['deptid = :deptid: AND langid = :langid:','bind' => ['deptid' => $department->id, 'langid' => $lang->id]]);
-            if($department_lang){
-                $form_lang = new DeptsLangForm($department_lang);
-                $departments_lang[$lang->id] = $department_lang;
-                $forms_lang[$lang->id] = $form_lang;
+            $departmentlang = \DeptsLang::findFirst(['deptid = :deptid: AND langid = :langid:','bind' => ['deptid' => $department->id, 'langid' => $lang->id]]);
+            if($departmentlang){
+                $formlang = new DeptsLangForm($departmentlang);
+                $departmentslang[$lang->id] = $departmentlang;
+                $formslang[$lang->id] = $formlang;
             }else{
                 echo 'Nội dung không phù hợp'; die;
             }
@@ -61,16 +61,16 @@ class DeptsController  extends \BackendController {
                 }
 
                 foreach ($languages as $key => $lang) {
-                    $req_department_lang[$lang->id] = [
+                    $req_departmentlang[$lang->id] = [
                         'name' => $p_name[$lang->id],
                         'description' => $p_description[$lang->id],
                         'address' => $p_address[$lang->id],
                         'langid' => $lang->id,
                     ];
 
-                    $forms_lang[$lang->id]->bind($req_department_lang[$lang->id], $departments_lang[$lang->id]);
-                    if (!$forms_lang[$lang->id]->isValid()) {
-                        foreach ($forms_lang[$lang->id]->getMessages() as $message) {
+                    $formslang[$lang->id]->bind($req_departmentlang[$lang->id], $departmentslang[$lang->id]);
+                    if (!$formslang[$lang->id]->isValid()) {
+                        foreach ($formslang[$lang->id]->getMessages() as $message) {
                             array_push($error, $message->getMessage());
                         }
                     }
@@ -83,8 +83,8 @@ class DeptsController  extends \BackendController {
                         }
                     } else {
                         foreach ($languages as $key => $lang) {
-                            $departments_lang[$lang->id]->department_id = $department->id;
-                            $departments_lang[$lang->id]->save();
+                            $departmentslang[$lang->id]->department_id = $department->id;
+                            $departmentslang[$lang->id]->save();
                         }
                         $this->flashSession->success($title." thành công");
                         return $this->response->redirect(WEB_ADMIN_URL.'/departments/update');
@@ -101,10 +101,10 @@ class DeptsController  extends \BackendController {
         }
 
         $this->view->languages = $languages;
-        $this->view->forms_lang = $forms_lang;
+        $this->view->formslang = $formslang;
         $this->view->form_department = $form_department;
         $this->view->department = $department;
-        $this->view->departments_lang = $departments_lang;
+        $this->view->departmentslang = $departmentslang;
         $this->view->title = $title;
         $this->assets->addJs('/elfinder/js/require.min.js');
         $this->get_js_css();

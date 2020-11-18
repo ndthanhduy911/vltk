@@ -105,8 +105,8 @@
 	require.config({
 		baseUrl: '/elfinder/js',
 		paths: {
-			'jquery': '/assets/backend/js/jquery-3.2.1.min',
-			'jquery-ui': '/assets/backend/js/plugins/jquery-ui.min',
+			'jquery': '/assets/backend/dist/plugins/jquery/jquery.min',
+			'jquery-ui': '/assets/backend/dist/plugins/jquery-ui/jquery-ui.min',
 			'elfinder': 'elfinder.min',
 			// 'encoding-japanese': '//cdn.rawgit.com/polygonplanet/encoding.js/1.0.26/encoding.min'
 		},

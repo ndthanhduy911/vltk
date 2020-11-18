@@ -77,8 +77,8 @@ class Menus extends \Phalcon\Mvc\Model
     }
 
     public static function getName($menu_id, $langid = 1){
-        $menu_lang = \MenusLang::findFirst(['langid =:langid: AND menu_id = :menu_id:', 'bind'=>['langid' => $langid, 'menu_id' => $menu_id]]);
-        return $menu_lang ? $menu_lang->name : '';
+        $menulang = \MenusLang::findFirst(['langid =:langid: AND menu_id = :menu_id:', 'bind'=>['langid' => $langid, 'menu_id' => $menu_id]]);
+        return $menulang ? $menulang->name : '';
     }
 
     public static function findFirstId($id, $columns = "*")

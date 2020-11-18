@@ -53,9 +53,9 @@
                     <h5 class="text-primary font-weight-normal">Hình logo</h5> 
                     <div class="row m-0">
                         <div class="col-md-12 p-0">
-                            <img id="showImg" src="<?php echo $partner->featured_image ? $partner->featured_image : '' ?>"
+                            <img id="showImg" src="<?php echo $partner->image ? $partner->image : '' ?>"
                                 alt="" width="100%">
-                            {{form_partner.render('featured_image')}}
+                            {{form_partner.render('image')}}
                             <a id="uploadImage" href="#" class="link">Chọn hình</a>
                         </div>
                     </div>

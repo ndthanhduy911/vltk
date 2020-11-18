@@ -11,13 +11,13 @@ class StaffController extends \FrontendController
             $this->view->title = '404';
             return $this->view->pick('templates/404');
         }
-        if(!$page_lang = \PagesLang::findFirst(["langid = $langid AND page_id = $page->id"])){
+        if(!$pagelang = \PagesLang::findFirst(["langid = $langid AND page_id = $page->id"])){
             $this->view->title = '404';
             return $this->view->pick('templates/404');
         }
-        $this->view->title = $page_lang->title;
+        $this->view->title = $pagelang->title;
         $this->view->page = $page;
-        $this->view->page_lang = $page_lang;
+        $this->view->pagelang = $pagelang;
         return $this->view->pick('templates/pages/teams');
     }
 
@@ -32,15 +32,15 @@ class StaffController extends \FrontendController
             return $this->view->pick('templates/404');
         }
 
-        if($staff_lang = \StaffLang::findFirst(["langid = $langid AND staff_id = $staff->id"])){
-            $this->view->title = $staff_lang->title;
+        if($stafflang = \StaffLang::findFirst(["langid = $langid AND staff_id = $staff->id"])){
+            $this->view->title = $stafflang->title;
             $this->view->staff = $staff;
-            $this->view->staff_lang = $staff_lang;
+            $this->view->stafflang = $stafflang;
         }
 
         if($dept_info = \Depts::findFirstId($staff->deptid)){
             $this->view->dept_info = $dept_info;
-            $this->view->dept_lang_info = \DeptsLang::findFirst(["langid = $langid AND deptid = $dept_info->id"]);
+            $this->view->deptlang_info = \DeptsLang::findFirst(["langid = $langid AND deptid = $dept_info->id"]);
         }
 
         if($page = \Pages::findFirst(["attribute_id = 2 AND deptid = $staff->deptid"])){

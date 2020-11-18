@@ -31,7 +31,7 @@ class IndexController extends \BackendController
             'pl.excerpt',
             'p.deptid',
             'p.calendar',
-            'p.featured_image',
+            'p.image',
         ))
         ->from(['p' => 'Posts'])
         ->where("p.deleted = 0 AND p.deptid = {$deptid}")

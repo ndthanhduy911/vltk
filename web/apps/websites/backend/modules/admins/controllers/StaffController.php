@@ -11,8 +11,8 @@ class StaffController  extends \BackendController {
     }
 
     public function updateAction($id = 0){
-        $forms_lang = [];
-        $staffs_lang = [];
+        $formslang = [];
+        $staffslang = [];
         $staff_content = [];
         $languages = \Language::find(['status = 1']);
         $deptid = $this->session->get('deptid');
@@ -23,12 +23,12 @@ class StaffController  extends \BackendController {
             $staff->updatedat = date('Y-m-d H:i:s');
             $title = 'Cập nhật';
             foreach ($languages as $key => $lang) {
-                $staff_lang = \StaffLang::findFirst(['staff_id = :id: AND langid = :langid:','bind' => ['id' => $staff->id, 'langid' => $lang->id]]);
-                if($staff_lang){
-                    $form_lang = new StaffLangForm($staff_lang);
-                    $staffs_lang[$lang->id] = $staff_lang;
-                    $forms_lang[$lang->id] = $form_lang;
-                    $staff_content[$lang->id] = $staff_lang->content;
+                $stafflang = \StaffLang::findFirst(['staff_id = :id: AND langid = :langid:','bind' => ['id' => $staff->id, 'langid' => $lang->id]]);
+                if($stafflang){
+                    $formlang = new StaffLangForm($stafflang);
+                    $staffslang[$lang->id] = $stafflang;
+                    $formslang[$lang->id] = $formlang;
+                    $staff_content[$lang->id] = $stafflang->content;
                 }else{
                     echo 'Nội dung không phù hợp'; die;
                 }
@@ -40,8 +40,8 @@ class StaffController  extends \BackendController {
             $staff->updatedat = $staff->createdat;
             $title = 'Thêm mới';
             foreach ($languages as $key => $lang) {
-                $forms_lang[$lang->id] = new StaffLangForm();
-                $staffs_lang[$lang->id] = new \StaffLang();
+                $formslang[$lang->id] = new StaffLangForm();
+                $staffslang[$lang->id] = new \StaffLang();
                 $staff_content[$lang->id] = '';
             }
         }
@@ -56,7 +56,7 @@ class StaffController  extends \BackendController {
                 $req_staff = [
                     'status' => $this->request->getPost('status',['int','trim']),
                     'slug' => $p_slug ? $p_slug : $this->helper->slugify($p_title[1]),
-                    'featured_image' => $this->request->getPost('featured_image',['string','trim']),
+                    'image' => $this->request->getPost('image',['string','trim']),
                     'dept_position' => $this->request->getPost('dept_position',['string','trim']),
                     'email' => $this->request->getPost('email',['string','trim']),
                     'sort' => $this->request->getPost('sort',['int','trim']),
@@ -89,15 +89,15 @@ class StaffController  extends \BackendController {
 
 
                 foreach ($languages as $key => $lang) {
-                    $req_staff_lang[$lang->id] = [
+                    $req_stafflang[$lang->id] = [
                         'title' => $p_title[$lang->id],
                         'content' => $p_content[$lang->id],
                         'langid' => $lang->id,
                     ];
 
-                    $forms_lang[$lang->id]->bind($req_staff_lang[$lang->id], $staffs_lang[$lang->id]);
-                    if (!$forms_lang[$lang->id]->isValid()) {
-                        foreach ($forms_lang[$lang->id]->getMessages() as $message) {
+                    $formslang[$lang->id]->bind($req_stafflang[$lang->id], $staffslang[$lang->id]);
+                    if (!$formslang[$lang->id]->isValid()) {
+                        foreach ($formslang[$lang->id]->getMessages() as $message) {
                             array_push($error, $message->getMessage());
                         }
                     }
@@ -110,8 +110,8 @@ class StaffController  extends \BackendController {
                         }
                     } else {
                         foreach ($languages as $key => $lang) {
-                            $staffs_lang[$lang->id]->staff_id = $staff->id;
-                            $staffs_lang[$lang->id]->save();
+                            $staffslang[$lang->id]->staff_id = $staff->id;
+                            $staffslang[$lang->id]->save();
                         }
                         $this->flashSession->success($title." thành công");
                         return $this->response->redirect(WEB_ADMIN_URL.'/staff');
@@ -128,10 +128,10 @@ class StaffController  extends \BackendController {
 
         $this->view->languages = $languages;
         $this->view->staff_content = $staff_content;
-        $this->view->forms_lang = $forms_lang;
+        $this->view->formslang = $formslang;
         $this->view->form_staff = $form_staff;
         $this->view->staff = $staff;
-        $this->view->staffs_lang = $staffs_lang;
+        $this->view->staffslang = $staffslang;
         $this->view->title = $title;
         $this->view->deptid = $deptid;
         $this->assets->addJs('/elfinder/js/require.min.js');
@@ -193,7 +193,7 @@ class StaffController  extends \BackendController {
             ->columns(array(
                 's.id',
                 's.slug',
-                's.featured_image',
+                's.image',
                 's.status',
                 's.deptid',
                 's.email',

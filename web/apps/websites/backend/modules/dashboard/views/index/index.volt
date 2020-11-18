@@ -104,7 +104,7 @@
                                             <tbody>
                                                 {% for post in newestPost %}
                                                 <tr>
-                                                    <td class="align-middle"><img src="{{ helper.getLinkImage(post.featured_image) }}" alt="{{ post.title }}" class="img-size-50"></td>
+                                                    <td class="align-middle"><img src="{{ helper.getLinkImage(post.image) }}" alt="{{ post.title }}" class="img-size-50"></td>
                                                     <td class="align-middle"><a target="_blank" href="<?= Posts::getUrl($dept, $post) ?>">{{ post.title }}</a></td>
                                                     <td class="align-middle"><span class="badge badge-info float-right">{{ helper.dateVn(post.calendar,'d/m/Y H:i') }}</span></td>
                                                 </tr>

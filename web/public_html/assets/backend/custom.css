@@ -565,11 +565,6 @@ html {
     z-index: 1000;
 }
 
-.nav-pills .nav-link.active,
-.nav-pills .show>.nav-link {
-    color: #000000;
-}
-
 .small-box {
     margin-bottom: 12px;
 }

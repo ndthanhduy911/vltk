@@ -77,7 +77,7 @@ class DeptController extends \FrontendController
         ->columns(array(
             'r.id',
             'r.slug',
-            'r.featured_image',
+            'r.image',
             'rl.title research_name',
         ))
         ->from(['r'=>'Researches'])
@@ -91,7 +91,7 @@ class DeptController extends \FrontendController
         ->columns(array(
             's.id',
             's.slug',
-            's.featured_image',
+            's.image',
             's.dean',
             's.dept_position',
             's.email',
@@ -112,7 +112,7 @@ class DeptController extends \FrontendController
         ->columns(array(
             'p.id',
             'p.link',
-            'p.featured_image',
+            'p.image',
             'pl.title title',
         ))
         ->from(['p' => 'Partner'])

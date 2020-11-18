@@ -42,8 +42,8 @@ class CategoriesController  extends \BackendController {
     }
 
     public function updateAction($id = 0){
-        $forms_lang = [];
-        $cats_lang = [];
+        $formslang = [];
+        $catslang = [];
         $languages = \Language::find(['status = 1']);
         if($id){
             if(!$category = \Categories::findFirstId($id)){
@@ -52,11 +52,11 @@ class CategoriesController  extends \BackendController {
             $category->updatedat = date('Y-m-d H:i:s');
             $title = 'Cập nhật';
             foreach ($languages as $key => $lang) {
-                $cat_lang = \CategoriesLang::findFirst(['catid = :id: AND langid = :langid:','bind' => ['id' => $category->id, 'langid' => $lang->id]]);
-                if($cat_lang){
-                    $form_lang = new CategoriesLangForm($cat_lang);
-                    $cats_lang[$lang->id] = $cat_lang;
-                    $forms_lang[$lang->id] = $form_lang;
+                $catlang = \CategoriesLang::findFirst(['catid = :id: AND langid = :langid:','bind' => ['id' => $category->id, 'langid' => $lang->id]]);
+                if($catlang){
+                    $formlang = new CategoriesLangForm($catlang);
+                    $catslang[$lang->id] = $catlang;
+                    $formslang[$lang->id] = $formlang;
                 }else{
                     echo 'Nội dung không phù hợp'; die;
                 }
@@ -70,8 +70,8 @@ class CategoriesController  extends \BackendController {
             $category->updatedat = $category->createdat;
             $title = 'Thêm mới';
             foreach ($languages as $key => $lang) {
-                $forms_lang[$lang->id] = new CategoriesLangForm();
-                $cats_lang[$lang->id] = new \CategoriesLang();
+                $formslang[$lang->id] = new CategoriesLangForm();
+                $catslang[$lang->id] = new \CategoriesLang();
             }
             $form_cat = new CategoriesForm($category);
         }
@@ -84,7 +84,7 @@ class CategoriesController  extends \BackendController {
                 $c_description = $this->request->getPost('description',['string','trim']);
                 $req_cat = [
                     'slug' => $c_slug ? $c_slug : $this->helper->slugify($c_name[1]),
-                    'featured_image' => $this->request->getPost('featured_image',['string','trim']),
+                    'image' => $this->request->getPost('image',['string','trim']),
                     'status' => $this->request->getPost('status',['int','trim']),
                 ];
                 
@@ -110,14 +110,14 @@ class CategoriesController  extends \BackendController {
 
 
                 foreach ($languages as $key => $lang) {
-                    $req_cat_lang[$lang->id] = [
+                    $req_catlang[$lang->id] = [
                         'name' => $c_name[$lang->id],
                         'description' => $c_description[$lang->id],
                         'langid' => $lang->id,
                     ];
-                    $forms_lang[$lang->id]->bind($req_cat_lang[$lang->id], $cats_lang[$lang->id]);
-                    if (!$forms_lang[$lang->id]->isValid()) {
-                        foreach ($forms_lang[$lang->id]->getMessages() as $message) {
+                    $formslang[$lang->id]->bind($req_catlang[$lang->id], $catslang[$lang->id]);
+                    if (!$formslang[$lang->id]->isValid()) {
+                        foreach ($formslang[$lang->id]->getMessages() as $message) {
                             array_push($error, $message->getMessage());
                         }
                     }
@@ -130,8 +130,8 @@ class CategoriesController  extends \BackendController {
                         }
                     } else {
                         foreach ($languages as $key => $lang) {
-                            $cats_lang[$lang->id]->catid = $category->id;
-                            $cats_lang[$lang->id]->save();
+                            $catslang[$lang->id]->catid = $category->id;
+                            $catslang[$lang->id]->save();
                         }
                         $this->flashSession->success($title." thành công");
                         return $this->response->redirect(WEB_ADMIN_URL.'/categories');
@@ -146,9 +146,9 @@ class CategoriesController  extends \BackendController {
             // }
         }
         $this->view->languages = $languages;
-        $this->view->forms_lang = $forms_lang;
+        $this->view->formslang = $formslang;
         $this->view->form_cat = $form_cat;
-        $this->view->cats_lang = $cats_lang;
+        $this->view->catslang = $catslang;
         $this->view->title = $title;
         $this->assets->addJs('/elfinder/js/require.min.js');
         $this->get_js_css();

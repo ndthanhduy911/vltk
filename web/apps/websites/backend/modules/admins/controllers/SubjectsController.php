@@ -11,8 +11,8 @@ class SubjectsController  extends \BackendController {
     }
 
     public function updateAction($id = 0){
-        $forms_lang = [];
-        $subjects_lang = [];
+        $formslang = [];
+        $subjectslang = [];
         $subject_content = [];
         $languages = \Language::find(['status = 1']);
         if($id){
@@ -22,12 +22,12 @@ class SubjectsController  extends \BackendController {
             $subject->updatedat = date('Y-m-d H:i:s');
             $title = 'Cập nhật';
             foreach ($languages as $key => $lang) {
-                $subject_lang = \SubjectsLang::findFirst(['subjectid = :id: AND langid = :langid:','bind' => ['id' => $subject->id, 'langid' => $lang->id]]);
-                if($subject_lang){
-                    $form_lang = new SubjectsLangForm($subject_lang);
-                    $subjects_lang[$lang->id] = $subject_lang;
-                    $forms_lang[$lang->id] = $form_lang;
-                    $subject_content[$lang->id] = $subject_lang->content;
+                $subjectlang = \SubjectsLang::findFirst(['subjectid = :id: AND langid = :langid:','bind' => ['id' => $subject->id, 'langid' => $lang->id]]);
+                if($subjectlang){
+                    $formlang = new SubjectsLangForm($subjectlang);
+                    $subjectslang[$lang->id] = $subjectlang;
+                    $formslang[$lang->id] = $formlang;
+                    $subject_content[$lang->id] = $subjectlang->content;
                 }else{
                     echo 'Nội dung không phù hợp'; die;
                 }
@@ -39,8 +39,8 @@ class SubjectsController  extends \BackendController {
             $subject->updatedat = $subject->createdat;
             $title = 'Thêm mới';
             foreach ($languages as $key => $lang) {
-                $forms_lang[$lang->id] = new SubjectsLangForm();
-                $subjects_lang[$lang->id] = new \SubjectsLang();
+                $formslang[$lang->id] = new SubjectsLangForm();
+                $subjectslang[$lang->id] = new \SubjectsLang();
                 $subject_content[$lang->id] = '';
             }
         }
@@ -57,7 +57,7 @@ class SubjectsController  extends \BackendController {
                     'status' => $this->request->getPost('status',['int','trim']),
                     'code' => $this->request->getPost('code',['string','trim']),
                     'slug' => $p_slug ? $p_slug : $this->helper->slugify($p_title[1]),
-                    'featured_image' => $this->request->getPost('featured_image',['string','trim']),
+                    'image' => $this->request->getPost('image',['string','trim']),
                     'background_image' => $this->request->getPost('background_image',['string','trim'])
                 ];
 
@@ -83,16 +83,16 @@ class SubjectsController  extends \BackendController {
 
 
                 foreach ($languages as $key => $lang) {
-                    $req_subject_lang[$lang->id] = [
+                    $req_subjectlang[$lang->id] = [
                         'title' => $p_title[$lang->id],
                         'content' => $p_content[$lang->id],
                         'excerpt' => $p_excerpt[$lang->id],
                         'langid' => $lang->id,
                     ];
 
-                    $forms_lang[$lang->id]->bind($req_subject_lang[$lang->id], $subjects_lang[$lang->id]);
-                    if (!$forms_lang[$lang->id]->isValid()) {
-                        foreach ($forms_lang[$lang->id]->getMessages() as $message) {
+                    $formslang[$lang->id]->bind($req_subjectlang[$lang->id], $subjectslang[$lang->id]);
+                    if (!$formslang[$lang->id]->isValid()) {
+                        foreach ($formslang[$lang->id]->getMessages() as $message) {
                             array_push($error, $message->getMessage());
                         }
                     }
@@ -105,8 +105,8 @@ class SubjectsController  extends \BackendController {
                         }
                     } else {
                         foreach ($languages as $key => $lang) {
-                            $subjects_lang[$lang->id]->subjectid = $subject->id;
-                            $subjects_lang[$lang->id]->save();
+                            $subjectslang[$lang->id]->subjectid = $subject->id;
+                            $subjectslang[$lang->id]->save();
                         }
                         $this->flashSession->success($title." thành công");
                         return $this->response->redirect(WEB_ADMIN_URL.'/subjects');
@@ -123,10 +123,10 @@ class SubjectsController  extends \BackendController {
 
         $this->view->languages = $languages;
         $this->view->subject_content = $subject_content;
-        $this->view->forms_lang = $forms_lang;
+        $this->view->formslang = $formslang;
         $this->view->form_subject = $form_subject;
         $this->view->subject = $subject;
-        $this->view->subjects_lang = $subjects_lang;
+        $this->view->subjectslang = $subjectslang;
         $this->view->title = $title;
         $this->assets->addJs('/elfinder/js/require.min.js');
         $this->get_js_css();

@@ -11,8 +11,8 @@ class PagesController  extends \BackendController {
     }
 
     public function updateAction($id = 0){
-        $forms_lang = [];
-        $pages_lang = [];
+        $formslang = [];
+        $pageslang = [];
         $page_content = [];
         $languages = \Language::find(['status = 1']);
         if($id){
@@ -22,12 +22,12 @@ class PagesController  extends \BackendController {
             $page->updatedat = date('Y-m-d H:i:s');
             $title = 'Cập nhật';
             foreach ($languages as $key => $lang) {
-                $page_lang = \PagesLang::findFirst(['page_id = :id: AND langid = :langid:','bind' => ['id' => $page->id, 'langid' => $lang->id]]);
-                if($page_lang){
-                    $form_lang = new PagesLangForm($page_lang);
-                    $pages_lang[$lang->id] = $page_lang;
-                    $forms_lang[$lang->id] = $form_lang;
-                    $page_content[$lang->id] = $page_lang->content;
+                $pagelang = \PagesLang::findFirst(['page_id = :id: AND langid = :langid:','bind' => ['id' => $page->id, 'langid' => $lang->id]]);
+                if($pagelang){
+                    $formlang = new PagesLangForm($pagelang);
+                    $pageslang[$lang->id] = $pagelang;
+                    $formslang[$lang->id] = $formlang;
+                    $page_content[$lang->id] = $pagelang->content;
                 }else{
                     echo 'Nội dung không phù hợp'; die;
                 }
@@ -40,8 +40,8 @@ class PagesController  extends \BackendController {
             $page->updatedat = $page->createdat;
             $title = 'Thêm mới';
             foreach ($languages as $key => $lang) {
-                $forms_lang[$lang->id] = new PagesLangForm();
-                $pages_lang[$lang->id] = new \PagesLang();
+                $formslang[$lang->id] = new PagesLangForm();
+                $pageslang[$lang->id] = new \PagesLang();
                 $page_content[$lang->id] = '';
             }
         }
@@ -57,7 +57,7 @@ class PagesController  extends \BackendController {
                 $req_page = [
                     'status' => $this->request->getPost('status',['string','trim']),
                     'slug' => $p_slug ? $p_slug : $this->helper->slugify($p_title[1]),
-                    'featured_image' => $this->request->getPost('featured_image',['string','trim']),
+                    'image' => $this->request->getPost('image',['string','trim']),
                     'background_image' => $this->request->getPost('background_image',['string','trim']),
                     'attribute_id' => (int)$this->request->getPost('attribute_id',['int','trim']),
                 ];
@@ -82,16 +82,16 @@ class PagesController  extends \BackendController {
                 }
 
                 foreach ($languages as $key => $lang) {
-                    $req_page_lang[$lang->id] = [
+                    $req_pagelang[$lang->id] = [
                         'title' => $p_title[$lang->id],
                         'content' => $p_content[$lang->id],
                         'excerpt' => $p_excerpt[$lang->id],
                         'langid' => $lang->id,
                     ];
 
-                    $forms_lang[$lang->id]->bind($req_page_lang[$lang->id], $pages_lang[$lang->id]);
-                    if (!$forms_lang[$lang->id]->isValid()) {
-                        foreach ($forms_lang[$lang->id]->getMessages() as $message) {
+                    $formslang[$lang->id]->bind($req_pagelang[$lang->id], $pageslang[$lang->id]);
+                    if (!$formslang[$lang->id]->isValid()) {
+                        foreach ($formslang[$lang->id]->getMessages() as $message) {
                             array_push($error, $message->getMessage());
                         }
                     }
@@ -104,8 +104,8 @@ class PagesController  extends \BackendController {
                         }
                     } else {
                         foreach ($languages as $key => $lang) {
-                            $pages_lang[$lang->id]->page_id = $page->id;
-                            $pages_lang[$lang->id]->save();
+                            $pageslang[$lang->id]->page_id = $page->id;
+                            $pageslang[$lang->id]->save();
                         }
                         $this->flashSession->success($title." thành công");
                         return $this->response->redirect(WEB_ADMIN_URL.'/pages');
@@ -122,10 +122,10 @@ class PagesController  extends \BackendController {
 
         $this->view->languages = $languages;
         $this->view->page_content = $page_content;
-        $this->view->forms_lang = $forms_lang;
+        $this->view->formslang = $formslang;
         $this->view->form_page = $form_page;
         $this->view->page = $page;
-        $this->view->pages_lang = $pages_lang;
+        $this->view->pageslang = $pageslang;
         $this->view->title = $title;
         $this->assets->addJs('/elfinder/js/require.min.js');
         $this->get_js_css();

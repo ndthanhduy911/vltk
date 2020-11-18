@@ -42,7 +42,7 @@ class FrontendController extends Controller
                 $dispatcher->setReturnedValue($dept);
                 $this->view->slug = $dept_slug ? $dept_slug : '';
                 $this->view->langid = $this->session->get('langid');
-                $this->view->dept_lang = \DeptsLang::findFirst(["deptid = $dept->id AND langid = $langid"]);
+                $this->view->deptlang = \DeptsLang::findFirst(["deptid = $dept->id AND langid = $langid"]);
                 $this->view->dept = $dept;
                 $this->view->language = $language;
             }else{

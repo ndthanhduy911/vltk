@@ -13,7 +13,7 @@
         'p.deptid',
         'p.createdat',
         'p.calendar',
-        'p.featured_image',
+        'p.image',
     ))
     ->from(['p'=>'Posts'])
     ->where("p.deleted = 0 AND p.status = 1 AND p.deptid = $dept->id")
@@ -44,9 +44,9 @@
                     <div class="masonry-grid-item col-md-6">
                         <article class="blogpost shadow-2 light-gray-bg bordered object-non-visible"
                             data-animation-effect="fadeInUpSmall" data-effect-delay="100">
-                            {% if post.featured_image %}
+                            {% if post.image %}
                             <div class="overlay-container">
-                                <img class="ml-auto mr-auto grow" src="{{ helper.getLinkImage(post.featured_image) }}" alt="{{ post.title }}">
+                                <img class="ml-auto mr-auto grow" src="{{ helper.getLinkImage(post.image) }}" alt="{{ post.title }}">
                             </div>
                             {% endif %}
                             <header>

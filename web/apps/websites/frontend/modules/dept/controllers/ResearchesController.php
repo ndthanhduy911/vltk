@@ -14,14 +14,14 @@ class ResearchesController extends \FrontendController
             $this->view->title = '404';
             return $this->view->pick('templates/404');
         }
-        if(!$research_lang = \ResearchesLang::findFirst(["langid = $langid AND research_id = $research->id"])){
+        if(!$researchlang = \ResearchesLang::findFirst(["langid = $langid AND research_id = $research->id"])){
             $this->view->title = '404';
             return $this->view->pick('templates/404');
         }
-        $this->view->title = $research_lang->title;
+        $this->view->title = $researchlang->title;
         $this->view->page = $research;
         $this->view->slug_now = $research->slug;
-        $this->view->page_lang = $research_lang;
+        $this->view->pagelang = $researchlang;
 
         return $this->view->pick('templates/pages/default');
     }

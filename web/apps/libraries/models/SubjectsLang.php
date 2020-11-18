@@ -4,7 +4,7 @@ class SubjectsLang extends \Phalcon\Mvc\Model
 {
     public function getSource()
     {
-        return 'subjects_lang';
+        return 'subjectslang';
     }
 
     public static function findFirstId($id, $columns = "*")

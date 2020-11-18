@@ -11,8 +11,8 @@ class ResearchesController  extends \BackendController {
     }
 
     public function updateAction($id = 0){
-        $forms_lang = [];
-        $researches_lang = [];
+        $formslang = [];
+        $researcheslang = [];
         $research_content = [];
         $languages = \Language::find(['status = 1']);
         if($id){
@@ -22,12 +22,12 @@ class ResearchesController  extends \BackendController {
             $research->updatedat = date('Y-m-d H:i:s');
             $title = 'Cập nhật';
             foreach ($languages as $key => $lang) {
-                $research_lang = \ResearchesLang::findFirst(['research_id = :id: AND langid = :langid:','bind' => ['id' => $research->id, 'langid' => $lang->id]]);
-                if($research_lang){
-                    $form_lang = new ResearchesLangForm($research_lang);
-                    $researches_lang[$lang->id] = $research_lang;
-                    $forms_lang[$lang->id] = $form_lang;
-                    $research_content[$lang->id] = $research_lang->content;
+                $researchlang = \ResearchesLang::findFirst(['research_id = :id: AND langid = :langid:','bind' => ['id' => $research->id, 'langid' => $lang->id]]);
+                if($researchlang){
+                    $formlang = new ResearchesLangForm($researchlang);
+                    $researcheslang[$lang->id] = $researchlang;
+                    $formslang[$lang->id] = $formlang;
+                    $research_content[$lang->id] = $researchlang->content;
                 }else{
                     echo 'Nội dung không phù hợp'; die;
                 }
@@ -39,8 +39,8 @@ class ResearchesController  extends \BackendController {
             $research->updatedat = $research->createdat;
             $title = 'Thêm mới';
             foreach ($languages as $key => $lang) {
-                $forms_lang[$lang->id] = new ResearchesLangForm();
-                $researches_lang[$lang->id] = new \ResearchesLang();
+                $formslang[$lang->id] = new ResearchesLangForm();
+                $researcheslang[$lang->id] = new \ResearchesLang();
                 $research_content[$lang->id] = '';
             }
         }
@@ -56,7 +56,7 @@ class ResearchesController  extends \BackendController {
                 $req_research = [
                     'status' => $this->request->getPost('status',['int','trim']),
                     'slug' => $p_slug ? $p_slug : $this->helper->slugify($p_title[1]),
-                    'featured_image' => $this->request->getPost('featured_image',['string','trim']),
+                    'image' => $this->request->getPost('image',['string','trim']),
                     'background_image' => $this->request->getPost('background_image',['string','trim'])
                 ];
 
@@ -82,16 +82,16 @@ class ResearchesController  extends \BackendController {
 
 
                 foreach ($languages as $key => $lang) {
-                    $req_research_lang[$lang->id] = [
+                    $req_researchlang[$lang->id] = [
                         'title' => $p_title[$lang->id],
                         'content' => $p_content[$lang->id],
                         'excerpt' => $p_excerpt[$lang->id],
                         'langid' => $lang->id,
                     ];
 
-                    $forms_lang[$lang->id]->bind($req_research_lang[$lang->id], $researches_lang[$lang->id]);
-                    if (!$forms_lang[$lang->id]->isValid()) {
-                        foreach ($forms_lang[$lang->id]->getMessages() as $message) {
+                    $formslang[$lang->id]->bind($req_researchlang[$lang->id], $researcheslang[$lang->id]);
+                    if (!$formslang[$lang->id]->isValid()) {
+                        foreach ($formslang[$lang->id]->getMessages() as $message) {
                             array_push($error, $message->getMessage());
                         }
                     }
@@ -104,8 +104,8 @@ class ResearchesController  extends \BackendController {
                         }
                     } else {
                         foreach ($languages as $key => $lang) {
-                            $researches_lang[$lang->id]->research_id = $research->id;
-                            $researches_lang[$lang->id]->save();
+                            $researcheslang[$lang->id]->research_id = $research->id;
+                            $researcheslang[$lang->id]->save();
                         }
                         $this->flashSession->success($title." thành công");
                         return $this->response->redirect(WEB_ADMIN_URL.'/researches');
@@ -122,10 +122,10 @@ class ResearchesController  extends \BackendController {
 
         $this->view->languages = $languages;
         $this->view->research_content = $research_content;
-        $this->view->forms_lang = $forms_lang;
+        $this->view->formslang = $formslang;
         $this->view->form_research = $form_research;
         $this->view->research = $research;
-        $this->view->researches_lang = $researches_lang;
+        $this->view->researcheslang = $researcheslang;
         $this->view->title = $title;
         $this->assets->addJs('/elfinder/js/require.min.js');
         $this->get_js_css();

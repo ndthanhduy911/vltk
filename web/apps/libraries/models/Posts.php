@@ -181,7 +181,7 @@ class Posts extends \ModelCore
             'catid' => 'Chuyên mục',
             'catname' => 'Chuyên mục',
             'status' => 'Trạng thái',
-            'featured_image' => 'Hình đại diện',
+            'image' => 'Hình đại diện',
             'author' => 'Tác giả',
             'authorname' => 'Tác giả',
             'deptid' => 'Đơn vị/bộ phận',
@@ -202,7 +202,7 @@ class Posts extends \ModelCore
     }
 
     public static function findTables () {
-        return ['featured_image','title','excerpt','catid','authorname','calendar','slug','status'];
+        return ['image','title','excerpt','catid','authorname','calendar','slug','status'];
     }
 
     public static function arrayOrder () {

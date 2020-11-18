@@ -20,10 +20,10 @@ class PostsController extends \FrontendController
             return $this->view->pick('templates/404');
         }
 
-        if($posts_lang = \PostsLang::findFirst(["langid = $langid AND postid = $post->id"])){
-            $this->view->title = $posts_lang->title;
-            $post->content = $posts_lang->content;
-            $post->excerpt = $posts_lang->excerpt;
+        if($postslang = \PostsLang::findFirst(["langid = $langid AND postid = $post->id"])){
+            $this->view->title = $postslang->title;
+            $post->content = $postslang->content;
+            $post->excerpt = $postslang->excerpt;
             $this->view->post = $post;
             return $this->view->pick('templates/single');
         }
@@ -59,7 +59,7 @@ class PostsController extends \FrontendController
             'p.deptid',
             'p.createdat',
             'p.calendar',
-            'p.featured_image',
+            'p.image',
         ))
         ->from(['p'=>'Posts'])
         ->where("p.deleted = 0 AND p.status = 1 AND p.catid = $category->id AND p.deptid = $dept->id")
@@ -99,7 +99,7 @@ class PostsController extends \FrontendController
             'p.deptid',
             'p.createdat',
             'p.calendar',
-            'p.featured_image',
+            'p.image',
         ))
         ->from(['p'=>'Posts'])
         ->leftJoin('PostsLang', "pl.postid = p.id AND pl.langid = {$langid} AND p.deptid = {$dept->id}",'pl')

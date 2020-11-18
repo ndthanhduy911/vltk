@@ -6,6 +6,7 @@ const loaderHtml = `
     <div class="loader mr-auto ml-auto"></div>
 </div>`;
 const singleCore = '#singleCore';
+const deptId = parseInt($('body').attr('dept'));
 // Random number integer
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));

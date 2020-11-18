@@ -145,9 +145,9 @@
                     <div class="tile p-3 mb-3">
                         <div class="row m-0">
                             <div class="col-md-12 p-0">
-                                <img id="showImg" src="<?php echo $staff->featured_image ? $staff->featured_image : '' ?>"
+                                <img id="showImg" src="<?php echo $staff->image ? $staff->image : '' ?>"
                                     alt="" width="100%">
-                                {{form_staff.render('featured_image')}}
+                                {{form_staff.render('image')}}
                                 <a id="uploadImage" href="#" class="link">Đặt ảnh đại diện</a>
                             </div>
                         </div>

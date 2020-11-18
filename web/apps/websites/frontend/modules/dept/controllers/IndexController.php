@@ -86,7 +86,7 @@ class IndexController extends \FrontendController
         ->columns(array(
             's.id',
             's.slug',
-            's.featured_image',
+            's.image',
             's.dean',
             's.dept_position',
             's.email',
@@ -107,7 +107,7 @@ class IndexController extends \FrontendController
         ->columns(array(
             'p.id',
             'p.link',
-            'p.featured_image',
+            'p.image',
             'pl.title title',
         ))
         ->from(['p'=>'Partner'])

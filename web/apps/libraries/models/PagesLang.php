@@ -4,7 +4,7 @@ class PagesLang extends \Phalcon\Mvc\Model
 {
     public function getSource()
     {
-        return 'pages_lang';
+        return 'pageslang';
     }
 
     public static function findFirstId($id, $columns = "*")

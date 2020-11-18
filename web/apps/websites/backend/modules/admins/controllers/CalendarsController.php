@@ -11,8 +11,8 @@ class CalendarsController  extends \BackendController {
     }
 
     public function updateAction($id = 0){
-        $forms_lang = [];
-        $calendars_lang = [];
+        $formslang = [];
+        $calendarslang = [];
         $calendar_content = [];
         $languages = \Language::find(['status = 1']);
         if($id){
@@ -23,12 +23,12 @@ class CalendarsController  extends \BackendController {
             $calendar->updatedat = date('Y-m-d H:i:s');
             $title = 'Cập nhật';
             foreach ($languages as $key => $lang) {
-                $calendar_lang = \CalendarsLang::findFirst(['calendarid = :id: AND langid = :langid:','bind' => ['id' => $calendar->id, 'langid' => $lang->id]]);
-                if($calendar_lang){
-                    $form_lang = new CalendarsLangForm($calendar_lang);
-                    $calendars_lang[$lang->id] = $calendar_lang;
-                    $forms_lang[$lang->id] = $form_lang;
-                    $calendar_content[$lang->id] = $calendar_lang->content;
+                $calendarlang = \CalendarsLang::findFirst(['calendarid = :id: AND langid = :langid:','bind' => ['id' => $calendar->id, 'langid' => $lang->id]]);
+                if($calendarlang){
+                    $formlang = new CalendarsLangForm($calendarlang);
+                    $calendarslang[$lang->id] = $calendarlang;
+                    $formslang[$lang->id] = $formlang;
+                    $calendar_content[$lang->id] = $calendarlang->content;
                 }else{
                     echo 'Nội dung không phù hợp'; die;
                 }
@@ -40,8 +40,8 @@ class CalendarsController  extends \BackendController {
             $calendar->updatedat = $calendar->createdat;
             $title = 'Thêm mới';
             foreach ($languages as $key => $lang) {
-                $forms_lang[$lang->id] = new CalendarsLangForm();
-                $calendars_lang[$lang->id] = new \CalendarsLang();
+                $formslang[$lang->id] = new CalendarsLangForm();
+                $calendarslang[$lang->id] = new \CalendarsLang();
                 $calendar_content[$lang->id] = '';
             }
         }
@@ -53,7 +53,7 @@ class CalendarsController  extends \BackendController {
                 $p_excerpt = $this->request->getPost('excerpt',['string','trim']);
                 $req_calendar = [
                     'status' => $this->request->getPost('status'),
-                    'featured_image' => $this->request->getPost('featured_image',['string','trim']),
+                    'image' => $this->request->getPost('image',['string','trim']),
                     'background_image' => $this->request->getPost('background_image',['string','trim']),
                     'classid' => $this->request->getPost('classid',['int','trim']),
                     'subjectid' => $this->request->getPost('subjectid',['int','trim']),
@@ -75,14 +75,14 @@ class CalendarsController  extends \BackendController {
                 }
 
                 foreach ($languages as $key => $lang) {
-                    $req_calendar_lang[$lang->id] = [
+                    $req_calendarlang[$lang->id] = [
                         'excerpt' => $p_excerpt[$lang->id],
                         'langid' => $lang->id,
                     ];
 
-                    $forms_lang[$lang->id]->bind($req_calendar_lang[$lang->id], $calendars_lang[$lang->id]);
-                    if (!$forms_lang[$lang->id]->isValid()) {
-                        foreach ($forms_lang[$lang->id]->getMessages() as $message) {
+                    $formslang[$lang->id]->bind($req_calendarlang[$lang->id], $calendarslang[$lang->id]);
+                    if (!$formslang[$lang->id]->isValid()) {
+                        foreach ($formslang[$lang->id]->getMessages() as $message) {
                             array_push($error, $message->getMessage());
                         }
                     }
@@ -96,8 +96,8 @@ class CalendarsController  extends \BackendController {
                         }
                     } else {
                         foreach ($languages as $key => $lang) {
-                            $calendars_lang[$lang->id]->calendarid = $calendar->id;
-                            $calendars_lang[$lang->id]->save();
+                            $calendarslang[$lang->id]->calendarid = $calendar->id;
+                            $calendarslang[$lang->id]->save();
                         }
                         $this->flashSession->success($title." thành công");
                         return $this->response->redirect(WEB_ADMIN_URL.'/calendars');
@@ -114,10 +114,10 @@ class CalendarsController  extends \BackendController {
 
         $this->view->languages = $languages;
         $this->view->calendar_content = $calendar_content;
-        $this->view->forms_lang = $forms_lang;
+        $this->view->formslang = $formslang;
         $this->view->form_calendar = $form_calendar;
         $this->view->calendar = $calendar;
-        $this->view->calendars_lang = $calendars_lang;
+        $this->view->calendarslang = $calendarslang;
         $this->view->title = $title;
         $this->assets->addJs('/elfinder/js/require.min.js');
         $this->get_js_css();

@@ -3,6 +3,6 @@ class MenusLang extends \Phalcon\Mvc\Model
 {
     public function getSource()
     {
-        return 'menus_lang';
+        return 'menuslang';
     }
 }

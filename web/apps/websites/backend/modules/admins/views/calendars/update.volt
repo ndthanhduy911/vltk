@@ -176,10 +176,10 @@
                 <div class="tile p-3 mb-3">
                     <div class="row m-0">
                         <div class="col-md-12 p-0">
-                            <img id="showImg" class="w-100 d-block" src="{{ calendar.featured_image ? calendar.featured_image : '' }}" alt="{{ calendar.featured_image ? calendar.featured_image : '' }}">
-                            {{form_calendar.render('featured_image')}}
+                            <img id="showImg" class="w-100 d-block" src="{{ calendar.image ? calendar.image : '' }}" alt="{{ calendar.image ? calendar.image : '' }}">
+                            {{form_calendar.render('image')}}
                             <a id="uploadImage" href="#" class="link">Đặt ảnh đại diện</a>
-                            <a id="removeImage" href="#" class="link text-danger {{ calendar.featured_image ? '' : 'hidden' }}">Xóa</a>
+                            <a id="removeImage" href="#" class="link text-danger {{ calendar.image ? '' : 'hidden' }}">Xóa</a>
                         </div>
                     </div>
                 </div>

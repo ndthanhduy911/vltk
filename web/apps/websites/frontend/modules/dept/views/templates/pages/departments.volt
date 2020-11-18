@@ -18,7 +18,7 @@
         ->columns(array(
             'r.id',
             'r.slug',
-            'r.featured_image',
+            'r.image',
             'rl.title research_name',
         ))
         ->from(['r'=>'Researches'])
@@ -74,7 +74,7 @@
                 <div class="col-lg-3 col-md-6 isotope-item">
                     <div class="image-box shadow-2 bordered text-center mb-20">
                         <div class="overlay-container rounded overlay-visible">
-                            <img src="{{ helper.getLinkImage(research.featured_image) }}"
+                            <img src="{{ helper.getLinkImage(research.image) }}"
                                 alt="{{ dept_item.dept_name }}">
                             <a href="<?php \Researches::getUrl($dept, $research) ?>" class="overlay-link"><i
                                     class="fa fa-graduation-cap"></i></a>

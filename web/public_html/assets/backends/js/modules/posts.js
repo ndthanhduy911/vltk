@@ -25,7 +25,7 @@ const loadTablePosts = () => {
                     "data": "no"
                 },
                 {
-                    "data": "featured_image"
+                    "data": "image"
                 },
                 {
                     "data": "title"
@@ -47,7 +47,7 @@ const loadTablePosts = () => {
                 }
             ],
             'createdRow': function (row, item, dataIndex) {
-                let image = `<img src="${getPathImage(item.featured_image, '/assets/frontend/images/defaut_img.png')}" width="50px">`;
+                let image = `<img src="${getPathImage(item.image, '/assets/frontend/images/defaut_img.png')}" width="50px">`;
                 $(row).addClass('text-center');
                 $('td', row).addClass('align-middle');
                 $('td:eq(1)', row).html(image);
@@ -99,7 +99,7 @@ const loadTablePostsTrash = () => {
                     "data": "no"
                 },
                 {
-                    "data": "featured_image"
+                    "data": "image"
                 },
                 {
                     "data": "title"
@@ -118,7 +118,7 @@ const loadTablePostsTrash = () => {
                 }
             ],
             'createdRow': function (row, item, dataIndex) {
-                let image = item.featured_image ? `<img src="${item.featured_image}" width="50px">` : '';
+                let image = item.image ? `<img src="${item.image}" width="50px">` : '';
                 $(row).addClass('text-center');
                 $('td', row).addClass('align-middle');
                 $('td:eq(1)', row).html(image);
@@ -161,4 +161,4 @@ const loadTablePostsTrash = () => {
 loadTablePosts();
 loadTablePostsTrash();
 changeTitleToSlug('#title', '#slug');
-showSelectImage('#uploadImage','#showImg','#featured_image', '#removeImage');
+showSelectImage('#uploadImage','#showImg','#image', '#removeImage');

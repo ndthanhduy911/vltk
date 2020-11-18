@@ -16,7 +16,7 @@ class PostsController  extends \BackendController {
         $filters = \Posts::findFilters();
         $tables = \Posts::findTables();
         $fFilters = ['title','catid','status','calendar'];
-        $fTables = ['featured_image','title','excerpt','catid','authorname','calendar','slug','status'];
+        $fTables = ['image','title','excerpt','catid','authorname','calendar','slug','status'];
         if($fSetting = \FilterSetting::findFirstKey('posts')){
             $fFilters = $fSetting->filters ? json_decode($fSetting->filters) : $fFilters;
             $fTables = $fSetting->tables ? json_decode($fSetting->tables) : $fTables;   
@@ -40,130 +40,72 @@ class PostsController  extends \BackendController {
         $this->getJsCss();
     }
 
-    public function updateAction($id = 0){
-        $forms_lang = [];
-        $posts_lang = [];
-        $post_content = [];
+    public function viewAction($id = 0){
+
+        if($this->request->get('singlePage') && $this->request->isAjax()){
+            $this->view->setRenderLevel(
+                \Phalcon\Mvc\View::LEVEL_ACTION_VIEW
+            );
+        }
+
+        $perEdit = $this->master::checkPermissionDepted('asset', 'update',1);
+        $perView = $this->master::checkPermissionDepted('asset', 'index');
+        $perL = $perView ? $perView : ($perEdit? $perEdit :false);
+        if(!$perL){
+            require ERROR_FILE; die;
+        }
+        if($this->request->get('singlePage') && $this->request->isAjax()){
+            $this->view->setRenderLevel(
+                \Phalcon\Mvc\View::LEVEL_ACTION_VIEW
+            );
+        }
+
+        $formsLang = [];
+        $postsLang = [];
+        $postContent = [];
         $languages = \Language::find(['status = 1']);
         if($id){
             if(!$post = \Posts::findFirstId($id)){
                 echo 'Không tìm thấy dữ liệu'; die;
-            }
-            $post->updatedat = date('Y-m-d H:i:s');
-            $post->calendar = $this->helper->datetimeVn($post->calendar);
-            $title = 'Cập nhật';
+            }            
             foreach ($languages as $key => $lang) {
-                $post_lang = \PostsLang::findFirst(['postid = :id: AND langid = :langid:','bind' => ['id' => $post->id, 'langid' => $lang->id]]);
-                if($post_lang){
-                    $form_lang = new PostsLangForm($post_lang);
-                    $posts_lang[$lang->id] = $post_lang;
-                    $forms_lang[$lang->id] = $form_lang;
-                    $post_content[$lang->id] = $post_lang->content;
+                $postLang = \PostsLang::findFirst(['postid = :id: AND langid = :langid:','bind' => ['id' => $post->id, 'langid' => $lang->id]]);
+                if($postLang){
+                    $formLang = new PostsLangForm($postLang);
+                    $postsLang[$lang->id] = $postLang;
+                    $formsLang[$lang->id] = $formLang;
+                    $postContent[$lang->id] = $postLang->content;
                 }else{
                     echo 'Nội dung không phù hợp'; die;
                 }
-            }   
+            }
+            $title = 'Chỉnh sửa';
+            $post->updatedat = date('Y-m-d H:i:s');
+            $post->calendar = $this->helper->dateVn($post->calendar,'d/m/Y H:i');
         }else{
             $post = new \Posts();
-            $post->author = $this->session->get('user_id');
+            $post->author = $this->session->get('userid');
             $post->deptid = $this->session->get('deptid');
             $post->createdat = date('Y-m-d H:i:s');
             $post->updatedat = $post->createdat;
             $title = 'Thêm mới';
-            foreach ($languages as $key => $lang) {
-                $forms_lang[$lang->id] = new PostsLangForm();
-                $posts_lang[$lang->id] = new \PostsLang();
-                $post_content[$lang->id] = '';
+            foreach ($languages as $lang) {
+                $formsLang[$lang->id] = new PostsLangForm();
+                $postsLang[$lang->id] = new \PostsLang();
+                $postContent[$lang->id] = '';
             }
         }
 
-        $form_post = new PostsForm($post);
-        if ($this->request->isPost()) {
-            if ($this->security->checkToken()) {
-                $data['token'] = ['key' => $this->security->getTokenKey(), 'value' => $this->security->getToken()];
-                $error = [];
-                $p_title = $this->request->getPost('title',['string','trim']);
-                $p_slug = $this->request->getPost('slug',['string','trim']);
-                $p_content = $this->request->getPost('content',['trim']);
-                $p_excerpt = $this->request->getPost('excerpt',['string','trim']);
-                $p_calendar = $this->request->getPost('calendar',['string','trim']);
-                $reqPost = [
-                    'catid' => $this->request->getPost('catid',['int','trim']),
-                    'status' => $this->request->getPost('status',['int','trim']),
-                    'slug' => $p_slug ? $p_slug : $this->helper->slugify($p_title[1]),
-                    'calendar' => $p_calendar ? $p_calendar : date('d/m/Y H:i'),
-                    'featured_image' => $this->request->getPost('featured_image',['string','trim']),
-                ];
+        $formPost = new PostsForm($post);
 
-                $check_slug = \Posts::findFirst([
-                    "slug = :slug: AND id != :id:",
-                    "bind" => [
-                        "slug" => $reqPost['slug'],
-                        'id'    => $id,
-                    ]
-                ]);
-    
-                if($check_slug){
-                    $reqPost['slug'] = $reqPost['slug'] .'-'. strtotime('now'); 
-                }
-
-                if(!$cat = \Categories::findFirst(["deptid = $post->deptid AND id = :catid:", 'bind' => ['catid' => $reqPost['catid']]])){
-                    $this->flashSession->error("Danh mục không tôn tại");
-                }
-
-                $form_post->bind($reqPost, $post);
-                if (!$form_post->isValid()) {
-                    foreach ($form_post->getMessages() as $message) {
-                        array_push($error, $message->getMessage());
-                    }
-                }
-
-                foreach ($languages as $key => $lang) {
-                    $reqPost_lang[$lang->id] = [
-                        'title' => $p_title[$lang->id],
-                        'content' => $p_content[$lang->id],
-                        'excerpt' => $p_excerpt[$lang->id],
-                        'langid' => $lang->id,
-                    ];
-
-                    $forms_lang[$lang->id]->bind($reqPost_lang[$lang->id], $posts_lang[$lang->id]);
-                    if (!$forms_lang[$lang->id]->isValid()) {
-                        foreach ($forms_lang[$lang->id]->getMessages() as $message) {
-                            array_push($error, $message->getMessage());
-                        }
-                    }
-                }
-
-                if (!count($error)) {
-                    $post->calendar = $this->helper->datetimeMysql($post->calendar);
-                    if (!$post->save()) {
-                        foreach ($post->getMessages() as $message) {
-                            $this->flashSession->error($message);
-                        }
-                    } else {
-                        foreach ($languages as $key => $lang) {
-                            $posts_lang[$lang->id]->postid = $post->id;
-                            $posts_lang[$lang->id]->save();
-                        }
-                        $this->flashSession->success($title." thành công");
-                        return $this->response->redirect(WEB_ADMIN_URL.'/posts');
-                    }
-                }else{
-                    foreach ($error as $value) {
-                        $this->flashSession->error($value);
-                    }
-                }
-            }else{
-                $this->flashSession->error("Token không chính xác");
-            }
-        }
-
+        $this->view->perEdit = $perEdit ? 1 : "";
+        $this->view->perView = $perView ? 1 : "";
         $this->view->languages = $languages;
-        $this->view->post_content = $post_content;
-        $this->view->forms_lang = $forms_lang;
-        $this->view->form_post = $form_post;
+        $this->view->postContent = $postContent;
+        $this->view->formsLang = $formsLang;
+        $this->view->formPost = $formPost;
         $this->view->post = $post;
-        $this->view->posts_lang = $posts_lang;
+        $this->view->postsLang = $postsLang;
         $this->view->title = $title;
         $this->assets->addJs('/elfinder/js/require.min.js');
         $this->getJsCss();
@@ -315,7 +257,7 @@ class PostsController  extends \BackendController {
             'p.deptid',
             'p.createdat',
             'p.calendar',
-            'p.featured_image',
+            'p.image',
             'pl.title',
             'pl.content',
             'pl.excerpt',
@@ -361,7 +303,7 @@ class PostsController  extends \BackendController {
                 'p.deptid',
                 'p.createdat',
                 'p.calendar',
-                'p.featured_image',
+                'p.image',
                 'u.name author_name',
                 'c.name cat_name',
             ))
@@ -385,6 +327,113 @@ class PostsController  extends \BackendController {
             return $this->response->send();
         }
     }
+
+    // ===================================
+    // Update data
+    // ===================================
+    public function updateAction($id = 0){
+
+        $this->view->disable();
+        if (!$this->security->checkToken()) {
+            $data['token'] = ['key' => $this->security->getTokenKey(), 'value' => $this->security->getToken()];
+            $data['error'] = ['Token không chính xác'];
+            $this->helper->responseJson($this, $data);
+        }
+        $data['token'] = ['key' => $this->security->getTokenKey(), 'value' => $this->security->getToken()];
+        if(!$this->request->isAjax() || !$this->request->isPost() || !$perL = $this->master::checkPermissionDepted('posts','update',1)){
+            $data['error'] = ['Truy cập không được phép'];
+            $this->helper->responseJson($this, $data);
+        }
+
+        $userid = $this->session->get('userid');
+        $languages = \Language::find(['status = 1']);
+        $pTitle = $this->request->getPost('title',['string','trim']);
+        $pContent = $this->request->getPost('content',['trim']);
+        $pExcerpt = $this->request->getPost('excerpt',['string','trim']);
+        if($id){
+            if(!$post = \Posts::findFirstIdPermission($id,$perL)){
+                $data['error'] = ['Không tìm thấy phiếu nhập'];
+                $this->helper->responseJson($this, $data);
+            }
+            $post->updatedat = date('Y-m-d H:i:s');
+            $post->updatedby = $userid;
+        }else{
+            $post = new \Posts();
+            $post->author = $this->session->get('userid');
+            $post->deptid = $this->session->get('deptid');
+            $post->createdat = date('Y-m-d H:i:s');
+            $post->updatedat = $post->createdat;
+            $post->createdby = $userid;
+            $post->updatedby = $userid;
+        }
+        $postLangs = [];
+        foreach ($languages as $lang) {
+            if(!$postLang = \PostsLang::findFirst(["postid = :id:",'bind' => ['id' => (int)$post->id]])){
+                $postLang = new \PostsLang();
+            }
+            $postLang->title = isset($pTitle[$lang->id]) ? $pTitle[$lang->id] : NULL;
+            $postLang->content = isset($pContent[$lang->id]) ? $pContent[$lang->id] : NULL;
+            $postLang->excerpt = isset($pExcerpt[$lang->id]) ? $pExcerpt[$lang->id] : NULL;
+            $postLang->langid = $lang->id;
+            array_push($postLangs,$postLang);
+        }
+
+
+        $plug = $this->request->getPost('slug',['string','trim']);
+        $post->title = $this->request->getPost('title',['string','trim']);
+        $post->catid = $this->request->getPost('catid',['int','trim']);
+        $post->status = $this->request->getPost('status',['int','trim']);
+        $post->slug = $plug ? $plug : $this->helper->slugify($pTitle[1]);
+        $post->calendar = $this->helper->dateMysql($this->request->getPost('calendar', ['string', 'trim']));
+        $iamge = $this->helper->uploadImage('image', $post->image, 'image');
+        if (!empty($checkReportfile['error'])) {
+            $data['error'] = [$checkReportfile['error']];
+            $this->helper->responseJson($this, $data);
+        }
+        $post->image = $iamge['filename'];
+
+            if(\Posts::findFirst(["slug = :slug: AND id != :id:","bind" => ["slug" => $post->slug,'id'=> $id]])){
+                $reqPost['slug'] = $post->slug .'-'. strtotime('now'); 
+            }
+
+            if(!\Categories::findFirstIdPermission($post->catid,$perL)){
+                $data['error'] = ["Chuyên mục không tồn tại"];
+                $this->helper->responseJson($this, $data);
+            }
+
+            try {
+                $this->db->begin();
+                $post->vdUpdate(true);
+                if (!$post->save()) {
+                    $this->db->rollback();
+                    foreach ($post->getMessages() as $message) {
+                        throw new \Exception($message->getMessage());
+                    }
+                }
+
+                $postLang = [];
+                foreach ($postLangs as $postLang) {
+                    $postLang->vdUpdate(true);
+                    if (!$post->save()) {
+                        $this->db->rollback();
+                        foreach ($post->getMessages() as $message) {
+                            throw new \Exception($message->getMessage());
+                        }
+                    }
+                }
+    
+
+                $this->db->commit();
+                $this->flashSession->success(($id ? 'Chỉnh sửa' : 'Thêm mới').' tài sản thành công');
+            } catch (\Throwable $e) {
+                $this->db->rollback();
+                $this->flashSession->error($e->getMessage());
+            }
+        
+            $this->helper->responseJson($this, $data);
+    }
+
+
     // =================================
     // FUNCTION
     // =================================

@@ -252,8 +252,8 @@ class CalendarsForm extends Form
         ));
         $this->add($status);
 
-        $featured_image = new Hidden('featured_image');
-        $this->add($featured_image);
+        $image = new Hidden('image');
+        $this->add($image);
 
         $background_image = new Hidden('background_image');
         $this->add($background_image);

@@ -3,6 +3,6 @@ class PartnerLang extends \Phalcon\Mvc\Model
 {
     public function getSource()
     {
-        return 'partner_lang';
+        return 'partnerlang';
     }
 }

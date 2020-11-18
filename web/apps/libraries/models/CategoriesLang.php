@@ -4,7 +4,7 @@ class CategoriesLang extends \Phalcon\Mvc\Model
 
     public function getSource()
     {
-        return 'categories_lang';
+        return 'categorieslang';
     }
 
     public static function findFirstId($id, $columns = "*")

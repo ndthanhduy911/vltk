@@ -44,7 +44,7 @@
     
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed text-sm navbar-white navbar-light">
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed text-sm navbar-white navbar-light" dept="{{session.get('deptid')}}">
     <div class="wrapper">
         {{ partial('header') }}
         {{ partial('sidebar') }}

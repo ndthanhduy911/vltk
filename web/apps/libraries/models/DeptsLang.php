@@ -4,12 +4,12 @@ class DeptsLang extends \ModelCore
     public function initialize()
     {
         $this->setSchema(SCHEMADB);
-        $this->setSource("depts_lang");
+        $this->setSource("deptslang");
     }
 
     public function getSource()
     {
-        return 'depts_lang';
+        return 'deptslang';
     }
 
     public static function getTitleById($id = null)

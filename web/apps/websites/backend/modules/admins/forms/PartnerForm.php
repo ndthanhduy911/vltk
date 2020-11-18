@@ -49,8 +49,8 @@ class PartnerForm extends Form
         ));
         $this->add($status);
 
-        $featured_image = new Hidden('featured_image');
-        $this->add($featured_image);
+        $image = new Hidden('image');
+        $this->add($image);
 
         $deleted = new Hidden('deleted');
         $this->add($deleted);

@@ -114,10 +114,10 @@
                 <div class="tile p-3 mb-3">
                     <div class="row m-0">
                         <div class="col-md-12 p-0">
-                            <img id="showImg" class="w-100 d-block" src="{{ class.featured_image ? class.featured_image : '' }}" alt="{{ class.featured_image ? class.featured_image : '' }}">
-                            {{form_class.render('featured_image')}}
+                            <img id="showImg" class="w-100 d-block" src="{{ class.image ? class.image : '' }}" alt="{{ class.image ? class.image : '' }}">
+                            {{form_class.render('image')}}
                             <a id="uploadImage" href="#" class="link">Đặt ảnh đại diện</a>
-                            <a id="removeImage" href="#" class="link text-danger {{ class.featured_image ? '' : 'hidden' }}">Xóa</a>
+                            <a id="removeImage" href="#" class="link text-danger {{ class.image ? '' : 'hidden' }}">Xóa</a>
                         </div>
                     </div>
                 </div>

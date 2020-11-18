@@ -70,7 +70,7 @@
                                 'p.status',
                                 'pl.excerpt',
                                 'p.calendar',
-                                'p.featured_image',
+                                'p.image',
                             ))
                             ->from(['p' => 'Posts'])
                             ->where("p.deleted = 0 AND p.catid = $cat->id AND p.status = 1")
@@ -83,7 +83,7 @@
                         {% for post in posts %}
                         <div class="media mb-3">
                             <div class="overlay-container rounded">
-                                <img class="media-object" src="{{ helper.getLinkImage(post.featured_image) }}" alt="{{ post.title }}">
+                                <img class="media-object" src="{{ helper.getLinkImage(post.image) }}" alt="{{ post.title }}">
                                 <a href="<?= Posts::getUrl($dept, $post) ?>" class="overlay-link small"><i class="fa fa-graduation-cap"></i></a>
                             </div>
                             <div class="media-body">
@@ -123,7 +123,7 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="image-box shadow-2 bordered text-center mb-20">
                         <div class="overlay-container rounded overlay-visible">
-                            <img class="grow" src="{{ helper.getLinkImage(research.featured_image) }}" alt="{{ research.research_name }}">
+                            <img class="grow" src="{{ helper.getLinkImage(research.image) }}" alt="{{ research.research_name }}">
                             <a href="<?= Researches::getUrl($dept,$research) ?>" class="overlay-link"><i class="fa fa-graduation-cap"></i></a>
                             <div class="overlay-bottom hidden-xs">
                                 <div class="text">
@@ -157,7 +157,7 @@
             <div class="col-md-4">
                 <div class="image-box team-member shadow-2 mb-20">
                     <div class="overlay-container rounded overlay-visible">
-                        <img width="100%" src="{{ helper.getLinkImage(staff.featured_image,'/assets/frontend/images/education.jpg') }}" alt="{{staff.title}}">
+                        <img width="100%" src="{{ helper.getLinkImage(staff.image,'/assets/frontend/images/education.jpg') }}" alt="{{staff.title}}">
                         <a href="{{ constant('WEB_URL')~'/staff/'~staff.slug }}" class="overlay-link" title="{{staff.title}}"><i class="fa fa-graduation-cap"></i></a>
                         <div class="overlay-bottom">
                             <div class="text p-0">
@@ -199,7 +199,7 @@
             <div class="col-lg-3 col-md-6">
                 <div class="ph-20 feature-box text-center object-non-visible" data-animation-effect="fadeInDownSmall"
                     data-effect-delay="100">
-                    <span class="icon large circle"><img class="rounded-circle" alt="{{partner.title}}" src="{{ helper.getLinkImage(partner.featured_image,'/assets/frontend/images/beauty.jpg') }}"></span>
+                    <span class="icon large circle"><img class="rounded-circle" alt="{{partner.title}}" src="{{ helper.getLinkImage(partner.image,'/assets/frontend/images/beauty.jpg') }}"></span>
                     <h3>{{partner.title}}</h3>
                 </div>
             </div>
