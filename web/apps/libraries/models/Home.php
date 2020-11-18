@@ -1,5 +1,5 @@
 <?php
-class Home extends \Phalcon\Mvc\Model
+class Home extends \ModelCore
 {
     public function getSource()
     {

@@ -1,6 +1,6 @@
 <?php
 
-class Subjects extends \Phalcon\Mvc\Model
+class Subjects extends \ModelCore
 {
     public function getSource()
     {

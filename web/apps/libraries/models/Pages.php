@@ -1,5 +1,5 @@
 <?php
-class Pages extends \Phalcon\Mvc\Model
+class Pages extends \ModelCore
 {
     public function getSource()
     {

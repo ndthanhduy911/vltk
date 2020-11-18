@@ -1,6 +1,6 @@
 <?php
 
-class Researches extends \Phalcon\Mvc\Model
+class Researches extends \ModelCore
 {
     public function getSource()
     {

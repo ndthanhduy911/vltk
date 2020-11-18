@@ -1,5 +1,5 @@
 <?php
-class CatStatus extends \Phalcon\Mvc\Model
+class CatStatus extends \ModelCore
 {
 
     public function getSource()

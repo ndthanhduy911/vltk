@@ -1,5 +1,5 @@
 <?php
-class Staff extends \Phalcon\Mvc\Model
+class Staff extends \ModelCore
 {
     public function getSource()
     {

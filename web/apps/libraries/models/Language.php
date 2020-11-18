@@ -1,5 +1,5 @@
 <?php
-class Language extends \Phalcon\Mvc\Model
+class Language extends \ModelCore
 {
     public function initialize(){
         $this->setSource("language");

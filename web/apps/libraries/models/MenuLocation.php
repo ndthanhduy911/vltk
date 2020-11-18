@@ -1,5 +1,5 @@
 <?php
-class MenuLocation extends \Phalcon\Mvc\Model
+class MenuLocation extends \ModelCore
 {
     public function getSource()
     {

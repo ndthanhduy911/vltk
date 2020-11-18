@@ -1,6 +1,6 @@
 <?php
 
-class Districts extends \ModelCore
+class Districts extends \Phalcon\Mvc\Model
 {
     public function initialize()
     {

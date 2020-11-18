@@ -1,6 +1,6 @@
 <?php
 
-class Attributes extends \Phalcon\Mvc\Model
+class Attributes extends \ModelCore
 {
     public function getSource()
     {

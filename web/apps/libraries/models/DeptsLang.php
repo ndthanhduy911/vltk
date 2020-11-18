@@ -1,5 +1,5 @@
 <?php
-class DeptsLang extends \ModelCore
+class DeptsLang extends \Phalcon\Mvc\Model
 {
     public function initialize()
     {

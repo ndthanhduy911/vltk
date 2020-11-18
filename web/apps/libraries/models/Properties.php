@@ -1,6 +1,6 @@
 <?php
 
-class Properties extends \Phalcon\Mvc\Model
+class Properties extends \ModelCore
 {
     public static function findFirstId($id, $columns = "*")
     {

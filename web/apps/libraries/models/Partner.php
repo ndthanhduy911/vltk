@@ -1,5 +1,5 @@
 <?php
-class Partner extends \Phalcon\Mvc\Model
+class Partner extends \ModelCore
 {
     public function getSource()
     {

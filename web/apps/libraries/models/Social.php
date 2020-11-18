@@ -1,5 +1,5 @@
 <?php
-class Social extends \Phalcon\Mvc\Model
+class Social extends \ModelCore
 {
     public function getSource()
     {

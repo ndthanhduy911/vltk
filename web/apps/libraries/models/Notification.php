@@ -1,6 +1,6 @@
 <?php
 
-class Notification extends \Phalcon\Mvc\Model
+class Notification extends \ModelCore
 {
     public function getSource()
     {

@@ -1,5 +1,5 @@
 <?php
-class ConectionSystem extends \Phalcon\Mvc\Model
+class ConectionSystem extends \ModelCore
 {
 
     public function getSource()

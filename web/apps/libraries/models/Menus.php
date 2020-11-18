@@ -1,6 +1,6 @@
 <?php
 
-class Menus extends \Phalcon\Mvc\Model
+class Menus extends \ModelCore
 {
     public function getSource()
     {

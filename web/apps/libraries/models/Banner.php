@@ -1,5 +1,5 @@
 <?php
-class Banner extends \Phalcon\Mvc\Model
+class Banner extends \ModelCore
 {
     public function getSource()
     {

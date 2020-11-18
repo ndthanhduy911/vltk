@@ -1,6 +1,6 @@
 <?php
 
-class Managers extends \Phalcon\Mvc\Model
+class Managers extends \ModelCore
 {
     public function getSource()
     {

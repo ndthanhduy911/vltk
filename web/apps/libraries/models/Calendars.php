@@ -1,6 +1,6 @@
 <?php
 
-class Calendars extends \Phalcon\Mvc\Model
+class Calendars extends \ModelCore
 {
     public function getSource()
     {
