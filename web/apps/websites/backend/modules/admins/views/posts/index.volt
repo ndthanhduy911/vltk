@@ -160,7 +160,7 @@
                             </div>
                         </div>
                     </div>
-                    <input type="hidden" name="fkey" value="checkin">
+                    <input type="hidden" name="fkey" value="posts">
                     <input class="tokenCSRF" type='hidden' name="{{security.getTokenKey()}}" value="{{security.getToken()}}" />
                 </div>
                 <div class="modal-footer justify-content-between">

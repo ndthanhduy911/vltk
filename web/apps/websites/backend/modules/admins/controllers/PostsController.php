@@ -19,7 +19,7 @@ class PostsController  extends \BackendController {
         $fTables = ['featured_image','title','excerpt','catid','authorname','calendar','slug','status'];
         if($fSetting = \FilterSetting::findFirstKey('posts')){
             $fFilters = $fSetting->filters ? json_decode($fSetting->filters) : $fFilters;
-            $fTables = $fSetting->tables ? json_decode($fSetting->tables) : $fTables;
+            $fTables = $fSetting->tables ? json_decode($fSetting->tables) : $fTables;   
         }
         $filters = \FilterSetting::mapFilter($fFilters,$filters);
         $tables = \FilterSetting::mapFilter($fTables,$tables);
