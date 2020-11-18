@@ -22,8 +22,8 @@ const getPostLink = (item) => {
 
 const updateSettingPosts = (form) => {
     if ($(form).length) {
-        let filterField = ['code', 'name', 'deptid', 'typeid', 'cstatus'];
-        let tableField = ['codes', 'name', 'typename', 'deptname', 'barcode', 'madename', 'producedyear', 'purchaseddate', 'suppliername', 'quantity', 'cstatus'];
+        let filterField = ['title', 'catid', 'status', 'calendar'];
+        let tableField = ['featured_image','title','excerpt','catid','authorname','calendar','slug','status'];
         showModalForm('#settingPosts', '#modalSettingPosts', 'GET', (data) => {
             let filters = data.filters.length ? data.filters : filterField;
             filters.forEach(element => {
@@ -44,36 +44,35 @@ const updateSettingPosts = (form) => {
         });
         checkboxAll('#filterSelectAll', 'input[name="filters[]"]');
         checkboxAll('#tablesSelectAll', 'input[name="tables[]"]');
-
         settingFiled(form,filterField,tableField)
     }
 }
 
 const loadTablePosts = (table = '#posts', cb = () => {}) => {
     if ($(table).length) {
-        let formSearch = $('#searchPosts');
+        let router = {co:'posts',aj:'ajaxgetdata',fo:'#searchPosts',cl:'Posts',ti:'bài viết'};
         let paramsUrl = getParams();
-
         let columns = [];
         let fkeys = [];
         $(`${table} thead th`).each((key,element) => {
             let fkey = $(element).data('col');
             fkeys.push(fkey);
-            if(['ddcosts'].indexOf(fkey) === -1){
-                columns.push({data : $(element).data('col')})
-            }else{
-                columns.push({data : 'no'})
-            }
+            // if(['ddcosts'].indexOf(fkey) === -1){
+            //     columns.push({data : $(element).data('col')})
+            // }else{
+            //     columns.push({data : 'no'})
+            // }
+            columns.push({data : $(element).data('col')})
         });
 
         let options = {
             "serverSide": true,
-            "ajax": `${webAdminUrl}/posts/ajaxgetdata?${paramsUrl}`,
+            "ajax": `${webAdminUrl}/${router.co}/${router.aj}?${paramsUrl}`,
             "columns":columns,
             'createdRow': function (row, item, dataIndex) {
                 $('td', row).addClass('align-middle text-center');
                 $('td:first', row).addClass('select-box').html(`
-                    <input name="assetCheckbox[]" class="assetCheckbox" type="checkbox" value="${item.id}" data-dept=${item.deptid}>
+                    <input name="${router.co}Checkbox[]" class="${router.co}Checkbox" type="checkbox" value="${item.id}" data-dept=${item.deptid}>
                 `)
                 let pageInfo = $(table).DataTable().page.info();
                 let page = pageInfo.page;
@@ -83,58 +82,15 @@ const loadTablePosts = (table = '#posts', cb = () => {}) => {
                 $(`td:eq(${fkeys.indexOf('title')})`, row).html(showTitle(item.title,30));
                 $(`td:eq(${fkeys.indexOf('excerpt')})`, row).html(showTitle(item.excerpt,30));
                 $(`td:eq(${fkeys.indexOf('featured_image')})`, row).html(image);
+                $(`td:eq(${fkeys.indexOf('catid')})`, row).html(item.catname);
                 $(`td:eq(${fkeys.indexOf('slug')})`, row).html(getPostLink(item));
                 $(`td:eq(${fkeys.indexOf('calendar')})`, row).html(vi_moment(item.calendar, 'DD/MM/YYYY HH:mm'));
                 $(`td:eq(${fkeys.indexOf('status')})`, row).html(showStatus(item.status));
-                $('td:last', row).addClass('text-nowrap').html(showButtonEdit(item,'posts','Posts'));
-            },
-            "language": {
-                "sProcessing": "Đang xử lý...",
-                "sLengthMenu": "Xem _MENU_",
-                "sZeroRecords": "Không tìm thấy dữ liệu",
-                "sInfo": "Đang xem _START_ đến _END_ trong tổng số _TOTAL_ bài viết",
-                "sInfoEmpty": "Đang xem 0 đến 0 trong tổng số 0 bài viết",
-                "sInfoFiltered": "(được lọc từ _MAX_ bài viết)",
-                "sInfoPostFix": "",
-                "sSearch": "Tìm:",
-                "sUrl": "",
-                "oPaginate": {
-                    "sFirst": "Đầu",
-                    "sPrevious": "Trước",
-                    "sNext": "Tiếp",
-                    "sLast": "Cuối"
-                }
+                $('td:last', row).addClass('text-nowrap').html(showButtonEdit(item,router.co,router.cl));
             }
         }
-        dataTableCt(table,options).then((dt) => {
-            $(table).on( 'page.dt', function (e) {
-                e.preventDefault();
-                let paged = dt.page.info().page;
-                let paramsUrl = setParam('paged',paged);
-                window.history.pushState({}, "Search parade", `${webAdminUrl}/posts?${paramsUrl}`);
-            });
 
-            formSearch.submit(function (e) { 
-                e.preventDefault();
-                let dataSearch = formSearch.serializeArray();
-                let textGetSearch = "?paged=";
-                dataSearch.forEach((element, index) => {
-                    if(element.name != "paged"){
-                        textGetSearch += `&${element.name}=${element.value}`
-                    }
-                })            
-                dt.ajax.url( `${webAdminUrl}/posts/ajaxgetdata${textGetSearch}` ).load();
-                window.history.pushState({}, "Search parade", `${webAdminUrl}/posts${textGetSearch}`);
-            });
-
-            checkboxAll('#postCheckboxAll','.postCheckbox');
-            deleteAll('#deletePosts', '.postCheckbox',(data) => {
-                showSweetAlertOk('Xóa thành công');
-                dt.draw()
-            });
-
-            updateSettingPosts('#frmSettingPosts');
-        })
+        dataTableCt(table,options,router)
         cb();
     }
 }

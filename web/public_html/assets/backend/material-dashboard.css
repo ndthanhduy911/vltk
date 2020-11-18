@@ -1013,14 +1013,14 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4 {
 
 
 a {
-  color: #003D7A;
+  color: #03A8F3;
 }
 a:hover, a:focus {
-  color: #FE5722;
+  color: #003D7A;
   text-decoration: none;
 }
 a.text-info:hover, a.text-info:focus {
-  color: #00a5bb;
+  color: #003D7A;
 }
 
 /*           Animations              */

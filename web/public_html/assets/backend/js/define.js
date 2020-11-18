@@ -15,7 +15,7 @@ const vi_moment = (date, type = 'DD/MM/YYYY HH:mm:ss') => {
     return date ? moment(date, 'YYYY-MM-DD HH:mm:ss').format(type) : '';
 }
 //Datatable Custom
-const dataTableCt = (table, opCT = false) => {
+const dataTableCt = (table, opCT = false,router={co:'',fo:'',aj:'ajaxgetdata',cl:'',ti:'hàng'}) => {
     return new Promise((resolve, reject) => {
         if ($(table).length) {
             let paged = getParams('paged')
@@ -41,9 +41,9 @@ const dataTableCt = (table, opCT = false) => {
                     "sProcessing": "Đang xử lý...",
                     "sLengthMenu": "Xem _MENU_",
                     "sZeroRecords": "Không tìm thấy dữ liệu",
-                    "sInfo": "Đang xem _START_ đến _END_ trong tổng số _TOTAL_ hàng",
-                    "sInfoEmpty": "Đang xem 0 đến 0 trong tổng số 0 hàng",
-                    "sInfoFiltered": "(được lọc từ _MAX_ hàng)",
+                    "sInfo": `Đang xem _START_ đến _END_ trong tổng số _TOTAL_ ${router.ti}`,
+                    "sInfoEmpty": `Đang xem 0 đến 0 trong tổng số 0 ${router.ti}`,
+                    "sInfoFiltered": `(được lọc từ _MAX_ ${router.ti})`,
                     "sInfoPostFix": "",
                     "sSearch": "Tìm:",
                     "sUrl": "",
@@ -56,6 +56,51 @@ const dataTableCt = (table, opCT = false) => {
                 }
             }
             let dt = $(table).DataTable(opCT ? $.extend(options, opCT) : options);
+            
+            $(table).on( 'page.dt', function (e) {
+                e.preventDefault();
+                let paged = dt.page.info().page;
+                let paramsUrl = setParam('paged',paged);
+                window.history.pushState({}, `Search ${router.co}`, `${webAdminUrl}/${router.co}?${paramsUrl}`);
+            });
+
+            $(table).on('click', '.orderby', function (e) {
+                e.preventDefault();
+                let orderBy = $(this).attr('order');
+                let orderDir = $(this).attr('dir');
+                let dataSearch = $(router.fo).serializeArray();
+                let textGet = "?paged=";
+                dataSearch.forEach((element, index) => {
+                    if (element.name != "paged") {
+                        textGet += `&${element.name}=${element.value}`
+                    }
+                })
+                dt.ajax.url(`${webAdminUrl}/${router.co}/${router.aj}${textGet}&order=${orderBy}&dir=${orderDir}`).load();
+                $(table).find('thead th a i').removeClass(['fa-sort-up','fa-sort-down']).addClass('fa-sort');
+                changeSort(this,orderDir);
+                window.history.pushState({}, `Order ${router.co}`, `${webAdminUrl}/${router.co}${textGet}&order=${orderBy}&dir=${orderDir}`);
+            });
+
+            $(router.fo).submit(function (e) { 
+                e.preventDefault();
+                let dataSearch = $(router.fo).serializeArray();
+                let textGetSearch = "?paged=";
+                dataSearch.forEach((element, index) => {
+                    if(element.name != "paged"){
+                        textGetSearch += `&${element.name}=${element.value}`
+                    }
+                })            
+                dt.ajax.url( `${webAdminUrl}/${router.co}/${router.aj}${textGetSearch}` ).load();
+                window.history.pushState({}, `Search ${router.co}`, `${webAdminUrl}/${router.co}${textGetSearch}`);
+            });
+
+            checkboxAll(`#${router.co}CheckboxAll`,`.${router.co}Checkbox`);
+            deleteAll(`#delete${router.cl}`, `.${router.co}Checkbox`,(data) => {
+                showSweetAlertOk('Xóa thành công');
+                dt.draw()
+            });
+            updateSettingPosts(`#frmSetting${router.cl}`);
+
             resolve(dt);
         }else{
             reject();

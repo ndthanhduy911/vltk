@@ -182,7 +182,7 @@ class FilterSetting extends \ModelCore
         return $data;
     }
 
-    public static function getDataOrder($_this,$data,$model,$a=""){
+    public static function getDataOrder($_this,$data,$model,$a="",$arrays = []){
         $orders = $_this->request->get('order',['string', 'trim']);
         $orders = explode(",",$orders);
         $dirs = $_this->request->get('dir',['string', 'trim']);
@@ -190,9 +190,14 @@ class FilterSetting extends \ModelCore
         $orderArray = [];
         foreach ($orders as $key => $value) {
             $dir = isset($dirs[$key]) ? (int)$dirs[$key] : '';
-            $dir = $dir==1? 'asc' :( $dir==2 ? 'desc' : 0 );
+            $dir = $dir==1 ? 'asc' :( $dir==2 ? 'desc' : 0 );
             if($model && property_exists($model, $value) && $dir){
                 array_push($orderArray,"{$a}.{$value} {$dir}");
+            }
+            foreach ($arrays as $alias => $av) {
+                if($av == $value && $dir){
+                    array_push($orderArray,"{$alias}.{$value} {$dir}");
+                }
             }
         }
         if(count($orderArray)){

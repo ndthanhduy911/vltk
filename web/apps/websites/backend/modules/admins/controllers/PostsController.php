@@ -16,7 +16,7 @@ class PostsController  extends \BackendController {
         $filters = \Posts::findFilters();
         $tables = \Posts::findTables();
         $fFilters = ['title','catid','status','calendar'];
-        $fTables = ['featured_image','title','excerpt','catname','authorname','calendar','slug','status'];
+        $fTables = ['featured_image','title','excerpt','catid','authorname','calendar','slug','status'];
         if($fSetting = \FilterSetting::findFirstKey('posts')){
             $fFilters = $fSetting->filters ? json_decode($fSetting->filters) : $fFilters;
             $fTables = $fSetting->tables ? json_decode($fSetting->tables) : $fTables;
@@ -335,7 +335,7 @@ class PostsController  extends \BackendController {
         ->orderBy('p.calendar DESC');
 
         $data = $this->master::builderPermission($data,$perL,'p');
-        $data = \FilterSetting::getDataOrder($this,$data,\Posts::findFirst(),'p');
+        $data = \FilterSetting::getDataOrder($this,$data,\Posts::findFirst(),'p',['pl'=>'title']);
         $data = \FilterSetting::getDataFilter($this,$data,\Posts::arrayFilter(),'p');
 
         $array_row = [

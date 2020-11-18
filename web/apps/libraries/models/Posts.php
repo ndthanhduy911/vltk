@@ -202,12 +202,13 @@ class Posts extends \ModelCore
     }
 
     public static function findTables () {
-        return ['featured_image','title','excerpt','catname','authorname','calendar','slug','status'];
+        return ['featured_image','title','excerpt','catid','authorname','calendar','slug','status'];
     }
 
     public static function arrayOrder () {
         return ['title','catid','status','calendar'];
     }
+    
     public static function findFilters () {
         $filters = \Posts::arrayFilter();
         return array_merge($filters[0],$filters[1],$filters[2]);
