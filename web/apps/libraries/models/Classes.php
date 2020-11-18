@@ -3,6 +3,12 @@
 class Classes extends \ModelCore
 {
     
+    public function initialize()
+    {
+        $this->setSchema(SCHEMADB);
+        $this->setSource("classes");
+    }
+
     public function getSource()
     {
         return 'classes';

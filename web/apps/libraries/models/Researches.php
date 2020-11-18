@@ -2,6 +2,12 @@
 
 class Researches extends \ModelCore
 {
+    public function initialize()
+    {
+        $this->setSchema(SCHEMADB);
+        $this->setSource("researches");
+    }
+
     public function getSource()
     {
         return 'researches';

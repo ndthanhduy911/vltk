@@ -2,9 +2,15 @@
 class ConectionSystem extends \ModelCore
 {
 
+    public function initialize()
+    {
+        $this->setSchema(SCHEMADB);
+        $this->setSource("connection");
+    }
+
     public function getSource()
     {
-        return 'conection';
+        return 'connection';
     }
 
     public static function findFirstId($id, $columns = "*")

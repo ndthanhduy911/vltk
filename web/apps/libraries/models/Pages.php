@@ -1,18 +1,15 @@
 <?php
 class Pages extends \ModelCore
 {
+    public function initialize()
+    {
+        $this->setSchema(SCHEMADB);
+        $this->setSource("pages");
+    }
+
     public function getSource()
     {
         return 'pages';
-    }
-
-    public static function findFirstId($id, $columns = "*")
-    {
-        return parent::findFirst([
-            "conditions" => "id = :id:",
-            "bind" => array('id' => $id),
-            "columns" => $columns
-        ]);   
     }
 
     public static function getUrlById($id = null)

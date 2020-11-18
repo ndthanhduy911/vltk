@@ -2,6 +2,12 @@
 
 class Tags extends \ModelCore{
     
+    public function initialize()
+    {
+        $this->setSchema(SCHEMADB);
+        $this->setSource("tags");
+    }
+
     public function getSource()
     {
         return 'tags';

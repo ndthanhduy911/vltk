@@ -22,7 +22,7 @@ class PartnerController  extends \BackendController {
             $partner->updatedat = date('Y-m-d H:i:s');
             $title = 'Cập nhật';
             foreach ($languages as $key => $lang) {
-                $partnerlang = \PartnerLang::findFirst(['partner_id = :id: AND langid = :langid:','bind' => ['id' => $partner->id, 'langid' => $lang->id]]);
+                $partnerlang = \PartnerLang::findFirst(['partnerid = :id: AND langid = :langid:','bind' => ['id' => $partner->id, 'langid' => $lang->id]]);
                 if($partnerlang){
                     $formlang = new PartnerLangForm($partnerlang);
                     $partnerslang[$lang->id] = $partnerlang;
@@ -84,7 +84,7 @@ class PartnerController  extends \BackendController {
                         }
                     } else {
                         foreach ($languages as $key => $lang) {
-                            $partnerslang[$lang->id]->partner_id = $partner->id;
+                            $partnerslang[$lang->id]->partnerid = $partner->id;
                             $partnerslang[$lang->id]->save();
                         }
                         $this->flashSession->success($title." thành công");
@@ -174,7 +174,7 @@ class PartnerController  extends \BackendController {
             ))
             ->from(['p' => 'Partner'])
             ->where("p.deleted = 0 AND p.deptid = {$deptid}")
-            ->leftJoin('PartnerLang', 'pl.partner_id = p.id AND pl.langid = 1','pl')
+            ->leftJoin('PartnerLang', 'pl.partnerid = p.id AND pl.langid = 1','pl')
             ->orderBy('p.deptid ASC');
     
             $search = 'pl.title LIKE :search:';

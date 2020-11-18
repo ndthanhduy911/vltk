@@ -1,6 +1,12 @@
 <?php 
 class Link extends \ModelCore
 {
+    public function initialize()
+    {
+        $this->setSchema(SCHEMADB);
+        $this->setSource("link");
+    }
+
     public function getSource()
     {
         return 'link';
@@ -9,14 +15,5 @@ class Link extends \ModelCore
     public static function getName($link_id, $langid = 1){
         $menulang = \LinkLang::findFirst(['langid =:langid: AND link_id = :link_id:', 'bind'=>['langid' => $langid, 'link_id' => $link_id]]);
         return $menulang ? $menulang->name : '';
-    }
-
-    public static function findFirstId($id, $columns = "*")
-    {
-        return parent::findFirst([
-            "conditions" => "id = :id:",
-            "bind" => array('id' => $id),
-            "columns" => $columns
-        ]);
     }
 }

@@ -117,7 +117,7 @@ class DeptController extends \FrontendController
         ))
         ->from(['p' => 'Partner'])
         ->where("p.status = 1 AND p.deleted = 0 AND p.deptid = $dept->id")
-        ->leftJoin('PartnerLang', "pl.partner_id = p.id AND pl.langid = $langid",'pl')
+        ->leftJoin('PartnerLang', "pl.partnerid = p.id AND pl.langid = $langid",'pl')
         ->getQuery()
         ->execute();
         

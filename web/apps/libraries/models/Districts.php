@@ -5,12 +5,12 @@ class Districts extends \Phalcon\Mvc\Model
     public function initialize()
     {
         $this->setSchema(SCHEMADB);
-        $this->setSource("hnndistricts");
+        $this->setSource("districts");
     }
 
     public function getSource()
     {
-        return 'hnndistricts';
+        return 'districts';
     }
 
     public static function getS2DistrictCity($cityId = 0)

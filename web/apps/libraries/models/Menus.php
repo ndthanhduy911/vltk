@@ -2,6 +2,12 @@
 
 class Menus extends \ModelCore
 {
+    public function initialize()
+    {
+        $this->setSchema(SCHEMADB);
+        $this->setSource("menus");
+    }
+
     public function getSource()
     {
         return 'menus';

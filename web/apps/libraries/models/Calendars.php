@@ -2,18 +2,15 @@
 
 class Calendars extends \ModelCore
 {
+    public function initialize()
+    {
+        $this->setSchema(SCHEMADB);
+        $this->setSource("calendars");
+    }
+
     public function getSource()
     {
         return 'calendars';
-    }
-
-    public static function findFirstId($id, $columns = "*")
-    {
-        return parent::findFirst([
-            "conditions" => "id = :id:",
-            "bind" => array('id' => $id),
-            "columns" => $columns
-        ]);   
     }
 
     public static function getUrlById($id = null)

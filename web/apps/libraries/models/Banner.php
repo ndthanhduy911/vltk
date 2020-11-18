@@ -1,18 +1,14 @@
 <?php
 class Banner extends \ModelCore
 {
+    public function initialize()
+    {
+        $this->setSchema(SCHEMADB);
+        $this->setSource("banner");
+    }
+
     public function getSource()
     {
         return 'banner';
-    }
-
-    public static function findFirstId($id, $columns = "*")
-    {
-        
-        return parent::findFirst([
-            "conditions" => "id = :id:",
-            "bind" => array('id' => $id),
-            "columns" => $columns
-        ]);
     }
 }

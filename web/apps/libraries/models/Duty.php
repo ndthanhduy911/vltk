@@ -8,12 +8,12 @@ class Duty extends \ModelCore
     public function initialize()
     {
         $this->setSchema(SCHEMADB);
-        $this->setSource("hnnduty");
+        $this->setSource("duty");
     }
 
     public function getSource()
     {
-        return 'hnnduty';
+        return 'duty';
     }
 
     public function vdUpdate($try=false)

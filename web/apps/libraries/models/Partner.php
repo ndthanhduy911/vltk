@@ -1,18 +1,14 @@
 <?php
 class Partner extends \ModelCore
 {
+    public function initialize()
+    {
+        $this->setSchema(SCHEMADB);
+        $this->setSource("partner");
+    }
+
     public function getSource()
     {
         return 'partner';
-    }
-
-    public static function findFirstId($id, $columns = "*")
-    {
-        
-        return parent::findFirst([
-            "conditions" => "id = :id:",
-            "bind" => array('id' => $id),
-            "columns" => $columns
-        ]);
     }
 }

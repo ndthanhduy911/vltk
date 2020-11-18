@@ -1,19 +1,15 @@
 <?php
 class Staff extends \ModelCore
 {
+    public function initialize()
+    {
+        $this->setSchema(SCHEMADB);
+        $this->setSource("staff");
+    }
+
     public function getSource()
     {
         return 'staff';
-    }
-
-    public static function findFirstId($id, $columns = "*")
-    {
-        
-        return parent::findFirst([
-            "conditions" => "id = :id:",
-            "bind" => array('id' => $id),
-            "columns" => $columns
-        ]);
     }
 
     public static function getUrl($dept, $staff = NULL)
