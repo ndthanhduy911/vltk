@@ -5,21 +5,12 @@ class ConectionSystem extends \ModelCore
     public function initialize()
     {
         $this->setSchema(SCHEMADB);
-        $this->setSource("connection");
+        $this->setSource("conection");
     }
 
     public function getSource()
     {
-        return 'connection';
-    }
-
-    public static function findFirstId($id, $columns = "*")
-    {
-        return parent::findFirst([
-            "conditions" => "id = :id:",
-            "bind" => array('id' => $id),
-            "columns" => $columns
-        ]);
+        return 'conection';
     }
 
     public static function countType($type, $deptid)

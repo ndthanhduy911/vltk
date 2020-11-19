@@ -1,42 +1,44 @@
-<div class="content-header">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-6 d-flex align-items-center">
-                <ol class="breadcrumb">
-                    {% if dispatcher.getControllerName() != 'index' %}
-                    <li class="breadcrumb-item"><a href="<?= WEB_ADMIN_URL ?>"><i class="fas fa-home"></i></a></li>
+<form method="post" enctype="multipart/form-data" data-toggle="validator" role="form">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6 d-flex align-items-center">
+                    <ol class="breadcrumb">
+                        {% if dispatcher.getControllerName() != 'index' %}
+                        <li class="breadcrumb-item"><a href="<?= WEB_ADMIN_URL ?>"><i class="fas fa-home"></i></a></li>
+                        {% endif %}
+                        <li class="breadcrumb-item"><a href="<?= WEB_ADMIN_URL ?>/posts">Bài viết</a></li>
+                        <li class="breadcrumb-item active">{{ title }}</li>
+                    </ol>
+                </div>
+                <div class="col-sm-6">
+                    <div class="float-right">
+                        <a id="btnBackPost" href="<?= WEB_ADMIN_URI.'/posts' ?>" class="btn btn-hnn btn-hnn-default" title="Trở về"><span><i class="fas fa-reply"></i></span></a>
+                    </div>
+                    {% if master.checkPermission('posts', 'update','1') %}
+                    <div class="float-right">
+                        <button type="submit" class="btn btn-hnn btn-hnn-success mr-2" title="Lưu thông tin"><span>Lưu</span></button>
+                    </div>
                     {% endif %}
-                    <li class="breadcrumb-item active">{{ title }}</li>
-                </ol>
-            </div>
-            <div class="col-sm-6">
-                <div class="float-right">
-                    <a id="btnBackPost" href="<?= WEB_ADMIN_URI.'/posts' ?>" class="btn btn-hnn btn-hnn-default" title="Trở về"><span><i class="fas fa-reply"></i></span></a>
                 </div>
-                {% if master.checkPermission('posts', 'update','1') %}
-                <div class="float-right">
-                    <button type="submit" class="btn btn-hnn btn-hnn-success mr-2" title="Lưu thông tin"><span>Lưu</span></button>
-                </div>
-                {% endif %}
             </div>
         </div>
     </div>
-</div>
 
-<div class="col-md-12">
     <div class="col-md-12">
-        {{flashSession.output()}}
+        <div class="col-md-12">
+            {{flashSession.output()}}
+        </div>
     </div>
-</div>
 
-<form method="post" enctype="multipart/form-data" data-toggle="validator" role="form">
+
     <section class="content">
         <div class="container-fluid">
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-md-9">
                         <div class="card">
-                            <div class="card-header p-2">
+                            <div class="card-header">
                                 <ul class="nav nav-pills w-100">
                                     {% for key, lang in languages %}
                                     <li class="nav-item">
@@ -67,11 +69,10 @@
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <h6 class="text-primary font-weight-normal">Nội dung</h6>
-                                        <div class="form-group mb-3">
+                                        <p class="mb-0">Nội dung</p>
+                                        <div class="form-group label-floating">
                                             <div class="input-group">
-                                                <textarea id="editor{{lang.id}}" name="content[{{lang.id}}]" class="rounded">
+                                                <textarea id="ckEditor{{lang.id}}" name="content[{{lang.id}}]" class="rounded">
                                                     <?= isset($postContent[$lang->id]) ? $postContent[$lang->id]: '' ?>
                                                 </textarea>
                                                 <div class="invalid-tooltip"></div>

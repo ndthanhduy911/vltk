@@ -5,11 +5,11 @@ class PostsLang extends \Phalcon\Mvc\Model
     public function initialize()
     {
         $this->setSchema(SCHEMADB);
-        $this->setSource("postlang");
+        $this->setSource("postslang");
     }
 
     public function getSource()
     {
-        return 'postlang';
+        return 'postslang';
     }
 }

@@ -22,7 +22,7 @@
                 {% endif %}
                 {% if master.checkPermission('posts', 'update') %}
                 <div class="btn-group float-right">
-                    <a id="addPosts" href="#" data-href="<?= WEB_ADMIN_URL ?>/posts/update" title="Tạo mới"
+                    <a id="addPosts" href="<?= WEB_ADMIN_URL ?>/posts/view" title="Tạo mới"
                         class="ml-2 btn btn-hnn btn-hnn-success"><span><i class="fas fa-plus"></i></span></a>
                 </div>
                 {% endif %}

@@ -31,9 +31,13 @@
     <!-- Select2 -->
     <link rel="stylesheet" href="<?= WEB_URL.'/assets/backend/dist/' ?>plugins/smoothproducts/css/smoothproducts.css">  
     <!-- OverlayScrollbars -->
-    <link type="text/css" href="<?= WEB_URL.'/assets/backend/dist/' ?>plugins/overlayScrollbars/css/OverlayScrollbars.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="<?= WEB_URL.'/assets/backend/dist/' ?>plugins/overlayScrollbars/css/OverlayScrollbars.min.css"/>
     <!-- Theme style -->
     <link rel="stylesheet" href="<?= WEB_URL.'/assets/backend/dist/' ?>/css/adminlte.min.css">
+    <!-- ckeditor -->
+    <!-- <link rel="stylesheet" href="<?= WEB_URL.'/assets/backend/dist/' ?>plugins/ckeditor/samples/css/samples.css">
+    <link rel="stylesheet" href="<?= WEB_URL.'/assets/backend/dist/' ?>plugins/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css"> -->
+    <!-- dashboard -->
     <link rel="stylesheet" href="<?= WEB_URL.'/assets/backend/' ?>material-dashboard.css?v=<?= VS_SCRIPT ?>">
     <!-- custom -->
     <link rel="stylesheet" href="<?= WEB_URL.'/assets/backend/' ?>custom.css?v=<?= VS_SCRIPT ?>">
@@ -82,6 +86,9 @@
     <script src="<?= WEB_URL.'/assets/backend/dist/' ?>plugins/barcode/jquery-barcode.min.js"></script>
     <!-- smoothproducts -->
     <script src="<?= WEB_URL.'/assets/backend/dist/' ?>plugins/smoothproducts/js/smoothproducts.min.js"></script>
+    <!-- ckeditor -->
+    <script src="<?= WEB_URL.'/assets/backend/dist/' ?>plugins/ckeditor/ckeditor.js"></script>
+    <script src="<?= WEB_URL.'/assets/backend/dist/' ?>plugins/ckeditor/samples/js/sample.js"></script>
     <!-- Call API -->
     <script src="<?= WEB_URL.'/assets/backend/' ?>js/callapi.js?v=<?= VS_SCRIPT ?>"></script>
     <!-- Define -->

@@ -9,6 +9,7 @@ const showStatus = (id = '') => {
     }
 }
 
+
 const showTitle = (text,length = 100) => {
     return `<span title="${text}">${trimText(text,length)}</span>`
 }
@@ -18,6 +19,16 @@ const getPostLink = (item) => {
         return `<a href="${webUri}/${item.dslug}/news/${item.slug}">Link</a>`;
     }
     return `<a href="${webUri}/news/${item.slug}">Link</a>`;
+}
+
+const updatePosts = () => {
+    if($('#ckEditor1').length){
+        getCkeditor1();
+    }
+
+    if($('#ckEditor2').length){
+        getCkeditor2();
+    }
 }
 
 const updateSettingPosts = (form) => {
@@ -188,3 +199,4 @@ loadTablePosts('#posts');
 loadTablePostsTrash('#posts_trash');
 changeTitleToSlug('#title', '#slug');
 showSelectImage('#uploadImage','#showImg','#image', '#removeImage');
+updatePosts();
