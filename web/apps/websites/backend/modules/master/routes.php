@@ -96,7 +96,7 @@ $router->add(WEB_ADMIN_URI . '/help/:action/:int', array(
     'id' => 2
 ));
 
-/***********************HelpController***********************/
+/***********************SettingController***********************/
 $router->add(WEB_ADMIN_URI . '/setting', array(
     'module' => 'backend_master',
     'controller' => 'setting',
@@ -138,25 +138,6 @@ $router->add(WEB_URI . '/files/display/{dir:[a-zA-Z0-9\_\-]+}/{file:[a-zA-Z0-9\_
 //     'action'  => 1,
 //     'id' => 2
 // ));
-
-/***********************BackupController***********************/
-$router->add(WEB_ADMIN_URI . '/backup', array(
-    'module' => 'backend_master',
-    'controller' => 'backup',
-    'action' => 'index',
-));
-
-$router->add(WEB_ADMIN_URI . '/backup/:action', array(
-    'module' => 'backend_master',
-    'controller' => 'backup',
-    'action' => 1,
-));
-$router->add(WEB_ADMIN_URI . '/backup/:action/:int', array(
-    'module' => 'backend_master',
-    'controller' => 'backup',
-    'action'  => 1,
-    'id' => 2
-));
 
 /***********************SyncController***********************/
 $router->add(WEB_ADMIN_URI . '/sync', array(

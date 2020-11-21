@@ -1,22 +1,13 @@
 <?php
-
 namespace Backend\Modules\Master;
-
-use Phalcon\Loader;
-use Phalcon\Mvc\View;
-use Phalcon\Mvc\View\Engine\Volt as VoltEngine;
-use Phalcon\Mvc\ModuleDefinitionInterface;
-
-
-class Module implements ModuleDefinitionInterface
+class Module implements \Phalcon\Mvc\ModuleDefinitionInterface
 {
     /**
      * Registers the module auto-loader
      */
-    public function registerAutoloaders(\Phalcon\DiInterface $dependencyInjector = null) // <- here it is
+    public function registerAutoloaders(\Phalcon\DiInterface $dependencyInjector = null)
     {
-        $loader = new Loader();
-
+        $loader = new \Phalcon\Loader();
         $loader->registerNamespaces(array(
             'Backend\Modules\Master\Controllers' => __DIR__ . '/controllers/',
             'Backend\Modules\Master\Forms' => __DIR__ . '/forms/',
@@ -31,18 +22,9 @@ class Module implements ModuleDefinitionInterface
      */
     public function registerServices(\Phalcon\DiInterface $di)
     {
-        /**
-         * Read configuration
-         */
-        //$config = include APP_DIR . "/config/config.php";
-        //$config = include APP_DIR . '/config/config.php';
-        /**
-         * Setting up the views component
-         */
-
         $di['view'] = function () {
             $config = include APP_DIR . '/configs/config.php';
-            $view = new View();
+            $view = new \Phalcon\Mvc\View();
             $view->setViewsDir(__DIR__ . '/views/');
             $view->setLayoutsDir('../../../layouts/' . $config->application->backendTheme . '/');
             $view->setPartialsDir('../../../layouts/' . $config->application->backendTheme . '/partials/');
@@ -51,7 +33,7 @@ class Module implements ModuleDefinitionInterface
             $view->registerEngines(array(
                 '.volt' => function ($view, $di) use ($config) {
 
-                    $volt = new VoltEngine($view, $di);
+                    $volt = new \Phalcon\Mvc\View\Engine\Volt($view, $di);
 
                     $volt->setOptions(array(
                         'compiledPath' => $config->application->cacheDir."views/",
