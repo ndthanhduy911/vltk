@@ -29,6 +29,8 @@ const updatePosts = () => {
     if($('#ckEditor2').length){
         getCkeditor2();
     }
+
+    
 }
 
 const updateSettingPosts = (form) => {

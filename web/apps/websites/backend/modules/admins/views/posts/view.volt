@@ -37,7 +37,7 @@
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-md-9">
-                        <div class="card">
+                        <div class="card card-primary card-outline">
                             <div class="card-header">
                                 <ul class="nav nav-pills w-100">
                                     {% for key, lang in languages %}
@@ -85,7 +85,7 @@
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="card">
+                        <div class="card card-primary card-outline">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="form-group label-floating col-md-12">
@@ -122,7 +122,7 @@
                                             alt="<?= !empty($post->image) ? $post->image : '' ?>">
                                             {{formPost.render('image')}}
                                             <a id="uploadImage" href="#" class="link">Đặt ảnh đại diện</a>
-                                            <a id="removeImage" href="#" class="link text-danger <?= !empty($post->image) ? "" : "hidden" ?>">Xóa</a>
+                                            <a id="removeImage" href="#" class="link text-danger <?= !empty($post->image) ? '' : 'hidden' ?>">Xóa</a>
                                         </div>
                                     </div>
                                 </div>

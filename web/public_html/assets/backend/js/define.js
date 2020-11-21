@@ -779,7 +779,7 @@ const createButton = (types = ["","","",""], item,controller, className) => {
         default:
             break;
     }
-    return `<a ${types[3] ? types[3] :''} data-href="${webAdminUrl}/${controller}/${types[1]}/${item.id}" href="#" ${types[2] ? 'data-get="'+webAdminUrl+'/'+controller+'/'+types[2]+'/'+item.id+'"' : ''} class="btn btn-hnn btn-sm btn-hnn-${color} ${action}${className}"><span title="${title}" ><i class="fas fa-${icon}"></i></span></a>`
+    return `<a ${types[3] ? types[3] :''} data-href="${webAdminUrl}/${controller}/${types[1]}/${item.id}" href="${webAdminUrl}/${controller}/${types[1]}/${item.id}" ${types[2] ? 'data-get="'+webAdminUrl+'/'+controller+'/'+types[2]+'/'+item.id+'"' : ''} class="btn btn-hnn btn-sm btn-hnn-${color} ${action}${className}"><span title="${title}" ><i class="fas fa-${icon}"></i></span></a>`
 }
 // Show button update
 const showActionButton = (item, controller, className, typeBtn = {
@@ -833,7 +833,7 @@ const showButtonView = (item,controller,className) => {
 
 // Show Button Edit
 const showButtonEdit = (item,controller,className) => {
-    return createButton([2, 'update' ,'getsingle'],item,controller,className);
+    return createButton([2, 'view' ,'getsingle'],item,controller,className);
 }
 
 // Show button updatedetail

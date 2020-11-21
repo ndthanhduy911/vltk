@@ -1,5 +1,6 @@
 <?php
 namespace Backend\Modules\Admins\Forms;
+
 use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\Select;
 use Phalcon\Forms\Element\Hidden;
@@ -34,25 +35,37 @@ class PostsForm extends \Phalcon\Forms\Form
         $this->add($slug);
 
         //catid
-        $deptid = isset($_SESSION['deptid']) ? $_SESSION['deptid'] : 0;
+        $perL = \Library\Master\Master::checkPermissionDepted('posts', 'update');
         $cats = $this->modelsManager->createBuilder()
-        ->columns(array(
+        ->columns([
             'c.id',
-            'cl.name name',
-        ))
+            'cl.name name'
+        ])
         ->from(['c'=>"Categories"])
         ->leftJoin('CategoriesLang', "cl.catid = c.id AND cl.langid = 1",'cl')
-        ->orderBy('cl.name ASC')
-        ->where("c.deptid = {$deptid}")
-        ->getQuery()
+        ->orderBy('cl.name ASC');
+        $cats = \Library\Master\Master::builderPermission($cats,$perL,'c');
+        $cats = $cats->getQuery()
         ->execute();
+
         $catid = new Select('catid', $cats, array(
-            'using' => array('id', 'name'),
+            'using' => ['id', 'name'],
             'class' => 'form-control form-control-sm',
             'data-error' => "Thông tin chưa hợp lệ",
         ));
         $catid->setLabel('Chuyên mục');
         $this->add($catid);
+
+        //tags
+        // $tags = \Tags::find(['deleted = 0']);
+        // $tags = new Select('tags', $cats, array(
+        //     'using' => ['id', 'name'],
+        //     'class' => 'form-control form-control-sm',
+        //     'data-error' => "Thông tin chưa hợp lệ",
+        // ));
+        // $tags->setLabel('Thẻ');
+        // $this->add($tags);
+
 
         //status
         $status = new Select('status', [

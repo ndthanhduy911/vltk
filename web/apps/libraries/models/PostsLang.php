@@ -1,4 +1,5 @@
 <?php
+use Library\Helper\HelperValidation;
 
 class PostsLang extends \Phalcon\Mvc\Model
 {
@@ -11,5 +12,28 @@ class PostsLang extends \Phalcon\Mvc\Model
     public function getSource()
     {
         return 'postslang';
+    }
+
+    public function vdUpdate($try = false){
+        $helper = new HelperValidation();
+        //title
+        $helper->setValidation('required', [
+            'name' => 'title',
+            'msg' => 'Tiêu đề không được để trống'
+        ]);
+        $helper->setValidation('max', [
+            'name' => 'title',
+            'len' => 255,
+            'msg' => 'Tiêu đề không được quá 255 ký tự'
+        ]);
+        if($try){
+            if(!$this->validate($helper->getValidation())){
+                foreach ($this->getMessages() as $message) {
+                    throw new \Exception($message->getMessage());
+                }
+            }
+        }
+
+        return $this->validate($helper->getValidation());
     }
 }

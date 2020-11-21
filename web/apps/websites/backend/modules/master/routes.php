@@ -57,6 +57,26 @@ $router->add(WEB_ADMIN_URI . '/logs/:action/:int', array(
     'id' => 2
 ));
 
+/***********************MediaController***********************/
+
+$router->add(WEB_ADMIN_URI . '/media', array(
+    'module' => 'backend_master',
+    'controller' => 'media',
+    'action' => 'index',
+));
+
+$router->add(WEB_ADMIN_URI . '/media/:action', array(
+    'module' => 'backend_master',
+    'controller' => 'media',
+    'action' => 1,
+));
+$router->add(WEB_ADMIN_URI . '/media/:action/:int', array(
+    'module' => 'backend_master',
+    'controller' => 'media',
+    'action'  => 1,
+    'id' => 2
+));
+
 /***********************HelpController***********************/
 $router->add(WEB_ADMIN_URI . '/help', array(
     'module' => 'backend_master',

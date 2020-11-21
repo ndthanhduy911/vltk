@@ -1,17 +1,17 @@
 <?php
 /***********************PostsController***********************/
-$router->add($config->application->backendUri . '/posts', array(
+$router->add(WEB_ADMIN_URI . '/posts', array(
     'module' => 'backend_admins',
     'controller' => 'posts',
     'action' => 'index',
 ));
 
-$router->add($config->application->backendUri . '/posts/:action', array(
+$router->add(WEB_ADMIN_URI . '/posts/:action', array(
     'module' => 'backend_admins',
     'controller' => 'posts',
     'action' => 1,
 ));
-$router->add($config->application->backendUri . '/posts/:action/:int', array(
+$router->add(WEB_ADMIN_URI . '/posts/:action/:int', array(
     'module' => 'backend_admins',
     'controller' => 'posts',
     'action'  => 1,
@@ -19,18 +19,18 @@ $router->add($config->application->backendUri . '/posts/:action/:int', array(
 ));
 
 /***********************PagesController***********************/
-$router->add($config->application->backendUri . '/pages', array(
+$router->add(WEB_ADMIN_URI . '/pages', array(
     'module' => 'backend_admins',
     'controller' => 'pages',
     'action' => 'index',
 ));
 
-$router->add($config->application->backendUri . '/pages/:action', array(
+$router->add(WEB_ADMIN_URI . '/pages/:action', array(
     'module' => 'backend_admins',
     'controller' => 'pages',
     'action' => 1,
 ));
-$router->add($config->application->backendUri . '/pages/:action/:int', array(
+$router->add(WEB_ADMIN_URI . '/pages/:action/:int', array(
     'module' => 'backend_admins',
     'controller' => 'pages',
     'action'  => 1,
@@ -38,18 +38,18 @@ $router->add($config->application->backendUri . '/pages/:action/:int', array(
 ));
 
 /***********************BannerController***********************/
-$router->add($config->application->backendUri . '/banner', array(
+$router->add(WEB_ADMIN_URI . '/banner', array(
     'module' => 'backend_admins',
     'controller' => 'banner',
     'action' => 'index',
 ));
 
-$router->add($config->application->backendUri . '/banner/:action', array(
+$router->add(WEB_ADMIN_URI . '/banner/:action', array(
     'module' => 'backend_admins',
     'controller' => 'banner',
     'action' => 1,
 ));
-$router->add($config->application->backendUri . '/banner/:action/:int', array(
+$router->add(WEB_ADMIN_URI . '/banner/:action/:int', array(
     'module' => 'backend_admins',
     'controller' => 'banner',
     'action'  => 1,
@@ -57,18 +57,18 @@ $router->add($config->application->backendUri . '/banner/:action/:int', array(
 ));
 
 /***********************StaffController***********************/
-$router->add($config->application->backendUri . '/staff', array(
+$router->add(WEB_ADMIN_URI . '/staff', array(
     'module' => 'backend_admins',
     'controller' => 'staff',
     'action' => 'index',
 ));
 
-$router->add($config->application->backendUri . '/staff/:action', array(
+$router->add(WEB_ADMIN_URI . '/staff/:action', array(
     'module' => 'backend_admins',
     'controller' => 'staff',
     'action' => 1,
 ));
-$router->add($config->application->backendUri . '/staff/:action/:int', array(
+$router->add(WEB_ADMIN_URI . '/staff/:action/:int', array(
     'module' => 'backend_admins',
     'controller' => 'staff',
     'action'  => 1,
@@ -76,18 +76,18 @@ $router->add($config->application->backendUri . '/staff/:action/:int', array(
 ));
 
 /***********************PartnerController***********************/
-$router->add($config->application->backendUri . '/partner', array(
+$router->add(WEB_ADMIN_URI . '/partner', array(
     'module' => 'backend_admins',
     'controller' => 'partner',
     'action' => 'index',
 ));
 
-$router->add($config->application->backendUri . '/partner/:action', array(
+$router->add(WEB_ADMIN_URI . '/partner/:action', array(
     'module' => 'backend_admins',
     'controller' => 'partner',
     'action' => 1,
 ));
-$router->add($config->application->backendUri . '/partner/:action/:int', array(
+$router->add(WEB_ADMIN_URI . '/partner/:action/:int', array(
     'module' => 'backend_admins',
     'controller' => 'partner',
     'action'  => 1,
@@ -95,18 +95,18 @@ $router->add($config->application->backendUri . '/partner/:action/:int', array(
 ));
 
 /***********************HomeController***********************/
-$router->add($config->application->backendUri . '/home', array(
+$router->add(WEB_ADMIN_URI . '/home', array(
     'module' => 'backend_admins',
     'controller' => 'home',
     'action' => 'index',
 ));
 
-$router->add($config->application->backendUri . '/home/:action', array(
+$router->add(WEB_ADMIN_URI . '/home/:action', array(
     'module' => 'backend_admins',
     'controller' => 'home',
     'action' => 1,
 ));
-$router->add($config->application->backendUri . '/home/:action/:int', array(
+$router->add(WEB_ADMIN_URI . '/home/:action/:int', array(
     'module' => 'backend_admins',
     'controller' => 'home',
     'action'  => 1,
@@ -114,12 +114,12 @@ $router->add($config->application->backendUri . '/home/:action/:int', array(
 ));
 
 /***********************DeptsController***********************/
-$router->add($config->application->backendUri . '/departments/:action', array(
+$router->add(WEB_ADMIN_URI . '/departments/:action', array(
     'module' => 'backend_admins',
     'controller' => 'departments',
     'action' => 1,
 ));
-$router->add($config->application->backendUri . '/departments/:action/:int', array(
+$router->add(WEB_ADMIN_URI . '/departments/:action/:int', array(
     'module' => 'backend_admins',
     'controller' => 'departments',
     'action'  => 1,
@@ -129,58 +129,38 @@ $router->add($config->application->backendUri . '/departments/:action/:int', arr
 
 /***********************CategoriesController***********************/
 
-$router->add($config->application->backendUri . '/categories', array(
+$router->add(WEB_ADMIN_URI . '/categories', array(
     'module' => 'backend_admins',
     'controller' => 'categories',
     'action' => 'index',
 ));
 
-$router->add($config->application->backendUri . '/categories/:action', array(
+$router->add(WEB_ADMIN_URI . '/categories/:action', array(
     'module' => 'backend_admins',
     'controller' => 'categories',
     'action' => 1,
 ));
-$router->add($config->application->backendUri . '/categories/:action/:int', array(
+$router->add(WEB_ADMIN_URI . '/categories/:action/:int', array(
     'module' => 'backend_admins',
     'controller' => 'categories',
-    'action'  => 1,
-    'id' => 2
-));
-
-/***********************MediaController***********************/
-
-$router->add($config->application->backendUri . '/media', array(
-    'module' => 'backend_admins',
-    'controller' => 'media',
-    'action' => 'index',
-));
-
-$router->add($config->application->backendUri . '/media/:action', array(
-    'module' => 'backend_admins',
-    'controller' => 'media',
-    'action' => 1,
-));
-$router->add($config->application->backendUri . '/media/:action/:int', array(
-    'module' => 'backend_admins',
-    'controller' => 'media',
     'action'  => 1,
     'id' => 2
 ));
 
 
 /***********************SubjectsController***********************/
-$router->add($config->application->backendUri . '/subjects', array(
+$router->add(WEB_ADMIN_URI . '/subjects', array(
     'module' => 'backend_admins',
     'controller' => 'subjects',
     'action' => 'index',
 ));
 
-$router->add($config->application->backendUri . '/subjects/:action', array(
+$router->add(WEB_ADMIN_URI . '/subjects/:action', array(
     'module' => 'backend_admins',
     'controller' => 'subjects',
     'action' => 1,
 ));
-$router->add($config->application->backendUri . '/subjects/:action/:int', array(
+$router->add(WEB_ADMIN_URI . '/subjects/:action/:int', array(
     'module' => 'backend_admins',
     'controller' => 'subjects',
     'action'  => 1,
@@ -188,18 +168,18 @@ $router->add($config->application->backendUri . '/subjects/:action/:int', array(
 ));
 
 /***********************CalendarsController***********************/
-$router->add($config->application->backendUri . '/calendars', array(
+$router->add(WEB_ADMIN_URI . '/calendars', array(
     'module' => 'backend_admins',
     'controller' => 'calendars',
     'action' => 'index',
 ));
 
-$router->add($config->application->backendUri . '/calendars/:action', array(
+$router->add(WEB_ADMIN_URI . '/calendars/:action', array(
     'module' => 'backend_admins',
     'controller' => 'calendars',
     'action' => 1,
 ));
-$router->add($config->application->backendUri . '/calendars/:action/:int', array(
+$router->add(WEB_ADMIN_URI . '/calendars/:action/:int', array(
     'module' => 'backend_admins',
     'controller' => 'calendars',
     'action'  => 1,
@@ -207,18 +187,18 @@ $router->add($config->application->backendUri . '/calendars/:action/:int', array
 ));
 
 /***********************ClassesController***********************/
-$router->add($config->application->backendUri . '/researches', array(
+$router->add(WEB_ADMIN_URI . '/researches', array(
     'module' => 'backend_admins',
     'controller' => 'researches',
     'action' => 'index',
 ));
 
-$router->add($config->application->backendUri . '/researches/:action', array(
+$router->add(WEB_ADMIN_URI . '/researches/:action', array(
     'module' => 'backend_admins',
     'controller' => 'researches',
     'action' => 1,
 ));
-$router->add($config->application->backendUri . '/researches/:action/:int', array(
+$router->add(WEB_ADMIN_URI . '/researches/:action/:int', array(
     'module' => 'backend_admins',
     'controller' => 'researches',
     'action'  => 1,
@@ -226,18 +206,18 @@ $router->add($config->application->backendUri . '/researches/:action/:int', arra
 ));
 
 /***********************ClassesController***********************/
-$router->add($config->application->backendUri . '/classes', array(
+$router->add(WEB_ADMIN_URI . '/classes', array(
     'module' => 'backend_admins',
     'controller' => 'classes',
     'action' => 'index',
 ));
 
-$router->add($config->application->backendUri . '/classes/:action', array(
+$router->add(WEB_ADMIN_URI . '/classes/:action', array(
     'module' => 'backend_admins',
     'controller' => 'classes',
     'action' => 1,
 ));
-$router->add($config->application->backendUri . '/classes/:action/:int', array(
+$router->add(WEB_ADMIN_URI . '/classes/:action/:int', array(
     'module' => 'backend_admins',
     'controller' => 'classes',
     'action'  => 1,

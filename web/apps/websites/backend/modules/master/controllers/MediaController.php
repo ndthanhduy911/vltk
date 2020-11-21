@@ -1,5 +1,5 @@
 <?php
-namespace Backend\Modules\Admins\Controllers;
+namespace Backend\Modules\Master\Controllers;
 use \Phalcon\Mvc\View;
 
 class MediaController  extends \BackendController {
