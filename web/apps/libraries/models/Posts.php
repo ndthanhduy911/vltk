@@ -183,7 +183,7 @@ class Posts extends \ModelCore
             'deptname' => 'Bộ môn',
             'calendar' => 'Ngày đăng',
             'title' => 'Tiêu đề',
-            'excerpt' => 'Trích dẫn'
+            'excerpt' => 'Tóm tắt'
         ];
         return isset($feilds[$key]) ? $feilds[$key] : '';
     }
