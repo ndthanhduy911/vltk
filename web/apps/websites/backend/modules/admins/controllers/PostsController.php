@@ -93,16 +93,19 @@ class PostsController  extends \BackendController {
         if($id){
             if(!$post = \Posts::findFirstId($id)){
                 echo 'Không tìm thấy dữ liệu'; die;
-            }            
+            }         
             foreach ($languages as $key => $lang) {
+                $v = ($key == 0 ? true : false);
                 $postLang = \PostsLang::findFirst(['postid = :id: AND langid = :langid:','bind' => ['id' => $post->id, 'langid' => $lang->id]]);
                 if($postLang){
-                    $formLang = new PostsLangForm($postLang);
+                    $formLang = new PostsLangForm($postLang, [$lang->id,$v]);
                     $postsLang[$lang->id] = $postLang;
                     $formsLang[$lang->id] = $formLang;
                     $postContent[$lang->id] = $postLang->content;
                 }else{
-                    echo 'Nội dung không phù hợp'; die;
+                    $formsLang[$lang->id] = new PostsLangForm(null, [$lang->id,$v]);
+                    $postsLang[$lang->id] = new \PostsLang();
+                    $postContent[$lang->id] = '';
                 }
             }
             $title = 'Chỉnh sửa';
@@ -115,11 +118,13 @@ class PostsController  extends \BackendController {
             $post->createdat = date('Y-m-d H:i:s');
             $post->updatedat = $post->createdat;
             $title = 'Thêm mới';
-            foreach ($languages as $lang) {
-                $formsLang[$lang->id] = new PostsLangForm();
+            foreach ($languages as $key => $lang) {
+                $v = $key == 0 ? true : false;
+                $formsLang[$lang->id] = new PostsLangForm(null, [$lang->id,$v]);
                 $postsLang[$lang->id] = new \PostsLang();
                 $postContent[$lang->id] = '';
             }
+            $post->calendar = date('d/m/Y H:i');
         }
 
         $formPost = new PostsForm($post);
@@ -246,7 +251,7 @@ class PostsController  extends \BackendController {
         $pExcerpt = $this->request->getPost('excerpt',['string','trim']);
         if($id){
             if(!$post = \Posts::findFirstIdPermission($id,$perL)){
-                $data['error'] = ['Không tìm thấy phiếu nhập'];
+                $data['error'] = ['Không tìm thấy bài viết'];
                 $this->helper->responseJson($this, $data);
             }
             $post->updatedat = date('Y-m-d H:i:s');
@@ -261,13 +266,20 @@ class PostsController  extends \BackendController {
             $post->updatedby = $userid;
         }
         $postLangs = [];
-        foreach ($languages as $lang) {
-            if(!$postLang = \PostsLang::findFirst(["postid = :id:",'bind' => ['id' => (int)$post->id]])){
+
+        foreach ($languages as $key => $lang) {
+
+            if(!$id || !$postLang = \PostsLang::findFirst(["postid = :id: AND langid = :langid:",'bind' => ['id' => (int)$id,'langid' => $lang->id]])){
                 $postLang = new \PostsLang();
             }
-            $postLang->title = isset($pTitle[$lang->id]) ? $pTitle[$lang->id] : NULL;
-            $postLang->content = isset($pContent[$lang->id]) ? $pContent[$lang->id] : NULL;
-            $postLang->excerpt = isset($pExcerpt[$lang->id]) ? $pExcerpt[$lang->id] : NULL;
+
+            if($key == 0){
+                $lId = $lang->id;
+            }
+
+            $postLang->title = !empty($pTitle[$lang->id]) ? $pTitle[$lang->id] : $pTitle[$lId];
+            $postLang->content = !empty($pContent[$lang->id]) ? $pContent[$lang->id] : $pContent[$lId];
+            $postLang->excerpt = !empty($pExcerpt[$lang->id]) ? $pExcerpt[$lang->id] : $pExcerpt[$lId];
             $postLang->langid = $lang->id;
             array_push($postLangs,$postLang);
         }
@@ -277,8 +289,8 @@ class PostsController  extends \BackendController {
         $post->catid = $this->request->getPost('catid',['int','trim']);
         $post->status = $this->request->getPost('status',['int','trim']);
         $post->slug = $plug ? $plug : $this->helper->slugify($pTitle[1]);
-        $post->calendar = $this->helper->dateMysql($this->request->getPost('calendar', ['string', 'trim']));
-        $iamge = $this->helper->uploadImage('image', $post->image, 'image');
+        $post->calendar = $this->helper->dateMysql($this->request->getPost('calendar', ['string', 'trim']),'Y-m-d H:i:s');
+        $iamge = $this->helper->uploadImage('image', isset($post->image) ? $post->image : NULL, 'image');
         if (!empty($checkReportfile['error'])) {
             $data['error'] = [$checkReportfile['error']];
             $this->helper->responseJson($this, $data);
@@ -286,7 +298,7 @@ class PostsController  extends \BackendController {
         $post->image = $iamge['filename'];
 
         if(\Posts::findFirst(["slug = :slug: AND id != :id:","bind" => ["slug" => $post->slug,'id'=> $id]])){
-            $reqPost['slug'] = $post->slug .'-'. strtotime('now'); 
+            $reqPost['slug'] = $post->slug .'-'. strtotime('now');
         }
 
         if(!\Categories::findFirstIdPermission($post->catid,$perL)){
@@ -298,25 +310,24 @@ class PostsController  extends \BackendController {
             $this->db->begin();
             $post->vdUpdate(true);
             if (!$post->save()) {
-                $this->db->rollback();
                 foreach ($post->getMessages() as $message) {
                     throw new \Exception($message->getMessage());
                 }
             }
             foreach ($postLangs as $postLang) {
+                $postLang->postid = $post->id;
                 $postLang->vdUpdate(true);
                 if (!$postLang->save()) {
-                    $this->db->rollback();
                     foreach ($postLang->getMessages() as $message) {
                         throw new \Exception($message->getMessage());
                     }
                 }
             }
             $this->db->commit();
-            $this->flashSession->success(($id ? 'Chỉnh sửa' : 'Thêm mới').' tài sản thành công');
+            $this->flashSession->success(($id ? 'Chỉnh sửa' : 'Thêm mới').' bài viết thành công');
         } catch (\Throwable $e) {
             $this->db->rollback();
-            $this->flashSession->error($e->getMessage());
+            $data['error'] = [$e->getMessage()];
         }
         $this->helper->responseJson($this, $data);
     }
@@ -413,7 +424,6 @@ class PostsController  extends \BackendController {
     // =================================
     // FUNCTION
     // =================================
-
     private function trashOne($item)
     {
         $userid = $this->session->get('userid');

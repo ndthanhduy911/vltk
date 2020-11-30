@@ -1,4 +1,4 @@
-<form method="post" enctype="multipart/form-data" data-toggle="validator" role="form">
+<form id="frmPosts" action="<?= WEB_ADMIN_URI ?>/posts/update<?= !empty($post->id) ? '/'.$post->id : '' ?>" method="post" enctype="multipart/form-data" data-toggle="validator" role="form">
     <div class="content-header">
         <div class="container-fluid">
             <div class="row">
@@ -57,14 +57,14 @@
                                             <div class="form-group label-floating col-md-12">
                                                 <div class="input-group">
                                                     <label class="control-label">{{formsLang[lang.id].getLabel('title')}}</label>
-                                                    {{formsLang[lang.id].render('title', ['id' : 'title'~lang.id,'name' : 'title['~lang.id~']'])}}
+                                                    {{formsLang[lang.id].render('title')}}
                                                     <div class="invalid-feedback"></div>
                                                 </div>
                                             </div>
                                             <div class="form-group label-floating col-md-12">
                                                 <div class="input-group">
                                                     <label class="control-label">{{formsLang[lang.id].getLabel('excerpt')}}</label>
-                                                    {{formsLang[lang.id].render('excerpt', ['id' : 'excerpt'~lang.id,'name' : 'excerpt['~lang.id~']'])}}
+                                                    {{formsLang[lang.id].render('excerpt')}}
                                                     <div class="invalid-feedback"></div>
                                                 </div>
                                             </div>

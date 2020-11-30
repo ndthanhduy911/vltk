@@ -135,15 +135,10 @@ class Posts extends \ModelCore
             'msg' => 'Bộ môn không được để trống'
         ]);
         //calendar
-        $helper->setValidation('max', [
-            'name' => 'calendar',
-            'len' => 16,
-            'msg' => 'Ngày đăng không được quá 16 ký tự'
-        ]);
         if(!empty($this->calendar)){
             $helper->setValidation('date', [
                 'name' => 'calendar',
-                'format' => 'd/m/Y H:i',
+                'format' => 'Y-m-d H:i:s',
                 'msg' => 'Ngày đăng không đúng định dạng'
             ]);
         }

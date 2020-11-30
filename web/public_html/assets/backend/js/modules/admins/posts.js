@@ -11,7 +11,7 @@ const showStatus = (id = '') => {
 
 
 const showTitle = (text,length = 100) => {
-    return `<span title="${text}">${trimText(text,length)}</span>`
+    return `<span title="${text}">${text ? trimText(text,length) : ''}</span>`
 }
 
 const getPostLink = (item) => {
@@ -21,16 +21,23 @@ const getPostLink = (item) => {
     return `<a href="${webUri}/news/${item.slug}">Link</a>`;
 }
 
-const updatePosts = () => {
-    if($('#ckEditor1').length){
+const updatePosts = (form = '#frmPosts') => {
+    if($(`${form} #ckEditor1`).length){
         getCkeditor1();
     }
 
-    if($('#ckEditor2').length){
+    if($(`${form} #ckEditor2`).length){
         getCkeditor2();
     }
 
-    
+    sendAjax(form, "POST").then(() => {
+        LoadPage(`${webAdminUrl}/posts`).then(()=>{
+            loadTablePosts('#posts');
+        });
+    });
+    // if(!perEdit){
+    //     $(form).find('select, input:not(.tokenCSRF)').prop('disabled', true);
+    // }
 }
 
 const updateSettingPosts = (form) => {
