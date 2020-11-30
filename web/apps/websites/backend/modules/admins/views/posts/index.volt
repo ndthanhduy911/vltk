@@ -14,10 +14,17 @@
                     <a id="settingPosts" data-href="<?= WEB_ADMIN_URL ?>/setting/filters" data-get="<?= WEB_ADMIN_URL ?>/setting/getsinglefilter?fkey=posts" title="Thiết lập giao diện"
                         class="ml-2 btn btn-hnn btn-hnn-default"><span><i class="fas fa-cog"></i></span></a>
                 </div>
+
                 {% if master.checkPermission('posts', 'trashs') %}
                 <div class="btn-group float-right">
-                    <a id="deletePosts" data-href="<?= WEB_ADMIN_URL ?>/posts/trashs" title="Thùng rác"
-                        class="ml-2 btn btn-hnn btn-hnn-danger"><span><i class="fas fa-trash"></i></span></a>
+                    <a href="<?= WEB_ADMIN_URL ?>/posts/trashs" title="Thùng rác"
+                        class="ml-2 btn btn-hnn btn-hnn-warning"><span><i class="fas fa-trash"></i></span></a>
+                </div>
+                {% endif %}
+                {% if master.checkPermission('posts', 'trashs') %}
+                <div class="btn-group float-right">
+                    <a id="deletePosts" data-href="<?= WEB_ADMIN_URL ?>/posts/trash" title="Xóa"
+                        class="ml-2 btn btn-hnn btn-hnn-danger"><span><i class="fas fa-ban"></i></span></a>
                 </div>
                 {% endif %}
                 {% if master.checkPermission('posts', 'update') %}
@@ -43,7 +50,7 @@
             <div class="col-md-12">
                 <div class="card card-primary card-outline">
                     <div class="card-body">
-                        <form action="" id="searchRole" class="searchForm">
+                        <form action="" id="searchPosts" class="searchForm">
                             <div class="row d-md-flex align-items-md-center">
                                 <span class="col-auto mt-2">Tìm kiếm</span>
                                 <div class="flex-1 col-auto row pr-0">
@@ -74,7 +81,7 @@
                                 <thead>
                                     <tr>
                                         <th data-col="no" class="align-middle text-center" style="width: 20px;">
-                                            <input id="assetCheckboxAll" type="checkbox" value="1">
+                                            <input id="postsCheckboxAll" type="checkbox" value="1">
                                         </th>
                                         <th data-col="no" class="align-middle text-center" style="width: 20px;">STT</th>
                                         {% for key,table in fTables %}

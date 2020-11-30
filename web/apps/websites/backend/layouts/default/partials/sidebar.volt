@@ -33,8 +33,8 @@
                         {% endif %}
                         {% if master.checkPermission('posts', 'update') %}
                         <li class="nav-item">
-                            <a href="<?= WEB_ADMIN_URL ?>/posts/update"
-                                class="nav-link {% if dispatcher.getControllerName()=='posts' AND dispatcher.getActionName()=='update' %} {{ 'active' }} {% endif %}">
+                            <a href="<?= WEB_ADMIN_URL ?>/posts/view"
+                                class="nav-link {% if dispatcher.getControllerName()=='posts' AND dispatcher.getActionName()=='view' %} {{ 'active' }} {% endif %}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Bài viết mới</p>
                             </a>
@@ -46,6 +46,15 @@
                                 class="nav-link {% if dispatcher.getControllerName()=='categories' %} {{ 'active' }} {% endif %}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Chuyên mục</p>
+                            </a>
+                        </li>
+                        {% endif %}
+                        {% if master.checkPermission('posts', 'trashs') %}
+                        <li class="nav-item">
+                            <a href="<?= WEB_ADMIN_URL ?>/posts/trashs"
+                                class="nav-link {% if dispatcher.getControllerName()=='posts' AND dispatcher.getActionName()=='trashs' %} {{ 'active' }} {% endif %}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Thùng rác</p>
                             </a>
                         </li>
                         {% endif %}

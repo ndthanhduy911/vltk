@@ -43,11 +43,11 @@ class PostsController  extends \BackendController {
             );
         }
 
-        $filters = \Posts::findFilters();
-        $tables = \Posts::findTables();
-        $fFilters = ['title','catid','status','calendar'];
-        $fTables = ['image','title','excerpt','catid','authorname','calendar','slug','status'];
-        if($fSetting = \FilterSetting::findFirstKey('posts')){
+        $filters = \Posts::findTrashFilters();
+        $tables = \Posts::findTrashTables();
+        $fFilters = ['title','catid','calendar'];
+        $fTables = ['image','title','excerpt','catid','authorname','calendar','slug'];
+        if($fSetting = \FilterSetting::findFirstKey('trashposts')){
             $fFilters = $fSetting->filters ? json_decode($fSetting->filters) : $fFilters;
             $fTables = $fSetting->tables ? json_decode($fSetting->tables) : $fTables;   
         }
@@ -188,44 +188,45 @@ class PostsController  extends \BackendController {
         $this->helper->responseJson($this, $this->ssp->dataOutput($this, $data,$search, $array_row));
     }
 
-    public function getdatatrashAction(){
-        if($this->request->isAjax()){
-            $deptid = $this->session->get('deptid');
-            $data = $this->modelsManager->createBuilder()
-            ->columns(array(
-                'p.id',
-                'pl.title',
-                'p.slug',
-                'p.catid',
-                'pl.content',
-                'p.status',
-                'pl.excerpt',
-                'p.deptid',
-                'p.createdat',
-                'p.calendar',
-                'p.image',
-                'u.name author_name',
-                'c.name cat_name',
-            ))
-            ->from(['p'=>'Posts'])
-            ->where("p.deleted = 0 AND p.status = 4 AND p.deptid = {$deptid}")
-            ->leftJoin('Users', 'u.id = p.author','u')
-            ->leftJoin('CategoriesLang', 'c.catid = p.catid AND c.langid = 1','c')
-            ->leftJoin('PostsLang', 'pl.postid = p.id AND pl.langid = 1','pl')
-            ->orderBy('p.calendar DESC');
-            // if($this->session->get('role') !== 1){
-            //     $data = $data->andWhere("deptid IN (".implode(',',$this->session->get('dept_mg')).")");
-            // }
-    
-            $search = 'pl.title LIKE :search:';
-            $this->response->setStatusCode(200, 'OK');
-            $this->response->setJsonContent($this->ssp->data_output($this->request->get(), $data,$search));
-            return $this->response->send();
-        }else{
-            $this->response->setStatusCode(403, 'Failed');
-            $this->response->setJsonContent(['Truy cập không được phép']);
-            return $this->response->send();
+    public function ajaxgetdatatrashAction(){
+        if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('posts', 'index')) {
+            $this->helper->responseJson($this, ["error" => "Truy cập không được phép"]);
         }
+        $columns = [
+            'p.id',
+            'p.slug',
+            'p.catid',
+            'p.status',
+            'p.deptid',
+            'p.createdat',
+            'p.calendar',
+            'p.image',
+            'pl.title',
+            'pl.content',
+            'pl.excerpt',
+            'u.fullname authorname',
+            'c.name catname',
+            'd.slug dslug',
+        ];
+
+        $data = $this->modelsManager->createBuilder()
+        ->columns($columns)
+        ->from(['p' => "Posts"])
+        ->where("p.deleted = 0 AND p.status = 4")
+        ->leftJoin('User', 'u.id = p.author','u')
+        ->leftJoin('CategoriesLang', 'c.catid = p.catid AND c.langid = 1','c')
+        ->leftJoin('PostsLang', 'pl.postid = p.id AND pl.langid = 1','pl')
+        ->leftJoin('Depts', 'd.id = p.deptid','d')
+        ->orderBy('p.calendar DESC');
+
+        $data = $this->master::builderPermission($data,$perL,'p');
+        $data = \FilterSetting::getDataOrder($this,$data,\Posts::findFirst(),'p',['pl'=>'title']);
+        $data = \FilterSetting::getDataFilter($this,$data,\Posts::arrayTrashFilter(),'p');
+
+        $array_row = [];
+
+        $search = '';
+        $this->helper->responseJson($this, $this->ssp->dataOutput($this, $data,$search, $array_row));
     }
 
     // ===================================

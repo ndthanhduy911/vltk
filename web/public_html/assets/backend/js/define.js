@@ -16,7 +16,87 @@ const vi_moment = (date, type = 'DD/MM/YYYY HH:mm:ss') => {
     return date ? moment(date, 'YYYY-MM-DD HH:mm:ss').format(type) : '';
 }
 //Datatable Custom
-const dataTableCt = (table, opCT = false,router={co:'',fo:'',aj:'ajaxgetdata',cl:'',ti:'hàng'}) => {
+const settingFiled = (form,filterField,tableField) => {
+    $('.sortFilter').sortable({
+        placeholder         : 'sort-highlight',
+        connectWith: `.sortFilter`,
+        forceHelperSize: true,
+        handle              : '.handle',
+        forcePlaceholderSize: true,
+        zIndex              : 999999
+    });
+
+    $('.sortTables').sortable({
+        placeholder         : 'sort-highlight',
+        connectWith: `.sortTables`,
+        forceHelperSize: true,
+        handle              : '.handle',
+        forcePlaceholderSize: true,
+        zIndex              : 999999
+    });
+
+    $(form).find(`[name="filters[]"]`).parents('.ui-sortable').attr('data-ids',1000);
+    filterField.forEach((element,index) => {
+        $(form).find(`#filters-${element}`).parents('.ui-sortable').attr('data-ids',index+1);
+    });
+
+    $(form).find(`[name="tables[]"]`).parents('.ui-sortable').attr('data-ids',1000);
+    tableField.forEach((element,index) => {
+        $(form).find(`#tables-${element}`).parents('.ui-sortable').attr('data-ids',index+1);
+    });
+
+    $(form).off('click','.refeshFilter').on('click', '.refeshFilter',function (e) {
+        e.preventDefault()
+        $(form).find(`[name="filters[]"]`).prop('checked',false);
+        filterField.forEach(element => {
+            $(form).find(`#filters-${element}`).prop('checked',true);
+        });
+
+        let items = $(form).find(`[name="filters[]"]`).parents('.ui-sortable');
+        items.sort(function(a, b){
+            return +$(a).data('ids') - +$(b).data('ids');
+        });
+        items.appendTo($(form).find(`.filterBox`));
+    });
+    $(form).off('click','.refeshTable').on('click', '.refeshTable',function (e) {
+        e.preventDefault();
+        $(form).find(`[name="tables[]"]`).prop('checked',false);
+        tableField.forEach(element => {
+            $(form).find(`#tables-${element}`).prop('checked',true);
+
+        });
+
+        let items = $(form).find(`[name="tables[]"]`).parents('.ui-sortable');
+        items.sort(function(a, b){
+            return +$(a).data('ids') - +$(b).data('ids');
+        });
+        items.appendTo($(form).find(`.tableBox`));
+        
+    });
+}
+const updateSetting = (table,className,filterField,tableField) => {
+    if ($(`#frmSetting${className}`).length) {
+        showModalForm(`#setting${className}`, `#modalSetting${className}`, 'GET', (data) => {
+            let filters = data.filters.length ? data.filters : filterField;
+            filters.forEach(element => {
+                $(`#frmSetting${className}`).find(`#filters-${element}`).prop('checked', true);
+            });
+            let tables = data.tables.length ? data.tables : tableField;
+            tables.forEach(element => {
+                $(`#frmSetting${className}`).find(`#tables-${element}`).prop('checked', true);
+            });
+        }, (data, row) => {
+            showSweetAlertOk("Thiết lập thành công");
+            LoadPage(window.location.href).then(()=>{
+                loadTablePosts(table);
+            });
+        });
+        checkboxAll('#filterSelectAll', 'input[name="filters[]"]');
+        checkboxAll('#tablesSelectAll', 'input[name="tables[]"]');
+        settingFiled(`#frmSetting${className}`,filterField,tableField);
+    }
+}
+const dataTableCt = (table, opCT = false,router={co:'',fo:'',aj:'ajaxgetdata',cl:'',ti:'hàng',ff:[],tf:[],lI:''}) => {
     return new Promise((resolve, reject) => {
         if ($(table).length) {
             let paged = getParams('paged')
@@ -100,8 +180,7 @@ const dataTableCt = (table, opCT = false,router={co:'',fo:'',aj:'ajaxgetdata',cl
                 showSweetAlertOk('Xóa thành công');
                 dt.draw()
             });
-            updateSettingPosts(`#frmSetting${router.cl}`);
-
+            updateSetting(table,router.cl,router.ff,router.tf);
             resolve(dt);
         }else{
             reject();
@@ -139,7 +218,15 @@ const isJson = (str) => {
     }
     return true;
 }
-const changeTitleToSlug = (title) =>
+
+const changeTitleToSlug = (title, slug) => {
+    $(title).change(function (e) { 
+        e.preventDefault();
+        $(slug).val(changeToSlug($(this).val()));
+    });
+}
+
+const changeToSlug = (title) =>
 {
     //Đổi chữ hoa thành chữ thường
     slug = title.toLowerCase();
@@ -884,6 +971,21 @@ const showErrorAjax = (response) => {
         $('.tokenCSRF').attr('name', response.token.key);
     }
 }
+
+//Loader Select2 default
+const select2Loader = () => {
+    $('form select:not(.custom-select)').select2({
+        minimumResultsForSearch: 5,
+        language: "vi",
+        placeholder: "Chọn",
+    });
+
+    $('.select2-multiple').select2({
+        minimumResultsForSearch: 5,
+        language: "vi",
+        placeholder: "Chọn"
+    });
+}
 //Send Ajax
 const sendAjax = (form, type = "GET", loader = true) => {
     return new Promise((resolve, reject) => {
@@ -963,20 +1065,6 @@ const LoadPage = (url, blockSingle = $(singleCore)) => {
         }
     })
 
-}
-//Loader Select2 default
-const select2Loader = () => {
-    $('form select:not(.custom-select)').select2({
-        minimumResultsForSearch: 5,
-        language: "vi",
-        placeholder: "Chọn",
-    });
-
-    $('.select2-multiple').select2({
-        minimumResultsForSearch: 5,
-        language: "vi",
-        placeholder: "Chọn"
-    });
 }
 //Loader dateRangePickerdefault
 const dateRangePickerLoader = () => {
@@ -1452,63 +1540,4 @@ const changeSort = (_this,dir) => {
         }
 
     }
-}
-
-const settingFiled = (form,filterField,tableField) => {
-    $('.sortFilter').sortable({
-        placeholder         : 'sort-highlight',
-        connectWith: `.sortFilter`,
-        forceHelperSize: true,
-        handle              : '.handle',
-        forcePlaceholderSize: true,
-        zIndex              : 999999
-    });
-
-    $('.sortTables').sortable({
-        placeholder         : 'sort-highlight',
-        connectWith: `.sortTables`,
-        forceHelperSize: true,
-        handle              : '.handle',
-        forcePlaceholderSize: true,
-        zIndex              : 999999
-    });
-
-    $(form).find(`[name="filters[]"]`).parents('.ui-sortable').attr('data-ids',1000);
-    filterField.forEach((element,index) => {
-        $(form).find(`#filters-${element}`).parents('.ui-sortable').attr('data-ids',index+1);
-    });
-
-    $(form).find(`[name="tables[]"]`).parents('.ui-sortable').attr('data-ids',1000);
-    tableField.forEach((element,index) => {
-        $(form).find(`#tables-${element}`).parents('.ui-sortable').attr('data-ids',index+1);
-    });
-
-    $(form).off('click','.refeshFilter').on('click', '.refeshFilter',function (e) {
-        e.preventDefault()
-        $(form).find(`[name="filters[]"]`).prop('checked',false);
-        filterField.forEach(element => {
-            $(form).find(`#filters-${element}`).prop('checked',true);
-        });
-
-        let items = $(form).find(`[name="filters[]"]`).parents('.ui-sortable');
-        items.sort(function(a, b){
-            return +$(a).data('ids') - +$(b).data('ids');
-        });
-        items.appendTo($(form).find(`.filterBox`));
-    });
-    $(form).off('click','.refeshTable').on('click', '.refeshTable',function (e) {
-        e.preventDefault();
-        $(form).find(`[name="tables[]"]`).prop('checked',false);
-        tableField.forEach(element => {
-            $(form).find(`#tables-${element}`).prop('checked',true);
-
-        });
-
-        let items = $(form).find(`[name="tables[]"]`).parents('.ui-sortable');
-        items.sort(function(a, b){
-            return +$(a).data('ids') - +$(b).data('ids');
-        });
-        items.appendTo($(form).find(`.tableBox`));
-        
-    });
 }
