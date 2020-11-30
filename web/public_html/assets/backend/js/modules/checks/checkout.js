@@ -183,7 +183,7 @@ const loadTableCheckOut = (table = 'checkout') => {
         showConfrim('.lockCheckOut',()=>{
             dt.draw();
             showSweetAlertOk(`Khóa phiếu xuất thành công`);
-        },'Nếu chọn “Đồng ý”, tất cả thông tin của phiếu xuất sẽ không được phép thay đổi và tài sản trong danh sách sẽ được chuyển đến đơn vị/bộ phận sử dụng. Anh/Chị muốn thực hiện thao tác này?')
+        },'Nếu chọn “Đồng ý”, tất cả thông tin của phiếu xuất sẽ không được phép thay đổi và tài sản trong danh sách sẽ được chuyển đến bộ môn sử dụng. Anh/Chị muốn thực hiện thao tác này?')
 
         checkboxAll('#checkOutCheckboxAll','.checkOutCheckbox');
         deleteAll('#deleteCheckOut','.checkOutCheckbox',(data)=>{
@@ -504,7 +504,7 @@ const updateCheckOut = (form) => {
                 updateCheckOut('#frmCheckOut');
             });
             showSweetAlertOk("Khóa thông tin thành công");
-        }, 'Nếu chọn “Đồng ý”, tất cả thông tin của phiếu xuất sẽ không được phép thay đổi và tài sản trong danh sách sẽ được chuyển đến đơn vị/bộ phận sử dụng. Anh/Chị muốn thực hiện thao tác này?')
+        }, 'Nếu chọn “Đồng ý”, tất cả thông tin của phiếu xuất sẽ không được phép thay đổi và tài sản trong danh sách sẽ được chuyển đến bộ môn sử dụng. Anh/Chị muốn thực hiện thao tác này?')
     }
 }
 

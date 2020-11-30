@@ -202,7 +202,7 @@ class UserController extends \BackendController
 
         $deptArray = \Depts::getArrayChildPermission($perL);
         if(!in_array($user->deptid, $deptArray)){
-            $data['error'] = ['Đơn vị/bộ phận không hợp lệ'];
+            $data['error'] = ['Bộ môn không hợp lệ'];
             $this->helper->responseJson($this, $data);
         }
 

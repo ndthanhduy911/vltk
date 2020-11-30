@@ -1,29 +1,29 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="vi-vn" lang="vi-vn" dir="ltr">
 <head>
-    <title><?= isset($title) ? $title." | " : '' ?>{{ dept_lang.name }}</title>
+    <title><?= isset($title) ? $title." | " : '' ?>{{ deptlang.name }}</title>
     <meta charset="utf-8" />
     <meta name="theme-color" content="#003D7C"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="keywords" content="vat ly,khoa vat ly, vat ly - vat ly ky thuat,khoa hoc tu nhien, hcmuns, hcmus, truong dai hoc khoa hoc tu nhien, trường đại học khoa học tự nhiên, 227 nguyen van cu q5, khtn, vnuhcm-us, hcmus">
-    <meta name="description" content="{{ dept_lang.name }}">
-    <meta itemprop="name" content="{{ dept_lang.name }}">
-    <meta itemprop="description" content="{{ dept_lang.name }}">
+    <meta name="description" content="{{ deptlang.name }}">
+    <meta itemprop="name" content="{{ deptlang.name }}">
+    <meta itemprop="description" content="{{ deptlang.name }}">
     <meta itemprop="image" content="{{ helper.getLinkImage(dept.logo, '/logo.png') }}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@hcmus.edu.vn">
-    <meta name="twitter:title" content="{{ dept_lang.name }}">
-    <meta name="twitter:description" content="{{ dept_lang.name }}">
+    <meta name="twitter:title" content="{{ deptlang.name }}">
+    <meta name="twitter:description" content="{{ deptlang.name }}">
     <meta name="twitter:creator" content="@hcmus.edu.vn">
     <meta name="twitter:image" content="{{ helper.getLinkImage(dept.logo, '/logo.png') }}">
     <meta property="fb:app_id" content="1234567890">
-    <meta property="og:title" content="{{ dept_lang.name }}" />
+    <meta property="og:title" content="{{ deptlang.name }}" />
     <meta property="og:type" content="article" />
     <meta property="og:url" content="<?= WEB_URL ?>/" />
     <meta property="og:image" content="{{ helper.getLinkImage(dept.logo, '/logo.png') }}" />
-    <meta property="og:description" content="{{ dept_lang.name }}" />
-    <meta property="og:site_name" content="{{ dept_lang.name }}" />
+    <meta property="og:description" content="{{ deptlang.name }}" />
+    <meta property="og:site_name" content="{{ deptlang.name }}" />
     <link rel="apple-touch-icon" sizes="76x76" href="{{ helper.getLinkImage(dept.icon, '/favicon.ico') }}" />
     <link rel="icon" type="image/png" href="{{ helper.getLinkImage(dept.icon, '/favicon.ico') }}" />
     <link rel="canonical" href="<?= WEB_URL ?>/" />

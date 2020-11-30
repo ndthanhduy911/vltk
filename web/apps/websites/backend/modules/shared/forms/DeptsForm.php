@@ -1,10 +1,6 @@
 <?php
 namespace Backend\Modules\Shared\Forms;
-
-use Depts;
-use AssetUnit;
 use Phalcon\Forms\Element\Text;
-use Phalcon\Forms\Element\Hidden;
 use Phalcon\Forms\Element\Select;
 use Phalcon\Forms\Form;
 
@@ -13,88 +9,117 @@ class DeptsForm extends Form
     public function initialize($entity = null, $options = null)
     {
         $name = new Text('name');
-        $name->setLabel('Tên đơn vị/ bộ phận '.requiredLabel());
         $name->setAttributes(array(
             'class' => 'form-control form-control-sm',
             'maxlength' => "100",
             'size' => "100",
             'required' => '',
-            'data-error' => "Tên đơn vị/ bộ phận chưa hợp lệ",
             'placeholder' => 'Ví dụ: Bộ phận Kỹ thuật',
-            'data-required-error' => "Vui lòng nhập thông tin",
+            'data-error' => "Thông tin không hợp lệ",
+            'data-required-error' => "Vui lòng nhập thông tin"
         ));
+        $name->setLabel('Tên bộ môn '.requiredLabel());
         $this->add($name);
 
+        $status = new Select('status', [
+            1 => "Hoạt động",
+            0 => "Khóa",
+        ], [
+            'useEmpty' => true,
+            'emptyText' => 'Chọn trạng thái',
+            'emptyValue' => '',
+            'class' => 'form-control form-control-sm',
+            'required' => '',
+            'data-required-error' => 'Vui lòng điền đầy đủ thông tin.',
+            'data-error' => "Thông tin không hợp lệ",
+        ]);
+        $status->setLabel('Trạng thái '.requiredLabel());
+        $this->add($status);
+
         $dcode = new Text('dcode');
-        $dcode->setLabel('Mã đơn vị/ bộ phận '.requiredLabel());
         $dcode->setAttributes(array(
             'class' => 'form-control form-control-sm',
-            'maxlength' => "13",
-            'size' => "13",
-            'required' => '',
-            'data-error' => "Mã đơn vị/ bộ phận chưa hợp lệ",
-            'placeholder' => 'Ví dụ: HNN13131',
-            'data-required-error' => "Vui lòng nhập thông tin",
+            'maxlength' => "4",
+            'size' => "4",
+            'placeholder' => 'Ví dụ: VLKT',
+            'data-error' => "Thông tin không hợp lệ",
         ));
+        $dcode->setLabel('Mã bộ môn');
         $this->add($dcode);
 
-        $qhns = new Text('qhns');
-        $qhns->setLabel('Mã QHNS');
-        $qhns->setAttributes(array(
+        $slug = new Text('slug');
+        $slug->setLabel('Slug');
+        $slug->setAttributes(array(
             'class' => 'form-control form-control-sm',
-            'maxlength' => "13",
-            'size' => "13",
-            'data-error' => "Mã QHNS chưa hợp lệ",
-            'placeholder' => 'Ví dụ: 12312312',
-            'data-required-error' => "Vui lòng nhập thông tin",
+            'placeholder' => 'Ví dụ: bai-viet-moi-nhat',
+            'maxlength' => "200",
+            'size' => '200',
+            'data-error' => "Thông tin không hợp lệ",
         ));
-        $this->add($qhns);
+        $this->add($slug);
+
+        $links = new Text('links');
+        $links->setAttributes(array(
+            'class' => 'form-control form-control-sm',
+            'placeholder' => 'Ví dụ: https://phys.hcmus.edu.vn',
+            'maxlength' => "200",
+            'size' => '200',
+            'data-error' => "Thông tin không hợp lệ",
+        ));
+        $links->setLabel('Link');
+        $this->add($links);
+
+        $phone = new Text('phone');
+        $phone->setAttributes(array(
+            'class' => 'form-control',
+            'placeholder' => 'Ví dụ: 01234567890',
+            'maxlength' => "30",
+            'size' => '30',
+            'data-error' => "Thông tin không hợp lệ",
+        ));
+        $phone->setLabel('Số điện thoại');
+        $this->add($phone);
+
+        $email = new Email('email');
+        $email->setAttributes(array(
+            'class' => 'form-control form-control-sm',
+            'placeholder' => "E-mail",
+            'size' => '100',
+            'maxlength' => "100",
+            'data-error' => "Thông tin không hợp lệ",
+        ));
+        $email->setLabel('E-mail');
+        $this->add($email);
 
         $address = new Text('address');
-        $address->setLabel('Địa chỉ');
         $address->setAttributes(array(
             'class' => 'form-control form-control-sm',
             'placeholder' => 'Ví dụ: Phòng A Tòa Nhà B',
-            'size' => 150
+            'size' => 150,
+            'data-error' => "Thông tin không hợp lệ",
         ));
+        $address->setLabel('Địa chỉ');
         $this->add($address);
 
         $description = new Text('description');
-        $description->setLabel('Mô tả');
         $description->setAttributes(array(
             'class' => 'form-control form-control-sm',
-            'placeholder' => 'Ví dụ: Bộ phận Kỹ thuật',
-            'size' => 150
+            'placeholder' => 'Ví dụ: Vật Lý Tin Học',
+            'size' => 150,
+            'data-error' => "Thông tin không hợp lệ",
         ));
+        $description->setLabel('Mô tả');
         $this->add($description);
 
-        $deptType = Depts::getTreeName(0);
+        $deptType = \Depts::getTreeName(0);
         $parentid = new Select('parentid', $deptType, array(
             'class' => 'form-control form-control-sm',
-            'data-error' => "Trực thuộc không đúng quy định.",
+            'data-error' => "Thông tin không hợp lệ",
             'useEmpty'      => true,
             'emptyValue'    => '0',
             'emptyText'     => 'Không có',
         ));
         $parentid->setLabel('Trực thuộc');
         $this->add($parentid);
-
-        $d_dept = [
-            1 => "Có",
-            0 => "Không"
-
-        ];
-        $isdept = new Select('isdept', $d_dept, array(
-            'class' => 'form-control form-control-sm',
-            'data-error' => "Đơn vị/bộ phận đúng quy định.",
-        ));
-        $isdept->setLabel('Là đơn vị');
-        $this->add($isdept);
-
-        $lat = new Hidden('lat');
-        $this->add($lat);
-
-        $lng = new Hidden('lng');
-        $this->add($lng);
     }
 }

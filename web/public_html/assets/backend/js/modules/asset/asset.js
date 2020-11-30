@@ -329,7 +329,7 @@ const updateMultipleAsset = (button, selector, cb = ()=> {}) => {
             Swal.fire({
                 position: 'top',
                 type: 'error',
-                title: 'Vui lòng chọn những tài sản có cùng đơn vị/bộ phận sử dụng',
+                title: 'Vui lòng chọn những tài sản có cùng bộ môn sử dụng',
                 showConfirmButton: false,
             })
         } else {

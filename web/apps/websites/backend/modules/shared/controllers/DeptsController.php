@@ -14,7 +14,7 @@ class DeptsController extends \BackendController
                 \Phalcon\Mvc\View::LEVEL_ACTION_VIEW
             );
         }
-        $title = "Đơn vị/bộ phận";
+        $title = "Bộ môn";
         $this->getJsCss();
         $this->view->title = $title;
         $this->view->form = new DeptsForm();
@@ -137,7 +137,7 @@ class DeptsController extends \BackendController
             if($id && $depts->parentid != $deptsOld['id']){
                 $arrayIdChild = \Depts::getArrayChild($deptsOld['id']);
                 if(in_array($deptParent->id, $arrayIdChild)){
-                    $data['error'] = ['Không thể trực thuộc đơn vị/bộ phận này'];
+                    $data['error'] = ['Không thể trực thuộc bộ môn này'];
                     $this->helper->responseJson($this, $data);
                 }
             }
@@ -152,9 +152,9 @@ class DeptsController extends \BackendController
                 }
             }
             if($id){
-                \Logs::saveLogs($this, 2, 'Cập nhật đơn vị/ bộ phận: '.$depts->name, $deptsOld,$depts->toArray());
+                \Logs::saveLogs($this, 2, 'Cập nhật bộ môn: '.$depts->name, $deptsOld,$depts->toArray());
             }else{
-                \Logs::saveLogs($this, 1, 'Thêm mới đơn vị/ bộ phận: '.$depts->name, "", $depts->toArray());
+                \Logs::saveLogs($this, 1, 'Thêm mới bộ môn: '.$depts->name, "", $depts->toArray());
             }
             $this->db->commit();
             $data['data'] = $depts->toArray();
@@ -199,41 +199,6 @@ class DeptsController extends \BackendController
         }    
     }
 
-    public function importAction(){
-        if (!$this->security->checkToken()) {
-            $data['token'] = ['key' => $this->security->getTokenKey(), 'value' => $this->security->getToken()];
-            $data['error'] = ['Token không chính xác'];
-            $this->helper->responseJson($this, $data);
-        }
-        $data['token'] = ['key' => $this->security->getTokenKey(), 'value' => $this->security->getToken()];
-        if (!$this->request->isAjax() || !$this->request->isPost() || !$this->master::checkPermission('depts', 'update')) {
-            $data['error'] = ["Truy cập không được phép"];
-            $this->helper->responseJson($this, $data);
-        }
-        try {
-            $this->db->begin();
-            $importExcel = new \Library\ImportExcel\ImportExcelDepts('importfile', [
-                'size_max' => 2,
-                'is_check_password' => false,
-                'file_password' => EXCEL_PASSWORD
-            ]);
-            $resValidation = $importExcel->validation();
-            if ($resValidation !== true) {
-                throw new \Exception($resValidation);
-            }
-            $importExcel->run();
-            if (!empty($importExcel->error)) {
-                throw new \Exception($importExcel->error);
-            }
-            $this->db->commit();
-            $this->helper->responseJson($this, $data);
-        } catch (\Throwable $e) {
-            $this->db->rollback();
-            $data['error'] = [$e->getMessage()];
-            $this->helper->responseJson($this, $data);
-        }
-    }
-
     // ===============================
     // FUNCTION
     // ===============================
@@ -258,8 +223,8 @@ class DeptsController extends \BackendController
         }
         $deleteChild = \Depts::deleteChild($depts->id);
         foreach ($deleteChild as $child) {
-            \Logs::saveLogs($this, 3, "Xóa đơn vị/ bộ phận: {$child['name']}", ['table' => 'Depts','id' => $child['id']]);
+            \Logs::saveLogs($this, 3, "Xóa bộ môn: {$child['name']}", ['table' => 'Depts','id' => $child['id']]);
         }
-        \Logs::saveLogs($this, 3, "Xóa đơn vị/ bộ phận: $depts->name", ['table' => 'Depts','id' => $depts->id]);
+        \Logs::saveLogs($this, 3, "Xóa bộ môn: $depts->name", ['table' => 'Depts','id' => $depts->id]);
     }
 }

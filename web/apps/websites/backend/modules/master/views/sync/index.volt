@@ -36,7 +36,7 @@
                         <div class="col-md-4 mr-auto ml-auto">
                             <div class="callout callout-info">        
                                 <p><strong>Bước 1:</strong> Tải biểu mẫu và cập nhật những nội dung tương ứng</p>
-                                <p><strong>Bước 2:</strong> Chọn loại đơn vị/bộ phận</p>
+                                <p><strong>Bước 2:</strong> Chọn loại bộ môn</p>
                                 <p><strong>Bước 3:</strong> Chọn loại tài sản</p>
                                 <p><strong>Bước 4:</strong> Chèn tệp đã điền đầy đủ thông tin</p>
                                 <p><strong>Bước 5:</strong> Nhấn nút tải lên để hoàn tất</p>

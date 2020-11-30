@@ -67,7 +67,7 @@
                         <div id="logo" class="logo" dept-id = "{{ dept.id }}">
                             <a href="<?php echo WEB_URL ?>/{{ dept.id != 1 ? dept.slug : ''}}">
                                 {% if dept.logo %}
-                                <img height="30px" src="{{ helper.getLinkImage(dept.logo) }}" alt="{{ dept_lang.name }}">
+                                <img height="30px" src="{{ helper.getLinkImage(dept.logo) }}" alt="{{ deptlang.name }}">
                                 {% else %}
                                 <h3 class="title text-default mb-0">{{ dept.dcode }}</h3>
                                 {% endif %}
@@ -75,7 +75,7 @@
                         </div>
                         {% if !dept.logo %}
                         <div class="site-slogan font-weight-bold">
-                            {{dept_lang.name}}
+                            {{deptlang.name}}
                         </div>
                         {% endif %}
                     </div>
@@ -88,7 +88,7 @@
                                     <div id="logo-mobile" class="logo">
                                         <a href="<?php echo WEB_URL ?>/">
                                             {% if dept.logo %}
-                                            <img id="logo-img-mobile" src="{{ helper.getLinkImage(dept.logo) }}" alt="{{ dept_lang.name }}">
+                                            <img id="logo-img-mobile" src="{{ helper.getLinkImage(dept.logo) }}" alt="{{ deptlang.name }}">
                                             {% else %}
                                             <h3 class="title text-default mb-0">{{ dept.dcode }}</h3>
                                             {% endif %}
@@ -96,7 +96,7 @@
                                     </div>
                                     {% if !dept.logo %}
                                     <div class="site-slogan logo-font">
-                                        {{dept_lang.name}}
+                                        {{deptlang.name}}
                                     </div>
                                     {% endif %}
 

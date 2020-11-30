@@ -161,7 +161,7 @@ const loadTableDepts = (table = 'depts', cb = () => {}) => {
         });
         // Show modal Depts Import
         showModalForm('#importDepts', '#modalDeptsImport', 'POST', () => {
-            $('#modalDeptsImport .modal-title').html('Nhập hàng loạt đơn vị/ bộ phận');
+            $('#modalDeptsImport .modal-title').html('Nhập hàng loạt bộ môn');
             $('#btnSummitDeptsImport span').html('Tải lên');
             let filename = $('#modalDeptsImport form').find('#importassetfile');
             checkUploadFile(filename, (/\.(xls|xlsx)$/i),(data)=>{
@@ -178,7 +178,7 @@ const loadTableDepts = (table = 'depts', cb = () => {}) => {
 
         // Show modal Depts Add
         showModalForm('#addDepts', '#modalDepts', 'GET', () => {
-            $('#modalDepts .modal-title').html('Thêm mới đơn vị/ bộ phận');
+            $('#modalDepts .modal-title').html('Thêm mới bộ môn');
             $('#btnSummitDepts span').html('Thêm mới');
         }, (data, row) => {
             showSweetAlertOk('Thêm mới thành công');
@@ -214,7 +214,7 @@ const loadTableDepts = (table = 'depts', cb = () => {}) => {
         deleteAll('#deleteDepts', '.assetTypeCheckbox',(data) => {
             showSweetAlertOk('Xóa thành công');
             dt.draw()
-        },'Nếu xóa đơn vị/ bộ phận này tất cả các đơn vị/ bộ phận trực thuộc cũng sẽ bị xóa. Bạn thật sự muốn thực hiện thao tác này ?');
+        },'Nếu xóa bộ môn này tất cả các bộ môn trực thuộc cũng sẽ bị xóa. Bạn thật sự muốn thực hiện thao tác này ?');
     }
 }
 

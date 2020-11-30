@@ -16,9 +16,9 @@ if($menuLocation = MenuLocation::findFirst(["status =  1 AND deptid = $dept->id 
                                 <h3 class="title text-default mb-0">{{ dept.dcode }}</h3>
                                 <a href="<?php echo WEB_URL ?>/">
                                     {% if dept.logo %}
-                                    <img src="{{ helper.getLinkImage(dept.logo) }}" alt="{{ dept_lang.name }}">
+                                    <img src="{{ helper.getLinkImage(dept.logo) }}" alt="{{ deptlang.name }}">
                                     {% else %}
-                                    <h3 class="title text-default">{{dept_lang.name}}</h3>
+                                    <h3 class="title text-default">{{deptlang.name}}</h3>
                                     {% endif %}
                                 </a>
                             </div>

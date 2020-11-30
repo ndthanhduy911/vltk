@@ -186,7 +186,7 @@ $router->add(WEB_ADMIN_URI . '/calendars/:action/:int', array(
     'id' => 2
 ));
 
-/***********************ClassesController***********************/
+/***********************ResearchesController***********************/
 $router->add(WEB_ADMIN_URI . '/researches', array(
     'module' => 'backend_admins',
     'controller' => 'researches',

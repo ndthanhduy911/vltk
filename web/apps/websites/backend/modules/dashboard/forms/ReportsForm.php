@@ -17,7 +17,7 @@ class ReportsForm extends Form{
             // 'emptyValue'    => '0',
             // 'emptyText'     => 'Tất cả',
         ));
-        $deptid->setLabel('Đơn vị/bộ phận '.requiredLabel());
+        $deptid->setLabel('Bộ môn '.requiredLabel());
         $this->add($deptid);
 
         $deptid1 = new Select('deptid1', $deptType, array(
@@ -28,7 +28,7 @@ class ReportsForm extends Form{
             'emptyValue'    => '0',
             'emptyText'     => 'Tất cả',
         ));
-        $deptid1->setLabel('Đơn vị/bộ phận '.requiredLabel());
+        $deptid1->setLabel('Bộ môn '.requiredLabel());
         $this->add($deptid1);
 
         $year = new Text('year');

@@ -86,13 +86,4 @@ class Menus extends \ModelCore
         $menulang = \MenusLang::findFirst(['langid =:langid: AND menu_id = :menu_id:', 'bind'=>['langid' => $langid, 'menu_id' => $menu_id]]);
         return $menulang ? $menulang->name : '';
     }
-
-    public static function findFirstId($id, $columns = "*")
-    {
-        return parent::findFirst([
-            "conditions" => "id = :id:",
-            "bind" => array('id' => $id),
-            "columns" => $columns
-        ]);
-    }
 }

@@ -135,7 +135,7 @@ class UserForm extends \Phalcon\Forms\Form
             'emptyText'     => 'Không có',
             'data-required-error' => "Vui lòng nhập thông tin",
         ));
-        $deptid->setLabel('Đơn vị/bộ phận '.requiredLabel());
+        $deptid->setLabel('Bộ môn '.requiredLabel());
         $this->add($deptid);
     }
 }

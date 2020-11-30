@@ -1,13 +1,11 @@
 <?php
 namespace Backend\Modules\Admins\Controllers;
 use Backend\Modules\Admins\Forms\CategoriesForm;
-use Backend\Modules\Admins\Forms\CategoriesLangForm;
-
 
 class CategoriesController  extends \BackendController {
 
     public function indexAction(){
-        $this->get_js_css();
+        $this->getJsCss();
         // $this->view->form = new UserForm();
     }
 
@@ -151,7 +149,7 @@ class CategoriesController  extends \BackendController {
         $this->view->catslang = $catslang;
         $this->view->title = $title;
         $this->assets->addJs('/elfinder/js/require.min.js');
-        $this->get_js_css();
+        $this->getJsCss();
     }
 
     public function deleteAction($id = 0){
@@ -199,7 +197,10 @@ class CategoriesController  extends \BackendController {
         }
     }
 
-    private function get_js_css (){
+    // ==============================
+    // FUNCTION
+    // ==============================
+    private function getJsCss (){
         $this->assets->addJs($this->config->application->baseUri.'/assets/backend/js/modules/admins/categories.js');
     }
 }

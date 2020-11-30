@@ -1,6 +1,5 @@
 <?php
 /***********************UserController***********************/
-
 $router->add(WEB_ADMIN_URI . '/user', array(
     'module' => 'backend_master',
     'controller' => 'user',
@@ -58,7 +57,6 @@ $router->add(WEB_ADMIN_URI . '/logs/:action/:int', array(
 ));
 
 /***********************MediaController***********************/
-
 $router->add(WEB_ADMIN_URI . '/media', array(
     'module' => 'backend_master',
     'controller' => 'media',
@@ -116,7 +114,6 @@ $router->add(WEB_ADMIN_URI . '/setting/:action/:int', array(
 ));
 
 /***********************UploadsController***********************/
-
 $router->add(WEB_URI . '/files/import/{filename:[a-zA-Z0-9\_\-]+}.xlsx', array(
     'module' => 'backend_master',
     'controller' => 'uploads',
@@ -157,6 +154,3 @@ $router->add(WEB_ADMIN_URI . '/sync/:action/:int', array(
     'action'  => 1,
     'id' => 2
 ));
-
-
-

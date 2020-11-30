@@ -52,6 +52,5 @@ class Module implements \Phalcon\Mvc\ModuleDefinitionInterface
             $dispatcher->setDefaultNamespace("Backend\Modules\Master\Controllers\\");
             return $dispatcher;
         });
-
     }
 }

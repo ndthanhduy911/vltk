@@ -1,5 +1,4 @@
 <?php
-
 /***********************DeptsController***********************/
 $router->add(WEB_ADMIN_URI . '/depts', array(
     'module' => 'backend_shared',

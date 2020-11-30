@@ -24,14 +24,14 @@ class Depts extends \ModelCore
             'name',
             new StringLength([
                 "max"            => 100,
-                "messageMaximum" => "Tên đơn vị/ bộ phận không được quá 100 ký tự",
+                "messageMaximum" => "Tên bộ môn không được quá 100 ký tự",
             ])
         );
         //name
         $validator->add(
             'name',
             new PresenceOf([
-                'message'   => 'Tên đơn vị/bộ phận không được để trống'
+                'message'   => 'Tên bộ môn không được để trống'
             ])
         );
         //dcode
@@ -39,14 +39,14 @@ class Depts extends \ModelCore
             'dcode',
             new StringLength([
                 "max"            => 13,
-                "messageMaximum" => "Mã đơn vị/bộ phận không được quá 13 ký tự",
+                "messageMaximum" => "Mã bộ môn không được quá 13 ký tự",
             ])
         );
         //dcode
         $validator->add(
             'dcode',
             new PresenceOf([
-                'message'   => 'Mã đơn vị/bộ phận không được để trống'
+                'message'   => 'Mã bộ môn không được để trống'
             ])
         );
         //qhns

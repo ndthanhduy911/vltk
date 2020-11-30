@@ -27,7 +27,7 @@ class SearchSyncForm extends Form{
             'emptyValue'    => 'all',
             'emptyText'     => 'Tất cả'
         ));
-        $deptidSearch->setLabel('Đơn vị/bộ phận');
+        $deptidSearch->setLabel('Bộ môn');
         $this->add($deptidSearch);
 
         //typeidSearch

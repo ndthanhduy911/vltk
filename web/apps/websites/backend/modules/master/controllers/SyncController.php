@@ -293,7 +293,7 @@ class SyncController extends \BackendController
             $this->isAllowChange($sync);
             if($deptId != $syncOld['deptid']){
                 if(!$isAcceptChangeDept){
-                    $data['error'] = ['Không được phép thay đổi đơn vị/bộ phận khi đã có tài sản'];
+                    $data['error'] = ['Không được phép thay đổi bộ môn khi đã có tài sản'];
                     $this->helper->responseJson($this, $data);
                 }
             }
@@ -332,7 +332,7 @@ class SyncController extends \BackendController
         $sync->coinstead4 = $this->request->getPost('coinstead4',['int', 'trim']);
 
         if(!$depts = \Depts::findFirstIdPermission($sync->deptid,$perL,'id,name')){
-            $data['error'] = ['Đơn vị/bộ phận không tồn tại'];
+            $data['error'] = ['Bộ môn không tồn tại'];
             $this->helper->responseJson($this, $data);
         }
         $sync->deptname = $depts->name;

@@ -33,7 +33,7 @@ class SyncForm extends Form
             // 'emptyValue'    => '0',
             // 'emptyText'     => 'Tất cả',
         ));
-        $deptid->setLabel('Đơn vị/bộ phận '.requiredLabel());
+        $deptid->setLabel('Bộ môn '.requiredLabel());
         $this->add($deptid);
     }
 }

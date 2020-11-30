@@ -22,12 +22,6 @@
                         data-toggle="tooltip" title="Tạo mới" class="ml-2 btn btn-hnn btn-hnn-success"><span>Thêm</span></a>
                 </div>
                 {% endif %}
-                {% if master.checkPermission('depts', 'update') %}
-                <div class="btn-group float-right">
-                    <a id="importDepts" href="#" data-href="<?= WEB_ADMIN_URL ?>/depts/import" data-toggle="tooltip" title="Tải lên hàng loạt"
-                        class="ml-2 btn btn-hnn btn-hnn-info"><span>Tải lên</span></a>
-                </div>
-                {% endif %}
             </div>
         </div>
     </div>
@@ -50,8 +44,8 @@
                                 <span class="col-auto mt-2">Tìm kiếm</span>
                                 <div class="form-group label-floating col-auto flex-1">
                                     <div class="input-group">
-                                        <label class="control-label">{{form_search.getLabel('parentSearch')}}</label>
-                                        {{ form_search.render('parentSearch',['value': request.get('parentSearch')]) }}
+                                        <label class="control-label">{{form_search.getLabel('parentidSearch')}}</label>
+                                        {{ form_search.render('parentidSearch',['value': request.get('parentidSearch')]) }}
                                         <div class="invalid-feedback">
                                         </div>
                                     </div>
@@ -75,7 +69,6 @@
                                 <div class="form-group col-auto mt-s-0">
                                     <button title="TÌm kiếm" data-toggle="tooltip" class="btn btn-hnn btn-hnn-info" type="submit"><span>Tìm</span></button>
                                 </div>
-                                {{ form_search.render('paged',['value': request.get('paged')]) }}
                             </div>
                         </form>
                         <div class="table-responsive">
@@ -83,10 +76,9 @@
                                 <thead>
                                     <tr>
                                         <th class="align-middle text-center" style="width: 30px;">
-                                            <!-- <input id="assetTypeCheckboxAll" type="checkbox" value="1"> -->
+                                            <input id="deptsCheckboxAll" type="checkbox" value="1">
                                         </th>
-                                        <th class="align-middle">Mã đơn vị/bộ phận</th>
-                                        <th class="align-middle">Mã QHNS</th>
+                                        <th class="align-middle">Mã bộ môn</th>
                                         <th class="align-middle">Tên</th>
                                         <th class="align-middle">Địa chỉ</th>
                                         <th class="align-middle">Mô tả</th>
@@ -107,9 +99,9 @@
 
 {% if master.checkPermission('depts', 'update',[0,1]) %}
 <div class="modal fade" id="modalDepts">
-    <div class="modal-dialog" style="max-width: 1220px;">
+    <div class="modal-dialog" style="max-width: 1350px;">
         <div class="modal-content">
-            {{form('method':'post','id':'frmDepts','enctype':'multipart/form-data','data-toggle':'validator','depts':'form', 'action':'', 'class':'customForm')}}
+        {{form('method':'post','id':'frmDepts','enctype':'multipart/form-data','data-toggle':'validator','depts':'form', 'action':'', 'class':'customForm')}}
             <div class="modal-header">
                 <h4 class="modal-title"></h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -118,38 +110,28 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="form-group label-floating col-md-6">
+                    <div class="form-group label-floating col-md-4">
                         <div class="input-group">
                             <label class="control-label">{{form.getLabel('name')}}</label>
                             {{form.render('name')}}
                             <div class="invalid-feedback"></div>
                         </div>
                     </div>
-                    <div class="form-group label-floating col-md-6">
+                    <div class="form-group label-floating col-md-4">
                         <div class="input-group">
                             <label class="control-label">{{form.getLabel('parentid')}}</label>
                             {{form.render('parentid')}}
                             <div class="invalid-feedback"></div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="form-group label-floating col-md-6">
+                    <div class="form-group label-floating col-md-4">
                         <div class="input-group">
                             <label class="control-label">{{form.getLabel('dcode')}}</label>
                             {{form.render('dcode')}}
                             <div class="invalid-feedback"></div>
                         </div>
                     </div>
-                    <div class="form-group label-floating col-md-6">
-                        <div class="input-group">
-                            <label class="control-label">{{form.getLabel('qhns')}}</label>
-                            {{form.render('qhns')}}
-                            <div class="invalid-feedback"></div>
-                        </div>
-                    </div>
                 </div>
-
                 <div class="row">
                     <div class="form-group label-floating col-md-6">
                         <div class="input-group">
@@ -170,59 +152,11 @@
             </div>
             {% if master.checkPermission('depts', 'update') OR master.checkPermission('depts', 'update', 1) %}
             <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-hnn btn-hnn-default"
-                    data-dismiss="modal"><span>Đóng</span></button>
-                <button type="submit" class="btn btn-hnn btn-hnn-info" id="btnSummitDepts"><span>Thêm
-                        mới</span></button>
+                <button type="button" class="btn btn-hnn btn-hnn-default" data-dismiss="modal"><span>Đóng</span></button>
+                <button type="submit" class="btn btn-hnn btn-hnn-info" id="btnSummitDepts"><span>Thêm mới</span></button>
             </div>
             {% endif %}
-            {{end_form()}}
-        </div>
-    </div>
-</div>
-{% endif %}
-
-{% if master.checkPermission('depts', 'add') %}
-<div class="modal fade" id="modalDeptsImport">
-    <div class="modal-dialog" style="min-width: 600px;">
-        <div class="modal-content">
-            <form id="frmDeptsImport" action="<?= WEB_ADMIN_URL ?>/depts/import" method="POST" enctype="multipart/form-data" data-toggle="validator" class="customForm">
-                <div class="modal-header">
-                    <h4 class="modal-title"></h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="callout callout-info">        
-                        <p><strong>Bước 1:</strong> Tải biểu mẫu và cập nhật những nội dung tương ứng</p>
-                        <p><strong>Bước 2:</strong> Chèn tệp đã điền đầy đủ thông tin</p>
-                        <p><strong>Bước 3:</strong> Nhấn nút tải lên để hoàn tất</p>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-md-12 text-center mt-0 pb-0">
-                            <a href="<?= WEB_URL ?>/files/import/depts_import.xlsx" class="btn btn-hnn btn-hnn-info"><span>Tải mẫu XLSX <i class="fas fa-download"></i></span></a>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-md-12 mt-0">
-                            <label for="importfile">Đính kèm tập tin XLSX</label>
-                            <div class="input-group">
-                                <div class="custom-file">
-                                    <input name="importfile" accept=".xlsx" type="file" class="custom-file-input form-control form-control-sm" id="importfile" placeholder="Tên tập tin nhập" required data-required-error="Vui lòng chọn biểu mẫu">
-                                    <label class="custom-file-label" for="importfile">Chọn tập tin XLSX</label>
-                                    <div class="invalid-feedback"></div>
-                                </div>
-                                <div class="input-group-append">
-                                    <button type="submit" class="btn btn-hnn btn-hnn-success"
-                                    id="btnSummitDeptsImport"><span>Tải lên</span></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <input class="tokenCSRF" type='hidden' name="{{security.getTokenKey()}}" value="{{security.getToken()}}" />
-                </div>
-            </form>
+        {{end_form()}}
         </div>
     </div>
 </div>

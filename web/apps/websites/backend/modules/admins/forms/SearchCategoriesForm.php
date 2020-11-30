@@ -4,7 +4,7 @@ use Phalcon\Forms\Form;
 use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\Select;
 
-class SearchDeptsForm extends Form{
+class SearchCategoriesForm extends Form{
     public function initialize($entity = null, $options = null){
         //nameSearch
         $nameSearch = new Text('nameSearch');
@@ -17,9 +17,9 @@ class SearchDeptsForm extends Form{
         ));
         $this->add($nameSearch);
 
-        //deptid
-        $depts = \Depts::getTreeName(0);
-        $parentidSearch = new Select('parentidSearch', $depts, array(
+        //parentid
+        $cats = \Categories::getTreeName(0);
+        $parentidSearch = new Select('parentidSearch', $cats, array(
             'class' => 'form-control form-control-sm',
             'useEmpty'      => true,
             'emptyValue'    => '0',

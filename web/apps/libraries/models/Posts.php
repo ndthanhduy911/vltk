@@ -132,7 +132,7 @@ class Posts extends \ModelCore
         $helper = new HelperValidation();
         $helper->setValidation('required', [
             'name' => 'deptid',
-            'msg' => 'Đơn vị/bộ phận không được để trống'
+            'msg' => 'Bộ môn không được để trống'
         ]);
         //calendar
         $helper->setValidation('max', [
@@ -184,8 +184,8 @@ class Posts extends \ModelCore
             'image' => 'Hình đại diện',
             'author' => 'Tác giả',
             'authorname' => 'Tác giả',
-            'deptid' => 'Đơn vị/bộ phận',
-            'deptname' => 'Đơn vị/bộ phận',
+            'deptid' => 'Bộ môn',
+            'deptname' => 'Bộ môn',
             'calendar' => 'Ngày đăng',
             'title' => 'Tiêu đề',
             'excerpt' => 'Trích dẫn'
