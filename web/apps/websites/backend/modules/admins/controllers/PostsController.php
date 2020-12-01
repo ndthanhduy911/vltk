@@ -178,7 +178,7 @@ class PostsController  extends \BackendController {
 
         $data = $this->master::builderPermission($data,$perL,'p');
         $data = \FilterSetting::getDataOrder($this,$data,\Posts::findFirst(),'p',['pl'=>'title']);
-        $data = \FilterSetting::getDataFilter($this,$data,\Posts::arrayFilter(),'p');
+        $data = \FilterSetting::getDataFilter($this,$data,\Posts::arrayFilter(),['p',['pl'=>['title']]]);
 
         $array_row = [
             'u' => $this->master::checkPermission('posts', 'update', 1)
@@ -291,12 +291,7 @@ class PostsController  extends \BackendController {
         $post->status = $this->request->getPost('status',['int','trim']);
         $post->slug = $plug ? $plug : $this->helper->slugify($pTitle[1]);
         $post->calendar = $this->helper->dateMysql($this->request->getPost('calendar', ['string', 'trim']),'Y-m-d H:i:s');
-        $iamge = $this->helper->uploadImage('image', isset($post->image) ? $post->image : NULL, 'image');
-        if (!empty($checkReportfile['error'])) {
-            $data['error'] = [$checkReportfile['error']];
-            $this->helper->responseJson($this, $data);
-        }
-        $post->image = $iamge['filename'];
+        $post->image = $this->request->getPost('image',['trim','string']);
 
         if(\Posts::findFirst(["slug = :slug: AND id != :id:","bind" => ["slug" => $post->slug,'id'=> $id]])){
             $reqPost['slug'] = $post->slug .'-'. strtotime('now');
@@ -431,7 +426,7 @@ class PostsController  extends \BackendController {
         $item->updatedat = date('Y-m-d H:i:s');
         $item->updatedby = $userid;
         $item->status = 4;
-        if (!$item->delete()) {
+        if (!$item->save()) {
             foreach ($item->getMessages() as $message) {
                 throw new \Exception($message->getMessage());
             }
@@ -444,8 +439,8 @@ class PostsController  extends \BackendController {
         $userid = $this->session->get('userid');
         $item->updatedat = date('Y-m-d H:i:s');
         $item->updatedby = $userid;
-        $item->status = 4;
-        if (!$item->delete()) {
+        $item->status = 1;
+        if (!$item->save()) {
             foreach ($item->getMessages() as $message) {
                 throw new \Exception($message->getMessage());
             }
@@ -463,7 +458,7 @@ class PostsController  extends \BackendController {
         }
         $data = \PostsLang::find([
             'postid = :postId:',
-            ['postId' => $itemOld['id']]
+            'bind' => ['postId' => $itemOld['id']]
         ]);
         foreach ($data as $it) {
             if (!$it->delete()) {

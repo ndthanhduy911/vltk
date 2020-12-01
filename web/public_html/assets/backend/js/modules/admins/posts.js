@@ -15,9 +15,9 @@ const showTitle = (text,length = 100) => {
 
 const getPostLink = (item) => {
     if(item.dslug != '/'){
-        return `<a href="${webUri}/${item.dslug}/news/${item.slug}">Link</a>`;
+        return `<a target="_blank" href="${webUri}/${item.dslug}/news/${item.slug}">Link</a>`;
     }
-    return `<a href="${webUri}/news/${item.slug}">Link</a>`;
+    return `<a target="_blank" href="${webUri}/news/${item.slug}">Link</a>`;
 }
 
 const loadTablePosts = (table = '#posts', cb = () => {}) => {
@@ -140,5 +140,10 @@ const updatePosts = (form = '#frmPosts') => {
 }
 
 loadTablePosts('#posts');
-loadTableTrashPosts('#trashposts');
+loadTableTrashPosts('#trashposts',()=>{
+    deleteAll(`#restorePosts`, `.postsCheckbox`,(data) => {
+        showSweetAlertOk('Khôi phục bài viết thành công');
+        $('#trashposts').DataTable().draw();
+    });
+});
 updatePosts();

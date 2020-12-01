@@ -16,7 +16,7 @@
                 </div>
                 {% if master.checkPermission('posts', 'delete') %}
                 <div class="btn-group float-right">
-                    <a id="deletePosts" data-href="<?= WEB_ADMIN_URL ?>/posts/delete" title="Xóa vĩnh viễn"
+                    <a id="deleteTrashPosts" data-href="<?= WEB_ADMIN_URL ?>/posts/delete" title="Xóa vĩnh viễn"
                         class="ml-2 btn btn-hnn btn-hnn-danger"><span><i class="fas fa-trash-alt"></i></span></a>
                 </div>
                 {% endif %}

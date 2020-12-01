@@ -1405,7 +1405,7 @@ const deleteAll = (button, selector, cb = () => {}, title = "Bạn có chắc mu
             Swal.fire({
                 position: 'top',
                 type: 'error',
-                title: 'Vui lòng chọn dữ liệu muốn xóa',
+                title: 'Vui lòng chọn dữ liệu',
                 showConfirmButton: false,
             })
         }
