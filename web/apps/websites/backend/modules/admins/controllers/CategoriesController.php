@@ -57,7 +57,6 @@ class CategoriesController  extends \BackendController {
                 }
             }
             $title = 'Chỉnh sửa';
-            $cat->createdat = $this->helper->dateVn($cat->createdat,'d/m/Y H:i');
         }else{
             $cat = new \Categories();
             $title = 'Thêm mới';
@@ -66,7 +65,6 @@ class CategoriesController  extends \BackendController {
                 $formsLang[$lang->id] = new CategoriesLangForm(null, [$lang->id,$v]);
                 $catsLang[$lang->id] = new \CategoriesLang();
             }
-            $cat->createdat = date('d/m/Y H:i');
         }
 
         $formCat = new CategoriesForm($cat);

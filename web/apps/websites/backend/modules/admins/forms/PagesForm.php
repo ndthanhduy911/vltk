@@ -4,27 +4,23 @@ namespace Backend\Modules\Admins\Forms;
 use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\Select;
 use Phalcon\Forms\Element\Hidden;
-use Phalcon\Forms\Form;
-use Phalcon\Validation\Validator\StringLength as StringLength;
-use Phalcon\Validation\Validator\PresenceOf;
-class PagesForm extends Form
+
+class PagesForm extends \Phalcon\Forms\Form
 {
     public function initialize($entity = null, $options = null)
     {
+        //slug
         $slug = new Text('slug');
+        $slug->setLabel('Slug');
         $slug->setAttributes(array(
-            'class' => 'form-control',
+            'class' => 'form-control form-control-sm',
             'placeholder' => 'Slug',
             'maxlength' => "200",
-        ));
-        $slug->addValidators(array(
-            new StringLength([
-                "max" => 200,
-                "messageMaximum" => "Slug không được dài quá 255 ký tự",
-            ]),
+            'data-error' => "Thông tin chưa hợp lệ",
         ));
         $this->add($slug);
 
+        //status
         $status = new Select('status', [
             1 => "Hoạt động",
             0 => "Khóa",
@@ -32,33 +28,32 @@ class PagesForm extends Form
             'useEmpty' => true,
             'emptyText' => 'Chọn trạng thái',
             'emptyValue' => '',
-            'class' => 'form-control pull-right w-100',
+            'class' => 'form-control form-control-sm',
             'required' => '',
-            'data-required-error' => 'Vui lòng điền đầy đủ thông tin.',
+            'data-required-error' => 'Vui lòng nhập thông tin',
+            'data-error' => "Thông tin chưa hợp lệ"
         ]);
-        $status->addValidators(array(
-            new PresenceOf(array(
-                'message' => 'Trạng thái không được để trống.',
-            )),
-        ));
+        $status->setLabel('Trạng thái');
         $this->add($status);
 
-        $attribute_id = new Select('attribute_id', Attributes::find(), [
-            'using' => array('id', 'name'),
+        //attributeid
+        $attributeid = new Select('attributeid', \Attributes::find(['status = 1']), array(
+            'using' => ['id', 'name'],
             'useEmpty' => true,
             'emptyText' => 'Mặc định',
-            'emptyValue' => '',
-            'class' => 'form-control pull-right w-100',
-        ]);
-        $this->add($attribute_id);
+            'emptyValue' => '0',
+            'class' => 'form-control form-control-sm',
+            'data-error' => "Thông tin chưa hợp lệ",
+        ));
+        $attributeid->setLabel('Giao diện');
+        $this->add($attributeid);
 
+        //image
         $image = new Hidden('image');
         $this->add($image);
 
-        $background_image = new Hidden('background_image');
-        $this->add($background_image);
-
-        $deleted = new Hidden('deleted');
-        $this->add($deleted);
+        //bgimage
+        $bgimage = new Hidden('bgimage');
+        $this->add($bgimage);
     }
 }

@@ -1,5 +1,4 @@
 <?php
-
 use Library\Helper\HelperValidation;
 
 class Posts extends \ModelCore

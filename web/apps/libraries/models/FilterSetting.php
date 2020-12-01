@@ -29,6 +29,8 @@ class FilterSetting extends \ModelCore
         $fkeys = [
             'posts' => \Posts::findFilters(),
             'trashposts' => \Posts::findTrashFilters(),
+            'pages' => \Pages::findFilters(),
+            'trashpages' => \Pages::findTrashFilters()
         ];
         if($fkey && isset($fkeys[$fkey])){
             $groupField = \FieldGroup::findDataArrayKey($fkey);
@@ -64,7 +66,9 @@ class FilterSetting extends \ModelCore
     public static function getTableKeys($fkey = false){
         $fkeys = [
             'posts' => \Posts::findTables(),
-            'trashposts' => \Posts::findTrashTables()
+            'trashposts' => \Posts::findTrashTables(),
+            'pages' => \Pages::findTables(),
+            'trashpages' => \Pages::findTrashTables()
         ];
 
         if($fkey && isset($fkeys[$fkey])){
@@ -89,6 +93,8 @@ class FilterSetting extends \ModelCore
         $fkeys = [
             'posts' => \Posts::arrayOrder(),
             'trashposts' => \Posts::arrayTrashOrder(),
+            'pages' => \Pages::arrayOrder(),
+            'trashpages' => \Pages::arrayTrashOrder(),
         ];
         if($fkey && isset($fkeys[$fkey])){
             return $fkeys[$fkey];

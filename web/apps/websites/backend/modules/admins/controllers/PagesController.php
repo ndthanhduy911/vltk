@@ -2,215 +2,460 @@
 namespace Backend\Modules\Admins\Controllers;
 use Backend\Modules\Admins\Forms\PagesForm;
 use Backend\Modules\Admins\Forms\PagesLangForm;
+use Backend\Modules\Admins\Forms\SearchPagesForm;
 
 class PagesController  extends \BackendController {
 
     public function indexAction(){
-        $this->get_js_css();
-        // $this->view->form = new UserForm();
+        if($this->request->get('singlePage') && $this->request->isAjax()){
+            $this->view->setRenderLevel(
+                \Phalcon\Mvc\View::LEVEL_ACTION_VIEW
+            );
+        }
+
+        $filters = \Pages::findFilters();
+        $tables = \Pages::findTables();
+        $fFilters = ['title','status','createdat'];
+        $fTables = ['image','title','excerpt','authorname','createdat','slug','status'];
+        if($fSetting = \FilterSetting::findFirstKey('pages')){
+            $fFilters = $fSetting->filters ? json_decode($fSetting->filters) : $fFilters;
+            $fTables = $fSetting->tables ? json_decode($fSetting->tables) : $fTables;   
+        }
+        $filters = \FilterSetting::mapFilter($fFilters,$filters);
+        $tables = \FilterSetting::mapFilter($fTables,$tables);
+        $fFilters = array_intersect($fFilters,$filters);
+        $fTables = array_intersect($fTables,$tables);
+
+        $title = "Trang";
+        $this->getJsCss();
+        $this->view->searchForm = new SearchPagesForm();
+        $this->view->title = $title;
+        $this->view->filters = $filters;
+        $this->view->tables = $tables;
+        $this->view->fFilters = $fFilters;
+        $this->view->fTables = $fTables;
     }
 
-    public function updateAction($id = 0){
-        $formslang = [];
-        $pageslang = [];
-        $page_content = [];
+    public function trashsAction(){
+        if($this->request->get('singlePage') && $this->request->isAjax()){
+            $this->view->setRenderLevel(
+                \Phalcon\Mvc\View::LEVEL_ACTION_VIEW
+            );
+        }
+
+        $filters = \Pages::findTrashFilters();
+        $tables = \Pages::findTrashTables();
+        $fFilters = ['title','createdat'];
+        $fTables = ['image','title','excerpt','authorname','createdat','slug'];
+        if($fSetting = \FilterSetting::findFirstKey('trashpages')){
+            $fFilters = $fSetting->filters ? json_decode($fSetting->filters) : $fFilters;
+            $fTables = $fSetting->tables ? json_decode($fSetting->tables) : $fTables;   
+        }
+        $filters = \FilterSetting::mapFilter($fFilters,$filters);
+        $tables = \FilterSetting::mapFilter($fTables,$tables);
+        $fFilters = array_intersect($fFilters,$filters);
+        $fTables = array_intersect($fTables,$tables);
+
+        $title = "Trang";
+        $this->getJsCss();
+        $this->view->searchForm = new SearchPagesForm();
+        $this->view->title = $title;
+        $this->view->filters = $filters;
+        $this->view->tables = $tables;
+        $this->view->fFilters = $fFilters;
+        $this->view->fTables = $fTables;
+    }
+
+    public function viewAction($id = 0){
+
+        if($this->request->get('singlePage') && $this->request->isAjax()){
+            $this->view->setRenderLevel(
+                \Phalcon\Mvc\View::LEVEL_ACTION_VIEW
+            );
+        }
+
+        $perEdit = $this->master::checkPermissionDepted('asset', 'update',1);
+        $perView = $this->master::checkPermissionDepted('asset', 'index');
+        $perL = $perView ? $perView : ($perEdit? $perEdit :false);
+        if(!$perL){
+            require ERROR_FILE; die;
+        }
+        if($this->request->get('singlePage') && $this->request->isAjax()){
+            $this->view->setRenderLevel(
+                \Phalcon\Mvc\View::LEVEL_ACTION_VIEW
+            );
+        }
+
+        $formsLang = [];
+        $pagesLang = [];
+        $pageContent = [];
         $languages = \Language::find(['status = 1']);
         if($id){
             if(!$page = \Pages::findFirstId($id)){
                 echo 'Không tìm thấy dữ liệu'; die;
-            }
-            $page->updatedat = date('Y-m-d H:i:s');
-            $title = 'Cập nhật';
+            }         
             foreach ($languages as $key => $lang) {
-                $pagelang = \PagesLang::findFirst(['page_id = :id: AND langid = :langid:','bind' => ['id' => $page->id, 'langid' => $lang->id]]);
-                if($pagelang){
-                    $formlang = new PagesLangForm($pagelang);
-                    $pageslang[$lang->id] = $pagelang;
-                    $formslang[$lang->id] = $formlang;
-                    $page_content[$lang->id] = $pagelang->content;
+                $v = ($key == 0 ? true : false);
+                $pageLang = \PagesLang::findFirst(['pageid = :id: AND langid = :langid:','bind' => ['id' => $page->id, 'langid' => $lang->id]]);
+                if($pageLang){
+                    $formLang = new PagesLangForm($pageLang, [$lang->id,$v]);
+                    $pagesLang[$lang->id] = $pageLang;
+                    $formsLang[$lang->id] = $formLang;
+                    $pageContent[$lang->id] = $pageLang->content;
                 }else{
-                    echo 'Nội dung không phù hợp'; die;
+                    $formsLang[$lang->id] = new PagesLangForm(null, [$lang->id,$v]);
+                    $pagesLang[$lang->id] = new \PagesLang();
+                    $pageContent[$lang->id] = '';
                 }
-            }   
+            }
+            $title = 'Chỉnh sửa';
+            $page->updatedat = date('Y-m-d H:i:s');
         }else{
             $page = new \Pages();
-            $page->author = $this->session->get('user_id');
+            $page->author = $this->session->get('userid');
             $page->deptid = $this->session->get('deptid');
             $page->createdat = date('Y-m-d H:i:s');
             $page->updatedat = $page->createdat;
             $title = 'Thêm mới';
             foreach ($languages as $key => $lang) {
-                $formslang[$lang->id] = new PagesLangForm();
-                $pageslang[$lang->id] = new \PagesLang();
-                $page_content[$lang->id] = '';
+                $v = $key == 0 ? true : false;
+                $formsLang[$lang->id] = new PagesLangForm(null, [$lang->id,$v]);
+                $pagesLang[$lang->id] = new \PagesLang();
+                $pageContent[$lang->id] = '';
             }
         }
 
-        $form_page = new PagesForm($page);
-        if ($this->request->isPost()) {
-            if ($this->security->checkToken()) {
-                $error = [];
-                $p_title = $this->request->getPost('title',['string','trim']);
-                $p_slug = $this->request->getPost('slug',['string','trim']);
-                $p_content = $this->request->getPost('content',['trim']);
-                $p_excerpt = $this->request->getPost('excerpt',['string','trim']);
-                $req_page = [
-                    'status' => $this->request->getPost('status',['string','trim']),
-                    'slug' => $p_slug ? $p_slug : $this->helper->slugify($p_title[1]),
-                    'image' => $this->request->getPost('image',['string','trim']),
-                    'background_image' => $this->request->getPost('background_image',['string','trim']),
-                    'attribute_id' => (int)$this->request->getPost('attribute_id',['int','trim']),
-                ];
+        $formPage = new PagesForm($page);
 
-                $check_slug = \Pages::findFirst([
-                    "slug = :slug: AND id != :id:",
-                    "bind" => [
-                        "slug" => $req_page['slug'],
-                        'id'    => $id,
-                    ]
-                ]);
-
-                if($check_slug){
-                    $req_page['slug'] = $req_page['slug'] .'-'. strtotime('now'); 
-                }
-
-                $form_page->bind($req_page, $page);
-                if (!$form_page->isValid()) {
-                    foreach ($form_page->getMessages() as $message) {
-                        array_push($error, $message->getMessage());
-                    }
-                }
-
-                foreach ($languages as $key => $lang) {
-                    $req_pagelang[$lang->id] = [
-                        'title' => $p_title[$lang->id],
-                        'content' => $p_content[$lang->id],
-                        'excerpt' => $p_excerpt[$lang->id],
-                        'langid' => $lang->id,
-                    ];
-
-                    $formslang[$lang->id]->bind($req_pagelang[$lang->id], $pageslang[$lang->id]);
-                    if (!$formslang[$lang->id]->isValid()) {
-                        foreach ($formslang[$lang->id]->getMessages() as $message) {
-                            array_push($error, $message->getMessage());
-                        }
-                    }
-                }
-
-                if (!count($error)) {
-                    if (!$page->save()) {
-                        foreach ($page->getMessages() as $message) {
-                            $this->flashSession->error($message);
-                        }
-                    } else {
-                        foreach ($languages as $key => $lang) {
-                            $pageslang[$lang->id]->page_id = $page->id;
-                            $pageslang[$lang->id]->save();
-                        }
-                        $this->flashSession->success($title." thành công");
-                        return $this->response->redirect(WEB_ADMIN_URL.'/pages');
-                    }
-                }else{
-                    foreach ($error as $value) {
-                        $this->flashSession->error($value);
-                    }
-                }
-            }else{
-                $this->flashSession->error("Token không chính xác");
-            }
-        }
-
+        $this->view->perEdit = $perEdit ? 1 : "";
+        $this->view->perView = $perView ? 1 : "";
         $this->view->languages = $languages;
-        $this->view->page_content = $page_content;
-        $this->view->formslang = $formslang;
-        $this->view->form_page = $form_page;
+        $this->view->pageContent = $pageContent;
+        $this->view->formsLang = $formsLang;
+        $this->view->formPage = $formPage;
         $this->view->page = $page;
-        $this->view->pageslang = $pageslang;
+        $this->view->pagesLang = $pagesLang;
         $this->view->title = $title;
         $this->assets->addJs('/elfinder/js/require.min.js');
-        $this->get_js_css();
-    }
-
-    public function deleteAction($id = null){
-        if ($page = \Pages::findFirstId($id)) {
-            $page->deleted = 1;
-            if (!$page->save()) {
-                if ($this->request->isAjax()) {
-                    foreach ($page->getMessages() as $message) {
-                        array_push($error, $message->getMessage());
-                    }
-                    $data['error'] = $error;
-                    $this->response->setStatusCode(400, 'error');
-                    $this->response->setJsonContent($data);
-                    return $this->response->send();
-                } else {
-                    foreach ($page->getMessages() as $message) {
-                        $this->flashSession->error($message);
-                    }
-                    return $this->response->redirect(WEB_ADMIN_URL.'/trashs');
-                }
-            }else{
-                if ($this->request->isAjax()) {
-                    $data['data'] = $page->toArray();
-                    $this->response->setStatusCode(200, 'OK');
-                    $this->response->setJsonContent($data);
-                    return $this->response->send();
-                } else {
-                    // $this->logs->write_log(3, 1, 'Xóa trang', json_encode($save),$this->session->get("user_id"));
-                    $this->flashSession->success("Xóa bài viết khoản thành công");
-                    return $this->response->redirect(WEB_ADMIN_URL.'/trashs');
-                }
-
-            }
-        }else{
-            if ($this->request->isAjax()) {
-                $data['error'] = 'Không tìm thấy bài viết';
-                $this->response->setStatusCode(404, 'Not found');
-                $this->response->setJsonContent($data);
-                return $this->response->send();
-            } else {
-                $this->flashSession->error("Không tìm thấy bài viết");
-                return $this->response->redirect(WEB_ADMIN_URL.'/trashs');
-            }
-        }
+        $this->getJsCss();
     }
 
     // =================================
     // API
     // =================================
-
-    public function getdataAction(){
-        if($this->request->isAjax()){
-            $deptid = $this->session->get('deptid');
-            $data = $this->modelsManager->createBuilder()
-            ->columns(array(
-                'p.id',
-                'p.slug',
-                'p.attribute_id',
-                'p.status',
-                'p.deptid',
-                'p.createdat',
-                'pl.excerpt excerpt',
-                'pl.title title',
-                'pl.content content',
-            ))
-            ->from(['p' => 'Pages'])
-            ->where("p.deleted = 0 AND p.deptid = {$deptid}")
-            ->leftJoin('PagesLang', 'pl.page_id = p.id AND pl.langid = 1','pl')
-            ->orderBy('p.deptid ASC, p.createdat DESC');
-    
-            $search = 'pl.title LIKE :search:';
-            $this->response->setStatusCode(200, 'OK');
-            $this->response->setJsonContent($this->ssp->data_output($this->request->get(), $data,$search));
-            return $this->response->send();
-        }else{
-            $this->response->setStatusCode(403, 'Failed');
-            $this->response->setJsonContent(['Truy cập không được phép']);
-            return $this->response->send();
+    // Get data
+    public function ajaxgetdataAction(){
+        if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('pages', 'index')) {
+            $this->helper->responseJson($this, ["error" => "Truy cập không được phép"]);
         }
+        $columns = [
+            'p.id',
+            'p.slug',
+            'p.attributeid',
+            'p.status',
+            'p.deptid',
+            'p.createdat',
+            'p.image',
+            'p.bgimage',
+            'pl.title',
+            'pl.content',
+            'pl.excerpt',
+            'u.fullname authorname',
+            'd.slug dslug',
+        ];
+
+        $data = $this->modelsManager->createBuilder()
+        ->columns($columns)
+        ->from(['p' => "Pages"])
+        ->where("p.deleted = 0 AND p.status != 4")
+        ->leftJoin('User', 'u.id = p.author','u')
+        ->leftJoin('PagesLang', 'pl.pageid = p.id AND pl.langid = 1','pl')
+        ->leftJoin('Depts', 'd.id = p.deptid','d')
+        ->orderBy('p.createdat DESC');
+
+        $data = $this->master::builderPermission($data,$perL,'p');
+        $data = \FilterSetting::getDataOrder($this,$data,\Pages::findFirst(),'p',['pl'=>'title']);
+        $data = \FilterSetting::getDataFilter($this,$data,\Pages::arrayFilter(),['p',['pl'=>['title']]]);
+
+        $array_row = [
+            'u' => $this->master::checkPermission('pages', 'update', 1)
+        ];
+
+        $search = '';
+        $this->helper->responseJson($this, $this->ssp->dataOutput($this, $data,$search, $array_row));
     }
 
-    private function get_js_css (){
-        $this->assets->addJs($this->config->application->baseUri.'/assets/backend/js/modules/admins/pages.js');
+    public function ajaxgetdatatrashAction(){
+        if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('pages', 'index')) {
+            $this->helper->responseJson($this, ["error" => "Truy cập không được phép"]);
+        }
+        $columns = [
+            'p.id',
+            'p.slug',
+            'p.attributeid',
+            'p.status',
+            'p.deptid',
+            'p.createdat',
+            'p.image',
+            'p.bgimage',
+            'pl.title',
+            'pl.content',
+            'pl.excerpt',
+            'u.fullname authorname',
+            'd.slug dslug',
+        ];
+
+        $data = $this->modelsManager->createBuilder()
+        ->columns($columns)
+        ->from(['p' => "Pages"])
+        ->where("p.deleted = 0 AND p.status = 4")
+        ->leftJoin('User', 'u.id = p.author','u')
+        ->leftJoin('PagesLang', 'pl.pageid = p.id AND pl.langid = 1','pl')
+        ->leftJoin('Depts', 'd.id = p.deptid','d')
+        ->orderBy('p.createdat DESC');
+
+        $data = $this->master::builderPermission($data,$perL,'p');
+        $data = \FilterSetting::getDataOrder($this,$data,\Pages::findFirst(),'p',['pl'=>'title']);
+        $data = \FilterSetting::getDataFilter($this,$data,\Pages::arrayTrashFilter(),'p');
+
+        $array_row = [];
+
+        $search = '';
+        $this->helper->responseJson($this, $this->ssp->dataOutput($this, $data,$search, $array_row));
+    }
+
+    // Update data
+
+    public function updateAction($id = 0){
+        $this->view->disable();
+        if (!$this->security->checkToken()) {
+            $data['token'] = ['key' => $this->security->getTokenKey(), 'value' => $this->security->getToken()];
+            $data['error'] = ['Token không chính xác'];
+            $this->helper->responseJson($this, $data);
+        }
+        $data['token'] = ['key' => $this->security->getTokenKey(), 'value' => $this->security->getToken()];
+        if(!$this->request->isAjax() || !$this->request->isPost() || !$perL = $this->master::checkPermissionDepted('pages','update')){
+            $data['error'] = ['Truy cập không được phép'];
+            $this->helper->responseJson($this, $data);
+        }
+
+        $userid = $this->session->get('userid');
+        $languages = \Language::find(['status = 1']);
+        $pTitle = $this->request->getPost('title',['string','trim']);
+        $pContent = $this->request->getPost('content',['trim']);
+        $pExcerpt = $this->request->getPost('excerpt',['string','trim']);
+        if($id){
+            if(!$page = \Pages::findFirstIdPermission($id,$perL)){
+                $data['error'] = ['Không tìm thấy trang'];
+                $this->helper->responseJson($this, $data);
+            }
+            $page->updatedat = date('Y-m-d H:i:s');
+            $page->updatedby = $userid;
+        }else{
+            $page = new \Pages();
+            $page->author = $this->session->get('userid');
+            $page->deptid = $this->session->get('deptid');
+            $page->createdat = date('Y-m-d H:i:s');
+            $page->updatedat = $page->createdat;
+            $page->createdby = $userid;
+            $page->updatedby = $userid;
+        }
+        $pageLangs = [];
+
+        foreach ($languages as $key => $lang) {
+
+            if(!$id || !$pageLang = \PagesLang::findFirst(["pageid = :id: AND langid = :langid:",'bind' => ['id' => (int)$id,'langid' => $lang->id]])){
+                $pageLang = new \PagesLang();
+            }
+
+            if($key == 0){
+                $lId = $lang->id;
+            }
+
+            $pageLang->title = !empty($pTitle[$lang->id]) ? $pTitle[$lang->id] : $pTitle[$lId];
+            $pageLang->content = !empty($pContent[$lang->id]) ? $pContent[$lang->id] : $pContent[$lId];
+            $pageLang->excerpt = !empty($pExcerpt[$lang->id]) ? $pExcerpt[$lang->id] : $pExcerpt[$lId];
+            $pageLang->langid = $lang->id;
+            array_push($pageLangs,$pageLang);
+        }
+
+        $plug = $this->request->getPost('slug',['string','trim']);
+        $page->attributeid = $this->request->getPost('attributeid',['int','trim']);
+        $page->status = $this->request->getPost('status',['int','trim']);
+        $page->slug = $plug ? $plug : $this->helper->slugify($pTitle[1]);
+        $page->image = $this->request->getPost('image',['trim','string']);
+        $page->bgimage = $this->request->getPost('bgimage',['trim','string']);
+
+        if(\Pages::findFirst(["slug = :slug: AND id != :id:","bind" => ["slug" => $page->slug,'id'=> $id]])){
+            $reqPost['slug'] = $page->slug .'-'. strtotime('now');
+        }
+
+        try {
+            $this->db->begin();
+            $page->vdUpdate(true);
+            if (!$page->save()) {
+                foreach ($page->getMessages() as $message) {
+                    throw new \Exception($message->getMessage());
+                }
+            }
+            foreach ($pageLangs as $pageLang) {
+                $pageLang->pageid = $page->id;
+                $pageLang->vdUpdate(true);
+                if (!$pageLang->save()) {
+                    foreach ($pageLang->getMessages() as $message) {
+                        throw new \Exception($message->getMessage());
+                    }
+                }
+            }
+            $this->db->commit();
+            $this->flashSession->success(($id ? 'Chỉnh sửa' : 'Thêm mới').' trang thành công');
+        } catch (\Throwable $e) {
+            $this->db->rollback();
+            $data['error'] = [$e->getMessage()];
+        }
+        $this->helper->responseJson($this, $data);
+    }
+
+    public function restoreAction(){
+        $this->view->disable();
+        if(!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('pages','delete',1)){
+            $data['error'] = ['Truy cập không được phép'];
+            $this->helper->responseJson($this, $data);
+        }
+
+        $listId = $this->request->getPost('dataId');
+        if (!is_array($listId)) {
+            $this->helper->responseJson($this, ["error" => ["Dữ liệu không hợp lệ"]]);
+        }
+
+        $listId = $this->helper->filterListIds($listId);
+        $strIds = implode(',', $listId);
+
+        $data = \Pages::findPermission($perL,"*",['status = 4 AND id IN (' . $strIds . ')']);
+
+        try {
+            $this->db->begin();
+            foreach ($data as $item) {
+                $this->restoreOne($item);
+            }
+            $this->db->commit();
+        } catch (\Throwable $e) {
+            $this->db->rollback();
+            $this->helper->responseJson($this, ["error" => [$e->getMessage()]]);
+        }
+        $this->helper->responseJson($this, ["result" => ["Success"]]);
+    }
+
+    public function trashAction(){
+        $this->view->disable();
+        if(!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('pages','delete',1)){
+            $data['error'] = ['Truy cập không được phép'];
+            $this->helper->responseJson($this, $data);
+        }
+
+        $listId = $this->request->getPost('dataId');
+        if (!is_array($listId)) {
+            $this->helper->responseJson($this, ["error" => ["Dữ liệu không hợp lệ"]]);
+        }
+
+        $listId = $this->helper->filterListIds($listId);
+        $strIds = implode(',', $listId);
+
+        $data = \Pages::findPermission($perL,"*",['id IN (' . $strIds . ')']);
+
+        try {
+            $this->db->begin();
+            foreach ($data as $item) {
+                $this->trashOne($item);
+            }
+            $this->db->commit();
+        } catch (\Throwable $e) {
+            $this->db->rollback();
+            $this->helper->responseJson($this, ["error" => [$e->getMessage()]]);
+        }
+        $this->helper->responseJson($this, ["result" => ["Success"]]);
+        
+    }
+
+    public function deleteAction(){
+        if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('pages', 'delete')) {
+            $this->helper->responseJson($this, ["error" => ["Truy cập không được phép"]]);
+        }
+
+        $listId = $this->request->getPost('dataId');
+        if (!is_array($listId)) {
+            $this->helper->responseJson($this, ["error" => ["Dữ liệu không hợp lệ"]]);
+        }
+
+        $listId = $this->helper->filterListIds($listId);
+        $strIds = implode(',', $listId);
+
+        $data = \Pages::findPermission($perL,"*",['status = 4 AND id IN (' . $strIds . ')']);
+
+        try {
+            $this->db->begin();
+            foreach ($data as $item) {
+                $this->deleteOne($item);
+            }
+            $this->db->commit();
+        } catch (\Throwable $e) {
+            $this->db->rollback();
+            $this->helper->responseJson($this, ["error" => [$e->getMessage()]]);
+        }
+        $this->helper->responseJson($this, ["result" => ["Success"]]);
+    }
+
+    // =================================
+    // FUNCTION
+    // =================================
+    private function trashOne($item){
+        $userid = $this->session->get('userid');
+        $item->updatedat = date('Y-m-d H:i:s');
+        $item->updatedby = $userid;
+        $item->status = 4;
+        if (!$item->save()) {
+            foreach ($item->getMessages() as $message) {
+                throw new \Exception($message->getMessage());
+            }
+        }
+        \Logs::saveLogs($this, 3, "Xóa tạm trang ID: {$item->id}", ['table' => 'Pages','id' => $item->id]);
+    }
+
+    private function restoreOne($item){
+        $userid = $this->session->get('userid');
+        $item->updatedat = date('Y-m-d H:i:s');
+        $item->updatedby = $userid;
+        $item->status = 1;
+        if (!$item->save()) {
+            foreach ($item->getMessages() as $message) {
+                throw new \Exception($message->getMessage());
+            }
+        }
+        \Logs::saveLogs($this, 5, "Khôi phục trang ID: {$item->id}", ['table' => 'Pages','id' => $item->id]);
+    }
+
+    private function deleteOne($item){
+        $itemOld = $item->toArray();
+        if (!$item->delete()) {
+            foreach ($item->getMessages() as $message) {
+                throw new \Exception($message->getMessage());
+            }
+        }
+        $data = \PagesLang::find([
+            'pageid = :pageid:',
+            'bind' => ['pageid' => $itemOld['id']]
+        ]);
+        foreach ($data as $it) {
+            if (!$it->delete()) {
+                foreach ($it->getMessages() as $message) {
+                    throw new \Exception($message->getMessage());
+                }
+            }
+        }
+        \Logs::saveLogs($this, 4, "Xóa trang ID: {$itemOld['id']}", ['table' => 'Pages','id' => $itemOld['id']]);
+    }
+
+    private function getJsCss(){
+        $this->assets->addJs(WEB_URI.'/assets/backend/js/modules/admins/pages.js');
     }
 }

@@ -5,11 +5,11 @@ class Attributes extends \ModelCore
     public function initialize()
     {
         $this->setSchema(SCHEMADB);
-        $this->setSource("banner");
+        $this->setSource("attributes");
     }
 
     public function getSource()
     {
-        return 'banner';
+        return 'attributes';
     }
 }

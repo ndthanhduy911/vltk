@@ -74,7 +74,7 @@ const settingFiled = (form,filterField,tableField) => {
         
     });
 }
-const updateSetting = (table,className,filterField,tableField) => {
+const updateSetting = (table,className,filterField,tableField,cb=()=>{}) => {
     if ($(`#frmSetting${className}`).length) {
         showModalForm(`#setting${className}`, `#modalSetting${className}`, 'GET', (data) => {
             let filters = data.filters.length ? data.filters : filterField;
@@ -88,7 +88,7 @@ const updateSetting = (table,className,filterField,tableField) => {
         }, (data, row) => {
             showSweetAlertOk("Thiết lập thành công");
             LoadPage(window.location.href).then(()=>{
-                loadTablePosts(table);
+                cb();
             });
         });
         checkboxAll('#filterSelectAll', 'input[name="filters[]"]');
@@ -180,7 +180,9 @@ const dataTableCt = (table, opCT = false,router={co:'',fo:'',aj:'ajaxgetdata',cl
                 showSweetAlertOk('Xóa thành công');
                 dt.draw()
             });
-            updateSetting(table,router.cl,router.ff,router.tf);
+            updateSetting(table,router.cl,router.ff,router.tf,()=>{
+                dataTableCt(table,opCT,router);
+            });
             resolve(dt);
         }else{
             reject();
