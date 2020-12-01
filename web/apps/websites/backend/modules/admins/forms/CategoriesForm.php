@@ -2,6 +2,7 @@
 namespace Backend\Modules\Admins\Forms;
 use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\Select;
+use Phalcon\Forms\Element\Hidden;
 
 class CategoriesForm extends \Phalcon\Forms\Form
 {
@@ -17,59 +18,39 @@ class CategoriesForm extends \Phalcon\Forms\Form
             'emptyValue' => '',
             'class' => 'form-control form-control-sm',
             'required' => '',
-            'data-required-error' => 'Vui lòng điền đầy đủ thông tin',
-            'data-error' => "Thông tin không hợp lệ"
+            'data-required-error' => 'Vui lòng nhập thông tin',
+            'data-error' => "Thông tin chưa hợp lệ"
         ]);
-        $status->setLabel('Trạng thái '.requiredLabel());
+        $status->setLabel('Trạng thái');
         $this->add($status);
 
         //parentid
-        $cats = \Categories::getTreeName(0,[],'',"--",1);
-        $parentid = new Select('parentid', $cats, array(
-            'class' => 'form-control form-control-sm',
-            'required' => '',
-            'useEmpty'      => true,
-            'emptyValue'    => '0',
-            'emptyText'     => 'Không có',
-            'data-required-error' => "Vui lòng nhập thông tin",
-            'data-error' => "Thông tin không hợp lệ"
-        ));
-        $parentid->setLabel('Trực thuộc '.requiredLabel());
-        $this->add($parentid);
+        // $cats = \Categories::getTreeName(0,[],'',"--",1);
+        // $parentid = new Select('parentid', $cats, array(
+        //     'class' => 'form-control form-control-sm',
+        //     'required' => '',
+        //     'useEmpty'      => true,
+        //     'emptyValue'    => '0',
+        //     'emptyText'     => 'Không có',
+        //     'data-required-error' => "Vui lòng nhập thông tin",
+        //     'data-error' => "Thông tin không hợp lệ"
+        // ));
+        // $parentid->setLabel('Trực thuộc '.requiredLabel());
+        // $this->add($parentid);
 
         //slug
         $slug = new Text('slug');
+        $slug->setLabel('Slug');
         $slug->setAttributes(array(
             'class' => 'form-control form-control-sm',
-            'placeholder' => 'Ví dụ: tin-giao-vu',
-            'maxlength' => "200"
+            'placeholder' => 'Slug',
+            'maxlength' => "200",
+            'data-error' => "Thông tin chưa hợp lệ",
         ));
-        $slug->setLabel('Slug');
         $this->add($slug);
 
-        //name
-        $name = new Text('name');
-        $name->setAttributes(array(
-            'class' => 'form-control form-control-sm',
-            'placeholder' => 'Ví dụ: Tin tức',
-            'required' => '',
-            'data-required-error' => "Vui lòng nhập tiêu đề.",
-            'maxlength' => "255",
-            'data-error' => "Thông tin không hợp lệ"
-        ));
-        $name->setLabel('Tên chuyên mục');
-        $this->add($name);
-
-        //description
-        $description = new Textarea('description');
-        $description->setAttributes(array(
-            'class' => 'form-control form-control-sm',
-            'placeholder' => 'Ví dụ: Mô tả',
-            'maxlength' => "255",
-            'rows' => 4,
-            'data-error' => "Thông tin không hợp lệ"
-        ));
-        $description->setLabel('Mô tả');
-        $this->add($description);
+        //image
+        $image = new Hidden('image');
+        $this->add($image);
     }
 }

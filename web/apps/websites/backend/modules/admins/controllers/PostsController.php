@@ -286,7 +286,6 @@ class PostsController  extends \BackendController {
         }
 
         $plug = $this->request->getPost('slug',['string','trim']);
-        $post->title = $this->request->getPost('title',['string','trim']);
         $post->catid = $this->request->getPost('catid',['int','trim']);
         $post->status = $this->request->getPost('status',['int','trim']);
         $post->slug = $plug ? $plug : $this->helper->slugify($pTitle[1]);

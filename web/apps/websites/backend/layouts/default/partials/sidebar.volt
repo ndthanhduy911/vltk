@@ -68,9 +68,9 @@
                     </a>
                 </li>
                 <li
-                    class="nav-item has-treeview {% if dispatcher.getControllerName() in ['subjects','categories'] %} {{ 'menu-open' }} {% endif %}">
+                    class="nav-item has-treeview {% if dispatcher.getControllerName() in ['subjects'] %} {{ 'menu-open' }} {% endif %}">
                     <a href="#"
-                        class="nav-link {% if dispatcher.getControllerName() in ['subjects','categories'] %} {{ 'active' }} {% endif %}">
+                        class="nav-link {% if dispatcher.getControllerName() in ['subjects'] %} {{ 'active' }} {% endif %}">
                         <i class="nav-icon fas fa-list"></i>
                         <p>
                             Đào tạo

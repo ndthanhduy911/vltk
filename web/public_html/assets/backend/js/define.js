@@ -188,6 +188,13 @@ const dataTableCt = (table, opCT = false,router={co:'',fo:'',aj:'ajaxgetdata',cl
     });
 
 }
+//Set data parameters url
+const setParam = (name,value) => {
+    let url_string = window.location.href;
+    let url = new URL(url_string);
+    url.searchParams.set(name, value)
+    return url.searchParams.toString()
+}
 //Show excerpt textshowViewDetail
 const trimText = (input, length, ellipses = true, strip_html = true) => {
     //strip tags, if desired
