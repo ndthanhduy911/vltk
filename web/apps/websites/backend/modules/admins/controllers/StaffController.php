@@ -54,13 +54,13 @@ class StaffController  extends \BackendController {
                 $p_slug = $this->request->getPost('slug',['string','trim']);
                 $p_content = $this->request->getPost('content',['trim']);
                 $req_staff = [
-                    'status' => $this->request->getPost('status',['int','trim']),
+                    'status' => $this->request->getPost('status',['int']),
                     'slug' => $p_slug ? $p_slug : $this->helper->slugify($p_title[1]),
                     'image' => $this->request->getPost('image',['string','trim']),
                     'dept_position' => $this->request->getPost('dept_position',['string','trim']),
                     'email' => $this->request->getPost('email',['string','trim']),
-                    'sort' => $this->request->getPost('sort',['int','trim']),
-                    'deptid' => $this->request->getPost('deptid',['int','trim'])
+                    'sort' => $this->request->getPost('sort',['int']),
+                    'deptid' => $this->request->getPost('deptid',['int'])
                 ];
 
                 if($deptid == 1){

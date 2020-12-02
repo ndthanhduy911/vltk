@@ -286,9 +286,10 @@ class PostsController  extends \BackendController {
         }
 
         $plug = $this->request->getPost('slug',['string','trim']);
-        $post->catid = $this->request->getPost('catid',['int','trim']);
-        $post->status = $this->request->getPost('status',['int','trim']);
+        $post->catid = $this->request->getPost('catid',['int']);
+        $post->status = $this->request->getPost('status',['int']);
         $post->slug = $plug ? $plug : $this->helper->slugify($pTitle[1]);
+
         $post->calendar = $this->helper->dateMysql($this->request->getPost('calendar', ['string', 'trim']),'Y-m-d H:i:s');
         $post->image = $this->request->getPost('image',['trim','string']);
 

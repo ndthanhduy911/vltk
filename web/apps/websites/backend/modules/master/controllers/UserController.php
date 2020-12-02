@@ -194,11 +194,11 @@ class UserController extends \BackendController
         $user->fullname = $this->request->getPost('fullname',['string','trim']);
         $user->username = $this->request->getPost('username',['string','trim']);
         $user->avatar = $this->request->getPost('avatar',['string','trim']);
-        $user->gender = $this->request->getPost('gender',['int','trim']);
+        $user->gender = $this->request->getPost('gender',['int']);
         $user->email = $this->request->getPost('email',['string','trim']);
-        $user->roleid = $this->request->getPost('roleid',['int','trim']);
-        $user->status = $this->request->getPost('status',['int','trim']);
-        $user->deptid = $this->request->getPost('deptid',['int','trim']);
+        $user->roleid = $this->request->getPost('roleid',['int']);
+        $user->status = $this->request->getPost('status',['int']);
+        $user->deptid = $this->request->getPost('deptid',['int']);
 
         $deptArray = \Depts::getArrayChildPermission($perL);
         if(!in_array($user->deptid, $deptArray)){

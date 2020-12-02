@@ -51,7 +51,7 @@ class BannerController  extends \BackendController {
                 $p_description = $this->request->getPost('description',['string','trim']);
                 $p_button_text = $this->request->getPost('button_text',['string','trim']);
                 $req_banner = [
-                    'status' => $this->request->getPost('status',['int','trim']),
+                    'status' => $this->request->getPost('status',['int']),
                     'image' => $this->request->getPost('image',['string','trim']),
                     'buttonlink' => $this->request->getPost('buttonlink',['string','trim']),
                 ];

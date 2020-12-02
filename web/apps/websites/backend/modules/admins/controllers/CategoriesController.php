@@ -167,7 +167,7 @@ class CategoriesController  extends \BackendController {
         }
 
         $clug = $this->request->getPost('slug',['string','trim']);
-        $categories->status = $this->request->getPost('status',['int','trim']);
+        $categories->status = $this->request->getPost('status',['int']);
         $categories->slug = $clug ? $clug : $this->helper->slugify($pName[1]);
         $categories->image = $this->request->getPost('image',['trim','string']);
 

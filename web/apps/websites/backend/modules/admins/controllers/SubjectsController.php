@@ -54,7 +54,7 @@ class SubjectsController  extends \BackendController {
                 $p_content = $this->request->getPost('content',['trim']);
                 $p_excerpt = $this->request->getPost('excerpt',['string','trim']);
                 $req_subject = [
-                    'status' => $this->request->getPost('status',['int','trim']),
+                    'status' => $this->request->getPost('status',['int']),
                     'code' => $this->request->getPost('code',['string','trim']),
                     'slug' => $p_slug ? $p_slug : $this->helper->slugify($p_title[1]),
                     'image' => $this->request->getPost('image',['string','trim']),

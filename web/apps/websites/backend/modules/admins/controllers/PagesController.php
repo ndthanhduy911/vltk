@@ -280,8 +280,8 @@ class PagesController  extends \BackendController {
         }
 
         $plug = $this->request->getPost('slug',['string','trim']);
-        $page->attributeid = $this->request->getPost('attributeid',['int','trim']);
-        $page->status = $this->request->getPost('status',['int','trim']);
+        $page->attributeid = $this->request->getPost('attributeid',['int']);
+        $page->status = $this->request->getPost('status',['int']);
         $page->slug = $plug ? $plug : $this->helper->slugify($pTitle[1]);
         $page->image = $this->request->getPost('image',['trim','string']);
         $page->bgimage = $this->request->getPost('bgimage',['trim','string']);

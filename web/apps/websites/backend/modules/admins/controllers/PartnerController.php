@@ -50,7 +50,7 @@ class PartnerController  extends \BackendController {
                 $p_title = $this->request->getPost('title',['string','trim']);
                 $p_link = $this->request->getPost('link',['string','trim']);
                 $req_partner = [
-                    'status' => $this->request->getPost('status',['int','trim']),
+                    'status' => $this->request->getPost('status',['int']),
                     'image' => $this->request->getPost('image',['string','trim']),
                     'link' => $this->request->getPost('link',['string','trim']),
                 ];

@@ -63,10 +63,6 @@ $di->set(
 //Version 4.0:
 $di->setShared('session', function () {
     $session = new SessionManager();
-    $files = new SessionAdapter([
-        'savePath' => sys_get_temp_dir(),
-    ]);
-    $session->setAdapter($files);
     $session->start();
 
     return $session;
@@ -94,7 +90,6 @@ $di->set('cookies', function() {
 $di->set('flash', function () {
     $escaper = new Escaper();
     $flash = new Flash($escaper);
-    $flash->setImplicitFlush(false);
     $flash->setCssClasses([
         'error'   => 'alert alert-danger',
         'success' => 'alert alert-success',
@@ -116,15 +111,14 @@ $di->set('flash', function () {
 //Version 4.0
 $di->setShared('flashSession', function () {
     $escaper = new Escaper();
-    $flash = new FlashSession($escaper);
-    $flash->setImplicitFlush(false);
+    $session = new SessionManager();
+    $flash = new FlashSession($escaper,$session);
     $flash->setCssClasses([
         'error'   => 'alert alert-danger',
         'success' => 'alert alert-success',
         'notice'  => 'alert alert-info',
         'warning' => 'alert alert-warning'
     ]);
-
     return $flash;
 });
 /**
