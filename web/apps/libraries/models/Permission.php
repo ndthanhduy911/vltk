@@ -7,11 +7,6 @@ class Permission extends \ModelCore
         $this->setSource("permission");
     }
 
-    public function getSource()
-    {
-        return 'permission';
-    }
-
     public function vdUpdate($try=false){
         $validator = new \Phalcon\Validation();
         if($try){

@@ -12,11 +12,6 @@ class Depts extends \ModelCore
         $this->setSource("depts");
     }
 
-    public function getSource()
-    {
-        return 'depts';
-    }
-
     public function vdUpdate($try=false){
         $validator = new Validation();
 

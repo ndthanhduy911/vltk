@@ -15,11 +15,6 @@ class Online extends \ModelCore
         $this->setSource("online");
     }
 
-    public function getSource()
-    {
-        return 'online';
-    }
-
     public static function check($userid){
         if($online = parent::findFirst(['userid = :userid:','bind' => ['userid' => $userid]])){
             $now = strtotime('now');

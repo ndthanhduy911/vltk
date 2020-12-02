@@ -11,11 +11,6 @@ class Role extends \ModelCore
         $this->setSource("role");
     }
 
-    public function getSource()
-    {
-        return 'role';
-    }
-
     public function vdUpdate($try=false)
     {
         $validator = new Validation();

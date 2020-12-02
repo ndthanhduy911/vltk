@@ -8,11 +8,6 @@ class FilterSetting extends \ModelCore
         $this->setSource("filtersetting");
     }
 
-    public function getSource()
-    {
-        return 'filtersetting';
-    }
-
     public function vdUpdate($try=false){
         $validator = new \Phalcon\Validation();
         if($try){

@@ -7,11 +7,6 @@ class Logs extends \ModelCore
         $this->setSource("slogs");
     }
 
-    public function getSource()
-    {
-        return 'slogs';
-    }
-
     public function vdUpdate($try=false){
         $validator = new \Phalcon\Validation();
         if($try){

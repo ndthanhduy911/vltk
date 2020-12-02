@@ -37,9 +37,9 @@
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-md-9">
-                        <div class="card card-primary card-outline">
-                            <div class="card-header">
-                                <ul class="nav nav-pills w-100">
+                        <div class="card card-primary card-outline card-outline-tabs">
+                            <div class="card-header p-0 border-bottom-0">
+                                <ul class="nav nav-tabs w-100" role="tablist">
                                     {% for key, lang in languages %}
                                     <li class="nav-item">
                                         <a class="nav-link {{ !key ? 'active' : '' }}" href="#lang{{lang.id}}" data-toggle="tab" data-tab="{{lang.id}}">

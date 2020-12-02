@@ -8,11 +8,6 @@ class ConectionSystem extends \ModelCore
         $this->setSource("conection");
     }
 
-    public function getSource()
-    {
-        return 'conection';
-    }
-
     public static function countType($type, $deptid)
     {
         $count = 0;

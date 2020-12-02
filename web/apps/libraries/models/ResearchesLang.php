@@ -2,9 +2,10 @@
 
 class ResearchesLang extends \Phalcon\Mvc\Model
 {
-    public function getSource()
+    public function initialize()
     {
-        return 'researcheslang';
+        $this->setSchema(SCHEMADB);
+        $this->setSource("researchesLang");
     }
 
     public static function findFirstId($id, $columns = "*")

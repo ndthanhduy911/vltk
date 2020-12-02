@@ -7,13 +7,14 @@ use Phalcon\Mvc\View;
 use Phalcon\Mvc\View\Engine\Volt as VoltEngine;
 use Phalcon\Mvc\ModuleDefinitionInterface;
 
-
 class Module implements ModuleDefinitionInterface
 {
     /**
      * Registers the module auto-loader
      */
-    public function registerAutoloaders(\Phalcon\DiInterface $dependencyInjector = null) // <- here it is
+    // Version 3.0: \Phalcon\DiInterface
+    // Version 4.0 => \Phalcon\DiInterface
+    public function registerAutoloaders(\Phalcon\DiInterface $dependencyInjector = null)
     {
         $loader = new Loader();
 
@@ -33,11 +34,6 @@ class Module implements ModuleDefinitionInterface
     public function registerServices(\Phalcon\DiInterface $di)
     {
         /**
-         * Read configuration
-         */
-        //$config = include APP_DIR . "/config/config.php";
-        //$config = include APP_DIR . '/config/config.php';
-        /**
          * Setting up the views component
          */
 
@@ -50,13 +46,15 @@ class Module implements ModuleDefinitionInterface
             $view->setTemplateAfter('layout');
 
             $view->registerEngines(array(
-                '.volt' => function ($view, $di) use ($config) {
+                '.volt' => function ($view) use ($config) {
 
-                    $volt = new VoltEngine($view, $di);
+                    $volt = new VoltEngine($view);
 
                     $volt->setOptions(array(
-                        'compiledPath' => $config->application->cacheDir."views/",
-                        'compiledSeparator' => '_'
+                        'compiledPath' => $config->application->cacheDir."views/", //Version: 3.0
+                        'compiledSeparator' => '_', //Version: 3.0
+                        // 'path' => $config->application->cacheDir."views/", //Version: 4.0
+                        // 'separator' => '_' //Version: 4.0
                     ));
 
                     return $volt;

@@ -9,11 +9,6 @@ class CategoriesLang extends \Phalcon\Mvc\Model
         $this->setSource("categorieslang");
     }
 
-    public function getSource()
-    {
-        return 'categorieslang';
-    }
-
     public function vdUpdate($try = false){
         $helper = new HelperValidation();
         //name

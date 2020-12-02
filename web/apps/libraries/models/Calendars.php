@@ -8,11 +8,6 @@ class Calendars extends \ModelCore
         $this->setSource("calendars");
     }
 
-    public function getSource()
-    {
-        return 'calendars';
-    }
-
     public static function getUrlById($id = null)
     {
         

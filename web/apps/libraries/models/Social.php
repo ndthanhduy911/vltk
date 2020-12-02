@@ -6,9 +6,4 @@ class Social extends \ModelCore
         $this->setSchema(SCHEMADB);
         $this->setSource("social");
     }
-
-    public function getSource()
-    {
-        return 'social';
-    }
 }

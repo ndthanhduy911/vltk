@@ -8,11 +8,6 @@ class Pages extends \ModelCore
         $this->setSource("pages");
     }
 
-    public function getSource()
-    {
-        return 'pages';
-    }
-
     public static function getUrlById($id = null)
     {
         if($page = parent::findFirst($id)){

@@ -9,11 +9,6 @@ class Posts extends \ModelCore
         $this->setSource("posts");
     }
 
-    public function getSource()
-    {
-        return 'posts';
-    }
-
     public static function getUrlById($id = null)
     {
         if($post = parent::findFirst($id)){

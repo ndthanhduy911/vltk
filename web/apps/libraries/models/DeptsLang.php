@@ -7,11 +7,6 @@ class DeptsLang extends \Phalcon\Mvc\Model
         $this->setSource("deptslang");
     }
 
-    public function getSource()
-    {
-        return 'deptslang';
-    }
-
     public static function getTitleById($id = null)
     {
         if($dept = parent::findFirst($id)){

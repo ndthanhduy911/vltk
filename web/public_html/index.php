@@ -1,7 +1,6 @@
 <?php
 session_start();
 error_reporting(E_ALL);
-
 use Phalcon\Mvc\Application;
 try
 {
@@ -35,22 +34,16 @@ try
      */
     require APP_DIR . '/configs/services.php';
 
-    
-    
     /**
      * Handle the request
      */
-    $application = new Application();
-    /**
-     * Assign the DI
-     */
-    $application->setDI($di);
+    $application = new Application($di);
     
     /**
      * Include modules
      */
     require APP_DIR . '/configs/modules.php';
-    echo $application->handle()->getContent();
+    echo $application->handle($_SERVER['REQUEST_URI'])->getContent();
 }
 catch (Phalcon\Exception $e)
 {

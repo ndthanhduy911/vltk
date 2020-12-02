@@ -5,6 +5,8 @@ class Module implements \Phalcon\Mvc\ModuleDefinitionInterface
     /**
      * Registers the module auto-loader
      */
+    // Version 3.0: \Phalcon\DiInterface
+    // Version 4.0 => \Phalcon\DiInterface
     public function registerAutoloaders(\Phalcon\DiInterface $dependencyInjector = null)
     {
         $loader = new \Phalcon\Loader();
@@ -31,13 +33,15 @@ class Module implements \Phalcon\Mvc\ModuleDefinitionInterface
             $view->setTemplateAfter('layout');
 
             $view->registerEngines(array(
-                '.volt' => function ($view, $di) use ($config) {
+                '.volt' => function ($view) use ($config) {
 
-                    $volt = new \Phalcon\Mvc\View\Engine\Volt($view, $di);
+                    $volt = new VoltEngine($view);
 
                     $volt->setOptions(array(
-                        'compiledPath' => $config->application->cacheDir."views/",
-                        'compiledSeparator' => '_'
+                        'compiledPath' => $config->application->cacheDir."views/", //Version: 3.0
+                        'compiledSeparator' => '_', //Version: 3.0
+                        // 'path' => $config->application->cacheDir."views/", //Version: 4.0
+                        // 'separator' => '_' //Version: 4.0
                     ));
 
                     return $volt;

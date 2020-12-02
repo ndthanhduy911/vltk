@@ -1,9 +1,9 @@
 <?php
 class BannerLang extends \Phalcon\Mvc\Model
 {
-    public function getSource()
+    public function initialize()
     {
-        return 'bannerlang';
+        $this->setSchema(SCHEMADB);
+        $this->setSource("bannerlang");
     }
-
 }

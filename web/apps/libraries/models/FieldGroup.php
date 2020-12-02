@@ -8,11 +8,6 @@ class FieldGroup extends \ModelCore
         $this->setSource("fieldgroup");
     }
 
-    public function getSource()
-    {
-        return 'fieldgroup';
-    }
-
     public function vdUpdate($try=false){
         $validator = new \Phalcon\Validation();
         if($try){

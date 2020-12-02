@@ -9,11 +9,6 @@ class PostsLang extends \Phalcon\Mvc\Model
         $this->setSource("postslang");
     }
 
-    public function getSource()
-    {
-        return 'postslang';
-    }
-
     public function vdUpdate($try = false){
         $helper = new HelperValidation();
         //title

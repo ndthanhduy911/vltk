@@ -8,11 +8,6 @@ class Tags extends \ModelCore{
         $this->setSource("tags");
     }
 
-    public function getSource()
-    {
-        return 'tags';
-    }
-
     public static function getUrlById($id = null)
     {
         

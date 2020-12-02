@@ -10,7 +10,7 @@ const showStatusRole = (id = '') => {
     }
 }
 
-const loadTableRole = (table = 'role', cb = () => {}) => {
+const loadTableRole = (table = '#role', cb = () => {}) => {
     if ($(table).length) {
         let formSearch = $('#searchRole');
         let dataLoadSearch = formSearch.serializeArray();
@@ -71,9 +71,6 @@ const loadTableRole = (table = 'role', cb = () => {}) => {
                     $(table).find('thead tr th:last').addClass('hidden');
                 }
             },
-            "drawCallback": function (settings) {                
-                $(table).find('[data-toggle="tooltip"]').tooltip()
-            },
             "deferRender": true,
             "language": {
                 "sProcessing": "Đang xử lý...",
@@ -111,7 +108,6 @@ const loadTableRole = (table = 'role', cb = () => {}) => {
             $('#modalRole .modal-title').html('Thêm mới');
             $('.btnSummitRole span').html('Thêm mới');
             $(`#modalRole #roleGroup input[type="checkbox"]:not([change=false])`).prop('disabled', false)
-            $(`#modalRole #dashboardGroup input[type="checkbox"]:not([change=false])`).prop('disabled', false)
         },(data,row)=>{
             dt.draw();
             Swal.fire({
@@ -138,25 +134,10 @@ const loadTableRole = (table = 'role', cb = () => {}) => {
                     }
                 });
             }
-            if(typeof data.dashboards != 'undefined'){
-                data.dashboards.forEach(element => {
-                    $(`#modalRole #dashboard${element.dashboardid}:not([change=false])`).prop('checked', true).prop('disabled', false);
-                });   
-            }
-            if(typeof data.fgroup != 'undefined'){
-                mapGroupFiiled('asset',data.fgroup.asset);
-                mapGroupFiiled('inventory',data.fgroup.inventory);
-                mapGroupFiiled('estimate',data.fgroup.estimate);
-                mapGroupFiiled('reduction',data.fgroup.reduction);
-                mapGroupFiiled('pcplan',data.fgroup.pcplan);
-                mapGroupFiiled('furnish',data.fgroup.furnish);
-            }
             if(data.id){
                 $(`#modalRole #roleGroup input[type="checkbox"]:not([change=false])`).prop('disabled', false);
-                $(`#modalRole #dashboardGroup input[type="checkbox"]:not([change=false])`).prop('disabled', false);
             }else{
                 $(`#modalRole #roleGroup input[type="checkbox"]:not([change=false])`).prop('checked', true).prop('disabled', true);
-                $(`#modalRole #dashboardGroup input[type="checkbox"]:not([change=false])`).prop('checked', true).prop('disabled', true);
             }
 
         },(data,row)=>{
@@ -212,12 +193,4 @@ const loadTableRole = (table = 'role', cb = () => {}) => {
     }
 }
 
-const mapGroupFiiled = (fkey,datas) => {
-    if(typeof datas != 'undefined' && Array.isArray(datas)){
-        datas.forEach(value => {
-            $(`#${fkey}-${value}`).prop('checked',true);
-        });
-    }
-}
-
-loadTableRole('#role');
+loadTableRole();

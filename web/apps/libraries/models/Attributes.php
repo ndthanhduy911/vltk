@@ -7,9 +7,4 @@ class Attributes extends \ModelCore
         $this->setSchema(SCHEMADB);
         $this->setSource("attributes");
     }
-
-    public function getSource()
-    {
-        return 'attributes';
-    }
 }

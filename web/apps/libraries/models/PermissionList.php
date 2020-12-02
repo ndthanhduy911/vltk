@@ -8,11 +8,6 @@ class PermissionList extends \ModelCore
         $this->setSource("permissionlist");
     }
 
-    public function getSource()
-    {
-        return 'permissionlist';
-    }
-
     public function vdUpdate($try=false){
         $validator = new \Phalcon\Validation();
         if($try){

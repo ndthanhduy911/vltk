@@ -6,9 +6,4 @@ class Language extends \ModelCore
         $this->setSchema(SCHEMADB);
         $this->setSource("language");
     }
-
-    public function getSource()
-    {
-        return 'language';
-    }
 }

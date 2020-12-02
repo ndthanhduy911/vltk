@@ -8,11 +8,6 @@ class Menus extends \ModelCore
         $this->setSource("menus");
     }
 
-    public function getSource()
-    {
-        return 'menus';
-    }
-
     public static function getLink($menu , $slug = ''){
         switch ((int)$menu->type) {
             case 1: {

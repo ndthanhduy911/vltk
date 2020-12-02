@@ -1,8 +1,9 @@
 <?php
 class MenusLang extends \Phalcon\Mvc\Model
 {
-    public function getSource()
+    public function initialize()
     {
-        return 'menuslang';
+        $this->setSchema(SCHEMADB);
+        $this->setSource("menuslang");
     }
 }

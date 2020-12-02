@@ -1,8 +1,9 @@
 <?php
 class LinkLang extends \Phalcon\Mvc\Model
 {
-    public function getSource()
+    public function initialize()
     {
-        return 'linklang';
+        $this->setSchema(SCHEMADB);
+        $this->setSource("linklang");
     }
 }

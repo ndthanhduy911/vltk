@@ -2,17 +2,9 @@
 
 class Notification extends \ModelCore
 {
-    public function getSource()
+    public function initialize()
     {
-        return 'notification';
-    }
-
-    public static function findFirstId($id, $columns = "*")
-    {
-        return parent::findFirst([
-            "conditions" => "id = :id: AND status !=4",
-            "bind" => array('id' => $id),
-            "columns" => $columns
-        ]);
+        $this->setSchema(SCHEMADB);
+        $this->setSource("notification");
     }
 }

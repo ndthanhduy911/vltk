@@ -8,11 +8,6 @@ class Researches extends \ModelCore
         $this->setSource("researches");
     }
 
-    public function getSource()
-    {
-        return 'researches';
-    }
-
     public static function findFirstId($id, $columns = "*")
     {
         return parent::findFirst([

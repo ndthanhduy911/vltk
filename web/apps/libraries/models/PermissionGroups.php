@@ -8,11 +8,6 @@ class PermissionGroups extends \ModelCore
         $this->setSource("permissiongroups");
     }
 
-    public function getSource()
-    {
-        return 'permissiongroups';
-    }
-
     public function vdUpdate($try=false){
         $validator = new \Phalcon\Validation();
         if($try){

@@ -7,11 +7,6 @@ class Link extends \ModelCore
         $this->setSource("link");
     }
 
-    public function getSource()
-    {
-        return 'link';
-    }
-
     public static function getName($link_id, $langid = 1){
         $menulang = \LinkLang::findFirst(['langid =:langid: AND link_id = :link_id:', 'bind'=>['langid' => $langid, 'link_id' => $link_id]]);
         return $menulang ? $menulang->name : '';

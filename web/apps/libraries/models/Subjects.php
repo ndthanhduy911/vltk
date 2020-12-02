@@ -8,11 +8,6 @@ class Subjects extends \ModelCore
         $this->setSource("subjects");
     }
 
-    public function getSource()
-    {
-        return 'subjects';
-    }
-
     public static function getUrlById($id = null)
     {
         

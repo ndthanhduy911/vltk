@@ -14,11 +14,6 @@ class User extends \ModelCore
         $this->setSource("user");
     }
 
-    public function getSource()
-    {
-        return 'user';
-    }
-
     public function vdUpdate($try=false)
     {
         $validator = new Validation();

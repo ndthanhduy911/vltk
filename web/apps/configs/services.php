@@ -1,7 +1,13 @@
 <?php
+declare(strict_types=1);
 use Library\ML\ML;
 
-date_default_timezone_set(TIMEZONE);
+use Phalcon\Session\Adapter\Files as SessionManager;//Version 3.0:
+// use Phalcon\Session\Manager as SessionManager;//Version 4.0
+// use Phalcon\Session\Adapter\Stream as SessionAdapter;//Version 4.0
+// use Phalcon\Escaper;//Version 4.0
+// use Phalcon\Flash\Direct as Flash;//Version 4.0
+// use Phalcon\Flash\Session as FlashSession;//Version 4.0
 
 $di = new \Phalcon\DI\FactoryDefault();
 
@@ -14,7 +20,8 @@ $di->set('router', function () use ($config) {
  * The URL component is used to generate all kind of urls in the application
  */
 $di->set('url', function () use ($config) {
-    $url = new \Phalcon\Mvc\Url();
+    $url = new \Phalcon\Mvc\Url(); //Version 3.0
+    // $url = new \Phalcon\Url(); //Version 4.0
     $url->setBaseUri($config->application->baseUri);
     return $url;
 }, true);
@@ -46,14 +53,24 @@ $di->set(
     true
 );
 
-/**
- * Start the session the first time some component request the session service
- */
+//Version 3.0:
 $di->setShared('session', function () {
-    $session = new \Phalcon\Session\Adapter\Files();
+    $session = new SessionManager();
     $session->start();
     return $session;
 });
+
+//Version 4.0:
+// $di->setShared('session', function () {
+//     $session = new SessionManager();
+//     $files = new SessionAdapter([
+//         'savePath' => sys_get_temp_dir(),
+//     ]);
+//     $session->setAdapter($files);
+//     $session->start();
+
+//     return $session;
+// });
 
 $di->set('cookies', function() {
     $cookies = new \Phalcon\Http\Response\Cookies();
@@ -64,6 +81,7 @@ $di->set('cookies', function() {
 /**
  * Flash service with custom CSS classes
  */
+//Version 3.0
 $di->setShared('flash', function () {
     return new \Phalcon\Flash\Direct([
         'error'   => 'alert alert-danger',
@@ -72,10 +90,24 @@ $di->setShared('flash', function () {
         'warning' => 'alert alert-warning'
     ]);
 });
+//Version 4.0
+// $di->set('flash', function () {
+//     $escaper = new Escaper();
+//     $flash = new Flash($escaper);
+//     $flash->setImplicitFlush(false);
+//     $flash->setCssClasses([
+//         'error'   => 'alert alert-danger',
+//         'success' => 'alert alert-success',
+//         'notice'  => 'alert alert-info',
+//         'warning' => 'alert alert-warning'
+//     ]);
 
+//     return $flash;
+// });
 /**
  * Register the session flash service with the Twitter Bootstrap classes
  */
+//Version 3.0
 $di->setShared('flashSession', function () {
     return new \Phalcon\Flash\Session([
         'error'   => 'alert alert-danger',
@@ -84,6 +116,20 @@ $di->setShared('flashSession', function () {
         'warning' => 'alert alert-warning'
     ]);
 });
+//Version 4.0
+// $di->setShared('flashSession', function () {
+//     $escaper = new Escaper();
+//     $flash = new FlashSession($escaper);
+//     $flash->setImplicitFlush(false);
+//     $flash->setCssClasses([
+//         'error'   => 'alert alert-danger',
+//         'success' => 'alert alert-success',
+//         'notice'  => 'alert alert-info',
+//         'warning' => 'alert alert-warning'
+//     ]);
+
+//     return $flash;
+// });
 /**
  * Cache
  */
@@ -101,7 +147,6 @@ $di->set('modelsCache', function() use($config)
         )
     );
     return $cache;
-
 });
 /**
  * Cache

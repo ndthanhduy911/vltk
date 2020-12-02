@@ -173,7 +173,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <?php $notRole = [2,10,11,13,14,15,16,17,18,19]; ?>
+                                                    <?php $notRole = [2]; ?>
                                                     <?php $groups = \PermissionGroups::findNoDelete("id,name") ?>
                                                     {% for group in groups %}
                                                     <?php $roles = PermissionRole::findNoDelete("id, name", ["groupid = {$group->id}"]) ?>
@@ -210,7 +210,7 @@
                                                                 <option value="0">Tất cả</option>
                                                                 <option value="1">Đơn vị</option>
                                                                 <option value="2">Cá nhân</option>
-                                                                <option value="3">Trực thuộc</option>
+                                                                <!-- <option value="3">Trực thuộc</option> -->
                                                             </select>
                                                         </td>
                                                     </tr>

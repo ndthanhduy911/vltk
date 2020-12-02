@@ -7,11 +7,6 @@ class Staff extends \ModelCore
         $this->setSource("staff");
     }
 
-    public function getSource()
-    {
-        return 'staff';
-    }
-
     public static function getUrl($dept, $staff = NULL)
     {
         if($dept->id == 1){

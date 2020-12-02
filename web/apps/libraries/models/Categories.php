@@ -8,12 +8,7 @@ class Categories extends \ModelCore
         $this->setSchema(SCHEMADB);
         $this->setSource("categories");
     }
-
-    public function getSource()
-    {
-        return 'categories';
-    }
-
+    
     public static function getChild($id , $data = [], $levelTag = '', $level = 0){
         $deptChild = Categories::find(["parentid = :id: AND deleted = 0", 'columns' => "id, id", 'bind' => ['id' => $id]]);
         if($deptChild->count()){

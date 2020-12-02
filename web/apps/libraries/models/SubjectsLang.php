@@ -2,17 +2,9 @@
 
 class SubjectsLang extends \Phalcon\Mvc\Model
 {
-    public function getSource()
+    public function initialize()
     {
-        return 'subjectslang';
-    }
-
-    public static function findFirstId($id, $columns = "*")
-    {
-        return parent::findFirst([
-            "conditions" => "id = :id:",
-            "bind" => array('id' => $id),
-            "columns" => $columns
-        ]);   
+        $this->setSchema(SCHEMADB);
+        $this->setSource("subjectslang");
     }
 }

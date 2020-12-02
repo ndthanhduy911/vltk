@@ -1,8 +1,9 @@
 <?php
 class StaffLang extends \Phalcon\Mvc\Model
 {
-    public function getSource()
+    public function initialize()
     {
-        return 'stafflang';
+        $this->setSchema(SCHEMADB);
+        $this->setSource("staffLang");
     }
 }

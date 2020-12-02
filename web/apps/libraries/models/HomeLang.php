@@ -1,8 +1,9 @@
 <?php
 class HomeLang extends \Phalcon\Mvc\Model
 {
-    public function getSource()
+    public function initialize()
     {
-        return 'homelang';
+        $this->setSchema(SCHEMADB);
+        $this->setSource("homelang");
     }
 }

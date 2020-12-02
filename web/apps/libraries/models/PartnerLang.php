@@ -1,8 +1,9 @@
 <?php
 class PartnerLang extends \Phalcon\Mvc\Model
 {
-    public function getSource()
+    public function initialize()
     {
-        return 'partnerlang';
+        $this->setSchema(SCHEMADB);
+        $this->setSource("partnerLang");
     }
 }

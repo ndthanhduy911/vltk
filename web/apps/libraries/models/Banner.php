@@ -6,9 +6,4 @@ class Banner extends \ModelCore
         $this->setSchema(SCHEMADB);
         $this->setSource("banner");
     }
-
-    public function getSource()
-    {
-        return 'banner';
-    }
 }

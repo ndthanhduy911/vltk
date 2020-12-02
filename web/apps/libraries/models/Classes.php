@@ -9,11 +9,6 @@ class Classes extends \ModelCore
         $this->setSource("classes");
     }
 
-    public function getSource()
-    {
-        return 'classes';
-    }
-
     public static function getUrlById($id = null)
     {
         if($class = parent::findFirst($id)){

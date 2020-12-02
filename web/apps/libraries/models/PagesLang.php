@@ -9,11 +9,6 @@ class PagesLang extends \Phalcon\Mvc\Model
         $this->setSource("pageslang");
     }
 
-    public function getSource()
-    {
-        return 'pageslang';
-    }
-
     public function vdUpdate($try = false){
         $helper = new HelperValidation();
         //title

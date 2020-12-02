@@ -11,11 +11,6 @@ class Duty extends \ModelCore
         $this->setSource("duty");
     }
 
-    public function getSource()
-    {
-        return 'duty';
-    }
-
     public function vdUpdate($try=false)
     {
         $validator = new Validation();

@@ -8,11 +8,6 @@ class Districts extends \Phalcon\Mvc\Model
         $this->setSource("districts");
     }
 
-    public function getSource()
-    {
-        return 'districts';
-    }
-
     public static function getS2DistrictCity($cityId = 0)
     {
         $data = parent::find([

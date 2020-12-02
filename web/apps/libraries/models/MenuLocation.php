@@ -6,9 +6,4 @@ class MenuLocation extends \ModelCore
         $this->setSchema(SCHEMADB);
         $this->setSource("menulocation");
     }
-
-    public function getSource()
-    {
-        return 'menulocation';
-    }
 }

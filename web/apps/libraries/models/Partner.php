@@ -6,9 +6,4 @@ class Partner extends \ModelCore
         $this->setSchema(SCHEMADB);
         $this->setSource("partner");
     }
-
-    public function getSource()
-    {
-        return 'partner';
-    }
 }

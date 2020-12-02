@@ -6,9 +6,4 @@ class Home extends \ModelCore
         $this->setSchema(SCHEMADB);
         $this->setSource("home");
     }
-
-    public function getSource()
-    {
-        return 'home';
-    }
 }
