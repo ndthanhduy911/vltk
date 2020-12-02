@@ -16,7 +16,7 @@ class SlideshowsController  extends \BackendController {
         $filters = \Slideshows::findFilters();
         $tables = \Slideshows::findTables();
         $fFilters = ['name','status','createdat'];
-        $fTables = ['image','name','createdat','status'];
+        $fTables = ['image','name','description','createdat','status'];
         if($fSetting = \FilterSetting::findFirstKey('slideshows')){
             $fFilters = $fSetting->filters ? json_decode($fSetting->filters) : $fFilters;
             $fTables = $fSetting->tables ? json_decode($fSetting->tables) : $fTables;   
@@ -26,7 +26,7 @@ class SlideshowsController  extends \BackendController {
         $fFilters = array_intersect($fFilters,$filters);
         $fTables = array_intersect($fTables,$tables);
 
-        $title = "Slideshows";
+        $title = "Banners";
         $this->getJsCss();
         $this->view->searchForm = new SearchSlideshowsForm();
         $this->view->title = $title;
@@ -46,7 +46,7 @@ class SlideshowsController  extends \BackendController {
         $filters = \Slideshows::findTrashFilters();
         $tables = \Slideshows::findTrashTables();
         $fFilters = ['name','createdat'];
-        $fTables = ['image','name','createdat'];
+        $fTables = ['image','name','description','createdat'];
         if($fSetting = \FilterSetting::findFirstKey('trashslideshows')){
             $fFilters = $fSetting->filters ? json_decode($fSetting->filters) : $fFilters;
             $fTables = $fSetting->tables ? json_decode($fSetting->tables) : $fTables;   
@@ -56,7 +56,7 @@ class SlideshowsController  extends \BackendController {
         $fFilters = array_intersect($fFilters,$filters);
         $fTables = array_intersect($fTables,$tables);
 
-        $title = "Slideshows";
+        $title = "Banners";
         $this->getJsCss();
         $this->view->searchForm = new SearchSlideshowsForm();
         $this->view->title = $title;
@@ -96,7 +96,7 @@ class SlideshowsController  extends \BackendController {
             }         
             foreach ($languages as $key => $lang) {
                 $v = ($key == 0 ? true : false);
-                $bannerLang = \SlideshowsLang::findFirst(['bannerid = :id: AND langid = :langid:','bind' => ['id' => $slideshows->id, 'langid' => $lang->id]]);
+                $bannerLang = \SlideshowsLang::findFirst(['slideshowid = :id: AND langid = :langid:','bind' => ['id' => $slideshows->id, 'langid' => $lang->id]]);
                 if($bannerLang){
                     $formLang = new SlideshowsLangForm($bannerLang, [$lang->id,$v]);
                     $slideshowsLang[$lang->id] = $bannerLang;
@@ -161,7 +161,7 @@ class SlideshowsController  extends \BackendController {
         ->columns($columns)
         ->from(['b' => "Slideshows"])
         ->where("b.deleted = 0 AND b.status != 4")
-        ->leftJoin('SlideshowsLang', 'bl.bannerid = b.id AND bl.langid = 1','bl')
+        ->leftJoin('SlideshowsLang', 'bl.slideshowid = b.id AND bl.langid = 1','bl')
         ->leftJoin('Depts', 'd.id = b.deptid','d')
         ->orderBy('b.sort ASC, b.id ASC');
 
@@ -198,7 +198,7 @@ class SlideshowsController  extends \BackendController {
         ->columns($columns)
         ->from(['b' => "Slideshows"])
         ->where("b.deleted = 0 AND b.status = 4")
-        ->leftJoin('SlideshowsLang', 'bl.bannerid = b.id AND bl.langid = 1','bl')
+        ->leftJoin('SlideshowsLang', 'bl.slideshowid = b.id AND bl.langid = 1','bl')
         ->leftJoin('Depts', 'd.id = b.deptid','d')
         ->orderBy('b.sort ASC, b.id ASC');
 
@@ -229,9 +229,8 @@ class SlideshowsController  extends \BackendController {
 
         $userid = $this->session->get('userid');
         $languages = \Language::find(['status = 1']);
-        $pTitle = $this->request->getPost('title',['string','trim']);
-        $pContent = $this->request->getPost('content',['trim']);
-        $pExcerpt = $this->request->getPost('excerpt',['string','trim']);
+        $pName = $this->request->getPost('name',['string','trim']);
+        $pDes = $this->request->getPost('description',['string','trim']);
         if($id){
             if(!$slideshows = \Slideshows::findFirstIdPermission($id,$perL)){
                 $data['error'] = ['Không tìm thấy banner'];
@@ -241,7 +240,6 @@ class SlideshowsController  extends \BackendController {
             $slideshows->updatedby = $userid;
         }else{
             $slideshows = new \Slideshows();
-            $slideshows->author = $this->session->get('userid');
             $slideshows->deptid = $this->session->get('deptid');
             $slideshows->createdat = date('Y-m-d H:i:s');
             $slideshows->updatedat = $slideshows->createdat;
@@ -251,32 +249,23 @@ class SlideshowsController  extends \BackendController {
         $bannerLangs = [];
 
         foreach ($languages as $key => $lang) {
-
-            if(!$id || !$bannerLang = \SlideshowsLang::findFirst(["bannerid = :id: AND langid = :langid:",'bind' => ['id' => (int)$id,'langid' => $lang->id]])){
+            if(!$id || !$bannerLang = \SlideshowsLang::findFirst(["slideshowid = :id: AND langid = :langid:",'bind' => ['id' => (int)$id,'langid' => $lang->id]])){
                 $bannerLang = new \SlideshowsLang();
             }
 
             if($key == 0){
                 $lId = $lang->id;
             }
-
-            $bannerLang->title = !empty($pTitle[$lang->id]) ? $pTitle[$lang->id] : $pTitle[$lId];
-            $bannerLang->content = !empty($pContent[$lang->id]) ? $pContent[$lang->id] : $pContent[$lId];
-            $bannerLang->excerpt = !empty($pExcerpt[$lang->id]) ? $pExcerpt[$lang->id] : $pExcerpt[$lId];
+            $bannerLang->name = !empty($pName[$lang->id]) ? $pName[$lang->id] : $pName[$lId];
+            $bannerLang->description = !empty($pDes[$lang->id]) ? $pDes[$lang->id] : $pDes[$lId];
             $bannerLang->langid = $lang->id;
             array_push($bannerLangs,$bannerLang);
         }
 
-        $plug = $this->request->getPost('slug',['string','trim']);
-        $slideshows->attrid = $this->request->getPost('attrid',['int']);
         $slideshows->status = $this->request->getPost('status',['int']);
-        $slideshows->slug = $plug ? $plug : $this->helper->slugify($pTitle[1]);
         $slideshows->image = $this->request->getPost('image',['trim','string']);
-        $slideshows->bgimage = $this->request->getPost('bgimage',['trim','string']);
-
-        if(\Slideshows::findFirst(["slug = :slug: AND id != :id:","bind" => ["slug" => $slideshows->slug,'id'=> $id]])){
-            $reqPost['slug'] = $slideshows->slug .'-'. strtotime('now');
-        }
+        $slideshows->sort = $this->request->getPost('sort',['int']);
+        $slideshows->buttonlink = $this->request->getPost('buttonlink',['trim','string']);
 
         try {
             $this->db->begin();
@@ -287,7 +276,7 @@ class SlideshowsController  extends \BackendController {
                 }
             }
             foreach ($bannerLangs as $bannerLang) {
-                $bannerLang->bannerid = $slideshows->id;
+                $bannerLang->slideshowid = $slideshows->id;
                 $bannerLang->vdUpdate(true);
                 if (!$bannerLang->save()) {
                     foreach ($bannerLang->getMessages() as $message) {
@@ -430,8 +419,8 @@ class SlideshowsController  extends \BackendController {
             }
         }
         $data = \SlideshowsLang::find([
-            'bannerid = :bannerid:',
-            'bind' => ['bannerid' => $itemOld['id']]
+            'slideshowid = :slideshowid:',
+            'bind' => ['slideshowid' => $itemOld['id']]
         ]);
         foreach ($data as $it) {
             if (!$it->delete()) {

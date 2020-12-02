@@ -9,16 +9,16 @@ class SlideshowsForm extends \Phalcon\Forms\Form
 {
     public function initialize($entity = null, $options = null)
     {
-        //slug
-        $slug = new Text('slug');
-        $slug->setLabel('Slug');
-        $slug->setAttributes(array(
+        //buttonlink
+        $buttonlink = new Text('buttonlink');
+        $buttonlink->setLabel('Liên kết');
+        $buttonlink->setAttributes(array(
             'class' => 'form-control form-control-sm',
-            'placeholder' => 'Slug',
+            'placeholder' => 'Ví dụ: https://phys.hcmus.edu.vn',
             'maxlength' => "200",
             'data-error' => "Thông tin chưa hợp lệ",
         ));
-        $this->add($slug);
+        $this->add($buttonlink);
 
         //status
         $status = new Select('status', [

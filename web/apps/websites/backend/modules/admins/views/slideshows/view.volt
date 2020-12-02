@@ -67,15 +67,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <p class="mb-0">Nội dung</p>
-                                        <div class="form-group label-floating">
-                                            <div class="input-group">
-                                                <textarea id="ckEditor{{lang.id}}" name="content[{{lang.id}}]" class="rounded">
-                                                    <?= isset($sideshowsContent[$lang->id]) ? $sideshowsContent[$lang->id]: '' ?>
-                                                </textarea>
-                                                <div class="invalid-tooltip"></div>
-                                            </div>
-                                        </div>
                                     </div>
                                     {% endfor  %}
                                 </div>
@@ -95,8 +86,8 @@
                                     </div>
                                     <div class="form-group label-floating col-md-12">
                                         <div class="input-group">
-                                            <label class="control-label">{{formSlideshows.getLabel('slug')}}</label>
-                                            {{formSlideshows.render('slug')}}
+                                            <label class="control-label">{{formSlideshows.getLabel('buttonlink')}}</label>
+                                            {{formSlideshows.render('buttonlink')}}
                                             <div class="invalid-feedback"></div>
                                         </div>
                                     </div>
