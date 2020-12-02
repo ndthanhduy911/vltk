@@ -56,7 +56,7 @@ class SubjectsController  extends \BackendController {
         $fFilters = array_intersect($fFilters,$filters);
         $fTables = array_intersect($fTables,$tables);
 
-        $title = "Trang";
+        $title = "Môn học";
         $this->getJsCss();
         $this->view->searchForm = new SearchSubjectsForm();
         $this->view->title = $title;
@@ -206,9 +206,9 @@ class SubjectsController  extends \BackendController {
         ->leftJoin('Depts', 'd.id = s.deptid','d')
         ->orderBy('s.createdat DESC');
 
-        $data = $this->master::builderPermission($data,$perL,'p');
+        $data = $this->master::builderPermission($data,$perL,'s');
         $data = \FilterSetting::getDataOrder($this,$data,\Subjects::findFirst(),'s',['sl'=>'title']);
-        $data = \FilterSetting::getDataFilter($this,$data,\Subjects::arrayTrashFilter(),'s');
+        $data = \FilterSetting::getDataFilter($this,$data,\Subjects::arrayTrashFilter(),['s',['sl'=>['title']]]);
 
         $array_row = [];
 

@@ -5,7 +5,7 @@
                 <div class="col-sm-6 d-flex align-items-center">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="<?= WEB_ADMIN_URL ?>"><i class="fas fa-home"></i></a></li>
-                        <li class="breadcrumb-item"><a href="<?= WEB_ADMIN_URL ?>/researches">Bài viết</a></li>
+                        <li class="breadcrumb-item"><a href="<?= WEB_ADMIN_URL ?>/researches">Hướng nghiên cứu</a></li>
                         <li class="breadcrumb-item active">{{ title }}</li>
                     </ol>
                 </div>

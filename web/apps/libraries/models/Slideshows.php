@@ -1,11 +1,11 @@
 <?php
 use Library\Helper\HelperValidation;
-class Banners extends \ModelCore
+class Slideshows extends \ModelCore
 {
     public function initialize()
     {
         $this->setSchema(SCHEMADB);
-        $this->setSource("banners");
+        $this->setSource("slideshows");
     }
 
     public function vdUpdate($try = false){
@@ -47,56 +47,54 @@ class Banners extends \ModelCore
             'slug' => 'Liên kết',
             'status' => 'Trạng thái',
             'image' => 'Hình đại diện',
-            'author' => 'Tác giả',
-            'authorname' => 'Tác giả',
             'deptid' => 'Bộ môn',
             'deptname' => 'Bộ môn',
             'createdat' => 'Ngày tạo',
-            'title' => 'Tiêu đề',
-            'excerpt' => 'Tóm tắt'
+            'name' => 'Tiêu đề',
+            'description' => 'Mô tả'
         ];
         return isset($feilds[$key]) ? $feilds[$key] : '';
     }
 
     public static function arrayFilter(){
         return [
-            ['title'],
+            ['name'],
             ['status'],
             ['createdat']
         ];
     }
 
     public static function findTables () {
-        return ['image','title','excerpt','authorname','createdat','slug','status'];
+        return ['image','name','description','createdat','slug','status'];
     }
 
     public static function arrayOrder () {
-        return ['title','status','createdat'];
+        return ['name','status','createdat'];
     }
     
     public static function findFilters () {
-        $filters = \Banners::arrayFilter();
+        $filters = \Slideshows::arrayFilter();
         return array_merge($filters[0],$filters[1],$filters[2]);
     }
 
     public static function arrayTrashFilter(){
         return [
-            ['title'],
+            ['name'],
             ['status'],
             ['createdat']
         ];
     }
 
     public static function findTrashTables () {
-        return ['image','title','excerpt','authorname','createdat','slug'];
+        return ['image','name','description','createdat','slug'];
     }
 
     public static function arrayTrashOrder () {
-        return ['title','createdat'];
+        return ['name','createdat'];
     }
     
     public static function findTrashFilters () {
-        $filters = \Banners::arrayTrashFilter();
+        $filters = \Slideshows::arrayTrashFilter();
         return array_merge($filters[0],$filters[1],$filters[2]);
     }
 }

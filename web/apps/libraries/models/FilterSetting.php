@@ -30,8 +30,8 @@ class FilterSetting extends \ModelCore
             'trashsubjects' => \Subjects::findTrashFilters(),
             'researches' => \Researches::findFilters(),
             'trashresearches' => \Researches::findTrashFilters(),
-            'banners' => \Banners::findFilters(),
-            'trashbanners' => \Banners::findTrashFilters()
+            'slideshows' => \Slideshows::findFilters(),
+            'trashslideshows' => \Slideshows::findTrashFilters(),
         ];
         if($fkey && isset($fkeys[$fkey])){
             $groupField = \FieldGroup::findDataArrayKey($fkey);
@@ -74,8 +74,8 @@ class FilterSetting extends \ModelCore
             'trashsubjects' => \Subjects::findTrashTables(),
             'researches' => \Researches::findTables(),
             'trashresearches' => \Researches::findTrashTables(),
-            'banners' => \Banners::findTables(),
-            'trashbanners' => \Banners::findTrashTables()
+            'slideshows' => \Slideshows::findTables(),
+            'trashslideshows' => \Slideshows::findTrashTables()
         ];
 
         if($fkey && isset($fkeys[$fkey])){
@@ -106,8 +106,8 @@ class FilterSetting extends \ModelCore
             'trashsubjects' => \Subjects::arrayTrashOrder(),
             'researches' => \Researches::arrayOrder(),
             'trashresearches' => \Researches::arrayTrashOrder(),
-            'banners' => \Banners::arrayOrder(),
-            'trashbanners' => \Banners::arrayTrashOrder(),
+            'slideshows' => \Slideshows::arrayOrder(),
+            'trashslideshows' => \Slideshows::arrayTrashOrder(),
         ];
         if($fkey && isset($fkeys[$fkey])){
             return $fkeys[$fkey];
@@ -134,7 +134,7 @@ class FilterSetting extends \ModelCore
             'pages' => 'Trang thông tin',
             'subjects' => 'Môn học',
             'researches' => 'Hướng nghiên cứu',
-            'banners' => 'Banners'
+            'slideshows' => 'Slideshows'
         ];
         return isset($data[$fkey]) ? $data[$fkey] : '';
     }

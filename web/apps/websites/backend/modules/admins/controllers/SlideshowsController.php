@@ -1,10 +1,10 @@
 <?php
 namespace Backend\Modules\Admins\Controllers;
-use Backend\Modules\Admins\Forms\BannersForm;
-use Backend\Modules\Admins\Forms\BannersLangForm;
-use Backend\Modules\Admins\Forms\SearchBannersForm;
+use Backend\Modules\Admins\Forms\SlideshowsForm;
+use Backend\Modules\Admins\Forms\SlideshowsLangForm;
+use Backend\Modules\Admins\Forms\SearchSlideshowsForm;
 
-class BannersController  extends \BackendController {
+class SlideshowsController  extends \BackendController {
 
     public function indexAction(){
         if($this->request->get('singlePage') && $this->request->isAjax()){
@@ -13,11 +13,11 @@ class BannersController  extends \BackendController {
             );
         }
 
-        $filters = \Banners::findFilters();
-        $tables = \Banners::findTables();
-        $fFilters = ['title','status','createdat'];
-        $fTables = ['image','title','excerpt','authorname','createdat','slug','status'];
-        if($fSetting = \FilterSetting::findFirstKey('banners')){
+        $filters = \Slideshows::findFilters();
+        $tables = \Slideshows::findTables();
+        $fFilters = ['name','status','createdat'];
+        $fTables = ['image','name','createdat','status'];
+        if($fSetting = \FilterSetting::findFirstKey('slideshows')){
             $fFilters = $fSetting->filters ? json_decode($fSetting->filters) : $fFilters;
             $fTables = $fSetting->tables ? json_decode($fSetting->tables) : $fTables;   
         }
@@ -26,9 +26,9 @@ class BannersController  extends \BackendController {
         $fFilters = array_intersect($fFilters,$filters);
         $fTables = array_intersect($fTables,$tables);
 
-        $title = "Trang";
+        $title = "Slideshows";
         $this->getJsCss();
-        $this->view->searchForm = new SearchBannersForm();
+        $this->view->searchForm = new SearchSlideshowsForm();
         $this->view->title = $title;
         $this->view->filters = $filters;
         $this->view->tables = $tables;
@@ -43,11 +43,11 @@ class BannersController  extends \BackendController {
             );
         }
 
-        $filters = \Banners::findTrashFilters();
-        $tables = \Banners::findTrashTables();
-        $fFilters = ['title','createdat'];
-        $fTables = ['image','title','excerpt','authorname','createdat','slug'];
-        if($fSetting = \FilterSetting::findFirstKey('trashbanners')){
+        $filters = \Slideshows::findTrashFilters();
+        $tables = \Slideshows::findTrashTables();
+        $fFilters = ['name','createdat'];
+        $fTables = ['image','name','createdat'];
+        if($fSetting = \FilterSetting::findFirstKey('trashslideshows')){
             $fFilters = $fSetting->filters ? json_decode($fSetting->filters) : $fFilters;
             $fTables = $fSetting->tables ? json_decode($fSetting->tables) : $fTables;   
         }
@@ -56,9 +56,9 @@ class BannersController  extends \BackendController {
         $fFilters = array_intersect($fFilters,$filters);
         $fTables = array_intersect($fTables,$tables);
 
-        $title = "Trang";
+        $title = "Slideshows";
         $this->getJsCss();
-        $this->view->searchForm = new SearchBannersForm();
+        $this->view->searchForm = new SearchSlideshowsForm();
         $this->view->title = $title;
         $this->view->filters = $filters;
         $this->view->tables = $tables;
@@ -74,8 +74,8 @@ class BannersController  extends \BackendController {
             );
         }
 
-        $perEdit = $this->master::checkPermissionDepted('banners', 'update',1);
-        $perView = $this->master::checkPermissionDepted('banners', 'index');
+        $perEdit = $this->master::checkPermissionDepted('slideshows', 'update',1);
+        $perView = $this->master::checkPermissionDepted('slideshows', 'index');
         $perL = $perView ? $perView : ($perEdit? $perEdit :false);
         if(!$perL){
             require ERROR_FILE; die;
@@ -87,54 +87,50 @@ class BannersController  extends \BackendController {
         }
 
         $formsLang = [];
-        $bannersLang = [];
+        $slideshowsLang = [];
         $bannerContent = [];
         $languages = \Language::find(['status = 1']);
         if($id){
-            if(!$banner = \Banners::findFirstId($id)){
+            if(!$slideshows = \Slideshows::findFirstId($id)){
                 echo 'Không tìm thấy dữ liệu'; die;
             }         
             foreach ($languages as $key => $lang) {
                 $v = ($key == 0 ? true : false);
-                $bannerLang = \BannersLang::findFirst(['bannerid = :id: AND langid = :langid:','bind' => ['id' => $banner->id, 'langid' => $lang->id]]);
+                $bannerLang = \SlideshowsLang::findFirst(['bannerid = :id: AND langid = :langid:','bind' => ['id' => $slideshows->id, 'langid' => $lang->id]]);
                 if($bannerLang){
-                    $formLang = new BannersLangForm($bannerLang, [$lang->id,$v]);
-                    $bannersLang[$lang->id] = $bannerLang;
+                    $formLang = new SlideshowsLangForm($bannerLang, [$lang->id,$v]);
+                    $slideshowsLang[$lang->id] = $bannerLang;
                     $formsLang[$lang->id] = $formLang;
                     $bannerContent[$lang->id] = $bannerLang->content;
                 }else{
-                    $formsLang[$lang->id] = new BannersLangForm(null, [$lang->id,$v]);
-                    $bannersLang[$lang->id] = new \BannersLang();
+                    $formsLang[$lang->id] = new SlideshowsLangForm(null, [$lang->id,$v]);
+                    $slideshowsLang[$lang->id] = new \SlideshowsLang();
                     $bannerContent[$lang->id] = '';
                 }
             }
             $title = 'Chỉnh sửa';
-            $banner->updatedat = date('Y-m-d H:i:s');
+            $slideshows->updatedat = date('Y-m-d H:i:s');
         }else{
-            $banner = new \Banners();
-            $banner->author = $this->session->get('userid');
-            $banner->deptid = $this->session->get('deptid');
-            $banner->createdat = date('Y-m-d H:i:s');
-            $banner->updatedat = $banner->createdat;
+            $slideshows = new \Slideshows();
             $title = 'Thêm mới';
             foreach ($languages as $key => $lang) {
                 $v = $key == 0 ? true : false;
-                $formsLang[$lang->id] = new BannersLangForm(null, [$lang->id,$v]);
-                $bannersLang[$lang->id] = new \BannersLang();
+                $formsLang[$lang->id] = new SlideshowsLangForm(null, [$lang->id,$v]);
+                $slideshowsLang[$lang->id] = new \SlideshowsLang();
                 $bannerContent[$lang->id] = '';
             }
         }
 
-        $formPage = new BannersForm($banner);
+        $formSlideshows = new SlideshowsForm($slideshows);
 
         $this->view->perEdit = $perEdit ? 1 : "";
         $this->view->perView = $perView ? 1 : "";
         $this->view->languages = $languages;
         $this->view->bannerContent = $bannerContent;
         $this->view->formsLang = $formsLang;
-        $this->view->formPage = $formPage;
-        $this->view->banner = $banner;
-        $this->view->bannersLang = $bannersLang;
+        $this->view->formSlideshows = $formSlideshows;
+        $this->view->slideshows = $slideshows;
+        $this->view->slideshowsLang = $slideshowsLang;
         $this->view->title = $title;
         $this->assets->addJs('/elfinder/js/require.min.js');
         $this->getJsCss();
@@ -145,39 +141,36 @@ class BannersController  extends \BackendController {
     // =================================
     // Get data
     public function ajaxgetdataAction(){
-        if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('banners', 'index')) {
+        if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('slideshows', 'index')) {
             $this->helper->responseJson($this, ["error" => "Truy cập không được phép"]);
         }
         $columns = [
-            'p.id',
-            'p.slug',
-            'p.attrid',
-            'p.status',
-            'p.deptid',
-            'p.createdat',
-            'p.image',
-            'p.bgimage',
-            'pl.title',
-            'pl.content',
-            'pl.excerpt',
-            'u.fullname authorname',
+            'b.id',
+            'b.deptid',
+            'b.image',
+            'b.buttonlink',
+            'b.status',
+            'b.sort',
+            'b.createdat',
+            'bl.name',
+            'bl.description',
             'd.slug dslug',
         ];
 
         $data = $this->modelsManager->createBuilder()
         ->columns($columns)
-        ->from(['p' => "Banners"])
-        ->where("p.deleted = 0 AND p.status != 4")
-        ->leftJoin('BannersLang', 'pl.bannerid = p.id AND pl.langid = 1','pl')
-        ->leftJoin('Depts', 'd.id = p.deptid','d')
-        ->orderBy('p.createdat DESC');
+        ->from(['b' => "Slideshows"])
+        ->where("b.deleted = 0 AND b.status != 4")
+        ->leftJoin('SlideshowsLang', 'bl.bannerid = b.id AND bl.langid = 1','bl')
+        ->leftJoin('Depts', 'd.id = b.deptid','d')
+        ->orderBy('b.sort ASC, b.id ASC');
 
-        $data = $this->master::builderPermission($data,$perL,'p');
-        $data = \FilterSetting::getDataOrder($this,$data,\Banners::findFirst(),'p',['pl'=>'title']);
-        $data = \FilterSetting::getDataFilter($this,$data,\Banners::arrayFilter(),['p',['pl'=>['title']]]);
+        $data = $this->master::builderPermission($data,$perL,'b');
+        $data = \FilterSetting::getDataOrder($this,$data,\Slideshows::findFirst(),'b',['bl'=>'name']);
+        $data = \FilterSetting::getDataFilter($this,$data,\Slideshows::arrayFilter(),['b',['bl'=>['name']]]);
 
         $array_row = [
-            'u' => $this->master::checkPermission('banners', 'update', 1)
+            'u' => $this->master::checkPermission('slideshows', 'update', 1)
         ];
 
         $search = '';
@@ -185,36 +178,33 @@ class BannersController  extends \BackendController {
     }
 
     public function ajaxgetdatatrashAction(){
-        if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('banners', 'index')) {
+        if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('slideshows', 'index')) {
             $this->helper->responseJson($this, ["error" => "Truy cập không được phép"]);
         }
         $columns = [
-            'p.id',
-            'p.slug',
-            'p.attrid',
-            'p.status',
-            'p.deptid',
-            'p.createdat',
-            'p.image',
-            'p.bgimage',
-            'pl.title',
-            'pl.content',
-            'pl.excerpt',
-            'u.fullname authorname',
+            'b.id',
+            'b.deptid',
+            'b.image',
+            'b.buttonlink',
+            'b.status',
+            'b.sort',
+            'b.createdat',
+            'bl.name',
+            'bl.description',
             'd.slug dslug',
         ];
 
         $data = $this->modelsManager->createBuilder()
         ->columns($columns)
-        ->from(['p' => "Banners"])
-        ->where("p.deleted = 0 AND p.status = 4")
-        ->leftJoin('BannersLang', 'pl.bannerid = p.id AND pl.langid = 1','pl')
-        ->leftJoin('Depts', 'd.id = p.deptid','d')
-        ->orderBy('p.createdat DESC');
+        ->from(['b' => "Slideshows"])
+        ->where("b.deleted = 0 AND b.status = 4")
+        ->leftJoin('SlideshowsLang', 'bl.bannerid = b.id AND bl.langid = 1','bl')
+        ->leftJoin('Depts', 'd.id = b.deptid','d')
+        ->orderBy('b.sort ASC, b.id ASC');
 
-        $data = $this->master::builderPermission($data,$perL,'p');
-        $data = \FilterSetting::getDataOrder($this,$data,\Banners::findFirst(),'p',['pl'=>'title']);
-        $data = \FilterSetting::getDataFilter($this,$data,\Banners::arrayTrashFilter(),'p');
+        $data = $this->master::builderPermission($data,$perL,'b');
+        $data = \FilterSetting::getDataOrder($this,$data,\Slideshows::findFirst(),'b',['bl'=>'name']);
+        $data = \FilterSetting::getDataFilter($this,$data,\Slideshows::arrayTrashFilter(),['b',['bl'=>['name']]]);
 
         $array_row = [];
 
@@ -232,7 +222,7 @@ class BannersController  extends \BackendController {
             $this->helper->responseJson($this, $data);
         }
         $data['token'] = ['key' => $this->security->getTokenKey(), 'value' => $this->security->getToken()];
-        if(!$this->request->isAjax() || !$this->request->isPost() || !$perL = $this->master::checkPermissionDepted('banners','update')){
+        if(!$this->request->isAjax() || !$this->request->isPost() || !$perL = $this->master::checkPermissionDepted('slideshows','update')){
             $data['error'] = ['Truy cập không được phép'];
             $this->helper->responseJson($this, $data);
         }
@@ -243,27 +233,27 @@ class BannersController  extends \BackendController {
         $pContent = $this->request->getPost('content',['trim']);
         $pExcerpt = $this->request->getPost('excerpt',['string','trim']);
         if($id){
-            if(!$banner = \Banners::findFirstIdPermission($id,$perL)){
+            if(!$slideshows = \Slideshows::findFirstIdPermission($id,$perL)){
                 $data['error'] = ['Không tìm thấy banner'];
                 $this->helper->responseJson($this, $data);
             }
-            $banner->updatedat = date('Y-m-d H:i:s');
-            $banner->updatedby = $userid;
+            $slideshows->updatedat = date('Y-m-d H:i:s');
+            $slideshows->updatedby = $userid;
         }else{
-            $banner = new \Banners();
-            $banner->author = $this->session->get('userid');
-            $banner->deptid = $this->session->get('deptid');
-            $banner->createdat = date('Y-m-d H:i:s');
-            $banner->updatedat = $banner->createdat;
-            $banner->createdby = $userid;
-            $banner->updatedby = $userid;
+            $slideshows = new \Slideshows();
+            $slideshows->author = $this->session->get('userid');
+            $slideshows->deptid = $this->session->get('deptid');
+            $slideshows->createdat = date('Y-m-d H:i:s');
+            $slideshows->updatedat = $slideshows->createdat;
+            $slideshows->createdby = $userid;
+            $slideshows->updatedby = $userid;
         }
         $bannerLangs = [];
 
         foreach ($languages as $key => $lang) {
 
-            if(!$id || !$bannerLang = \BannersLang::findFirst(["bannerid = :id: AND langid = :langid:",'bind' => ['id' => (int)$id,'langid' => $lang->id]])){
-                $bannerLang = new \BannersLang();
+            if(!$id || !$bannerLang = \SlideshowsLang::findFirst(["bannerid = :id: AND langid = :langid:",'bind' => ['id' => (int)$id,'langid' => $lang->id]])){
+                $bannerLang = new \SlideshowsLang();
             }
 
             if($key == 0){
@@ -278,26 +268,26 @@ class BannersController  extends \BackendController {
         }
 
         $plug = $this->request->getPost('slug',['string','trim']);
-        $banner->attrid = $this->request->getPost('attrid',['int']);
-        $banner->status = $this->request->getPost('status',['int']);
-        $banner->slug = $plug ? $plug : $this->helper->slugify($pTitle[1]);
-        $banner->image = $this->request->getPost('image',['trim','string']);
-        $banner->bgimage = $this->request->getPost('bgimage',['trim','string']);
+        $slideshows->attrid = $this->request->getPost('attrid',['int']);
+        $slideshows->status = $this->request->getPost('status',['int']);
+        $slideshows->slug = $plug ? $plug : $this->helper->slugify($pTitle[1]);
+        $slideshows->image = $this->request->getPost('image',['trim','string']);
+        $slideshows->bgimage = $this->request->getPost('bgimage',['trim','string']);
 
-        if(\Banners::findFirst(["slug = :slug: AND id != :id:","bind" => ["slug" => $banner->slug,'id'=> $id]])){
-            $reqPost['slug'] = $banner->slug .'-'. strtotime('now');
+        if(\Slideshows::findFirst(["slug = :slug: AND id != :id:","bind" => ["slug" => $slideshows->slug,'id'=> $id]])){
+            $reqPost['slug'] = $slideshows->slug .'-'. strtotime('now');
         }
 
         try {
             $this->db->begin();
-            $banner->vdUpdate(true);
-            if (!$banner->save()) {
-                foreach ($banner->getMessages() as $message) {
+            $slideshows->vdUpdate(true);
+            if (!$slideshows->save()) {
+                foreach ($slideshows->getMessages() as $message) {
                     throw new \Exception($message->getMessage());
                 }
             }
             foreach ($bannerLangs as $bannerLang) {
-                $bannerLang->bannerid = $banner->id;
+                $bannerLang->bannerid = $slideshows->id;
                 $bannerLang->vdUpdate(true);
                 if (!$bannerLang->save()) {
                     foreach ($bannerLang->getMessages() as $message) {
@@ -316,7 +306,7 @@ class BannersController  extends \BackendController {
 
     public function restoreAction(){
         $this->view->disable();
-        if(!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('banners','delete',1)){
+        if(!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('slideshows','delete',1)){
             $data['error'] = ['Truy cập không được phép'];
             $this->helper->responseJson($this, $data);
         }
@@ -329,7 +319,7 @@ class BannersController  extends \BackendController {
         $listId = $this->helper->filterListIds($listId);
         $strIds = implode(',', $listId);
 
-        $data = \Banners::findPermission($perL,"*",['status = 4 AND id IN (' . $strIds . ')']);
+        $data = \Slideshows::findPermission($perL,"*",['status = 4 AND id IN (' . $strIds . ')']);
 
         try {
             $this->db->begin();
@@ -346,7 +336,7 @@ class BannersController  extends \BackendController {
 
     public function trashAction(){
         $this->view->disable();
-        if(!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('banners','delete',1)){
+        if(!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('slideshows','delete',1)){
             $data['error'] = ['Truy cập không được phép'];
             $this->helper->responseJson($this, $data);
         }
@@ -359,7 +349,7 @@ class BannersController  extends \BackendController {
         $listId = $this->helper->filterListIds($listId);
         $strIds = implode(',', $listId);
 
-        $data = \Banners::findPermission($perL,"*",['id IN (' . $strIds . ')']);
+        $data = \Slideshows::findPermission($perL,"*",['id IN (' . $strIds . ')']);
 
         try {
             $this->db->begin();
@@ -376,7 +366,7 @@ class BannersController  extends \BackendController {
     }
 
     public function deleteAction(){
-        if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('banners', 'delete')) {
+        if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('slideshows', 'delete')) {
             $this->helper->responseJson($this, ["error" => ["Truy cập không được phép"]]);
         }
 
@@ -388,7 +378,7 @@ class BannersController  extends \BackendController {
         $listId = $this->helper->filterListIds($listId);
         $strIds = implode(',', $listId);
 
-        $data = \Banners::findPermission($perL,"*",['status = 4 AND id IN (' . $strIds . ')']);
+        $data = \Slideshows::findPermission($perL,"*",['status = 4 AND id IN (' . $strIds . ')']);
 
         try {
             $this->db->begin();
@@ -416,7 +406,7 @@ class BannersController  extends \BackendController {
                 throw new \Exception($message->getMessage());
             }
         }
-        \Logs::saveLogs($this, 3, "Xóa tạm banner ID: {$item->id}", ['table' => 'Banners','id' => $item->id]);
+        \Logs::saveLogs($this, 3, "Xóa tạm banner ID: {$item->id}", ['table' => 'Slideshows','id' => $item->id]);
     }
 
     private function restoreOne($item){
@@ -429,7 +419,7 @@ class BannersController  extends \BackendController {
                 throw new \Exception($message->getMessage());
             }
         }
-        \Logs::saveLogs($this, 5, "Khôi phục banner ID: {$item->id}", ['table' => 'Banners','id' => $item->id]);
+        \Logs::saveLogs($this, 5, "Khôi phục banner ID: {$item->id}", ['table' => 'Slideshows','id' => $item->id]);
     }
 
     private function deleteOne($item){
@@ -439,7 +429,7 @@ class BannersController  extends \BackendController {
                 throw new \Exception($message->getMessage());
             }
         }
-        $data = \BannersLang::find([
+        $data = \SlideshowsLang::find([
             'bannerid = :bannerid:',
             'bind' => ['bannerid' => $itemOld['id']]
         ]);
@@ -450,10 +440,10 @@ class BannersController  extends \BackendController {
                 }
             }
         }
-        \Logs::saveLogs($this, 4, "Xóa banner ID: {$itemOld['id']}", ['table' => 'Banners','id' => $itemOld['id']]);
+        \Logs::saveLogs($this, 4, "Xóa banner ID: {$itemOld['id']}", ['table' => 'Slideshows','id' => $itemOld['id']]);
     }
 
     private function getJsCss(){
-        $this->assets->addJs(WEB_URI.'/assets/backend/js/modules/admins/banners.js');
+        $this->assets->addJs(WEB_URI.'/assets/backend/js/modules/admins/slideshows.js');
     }
 }

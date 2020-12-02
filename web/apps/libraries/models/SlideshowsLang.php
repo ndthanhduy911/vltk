@@ -1,11 +1,11 @@
 <?php
 use Library\Helper\HelperValidation;
-class BannersLang extends \Phalcon\Mvc\Model
+class SlideshowsLang extends \Phalcon\Mvc\Model
 {
     public function initialize()
     {
         $this->setSchema(SCHEMADB);
-        $this->setSource("bannerslang");
+        $this->setSource("slideshowslang");
     }
     
     public function vdUpdate($try = false){

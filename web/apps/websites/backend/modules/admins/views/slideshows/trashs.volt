@@ -9,18 +9,18 @@
             </div>
             <div class="col-sm-6">
                 <div class="btn-group float-right">
-                    <a id="settingTrashBanners" data-href="<?= WEB_ADMIN_URL ?>/setting/filters" data-get="<?= WEB_ADMIN_URL ?>/setting/getsinglefilter?fkey=trashbanners" title="Thiết lập giao diện"
+                    <a id="settingTrashSlideshows" data-href="<?= WEB_ADMIN_URL ?>/setting/filters" data-get="<?= WEB_ADMIN_URL ?>/setting/getsinglefilter?fkey=trashslideshows" title="Thiết lập giao diện"
                         class="ml-2 btn btn-hnn btn-hnn-default"><span><i class="fas fa-cog"></i></span></a>
                 </div>
-                {% if master.checkPermission('banners', 'delete') %}
+                {% if master.checkPermission('slideshows', 'delete') %}
                 <div class="btn-group float-right">
-                    <a id="deleteTrashBanners" data-href="<?= WEB_ADMIN_URL ?>/banners/delete" title="Xóa vĩnh viễn"
+                    <a id="deleteTrashSlideshows" data-href="<?= WEB_ADMIN_URL ?>/slideshows/delete" title="Xóa vĩnh viễn"
                         class="ml-2 btn btn-hnn btn-hnn-danger"><span><i class="fas fa-trash-alt"></i></span></a>
                 </div>
                 {% endif %}
-                {% if master.checkPermission('banners', 'restore') %}
+                {% if master.checkPermission('slideshows', 'restore') %}
                 <div class="btn-group float-right">
-                    <a id="restoreBanners" data-href="<?= WEB_ADMIN_URL ?>/banners/restore" title="Khôi phục banner"
+                    <a id="restoreSlideshows" data-href="<?= WEB_ADMIN_URL ?>/slideshows/restore" title="Khôi phục banner"
                         class="ml-2 btn btn-hnn btn-hnn-info"><span><i class="fas fa-sync"></i></span></a>
                 </div>
                 {% endif %}
@@ -42,7 +42,7 @@
             <div class="col-md-12">
                 <div class="card card-primary card-outline">
                     <div class="card-body">
-                        <form action="" id="searchTrashBanners" class="searchForm">
+                        <form action="" id="searchTrashSlideshows" class="searchForm">
                             <div class="row d-md-flex align-items-md-center">
                                 <span class="col-auto mt-2">Tìm kiếm</span>
                                 <div class="flex-1 col-auto row pr-0">
@@ -69,15 +69,15 @@
                             </div>
                         </form>
                         <div class="table-responsive">
-                            <table id="trashbanners" class="table table-bordered table-hover rounded">
+                            <table id="trashslideshows" class="table table-bordered table-hover rounded">
                                 <thead>
                                     <tr>
                                         <th data-col="no" class="align-middle text-center" style="width: 20px;">
-                                            <input id="bannersCheckboxAll" type="checkbox" value="1">
+                                            <input id="slideshowsCheckboxAll" type="checkbox" value="1">
                                         </th>
                                         <th data-col="no" class="align-middle text-center" style="width: 20px;">STT</th>
                                         {% for key,table in fTables %}
-                                        <th data-col="{{table}}" class="align-middle text-center"><?= $this->helper->showSort($table,$this,'banners',\Banners::filedName($table)) ?></th>
+                                        <th data-col="{{table}}" class="align-middle text-center"><?= $this->helper->showSort($table,$this,'slideshows',\Slideshows::filedName($table)) ?></th>
                                         {% endfor %}
                                     </tr>
                                 </thead>
@@ -94,10 +94,10 @@
     </div>
 </section>
 
-<div class="modal fade" id="modalSettingTrashBanners">
+<div class="modal fade" id="modalSettingTrashSlideshows">
     <div class="modal-dialog" style="min-width: 1300px;">
         <div class="modal-content">
-            <form id="frmSettingTrashBanners" action="" method="POST" enctype="multipart/form-data" data-toggle="validator" class="customForm">
+            <form id="frmSettingTrashSlideshows" action="" method="POST" enctype="multipart/form-data" data-toggle="validator" class="customForm">
                 <div class="modal-header">
                     <h4 class="modal-title">Thiết lập giao diện</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -123,7 +123,7 @@
                                             <input class="" type="checkbox" id="filters-{{value}}"
                                                 name="filters[]" value="{{value}}">
                                             <label for="filters-{{value}}"
-                                                class="font-weight-normal mb-0 ml-2"><?= \Banners::filedName($value) ?></label>
+                                                class="font-weight-normal mb-0 ml-2"><?= \Slideshows::filedName($value) ?></label>
                                         </div>
                                     </div>
                                 </div>
@@ -150,7 +150,7 @@
                                             <input class="" type="checkbox" id="tables-{{value}}"
                                                 name="tables[]" value="{{value}}">
                                             <label for="tables-{{value}}"
-                                                class="font-weight-normal mb-0 ml-2"><?= \Banners::filedName($value) ?></label>
+                                                class="font-weight-normal mb-0 ml-2"><?= \Slideshows::filedName($value) ?></label>
                                         </div>
                                     </div>
                                 </div>
@@ -158,7 +158,7 @@
                             </div>
                         </div>
                     </div>
-                    <input type="hidden" name="fkey" value="trashbanners">
+                    <input type="hidden" name="fkey" value="trashslideshows">
                     <input class="tokenCSRF" type='hidden' name="{{security.getTokenKey()}}" value="{{security.getToken()}}" />
                 </div>
                 <div class="modal-footer justify-content-between">

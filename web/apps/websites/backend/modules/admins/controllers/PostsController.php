@@ -219,7 +219,7 @@ class PostsController  extends \BackendController {
 
         $data = $this->master::builderPermission($data,$perL,'p');
         $data = \FilterSetting::getDataOrder($this,$data,\Posts::findFirst(),'p',['pl'=>'title']);
-        $data = \FilterSetting::getDataFilter($this,$data,\Posts::arrayTrashFilter(),'p');
+        $data = \FilterSetting::getDataFilter($this,$data,\Posts::arrayTrashFilter(),['p',['pl'=>['title']]]);
 
         $array_row = [];
 

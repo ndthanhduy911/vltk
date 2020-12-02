@@ -26,7 +26,7 @@ class ResearchesController  extends \BackendController {
         $fFilters = array_intersect($fFilters,$filters);
         $fTables = array_intersect($fTables,$tables);
 
-        $title = "Trang";
+        $title = "Hướng nghiên cứu";
         $this->getJsCss();
         $this->view->searchForm = new SearchResearchesForm();
         $this->view->title = $title;
@@ -56,7 +56,7 @@ class ResearchesController  extends \BackendController {
         $fFilters = array_intersect($fFilters,$filters);
         $fTables = array_intersect($fTables,$tables);
 
-        $title = "Trang";
+        $title = "Hướng nghiên cứu";
         $this->getJsCss();
         $this->view->searchForm = new SearchResearchesForm();
         $this->view->title = $title;
@@ -201,11 +201,11 @@ class ResearchesController  extends \BackendController {
         ->where("r.deleted = 0 AND r.status = 4")
         ->leftJoin('ResearchesLang', 'rl.researchid = r.id AND rl.langid = 1','rl')
         ->leftJoin('Depts', 'd.id = r.deptid','d')
-        ->orderBy('p.createdat DESC');
+        ->orderBy('r.createdat DESC');
 
-        $data = $this->master::builderPermission($data,$perL,'p');
+        $data = $this->master::builderPermission($data,$perL,'r');
         $data = \FilterSetting::getDataOrder($this,$data,\Researches::findFirst(),'r',['rl'=>'title']);
-        $data = \FilterSetting::getDataFilter($this,$data,\Researches::arrayTrashFilter(),'r');
+        $data = \FilterSetting::getDataFilter($this,$data,\Researches::arrayTrashFilter(),['r',['rl'=>['title']]]);
 
         $array_row = [];
 

@@ -44,9 +44,9 @@ class IndexController extends \FrontendController
             'bl.description description',
             'bl.button_text button_text'
         ))
-        ->from(['b'=>'Banner'])
+        ->from(['b'=>'Banners'])
         ->where("b.deleted = 0 AND b.status = 1 AND b.deptid = 1")
-        ->leftJoin('BannerLang', "bl.bannerid = b.id AND bl.langid = $langid",'bl')
+        ->leftJoin('BannersLang', "bl.bannerid = b.id AND bl.langid = $langid",'bl')
         ->orderBy("b.sort = 0 ASC")
         ->getQuery()
         ->execute();

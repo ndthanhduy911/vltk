@@ -13,8 +13,8 @@ class SearchPagesForm extends Form
         $titleSearch->setLabel('Tiêu đề');
         $titleSearch->setAttributes(array(
             'class' => 'form-control form-control-sm',
-            'placeholder' => 'Ví dụ: Lịch thi mới nhất',
-            'maxlength' => "100",
+            'placeholder' => 'Ví dụ: Trang tin tức',
+            'maxlength' => "255",
         ));
         $this->add($titleSearch);
 

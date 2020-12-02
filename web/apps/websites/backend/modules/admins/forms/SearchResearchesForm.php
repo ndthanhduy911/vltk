@@ -13,7 +13,7 @@ class SearchResearchesForm extends Form
         $titleSearch->setLabel('Tiêu đề');
         $titleSearch->setAttributes(array(
             'class' => 'form-control form-control-sm',
-            'placeholder' => 'Ví dụ: Lịch thi mới nhất',
+            'placeholder' => 'Ví dụ: Xử lý hình ảnh',
             'maxlength' => "100",
         ));
         $this->add($titleSearch);

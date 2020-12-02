@@ -4,19 +4,19 @@ use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Form;
 use Phalcon\Forms\Element\Select;
 
-class SearchBannersForm extends Form
+class SearchSlideshowsForm extends Form
 {
     public function initialize($entity = null, $options = null){
 
-        //titleSearch
-        $titleSearch = new Text('titleSearch');
-        $titleSearch->setLabel('Tiêu đề');
-        $titleSearch->setAttributes(array(
+        //nameSearch
+        $nameSearch = new Text('nameSearch');
+        $nameSearch->setLabel('Tiêu đề');
+        $nameSearch->setAttributes(array(
             'class' => 'form-control form-control-sm',
-            'placeholder' => 'Ví dụ: Lịch thi mới nhất',
-            'maxlength' => "100",
+            'placeholder' => 'Ví dụ: Ngày hội chuyên ngành',
+            'maxlength' => "255",
         ));
-        $this->add($titleSearch);
+        $this->add($nameSearch);
 
         //createdatSearch
         $createdatSearch = new Text('createdatSearch');

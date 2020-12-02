@@ -20,12 +20,12 @@ const getBannerLink = (item) => {
     return `<a target="_blank" href="${webUri}/news/${item.slug}">Link</a>`;
 }
 
-const loadTableBanners = (table = '#banners', cb = () => {}) => {
+const loadTableSlideshows = (table = '#slideshows', cb = () => {}) => {
     if ($(table).length) {
         let router = {
-            co:'banners',aj:'ajaxgetdata',fo:'#searchBanners',cl:'Banners',ti:'trang',
-            ff:['title', 'status', 'createdat'],
-            tf:['image','title','excerpt','authorname','createdat','slug','status'],
+            co:'slideshows',aj:'ajaxgetdata',fo:'#searchSlideshows',cl:'Slideshows',ti:'banners',
+            ff:['name', 'status', 'createdat'],
+            tf:['image','name','description','createdat','status'],
         };
         let paramsUrl = getParams();
         let columns = [];
@@ -55,10 +55,9 @@ const loadTableBanners = (table = '#banners', cb = () => {}) => {
                 let pageLength = pageInfo.length;
                 $('td:eq(1)', row).html((dataIndex+1)+(page*pageLength));
                 let image = `<img src="${getPathImage(item.image, '/assets/frontend/images/defaut_img.png')}" height="30px">`;
-                $(`td:eq(${fkeys.indexOf('title')})`, row).html(showTitle(item.title,30));
-                $(`td:eq(${fkeys.indexOf('excerpt')})`, row).html(showTitle(item.excerpt,30));
+                $(`td:eq(${fkeys.indexOf('name')})`, row).html(showTitle(item.name,30));
+                $(`td:eq(${fkeys.indexOf('description')})`, row).html(showTitle(item.description,30));
                 $(`td:eq(${fkeys.indexOf('image')})`, row).html(image);
-                $(`td:eq(${fkeys.indexOf('slug')})`, row).html(getBannerLink(item));
                 $(`td:eq(${fkeys.indexOf('createdat')})`, row).html(vi_moment(item.createdat, 'DD/MM/YYYY HH:mm'));
                 $(`td:eq(${fkeys.indexOf('status')})`, row).html(showStatus(item.status));
                 $('td:last', row).addClass('text-nowrap').html(showButtonEdit(item,router.co,router.cl));
@@ -70,12 +69,12 @@ const loadTableBanners = (table = '#banners', cb = () => {}) => {
     }
 }
 
-const loadTableTrashBanners = (table = '#trashbanners', cb = () => {}) => {
+const loadTableTrashSlideshows = (table = '#trashslideshows', cb = () => {}) => {
     if ($(table).length) {
         let router = {
-            co:'banners',aj:'ajaxgetdatatrash',fo:'#searchTrashBanners',cl:'TrashBanners',ti:'trang',
-            ff:['title', 'catid', 'createdat'],
-            tf:['image','title','excerpt','authorname','createdat','slug']
+            co:'slideshows',aj:'ajaxgetdatatrash',fo:'#searchTrashSlideshows',cl:'TrashSlideshows',ti:'banners',
+            ff:['name','status', 'createdat'],
+            tf:['image','name','description','createdat']
         };
         let paramsUrl = getParams();
         let columns = [];
@@ -105,11 +104,9 @@ const loadTableTrashBanners = (table = '#trashbanners', cb = () => {}) => {
                 let pageLength = pageInfo.length;
                 $('td:eq(1)', row).html((dataIndex+1)+(page*pageLength));
                 let image = `<img src="${getPathImage(item.image, '/assets/frontend/images/defaut_img.png')}" height="30px">`;
-                $(`td:eq(${fkeys.indexOf('title')})`, row).html(showTitle(item.title,30));
-                $(`td:eq(${fkeys.indexOf('excerpt')})`, row).html(showTitle(item.excerpt,30));
+                $(`td:eq(${fkeys.indexOf('name')})`, row).html(showTitle(item.title,30));
+                $(`td:eq(${fkeys.indexOf('description')})`, row).html(showTitle(item.description,30));
                 $(`td:eq(${fkeys.indexOf('image')})`, row).html(image);
-                $(`td:eq(${fkeys.indexOf('catid')})`, row).html(item.catname);
-                $(`td:eq(${fkeys.indexOf('slug')})`, row).html(getBannerLink(item));
                 $(`td:eq(${fkeys.indexOf('createdat')})`, row).html(vi_moment(item.createdat, 'DD/MM/YYYY HH:mm'));
             }
         }
@@ -119,7 +116,7 @@ const loadTableTrashBanners = (table = '#trashbanners', cb = () => {}) => {
     }
 }
 
-const updateBanners = (form = '#frmBanners') => {
+const updateSlideshows = (form = '#frmSlideshows') => {
     if($(form).length){
         if($(`${form} #ckEditor1`).length){
             getCkeditor1();
@@ -130,7 +127,7 @@ const updateBanners = (form = '#frmBanners') => {
         }
     
         sendAjax(form, "POST").then(() => {
-            window.location.href=`${webAdminUrl}/banners`;
+            window.location.href=`${webAdminUrl}/slideshows`;
         });
     
         showSelectImage('#uploadImage','#showImg','#image', '#removeImage');
@@ -138,14 +135,14 @@ const updateBanners = (form = '#frmBanners') => {
     }
 }
 
-loadTableBanners('#banners');
-loadTableTrashBanners('#trashbanners',()=>{
-    deleteAll(`#restoreBanners`, `.bannersCheckbox`,(data) => {
-        showSweetAlertOk('Khôi phục trang thành công');
-        $('#trashbanners').DataTable().draw();
+loadTableSlideshows('#slideshows');
+loadTableTrashSlideshows('#trashslideshows',()=>{
+    deleteAll(`#restoreSlideshows`, `.slideshowsCheckbox`,(data) => {
+        showSweetAlertOk('Khôi phục banners thành công');
+        $('#trashslideshows').DataTable().draw();
     });
 });
-updateBanners();
+updateSlideshows();
 
 showSelectImage('#uploadImage','#showImg','#image', '#removeImage');
 

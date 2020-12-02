@@ -99,8 +99,8 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="<?= WEB_ADMIN_URL ?>/banners"
-                        class="nav-link {% if dispatcher.getControllerName()=='banners' %} {{ 'active' }} {% endif %}">
+                    <a href="<?= WEB_ADMIN_URL ?>/slideshows"
+                        class="nav-link {% if dispatcher.getControllerName()=='slideshows' %} {{ 'active' }} {% endif %}">
                         <i class="nav-icon fas fa-images"></i>
                         <p>Banners</p>
                     </a>
@@ -109,14 +109,14 @@
                     <a href="<?= WEB_ADMIN_URL ?>/staff"
                         class="nav-link {% if dispatcher.getControllerName()=='staff' %} {{ 'active' }} {% endif %}">
                         <i class="nav-icon fas fa-users"></i>
-                        <p>Nhân viên</p>
+                        <p>Tổ chức Nhân sự</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="<?= WEB_ADMIN_URL ?>/partner"
                         class="nav-link {% if dispatcher.getControllerName()=='partner' %} {{ 'active' }} {% endif %}">
                         <i class="nav-icon fas fa-handshake"></i>
-                        <p>Liên kết</p>
+                        <p>Liên kết/ đối tác</p>
                     </a>
                 </li>
                 <li class="nav-item">

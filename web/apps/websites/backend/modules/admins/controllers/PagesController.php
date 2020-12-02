@@ -213,7 +213,7 @@ class PagesController  extends \BackendController {
 
         $data = $this->master::builderPermission($data,$perL,'p');
         $data = \FilterSetting::getDataOrder($this,$data,\Pages::findFirst(),'p',['pl'=>'title']);
-        $data = \FilterSetting::getDataFilter($this,$data,\Pages::arrayTrashFilter(),'p');
+        $data = \FilterSetting::getDataFilter($this,$data,\Pages::arrayTrashFilter(),['p',['pl'=>['title']]]);
 
         $array_row = [];
 

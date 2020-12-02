@@ -23,7 +23,7 @@ const getPageLink = (item) => {
 const loadTableResearches = (table = '#researches', cb = () => {}) => {
     if ($(table).length) {
         let router = {
-            co:'researches',aj:'ajaxgetdata',fo:'#searchResearches',cl:'Researches',ti:'trang',
+            co:'researches',aj:'ajaxgetdata',fo:'#searchResearches',cl:'Researches',ti:'hướng nghiên cứu',
             ff:['title', 'status', 'createdat'],
             tf:['image','title','excerpt','createdat','slug','status'],
         };
@@ -73,7 +73,7 @@ const loadTableResearches = (table = '#researches', cb = () => {}) => {
 const loadTableTrashResearches = (table = '#trashresearches', cb = () => {}) => {
     if ($(table).length) {
         let router = {
-            co:'researches',aj:'ajaxgetdatatrash',fo:'#searchTrashResearches',cl:'TrashResearches',ti:'trang',
+            co:'researches',aj:'ajaxgetdatatrash',fo:'#searchTrashResearches',cl:'TrashResearches',ti:'hướng nghiên cứu',
             ff:['title', 'status', 'createdat'],
             tf:['image','title','excerpt','createdat','slug']
         };
@@ -140,7 +140,7 @@ const updateResearches = (form = '#frmResearches') => {
 loadTableResearches('#researches');
 loadTableTrashResearches('#trashresearches',()=>{
     deleteAll(`#restoreResearches`, `.researchesCheckbox`,(data) => {
-        showSweetAlertOk('Khôi phục trang thành công');
+        showSweetAlertOk('Khôi phục hướng nghiên cứu thành công');
         $('#trashresearches').DataTable().draw();
     });
 });
