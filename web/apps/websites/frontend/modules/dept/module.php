@@ -10,10 +10,9 @@ use Phalcon\Mvc\ModuleDefinitionInterface;
 
 class Module implements ModuleDefinitionInterface
 {
-
     // Version 3.0: \Phalcon \ DiInterface
     // Version 4.0 => \Phalcon \ Di\ DiInterface
-    public function registerAutoloaders(\Phalcon\Di\DiInterface $dependencyInjector = null)
+    public function registerAutoloaders(\Phalcon\Di\DiInterface $di = null)
     {
         $loader = new Loader();
 
@@ -35,7 +34,6 @@ class Module implements ModuleDefinitionInterface
             $view->setLayoutsDir('../../../layouts/default/');
             $view->setPartialsDir('../../../layouts/default/partials/');
             $view->setTemplateAfter('layout');
-        
             $view->registerEngines(array(
                 '.volt' => function ($view) use ($config,$di) {
                     $volt = new VoltEngine($view,$di);
@@ -58,6 +56,5 @@ class Module implements ModuleDefinitionInterface
             $dispatcher->setDefaultNamespace("Frontend\Modules\Dept\Controllers\\");
             return $dispatcher;
         });
-
     }
 }
