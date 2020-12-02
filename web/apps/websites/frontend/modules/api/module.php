@@ -13,8 +13,8 @@ class Module implements ModuleDefinitionInterface
      * Registers the module auto-loader
      */
     // Version 3.0: \Phalcon\DiInterface
-    // Version 4.0 => \Phalcon\DiInterface
-    public function registerAutoloaders(\Phalcon\DiInterface $dependencyInjector = null)
+    // Version 4.0 => \Phalcon\Di\DiInterface
+    public function registerAutoloaders(\Phalcon\Di\DiInterface $dependencyInjector = null)
     {
         $loader = new Loader();
 
@@ -31,7 +31,7 @@ class Module implements ModuleDefinitionInterface
      *
      * @param Phalcon\DI $di
      */
-    public function registerServices(\Phalcon\DiInterface $di)
+    public function registerServices(\Phalcon\Di\DiInterface $di)
     {
         /**
          * Setting up the views component
@@ -51,10 +51,10 @@ class Module implements ModuleDefinitionInterface
                     $volt = new VoltEngine($view);
 
                     $volt->setOptions(array(
-                        'compiledPath' => $config->application->cacheDir."views/", //Version: 3.0
-                        'compiledSeparator' => '_', //Version: 3.0
-                        // 'path' => $config->application->cacheDir."views/", //Version: 4.0
-                        // 'separator' => '_' //Version: 4.0
+                        // 'compiledPath' => $config->application->cacheDir."views/", //Version 3.0
+                        // 'compiledSeparator' => '_', //Version 3.0
+                        'path' => $config->application->cacheDir."views/", //Version 4.0
+                        'separator' => '_' //Version 4.0
                     ));
 
                     return $volt;

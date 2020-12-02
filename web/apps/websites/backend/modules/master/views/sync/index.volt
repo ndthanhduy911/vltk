@@ -3,9 +3,7 @@
         <div class="row">
             <div class="col-sm-6 d-flex align-items-center">
                 <ol class="breadcrumb">
-                    {% if dispatcher.getControllerName() != 'index' %}
                     <li class="breadcrumb-item"><a href="<?= WEB_ADMIN_URL ?>"><i class="fas fa-home"></i></a></li>
-                    {% endif %}
                     <li class="breadcrumb-item active">{{ title }}<span class="ml-1">- Quản lý danh sách, thông tin nhập dữ liệu ban đầu</span></li>
                 </ol>
             </div>

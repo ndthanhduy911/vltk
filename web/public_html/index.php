@@ -1,23 +1,19 @@
 <?php
+declare(strict_types=1);
+use Phalcon\Mvc\Application;
 session_start();
 error_reporting(E_ALL);
-use Phalcon\Mvc\Application;
+header('Access-Control-Allow-Origin: *');
+define('BASE_DIR', dirname(__DIR__));
+define('APP_DIR', BASE_DIR . '/apps');
+date_default_timezone_set('Asia/Ho_Chi_Minh');
 try
 {
-    header('Access-Control-Allow-Origin: *');
-    /**
-     * Define some useful constants
-     */
-    define('BASE_DIR', dirname(__DIR__));
-    define('APP_DIR', BASE_DIR . '/apps');
-
-    date_default_timezone_set('Asia/Ho_Chi_Minh');
-
     $define = include APP_DIR . '/configs/define.php';
     /**
      * Include functions
      */
-    $config = include APP_DIR . '/configs/functions.php';
+    include APP_DIR . '/configs/functions.php';
 
     /**
      * Read the configuration
@@ -43,8 +39,8 @@ try
      * Include modules
      */
     require APP_DIR . '/configs/modules.php';
-    echo $application->handle()->getContent();
-    // echo $application->handle($_SERVER['REQUEST_URI'])->getContent(); //Vesion 4.0
+    // echo $application->handle()->getContent();
+    echo $application->handle($_SERVER['REQUEST_URI'])->getContent(); //Vesion 4.0
 }
 catch (Phalcon\Exception $e)
 {

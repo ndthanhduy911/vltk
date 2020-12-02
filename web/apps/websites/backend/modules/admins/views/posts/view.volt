@@ -4,9 +4,7 @@
             <div class="row">
                 <div class="col-sm-6 d-flex align-items-center">
                     <ol class="breadcrumb">
-                        {% if dispatcher.getControllerName() != 'index' %}
                         <li class="breadcrumb-item"><a href="<?= WEB_ADMIN_URL ?>"><i class="fas fa-home"></i></a></li>
-                        {% endif %}
                         <li class="breadcrumb-item"><a href="<?= WEB_ADMIN_URL ?>/posts">Bài viết</a></li>
                         <li class="breadcrumb-item active">{{ title }}</li>
                     </ol>

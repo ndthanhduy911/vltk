@@ -13,7 +13,7 @@ class Module implements ModuleDefinitionInterface
 
     // Version 3.0: \Phalcon \ DiInterface
     // Version 4.0 => \Phalcon \ Di\ DiInterface
-    public function registerAutoloaders(\Phalcon\DiInterface $dependencyInjector = null)
+    public function registerAutoloaders(\Phalcon\Di\DiInterface $dependencyInjector = null)
     {
         $loader = new Loader();
 
@@ -25,26 +25,25 @@ class Module implements ModuleDefinitionInterface
         $loader->register();
     }
 
-    public function registerServices(\Phalcon\DiInterface $di)
+    public function registerServices(\Phalcon\Di\DiInterface $di)
     {
-        $di['view'] = function () {
-            $config = include APP_DIR . '/configs/config.php';
+
+        $di->set('view', function () use($di) {
+            $config = $di->getConfig();
             $view = new View();
             $view->setViewsDir(__DIR__ . '/views/');
             $view->setLayoutsDir('../../../layouts/default/');
             $view->setPartialsDir('../../../layouts/default/partials/');
             $view->setTemplateAfter('layout');
-
+        
             $view->registerEngines(array(
-                '.volt' => function ($view) use ($config) {
-
-                    $volt = new VoltEngine($view);
-
+                '.volt' => function ($view) use ($config,$di) {
+                    $volt = new VoltEngine($view,$di);
                     $volt->setOptions(array(
-                        'compiledPath' => $config->application->cacheDir."views/", //Version: 3.0
-                        'compiledSeparator' => '_', //Version: 3.0
-                        // 'path' => $config->application->cacheDir."views/", //Version: 4.0
-                        // 'separator' => '_' //Version: 4.0
+                        // 'compiledPath' => $config->application->cacheDir."views/", //Version 3.0
+                        // 'compiledSeparator' => '_', //Version 3.0
+                        'path' => $config->application->cacheDir."views/", //Version 4.0
+                        'separator' => '_' //Version 4.0
                     ));
 
                     return $volt;
@@ -52,7 +51,7 @@ class Module implements ModuleDefinitionInterface
                 '.phtml' => 'Phalcon\Mvc\View\Engine\Php'
             ));
             return $view;
-        };
+        });
 
         $di->set('dispatcher' , function(){
             $dispatcher = new \Phalcon\Mvc\Dispatcher();
