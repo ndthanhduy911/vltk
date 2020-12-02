@@ -145,6 +145,7 @@ class PagesController  extends \BackendController {
         }
         $columns = [
             'p.id',
+            'p.slug',
             'p.attrid',
             'p.status',
             'p.author',
@@ -186,6 +187,7 @@ class PagesController  extends \BackendController {
         }
         $columns = [
             'p.id',
+            'p.slug',
             'p.attrid',
             'p.status',
             'p.author',

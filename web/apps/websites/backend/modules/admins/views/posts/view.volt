@@ -1,4 +1,4 @@
-<form id="frmPosts" action="<?= WEB_ADMIN_URI ?>/posts/update<?= !empty($post->id) ? '/'.$post->id : '' ?>" method="post" enctype="multipart/form-data" data-toggle="validator" role="form">
+<form id="frmPosts" action="<?= WEB_ADMIN_URI ?>/posts/update<?= !empty($posts->id) ? '/'.$posts->id : '' ?>" method="post" enctype="multipart/form-data" data-toggle="validator" role="form">
     <div class="content-header">
         <div class="container-fluid">
             <div class="row">
@@ -71,7 +71,7 @@
                                         <div class="form-group label-floating">
                                             <div class="input-group">
                                                 <textarea id="ckEditor{{lang.id}}" name="content[{{lang.id}}]" class="rounded">
-                                                    <?= isset($postContent[$lang->id]) ? $postContent[$lang->id]: '' ?>
+                                                    <?= isset($postsContent[$lang->id]) ? $postsContent[$lang->id]: '' ?>
                                                 </textarea>
                                                 <div class="invalid-tooltip"></div>
                                             </div>
@@ -88,39 +88,39 @@
                                 <div class="row">
                                     <div class="form-group label-floating col-md-12">
                                         <div class="input-group">
-                                            <label class="control-label">{{formPost.getLabel('status')}}</label>
-                                            {{formPost.render('status')}}
+                                            <label class="control-label">{{formPosts.getLabel('status')}}</label>
+                                            {{formPosts.render('status')}}
                                             <div class="invalid-feedback"></div>
                                         </div>
                                     </div>
                                     <div class="form-group label-floating col-md-12">
                                         <div class="input-group">
-                                            <label class="control-label">{{formPost.getLabel('calendar')}}</label>
-                                            {{formPost.render('calendar')}}
+                                            <label class="control-label">{{formPosts.getLabel('calendar')}}</label>
+                                            {{formPosts.render('calendar')}}
                                             <div class="invalid-feedback"></div>
                                         </div>
                                     </div>
                                     <div class="form-group label-floating col-md-12">
                                         <div class="input-group">
-                                            <label class="control-label">{{formPost.getLabel('slug')}}</label>
-                                            {{formPost.render('slug')}}
+                                            <label class="control-label">{{formPosts.getLabel('slug')}}</label>
+                                            {{formPosts.render('slug')}}
                                             <div class="invalid-feedback"></div>
                                         </div>
                                     </div>
                                     <div class="form-group label-floating col-md-12">
                                         <div class="input-group">
-                                            <label class="control-label">{{formPost.getLabel('catid')}}</label>
-                                            {{formPost.render('catid')}}
+                                            <label class="control-label">{{formPosts.getLabel('catid')}}</label>
+                                            {{formPosts.render('catid')}}
                                             <div class="invalid-feedback"></div>
                                         </div>
                                     </div>
                                     <div class="form-group label-floating col-md-12">
                                         <div class="col-md-12 p-0">
-                                            <img id="showImg" class="w-100 d-block" src="<?= !empty($post->image) ? $post->image : '' ?>"
-                                            alt="<?= !empty($post->image) ? $post->image : '' ?>">
-                                            {{formPost.render('image')}}
+                                            <img id="showImg" class="w-100 d-block" src="<?= !empty($posts->image) ? $posts->image : '' ?>"
+                                            alt="<?= !empty($posts->image) ? $posts->image : '' ?>">
+                                            {{formPosts.render('image')}}
                                             <a id="uploadImage" href="#" class="link">Đặt ảnh đại diện</a>
-                                            <a id="removeImage" href="#" class="link text-danger <?= !empty($post->image) ? '' : 'hidden' ?>">Xóa</a>
+                                            <a id="removeImage" href="#" class="link text-danger <?= !empty($posts->image) ? '' : 'hidden' ?>">Xóa</a>
                                         </div>
                                     </div>
                                 </div>
