@@ -43,7 +43,8 @@ try
      * Include modules
      */
     require APP_DIR . '/configs/modules.php';
-    echo $application->handle($_SERVER['REQUEST_URI'])->getContent();
+    echo $application->handle()->getContent();
+    // echo $application->handle($_SERVER['REQUEST_URI'])->getContent(); //Vesion 4.0
 }
 catch (Phalcon\Exception $e)
 {
