@@ -74,8 +74,8 @@ class PostsController  extends \BackendController {
             );
         }
 
-        $perEdit = $this->master::checkPermissionDepted('asset', 'update',1);
-        $perView = $this->master::checkPermissionDepted('asset', 'index');
+        $perEdit = $this->master::checkPermissionDepted('posts', 'update',1);
+        $perView = $this->master::checkPermissionDepted('posts', 'index');
         $perL = $perView ? $perView : ($perEdit? $perEdit :false);
         if(!$perL){
             require ERROR_FILE; die;
@@ -91,12 +91,12 @@ class PostsController  extends \BackendController {
         $postContent = [];
         $languages = \Language::find(['status = 1']);
         if($id){
-            if(!$post = \Posts::findFirstId($id)){
+            if(!$posts = \Posts::findFirstId($id)){
                 echo 'Không tìm thấy dữ liệu'; die;
             }         
             foreach ($languages as $key => $lang) {
                 $v = ($key == 0 ? true : false);
-                $postLang = \PostsLang::findFirst(['postid = :id: AND langid = :langid:','bind' => ['id' => $post->id, 'langid' => $lang->id]]);
+                $postLang = \PostsLang::findFirst(['postid = :id: AND langid = :langid:','bind' => ['id' => $posts->id, 'langid' => $lang->id]]);
                 if($postLang){
                     $formLang = new PostsLangForm($postLang, [$lang->id,$v]);
                     $postsLang[$lang->id] = $postLang;
@@ -109,14 +109,10 @@ class PostsController  extends \BackendController {
                 }
             }
             $title = 'Chỉnh sửa';
-            $post->updatedat = date('Y-m-d H:i:s');
-            $post->calendar = $this->helper->dateVn($post->calendar,'d/m/Y H:i');
+            $posts->updatedat = date('Y-m-d H:i:s');
+            $posts->calendar = $this->helper->dateVn($posts->calendar,'d/m/Y H:i');
         }else{
-            $post = new \Posts();
-            $post->author = $this->session->get('userid');
-            $post->deptid = $this->session->get('deptid');
-            $post->createdat = date('Y-m-d H:i:s');
-            $post->updatedat = $post->createdat;
+            $posts = new \Posts();
             $title = 'Thêm mới';
             foreach ($languages as $key => $lang) {
                 $v = $key == 0 ? true : false;
@@ -124,18 +120,18 @@ class PostsController  extends \BackendController {
                 $postsLang[$lang->id] = new \PostsLang();
                 $postContent[$lang->id] = '';
             }
-            $post->calendar = date('d/m/Y H:i');
+            $posts->calendar = date('d/m/Y H:i');
         }
 
-        $formPost = new PostsForm($post);
+        $formPosts = new PostsForm($posts);
 
         $this->view->perEdit = $perEdit ? 1 : "";
         $this->view->perView = $perView ? 1 : "";
         $this->view->languages = $languages;
         $this->view->postContent = $postContent;
         $this->view->formsLang = $formsLang;
-        $this->view->formPost = $formPost;
-        $this->view->post = $post;
+        $this->view->formPosts = $formPosts;
+        $this->view->posts = $posts;
         $this->view->postsLang = $postsLang;
         $this->view->title = $title;
         $this->assets->addJs('/elfinder/js/require.min.js');
@@ -154,10 +150,11 @@ class PostsController  extends \BackendController {
             'p.slug',
             'p.catid',
             'p.status',
-            'p.deptid',
-            'p.createdat',
-            'p.calendar',
             'p.image',
+            'p.author',
+            'p.deptid',
+            'p.calendar',
+            'p.createdat',
             'pl.title',
             'pl.content',
             'pl.excerpt',
@@ -197,10 +194,11 @@ class PostsController  extends \BackendController {
             'p.slug',
             'p.catid',
             'p.status',
-            'p.deptid',
-            'p.createdat',
-            'p.calendar',
             'p.image',
+            'p.author',
+            'p.deptid',
+            'p.calendar',
+            'p.createdat',
             'pl.title',
             'pl.content',
             'pl.excerpt',
@@ -251,20 +249,20 @@ class PostsController  extends \BackendController {
         $pContent = $this->request->getPost('content',['trim']);
         $pExcerpt = $this->request->getPost('excerpt',['string','trim']);
         if($id){
-            if(!$post = \Posts::findFirstIdPermission($id,$perL)){
+            if(!$posts = \Posts::findFirstIdPermission($id,$perL)){
                 $data['error'] = ['Không tìm thấy bài viết'];
                 $this->helper->responseJson($this, $data);
             }
-            $post->updatedat = date('Y-m-d H:i:s');
-            $post->updatedby = $userid;
+            $posts->updatedat = date('Y-m-d H:i:s');
+            $posts->updatedby = $userid;
         }else{
-            $post = new \Posts();
-            $post->author = $this->session->get('userid');
-            $post->deptid = $this->session->get('deptid');
-            $post->createdat = date('Y-m-d H:i:s');
-            $post->updatedat = $post->createdat;
-            $post->createdby = $userid;
-            $post->updatedby = $userid;
+            $posts = new \Posts();
+            $posts->author = $this->session->get('userid');
+            $posts->deptid = $this->session->get('deptid');
+            $posts->createdat = date('Y-m-d H:i:s');
+            $posts->updatedat = $posts->createdat;
+            $posts->createdby = $userid;
+            $posts->updatedby = $userid;
         }
         $postLangs = [];
 
@@ -286,32 +284,32 @@ class PostsController  extends \BackendController {
         }
 
         $plug = $this->request->getPost('slug',['string','trim']);
-        $post->catid = $this->request->getPost('catid',['int']);
-        $post->status = $this->request->getPost('status',['int']);
-        $post->slug = $plug ? $plug : $this->helper->slugify($pTitle[1]);
+        $posts->catid = $this->request->getPost('catid',['int']);
+        $posts->status = $this->request->getPost('status',['int']);
+        $posts->slug = $plug ? $plug : $this->helper->slugify($pTitle[1]);
 
-        $post->calendar = $this->helper->dateMysql($this->request->getPost('calendar', ['string', 'trim']),'Y-m-d H:i:s');
-        $post->image = $this->request->getPost('image',['trim','string']);
+        $posts->calendar = $this->helper->dateMysql($this->request->getPost('calendar', ['string', 'trim']),'Y-m-d H:i:s');
+        $posts->image = $this->request->getPost('image',['trim','string']);
 
-        if(\Posts::findFirst(["slug = :slug: AND id != :id:","bind" => ["slug" => $post->slug,'id'=> $id]])){
-            $reqPost['slug'] = $post->slug .'-'. strtotime('now');
+        if(\Posts::findFirst(["slug = :slug: AND id != :id:","bind" => ["slug" => $posts->slug,'id'=> $id]])){
+            $reqPost['slug'] = $posts->slug .'-'. strtotime('now');
         }
 
-        if(!\Categories::findFirstIdPermission($post->catid,$perL)){
+        if(!\Categories::findFirstIdPermission($posts->catid,$perL)){
             $data['error'] = ["Chuyên mục không tồn tại"];
             $this->helper->responseJson($this, $data);
         }
 
         try {
             $this->db->begin();
-            $post->vdUpdate(true);
-            if (!$post->save()) {
-                foreach ($post->getMessages() as $message) {
+            $posts->vdUpdate(true);
+            if (!$posts->save()) {
+                foreach ($posts->getMessages() as $message) {
                     throw new \Exception($message->getMessage());
                 }
             }
             foreach ($postLangs as $postLang) {
-                $postLang->postid = $post->id;
+                $postLang->postid = $posts->id;
                 $postLang->vdUpdate(true);
                 if (!$postLang->save()) {
                     foreach ($postLang->getMessages() as $message) {

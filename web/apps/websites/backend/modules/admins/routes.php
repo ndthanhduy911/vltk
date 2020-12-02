@@ -37,21 +37,21 @@ $router->add(WEB_ADMIN_URI . '/pages/:action/:int', array(
     'id' => 2
 ));
 
-/***********************BannerController***********************/
-$router->add(WEB_ADMIN_URI . '/banner', array(
+/***********************BannersController***********************/
+$router->add(WEB_ADMIN_URI . '/banners', array(
     'module' => 'backend_admins',
-    'controller' => 'banner',
+    'controller' => 'banners',
     'action' => 'index',
 ));
 
-$router->add(WEB_ADMIN_URI . '/banner/:action', array(
+$router->add(WEB_ADMIN_URI . '/banners/:action', array(
     'module' => 'backend_admins',
-    'controller' => 'banner',
+    'controller' => 'banners',
     'action' => 1,
 ));
-$router->add(WEB_ADMIN_URI . '/banner/:action/:int', array(
+$router->add(WEB_ADMIN_URI . '/banners/:action/:int', array(
     'module' => 'backend_admins',
-    'controller' => 'banner',
+    'controller' => 'banners',
     'action'  => 1,
     'id' => 2
 ));

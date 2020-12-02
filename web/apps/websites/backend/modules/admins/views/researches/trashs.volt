@@ -9,28 +9,22 @@
             </div>
             <div class="col-sm-6">
                 <div class="btn-group float-right">
-                    <a id="settingResearches" data-href="<?= WEB_ADMIN_URL ?>/setting/filters" data-get="<?= WEB_ADMIN_URL ?>/setting/getsinglefilter?fkey=researches" title="Thiết lập giao diện"
+                    <a id="settingTrashResearches" data-href="<?= WEB_ADMIN_URL ?>/setting/filters" data-get="<?= WEB_ADMIN_URL ?>/setting/getsinglefilter?fkey=trashresearches" title="Thiết lập giao diện"
                         class="ml-2 btn btn-hnn btn-hnn-default"><span><i class="fas fa-cog"></i></span></a>
                 </div>
+                {% if master.checkPermission('researches', 'delete') %}
+                <div class="btn-group float-right">
+                    <a id="deleteTrashResearches" data-href="<?= WEB_ADMIN_URL ?>/researches/delete" title="Xóa vĩnh viễn"
+                        class="ml-2 btn btn-hnn btn-hnn-danger"><span><i class="fas fa-trash-alt"></i></span></a>
+                </div>
+                {% endif %}
+                {% if master.checkPermission('researches', 'restore') %}
+                <div class="btn-group float-right">
+                    <a id="restoreResearches" data-href="<?= WEB_ADMIN_URL ?>/researches/restore" title="Khôi phục bài viết"
+                        class="ml-2 btn btn-hnn btn-hnn-info"><span><i class="fas fa-sync"></i></span></a>
+                </div>
+                {% endif %}
 
-                {% if master.checkPermission('researches', 'trashs') %}
-                <div class="btn-group float-right">
-                    <a href="<?= WEB_ADMIN_URL ?>/researches/trashs" title="Thùng rác"
-                        class="ml-2 btn btn-hnn btn-hnn-warning"><span><i class="fas fa-trash"></i></span></a>
-                </div>
-                {% endif %}
-                {% if master.checkPermission('researches', 'trashs') %}
-                <div class="btn-group float-right">
-                    <a id="deleteResearches" data-href="<?= WEB_ADMIN_URL ?>/researches/trash" title="Xóa"
-                        class="ml-2 btn btn-hnn btn-hnn-danger"><span><i class="fas fa-ban"></i></span></a>
-                </div>
-                {% endif %}
-                {% if master.checkPermission('researches', 'update') %}
-                <div class="btn-group float-right">
-                    <a id="addResearches" href="<?= WEB_ADMIN_URL ?>/researches/view" title="Tạo mới"
-                        class="ml-2 btn btn-hnn btn-hnn-success"><span><i class="fas fa-plus"></i></span></a>
-                </div>
-                {% endif %}
             </div>
         </div>
     </div>
@@ -48,7 +42,7 @@
             <div class="col-md-12">
                 <div class="card card-primary card-outline">
                     <div class="card-body">
-                        <form action="" id="searchResearches" class="searchForm">
+                        <form action="" id="searchTrashResearches" class="searchForm">
                             <div class="row d-md-flex align-items-md-center">
                                 <span class="col-auto mt-2">Tìm kiếm</span>
                                 <div class="flex-1 col-auto row pr-0">
@@ -75,7 +69,7 @@
                             </div>
                         </form>
                         <div class="table-responsive">
-                            <table id="researches" class="table table-bordered table-hover rounded">
+                            <table id="trashresearches" class="table table-bordered table-hover rounded">
                                 <thead>
                                     <tr>
                                         <th data-col="no" class="align-middle text-center" style="width: 20px;">
@@ -85,7 +79,6 @@
                                         {% for key,table in fTables %}
                                         <th data-col="{{table}}" class="align-middle text-center"><?= $this->helper->showSort($table,$this,'researches',\Researches::filedName($table)) ?></th>
                                         {% endfor %}
-                                        <th data-col="no" class="align-middle text-center">Thao tác</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -101,10 +94,10 @@
     </div>
 </section>
 
-<div class="modal fade" id="modalSettingResearches">
+<div class="modal fade" id="modalSettingTrashResearches">
     <div class="modal-dialog" style="min-width: 1300px;">
         <div class="modal-content">
-            <form id="frmSettingResearches" action="" method="POST" enctype="multipart/form-data" data-toggle="validator" class="customForm">
+            <form id="frmSettingTrashResearches" action="" method="POST" enctype="multipart/form-data" data-toggle="validator" class="customForm">
                 <div class="modal-header">
                     <h4 class="modal-title">Thiết lập giao diện</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -165,7 +158,7 @@
                             </div>
                         </div>
                     </div>
-                    <input type="hidden" name="fkey" value="researches">
+                    <input type="hidden" name="fkey" value="trashresearches">
                     <input class="tokenCSRF" type='hidden' name="{{security.getTokenKey()}}" value="{{security.getToken()}}" />
                 </div>
                 <div class="modal-footer justify-content-between">

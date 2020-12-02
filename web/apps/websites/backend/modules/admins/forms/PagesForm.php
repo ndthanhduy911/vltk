@@ -36,8 +36,8 @@ class PagesForm extends \Phalcon\Forms\Form
         $status->setLabel('Trạng thái');
         $this->add($status);
 
-        //attributeid
-        $attributeid = new Select('attributeid', \Attributes::find(['status = 1']), array(
+        //attrid
+        $attrid = new Select('attrid', \Attributes::find(['status = 1']), array(
             'using' => ['id', 'name'],
             'useEmpty' => true,
             'emptyText' => 'Mặc định',
@@ -45,8 +45,8 @@ class PagesForm extends \Phalcon\Forms\Form
             'class' => 'form-control form-control-sm',
             'data-error' => "Thông tin chưa hợp lệ",
         ));
-        $attributeid->setLabel('Giao diện');
-        $this->add($attributeid);
+        $attrid->setLabel('Giao diện');
+        $this->add($attrid);
 
         //image
         $image = new Hidden('image');

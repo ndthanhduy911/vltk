@@ -1,19 +1,19 @@
-<form id="frmPages" action="<?= WEB_ADMIN_URI ?>/pages/update<?= !empty($pages->id) ? '/'.$pages->id : '' ?>" method="post" enctype="multipart/form-data" data-toggle="validator" role="form">
+<form id="frmResearches" action="<?= WEB_ADMIN_URI ?>/researches/update<?= !empty($researches->id) ? '/'.$researches->id : '' ?>" method="post" enctype="multipart/form-data" data-toggle="validator" role="form">
     <div class="content-header">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-6 d-flex align-items-center">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="<?= WEB_ADMIN_URL ?>"><i class="fas fa-home"></i></a></li>
-                        <li class="breadcrumb-item"><a href="<?= WEB_ADMIN_URL ?>/pages">Bài viết</a></li>
+                        <li class="breadcrumb-item"><a href="<?= WEB_ADMIN_URL ?>/researches">Bài viết</a></li>
                         <li class="breadcrumb-item active">{{ title }}</li>
                     </ol>
                 </div>
                 <div class="col-sm-6">
                     <div class="float-right">
-                        <a id="btnBackPost" href="<?= WEB_ADMIN_URI.'/pages' ?>" class="btn btn-hnn btn-hnn-default" title="Trở về"><span><i class="fas fa-reply"></i></span></a>
+                        <a id="btnBackPost" href="<?= WEB_ADMIN_URI.'/researches' ?>" class="btn btn-hnn btn-hnn-default" title="Trở về"><span><i class="fas fa-reply"></i></span></a>
                     </div>
-                    {% if master.checkPermission('pages', 'update','1') %}
+                    {% if master.checkPermission('researches', 'update','1') %}
                     <div class="float-right">
                         <button type="submit" class="btn btn-hnn btn-hnn-success mr-2" title="Lưu thông tin"><span>Lưu</span></button>
                     </div>
@@ -71,7 +71,7 @@
                                         <div class="form-group label-floating">
                                             <div class="input-group">
                                                 <textarea id="ckEditor{{lang.id}}" name="content[{{lang.id}}]" class="rounded">
-                                                    <?= isset($pagesContent[$lang->id]) ? $pagesContent[$lang->id]: '' ?>
+                                                    <?= isset($researchesContent[$lang->id]) ? $researchesContent[$lang->id]: '' ?>
                                                 </textarea>
                                                 <div class="invalid-tooltip"></div>
                                             </div>
@@ -88,41 +88,34 @@
                                 <div class="row">
                                     <div class="form-group label-floating col-md-12">
                                         <div class="input-group">
-                                            <label class="control-label">{{formPages.getLabel('status')}}</label>
-                                            {{formPages.render('status')}}
+                                            <label class="control-label">{{formResearches.getLabel('status')}}</label>
+                                            {{formResearches.render('status')}}
                                             <div class="invalid-feedback"></div>
                                         </div>
                                     </div>
                                     <div class="form-group label-floating col-md-12">
                                         <div class="input-group">
-                                            <label class="control-label">{{formPages.getLabel('slug')}}</label>
-                                            {{formPages.render('slug')}}
-                                            <div class="invalid-feedback"></div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group label-floating col-md-12">
-                                        <div class="input-group">
-                                            <label class="control-label">{{formPages.getLabel('attrid')}}</label>
-                                            {{formPages.render('attrid')}}
+                                            <label class="control-label">{{formResearches.getLabel('slug')}}</label>
+                                            {{formResearches.render('slug')}}
                                             <div class="invalid-feedback"></div>
                                         </div>
                                     </div>
                                     <div class="form-group label-floating col-md-12">
                                         <div class="col-md-12 p-0">
-                                            <img id="showImg" class="w-100 d-block" src="<?= !empty($pages->image) ? $pages->image : '' ?>"
-                                            alt="<?= !empty($pages->image) ? $pages->image : '' ?>">
-                                            {{formPages.render('image')}}
+                                            <img id="showImg" class="w-100 d-block" src="<?= !empty($researches->image) ? $researches->image : '' ?>"
+                                            alt="<?= !empty($researches->image) ? $researches->image : '' ?>">
+                                            {{formResearches.render('image')}}
                                             <a id="uploadImage" href="#" class="link">Đặt ảnh đại diện</a>
-                                            <a id="removeImage" href="#" class="link text-danger <?= !empty($pages->image) ? '' : 'hidden' ?>">Xóa</a>
+                                            <a id="removeImage" href="#" class="link text-danger <?= !empty($researches->image) ? '' : 'hidden' ?>">Xóa</a>
                                         </div>
                                     </div>
                                     <div class="form-group label-floating col-md-12">
                                         <div class="col-md-12 p-0">
-                                            <img id="showBgImg" class="w-100 d-block" src="<?= !empty($pages->bgimage) ? $pages->bgimage : '' ?>"
-                                            alt="<?= !empty($pages->bgimage) ? $pages->bgimage : '' ?>">
-                                            {{formPages.render('bgimage')}}
-                                            <a id="uploadBgImage" href="#" class="link">Đặt ảnh hình nền</a>
-                                            <a id="removeBgImage" href="#" class="link text-danger <?= !empty($pages->bgimage) ? '' : 'hidden' ?>">Xóa</a>
+                                            <img id="showBgImg" class="w-100 d-block" src="<?= !empty($researches->bgimage) ? $researches->bgimage : '' ?>"
+                                            alt="<?= !empty($researches->bgimage) ? $researches->bgimage : '' ?>">
+                                            {{formResearches.render('bgimage')}}
+                                            <a id="uploadBgImage" href="#" class="link">Đặt hình nền</a>
+                                            <a id="removeBgImage" href="#" class="link text-danger <?= !empty($researches->bgimage) ? '' : 'hidden' ?>">Xóa</a>
                                         </div>
                                     </div>
                                 </div>

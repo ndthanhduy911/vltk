@@ -32,14 +32,6 @@ class Pages extends \ModelCore
             'name' => 'deptid',
             'msg' => 'Bộ môn không được để trống'
         ]);
-        //calendar
-        if(!empty($this->calendar)){
-            $helper->setValidation('date', [
-                'name' => 'calendar',
-                'format' => 'Y-m-d H:i:s',
-                'msg' => 'Ngày đăng không đúng định dạng'
-            ]);
-        }
         //slug
         $helper->setValidation('max', [
             'name' => 'slug',
@@ -108,7 +100,7 @@ class Pages extends \ModelCore
     public static function arrayTrashFilter(){
         return [
             ['title'],
-            ['catid'],
+            ['status'],
             ['createdat']
         ];
     }
@@ -118,7 +110,7 @@ class Pages extends \ModelCore
     }
 
     public static function arrayTrashOrder () {
-        return ['title','calendar'];
+        return ['title','createdat'];
     }
     
     public static function findTrashFilters () {

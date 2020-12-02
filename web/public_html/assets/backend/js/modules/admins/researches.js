@@ -1,4 +1,3 @@
-//Datatable cho bảng researches
 const showStatus = (id = '') => {
     switch (parseInt(id)) {
         case 0:
@@ -10,75 +9,143 @@ const showStatus = (id = '') => {
     }
 }
 
-const loadTableResearches = () => {
-    if ($('#researches').length) {
-        let dt = $('#researches').DataTable({
-            "scrollX": true,
-            "ordering": false,
-            "processing": true,
-            "serverSide": true,
-            "autoWidth": false,
-            "pageLength": 25,
-            "ajax": backendUrl+"/researches/getdata",
-            "columns": [
-                {
-                    "data": "no"
-                },
-                {
-                    "data": "title"
-                },
-                {
-                    "data": "excerpt"
-                },
-                {
-                    "data": "createdat"
-                },
-                {
-                    "data": "status"
-                },
-                {
-                    "data": null
-                }
-            ],
-            'createdRow': function (row, item, dataIndex) {
-                $(row).addClass('text-center');
-                $('td', row).addClass('align-middle');
-                $('td:eq(3)', row).html(vi_moment(item.createdat, 'DD/MM/YYYY HH:mm'));
-                $('td:eq(4)', row).html(showStatus(item.status));
-                $('td:eq(5)', row).html(`
-                    <a href="${backendUrl}/researches/update/${item.id}" class="fa fa-pencil btn btn-info btn-sm editResearch" title="Cập nhật"></a>
-                `);
-                $('td:eq(5)', row).append(`<a href="#" data-href="${backendUrl}/researches/delete/${item.id}" class="fa fa-trash btn btn-danger btn-sm deleteResearch" title="Xóa"></a>`);
-            },
-            "deferRender": true,
-            "language": {
-                "sProcessing": "Đang xử lý...",
-                "sLengthMenu": "Xem _MENU_ mục",
-                "sZeroRecords": "Không tìm thấy dữ liệu",
-                "sInfo": "Đang xem _START_ đến _END_ trong tổng số _TOTAL_ mục",
-                "sInfoEmpty": "Đang xem 0 đến 0 trong tổng số 0 mục",
-                "sInfoFiltered": "(được lọc từ _MAX_ mục)",
-                "sInfoPostFix": "",
-                "sSearch": "Tìm:",
-                "sUrl": "",
-                "oPaginate": {
-                    "sFirst": "Đầu",
-                    "sPrevious": "Trước",
-                    "sNext": "Tiếp",
-                    "sLast": "Cuối"
-                }
-            }
+const showTitle = (text,length = 100) => {
+    return `<span title="${text}">${text ? trimText(text,length) : ''}</span>`
+}
+
+const getPageLink = (item) => {
+    if(item.dslug != '/'){
+        return `<a target="_blank" href="${webUri}/${item.dslug}/news/${item.slug}">Link</a>`;
+    }
+    return `<a target="_blank" href="${webUri}/news/${item.slug}">Link</a>`;
+}
+
+const loadTableResearches = (table = '#researches', cb = () => {}) => {
+    if ($(table).length) {
+        let router = {
+            co:'researches',aj:'ajaxgetdata',fo:'#searchResearches',cl:'Researches',ti:'trang',
+            ff:['title', 'status', 'createdat'],
+            tf:['image','title','excerpt','createdat','slug','status'],
+        };
+        let paramsUrl = getParams();
+        let columns = [];
+        let fkeys = [];
+        $(`${table} thead th`).each((key,element) => {
+            let fkey = $(element).data('col');
+            fkeys.push(fkey);
+            // if(['ddcosts'].indexOf(fkey) === -1){
+            //     columns.push({data : $(element).data('col')})
+            // }else{
+            //     columns.push({data : 'no'})
+            // }
+            columns.push({data : $(element).data('col')})
         });
-        showConfrimDelete('.deleteResearch',()=>{
-            dt.draw();
-        })
+
+        let options = {
+            "serverSide": true,
+            "ajax": `${webAdminUrl}/${router.co}/${router.aj}?${paramsUrl}`,
+            "columns":columns,
+            'createdRow': function (row, item, dataIndex) {
+                $('td', row).addClass('align-middle text-center');
+                $('td:first', row).addClass('select-box').html(`
+                    <input name="${router.co}Checkbox[]" class="${router.co}Checkbox" type="checkbox" value="${item.id}" data-dept=${item.deptid}>
+                `)
+                let pageInfo = $(table).DataTable().page.info();
+                let page = pageInfo.page;
+                let pageLength = pageInfo.length;
+                $('td:eq(1)', row).html((dataIndex+1)+(page*pageLength));
+                let image = `<img src="${getPathImage(item.image, '/assets/frontend/images/defaut_img.png')}" height="30px">`;
+                $(`td:eq(${fkeys.indexOf('title')})`, row).html(showTitle(item.title,30));
+                $(`td:eq(${fkeys.indexOf('excerpt')})`, row).html(showTitle(item.excerpt,30));
+                $(`td:eq(${fkeys.indexOf('image')})`, row).html(image);
+                $(`td:eq(${fkeys.indexOf('slug')})`, row).html(getPageLink(item));
+                $(`td:eq(${fkeys.indexOf('createdat')})`, row).html(vi_moment(item.createdat, 'DD/MM/YYYY HH:mm'));
+                $(`td:eq(${fkeys.indexOf('status')})`, row).html(showStatus(item.status));
+                $('td:last', row).addClass('text-nowrap').html(showButtonEdit(item,router.co,router.cl));
+            }
+        }
+        dataTableCt(table,options,router).then(()=>{
+            cb();
+        });
     }
 }
 
-loadTableResearches();
+const loadTableTrashResearches = (table = '#trashresearches', cb = () => {}) => {
+    if ($(table).length) {
+        let router = {
+            co:'researches',aj:'ajaxgetdatatrash',fo:'#searchTrashResearches',cl:'TrashResearches',ti:'trang',
+            ff:['title', 'status', 'createdat'],
+            tf:['image','title','excerpt','createdat','slug']
+        };
+        let paramsUrl = getParams();
+        let columns = [];
+        let fkeys = [];
+        $(`${table} thead th`).each((key,element) => {
+            let fkey = $(element).data('col');
+            fkeys.push(fkey);
+            // if(['ddcosts'].indexOf(fkey) === -1){
+            //     columns.push({data : $(element).data('col')})
+            // }else{
+            //     columns.push({data : 'no'})
+            // }
+            columns.push({data : $(element).data('col')})
+        });
 
-changeTitleToSlug('#title', '#slug');
+        let options = {
+            "serverSide": true,
+            "ajax": `${webAdminUrl}/${router.co}/${router.aj}?${paramsUrl}`,
+            "columns":columns,
+            'createdRow': function (row, item, dataIndex) {
+                $('td', row).addClass('align-middle text-center');
+                $('td:first', row).addClass('select-box').html(`
+                    <input name="${router.co}Checkbox[]" class="${router.co}Checkbox" type="checkbox" value="${item.id}" data-dept=${item.deptid}>
+                `)
+                let pageInfo = $(table).DataTable().page.info();
+                let page = pageInfo.page;
+                let pageLength = pageInfo.length;
+                $('td:eq(1)', row).html((dataIndex+1)+(page*pageLength));
+                let image = `<img src="${getPathImage(item.image, '/assets/frontend/images/defaut_img.png')}" height="30px">`;
+                $(`td:eq(${fkeys.indexOf('title')})`, row).html(showTitle(item.title,30));
+                $(`td:eq(${fkeys.indexOf('excerpt')})`, row).html(showTitle(item.excerpt,30));
+                $(`td:eq(${fkeys.indexOf('image')})`, row).html(image);
+                $(`td:eq(${fkeys.indexOf('slug')})`, row).html(getPageLink(item));
+                $(`td:eq(${fkeys.indexOf('createdat')})`, row).html(vi_moment(item.createdat, 'DD/MM/YYYY HH:mm'));
+            }
+        }
+
+        dataTableCt(table,options,router)
+        cb();
+    }
+}
+
+const updateResearches = (form = '#frmResearches') => {
+    if($(form).length){
+        if($(`${form} #ckEditor1`).length){
+            getCkeditor1();
+        }
+    
+        if($(`${form} #ckEditor2`).length){
+            getCkeditor2();
+        }
+    
+        sendAjax(form, "POST").then(() => {
+            window.location.href=`${webAdminUrl}/researches`;
+        });
+    
+        showSelectImage('#uploadImage','#showImg','#image', '#removeImage');
+        changeTitleToSlug('#title', '#slug');
+    }
+}
+
+loadTableResearches('#researches');
+loadTableTrashResearches('#trashresearches',()=>{
+    deleteAll(`#restoreResearches`, `.researchesCheckbox`,(data) => {
+        showSweetAlertOk('Khôi phục trang thành công');
+        $('#trashresearches').DataTable().draw();
+    });
+});
+updateResearches();
 
 showSelectImage('#uploadImage','#showImg','#image', '#removeImage');
 
-showSelectImage('#uploadBackgroundImage','#showBackgroundImg','#background_image', '#removeBackgroundImage');
+showSelectImage('#uploadBgImage','#showBgImg','#bgimage', '#removeBgImage');

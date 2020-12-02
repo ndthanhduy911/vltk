@@ -25,7 +25,13 @@ class FilterSetting extends \ModelCore
             'posts' => \Posts::findFilters(),
             'trashposts' => \Posts::findTrashFilters(),
             'pages' => \Pages::findFilters(),
-            'trashpages' => \Pages::findTrashFilters()
+            'trashpages' => \Pages::findTrashFilters(),
+            'subjects' => \Subjects::findFilters(),
+            'trashsubjects' => \Subjects::findTrashFilters(),
+            'researches' => \Researches::findFilters(),
+            'trashresearches' => \Researches::findTrashFilters(),
+            'banners' => \Banners::findFilters(),
+            'trashbanners' => \Banners::findTrashFilters()
         ];
         if($fkey && isset($fkeys[$fkey])){
             $groupField = \FieldGroup::findDataArrayKey($fkey);
@@ -63,7 +69,13 @@ class FilterSetting extends \ModelCore
             'posts' => \Posts::findTables(),
             'trashposts' => \Posts::findTrashTables(),
             'pages' => \Pages::findTables(),
-            'trashpages' => \Pages::findTrashTables()
+            'trashpages' => \Pages::findTrashTables(),
+            'subjects' => \Subjects::findTables(),
+            'trashsubjects' => \Subjects::findTrashTables(),
+            'researches' => \Researches::findTables(),
+            'trashresearches' => \Researches::findTrashTables(),
+            'banners' => \Banners::findTables(),
+            'trashbanners' => \Banners::findTrashTables()
         ];
 
         if($fkey && isset($fkeys[$fkey])){
@@ -90,6 +102,12 @@ class FilterSetting extends \ModelCore
             'trashposts' => \Posts::arrayTrashOrder(),
             'pages' => \Pages::arrayOrder(),
             'trashpages' => \Pages::arrayTrashOrder(),
+            'subjects' => \Subjects::arrayOrder(),
+            'trashsubjects' => \Subjects::arrayTrashOrder(),
+            'researches' => \Researches::arrayOrder(),
+            'trashresearches' => \Researches::arrayTrashOrder(),
+            'banners' => \Banners::arrayOrder(),
+            'trashbanners' => \Banners::arrayTrashOrder(),
         ];
         if($fkey && isset($fkeys[$fkey])){
             return $fkeys[$fkey];
@@ -112,10 +130,11 @@ class FilterSetting extends \ModelCore
 
     public static function findNameKey($fkey){
         $data = [
-            'asset' => 'Tài sản sử dụng',
-            'checkin' => 'Phiếu nhập',
-            'checkout' => 'Phiếu xuất',
-            'checkinasset' => 'Tài sản nhập/xuất'
+            'posts' => 'Bài viết',
+            'pages' => 'Trang thông tin',
+            'subjects' => 'Môn học',
+            'researches' => 'Hướng nghiên cứu',
+            'banners' => 'Banners'
         ];
         return isset($data[$fkey]) ? $data[$fkey] : '';
     }

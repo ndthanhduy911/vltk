@@ -64,13 +64,13 @@
                     <a href="<?= WEB_ADMIN_URL ?>/pages"
                         class="nav-link {% if dispatcher.getControllerName()=='pages' %} {{ 'active' }} {% endif %}">
                         <i class="nav-icon fas fa-globe"></i>
-                        <p>Trang</p>
+                        <p>Trang thông tin</p>
                     </a>
                 </li>
                 <li
-                    class="nav-item has-treeview {% if dispatcher.getControllerName() in ['subjects'] %} {{ 'menu-open' }} {% endif %}">
+                    class="nav-item has-treeview {% if dispatcher.getControllerName() in ['subjects','researches'] %} {{ 'menu-open' }} {% endif %}">
                     <a href="#"
-                        class="nav-link {% if dispatcher.getControllerName() in ['subjects'] %} {{ 'active' }} {% endif %}">
+                        class="nav-link {% if dispatcher.getControllerName() in ['subjects','researches'] %} {{ 'active' }} {% endif %}">
                         <i class="nav-icon fas fa-list"></i>
                         <p>
                             Đào tạo
@@ -99,8 +99,8 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="<?= WEB_ADMIN_URL ?>/banner"
-                        class="nav-link {% if dispatcher.getControllerName()=='banner' %} {{ 'active' }} {% endif %}">
+                    <a href="<?= WEB_ADMIN_URL ?>/banners"
+                        class="nav-link {% if dispatcher.getControllerName()=='banners' %} {{ 'active' }} {% endif %}">
                         <i class="nav-icon fas fa-images"></i>
                         <p>Banners</p>
                     </a>

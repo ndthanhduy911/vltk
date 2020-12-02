@@ -1,10 +1,10 @@
 <?php
 namespace Backend\Modules\Admins\Controllers;
-use Backend\Modules\Admins\Forms\PagesForm;
-use Backend\Modules\Admins\Forms\PagesLangForm;
-use Backend\Modules\Admins\Forms\SearchPagesForm;
+use Backend\Modules\Admins\Forms\BannersForm;
+use Backend\Modules\Admins\Forms\BannersLangForm;
+use Backend\Modules\Admins\Forms\SearchBannersForm;
 
-class PagesController  extends \BackendController {
+class BannersController  extends \BackendController {
 
     public function indexAction(){
         if($this->request->get('singlePage') && $this->request->isAjax()){
@@ -13,11 +13,11 @@ class PagesController  extends \BackendController {
             );
         }
 
-        $filters = \Pages::findFilters();
-        $tables = \Pages::findTables();
+        $filters = \Banners::findFilters();
+        $tables = \Banners::findTables();
         $fFilters = ['title','status','createdat'];
         $fTables = ['image','title','excerpt','authorname','createdat','slug','status'];
-        if($fSetting = \FilterSetting::findFirstKey('pages')){
+        if($fSetting = \FilterSetting::findFirstKey('banners')){
             $fFilters = $fSetting->filters ? json_decode($fSetting->filters) : $fFilters;
             $fTables = $fSetting->tables ? json_decode($fSetting->tables) : $fTables;   
         }
@@ -28,7 +28,7 @@ class PagesController  extends \BackendController {
 
         $title = "Trang";
         $this->getJsCss();
-        $this->view->searchForm = new SearchPagesForm();
+        $this->view->searchForm = new SearchBannersForm();
         $this->view->title = $title;
         $this->view->filters = $filters;
         $this->view->tables = $tables;
@@ -43,11 +43,11 @@ class PagesController  extends \BackendController {
             );
         }
 
-        $filters = \Pages::findTrashFilters();
-        $tables = \Pages::findTrashTables();
+        $filters = \Banners::findTrashFilters();
+        $tables = \Banners::findTrashTables();
         $fFilters = ['title','createdat'];
         $fTables = ['image','title','excerpt','authorname','createdat','slug'];
-        if($fSetting = \FilterSetting::findFirstKey('trashpages')){
+        if($fSetting = \FilterSetting::findFirstKey('trashbanners')){
             $fFilters = $fSetting->filters ? json_decode($fSetting->filters) : $fFilters;
             $fTables = $fSetting->tables ? json_decode($fSetting->tables) : $fTables;   
         }
@@ -58,7 +58,7 @@ class PagesController  extends \BackendController {
 
         $title = "Trang";
         $this->getJsCss();
-        $this->view->searchForm = new SearchPagesForm();
+        $this->view->searchForm = new SearchBannersForm();
         $this->view->title = $title;
         $this->view->filters = $filters;
         $this->view->tables = $tables;
@@ -74,8 +74,8 @@ class PagesController  extends \BackendController {
             );
         }
 
-        $perEdit = $this->master::checkPermissionDepted('posts', 'update',1);
-        $perView = $this->master::checkPermissionDepted('posts', 'index');
+        $perEdit = $this->master::checkPermissionDepted('banners', 'update',1);
+        $perView = $this->master::checkPermissionDepted('banners', 'index');
         $perL = $perView ? $perView : ($perEdit? $perEdit :false);
         if(!$perL){
             require ERROR_FILE; die;
@@ -87,49 +87,54 @@ class PagesController  extends \BackendController {
         }
 
         $formsLang = [];
-        $pagesLang = [];
-        $pageContent = [];
+        $bannersLang = [];
+        $bannerContent = [];
         $languages = \Language::find(['status = 1']);
         if($id){
-            if(!$pages = \Pages::findFirstId($id)){
+            if(!$banner = \Banners::findFirstId($id)){
                 echo 'Không tìm thấy dữ liệu'; die;
             }         
             foreach ($languages as $key => $lang) {
                 $v = ($key == 0 ? true : false);
-                $pageLang = \PagesLang::findFirst(['pageid = :id: AND langid = :langid:','bind' => ['id' => $page->id, 'langid' => $lang->id]]);
-                if($pageLang){
-                    $formLang = new PagesLangForm($pageLang, [$lang->id,$v]);
-                    $pagesLang[$lang->id] = $pageLang;
+                $bannerLang = \BannersLang::findFirst(['bannerid = :id: AND langid = :langid:','bind' => ['id' => $banner->id, 'langid' => $lang->id]]);
+                if($bannerLang){
+                    $formLang = new BannersLangForm($bannerLang, [$lang->id,$v]);
+                    $bannersLang[$lang->id] = $bannerLang;
                     $formsLang[$lang->id] = $formLang;
-                    $pageContent[$lang->id] = $pageLang->content;
+                    $bannerContent[$lang->id] = $bannerLang->content;
                 }else{
-                    $formsLang[$lang->id] = new PagesLangForm(null, [$lang->id,$v]);
-                    $pagesLang[$lang->id] = new \PagesLang();
-                    $pageContent[$lang->id] = '';
+                    $formsLang[$lang->id] = new BannersLangForm(null, [$lang->id,$v]);
+                    $bannersLang[$lang->id] = new \BannersLang();
+                    $bannerContent[$lang->id] = '';
                 }
             }
             $title = 'Chỉnh sửa';
+            $banner->updatedat = date('Y-m-d H:i:s');
         }else{
-            $pages = new \Pages();
+            $banner = new \Banners();
+            $banner->author = $this->session->get('userid');
+            $banner->deptid = $this->session->get('deptid');
+            $banner->createdat = date('Y-m-d H:i:s');
+            $banner->updatedat = $banner->createdat;
             $title = 'Thêm mới';
             foreach ($languages as $key => $lang) {
                 $v = $key == 0 ? true : false;
-                $formsLang[$lang->id] = new PagesLangForm(null, [$lang->id,$v]);
-                $pagesLang[$lang->id] = new \PagesLang();
-                $pageContent[$lang->id] = '';
+                $formsLang[$lang->id] = new BannersLangForm(null, [$lang->id,$v]);
+                $bannersLang[$lang->id] = new \BannersLang();
+                $bannerContent[$lang->id] = '';
             }
         }
 
-        $formPages = new PagesForm($pages);
+        $formPage = new BannersForm($banner);
 
         $this->view->perEdit = $perEdit ? 1 : "";
         $this->view->perView = $perView ? 1 : "";
         $this->view->languages = $languages;
-        $this->view->pageContent = $pageContent;
+        $this->view->bannerContent = $bannerContent;
         $this->view->formsLang = $formsLang;
-        $this->view->formPages = $formPages;
-        $this->view->pages = $pages;
-        $this->view->pagesLang = $pagesLang;
+        $this->view->formPage = $formPage;
+        $this->view->banner = $banner;
+        $this->view->bannersLang = $bannersLang;
         $this->view->title = $title;
         $this->assets->addJs('/elfinder/js/require.min.js');
         $this->getJsCss();
@@ -140,18 +145,18 @@ class PagesController  extends \BackendController {
     // =================================
     // Get data
     public function ajaxgetdataAction(){
-        if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('pages', 'index')) {
+        if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('banners', 'index')) {
             $this->helper->responseJson($this, ["error" => "Truy cập không được phép"]);
         }
         $columns = [
             'p.id',
+            'p.slug',
             'p.attrid',
             'p.status',
-            'p.author',
             'p.deptid',
+            'p.createdat',
             'p.image',
             'p.bgimage',
-            'p.createdat',
             'pl.title',
             'pl.content',
             'pl.excerpt',
@@ -161,19 +166,18 @@ class PagesController  extends \BackendController {
 
         $data = $this->modelsManager->createBuilder()
         ->columns($columns)
-        ->from(['p' => "Pages"])
+        ->from(['p' => "Banners"])
         ->where("p.deleted = 0 AND p.status != 4")
-        ->leftJoin('User', 'u.id = p.author','u')
-        ->leftJoin('PagesLang', 'pl.pageid = p.id AND pl.langid = 1','pl')
+        ->leftJoin('BannersLang', 'pl.bannerid = p.id AND pl.langid = 1','pl')
         ->leftJoin('Depts', 'd.id = p.deptid','d')
         ->orderBy('p.createdat DESC');
 
         $data = $this->master::builderPermission($data,$perL,'p');
-        $data = \FilterSetting::getDataOrder($this,$data,\Pages::findFirst(),'p',['pl'=>'title']);
-        $data = \FilterSetting::getDataFilter($this,$data,\Pages::arrayFilter(),['p',['pl'=>['title']]]);
+        $data = \FilterSetting::getDataOrder($this,$data,\Banners::findFirst(),'p',['pl'=>'title']);
+        $data = \FilterSetting::getDataFilter($this,$data,\Banners::arrayFilter(),['p',['pl'=>['title']]]);
 
         $array_row = [
-            'u' => $this->master::checkPermission('pages', 'update', 1)
+            'u' => $this->master::checkPermission('banners', 'update', 1)
         ];
 
         $search = '';
@@ -181,18 +185,18 @@ class PagesController  extends \BackendController {
     }
 
     public function ajaxgetdatatrashAction(){
-        if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('pages', 'index')) {
+        if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('banners', 'index')) {
             $this->helper->responseJson($this, ["error" => "Truy cập không được phép"]);
         }
         $columns = [
             'p.id',
+            'p.slug',
             'p.attrid',
             'p.status',
-            'p.author',
             'p.deptid',
+            'p.createdat',
             'p.image',
             'p.bgimage',
-            'p.createdat',
             'pl.title',
             'pl.content',
             'pl.excerpt',
@@ -202,16 +206,15 @@ class PagesController  extends \BackendController {
 
         $data = $this->modelsManager->createBuilder()
         ->columns($columns)
-        ->from(['p' => "Pages"])
+        ->from(['p' => "Banners"])
         ->where("p.deleted = 0 AND p.status = 4")
-        ->leftJoin('User', 'u.id = p.author','u')
-        ->leftJoin('PagesLang', 'pl.pageid = p.id AND pl.langid = 1','pl')
+        ->leftJoin('BannersLang', 'pl.bannerid = p.id AND pl.langid = 1','pl')
         ->leftJoin('Depts', 'd.id = p.deptid','d')
         ->orderBy('p.createdat DESC');
 
         $data = $this->master::builderPermission($data,$perL,'p');
-        $data = \FilterSetting::getDataOrder($this,$data,\Pages::findFirst(),'p',['pl'=>'title']);
-        $data = \FilterSetting::getDataFilter($this,$data,\Pages::arrayTrashFilter(),'p');
+        $data = \FilterSetting::getDataOrder($this,$data,\Banners::findFirst(),'p',['pl'=>'title']);
+        $data = \FilterSetting::getDataFilter($this,$data,\Banners::arrayTrashFilter(),'p');
 
         $array_row = [];
 
@@ -229,7 +232,7 @@ class PagesController  extends \BackendController {
             $this->helper->responseJson($this, $data);
         }
         $data['token'] = ['key' => $this->security->getTokenKey(), 'value' => $this->security->getToken()];
-        if(!$this->request->isAjax() || !$this->request->isPost() || !$perL = $this->master::checkPermissionDepted('pages','update')){
+        if(!$this->request->isAjax() || !$this->request->isPost() || !$perL = $this->master::checkPermissionDepted('banners','update')){
             $data['error'] = ['Truy cập không được phép'];
             $this->helper->responseJson($this, $data);
         }
@@ -240,70 +243,70 @@ class PagesController  extends \BackendController {
         $pContent = $this->request->getPost('content',['trim']);
         $pExcerpt = $this->request->getPost('excerpt',['string','trim']);
         if($id){
-            if(!$page = \Pages::findFirstIdPermission($id,$perL)){
-                $data['error'] = ['Không tìm thấy trang'];
+            if(!$banner = \Banners::findFirstIdPermission($id,$perL)){
+                $data['error'] = ['Không tìm thấy banner'];
                 $this->helper->responseJson($this, $data);
             }
-            $page->updatedat = date('Y-m-d H:i:s');
-            $page->updatedby = $userid;
+            $banner->updatedat = date('Y-m-d H:i:s');
+            $banner->updatedby = $userid;
         }else{
-            $page = new \Pages();
-            $page->author = $this->session->get('userid');
-            $page->deptid = $this->session->get('deptid');
-            $page->createdat = date('Y-m-d H:i:s');
-            $page->updatedat = $page->createdat;
-            $page->createdby = $userid;
-            $page->updatedby = $userid;
+            $banner = new \Banners();
+            $banner->author = $this->session->get('userid');
+            $banner->deptid = $this->session->get('deptid');
+            $banner->createdat = date('Y-m-d H:i:s');
+            $banner->updatedat = $banner->createdat;
+            $banner->createdby = $userid;
+            $banner->updatedby = $userid;
         }
-        $pageLangs = [];
+        $bannerLangs = [];
 
         foreach ($languages as $key => $lang) {
 
-            if(!$id || !$pageLang = \PagesLang::findFirst(["pageid = :id: AND langid = :langid:",'bind' => ['id' => (int)$id,'langid' => $lang->id]])){
-                $pageLang = new \PagesLang();
+            if(!$id || !$bannerLang = \BannersLang::findFirst(["bannerid = :id: AND langid = :langid:",'bind' => ['id' => (int)$id,'langid' => $lang->id]])){
+                $bannerLang = new \BannersLang();
             }
 
             if($key == 0){
                 $lId = $lang->id;
             }
 
-            $pageLang->title = !empty($pTitle[$lang->id]) ? $pTitle[$lang->id] : $pTitle[$lId];
-            $pageLang->content = !empty($pContent[$lang->id]) ? $pContent[$lang->id] : $pContent[$lId];
-            $pageLang->excerpt = !empty($pExcerpt[$lang->id]) ? $pExcerpt[$lang->id] : $pExcerpt[$lId];
-            $pageLang->langid = $lang->id;
-            array_push($pageLangs,$pageLang);
+            $bannerLang->title = !empty($pTitle[$lang->id]) ? $pTitle[$lang->id] : $pTitle[$lId];
+            $bannerLang->content = !empty($pContent[$lang->id]) ? $pContent[$lang->id] : $pContent[$lId];
+            $bannerLang->excerpt = !empty($pExcerpt[$lang->id]) ? $pExcerpt[$lang->id] : $pExcerpt[$lId];
+            $bannerLang->langid = $lang->id;
+            array_push($bannerLangs,$bannerLang);
         }
 
         $plug = $this->request->getPost('slug',['string','trim']);
-        $page->attrid = $this->request->getPost('attrid',['int']);
-        $page->status = $this->request->getPost('status',['int']);
-        $page->slug = $plug ? $plug : $this->helper->slugify($pTitle[1]);
-        $page->image = $this->request->getPost('image',['trim','string']);
-        $page->bgimage = $this->request->getPost('bgimage',['trim','string']);
+        $banner->attrid = $this->request->getPost('attrid',['int']);
+        $banner->status = $this->request->getPost('status',['int']);
+        $banner->slug = $plug ? $plug : $this->helper->slugify($pTitle[1]);
+        $banner->image = $this->request->getPost('image',['trim','string']);
+        $banner->bgimage = $this->request->getPost('bgimage',['trim','string']);
 
-        if(\Pages::findFirst(["slug = :slug: AND id != :id:","bind" => ["slug" => $page->slug,'id'=> $id]])){
-            $reqPost['slug'] = $page->slug .'-'. strtotime('now');
+        if(\Banners::findFirst(["slug = :slug: AND id != :id:","bind" => ["slug" => $banner->slug,'id'=> $id]])){
+            $reqPost['slug'] = $banner->slug .'-'. strtotime('now');
         }
 
         try {
             $this->db->begin();
-            $page->vdUpdate(true);
-            if (!$page->save()) {
-                foreach ($page->getMessages() as $message) {
+            $banner->vdUpdate(true);
+            if (!$banner->save()) {
+                foreach ($banner->getMessages() as $message) {
                     throw new \Exception($message->getMessage());
                 }
             }
-            foreach ($pageLangs as $pageLang) {
-                $pageLang->pageid = $page->id;
-                $pageLang->vdUpdate(true);
-                if (!$pageLang->save()) {
-                    foreach ($pageLang->getMessages() as $message) {
+            foreach ($bannerLangs as $bannerLang) {
+                $bannerLang->bannerid = $banner->id;
+                $bannerLang->vdUpdate(true);
+                if (!$bannerLang->save()) {
+                    foreach ($bannerLang->getMessages() as $message) {
                         throw new \Exception($message->getMessage());
                     }
                 }
             }
             $this->db->commit();
-            $this->flashSession->success(($id ? 'Chỉnh sửa' : 'Thêm mới').' trang thành công');
+            $this->flashSession->success(($id ? 'Chỉnh sửa' : 'Thêm mới').' banner thành công');
         } catch (\Throwable $e) {
             $this->db->rollback();
             $data['error'] = [$e->getMessage()];
@@ -313,7 +316,7 @@ class PagesController  extends \BackendController {
 
     public function restoreAction(){
         $this->view->disable();
-        if(!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('pages','delete',1)){
+        if(!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('banners','delete',1)){
             $data['error'] = ['Truy cập không được phép'];
             $this->helper->responseJson($this, $data);
         }
@@ -326,7 +329,7 @@ class PagesController  extends \BackendController {
         $listId = $this->helper->filterListIds($listId);
         $strIds = implode(',', $listId);
 
-        $data = \Pages::findPermission($perL,"*",['status = 4 AND id IN (' . $strIds . ')']);
+        $data = \Banners::findPermission($perL,"*",['status = 4 AND id IN (' . $strIds . ')']);
 
         try {
             $this->db->begin();
@@ -343,7 +346,7 @@ class PagesController  extends \BackendController {
 
     public function trashAction(){
         $this->view->disable();
-        if(!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('pages','delete',1)){
+        if(!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('banners','delete',1)){
             $data['error'] = ['Truy cập không được phép'];
             $this->helper->responseJson($this, $data);
         }
@@ -356,7 +359,7 @@ class PagesController  extends \BackendController {
         $listId = $this->helper->filterListIds($listId);
         $strIds = implode(',', $listId);
 
-        $data = \Pages::findPermission($perL,"*",['id IN (' . $strIds . ')']);
+        $data = \Banners::findPermission($perL,"*",['id IN (' . $strIds . ')']);
 
         try {
             $this->db->begin();
@@ -373,7 +376,7 @@ class PagesController  extends \BackendController {
     }
 
     public function deleteAction(){
-        if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('pages', 'delete')) {
+        if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('banners', 'delete')) {
             $this->helper->responseJson($this, ["error" => ["Truy cập không được phép"]]);
         }
 
@@ -385,7 +388,7 @@ class PagesController  extends \BackendController {
         $listId = $this->helper->filterListIds($listId);
         $strIds = implode(',', $listId);
 
-        $data = \Pages::findPermission($perL,"*",['status = 4 AND id IN (' . $strIds . ')']);
+        $data = \Banners::findPermission($perL,"*",['status = 4 AND id IN (' . $strIds . ')']);
 
         try {
             $this->db->begin();
@@ -413,7 +416,7 @@ class PagesController  extends \BackendController {
                 throw new \Exception($message->getMessage());
             }
         }
-        \Logs::saveLogs($this, 3, "Xóa tạm trang ID: {$item->id}", ['table' => 'Pages','id' => $item->id]);
+        \Logs::saveLogs($this, 3, "Xóa tạm banner ID: {$item->id}", ['table' => 'Banners','id' => $item->id]);
     }
 
     private function restoreOne($item){
@@ -426,7 +429,7 @@ class PagesController  extends \BackendController {
                 throw new \Exception($message->getMessage());
             }
         }
-        \Logs::saveLogs($this, 5, "Khôi phục trang ID: {$item->id}", ['table' => 'Pages','id' => $item->id]);
+        \Logs::saveLogs($this, 5, "Khôi phục banner ID: {$item->id}", ['table' => 'Banners','id' => $item->id]);
     }
 
     private function deleteOne($item){
@@ -436,9 +439,9 @@ class PagesController  extends \BackendController {
                 throw new \Exception($message->getMessage());
             }
         }
-        $data = \PagesLang::find([
-            'pageid = :pageid:',
-            'bind' => ['pageid' => $itemOld['id']]
+        $data = \BannersLang::find([
+            'bannerid = :bannerid:',
+            'bind' => ['bannerid' => $itemOld['id']]
         ]);
         foreach ($data as $it) {
             if (!$it->delete()) {
@@ -447,10 +450,10 @@ class PagesController  extends \BackendController {
                 }
             }
         }
-        \Logs::saveLogs($this, 4, "Xóa trang ID: {$itemOld['id']}", ['table' => 'Pages','id' => $itemOld['id']]);
+        \Logs::saveLogs($this, 4, "Xóa banner ID: {$itemOld['id']}", ['table' => 'Banners','id' => $itemOld['id']]);
     }
 
     private function getJsCss(){
-        $this->assets->addJs(WEB_URI.'/assets/backend/js/modules/admins/pages.js');
+        $this->assets->addJs(WEB_URI.'/assets/backend/js/modules/admins/banners.js');
     }
 }

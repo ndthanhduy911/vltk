@@ -1,13 +1,13 @@
 <?php
-
-class ResearchesLang extends \Phalcon\Mvc\Model
+use Library\Helper\HelperValidation;
+class BannersLang extends \Phalcon\Mvc\Model
 {
     public function initialize()
     {
         $this->setSchema(SCHEMADB);
-        $this->setSource("researchesLang");
+        $this->setSource("bannerslang");
     }
-
+    
     public function vdUpdate($try = false){
         $helper = new HelperValidation();
         //title
