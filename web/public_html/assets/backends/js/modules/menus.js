@@ -105,7 +105,7 @@ const loadTableMenu = () => {
                 $(row).addClass('text-center bg-warning text-white');
                 $('td', row).addClass('align-middle');
                 $('td:eq(0)', row).addClass('text-left');                
-                if(item.parent_id){
+                if(item.parentid){
                     $('td:eq(0)', row).html('---'+item.menu_name);
                 }
                 $('td:eq(1)', row).html(showStatus(item.status));
@@ -194,7 +194,7 @@ $("#postid").select2({
     placeholder: "Chọn bài viết",
 });
 
-$("#page_id").select2({
+$("#pageid").select2({
     placeholder: "Chọn trang",
 });
 

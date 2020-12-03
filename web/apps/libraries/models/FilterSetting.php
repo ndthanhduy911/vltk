@@ -23,15 +23,11 @@ class FilterSetting extends \ModelCore
     public static function getFilterKeys($fkey = false){
         $fkeys = [
             'posts' => \Posts::findFilters(),
-            'trashposts' => \Posts::findTrashFilters(),
             'pages' => \Pages::findFilters(),
-            'trashpages' => \Pages::findTrashFilters(),
             'subjects' => \Subjects::findFilters(),
-            'trashsubjects' => \Subjects::findTrashFilters(),
             'researches' => \Researches::findFilters(),
-            'trashresearches' => \Researches::findTrashFilters(),
             'slideshows' => \Slideshows::findFilters(),
-            'trashslideshows' => \Slideshows::findTrashFilters(),
+            'staffs' => \Staffs::findFilters()
         ];
         if($fkey && isset($fkeys[$fkey])){
             $groupField = \FieldGroup::findDataArrayKey($fkey);
@@ -67,15 +63,11 @@ class FilterSetting extends \ModelCore
     public static function getTableKeys($fkey = false){
         $fkeys = [
             'posts' => \Posts::findTables(),
-            'trashposts' => \Posts::findTrashTables(),
             'pages' => \Pages::findTables(),
-            'trashpages' => \Pages::findTrashTables(),
             'subjects' => \Subjects::findTables(),
-            'trashsubjects' => \Subjects::findTrashTables(),
             'researches' => \Researches::findTables(),
-            'trashresearches' => \Researches::findTrashTables(),
             'slideshows' => \Slideshows::findTables(),
-            'trashslideshows' => \Slideshows::findTrashTables()
+            'staffs' => \Staffs::findTables()
         ];
 
         if($fkey && isset($fkeys[$fkey])){
@@ -99,15 +91,11 @@ class FilterSetting extends \ModelCore
     public static function getOrderKeys($fkey = false){
         $fkeys = [
             'posts' => \Posts::arrayOrder(),
-            'trashposts' => \Posts::arrayTrashOrder(),
             'pages' => \Pages::arrayOrder(),
-            'trashpages' => \Pages::arrayTrashOrder(),
             'subjects' => \Subjects::arrayOrder(),
-            'trashsubjects' => \Subjects::arrayTrashOrder(),
             'researches' => \Researches::arrayOrder(),
-            'trashresearches' => \Researches::arrayTrashOrder(),
             'slideshows' => \Slideshows::arrayOrder(),
-            'trashslideshows' => \Slideshows::arrayTrashOrder(),
+            'staffs' => \Staffs::arrayOrder()
         ];
         if($fkey && isset($fkeys[$fkey])){
             return $fkeys[$fkey];
@@ -134,7 +122,8 @@ class FilterSetting extends \ModelCore
             'pages' => 'Trang thông tin',
             'subjects' => 'Môn học',
             'researches' => 'Hướng nghiên cứu',
-            'slideshows' => 'Slideshows'
+            'slideshows' => 'Banners',
+            'staffs' => 'Tổ chức nhân sự'
         ];
         return isset($data[$fkey]) ? $data[$fkey] : '';
     }

@@ -19,7 +19,7 @@ class Pages extends \ModelCore
 
     public static function getTitleById($id = null)
     {
-        if($page = PagesLang::findFirst(['page_id = :page_id:','bind' => ['page_id' => $id]])){
+        if($page = PagesLang::findFirst(['pageid = :pageid:','bind' => ['pageid' => $id]])){
             return $page->name;
         }else{
             return null;
@@ -94,27 +94,6 @@ class Pages extends \ModelCore
     
     public static function findFilters () {
         $filters = \Pages::arrayFilter();
-        return array_merge($filters[0],$filters[1],$filters[2]);
-    }
-
-    public static function arrayTrashFilter(){
-        return [
-            ['title'],
-            ['status'],
-            ['createdat']
-        ];
-    }
-
-    public static function findTrashTables () {
-        return ['image','title','excerpt','authorname','createdat','slug'];
-    }
-
-    public static function arrayTrashOrder () {
-        return ['title','createdat'];
-    }
-    
-    public static function findTrashFilters () {
-        $filters = \Pages::arrayTrashFilter();
         return array_merge($filters[0],$filters[1],$filters[2]);
     }
 }

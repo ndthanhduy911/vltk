@@ -49,15 +49,6 @@
                             </a>
                         </li>
                         {% endif %}
-                        {% if master.checkPermission('posts', 'trashs') %}
-                        <li class="nav-item">
-                            <a href="<?= WEB_ADMIN_URL ?>/posts/trashs"
-                                class="nav-link {% if dispatcher.getControllerName()=='posts' AND dispatcher.getActionName()=='trashs' %} {{ 'active' }} {% endif %}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Thùng rác</p>
-                            </a>
-                        </li>
-                        {% endif %}
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -106,15 +97,15 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?= WEB_ADMIN_URL ?>/staff"
-                        class="nav-link {% if dispatcher.getControllerName()=='staff' %} {{ 'active' }} {% endif %}">
+                    <a href="<?= WEB_ADMIN_URL ?>/staffs"
+                        class="nav-link {% if dispatcher.getControllerName()=='staffs' %} {{ 'active' }} {% endif %}">
                         <i class="nav-icon fas fa-users"></i>
                         <p>Tổ chức Cán bộ</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?= WEB_ADMIN_URL ?>/partner"
-                        class="nav-link {% if dispatcher.getControllerName()=='partner' %} {{ 'active' }} {% endif %}">
+                    <a href="<?= WEB_ADMIN_URL ?>/partners"
+                        class="nav-link {% if dispatcher.getControllerName()=='partners' %} {{ 'active' }} {% endif %}">
                         <i class="nav-icon fas fa-handshake"></i>
                         <p>Liên kết/ đối tác</p>
                     </a>

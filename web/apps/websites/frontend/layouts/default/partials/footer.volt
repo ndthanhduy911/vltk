@@ -1,7 +1,7 @@
 <?php 
 $menuParents = [];
 if($menuLocation = MenuLocation::findFirst(["status =  1 AND deptid = $dept->id AND type = 2"])) {
-    $menuParents = Menus::find(["status = 1 AND deptid = $dept->id AND menu_location_id = {$menuLocation->id} AND parent_id is NULL",'order' => 'sort ASC','limit' => 3]);
+    $menuParents = Menus::find(["status = 1 AND deptid = $dept->id AND menu_location_id = {$menuLocation->id} AND parentid is NULL",'order' => 'sort ASC','limit' => 3]);
 }
 ?>
 
@@ -28,7 +28,7 @@ if($menuLocation = MenuLocation::findFirst(["status =  1 AND deptid = $dept->id 
                     <div class="col-lg-3">
                         <div class="footer-content">
                             <h4 class="title text-default">{% if menu.icon %}<i class="fa {{ menu.icon }} pr-10"></i> {% endif %} <?= Menus::getName($menu->id, $langid) ?></h4>
-                            <?php $menuChild = Menus::find(['parent_id = :parent_id:','bind' => ['parent_id' => $menu->id]]); ?>
+                            <?php $menuChild = Menus::find(['parentid = :parentid:','bind' => ['parentid' => $menu->id]]); ?>
                             {% if menuChild.count() %}
                             <nav class="mb-20">
                                 <ul class="nav flex-column list-style-icons">

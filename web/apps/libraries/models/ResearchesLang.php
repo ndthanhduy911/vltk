@@ -1,5 +1,5 @@
 <?php
-
+use Library\Helper\HelperValidation;
 class ResearchesLang extends \Phalcon\Mvc\Model
 {
     public function initialize()

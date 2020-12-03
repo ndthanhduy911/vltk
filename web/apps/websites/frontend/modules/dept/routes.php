@@ -43,23 +43,22 @@ $router->add($config->application->frontendUri."/{dept:[a-zA-Z0-9_-]+}/{page:[a-
     'page' => 2,
 ));
 
-/***********************StaffController***********************/
+/***********************StaffsController***********************/
 
-$router->add($config->application->frontendUri."/{dept:[a-zA-Z0-9_-]+}/staff/{staff:[a-zA-Z0-9_-]+}", array(
+$router->add($config->application->frontendUri."/{dept:[a-zA-Z0-9_-]+}/staffs/{staff:[a-zA-Z0-9_-]+}", array(
     'module' => 'frontend_dept',
-    'controller' => 'staff',
+    'controller' => 'staffs',
     'action' => 'single',
     'dept' => 1,
     'staff' => 2,
 ));
 
-$router->add($config->application->frontendUri."/{dept:[a-zA-Z0-9_-]+}/staff", array(
+$router->add($config->application->frontendUri."/{dept:[a-zA-Z0-9_-]+}/staffs", array(
     'module' => 'frontend_dept',
-    'controller' => 'staff',
+    'controller' => 'staffs',
     'action' => 'index',
     'dept' => 1,
 ));
-
 
 // ======================================
 // HOMEPAGE

@@ -56,21 +56,21 @@ $router->add(WEB_ADMIN_URI . '/slideshows/:action/:int', array(
     'id' => 2
 ));
 
-/***********************StaffController***********************/
-$router->add(WEB_ADMIN_URI . '/staff', array(
+/***********************StaffsController***********************/
+$router->add(WEB_ADMIN_URI . '/staffs', array(
     'module' => 'backend_admins',
-    'controller' => 'staff',
+    'controller' => 'staffs',
     'action' => 'index',
 ));
 
-$router->add(WEB_ADMIN_URI . '/staff/:action', array(
+$router->add(WEB_ADMIN_URI . '/staffs/:action', array(
     'module' => 'backend_admins',
-    'controller' => 'staff',
+    'controller' => 'staffs',
     'action' => 1,
 ));
-$router->add(WEB_ADMIN_URI . '/staff/:action/:int', array(
+$router->add(WEB_ADMIN_URI . '/staffs/:action/:int', array(
     'module' => 'backend_admins',
-    'controller' => 'staff',
+    'controller' => 'staffs',
     'action'  => 1,
     'id' => 2
 ));

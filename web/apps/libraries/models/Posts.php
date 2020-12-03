@@ -202,25 +202,4 @@ class Posts extends \ModelCore
         $filters = \Posts::arrayFilter();
         return array_merge($filters[0],$filters[1],$filters[2]);
     }
-
-    public static function arrayTrashFilter(){
-        return [
-            ['title'],
-            ['catid'],
-            ['calendar']
-        ];
-    }
-
-    public static function findTrashTables () {
-        return ['image','title','excerpt','catid','authorname','calendar','slug'];
-    }
-
-    public static function arrayTrashOrder () {
-        return ['title','catid','calendar'];
-    }
-    
-    public static function findTrashFilters () {
-        $filters = \Posts::arrayTrashFilter();
-        return array_merge($filters[0],$filters[1],$filters[2]);
-    }
 }

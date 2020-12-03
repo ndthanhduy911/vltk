@@ -101,7 +101,7 @@ class DeptController extends \FrontendController
         ))
         ->from(['s'=>'Staff'])
         ->where("s.deptid = $dept->id AND s.status = 1 AND s.deleted = 0 AND (s.dept_position = 1 OR s.dept_position = 2)")
-        ->leftJoin("StaffLang", "sl.staff_id = s.id AND sl.langid = $langid",'sl')
+        ->leftJoin("StaffLang", "sl.staffid = s.id AND sl.langid = $langid",'sl')
         ->orderBy("s.dean ASC")
         ->limit(3)
         ->getQuery()

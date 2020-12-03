@@ -13,7 +13,7 @@
             'sl.content content'
         ))
         ->from(['s'=>'Staff'])
-        ->leftJoin("StaffLang", "sl.staff_id = s.id AND sl.langid = $langid",'sl')
+        ->leftJoin("StaffLang", "sl.staffid = s.id AND sl.langid = $langid",'sl')
         ->where("s.status = 1 AND (s.dean = 1 OR s.dean = 2)")
         ->orderBy("s.sort ASC, s.dean ASC")
         ->limit(3)
@@ -33,7 +33,7 @@
             'sl.content content'
         ))
         ->from(['s'=>'Staff'])
-        ->leftJoin("StaffLang", "sl.staff_id = s.id AND sl.langid = $langid",'sl')
+        ->leftJoin("StaffLang", "sl.staffid = s.id AND sl.langid = $langid",'sl')
         ->where("s.status = 1")
         ->inWhere("s.dept_position", [1,2])
         ->orderBy("s.deptid ASC, s.dept_position ASC, s.sort ASC")
@@ -54,7 +54,7 @@
         ))
         ->from(['s'=>'Staff'])
         ->where("s.deleted = 0 AND s.status = 1 AND s.dept_position != 5 AND s.deptid = $dept->id")
-        ->leftJoin("StaffLang", "sl.staff_id = s.id AND sl.langid = $langid",'sl')
+        ->leftJoin("StaffLang", "sl.staffid = s.id AND sl.langid = $langid",'sl')
         ->orderBy("s.dept_position ASC")
         ->getQuery()
         ->execute();
@@ -73,7 +73,7 @@
         ))
         ->from(['s'=>'Staff'])
         ->where("s.deleted = 0 AND s.status = 1 AND s.dept_position = 5 AND s.deptid = $dept->id")
-        ->leftJoin("StaffLang", "sl.staff_id = s.id AND sl.langid = $langid",'sl')
+        ->leftJoin("StaffLang", "sl.staffid = s.id AND sl.langid = $langid",'sl')
         ->orderBy("s.dept_position ASC")
         ->getQuery()
         ->execute();

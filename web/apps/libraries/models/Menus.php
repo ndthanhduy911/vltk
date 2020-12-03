@@ -15,7 +15,7 @@ class Menus extends \ModelCore
                 break;
             }    
             case 2: {
-                return ($page = \Pages::findFirstId($menu->page_id)) ? WEB_URL.($slug != '/' ? '/'.$slug : '').'/'.$page->slug.'.html' : '#';
+                return ($page = \Pages::findFirstId($menu->pageid)) ? WEB_URL.($slug != '/' ? '/'.$slug : '').'/'.$page->slug.'.html' : '#';
                 break;
             } 
             case 3: {
@@ -50,7 +50,7 @@ class Menus extends \ModelCore
                 break;
             }    
             case 2: {
-                $item['link'] = ($page = \Pages::findFirstId($menu->page_id)) ? WEB_URL.($slug != '/' ? '/'.$slug : '').'/'.$page->slug.'.html' : '#';
+                $item['link'] = ($page = \Pages::findFirstId($menu->pageid)) ? WEB_URL.($slug != '/' ? '/'.$slug : '').'/'.$page->slug.'.html' : '#';
                 $item['actived'] = (isset($page->slug) ? $page->slug : '#4') == $slug_now ? true : false;
                 break;
             } 

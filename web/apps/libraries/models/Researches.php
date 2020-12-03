@@ -1,5 +1,5 @@
 <?php
-
+use Library\Helper\HelperValidation;
 class Researches extends \ModelCore
 {
     public function initialize()
@@ -102,27 +102,6 @@ class Researches extends \ModelCore
     
     public static function findFilters () {
         $filters = \Researches::arrayFilter();
-        return array_merge($filters[0],$filters[1],$filters[2]);
-    }
-
-    public static function arrayTrashFilter(){
-        return [
-            ['title'],
-            ['status'],
-            ['createdat']
-        ];
-    }
-
-    public static function findTrashTables () {
-        return ['image','title','excerpt','createdat','slug'];
-    }
-
-    public static function arrayTrashOrder () {
-        return ['title','createdat'];
-    }
-    
-    public static function findTrashFilters () {
-        $filters = \Researches::arrayTrashFilter();
         return array_merge($filters[0],$filters[1],$filters[2]);
     }
 }

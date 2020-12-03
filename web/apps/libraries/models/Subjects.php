@@ -106,25 +106,4 @@ class Subjects extends \ModelCore
         $filters = \Subjects::arrayFilter();
         return array_merge($filters[0],$filters[1],$filters[2]);
     }
-
-    public static function arrayTrashFilter(){
-        return [
-            ['title','code'],
-            ['status'],
-            ['createdat']
-        ];
-    }
-
-    public static function findTrashTables () {
-        return ['image','code','title','excerpt','createdat','slug'];
-    }
-
-    public static function arrayTrashOrder () {
-        return ['title','code','createdat'];
-    }
-    
-    public static function findTrashFilters () {
-        $filters = \Subjects::arrayTrashFilter();
-        return array_merge($filters[0],$filters[1],$filters[2]);
-    }
 }

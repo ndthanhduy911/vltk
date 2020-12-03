@@ -3,7 +3,7 @@
     $links = \Link::find(["deleted = 0 AND status = 1 AND deptid = $dept->id", "order" => "sort ASC"]);
     $menuParents = [];
     if($menuLocation = \MenuLocation::findFirst(["status =  1 AND deptid = $dept->id AND type = 1"])) {
-        $menuParents = \Menus::find(["deleted = 0 AND status = 1 AND deptid = $dept->id AND menu_location_id = {$menuLocation->id} AND parent_id is NULL",'order' => 'sort ASC']);
+        $menuParents = \Menus::find(["deleted = 0 AND status = 1 AND deptid = $dept->id AND menu_location_id = {$menuLocation->id} AND parentid is NULL",'order' => 'sort ASC']);
     }
 ?>
 <div class="header-container">
@@ -111,7 +111,7 @@
                                 <div class="collapse navbar-collapse" id="navbar-collapse-1">
                                     <ul class="navbar-nav ml-xl-auto">
                                         {%for menu in menuParents%}
-                                        <?php $slug_now = isset($slug_now) ? $slug_now : ''; $menuP = \Menus::getItem($menu, $dept->slug, $slug_now); $menuChild = \Menus::find(['deleted = 0 AND parent_id = :parent_id:','bind' => ['parent_id' => $menu->id]]); ?>
+                                        <?php $slug_now = isset($slug_now) ? $slug_now : ''; $menuP = \Menus::getItem($menu, $dept->slug, $slug_now); $menuChild = \Menus::find(['deleted = 0 AND parentid = :parentid:','bind' => ['parentid' => $menu->id]]); ?>
                                         <li class="nav-item dropdown {{ menuP['actived'] ? 'active' : '' }}">
                                             <a target="{{ helper.getTarget(menu.target)}}" rel="noopener" href="{{ menuP['link'] }}" class="{{ menuP['actived'] ? 'active' : '' }} nav-link {{ menuChild.count() ? 'dropdown-toggle' : '' }}" {{ menuChild.count() ? 'data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"' : '' }}><?= \Menus::getName($menu->id, $langid) ?></a>
                                             <?php if($menuChild->count()){ ?>

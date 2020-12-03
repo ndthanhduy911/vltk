@@ -1,4 +1,7 @@
-//Datatable cho bảng staff
+const showTitle = (text,length = 100) => {
+    return `<span title="${text}">${text ? trimText(text,length) : ''}</span>`
+}
+
 const showStatus = (id = '') => {
     switch (parseInt(id)) {
         case 0:
@@ -13,39 +16,46 @@ const showStatus = (id = '') => {
 const showDean = (dean = '') => {
     switch (parseInt(dean)) {
         case 1:
-            return `<span class="badge badge-primary p-2">Trưởng khoa</span>`;
+            return `<span class="badge badge-primary p-1">Trưởng khoa</span>`;
         case 2:
-            return `<span class="badge badge-primary p-2">Phó trưởng khoa</span>`;
+            return `<span class="badge badge-primary p-1">Phó trưởng khoa</span>`;
         default:
-            return "";
+            return `<span class="badge badge-warning p-1">Không</span>`;
     }
 }
 
 const showPosition = (pos = '') => {
     switch (parseInt(pos)) {
         case 1:
-            return `<span class="badge badge-primary p-2">Trưởng bộ môn</span>`;
+            return `<span class="badge badge-primary p-1">Trưởng bộ môn</span>`;
         case 2:
-            return `<span class="badge badge-primary p-2">Phó bộ môn</span>`;
+            return `<span class="badge badge-primary p-1">Phó bộ môn</span>`;
         case 3:
-            return `<span class="badge badge-primary p-2">Giáo vụ</span>`;
+            return `<span class="badge badge-primary p-1">Giáo vụ</span>`;
         case 4:
-            return `<span class="badge badge-primary p-2">Giảng viên</span>`;
+            return `<span class="badge badge-primary p-1">Giảng viên</span>`;
         case 5:
-            return `<span class="badge badge-primary p-2">Giảng viên thỉnh giản</span>`;
+            return `<span class="badge badge-primary p-1">Giảng viên thỉnh giảng</span>`;
         case 6:
-            return `<span class="badge badge-primary p-2">Nhân viên</span>`;
+            return `<span class="badge badge-primary p-1">Nhân viên</span>`;
         default:
-            return "";
+            return `<span class="badge badge-warning p-1">Không</span>`;
     }
 }
 
-const loadTableSubjects = (table = '#subjects', cb = () => {}) => {
+const getStaffLink = (item) => {
+    if(item.dslug != '/'){
+        return `<a target="_blank" href="${webUri}/${item.dslug}/staffs/${item.slug}">Link</a>`;
+    }
+    return `<a target="_blank" href="${webUri}/staffs/${item.slug}">Link</a>`;
+}
+
+const loadTableStaffs = (table = '#staffs', cb = () => {}) => {
     if ($(table).length) {
         let router = {
-            co:'subjects',aj:'ajaxgetdata',fo:'#searchSubjects',cl:'Subjects',ti:'môn học',
-            ff:['title', 'status', 'createdat'],
-            tf:['image','title','excerpt','createdat','slug','status'],
+            co:'staffs',aj:'ajaxgetdata',fo:'#searchStaffs',cl:'Staffs',ti:'cán bộ',
+            ff:['title','email','status','createdat'],
+            tf:['image','title','email','dean','dept_position','createdat','slug','status']
         };
         let paramsUrl = getParams();
         let columns = [];
@@ -53,11 +63,6 @@ const loadTableSubjects = (table = '#subjects', cb = () => {}) => {
         $(`${table} thead th`).each((key,element) => {
             let fkey = $(element).data('col');
             fkeys.push(fkey);
-            // if(['ddcosts'].indexOf(fkey) === -1){
-            //     columns.push({data : $(element).data('col')})
-            // }else{
-            //     columns.push({data : 'no'})
-            // }
             columns.push({data : $(element).data('col')})
         });
 
@@ -76,9 +81,10 @@ const loadTableSubjects = (table = '#subjects', cb = () => {}) => {
                 $('td:eq(1)', row).html((dataIndex+1)+(page*pageLength));
                 let image = `<img src="${getPathImage(item.image, '/assets/frontend/images/defaut_img.png')}" height="30px">`;
                 $(`td:eq(${fkeys.indexOf('title')})`, row).html(showTitle(item.title,30));
-                $(`td:eq(${fkeys.indexOf('excerpt')})`, row).html(showTitle(item.excerpt,30));
                 $(`td:eq(${fkeys.indexOf('image')})`, row).html(image);
-                $(`td:eq(${fkeys.indexOf('slug')})`, row).html(getPageLink(item));
+                $(`td:eq(${fkeys.indexOf('slug')})`, row).html(getStaffLink(item));
+                $(`td:eq(${fkeys.indexOf('dean')})`, row).html(showDean(item.dean));
+                $(`td:eq(${fkeys.indexOf('dept_position')})`, row).html(showPosition(item.dept_position));
                 $(`td:eq(${fkeys.indexOf('createdat')})`, row).html(vi_moment(item.createdat, 'DD/MM/YYYY HH:mm'));
                 $(`td:eq(${fkeys.indexOf('status')})`, row).html(showStatus(item.status));
                 $('td:last', row).addClass('text-nowrap').html(showButtonEdit(item,router.co,router.cl));
@@ -90,7 +96,7 @@ const loadTableSubjects = (table = '#subjects', cb = () => {}) => {
     }
 }
 
-const updateSubjects = (form = '#frmSubjects') => {
+const updateStaffs = (form = '#frmStaffs') => {
     if($(form).length){
         if($(`${form} #ckEditor1`).length){
             getCkeditor1();
@@ -101,7 +107,7 @@ const updateSubjects = (form = '#frmSubjects') => {
         }
     
         sendAjax(form, "POST").then(() => {
-            window.location.href=`${webAdminUrl}/subjects`;
+            window.location.href=`${webAdminUrl}/staffs`;
         });
     
         showSelectImage('#uploadImage','#showImg','#image', '#removeImage');
@@ -109,5 +115,5 @@ const updateSubjects = (form = '#frmSubjects') => {
     }
 }
 
-loadTableSubjects();
-updateSubjects();
+loadTableStaffs();
+updateStaffs();

@@ -14,7 +14,7 @@ class PagesController extends \FrontendController
             $this->view->title = '404';
             return $this->view->pick('templates/404');
         }
-        if(!$pagelang = \PagesLang::findFirst(["langid = $langid AND page_id = $page->id"])){
+        if(!$pagelang = \PagesLang::findFirst(["langid = $langid AND pageid = $page->id"])){
             $this->view->title = '404';
             return $this->view->pick('templates/404');
         }
@@ -22,11 +22,11 @@ class PagesController extends \FrontendController
         $this->view->page = $page;
         $this->view->slug_now = $page->slug;
         $this->view->pagelang = $pagelang;
-        if(!$page->attribute_id){
+        if(!$page->attrid){
             return $this->view->pick('templates/pages/default');
         }
 
-        if(($attribute = \Attributes::findFirst($page->attribute_id))){
+        if(($attribute = \Attributes::findFirst($page->attrid))){
         return $this->view->pick('templates/pages/'.$attribute->path);
         }
 

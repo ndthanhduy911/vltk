@@ -76,25 +76,4 @@ class Slideshows extends \ModelCore
         $filters = \Slideshows::arrayFilter();
         return array_merge($filters[0],$filters[1],$filters[2]);
     }
-
-    public static function arrayTrashFilter(){
-        return [
-            ['name'],
-            ['status'],
-            ['createdat']
-        ];
-    }
-
-    public static function findTrashTables () {
-        return ['image','name','description','createdat','slug'];
-    }
-
-    public static function arrayTrashOrder () {
-        return ['name','createdat'];
-    }
-    
-    public static function findTrashFilters () {
-        $filters = \Slideshows::arrayTrashFilter();
-        return array_merge($filters[0],$filters[1],$filters[2]);
-    }
 }

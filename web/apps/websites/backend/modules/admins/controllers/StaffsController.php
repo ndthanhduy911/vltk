@@ -16,38 +16,8 @@ class StaffsController  extends \BackendController {
         $filters = \Staffs::findFilters();
         $tables = \Staffs::findTables();
         $fFilters = ['title','email','status','createdat'];
-        $fTables = ['image','title','email','dean','createdat','slug','status'];
+        $fTables = ['image','title','email','dean','dept_position','createdat','slug','status'];
         if($fSetting = \FilterSetting::findFirstKey('staffs')){
-            $fFilters = $fSetting->filters ? json_decode($fSetting->filters) : $fFilters;
-            $fTables = $fSetting->tables ? json_decode($fSetting->tables) : $fTables;   
-        }
-        $filters = \FilterSetting::mapFilter($fFilters,$filters);
-        $tables = \FilterSetting::mapFilter($fTables,$tables);
-        $fFilters = array_intersect($fFilters,$filters);
-        $fTables = array_intersect($fTables,$tables);
-
-        $title = "Tổ chức Cán bộ";
-        $this->getJsCss();
-        $this->view->searchForm = new SearchStaffsForm();
-        $this->view->title = $title;
-        $this->view->filters = $filters;
-        $this->view->tables = $tables;
-        $this->view->fFilters = $fFilters;
-        $this->view->fTables = $fTables;
-    }
-
-    public function trashsAction(){
-        if($this->request->get('singlePage') && $this->request->isAjax()){
-            $this->view->setRenderLevel(
-                \Phalcon\Mvc\View::LEVEL_ACTION_VIEW
-            );
-        }
-
-        $filters = \Staffs::findTrashFilters();
-        $tables = \Staffs::findTrashTables();
-        $fFilters = ['title','email','status','createdat'];
-        $fTables = ['image','title','email','dean','createdat','slug','status'];
-        if($fSetting = \FilterSetting::findFirstKey('trashstaffs')){
             $fFilters = $fSetting->filters ? json_decode($fSetting->filters) : $fFilters;
             $fTables = $fSetting->tables ? json_decode($fSetting->tables) : $fTables;   
         }
@@ -145,15 +115,16 @@ class StaffsController  extends \BackendController {
         $columns = [
             's.id',
             's.slug',
-            's.status',
-            's.code',
-            's.deptid',
-            's.createdat',
             's.image',
-            's.bgimage',
+            's.email',
+            's.dean',
+            's.dept_position',
+            's.createdat',
+            's.deptid',
+            's.status',
+            's.sort',
             'sl.title',
             'sl.content',
-            'sl.excerpt',
             'd.slug dslug',
         ];
 
