@@ -47,9 +47,9 @@ class DeptController extends \FrontendController
             'bl.description description',
             'bl.button_text button_text'
         ))
-        ->from(['b'=>'Banners'])
+        ->from(['b'=>'Slideshows'])
         ->where("b.status = 1 AND b.deleted = 0 AND b.deptid = $dept->id")
-        ->leftJoin('BannersLang', "bl.bannerid = b.id AND bl.langid = $langid",'bl')
+        ->leftJoin('SlideshowsLang', "bl.slideshowid = b.id AND bl.langid = $langid",'bl')
         ->getQuery()
         ->execute();
         

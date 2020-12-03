@@ -40,83 +40,74 @@ const showPosition = (pos = '') => {
     }
 }
 
-const loadTablePages = () => {
-    if ($('#staff').length) {
-        let dt = $('#staff').DataTable({
-            "scrollX": true,
-            "ordering": false,
-            "processing": true,
-            "serverSide": true,
-            "autoWidth": false,
-            "pageLength": 25,
-            "ajax": backendUrl+"/staff/getdata",
-            "columns": [
-                {
-                    "data": "no"
-                },
-                {
-                    "data": "image"
-                },
-                {
-                    "data": "title"
-                },
-                {
-                    "data": null
-                },
-                {
-                    "data": "dept_name"
-                },
-                {
-                    "data": "createdat"
-                },
-                {
-                    "data": "status"
-                },
-                {
-                    "data": null
-                }
-            ],
-            'createdRow': function (row, item, dataIndex) {
-                $(row).addClass('text-center');
-                let image = `<img src="${getPathImage(item.image, '/assets/frontend/images/defaut_img.png')}" width="50px">`;
-                $('td:eq(1)', row).html(image);
-                $('td', row).addClass('align-middle');
-                $('td:eq(5)', row).html(showDean(item.dean)+showPosition(item.dept_position))
-                $('td:eq(5)', row).html(vi_moment(item.createdat, 'DD/MM/YYYY HH:mm'));
-                $('td:eq(6)', row).html(showStatus(item.status));
-                $('td:eq(7)', row).html(`
-                    <a href="${backendUrl}/staff/update/${item.id}" class="fa fa-pencil btn btn-info btn-sm editStaff" title="Cập nhật"></a>
-                `);
-                $('td:eq(7)', row).append(`<a href="#" data-href="${backendUrl}/staff/delete/${item.id}" class="fa fa-trash btn btn-danger btn-sm deleteStaff" title="Xóa"></a>`);
-                
-            },
-            "deferRender": true,
-            "language": {
-                "sProcessing": "Đang xử lý...",
-                "sLengthMenu": "Xem _MENU_ mục",
-                "sZeroRecords": "Không tìm thấy dữ liệu",
-                "sInfo": "Đang xem _START_ đến _END_ trong tổng số _TOTAL_ mục",
-                "sInfoEmpty": "Đang xem 0 đến 0 trong tổng số 0 mục",
-                "sInfoFiltered": "(được lọc từ _MAX_ mục)",
-                "sInfoPostFix": "",
-                "sSearch": "Tìm:",
-                "sUrl": "",
-                "oPaginate": {
-                    "sFirst": "Đầu",
-                    "sPrevious": "Trước",
-                    "sNext": "Tiếp",
-                    "sLast": "Cuối"
-                }
-            }
+const loadTableSubjects = (table = '#subjects', cb = () => {}) => {
+    if ($(table).length) {
+        let router = {
+            co:'subjects',aj:'ajaxgetdata',fo:'#searchSubjects',cl:'Subjects',ti:'môn học',
+            ff:['title', 'status', 'createdat'],
+            tf:['image','title','excerpt','createdat','slug','status'],
+        };
+        let paramsUrl = getParams();
+        let columns = [];
+        let fkeys = [];
+        $(`${table} thead th`).each((key,element) => {
+            let fkey = $(element).data('col');
+            fkeys.push(fkey);
+            // if(['ddcosts'].indexOf(fkey) === -1){
+            //     columns.push({data : $(element).data('col')})
+            // }else{
+            //     columns.push({data : 'no'})
+            // }
+            columns.push({data : $(element).data('col')})
         });
-        showConfrimDelete('.deleteStaff',()=>{
-            dt.draw();
-        })
+
+        let options = {
+            "serverSide": true,
+            "ajax": `${webAdminUrl}/${router.co}/${router.aj}?${paramsUrl}`,
+            "columns":columns,
+            'createdRow': function (row, item, dataIndex) {
+                $('td', row).addClass('align-middle text-center');
+                $('td:first', row).addClass('select-box').html(`
+                    <input name="${router.co}Checkbox[]" class="${router.co}Checkbox" type="checkbox" value="${item.id}" data-dept=${item.deptid}>
+                `)
+                let pageInfo = $(table).DataTable().page.info();
+                let page = pageInfo.page;
+                let pageLength = pageInfo.length;
+                $('td:eq(1)', row).html((dataIndex+1)+(page*pageLength));
+                let image = `<img src="${getPathImage(item.image, '/assets/frontend/images/defaut_img.png')}" height="30px">`;
+                $(`td:eq(${fkeys.indexOf('title')})`, row).html(showTitle(item.title,30));
+                $(`td:eq(${fkeys.indexOf('excerpt')})`, row).html(showTitle(item.excerpt,30));
+                $(`td:eq(${fkeys.indexOf('image')})`, row).html(image);
+                $(`td:eq(${fkeys.indexOf('slug')})`, row).html(getPageLink(item));
+                $(`td:eq(${fkeys.indexOf('createdat')})`, row).html(vi_moment(item.createdat, 'DD/MM/YYYY HH:mm'));
+                $(`td:eq(${fkeys.indexOf('status')})`, row).html(showStatus(item.status));
+                $('td:last', row).addClass('text-nowrap').html(showButtonEdit(item,router.co,router.cl));
+            }
+        }
+        dataTableCt(table,options,router).then(()=>{
+            cb();
+        });
     }
 }
 
-loadTablePages();
+const updateSubjects = (form = '#frmSubjects') => {
+    if($(form).length){
+        if($(`${form} #ckEditor1`).length){
+            getCkeditor1();
+        }
+    
+        if($(`${form} #ckEditor2`).length){
+            getCkeditor2();
+        }
+    
+        sendAjax(form, "POST").then(() => {
+            window.location.href=`${webAdminUrl}/subjects`;
+        });
+    
+        showSelectImage('#uploadImage','#showImg','#image', '#removeImage');
+        changeTitleToSlug('#title', '#slug');
+    }
+}
 
-changeTitleToSlug('#title', '#slug');
-
-showSelectImage('#uploadImage','#showImg','#image');
+loadTableSubjects();
+updateSubjects();

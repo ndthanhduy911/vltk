@@ -113,7 +113,7 @@ const loadTableTrashSubjects = (table = '#trashsubjects', cb = () => {}) => {
             }
         }
 
-        dataTableCt(table,options,router)
+        dataTableCt(table,options,router);
         cb();
     }
 }
@@ -133,6 +133,7 @@ const updateSubjects = (form = '#frmSubjects') => {
         });
     
         showSelectImage('#uploadImage','#showImg','#image', '#removeImage');
+        showSelectImage('#uploadBgImage','#showBgImg','#bgimage', '#removeBgImage');
         changeTitleToSlug('#title', '#slug');
     }
 }
@@ -145,7 +146,3 @@ loadTableTrashSubjects('#trashsubjects',()=>{
     });
 });
 updateSubjects();
-
-showSelectImage('#uploadImage','#showImg','#image', '#removeImage');
-
-showSelectImage('#uploadBgImage','#showBgImg','#bgimage', '#removeBgImage');

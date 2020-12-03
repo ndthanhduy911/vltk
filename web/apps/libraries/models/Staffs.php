@@ -1,5 +1,5 @@
 <?php
-class Staff extends \ModelCore
+class Staffs extends \ModelCore
 {
     public function initialize()
     {
