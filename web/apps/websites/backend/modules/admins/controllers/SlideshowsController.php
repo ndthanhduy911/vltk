@@ -36,36 +36,6 @@ class SlideshowsController  extends \BackendController {
         $this->view->fTables = $fTables;
     }
 
-    public function trashsAction(){
-        if($this->request->get('singlePage') && $this->request->isAjax()){
-            $this->view->setRenderLevel(
-                \Phalcon\Mvc\View::LEVEL_ACTION_VIEW
-            );
-        }
-
-        $filters = \Slideshows::findTrashFilters();
-        $tables = \Slideshows::findTrashTables();
-        $fFilters = ['name','createdat'];
-        $fTables = ['image','name','description','createdat'];
-        if($fSetting = \FilterSetting::findFirstKey('trashslideshows')){
-            $fFilters = $fSetting->filters ? json_decode($fSetting->filters) : $fFilters;
-            $fTables = $fSetting->tables ? json_decode($fSetting->tables) : $fTables;   
-        }
-        $filters = \FilterSetting::mapFilter($fFilters,$filters);
-        $tables = \FilterSetting::mapFilter($fTables,$tables);
-        $fFilters = array_intersect($fFilters,$filters);
-        $fTables = array_intersect($fTables,$tables);
-
-        $title = "Banners";
-        $this->getJsCss();
-        $this->view->searchForm = new SearchSlideshowsForm();
-        $this->view->title = $title;
-        $this->view->filters = $filters;
-        $this->view->tables = $tables;
-        $this->view->fFilters = $fFilters;
-        $this->view->fTables = $fTables;
-    }
-
     public function viewAction($id = 0){
 
         if($this->request->get('singlePage') && $this->request->isAjax()){
@@ -160,7 +130,7 @@ class SlideshowsController  extends \BackendController {
         $data = $this->modelsManager->createBuilder()
         ->columns($columns)
         ->from(['b' => "Slideshows"])
-        ->where("b.deleted = 0 AND b.status != 4")
+        ->where("b.deleted = 0")
         ->leftJoin('SlideshowsLang', 'bl.slideshowid = b.id AND bl.langid = 1','bl')
         ->leftJoin('Depts', 'd.id = b.deptid','d')
         ->orderBy('b.sort ASC, b.id ASC');
@@ -177,43 +147,7 @@ class SlideshowsController  extends \BackendController {
         $this->helper->responseJson($this, $this->ssp->dataOutput($this, $data,$search, $array_row));
     }
 
-    public function ajaxgetdatatrashAction(){
-        if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('slideshows', 'index')) {
-            $this->helper->responseJson($this, ["error" => "Truy cập không được phép"]);
-        }
-        $columns = [
-            'b.id',
-            'b.deptid',
-            'b.image',
-            'b.buttonlink',
-            'b.status',
-            'b.sort',
-            'b.createdat',
-            'bl.name',
-            'bl.description',
-            'd.slug dslug',
-        ];
-
-        $data = $this->modelsManager->createBuilder()
-        ->columns($columns)
-        ->from(['b' => "Slideshows"])
-        ->where("b.deleted = 0 AND b.status = 4")
-        ->leftJoin('SlideshowsLang', 'bl.slideshowid = b.id AND bl.langid = 1','bl')
-        ->leftJoin('Depts', 'd.id = b.deptid','d')
-        ->orderBy('b.sort ASC, b.id ASC');
-
-        $data = $this->master::builderPermission($data,$perL,'b');
-        $data = \FilterSetting::getDataOrder($this,$data,\Slideshows::findFirst(),'b',['bl'=>'name']);
-        $data = \FilterSetting::getDataFilter($this,$data,\Slideshows::arrayTrashFilter(),['b',['bl'=>['name']]]);
-
-        $array_row = [];
-
-        $search = '';
-        $this->helper->responseJson($this, $this->ssp->dataOutput($this, $data,$search, $array_row));
-    }
-
     // Update data
-
     public function updateAction($id = 0){
         $this->view->disable();
         if (!$this->security->checkToken()) {
@@ -293,67 +227,6 @@ class SlideshowsController  extends \BackendController {
         $this->helper->responseJson($this, $data);
     }
 
-    public function restoreAction(){
-        $this->view->disable();
-        if(!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('slideshows','delete',1)){
-            $data['error'] = ['Truy cập không được phép'];
-            $this->helper->responseJson($this, $data);
-        }
-
-        $listId = $this->request->getPost('dataId');
-        if (!is_array($listId)) {
-            $this->helper->responseJson($this, ["error" => ["Dữ liệu không hợp lệ"]]);
-        }
-
-        $listId = $this->helper->filterListIds($listId);
-        $strIds = implode(',', $listId);
-
-        $data = \Slideshows::findPermission($perL,"*",['status = 4 AND id IN (' . $strIds . ')']);
-
-        try {
-            $this->db->begin();
-            foreach ($data as $item) {
-                $this->restoreOne($item);
-            }
-            $this->db->commit();
-        } catch (\Throwable $e) {
-            $this->db->rollback();
-            $this->helper->responseJson($this, ["error" => [$e->getMessage()]]);
-        }
-        $this->helper->responseJson($this, ["result" => ["Success"]]);
-    }
-
-    public function trashAction(){
-        $this->view->disable();
-        if(!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('slideshows','delete',1)){
-            $data['error'] = ['Truy cập không được phép'];
-            $this->helper->responseJson($this, $data);
-        }
-
-        $listId = $this->request->getPost('dataId');
-        if (!is_array($listId)) {
-            $this->helper->responseJson($this, ["error" => ["Dữ liệu không hợp lệ"]]);
-        }
-
-        $listId = $this->helper->filterListIds($listId);
-        $strIds = implode(',', $listId);
-
-        $data = \Slideshows::findPermission($perL,"*",['id IN (' . $strIds . ')']);
-
-        try {
-            $this->db->begin();
-            foreach ($data as $item) {
-                $this->trashOne($item);
-            }
-            $this->db->commit();
-        } catch (\Throwable $e) {
-            $this->db->rollback();
-            $this->helper->responseJson($this, ["error" => [$e->getMessage()]]);
-        }
-        $this->helper->responseJson($this, ["result" => ["Success"]]);
-        
-    }
-
     public function deleteAction(){
         if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('slideshows', 'delete')) {
             $this->helper->responseJson($this, ["error" => ["Truy cập không được phép"]]);
@@ -367,7 +240,7 @@ class SlideshowsController  extends \BackendController {
         $listId = $this->helper->filterListIds($listId);
         $strIds = implode(',', $listId);
 
-        $data = \Slideshows::findPermission($perL,"*",['status = 4 AND id IN (' . $strIds . ')']);
+        $data = \Slideshows::findPermission($perL,"*",['deleted = 0 AND id IN (' . $strIds . ')']);
 
         try {
             $this->db->begin();
@@ -385,51 +258,18 @@ class SlideshowsController  extends \BackendController {
     // =================================
     // FUNCTION
     // =================================
-    private function trashOne($item){
+    private function deleteOne($item)
+    {
         $userid = $this->session->get('userid');
         $item->updatedat = date('Y-m-d H:i:s');
         $item->updatedby = $userid;
-        $item->status = 4;
+        $item->deleted = 1;
         if (!$item->save()) {
             foreach ($item->getMessages() as $message) {
                 throw new \Exception($message->getMessage());
             }
         }
-        \Logs::saveLogs($this, 3, "Xóa tạm banner ID: {$item->id}", ['table' => 'Slideshows','id' => $item->id]);
-    }
-
-    private function restoreOne($item){
-        $userid = $this->session->get('userid');
-        $item->updatedat = date('Y-m-d H:i:s');
-        $item->updatedby = $userid;
-        $item->status = 1;
-        if (!$item->save()) {
-            foreach ($item->getMessages() as $message) {
-                throw new \Exception($message->getMessage());
-            }
-        }
-        \Logs::saveLogs($this, 5, "Khôi phục banner ID: {$item->id}", ['table' => 'Slideshows','id' => $item->id]);
-    }
-
-    private function deleteOne($item){
-        $itemOld = $item->toArray();
-        if (!$item->delete()) {
-            foreach ($item->getMessages() as $message) {
-                throw new \Exception($message->getMessage());
-            }
-        }
-        $data = \SlideshowsLang::find([
-            'slideshowid = :slideshowid:',
-            'bind' => ['slideshowid' => $itemOld['id']]
-        ]);
-        foreach ($data as $it) {
-            if (!$it->delete()) {
-                foreach ($it->getMessages() as $message) {
-                    throw new \Exception($message->getMessage());
-                }
-            }
-        }
-        \Logs::saveLogs($this, 4, "Xóa banner ID: {$itemOld['id']}", ['table' => 'Slideshows','id' => $itemOld['id']]);
+        \Logs::saveLogs($this, 3, "Xóa tạm banners ID: {$item->id}", ['table' => 'Slideshows','id' => $item->id]);
     }
 
     private function getJsCss(){

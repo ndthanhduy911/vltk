@@ -154,3 +154,22 @@ $router->add(WEB_ADMIN_URI . '/sync/:action/:int', array(
     'action'  => 1,
     'id' => 2
 ));
+
+/***********************TrashsController***********************/
+$router->add(WEB_ADMIN_URI . '/trashs', array(
+    'module' => 'backend_master',
+    'controller' => 'trashs',
+    'action' => 'index',
+));
+
+$router->add(WEB_ADMIN_URI . '/trashs/:action', array(
+    'module' => 'backend_master',
+    'controller' => 'trashs',
+    'action' => 1,
+));
+$router->add(WEB_ADMIN_URI . '/trashs/:action/:int', array(
+    'module' => 'backend_master',
+    'controller' => 'trashs',
+    'action'  => 1,
+    'id' => 2
+));

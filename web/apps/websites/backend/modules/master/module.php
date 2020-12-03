@@ -1,5 +1,8 @@
 <?php
 namespace Backend\Modules\Master;
+use Phalcon\Mvc\View;
+use Phalcon\Mvc\View\Engine\Volt as VoltEngine;
+
 class Module implements \Phalcon\Mvc\ModuleDefinitionInterface
 {
     /**

@@ -36,36 +36,6 @@ class PagesController  extends \BackendController {
         $this->view->fTables = $fTables;
     }
 
-    public function trashsAction(){
-        if($this->request->get('singlePage') && $this->request->isAjax()){
-            $this->view->setRenderLevel(
-                \Phalcon\Mvc\View::LEVEL_ACTION_VIEW
-            );
-        }
-
-        $filters = \Pages::findTrashFilters();
-        $tables = \Pages::findTrashTables();
-        $fFilters = ['title','createdat'];
-        $fTables = ['image','title','excerpt','authorname','createdat','slug'];
-        if($fSetting = \FilterSetting::findFirstKey('trashpages')){
-            $fFilters = $fSetting->filters ? json_decode($fSetting->filters) : $fFilters;
-            $fTables = $fSetting->tables ? json_decode($fSetting->tables) : $fTables;   
-        }
-        $filters = \FilterSetting::mapFilter($fFilters,$filters);
-        $tables = \FilterSetting::mapFilter($fTables,$tables);
-        $fFilters = array_intersect($fFilters,$filters);
-        $fTables = array_intersect($fTables,$tables);
-
-        $title = "Trang";
-        $this->getJsCss();
-        $this->view->searchForm = new SearchPagesForm();
-        $this->view->title = $title;
-        $this->view->filters = $filters;
-        $this->view->tables = $tables;
-        $this->view->fFilters = $fFilters;
-        $this->view->fTables = $fTables;
-    }
-
     public function viewAction($id = 0){
 
         if($this->request->get('singlePage') && $this->request->isAjax()){
@@ -163,7 +133,7 @@ class PagesController  extends \BackendController {
         $data = $this->modelsManager->createBuilder()
         ->columns($columns)
         ->from(['p' => "Pages"])
-        ->where("p.deleted = 0 AND p.status != 4")
+        ->where("p.deleted = 0")
         ->leftJoin('User', 'u.id = p.author','u')
         ->leftJoin('PagesLang', 'pl.pageid = p.id AND pl.langid = 1','pl')
         ->leftJoin('Depts', 'd.id = p.deptid','d')
@@ -176,46 +146,6 @@ class PagesController  extends \BackendController {
         $array_row = [
             'u' => $this->master::checkPermission('pages', 'update', 1)
         ];
-
-        $search = '';
-        $this->helper->responseJson($this, $this->ssp->dataOutput($this, $data,$search, $array_row));
-    }
-
-    public function ajaxgetdatatrashAction(){
-        if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('pages', 'index')) {
-            $this->helper->responseJson($this, ["error" => "Truy cập không được phép"]);
-        }
-        $columns = [
-            'p.id',
-            'p.slug',
-            'p.attrid',
-            'p.status',
-            'p.author',
-            'p.deptid',
-            'p.image',
-            'p.bgimage',
-            'p.createdat',
-            'pl.title',
-            'pl.content',
-            'pl.excerpt',
-            'u.fullname authorname',
-            'd.slug dslug',
-        ];
-
-        $data = $this->modelsManager->createBuilder()
-        ->columns($columns)
-        ->from(['p' => "Pages"])
-        ->where("p.deleted = 0 AND p.status = 4")
-        ->leftJoin('User', 'u.id = p.author','u')
-        ->leftJoin('PagesLang', 'pl.pageid = p.id AND pl.langid = 1','pl')
-        ->leftJoin('Depts', 'd.id = p.deptid','d')
-        ->orderBy('p.createdat DESC');
-
-        $data = $this->master::builderPermission($data,$perL,'p');
-        $data = \FilterSetting::getDataOrder($this,$data,\Pages::findFirst(),'p',['pl'=>'title']);
-        $data = \FilterSetting::getDataFilter($this,$data,\Pages::arrayTrashFilter(),['p',['pl'=>['title']]]);
-
-        $array_row = [];
 
         $search = '';
         $this->helper->responseJson($this, $this->ssp->dataOutput($this, $data,$search, $array_row));
@@ -313,67 +243,6 @@ class PagesController  extends \BackendController {
         $this->helper->responseJson($this, $data);
     }
 
-    public function restoreAction(){
-        $this->view->disable();
-        if(!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('pages','delete',1)){
-            $data['error'] = ['Truy cập không được phép'];
-            $this->helper->responseJson($this, $data);
-        }
-
-        $listId = $this->request->getPost('dataId');
-        if (!is_array($listId)) {
-            $this->helper->responseJson($this, ["error" => ["Dữ liệu không hợp lệ"]]);
-        }
-
-        $listId = $this->helper->filterListIds($listId);
-        $strIds = implode(',', $listId);
-
-        $data = \Pages::findPermission($perL,"*",['status = 4 AND id IN (' . $strIds . ')']);
-
-        try {
-            $this->db->begin();
-            foreach ($data as $item) {
-                $this->restoreOne($item);
-            }
-            $this->db->commit();
-        } catch (\Throwable $e) {
-            $this->db->rollback();
-            $this->helper->responseJson($this, ["error" => [$e->getMessage()]]);
-        }
-        $this->helper->responseJson($this, ["result" => ["Success"]]);
-    }
-
-    public function trashAction(){
-        $this->view->disable();
-        if(!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('pages','delete',1)){
-            $data['error'] = ['Truy cập không được phép'];
-            $this->helper->responseJson($this, $data);
-        }
-
-        $listId = $this->request->getPost('dataId');
-        if (!is_array($listId)) {
-            $this->helper->responseJson($this, ["error" => ["Dữ liệu không hợp lệ"]]);
-        }
-
-        $listId = $this->helper->filterListIds($listId);
-        $strIds = implode(',', $listId);
-
-        $data = \Pages::findPermission($perL,"*",['id IN (' . $strIds . ')']);
-
-        try {
-            $this->db->begin();
-            foreach ($data as $item) {
-                $this->trashOne($item);
-            }
-            $this->db->commit();
-        } catch (\Throwable $e) {
-            $this->db->rollback();
-            $this->helper->responseJson($this, ["error" => [$e->getMessage()]]);
-        }
-        $this->helper->responseJson($this, ["result" => ["Success"]]);
-        
-    }
-
     public function deleteAction(){
         if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('pages', 'delete')) {
             $this->helper->responseJson($this, ["error" => ["Truy cập không được phép"]]);
@@ -387,7 +256,7 @@ class PagesController  extends \BackendController {
         $listId = $this->helper->filterListIds($listId);
         $strIds = implode(',', $listId);
 
-        $data = \Pages::findPermission($perL,"*",['status = 4 AND id IN (' . $strIds . ')']);
+        $data = \Pages::findPermission($perL,"*",['deleted = 0 AND id IN (' . $strIds . ')']);
 
         try {
             $this->db->begin();
@@ -405,51 +274,18 @@ class PagesController  extends \BackendController {
     // =================================
     // FUNCTION
     // =================================
-    private function trashOne($item){
+    private function deleteOne($item)
+    {
         $userid = $this->session->get('userid');
         $item->updatedat = date('Y-m-d H:i:s');
         $item->updatedby = $userid;
-        $item->status = 4;
+        $item->deleted = 1;
         if (!$item->save()) {
             foreach ($item->getMessages() as $message) {
                 throw new \Exception($message->getMessage());
             }
         }
         \Logs::saveLogs($this, 3, "Xóa tạm trang ID: {$item->id}", ['table' => 'Pages','id' => $item->id]);
-    }
-
-    private function restoreOne($item){
-        $userid = $this->session->get('userid');
-        $item->updatedat = date('Y-m-d H:i:s');
-        $item->updatedby = $userid;
-        $item->status = 1;
-        if (!$item->save()) {
-            foreach ($item->getMessages() as $message) {
-                throw new \Exception($message->getMessage());
-            }
-        }
-        \Logs::saveLogs($this, 5, "Khôi phục trang ID: {$item->id}", ['table' => 'Pages','id' => $item->id]);
-    }
-
-    private function deleteOne($item){
-        $itemOld = $item->toArray();
-        if (!$item->delete()) {
-            foreach ($item->getMessages() as $message) {
-                throw new \Exception($message->getMessage());
-            }
-        }
-        $data = \PagesLang::find([
-            'pageid = :pageid:',
-            'bind' => ['pageid' => $itemOld['id']]
-        ]);
-        foreach ($data as $it) {
-            if (!$it->delete()) {
-                foreach ($it->getMessages() as $message) {
-                    throw new \Exception($message->getMessage());
-                }
-            }
-        }
-        \Logs::saveLogs($this, 4, "Xóa trang ID: {$itemOld['id']}", ['table' => 'Pages','id' => $itemOld['id']]);
     }
 
     private function getJsCss(){

@@ -94,9 +94,9 @@ class IndexController extends \FrontendController
             'sl.title title',
             'sl.content content'
         ))
-        ->from(['s'=>'Staff'])
+        ->from(['s'=>'Staffs'])
         ->where("s.status = 1 AND s.deleted = 0 AND (s.dean = 1 OR s.dean = 2)")
-        ->leftJoin("StaffLang", "sl.staff_id = s.id AND sl.langid = $langid",'sl')
+        ->leftJoin("StaffsLang", "sl.staff_id = s.id AND sl.langid = $langid",'sl')
         ->orderBy("s.sort ASC, s.dean ASC")
         ->limit(3)
         ->getQuery()

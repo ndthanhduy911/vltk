@@ -160,7 +160,7 @@ class StaffsController  extends \BackendController {
         $data = $this->modelsManager->createBuilder()
         ->columns($columns)
         ->from(['s' => "Staffs"])
-        ->where("s.deleted = 0 AND s.status != 4")
+        ->where("s.deleted = 0")
         ->leftJoin('StaffsLang', 'sl.staffid = s.id AND sl.langid = 1','sl')
         ->leftJoin('Depts', 'd.id = s.deptid','d')
         ->orderBy('s.createdat DESC');
@@ -172,45 +172,6 @@ class StaffsController  extends \BackendController {
         $array_row = [
             'u' => $this->master::checkPermission('staffs', 'update', 1)
         ];
-
-        $search = '';
-        $this->helper->responseJson($this, $this->ssp->dataOutput($this, $data,$search, $array_row));
-    }
-
-    public function ajaxgetdatatrashAction(){
-        if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('staffs', 'index')) {
-            $this->helper->responseJson($this, ["error" => "Truy cập không được phép"]);
-        }
-        $columns = [
-            's.id',
-            's.slug',
-            's.status',
-            's.code',
-            's.deptid',
-            's.createdat',
-            's.image',
-            's.bgimage',
-            'sl.title',
-            'sl.content',
-            'sl.excerpt',
-            'u.fullname authorname',
-            'd.slug dslug',
-        ];
-
-        $data = $this->modelsManager->createBuilder()
-        ->columns($columns)
-        ->from(['s' => "Staffs"])
-        ->where("s.deleted = 0 AND s.status = 4")
-        ->leftJoin('User', 'u.id = s.author','u')
-        ->leftJoin('StaffsLang', 'sl.staffid = s.id AND sl.langid = 1','sl')
-        ->leftJoin('Depts', 'd.id = s.deptid','d')
-        ->orderBy('s.createdat DESC');
-
-        $data = $this->master::builderPermission($data,$perL,'s');
-        $data = \FilterSetting::getDataOrder($this,$data,\Staffs::findFirst(),'s',['sl'=>'title']);
-        $data = \FilterSetting::getDataFilter($this,$data,\Staffs::arrayTrashFilter(),['s',['sl'=>['title']]]);
-
-        $array_row = [];
 
         $search = '';
         $this->helper->responseJson($this, $this->ssp->dataOutput($this, $data,$search, $array_row));
@@ -308,67 +269,6 @@ class StaffsController  extends \BackendController {
         $this->helper->responseJson($this, $data);
     }
 
-    public function restoreAction(){
-        $this->view->disable();
-        if(!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('staffs','delete',1)){
-            $data['error'] = ['Truy cập không được phép'];
-            $this->helper->responseJson($this, $data);
-        }
-
-        $listId = $this->request->getPost('dataId');
-        if (!is_array($listId)) {
-            $this->helper->responseJson($this, ["error" => ["Dữ liệu không hợp lệ"]]);
-        }
-
-        $listId = $this->helper->filterListIds($listId);
-        $strIds = implode(',', $listId);
-
-        $data = \Staffs::findPermission($perL,"*",['status = 4 AND id IN (' . $strIds . ')']);
-
-        try {
-            $this->db->begin();
-            foreach ($data as $item) {
-                $this->restoreOne($item);
-            }
-            $this->db->commit();
-        } catch (\Throwable $e) {
-            $this->db->rollback();
-            $this->helper->responseJson($this, ["error" => [$e->getMessage()]]);
-        }
-        $this->helper->responseJson($this, ["result" => ["Success"]]);
-    }
-
-    public function trashAction(){
-        $this->view->disable();
-        if(!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('staffs','delete',1)){
-            $data['error'] = ['Truy cập không được phép'];
-            $this->helper->responseJson($this, $data);
-        }
-
-        $listId = $this->request->getPost('dataId');
-        if (!is_array($listId)) {
-            $this->helper->responseJson($this, ["error" => ["Dữ liệu không hợp lệ"]]);
-        }
-
-        $listId = $this->helper->filterListIds($listId);
-        $strIds = implode(',', $listId);
-
-        $data = \Staffs::findPermission($perL,"*",['id IN (' . $strIds . ')']);
-
-        try {
-            $this->db->begin();
-            foreach ($data as $item) {
-                $this->trashOne($item);
-            }
-            $this->db->commit();
-        } catch (\Throwable $e) {
-            $this->db->rollback();
-            $this->helper->responseJson($this, ["error" => [$e->getMessage()]]);
-        }
-        $this->helper->responseJson($this, ["result" => ["Success"]]);
-        
-    }
-
     public function deleteAction(){
         if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('staffs', 'delete')) {
             $this->helper->responseJson($this, ["error" => ["Truy cập không được phép"]]);
@@ -382,7 +282,7 @@ class StaffsController  extends \BackendController {
         $listId = $this->helper->filterListIds($listId);
         $strIds = implode(',', $listId);
 
-        $data = \Staffs::findPermission($perL,"*",['status = 4 AND id IN (' . $strIds . ')']);
+        $data = \Staffs::findPermission($perL,"*",['deleted = 0 AND id IN (' . $strIds . ')']);
 
         try {
             $this->db->begin();
@@ -400,51 +300,19 @@ class StaffsController  extends \BackendController {
     // =================================
     // FUNCTION
     // =================================
-    private function trashOne($item){
+
+    private function deleteOne($item)
+    {
         $userid = $this->session->get('userid');
         $item->updatedat = date('Y-m-d H:i:s');
         $item->updatedby = $userid;
-        $item->status = 4;
+        $item->deleted = 1;
         if (!$item->save()) {
             foreach ($item->getMessages() as $message) {
                 throw new \Exception($message->getMessage());
             }
         }
-        \Logs::saveLogs($this, 3, "Xóa tạm môn học ID: {$item->id}", ['table' => 'Staffs','id' => $item->id]);
-    }
-
-    private function restoreOne($item){
-        $userid = $this->session->get('userid');
-        $item->updatedat = date('Y-m-d H:i:s');
-        $item->updatedby = $userid;
-        $item->status = 1;
-        if (!$item->save()) {
-            foreach ($item->getMessages() as $message) {
-                throw new \Exception($message->getMessage());
-            }
-        }
-        \Logs::saveLogs($this, 5, "Khôi phục môn học ID: {$item->id}", ['table' => 'Staffs','id' => $item->id]);
-    }
-
-    private function deleteOne($item){
-        $itemOld = $item->toArray();
-        if (!$item->delete()) {
-            foreach ($item->getMessages() as $message) {
-                throw new \Exception($message->getMessage());
-            }
-        }
-        $data = \StaffsLang::find([
-            'staffid = :staffid:',
-            'bind' => ['staffid' => $itemOld['id']]
-        ]);
-        foreach ($data as $it) {
-            if (!$it->delete()) {
-                foreach ($it->getMessages() as $message) {
-                    throw new \Exception($message->getMessage());
-                }
-            }
-        }
-        \Logs::saveLogs($this, 4, "Xóa môn học ID: {$itemOld['id']}", ['table' => 'Staffs','id' => $itemOld['id']]);
+        \Logs::saveLogs($this, 3, "Xóa tạm cán bộ ID: {$item->id}", ['table' => 'Staffs','id' => $item->id]);
     }
 
     private function getJsCss(){

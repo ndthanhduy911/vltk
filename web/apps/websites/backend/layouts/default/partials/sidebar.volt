@@ -109,7 +109,7 @@
                     <a href="<?= WEB_ADMIN_URL ?>/staff"
                         class="nav-link {% if dispatcher.getControllerName()=='staff' %} {{ 'active' }} {% endif %}">
                         <i class="nav-icon fas fa-users"></i>
-                        <p>Tổ chức Nhân sự</p>
+                        <p>Tổ chức Cán bộ</p>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -248,6 +248,78 @@
                                 class="nav-link {% if dispatcher.getControllerName()=='logs' AND request.get('typeidSearch') == 3 %} {{ 'active' }} {% endif %}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Nhật ký xóa</p>
+                            </a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </li>
+                <li class="nav-item has-treeview {% if dispatcher.getControllerName() in ['trashs'] %} {{ 'menu-open' }} {% endif %}">
+                    <a href="#"
+                        class="nav-link {% if dispatcher.getControllerName() in ['trashs'] %} {{ 'active' }} {% endif %}">
+                        <i class="nav-icon fas fa-trash-restore"></i>
+                        <p> Thùng rác<i class="right fas fa-angle-left"></i></p>
+                    </a>
+                    <ul class="nav nav-treeview mt-1">
+                        {% if master.checkPermission('posts', 'delete') %}
+                        <li class="nav-item">
+                            <a href="<?= WEB_ADMIN_URL ?>/trashs?type=posts"
+                                class="nav-link {% if dispatcher.getControllerName()=='trashs' AND request.get('type') == 'posts' %} {{ 'active' }} {% endif %}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Bài viết</p>
+                            </a>
+                        </li>
+                        {% endif %}
+                        {% if master.checkPermission('pages', 'delete') %}
+                        <li class="nav-item">
+                            <a href="<?= WEB_ADMIN_URL ?>/trashs?type=pages"
+                                class="nav-link {% if dispatcher.getControllerName()=='trashs' AND request.get('type') == 'pages' %} {{ 'active' }} {% endif %}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Trang thông tin</p>
+                            </a>
+                        </li>
+                        {% endif %}
+                        {% if master.checkPermission('subjects', 'delete') %}
+                        <li class="nav-item">
+                            <a href="<?= WEB_ADMIN_URL ?>/trashs?type=subjects"
+                                class="nav-link {% if dispatcher.getControllerName()=='trashs' AND request.get('type') == 'subjects' %} {{ 'active' }} {% endif %}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Môn học</p>
+                            </a>
+                        </li>
+                        {% endif %}
+                        {% if master.checkPermission('researches', 'delete') %}
+                        <li class="nav-item">
+                            <a href="<?= WEB_ADMIN_URL ?>/trashs?type=researches"
+                                class="nav-link {% if dispatcher.getControllerName()=='trashs' AND request.get('type') == 'researches' %} {{ 'active' }} {% endif %}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Hướng nghiên cứu</p>
+                            </a>
+                        </li>
+                        {% endif %}
+                        {% if master.checkPermission('slideshows', 'delete') %}
+                        <li class="nav-item">
+                            <a href="<?= WEB_ADMIN_URL ?>/trashs?type=slideshows"
+                                class="nav-link {% if dispatcher.getControllerName()=='trashs' AND request.get('type') == 'slideshows' %} {{ 'active' }} {% endif %}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Banners</p>
+                            </a>
+                        </li>
+                        {% endif %}
+                        {% if master.checkPermission('staffs', 'delete') %}
+                        <li class="nav-item">
+                            <a href="<?= WEB_ADMIN_URL ?>/trashs?type=staffs"
+                                class="nav-link {% if dispatcher.getControllerName()=='trashs' AND request.get('type') == 'staffs' %} {{ 'active' }} {% endif %}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Tổ chức Cán bộ</p>
+                            </a>
+                        </li>
+                        {% endif %}
+                        {% if master.checkPermission('partners', 'delete') %}
+                        <li class="nav-item">
+                            <a href="<?= WEB_ADMIN_URL ?>/trashs?type=partners"
+                                class="nav-link {% if dispatcher.getControllerName()=='trashs' AND request.get('type') == 'partners' %} {{ 'active' }} {% endif %}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Liên kết/ đối tác</p>
                             </a>
                         </li>
                         {% endif %}

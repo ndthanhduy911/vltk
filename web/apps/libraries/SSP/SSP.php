@@ -7,10 +7,11 @@ class SSP
     {
         $start = (int)$_this->request->get('start','int');
         $length = $_this->request->get('length','int');
-        $search = $_this->request->get('search','int');
+        $search = $_this->request->get('search',['trim','string']);
         $search = isset($search['value']) ? $search['value'] : '';
         $data = $input;
-        if($search && !$search_text){
+
+        if($search && $search_text){
             $data = $data->andWhere($search_text,['search' => '%'.$search.'%']);
         }
 

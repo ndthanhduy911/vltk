@@ -162,27 +162,33 @@ const dataTableCt = (table, opCT = false,router={co:'',fo:'',aj:'ajaxgetdata',cl
                 window.history.pushState({}, `Order ${router.co}`, `${webAdminUrl}/${router.co}${textGet}&order=${orderBy}&dir=${orderDir}`);
             });
 
-            $(router.fo).submit(function (e) { 
-                e.preventDefault();
-                let dataSearch = $(router.fo).serializeArray();
-                let textGetSearch = "?paged=";
-                dataSearch.forEach((element, index) => {
-                    if(element.name != "paged"){
-                        textGetSearch += `&${element.name}=${element.value}`
-                    }
-                })            
-                dt.ajax.url( `${webAdminUrl}/${router.co}/${router.aj}${textGetSearch}` ).load();
-                window.history.pushState({}, `Search ${router.co}`, `${webAdminUrl}/${router.co}${textGetSearch}`);
-            });
+            if(router.fo){
+                $(router.fo).submit(function (e) { 
+                    e.preventDefault();
+                    let dataSearch = $(router.fo).serializeArray();
+                    let textGetSearch = "?paged=";
+                    dataSearch.forEach((element, index) => {
+                        if(element.name != "paged"){
+                            textGetSearch += `&${element.name}=${element.value}`
+                        }
+                    })            
+                    dt.ajax.url( `${webAdminUrl}/${router.co}/${router.aj}${textGetSearch}` ).load();
+                    window.history.pushState({}, `Search ${router.co}`, `${webAdminUrl}/${router.co}${textGetSearch}`);
+                });
+            }
 
             checkboxAll(`#${router.co}CheckboxAll`,`.${router.co}Checkbox`);
             deleteAll(`#delete${router.cl}`, `.${router.co}Checkbox`,(data) => {
                 showSweetAlertOk('Xóa thành công');
                 dt.draw()
             });
-            updateSetting(table,router.cl,router.ff,router.tf,()=>{
-                dataTableCt(table,opCT,router);
-            });
+
+            if(router.ff && router.tf){
+                updateSetting(table,router.cl,router.ff,router.tf,()=>{
+                    dataTableCt(table,opCT,router);
+                });
+            }
+
             resolve(dt);
         }else{
             reject();
@@ -871,6 +877,13 @@ const createButton = (types = ["","","",""], item,controller, className) => {
             title = "Xuất biên bản bàn giao"
             break;            
         }
+        case 6 : {
+            action = 'restore';
+            color = 'info';
+            icon = 'sync';
+            title = "Khôi phục dữ liệu"
+            break;            
+        }
             
         default:
             break;
@@ -931,6 +944,11 @@ const showButtonView = (item,controller,className) => {
 const showButtonEdit = (item,controller,className) => {
     return createButton([2, 'view' ,'getsingle'],item,controller,className);
 }
+// Show Button Restore
+const showButtonRestore = (item,controller,className) => {
+    return createButton([6, 'restore' ,''],item,controller,className);
+}
+
 
 // Show button updatedetail
 const showActionDetailButton = (item, controller, className, typeBtn = {

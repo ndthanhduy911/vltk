@@ -13,16 +13,10 @@
                         class="ml-2 btn btn-hnn btn-hnn-default"><span><i class="fas fa-cog"></i></span></a>
                 </div>
 
-                {% if master.checkPermission('pages', 'trashs') %}
+                {% if master.checkPermission('pages', 'delete') %}
                 <div class="btn-group float-right">
-                    <a href="<?= WEB_ADMIN_URL ?>/pages/trashs" title="Thùng rác"
-                        class="ml-2 btn btn-hnn btn-hnn-warning"><span><i class="fas fa-trash"></i></span></a>
-                </div>
-                {% endif %}
-                {% if master.checkPermission('pages', 'trashs') %}
-                <div class="btn-group float-right">
-                    <a id="deletePages" data-href="<?= WEB_ADMIN_URL ?>/pages/trash" title="Xóa"
-                        class="ml-2 btn btn-hnn btn-hnn-danger"><span><i class="fas fa-ban"></i></span></a>
+                    <a id="deletePages" data-href="<?= WEB_ADMIN_URL ?>/pages/delete" title="Xóa"
+                        class="ml-2 btn btn-hnn btn-hnn-danger"><span><i class="fas fa-trash"></i></span></a>
                 </div>
                 {% endif %}
                 {% if master.checkPermission('pages', 'update') %}

@@ -9,22 +9,22 @@
             </div>
             <div class="col-sm-6">
                 <div class="btn-group float-right">
-                    <a id="settingTrashResearches" data-href="<?= WEB_ADMIN_URL ?>/setting/filters" data-get="<?= WEB_ADMIN_URL ?>/setting/getsinglefilter?fkey=trashresearches" title="Thiết lập giao diện"
+                    <a id="settingSubjects" data-href="<?= WEB_ADMIN_URL ?>/setting/filters" data-get="<?= WEB_ADMIN_URL ?>/setting/getsinglefilter?fkey=subjects" title="Thiết lập giao diện"
                         class="ml-2 btn btn-hnn btn-hnn-default"><span><i class="fas fa-cog"></i></span></a>
                 </div>
-                {% if master.checkPermission('researches', 'delete') %}
-                <div class="btn-group float-right">
-                    <a id="deleteTrashResearches" data-href="<?= WEB_ADMIN_URL ?>/researches/delete" title="Xóa vĩnh viễn"
-                        class="ml-2 btn btn-hnn btn-hnn-danger"><span><i class="fas fa-trash-alt"></i></span></a>
-                </div>
-                {% endif %}
-                {% if master.checkPermission('researches', 'restore') %}
-                <div class="btn-group float-right">
-                    <a id="restoreResearches" data-href="<?= WEB_ADMIN_URL ?>/researches/restore" title="Khôi phục bài viết"
-                        class="ml-2 btn btn-hnn btn-hnn-info"><span><i class="fas fa-sync"></i></span></a>
-                </div>
-                {% endif %}
 
+                {% if master.checkPermission('subjects', 'delete') %}
+                <div class="btn-group float-right">
+                    <a id="deleteSubjects" data-href="<?= WEB_ADMIN_URL ?>/subjects/delete" title="Xóa"
+                        class="ml-2 btn btn-hnn btn-hnn-danger"><span><i class="fas fa-trash"></i></span></a>
+                </div>
+                {% endif %}
+                {% if master.checkPermission('subjects', 'update') %}
+                <div class="btn-group float-right">
+                    <a id="addSubjects" href="<?= WEB_ADMIN_URL ?>/subjects/view" title="Tạo mới"
+                        class="ml-2 btn btn-hnn btn-hnn-success"><span><i class="fas fa-plus"></i></span></a>
+                </div>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -42,7 +42,7 @@
             <div class="col-md-12">
                 <div class="card card-primary card-outline">
                     <div class="card-body">
-                        <form action="" id="searchTrashResearches" class="searchForm">
+                        <form action="" id="searchSubjects" class="searchForm">
                             <div class="row d-md-flex align-items-md-center">
                                 <span class="col-auto mt-2">Tìm kiếm</span>
                                 <div class="flex-1 col-auto row pr-0">
@@ -69,16 +69,17 @@
                             </div>
                         </form>
                         <div class="table-responsive">
-                            <table id="trashresearches" class="table table-bordered table-hover rounded">
+                            <table id="subjects" class="table table-bordered table-hover rounded">
                                 <thead>
                                     <tr>
                                         <th data-col="no" class="align-middle text-center" style="width: 20px;">
-                                            <input id="researchesCheckboxAll" type="checkbox" value="1">
+                                            <input id="subjectsCheckboxAll" type="checkbox" value="1">
                                         </th>
                                         <th data-col="no" class="align-middle text-center" style="width: 20px;">STT</th>
                                         {% for key,table in fTables %}
-                                        <th data-col="{{table}}" class="align-middle text-center"><?= $this->helper->showSort($table,$this,'researches',\Researches::filedName($table)) ?></th>
+                                        <th data-col="{{table}}" class="align-middle text-center"><?= $this->helper->showSort($table,$this,'subjects',\Subjects::filedName($table)) ?></th>
                                         {% endfor %}
+                                        <th data-col="no" class="align-middle text-center">Thao tác</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -94,10 +95,10 @@
     </div>
 </section>
 
-<div class="modal fade" id="modalSettingTrashResearches">
+<div class="modal fade" id="modalSettingSubjects">
     <div class="modal-dialog" style="min-width: 1300px;">
         <div class="modal-content">
-            <form id="frmSettingTrashResearches" action="" method="POST" enctype="multipart/form-data" data-toggle="validator" class="customForm">
+            <form id="frmSettingSubjects" action="" method="POST" enctype="multipart/form-data" data-toggle="validator" class="customForm">
                 <div class="modal-header">
                     <h4 class="modal-title">Thiết lập giao diện</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -123,7 +124,7 @@
                                             <input class="" type="checkbox" id="filters-{{value}}"
                                                 name="filters[]" value="{{value}}">
                                             <label for="filters-{{value}}"
-                                                class="font-weight-normal mb-0 ml-2"><?= \Researches::filedName($value) ?></label>
+                                                class="font-weight-normal mb-0 ml-2"><?= \Subjects::filedName($value) ?></label>
                                         </div>
                                     </div>
                                 </div>
@@ -150,7 +151,7 @@
                                             <input class="" type="checkbox" id="tables-{{value}}"
                                                 name="tables[]" value="{{value}}">
                                             <label for="tables-{{value}}"
-                                                class="font-weight-normal mb-0 ml-2"><?= \Researches::filedName($value) ?></label>
+                                                class="font-weight-normal mb-0 ml-2"><?= \Subjects::filedName($value) ?></label>
                                         </div>
                                     </div>
                                 </div>
@@ -158,7 +159,7 @@
                             </div>
                         </div>
                     </div>
-                    <input type="hidden" name="fkey" value="trashresearches">
+                    <input type="hidden" name="fkey" value="subjects">
                     <input class="tokenCSRF" type='hidden' name="{{security.getTokenKey()}}" value="{{security.getToken()}}" />
                 </div>
                 <div class="modal-footer justify-content-between">

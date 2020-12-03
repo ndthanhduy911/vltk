@@ -1,11 +1,11 @@
 <?php
 use Library\Helper\HelperValidation;
-class SubjectsLang extends \Phalcon\Mvc\Model
+class StaffsLang extends \Phalcon\Mvc\Model
 {
     public function initialize()
     {
         $this->setSchema(SCHEMADB);
-        $this->setSource("staffslang");
+        $this->setSource("stafflang");
     }
 
     public function vdUpdate($try = false){

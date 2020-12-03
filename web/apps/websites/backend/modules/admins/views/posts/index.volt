@@ -13,16 +13,10 @@
                         class="ml-2 btn btn-hnn btn-hnn-default"><span><i class="fas fa-cog"></i></span></a>
                 </div>
 
-                {% if master.checkPermission('posts', 'trashs') %}
+                {% if master.checkPermission('posts','delete') %}
                 <div class="btn-group float-right">
-                    <a href="<?= WEB_ADMIN_URL ?>/posts/trashs" title="Thùng rác"
-                        class="ml-2 btn btn-hnn btn-hnn-warning"><span><i class="fas fa-trash"></i></span></a>
-                </div>
-                {% endif %}
-                {% if master.checkPermission('posts', 'trashs') %}
-                <div class="btn-group float-right">
-                    <a id="deletePosts" data-href="<?= WEB_ADMIN_URL ?>/posts/trash" title="Xóa"
-                        class="ml-2 btn btn-hnn btn-hnn-danger"><span><i class="fas fa-ban"></i></span></a>
+                    <a id="deletePosts" data-href="<?= WEB_ADMIN_URL ?>/posts/delete" title="Xóa bài viết"
+                        class="ml-2 btn btn-hnn btn-hnn-danger"><span><i class="fas fa-trash"></i></span></a>
                 </div>
                 {% endif %}
                 {% if master.checkPermission('posts', 'update') %}
