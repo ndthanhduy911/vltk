@@ -224,4 +224,23 @@ $router->add(WEB_ADMIN_URI . '/classes/:action/:int', array(
     'id' => 2
 ));
 
+/***********************MenusController***********************/
+$router->add(WEB_ADMIN_URI . '/menus', array(
+    'module' => 'backend_admins',
+    'controller' => 'menus',
+    'action' => 'index',
+));
+
+$router->add(WEB_ADMIN_URI . '/menus/:action', array(
+    'module' => 'backend_admins',
+    'controller' => 'menus',
+    'action' => 1,
+));
+$router->add(WEB_ADMIN_URI . '/menus/:action/:int', array(
+    'module' => 'backend_admins',
+    'controller' => 'menus',
+    'action'  => 1,
+    'id' => 2
+));
+
 
