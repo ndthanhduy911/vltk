@@ -246,6 +246,19 @@ select.is-valid+.select2 .select2-selection {
     padding-top: 4px;
     padding-bottom: 4px;
 }
+select.is-valid+.select2 .select2-selection.select2-selection--multiple {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.select2-container--default.select2-container--focus .select2-selection--multiple {
+    border: none;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__rendered {
+    padding-left: 0;
+    padding-right: 0;
+}
 
 .select2-container--default.select2-container--disabled {
     background-color: #e9ecef;

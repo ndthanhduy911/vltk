@@ -9,12 +9,12 @@ class IndexController extends \BackendController
         $deptid = $this->session->get('deptid');
         if($deptid !== 1){
             $countStaff = \Staffs::count(["deptid = {$deptid} AND status = 1 AND deleted = 0"]);
-            $countPartner = \Partner::count(["deptid = {$deptid} AND status = 1 AND deleted = 0"]);
+            $countPartner = \Partners::count(["deptid = {$deptid} AND status = 1 AND deleted = 0"]);
             $countPage = \Pages::count(["deptid = {$deptid} AND status = 1 AND deleted = 0"]);
             $countPost = \Posts::count(["deptid = {$deptid} AND status = 1 AND deleted = 0"]);
         }else{
             $countStaff = \Staffs::count(["status = 1 AND deleted = 0"]);
-            $countPartner = \Partner::count(["status = 1 AND deleted = 0"]);
+            $countPartner = \Partners::count(["status = 1 AND deleted = 0"]);
             $countPage = \Pages::count(["status = 1 AND deleted = 0"]);
             $countPost = \Posts::count(["status = 1 AND deleted = 0"]);
         }

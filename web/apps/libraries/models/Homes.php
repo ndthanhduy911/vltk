@@ -1,5 +1,5 @@
 <?php
-class Home extends \ModelCore
+class Homes extends \ModelCore
 {
     public function initialize()
     {

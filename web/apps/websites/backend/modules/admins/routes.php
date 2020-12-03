@@ -94,21 +94,21 @@ $router->add(WEB_ADMIN_URI . '/partners/:action/:int', array(
     'id' => 2
 ));
 
-/***********************HomeController***********************/
-$router->add(WEB_ADMIN_URI . '/home', array(
+/***********************HomesController***********************/
+$router->add(WEB_ADMIN_URI . '/homes', array(
     'module' => 'backend_admins',
-    'controller' => 'home',
+    'controller' => 'homes',
     'action' => 'index',
 ));
 
-$router->add(WEB_ADMIN_URI . '/home/:action', array(
+$router->add(WEB_ADMIN_URI . '/homes/:action', array(
     'module' => 'backend_admins',
-    'controller' => 'home',
+    'controller' => 'homes',
     'action' => 1,
 ));
-$router->add(WEB_ADMIN_URI . '/home/:action/:int', array(
+$router->add(WEB_ADMIN_URI . '/homes/:action/:int', array(
     'module' => 'backend_admins',
-    'controller' => 'home',
+    'controller' => 'homes',
     'action'  => 1,
     'id' => 2
 ));

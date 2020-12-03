@@ -111,15 +111,15 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?= WEB_ADMIN_URL ?>/home"
-                        class="nav-link {% if dispatcher.getControllerName()=='home' %} {{ 'active' }} {% endif %}">
+                    <a href="<?= WEB_ADMIN_URL ?>/homes"
+                        class="nav-link {% if dispatcher.getControllerName()=='homes' %} {{ 'active' }} {% endif %}">
                         <i class="nav-icon fas fa-home"></i>
                         <p>Trang chủ</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?= WEB_ADMIN_URL ?>/home"
-                        class="nav-link {% if dispatcher.getControllerName()=='home' %} {{ 'active' }} {% endif %}">
+                    <a href="<?= WEB_ADMIN_URL ?>/menus"
+                        class="nav-link {% if dispatcher.getControllerName()=='menus' %} {{ 'active' }} {% endif %}">
                         <i class="nav-icon fas fa-list-alt"></i>
                         <p>Menus</p>
                     </a>

@@ -1,5 +1,5 @@
 <?php
-class HomeLang extends \Phalcon\Mvc\Model
+class HomesLang extends \Phalcon\Mvc\Model
 {
     public function initialize()
     {
