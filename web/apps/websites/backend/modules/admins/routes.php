@@ -75,21 +75,21 @@ $router->add(WEB_ADMIN_URI . '/staffs/:action/:int', array(
     'id' => 2
 ));
 
-/***********************PartnerController***********************/
-$router->add(WEB_ADMIN_URI . '/partner', array(
+/***********************PartnersController***********************/
+$router->add(WEB_ADMIN_URI . '/partners', array(
     'module' => 'backend_admins',
-    'controller' => 'partner',
+    'controller' => 'partners',
     'action' => 'index',
 ));
 
-$router->add(WEB_ADMIN_URI . '/partner/:action', array(
+$router->add(WEB_ADMIN_URI . '/partners/:action', array(
     'module' => 'backend_admins',
-    'controller' => 'partner',
+    'controller' => 'partners',
     'action' => 1,
 ));
-$router->add(WEB_ADMIN_URI . '/partner/:action/:int', array(
+$router->add(WEB_ADMIN_URI . '/partners/:action/:int', array(
     'module' => 'backend_admins',
-    'controller' => 'partner',
+    'controller' => 'partners',
     'action'  => 1,
     'id' => 2
 ));

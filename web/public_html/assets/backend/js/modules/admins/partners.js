@@ -20,12 +20,12 @@ const getPageLink = (item) => {
     return `<a target="_blank" href="${webUri}/news/${item.slug}">Link</a>`;
 }
 
-const loadTableSubjects = (table = '#subjects', cb = () => {}) => {
+const loadTablePartners = (table = '#partners', cb = () => {}) => {
     if ($(table).length) {
         let router = {
-            co:'subjects',aj:'ajaxgetdata',fo:'#searchSubjects',cl:'Subjects',ti:'môn học',
-            ff:['title', 'code','status', 'createdat'],
-            tf:['image','code','title','excerpt','createdat','slug','status']
+            co:'partners',aj:'ajaxgetdata',fo:'#searchPartners',cl:'Partners',ti:'Liên kết/ đối tác',
+            ff:['title', 'status', 'createdat'],
+            tf:['image','title','excerpt','createdat','link','status']
         };
         let paramsUrl = getParams();
         let columns = [];
@@ -70,7 +70,7 @@ const loadTableSubjects = (table = '#subjects', cb = () => {}) => {
     }
 }
 
-const updateSubjects = (form = '#frmSubjects') => {
+const updatePartners = (form = '#frmPartners') => {
     if($(form).length){
         if($(`${form} #ckEditor1`).length){
             getCkeditor1();
@@ -81,7 +81,7 @@ const updateSubjects = (form = '#frmSubjects') => {
         }
     
         sendAjax(form, "POST").then(() => {
-            window.location.href=`${webAdminUrl}/subjects`;
+            window.location.href=`${webAdminUrl}/partners`;
         });
     
         showSelectImage('#uploadImage','#showImg','#image', '#removeImage');
@@ -90,5 +90,5 @@ const updateSubjects = (form = '#frmSubjects') => {
     }
 }
 
-loadTableSubjects('#subjects');
-updateSubjects();
+loadTablePartners('#partners');
+updatePartners();

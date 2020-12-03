@@ -27,7 +27,8 @@ class FilterSetting extends \ModelCore
             'subjects' => \Subjects::findFilters(),
             'researches' => \Researches::findFilters(),
             'slideshows' => \Slideshows::findFilters(),
-            'staffs' => \Staffs::findFilters()
+            'staffs' => \Staffs::findFilters(),
+            'partners' => \Partners::findFilters()
         ];
         if($fkey && isset($fkeys[$fkey])){
             $groupField = \FieldGroup::findDataArrayKey($fkey);
@@ -67,7 +68,8 @@ class FilterSetting extends \ModelCore
             'subjects' => \Subjects::findTables(),
             'researches' => \Researches::findTables(),
             'slideshows' => \Slideshows::findTables(),
-            'staffs' => \Staffs::findTables()
+            'staffs' => \Staffs::findTables(),
+            'partners' => \Partners::findTables()
         ];
 
         if($fkey && isset($fkeys[$fkey])){
@@ -95,7 +97,8 @@ class FilterSetting extends \ModelCore
             'subjects' => \Subjects::arrayOrder(),
             'researches' => \Researches::arrayOrder(),
             'slideshows' => \Slideshows::arrayOrder(),
-            'staffs' => \Staffs::arrayOrder()
+            'staffs' => \Staffs::arrayOrder(),
+            'partners' => \Partners::arrayOrder()
         ];
         if($fkey && isset($fkeys[$fkey])){
             return $fkeys[$fkey];
