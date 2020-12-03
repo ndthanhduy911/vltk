@@ -33,11 +33,6 @@ const loadTableResearches = (table = '#researches', cb = () => {}) => {
         $(`${table} thead th`).each((key,element) => {
             let fkey = $(element).data('col');
             fkeys.push(fkey);
-            // if(['ddcosts'].indexOf(fkey) === -1){
-            //     columns.push({data : $(element).data('col')})
-            // }else{
-            //     columns.push({data : 'no'})
-            // }
             columns.push({data : $(element).data('col')})
         });
 

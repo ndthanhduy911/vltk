@@ -125,6 +125,7 @@ class ResearchesController  extends \BackendController {
             'rl.content',
             'rl.excerpt',
             'd.slug dslug',
+            '(SELECT dl.name FROM DeptsLang AS dl WHERE dl.deptid = r.deptid AND dl.langid = 1) AS deptname'
         ];
 
         $data = $this->modelsManager->createBuilder()
@@ -133,7 +134,7 @@ class ResearchesController  extends \BackendController {
         ->where("r.deleted = 0")
         ->leftJoin('ResearchesLang', 'rl.researchid = r.id AND rl.langid = 1','rl')
         ->leftJoin('Depts', 'd.id = r.deptid','d')
-        ->orderBy('r.createdat DESC');
+        ->orderBy('r.deptid ASC,r.id DESC');
 
         $data = $this->master::builderPermission($data,$perL,'r');
         $data = \FilterSetting::getDataOrder($this,$data,\Researches::findFirst(),'r',['rl'=>'title']);

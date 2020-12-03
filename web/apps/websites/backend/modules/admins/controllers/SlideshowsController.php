@@ -125,6 +125,7 @@ class SlideshowsController  extends \BackendController {
             'bl.name',
             'bl.description',
             'd.slug dslug',
+            '(SELECT dl.name FROM DeptsLang AS dl WHERE dl.deptid = b.deptid AND dl.langid = 1) AS deptname',
         ];
 
         $data = $this->modelsManager->createBuilder()
@@ -133,7 +134,7 @@ class SlideshowsController  extends \BackendController {
         ->where("b.deleted = 0")
         ->leftJoin('SlideshowsLang', 'bl.slideshowid = b.id AND bl.langid = 1','bl')
         ->leftJoin('Depts', 'd.id = b.deptid','d')
-        ->orderBy('b.sort ASC, b.id ASC');
+        ->orderBy('b.deptid ASC, b.sort ASC, b.id ASC');
 
         $data = $this->master::builderPermission($data,$perL,'b');
         $data = \FilterSetting::getDataOrder($this,$data,\Slideshows::findFirst(),'b',['bl'=>'name']);

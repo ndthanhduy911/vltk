@@ -131,6 +131,7 @@ class PostsController  extends \BackendController {
             'u.fullname authorname',
             'c.name catname',
             'd.slug dslug',
+            '(SELECT dl.name FROM DeptsLang AS dl WHERE dl.deptid = p.deptid AND dl.langid = 1) AS deptname',
         ];
 
         $data = $this->modelsManager->createBuilder()
@@ -141,7 +142,7 @@ class PostsController  extends \BackendController {
         ->leftJoin('CategoriesLang', 'c.catid = p.catid AND c.langid = 1','c')
         ->leftJoin('PostsLang', 'pl.postid = p.id AND pl.langid = 1','pl')
         ->leftJoin('Depts', 'd.id = p.deptid','d')
-        ->orderBy('p.calendar DESC');
+        ->orderBy('p.deptid ASC, p.calendar DESC');
 
         $data = $this->master::builderPermission($data,$perL,'p');
         $data = \FilterSetting::getDataOrder($this,$data,\Posts::findFirst(),'p',['pl'=>'title']);

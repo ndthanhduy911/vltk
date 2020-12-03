@@ -76,6 +76,9 @@
                                             <input id="slideshowsCheckboxAll" type="checkbox" value="1">
                                         </th>
                                         <th data-col="no" class="align-middle text-center" style="width: 20px;">STT</th>
+                                        {% if session.get('roleid') == 1 %}
+                                        <th data-col="deptname" class="align-middle text-center">Khoa/ bộ môn</th>
+                                        {% endif %}
                                         {% for key,table in fTables %}
                                         <th data-col="{{table}}" class="align-middle text-center"><?= $this->helper->showSort($table,$this,'slideshows',\Slideshows::filedName($table)) ?></th>
                                         {% endfor %}

@@ -128,6 +128,7 @@ class PagesController  extends \BackendController {
             'pl.excerpt',
             'u.fullname authorname',
             'd.slug dslug',
+            '(SELECT dl.name FROM DeptsLang AS dl WHERE dl.deptid = p.deptid AND dl.langid = 1) AS deptname',
         ];
 
         $data = $this->modelsManager->createBuilder()
@@ -137,7 +138,7 @@ class PagesController  extends \BackendController {
         ->leftJoin('User', 'u.id = p.author','u')
         ->leftJoin('PagesLang', 'pl.pageid = p.id AND pl.langid = 1','pl')
         ->leftJoin('Depts', 'd.id = p.deptid','d')
-        ->orderBy('p.createdat DESC');
+        ->orderBy('p.deptid ASC, p.id DESC');
 
         $data = $this->master::builderPermission($data,$perL,'p');
         $data = \FilterSetting::getDataOrder($this,$data,\Pages::findFirst(),'p',['pl'=>'title']);

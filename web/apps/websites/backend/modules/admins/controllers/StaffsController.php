@@ -126,6 +126,7 @@ class StaffsController  extends \BackendController {
             'sl.title',
             'sl.content',
             'd.slug dslug',
+            '(SELECT dl.name FROM DeptsLang AS dl WHERE dl.deptid = s.deptid AND dl.langid = 1) AS deptname',
         ];
 
         $data = $this->modelsManager->createBuilder()
@@ -134,7 +135,7 @@ class StaffsController  extends \BackendController {
         ->where("s.deleted = 0")
         ->leftJoin('StaffsLang', 'sl.staffid = s.id AND sl.langid = 1','sl')
         ->leftJoin('Depts', 'd.id = s.deptid','d')
-        ->orderBy('s.createdat DESC');
+        ->orderBy('s.deptid ASC,s.id DESC');
 
         $data = $this->master::builderPermission($data,$perL,'p');
         $data = \FilterSetting::getDataOrder($this,$data,\Staffs::findFirst(),'s',['sl'=>'title']);
