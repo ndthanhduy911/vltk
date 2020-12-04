@@ -88,7 +88,7 @@
                                 <div class="card-footer">
                                     {{filed.render()}}
                                     <a href="#" class="link upImage">Tải ảnh</a>
-                                    <a href="#" class="rmImage float-right link text-danger <?= !empty($items->{$filed->getName()}) ? '' : 'hidden' ?>">Xóa</a>
+                                    <a href="#" class="rmImage ml-auto link text-danger <?= !empty($items->{$filed->getName()}) ? '' : 'hidden' ?>">Xóa</a>
                                 </div>
                             </div>
                             {% else %}

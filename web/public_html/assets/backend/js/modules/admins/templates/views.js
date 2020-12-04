@@ -13,7 +13,7 @@ const updateViews = (form = '#frmViews') => {
         });
     
         showSelectImage(".boxImg .upImage",'.boxImg .showImg','.boxImg input', '.boxImg .rmImage');
-        changeTitleToSlug('#title', '#slug');
+        changeTitleToSlug('#title1', '#slug');
     }
 }
 

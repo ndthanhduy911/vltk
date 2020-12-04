@@ -13,9 +13,6 @@ class CategoriesForm extends \Phalcon\Forms\Form
             1 => "Hoạt động",
             0 => "Khóa",
         ], [
-            'useEmpty' => true,
-            'emptyText' => 'Chọn trạng thái',
-            'emptyValue' => '',
             'class' => 'form-control form-control-sm',
             'required' => '',
             'data-required-error' => 'Vui lòng nhập thông tin',

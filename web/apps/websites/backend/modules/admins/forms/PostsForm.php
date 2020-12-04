@@ -14,9 +14,6 @@ class PostsForm extends \Phalcon\Forms\Form
             1 => "Hoạt động",
             0 => "Khóa",
         ], [
-            'useEmpty' => true,
-            'emptyText' => 'Chọn trạng thái',
-            'emptyValue' => '',
             'class' => 'form-control form-control-sm',
             'required' => '',
             'data-required-error' => 'Vui lòng nhập thông tin',
@@ -59,6 +56,7 @@ class PostsForm extends \Phalcon\Forms\Form
         ])
         ->from(['c'=>"Categories"])
         ->leftJoin('CategoriesLang', "cl.catid = c.id AND cl.langid = 1",'cl')
+        ->where("c.deleted = 0")
         ->orderBy('cl.name ASC');
         $cats = \Library\Master\Master::builderPermission($cats,$perL,'c');
         $cats = $cats->getQuery()

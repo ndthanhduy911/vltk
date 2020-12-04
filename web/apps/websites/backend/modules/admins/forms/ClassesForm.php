@@ -45,9 +45,6 @@ class ClassesForm extends Form
             1 => "Hoạt động",
             0 => "Khóa",
         ], [
-            'useEmpty' => true,
-            'emptyText' => 'Chọn trạng thái',
-            'emptyValue' => '',
             'class' => 'form-control pull-right w-100',
             'required' => '',
             'data-required-error' => 'Vui lòng điền đầy đủ thông tin.',
