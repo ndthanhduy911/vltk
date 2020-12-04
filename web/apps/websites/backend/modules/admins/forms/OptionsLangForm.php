@@ -9,7 +9,7 @@ class OptionsLangForm extends \Phalcon\Forms\Form
     {
         $name = new Text('name');
         $name->setLabel('Tiêu đề');
-        $nameAttr = [
+        $attr = [
             'class' => "form-control form-control-sm",
             'placeholder' => 'Tiêu đề',
             'required' => '',
@@ -17,33 +17,21 @@ class OptionsLangForm extends \Phalcon\Forms\Form
             'data-required-error' => "Vui lòng nhập thông tin",
             'data-error' => "Thông tin không hợp lệ"
         ];
-        if(!empty($lang)){
-            $nameAttr['name'] = "name[$lang[0]]";
-            $nameAttr['id'] = "name".$lang[0];
-            if(!$lang[1]){
-                $nameAttr['class'] = $nameAttr['class'].' nvali';
-            }
-        }
-        $name->setAttributes($nameAttr);
+        $attr = cFL($attr,$lang,'name');
+        $name->setAttributes($attr);
         $this->add($name);
 
         $address = new Textarea('address');
         $address->setLabel('Địa chỉ');
-        $addressAttr = [
+        $attr = [
             'class' => 'form-control form-control-sm',
             'placeholder' => 'Địa chỉ',
             'maxlength' => "255",
             'data-error' => "Thông tin không hợp lệ",
             'rows' => 4
         ];
-        if(!empty($lang)){
-            $addressAttr['name'] = "address[$lang[0]]";
-            $addressAttr['id'] = 'address'.$lang[0];
-            if(!$lang[1]){
-                $addressAttr['class'] = $addressAttr['class'].' nvali';
-            }
-        }
-        $address->setAttributes($addressAttr);
+        $attr = cFL($attr,$lang,'address');
+        $address->setAttributes($attr);
         $this->add($address);
     }
 }

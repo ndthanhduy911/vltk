@@ -11,7 +11,7 @@ class PartnersLangForm extends Form
         //title
         $title = new Text('title');
         $title->setLabel('<i class="fas fa-book mr-1"></i>Tiêu đề');
-        $titleAttr = [
+        $attr = [
             'class' => "form-control form-control-sm",
             'placeholder' => 'Tiêu đề',
             'required' => '',
@@ -19,34 +19,22 @@ class PartnersLangForm extends Form
             'data-required-error' => "Vui lòng nhập thông tin",
             'data-error' => "Thông tin không hợp lệ"
         ];
-        if(!empty($lang)){
-            $titleAttr['name'] = "title[$lang[0]]";
-            $titleAttr['id'] = "title".$lang[0];
-            if(!$lang[1]){
-                $titleAttr['class'] = $titleAttr['class'].' nvali';
-            }
-        }
-        $title->setAttributes($titleAttr);
+        $attr = cFL($attr,$lang,'title');
+        $title->setAttributes($attr);
         $this->add($title);
 
         //excerpt
         $excerpt = new Textarea('excerpt');
         $excerpt->setLabel('<i class="fas fa-tags mr-1"></i>Tóm tắt');
-        $excerptAttr = [
+        $attr = [
             'class' => 'form-control form-control-sm',
             'placeholder' => 'Tóm tắt',
             'maxlength' => "255",
             'data-error' => "Thông tin chưa hợp lệ",
             'rows' => 4
         ];
-        if(!empty($lang)){
-            $excerptAttr['name'] = "excerpt[$lang[0]]";
-            $excerptAttr['id'] = 'excerpt'.$lang[0];
-            if(!$lang[1]){
-                $excerptAttr['class'] = $excerptAttr['class'].' nvali';
-            }
-        }
-        $excerpt->setAttributes($excerptAttr);
+        $attr = cFL($attr,$lang,'excerpt');
+        $excerpt->setAttributes($attr);
         $this->add($excerpt);
     }
 }

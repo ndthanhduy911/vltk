@@ -10,7 +10,7 @@ class HomesLangForm extends Form
     {
         $specializedtitle = new Text('specializedtitle');
         $specializedtitle->setLabel('Tiêu đề');
-        $specializedtitleAttr = [
+        $attr = [
             'class' => 'form-control form-control-sm',
             'placeholder' => 'Slug',
             'maxlength' => "255",
@@ -18,20 +18,14 @@ class HomesLangForm extends Form
             'data-required-error' => "Vui lòng nhập tiêu đề",
             'data-error' => "Thông tin chưa hợp lệ"
         ];
-        if(!empty($lang)){
-            $specializedtitleAttr['name'] = "specializedtitle[$lang[0]]";
-            $specializedtitleAttr['id'] = "specializedtitle".$lang[0];
-            if(!$lang[1]){
-                $specializedtitleAttr['class'] = $specializedtitleAttr['class'].' nvali';
-            }
-        }
-        $specializedtitle->setAttributes($specializedtitleAttr);
+        $attr = cFL($attr,$lang,'specializedtitle');
+        $specializedtitle->setAttributes($attr);
         $this->add($specializedtitle);
 
 
         $stafftitle = new Text('stafftitle');
         $stafftitle->setLabel('Tiêu đề');
-        $stafftitleAttr = [
+        $attr = [
             'class' => 'form-control form-control-sm',
             'placeholder' => 'Slug',
             'maxlength' => "255",
@@ -39,38 +33,26 @@ class HomesLangForm extends Form
             'data-required-error' => "Vui lòng nhập tiêu đề",
             'data-error' => "Thông tin chưa hợp lệ"
         ];
-        if(!empty($lang)){
-            $stafftitleAttr['name'] = "stafftitle[$lang[0]]";
-            $stafftitleAttr['id'] = "stafftitle".$lang[0];
-            if(!$lang[1]){
-                $stafftitleAttr['class'] = $stafftitleAttr['class'].' nvali';
-            }
-        }
-        $stafftitle->setAttributes($stafftitleAttr);
+        $attr = cFL($attr,$lang,'stafftitle');
+        $stafftitle->setAttributes($attr);
         $this->add($stafftitle);
 
         $staffdes = new Textarea('staffdes');
         $staffdes->setLabel('Tiêu đề');
-        $staffdesAttr = [
+        $attr = [
             'class' => 'form-control form-control-sm',
             'placeholder' => 'Slug',
             'maxlength' => "255",
             'rows' => 4,
             'data-error' => "Thông tin chưa hợp lệ"
         ];
-        if(!empty($lang)){
-            $staffdesAttr['name'] = "staffdes[$lang[0]]";
-            $staffdesAttr['id'] = "staffdes".$lang[0];
-            if(!$lang[1]){
-                $staffdesAttr['class'] = $staffdesAttr['class'].' nvali';
-            }
-        }
-        $staffdes->setAttributes($staffdesAttr);
+        $attr = cFL($attr,$lang,'staffdes');
+        $staffdes->setAttributes($attr);
         $this->add($staffdes);
 
         $partnertitle = new Text('partnertitle');
         $partnertitle->setLabel('Tiêu đề');
-        $partnertitleAttr = [
+        $attr = [
             'class' => 'form-control form-control-sm',
             'placeholder' => 'Slug',
             'maxlength' => "255",
@@ -78,39 +60,27 @@ class HomesLangForm extends Form
             'data-required-error' => "Vui lòng nhập tiêu đề",
             'data-error' => "Thông tin chưa hợp lệ"
         ];
-        if(!empty($lang)){
-            $partnertitleAttr['name'] = "partnertitle[$lang[0]]";
-            $partnertitleAttr['id'] = "partnertitle".$lang[0];
-            if(!$lang[1]){
-                $partnertitleAttr['class'] = $partnertitleAttr['class'].' nvali';
-            }
-        }
-        $partnertitle->setAttributes($partnertitleAttr);
+        $attr = cFL($attr,$lang,'partnertitle');
+        $partnertitle->setAttributes($attr);
         $this->add($partnertitle);
 
 
         $partnerdes = new Textarea('partnerdes');
         $partnerdes->setLabel('Tiêu đề');
-        $partnerdesAttr = [
+        $attr = [
             'class' => 'form-control form-control-sm',
             'placeholder' => 'Slug',
             'maxlength' => "255",
             'rows' => 4,
             'data-error' => "Thông tin chưa hợp lệ"
         ];
-        if(!empty($lang)){
-            $partnerdesAttr['name'] = "partnerdes[$lang[0]]";
-            $partnerdesAttr['id'] = "partnerdes".$lang[0];
-            if(!$lang[1]){
-                $partnerdesAttr['class'] = $partnerdesAttr['class'].' nvali';
-            }
-        }
-        $partnerdes->setAttributes($partnerdesAttr);
+        $attr = cFL($attr,$lang,'partnerdes');
+        $partnerdes->setAttributes($attr);
         $this->add($partnerdes);
 
         $contacttitle = new Text('contacttitle');
         $contacttitle->setLabel('Tiêu đề');
-        $contacttitleAttr = [
+        $attr = [
             'class' => 'form-control form-control-sm',
             'placeholder' => 'Slug',
             'maxlength' => "255",
@@ -118,33 +88,21 @@ class HomesLangForm extends Form
             'data-required-error' => "Vui lòng nhập tiêu đề",
             'data-error' => "Thông tin chưa hợp lệ"
         ];
-        if(!empty($lang)){
-            $contacttitleAttr['name'] = "contacttitle[$lang[0]]";
-            $contacttitleAttr['id'] = "contacttitle".$lang[0];
-            if(!$lang[1]){
-                $contacttitleAttr['class'] = $contacttitleAttr['class'].' nvali';
-            }
-        }
-        $contacttitle->setAttributes($contacttitleAttr);
+        $attr = cFL($attr,$lang,'contacttitle');
+        $contacttitle->setAttributes($attr);
         $this->add($contacttitle);
 
         $contactdes = new Textarea('contactdes');
         $contactdes->setLabel('Tiêu đề');
-        $contactdesAttr = [
+        $attr = [
             'class' => 'form-control form-control-sm',
             'placeholder' => 'Slug',
             'maxlength' => "255",
             'rows' => 4,
             'data-error' => "Thông tin chưa hợp lệ"
         ];
-        if(!empty($lang)){
-            $contactdesAttr['name'] = "contactdes[$lang[0]]";
-            $contactdesAttr['id'] = "contactdes".$lang[0];
-            if(!$lang[1]){
-                $contactdesAttr['class'] = $contactdesAttr['class'].' nvali';
-            }
-        }
-        $contactdes->setAttributes($contactdesAttr);
+        $attr = cFL($attr,$lang,'contactdes');
+        $contactdes->setAttributes($attr);
         $this->add($contactdes);
     }
 }
