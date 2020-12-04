@@ -72,11 +72,11 @@ const loadTableSubjects = (table = '#subjects', cb = () => {}) => {
 
 const updateSubjects = (form = '#frmSubjects') => {
     if($(form).length){
-        if($(`${form} #ckEditor1`).length){
+        if($(`${form} #content1`).length){
             getCkeditor1();
         }
     
-        if($(`${form} #ckEditor2`).length){
+        if($(`${form} #content2`).length){
             getCkeditor2();
         }
     

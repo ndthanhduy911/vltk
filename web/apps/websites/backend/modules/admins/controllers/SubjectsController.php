@@ -6,6 +6,10 @@ use Backend\Modules\Admins\Forms\SearchSubjectsForm;
 
 class SubjectsController  extends \BackendController {
 
+    private $title = "Môn học";
+
+    private $cler = "subjects";
+
     public function indexAction(){
         if($this->request->get('singlePage') && $this->request->isAjax()){
             $this->view->setRenderLevel(
@@ -17,7 +21,7 @@ class SubjectsController  extends \BackendController {
         $tables = \Subjects::findTables();
         $fFilters = ['title','code','status','createdat'];
         $fTables = ['image','code','title','excerpt','createdat','slug','status'];
-        if($fSetting = \FilterSetting::findFirstKey('subjects')){
+        if($fSetting = \FilterSetting::findFirstKey($this->cler)){
             $fFilters = $fSetting->filters ? json_decode($fSetting->filters) : $fFilters;
             $fTables = $fSetting->tables ? json_decode($fSetting->tables) : $fTables;   
         }
@@ -26,10 +30,9 @@ class SubjectsController  extends \BackendController {
         $fFilters = array_intersect($fFilters,$filters);
         $fTables = array_intersect($fTables,$tables);
 
-        $title = "Môn học";
         $this->getJsCss();
         $this->view->searchForm = new SearchSubjectsForm();
-        $this->view->title = $title;
+        $this->view->title = $this->title;
         $this->view->filters = $filters;
         $this->view->tables = $tables;
         $this->view->fFilters = $fFilters;
@@ -44,8 +47,8 @@ class SubjectsController  extends \BackendController {
             );
         }
 
-        $perEdit = $this->master::checkPermissionDepted('subjects', 'update',1);
-        $perView = $this->master::checkPermissionDepted('subjects', 'index');
+        $perEdit = $this->master::checkPermissionDepted($this->cler, 'update',1);
+        $perView = $this->master::checkPermissionDepted($this->cler, 'index');
         $perL = $perView ? $perView : ($perEdit? $perEdit :false);
         if(!$perL){
             require ERROR_FILE; die;
@@ -57,51 +60,44 @@ class SubjectsController  extends \BackendController {
         }
 
         $formsLang = [];
-        $subjectsLang = [];
-        $subjectContent = [];
         $languages = \Language::find(['status = 1']);
         if($id){
-            if(!$subjects = \Subjects::findFirstId($id)){
+            if(!$items = \Subjects::findFirstId($id)){
                 echo 'Không tìm thấy dữ liệu'; die;
             }         
             foreach ($languages as $key => $lang) {
                 $v = ($key == 0 ? true : false);
-                $subjectLang = \SubjectsLang::findFirst(['subjectid = :id: AND langid = :langid:','bind' => ['id' => $subjects->id, 'langid' => $lang->id]]);
-                if($subjectLang){
-                    $formLang = new SubjectsLangForm($subjectLang, [$lang->id,$v]);
-                    $subjectsLang[$lang->id] = $subjectLang;
+                $itemsLang = \SubjectsLang::findFirst(['subjectid = :id: AND langid = :langid:','bind' => ['id' => $items->id, 'langid' => $lang->id]]);
+                if($itemsLang){
+                    $formLang = new SubjectsLangForm($itemsLang, [$lang->id,$v]);
                     $formsLang[$lang->id] = $formLang;
-                    $subjectContent[$lang->id] = $subjectLang->content;
                 }else{
                     $formsLang[$lang->id] = new SubjectsLangForm(null, [$lang->id,$v]);
-                    $subjectsLang[$lang->id] = new \SubjectsLang();
-                    $subjectContent[$lang->id] = '';
                 }
             }
             $title = 'Chỉnh sửa';
         }else{
-            $subjects = new \Subjects();
+            $items = new \Subjects();
             $title = 'Thêm mới';
             foreach ($languages as $key => $lang) {
                 $v = $key == 0 ? true : false;
                 $formsLang[$lang->id] = new SubjectsLangForm(null, [$lang->id,$v]);
-                $subjectsLang[$lang->id] = new \SubjectsLang();
-                $subjectContent[$lang->id] = '';
             }
         }
 
-        $formSubjects = new SubjectsForm($subjects);
+        $form = new SubjectsForm($items);
         $this->view->perEdit = $perEdit ? 1 : "";
         $this->view->perView = $perView ? 1 : "";
         $this->view->languages = $languages;
-        $this->view->subjectContent = $subjectContent;
         $this->view->formsLang = $formsLang;
-        $this->view->formSubjects = $formSubjects;
-        $this->view->subjects = $subjects;
-        $this->view->subjectsLang = $subjectsLang;
+        $this->view->form = $form;
+        $this->view->items = $items;
         $this->view->title = $title;
-        $this->assets->addJs('/elfinder/js/require.min.js');
-        $this->getJsCss();
+        $this->view->btitle = $this->title;
+        $this->view->cler = $this->cler;
+        $this->assets->addJs(WEB_URI.'/elfinder/js/require.min.js');
+        $this->assets->addJs(WEB_URI.'/assets/backend/js/modules/admins/templates/views.js');
+        return $this->view->pick('templates/views');
     }
 
     // =================================
@@ -109,7 +105,7 @@ class SubjectsController  extends \BackendController {
     // =================================
     // Get data
     public function ajaxgetdataAction(){
-        if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('subjects', 'index')) {
+        if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted($this->cler, 'index')) {
             $this->helper->responseJson($this, ["error" => "Truy cập không được phép"]);
         }
         $columns = [
@@ -141,7 +137,7 @@ class SubjectsController  extends \BackendController {
         $data = \FilterSetting::getDataFilter($this,$data,\Subjects::arrayFilter(),['s',['sl'=>['title']]]);
 
         $array_row = [
-            'u' => $this->master::checkPermission('subjects', 'update', 1)
+            'u' => $this->master::checkPermission($this->cler, 'update', 1)
         ];
 
         $search = '';
@@ -158,7 +154,7 @@ class SubjectsController  extends \BackendController {
             $this->helper->responseJson($this, $data);
         }
         $data['token'] = ['key' => $this->security->getTokenKey(), 'value' => $this->security->getToken()];
-        if(!$this->request->isAjax() || !$this->request->isPost() || !$perL = $this->master::checkPermissionDepted('subjects','update')){
+        if(!$this->request->isAjax() || !$this->request->isPost() || !$perL = $this->master::checkPermissionDepted($this->cler,'update')){
             $data['error'] = ['Truy cập không được phép'];
             $this->helper->responseJson($this, $data);
         }
@@ -241,7 +237,7 @@ class SubjectsController  extends \BackendController {
     }
 
     public function deleteAction(){
-        if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('subjects', 'delete')) {
+        if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted($this->cler, 'delete')) {
             $this->helper->responseJson($this, ["error" => ["Truy cập không được phép"]]);
         }
 

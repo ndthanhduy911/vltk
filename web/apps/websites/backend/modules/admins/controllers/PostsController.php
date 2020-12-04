@@ -6,6 +6,10 @@ use Backend\Modules\Admins\Forms\SearchPostsForm;
 
 class PostsController  extends \BackendController {
 
+    private $title = "Bài viết";
+
+    private $cler = "posts";
+
     public function indexAction(){
         if($this->request->get('singlePage') && $this->request->isAjax()){
             $this->view->setRenderLevel(
@@ -17,7 +21,7 @@ class PostsController  extends \BackendController {
         $tables = \Posts::findTables();
         $fFilters = ['title','catid','status','calendar'];
         $fTables = ['image','title','excerpt','catid','authorname','calendar','slug','status'];
-        if($fSetting = \FilterSetting::findFirstKey('posts')){
+        if($fSetting = \FilterSetting::findFirstKey($this->cler)){
             $fFilters = $fSetting->filters ? json_decode($fSetting->filters) : $fFilters;
             $fTables = $fSetting->tables ? json_decode($fSetting->tables) : $fTables;   
         }
@@ -26,10 +30,9 @@ class PostsController  extends \BackendController {
         $fFilters = array_intersect($fFilters,$filters);
         $fTables = array_intersect($fTables,$tables);
 
-        $title = "Bài viết";
         $this->getJsCss();
         $this->view->searchForm = new SearchPostsForm();
-        $this->view->title = $title;
+        $this->view->title = $this->title;
         $this->view->filters = $filters;
         $this->view->tables = $tables;
         $this->view->fFilters = $fFilters;
@@ -44,8 +47,8 @@ class PostsController  extends \BackendController {
             );
         }
 
-        $perEdit = $this->master::checkPermissionDepted('posts', 'update',1);
-        $perView = $this->master::checkPermissionDepted('posts', 'index');
+        $perEdit = $this->master::checkPermissionDepted($this->cler, 'update',1);
+        $perView = $this->master::checkPermissionDepted($this->cler, 'index');
         $perL = $perView ? $perView : ($perEdit? $perEdit :false);
         if(!$perL){
             require ERROR_FILE; die;
@@ -57,62 +60,55 @@ class PostsController  extends \BackendController {
         }
 
         $formsLang = [];
-        $postsLang = [];
-        $postContent = [];
         $languages = \Language::find(['status = 1']);
         if($id){
-            if(!$posts = \Posts::findFirstId($id)){
+            if(!$items = \Posts::findFirstId($id)){
                 echo 'Không tìm thấy dữ liệu'; die;
             }         
             foreach ($languages as $key => $lang) {
                 $v = ($key == 0 ? true : false);
-                $postLang = \PostsLang::findFirst(['postid = :id: AND langid = :langid:','bind' => ['id' => $posts->id, 'langid' => $lang->id]]);
-                if($postLang){
-                    $formLang = new PostsLangForm($postLang, [$lang->id,$v]);
-                    $postsLang[$lang->id] = $postLang;
+                $itemsLang = \PostsLang::findFirst(['postid = :id: AND langid = :langid:','bind' => ['id' => $items->id, 'langid' => $lang->id]]);
+                if($itemsLang){
+                    $formLang = new PostsLangForm($itemsLang, [$lang->id,$v]);
                     $formsLang[$lang->id] = $formLang;
-                    $postContent[$lang->id] = $postLang->content;
                 }else{
                     $formsLang[$lang->id] = new PostsLangForm(null, [$lang->id,$v]);
-                    $postsLang[$lang->id] = new \PostsLang();
-                    $postContent[$lang->id] = '';
                 }
             }
             $title = 'Chỉnh sửa';
-            $posts->updatedat = date('Y-m-d H:i:s');
-            $posts->calendar = $this->helper->dateVn($posts->calendar,'d/m/Y H:i');
+            $items->updatedat = date('Y-m-d H:i:s');
+            $items->calendar = $this->helper->dateVn($items->calendar,'d/m/Y H:i');
         }else{
-            $posts = new \Posts();
+            $items = new \Posts();
             $title = 'Thêm mới';
             foreach ($languages as $key => $lang) {
                 $v = $key == 0 ? true : false;
                 $formsLang[$lang->id] = new PostsLangForm(null, [$lang->id,$v]);
-                $postsLang[$lang->id] = new \PostsLang();
-                $postContent[$lang->id] = '';
             }
-            $posts->calendar = date('d/m/Y H:i');
+            $items->calendar = date('d/m/Y H:i');
         }
 
-        $formPosts = new PostsForm($posts);
+        $form = new PostsForm($items);
 
         $this->view->perEdit = $perEdit ? 1 : "";
         $this->view->perView = $perView ? 1 : "";
         $this->view->languages = $languages;
-        $this->view->postContent = $postContent;
         $this->view->formsLang = $formsLang;
-        $this->view->formPosts = $formPosts;
-        $this->view->posts = $posts;
-        $this->view->postsLang = $postsLang;
+        $this->view->form = $form;
+        $this->view->items = $items;
         $this->view->title = $title;
-        $this->assets->addJs('/elfinder/js/require.min.js');
-        $this->getJsCss();
+        $this->view->btitle = $this->title;
+        $this->view->cler = $this->cler;
+        $this->assets->addJs(WEB_URI.'/elfinder/js/require.min.js');
+        $this->assets->addJs(WEB_URI.'/assets/backend/js/modules/admins/templates/views.js');
+        return $this->view->pick('templates/views');
     }
 
     // ===============================
     // API
     // ===============================
     public function ajaxgetdataAction(){
-        if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('posts', 'index')) {
+        if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted($this->cler, 'index')) {
             $this->helper->responseJson($this, ["error" => "Truy cập không được phép"]);
         }
         $columns = [
@@ -149,7 +145,7 @@ class PostsController  extends \BackendController {
         $data = \FilterSetting::getDataFilter($this,$data,\Posts::arrayFilter(),['p',['pl'=>['title']]]);
 
         $array_row = [
-            'u' => $this->master::checkPermission('posts', 'update', 1)
+            'u' => $this->master::checkPermission($this->cler, 'update', 1)
         ];
 
         $search = '';
@@ -167,7 +163,7 @@ class PostsController  extends \BackendController {
             $this->helper->responseJson($this, $data);
         }
         $data['token'] = ['key' => $this->security->getTokenKey(), 'value' => $this->security->getToken()];
-        if(!$this->request->isAjax() || !$this->request->isPost() || !$perL = $this->master::checkPermissionDepted('posts','update')){
+        if(!$this->request->isAjax() || !$this->request->isPost() || !$perL = $this->master::checkPermissionDepted($this->cler,'update')){
             $data['error'] = ['Truy cập không được phép'];
             $this->helper->responseJson($this, $data);
         }
@@ -256,7 +252,7 @@ class PostsController  extends \BackendController {
     }
 
     public function deleteAction(){
-        if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('posts', 'delete')) {
+        if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted($this->cler, 'delete')) {
             $this->helper->responseJson($this, ["error" => ["Truy cập không được phép"]]);
         }
 

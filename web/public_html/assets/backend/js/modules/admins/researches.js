@@ -67,11 +67,11 @@ const loadTableResearches = (table = '#researches', cb = () => {}) => {
 
 const updateResearches = (form = '#frmResearches') => {
     if($(form).length){
-        if($(`${form} #ckEditor1`).length){
+        if($(`${form} #content1`).length){
             getCkeditor1();
         }
     
-        if($(`${form} #ckEditor2`).length){
+        if($(`${form} #content2`).length){
             getCkeditor2();
         }
     

@@ -10,7 +10,7 @@ class StaffsLangForm extends Form
     public function initialize($entity = null, $lang = null)
     {
         $title = new Text('title');
-        $title->setLabel('Họ & tên');
+        $title->setLabel('<i class="fas fa-user mr-1"></i>Họ & tên');
         $titleAttr = [
             'class' => "form-control form-control-sm",
             'placeholder' => 'Ví dụ: GS.TS. CHÂU VĂN TẠO',

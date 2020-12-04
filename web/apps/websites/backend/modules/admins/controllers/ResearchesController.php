@@ -6,6 +6,10 @@ use Backend\Modules\Admins\Forms\SearchResearchesForm;
 
 class ResearchesController  extends \BackendController {
 
+    private $title = "Hướng nghiên cứu";
+
+    private $cler = "researches";
+
     public function indexAction(){
         if($this->request->get('singlePage') && $this->request->isAjax()){
             $this->view->setRenderLevel(
@@ -17,7 +21,7 @@ class ResearchesController  extends \BackendController {
         $tables = \Researches::findTables();
         $fFilters = ['title','status','createdat'];
         $fTables = ['image','title','excerpt','createdat','slug','status'];
-        if($fSetting = \FilterSetting::findFirstKey('researches')){
+        if($fSetting = \FilterSetting::findFirstKey($this->cler)){
             $fFilters = $fSetting->filters ? json_decode($fSetting->filters) : $fFilters;
             $fTables = $fSetting->tables ? json_decode($fSetting->tables) : $fTables;   
         }
@@ -26,10 +30,9 @@ class ResearchesController  extends \BackendController {
         $fFilters = array_intersect($fFilters,$filters);
         $fTables = array_intersect($fTables,$tables);
 
-        $title = "Hướng nghiên cứu";
         $this->getJsCss();
         $this->view->searchForm = new SearchResearchesForm();
-        $this->view->title = $title;
+        $this->view->title = $this->title;
         $this->view->filters = $filters;
         $this->view->tables = $tables;
         $this->view->fFilters = $fFilters;
@@ -44,8 +47,8 @@ class ResearchesController  extends \BackendController {
             );
         }
 
-        $perEdit = $this->master::checkPermissionDepted('researches', 'update',1);
-        $perView = $this->master::checkPermissionDepted('researches', 'index');
+        $perEdit = $this->master::checkPermissionDepted($this->cler, 'update',1);
+        $perView = $this->master::checkPermissionDepted($this->cler, 'index');
         $perL = $perView ? $perView : ($perEdit? $perEdit :false);
         if(!$perL){
             require ERROR_FILE; die;
@@ -57,52 +60,45 @@ class ResearchesController  extends \BackendController {
         }
 
         $formsLang = [];
-        $researchesLang = [];
-        $researchContent = [];
         $languages = \Language::find(['status = 1']);
         if($id){
-            if(!$researches = \Researches::findFirstId($id)){
+            if(!$items = \Researches::findFirstId($id)){
                 echo 'Không tìm thấy dữ liệu'; die;
             }         
             foreach ($languages as $key => $lang) {
                 $v = ($key == 0 ? true : false);
-                $researchLang = \ResearchesLang::findFirst(['researchid = :id: AND langid = :langid:','bind' => ['id' => $researches->id, 'langid' => $lang->id]]);
-                if($researchLang){
-                    $formLang = new ResearchesLangForm($researchLang, [$lang->id,$v]);
-                    $researchesLang[$lang->id] = $researchLang;
+                $itemsLang = \ResearchesLang::findFirst(['researchid = :id: AND langid = :langid:','bind' => ['id' => $items->id, 'langid' => $lang->id]]);
+                if($itemsLang){
+                    $formLang = new ResearchesLangForm($itemsLang, [$lang->id,$v]);
                     $formsLang[$lang->id] = $formLang;
-                    $researchContent[$lang->id] = $researchLang->content;
                 }else{
                     $formsLang[$lang->id] = new ResearchesLangForm(null, [$lang->id,$v]);
-                    $researchesLang[$lang->id] = new \ResearchesLang();
-                    $researchContent[$lang->id] = '';
                 }
             }
             $title = 'Chỉnh sửa';
         }else{
-            $researches = new \Researches();
+            $items = new \Researches();
             $title = 'Thêm mới';
             foreach ($languages as $key => $lang) {
                 $v = $key == 0 ? true : false;
                 $formsLang[$lang->id] = new ResearchesLangForm(null, [$lang->id,$v]);
-                $researchesLang[$lang->id] = new \ResearchesLang();
-                $researchContent[$lang->id] = '';
             }
         }
 
-        $formResearches = new ResearchesForm($researches);
+        $form = new ResearchesForm($items);
 
         $this->view->perEdit = $perEdit ? 1 : "";
         $this->view->perView = $perView ? 1 : "";
         $this->view->languages = $languages;
-        $this->view->researchContent = $researchContent;
         $this->view->formsLang = $formsLang;
-        $this->view->formResearches = $formResearches;
-        $this->view->researches = $researches;
-        $this->view->researchesLang = $researchesLang;
+        $this->view->form = $form;
+        $this->view->items = $items;
         $this->view->title = $title;
-        $this->assets->addJs('/elfinder/js/require.min.js');
-        $this->getJsCss();
+        $this->view->btitle = $this->title;
+        $this->view->cler = $this->cler;
+        $this->assets->addJs(WEB_URI.'/elfinder/js/require.min.js');
+        $this->assets->addJs(WEB_URI.'/assets/backend/js/modules/admins/templates/views.js');
+        return $this->view->pick('templates/views');
     }
 
     // =================================
@@ -110,7 +106,7 @@ class ResearchesController  extends \BackendController {
     // =================================
     // Get data
     public function ajaxgetdataAction(){
-        if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('researches', 'index')) {
+        if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted($this->cler, 'index')) {
             $this->helper->responseJson($this, ["error" => "Truy cập không được phép"]);
         }
         $columns = [
@@ -141,7 +137,7 @@ class ResearchesController  extends \BackendController {
         $data = \FilterSetting::getDataFilter($this,$data,\Researches::arrayFilter(),['r',['rl'=>['title']]]);
 
         $array_row = [
-            'u' => $this->master::checkPermission('researches', 'update', 1)
+            'u' => $this->master::checkPermission($this->cler, 'update', 1)
         ];
 
         $search = '';
@@ -157,7 +153,7 @@ class ResearchesController  extends \BackendController {
             $this->helper->responseJson($this, $data);
         }
         $data['token'] = ['key' => $this->security->getTokenKey(), 'value' => $this->security->getToken()];
-        if(!$this->request->isAjax() || !$this->request->isPost() || !$perL = $this->master::checkPermissionDepted('researches','update')){
+        if(!$this->request->isAjax() || !$this->request->isPost() || !$perL = $this->master::checkPermissionDepted($this->cler,'update')){
             $data['error'] = ['Truy cập không được phép'];
             $this->helper->responseJson($this, $data);
         }
@@ -239,7 +235,7 @@ class ResearchesController  extends \BackendController {
     }
 
     public function deleteAction(){
-        if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('researches', 'delete')) {
+        if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted($this->cler, 'delete')) {
             $this->helper->responseJson($this, ["error" => ["Truy cập không được phép"]]);
         }
 

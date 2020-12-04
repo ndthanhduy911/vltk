@@ -70,25 +70,4 @@ const loadTablePages = (table = '#pages', cb = () => {}) => {
     }
 }
 
-const updatePages = (form = '#frmPages') => {
-    if($(form).length){
-        if($(`${form} #ckEditor1`).length){
-            getCkeditor1();
-        }
-    
-        if($(`${form} #ckEditor2`).length){
-            getCkeditor2();
-        }
-    
-        sendAjax(form, "POST").then(() => {
-            window.location.href=`${webAdminUrl}/pages`;
-        });
-    
-        showSelectImage('#uploadImage','#showImg','#image', '#removeImage');
-        showSelectImage('#uploadBgImage','#showBgImg','#bgimage', '#removeBgImage');
-        changeTitleToSlug('#title', '#slug');
-    }
-}
-
 loadTablePages();
-updatePages();

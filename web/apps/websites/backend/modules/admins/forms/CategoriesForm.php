@@ -21,7 +21,7 @@ class CategoriesForm extends \Phalcon\Forms\Form
             'data-required-error' => 'Vui lòng nhập thông tin',
             'data-error' => "Thông tin chưa hợp lệ"
         ]);
-        $status->setLabel('Trạng thái');
+        $status->setLabel('<i class="fas fa-check-circle mr-1"></i>Trạng thái');
         $this->add($status);
 
         //parentid
@@ -40,7 +40,7 @@ class CategoriesForm extends \Phalcon\Forms\Form
 
         //slug
         $slug = new Text('slug');
-        $slug->setLabel('Slug');
+        $slug->setLabel('<i class="fas fa-globe mr-1"></i>Slug');
         $slug->setAttributes(array(
             'class' => 'form-control form-control-sm',
             'placeholder' => 'Slug',
@@ -51,6 +51,8 @@ class CategoriesForm extends \Phalcon\Forms\Form
 
         //image
         $image = new Hidden('image');
+        $image->setLabel('<i class="fas fa-image mr-1"></i>Ảnh đại diện');
+        $image->setUserOption('attr','image');
         $this->add($image);
     }
 }

@@ -4,23 +4,30 @@ namespace Backend\Modules\Admins\Forms;
 use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\Select;
 use Phalcon\Forms\Element\Hidden;
+use Phalcon\Forms\Element\Numeric;
 use Phalcon\Forms\Form;
 class StaffsForm extends Form
 {
     public function initialize($entity = null, $options = null)
     {
-        $slug = new Text('slug');
-        $slug->setLabel('Slug');
-        $slug->setAttributes(array(
+        //status
+        $status = new Select('status', [
+            1 => "Hoạt động",
+            0 => "Khóa",
+        ], [
+            'useEmpty' => true,
+            'emptyText' => 'Chọn trạng thái',
+            'emptyValue' => '',
             'class' => 'form-control form-control-sm',
-            'placeholder' => 'Slug',
-            'maxlength' => "200",
+            'required' => '',
+            'data-required-error' => 'Vui lòng nhập thông tin',
             'data-error' => "Thông tin chưa hợp lệ"
-        ));
-        $this->add($slug);
+        ]);
+        $status->setLabel('<i class="fas fa-check-circle mr-1"></i>Trạng thái');
+        $this->add($status);
 
         $email = new Text('email');
-        $email->setLabel('E-mail');
+        $email->setLabel('<i class="fas fa-envelope mr-1"></i>E-mail');
         $email->setAttributes(array(
             'class' => 'form-control form-control-sm',
             'placeholder' => 'Ví dụ: cvtao@hcmus.edu.vn',
@@ -28,6 +35,17 @@ class StaffsForm extends Form
             'data-error' => "Thông tin chưa hợp lệ"
         ));
         $this->add($email);
+
+        //deptid
+        $deptid = new Select('deptid', [], [
+            'class' => 'form-control form-control-sm',
+            'useEmpty' => true,
+            'emptyText' => 'Không có',
+            'emptyValue' => '',
+            'data-error' => "Thông tin chưa hợp lệ"
+        ]);
+        $deptid->setLabel('<i class="fas fa-building mr-1"></i>Khoa/ bộ môn');
+        $this->add($deptid);
 
         $dean = new Select('dean', [
             1 => "Trưởng khoa",
@@ -39,7 +57,7 @@ class StaffsForm extends Form
             'emptyValue' => '',
             'data-error' => "Thông tin chưa hợp lệ"
         ]);
-        $dean->setLabel('Chức vụ Khoa');
+        $dean->setLabel('<i class="fas fa-school mr-1"></i>Chức vụ Khoa');
         $this->add($dean);
 
         $dept_position = new Select('dept_position', [
@@ -56,39 +74,40 @@ class StaffsForm extends Form
             'emptyValue' => '',
             'data-error' => "Thông tin chưa hợp lệ"
         ]);
-        $dept_position->setLabel('Chức vụ Bộ môn');
+        $dept_position->setLabel('<i class="fas fa-graduation-cap mr-1"></i>Chức vụ Bộ môn');
         $this->add($dept_position);
 
-        //status
-        $status = new Select('status', [
-            1 => "Hoạt động",
-            0 => "Khóa",
-        ], [
-            'useEmpty' => true,
-            'emptyText' => 'Chọn trạng thái',
-            'emptyValue' => '',
+        $slug = new Text('slug');
+        $slug->setLabel('<i class="fas fa-globe mr-1"></i>Slug');
+        $slug->setAttributes(array(
             'class' => 'form-control form-control-sm',
-            'required' => '',
-            'data-required-error' => 'Vui lòng nhập thông tin',
+            'placeholder' => 'Slug',
+            'maxlength' => "200",
             'data-error' => "Thông tin chưa hợp lệ"
-        ]);
-        $status->setLabel('Trạng thái');
-        $this->add($status);
+        ));
+        $this->add($slug);
+
 
         $sort = new Numeric('sort');
         $sort->setAttributes(array(
-            'class' => 'form-control',
+            'class' => 'form-control form-control-sm',
             'placeholder' => 'Sắp xếp',
             'maxlength' => "999",
+            'data-error' => "Thông tin chưa hợp lệ"
         ));
+        $sort->setLabel('<i class="fas fa-sort mr-1"></i>Sắp xếp');
         $this->add($sort);
 
         //image
         $image = new Hidden('image');
+        $image->setLabel('<i class="fas fa-image mr-1"></i>Ảnh đại diện');
+        $image->setUserOption('attr','image');
         $this->add($image);
 
         //bgimage
         $bgimage = new Hidden('bgimage');
+        $bgimage->setLabel('<i class="fas fa-image mr-1"></i>Ảnh nền');
+        $bgimage->setUserOption('attr','image');
         $this->add($bgimage);
     }
 }

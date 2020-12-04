@@ -8,7 +8,7 @@ class SlideshowsLangForm extends \Phalcon\Forms\Form
     public function initialize($entity = null, $lang = null)
     {
         $name = new Text('name');
-        $name->setLabel('Tiêu đề');
+        $name->setLabel('<i class="fas fa-book mr-1"></i>Tiêu đề');
         $nameAttr = [
             'class' => "form-control form-control-sm",
             'placeholder' => 'Tiêu đề',
@@ -28,7 +28,7 @@ class SlideshowsLangForm extends \Phalcon\Forms\Form
         $this->add($name);
 
         $description = new Textarea('description');
-        $description->setLabel('Mô tả');
+        $description->setLabel('<i class="fas fa-tags mr-1"></i>Mô tả');
         $descriptionAttr = [
             'class' => 'form-control form-control-sm',
             'placeholder' => 'Mô tả',

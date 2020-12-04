@@ -6,6 +6,10 @@ use Backend\Modules\Admins\Forms\SearchCategoriesForm;
 
 class CategoriesController  extends \BackendController {
 
+    private $title = "Chuyên mục";
+
+    private $cler = "categories";
+
     public function indexAction(){
         if($this->request->get('singlePage') && $this->request->isAjax()){
             $this->view->setRenderLevel(
@@ -13,10 +17,9 @@ class CategoriesController  extends \BackendController {
             );
         }
 
-        $title = "Chuyên mục";
         $this->getJsCss();
         $this->view->searchForm = new SearchCategoriesForm();
-        $this->view->title = $title;
+        $this->view->title = $this->title;
     }
     public function viewAction($id = 0){
         if($this->request->get('singlePage') && $this->request->isAjax()){
@@ -25,8 +28,8 @@ class CategoriesController  extends \BackendController {
             );
         }
 
-        $perEdit = $this->master::checkPermissionDepted('categories', 'update',1);
-        $perView = $this->master::checkPermissionDepted('categories', 'index');
+        $perEdit = $this->master::checkPermissionDepted($this->cler, 'update',1);
+        $perView = $this->master::checkPermissionDepted($this->cler, 'index');
         $perL = $perView ? $perView : ($perEdit? $perEdit :false);
         if(!$perL){
             require ERROR_FILE; die;
@@ -38,7 +41,6 @@ class CategoriesController  extends \BackendController {
         }
 
         $formsLang = [];
-        $catsLang = [];
         $languages = \Language::find(['status = 1']);
         if($id){
             if(!$cat = \Categories::findFirstId($id)){
@@ -49,11 +51,9 @@ class CategoriesController  extends \BackendController {
                 $catLang = \CategoriesLang::findFirst(['catid = :id: AND langid = :langid:','bind' => ['id' => $cat->id, 'langid' => $lang->id]]);
                 if($catLang){
                     $formLang = new CategoriesLangForm($catLang, [$lang->id,$v]);
-                    $catsLang[$lang->id] = $catLang;
                     $formsLang[$lang->id] = $formLang;
                 }else{
                     $formsLang[$lang->id] = new CategoriesLangForm(null, [$lang->id,$v]);
-                    $catsLang[$lang->id] = new \CategoriesLang();
                 }
             }
             $title = 'Chỉnh sửa';
@@ -63,27 +63,29 @@ class CategoriesController  extends \BackendController {
             foreach ($languages as $key => $lang) {
                 $v = $key == 0 ? true : false;
                 $formsLang[$lang->id] = new CategoriesLangForm(null, [$lang->id,$v]);
-                $catsLang[$lang->id] = new \CategoriesLang();
             }
         }
 
-        $formCat = new CategoriesForm($cat);
+        $form = new CategoriesForm($items);
 
         $this->view->perEdit = $perEdit ? 1 : "";
         $this->view->perView = $perView ? 1 : "";
         $this->view->languages = $languages;
         $this->view->formsLang = $formsLang;
-        $this->view->formCat = $formCat;
-        $this->view->cat = $cat;
-        $this->view->catsLang = $catsLang;
+        $this->view->form = $form;
+        $this->view->items = $items;
         $this->view->title = $title;
-        $this->getJsCss();
+        $this->view->btitle = $this->title;
+        $this->view->cler = $this->cler;
+        $this->assets->addJs(WEB_URI.'/elfinder/js/require.min.js');
+        $this->assets->addJs(WEB_URI.'/assets/backend/js/modules/admins/templates/views.js');
+        return $this->view->pick('templates/views');
     }
     // ===============================
     // API
     // ===============================
     public function ajaxgetdataAction(){
-        if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('categories', 'index')) {
+        if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted($this->cler, 'index')) {
             $this->helper->responseJson($this, ["error" => "Truy cập không được phép"]);
         }
         $columns = [
@@ -111,7 +113,7 @@ class CategoriesController  extends \BackendController {
         $data = \FilterSetting::getDataFilter($this,$data,\Categories::arrayFilter(),['c',['cl'=>['name']]]);
 
         $array_row = [
-            'u' => $this->master::checkPermission('categories', 'update', 1)
+            'u' => $this->master::checkPermission($this->cler, 'update', 1)
         ];
 
         $search = '';
@@ -128,7 +130,7 @@ class CategoriesController  extends \BackendController {
             $this->helper->responseJson($this, $data);
         }
         $data['token'] = ['key' => $this->security->getTokenKey(), 'value' => $this->security->getToken()];
-        if(!$this->request->isAjax() || !$this->request->isPost() || !$perL = $this->master::checkPermissionDepted('categories','update')){
+        if(!$this->request->isAjax() || !$this->request->isPost() || !$perL = $this->master::checkPermissionDepted($this->cler,'update')){
             $data['error'] = ['Truy cập không được phép'];
             $this->helper->responseJson($this, $data);
         }
@@ -201,7 +203,7 @@ class CategoriesController  extends \BackendController {
         $this->helper->responseJson($this, $data);
     }
     public function deleteAction(){
-        if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('categories', 'delete')) {
+        if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted($this->cler, 'delete')) {
             $this->helper->responseJson($this, ["error" => ["Truy cập không được phép"]]);
         }
 

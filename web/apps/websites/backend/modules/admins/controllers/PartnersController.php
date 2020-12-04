@@ -5,6 +5,9 @@ use Backend\Modules\Admins\Forms\PartnersLangForm;
 use Backend\Modules\Admins\Forms\SearchPartnersForm;
 
 class PartnersController  extends \BackendController {
+    private $title = "Liên kết/ đối tác";
+
+    private $cler = "partners";
 
     public function indexAction(){
         if($this->request->get('singlePage') && $this->request->isAjax()){
@@ -17,7 +20,7 @@ class PartnersController  extends \BackendController {
         $tables = \Partners::findTables();
         $fFilters = ['title','status','createdat'];
         $fTables = ['image','title','excerpt','createdat','link','status'];
-        if($fSetting = \FilterSetting::findFirstKey('partners')){
+        if($fSetting = \FilterSetting::findFirstKey($this->cler)){
             $fFilters = $fSetting->filters ? json_decode($fSetting->filters) : $fFilters;
             $fTables = $fSetting->tables ? json_decode($fSetting->tables) : $fTables;   
         }
@@ -26,10 +29,9 @@ class PartnersController  extends \BackendController {
         $fFilters = array_intersect($fFilters,$filters);
         $fTables = array_intersect($fTables,$tables);
 
-        $title = "Liên kết/ đối tác";
         $this->getJsCss();
         $this->view->searchForm = new SearchPartnersForm();
-        $this->view->title = $title;
+        $this->view->title = $this->title;
         $this->view->filters = $filters;
         $this->view->tables = $tables;
         $this->view->fFilters = $fFilters;
@@ -44,8 +46,8 @@ class PartnersController  extends \BackendController {
             );
         }
 
-        $perEdit = $this->master::checkPermissionDepted('partners', 'update',1);
-        $perView = $this->master::checkPermissionDepted('partners', 'index');
+        $perEdit = $this->master::checkPermissionDepted($this->cler, 'update',1);
+        $perView = $this->master::checkPermissionDepted($this->cler, 'index');
         $perL = $perView ? $perView : ($perEdit? $perEdit :false);
         if(!$perL){
             require ERROR_FILE; die;
@@ -57,51 +59,44 @@ class PartnersController  extends \BackendController {
         }
 
         $formsLang = [];
-        $partnersLang = [];
-        $partnerContent = [];
         $languages = \Language::find(['status = 1']);
         if($id){
-            if(!$partners = \Partners::findFirstId($id)){
+            if(!$items = \Partners::findFirstId($id)){
                 echo 'Không tìm thấy dữ liệu'; die;
             }         
             foreach ($languages as $key => $lang) {
                 $v = ($key == 0 ? true : false);
-                $partnerLang = \PartnersLang::findFirst(['partnerid = :id: AND langid = :langid:','bind' => ['id' => $partners->id, 'langid' => $lang->id]]);
-                if($partnerLang){
-                    $formLang = new PartnersLangForm($partnerLang, [$lang->id,$v]);
-                    $partnersLang[$lang->id] = $partnerLang;
+                $itemsLang = \PartnersLang::findFirst(['partnerid = :id: AND langid = :langid:','bind' => ['id' => $items->id, 'langid' => $lang->id]]);
+                if($itemsLang){
+                    $formLang = new PartnersLangForm($itemsLang, [$lang->id,$v]);
                     $formsLang[$lang->id] = $formLang;
-                    $partnerContent[$lang->id] = $partnerLang->content;
                 }else{
                     $formsLang[$lang->id] = new PartnersLangForm(null, [$lang->id,$v]);
-                    $partnersLang[$lang->id] = new \PartnersLang();
-                    $partnerContent[$lang->id] = '';
                 }
             }
             $title = 'Chỉnh sửa';
         }else{
-            $partners = new \Partners();
+            $items = new \Partners();
             $title = 'Thêm mới';
             foreach ($languages as $key => $lang) {
                 $v = $key == 0 ? true : false;
                 $formsLang[$lang->id] = new PartnersLangForm(null, [$lang->id,$v]);
-                $partnersLang[$lang->id] = new \PartnersLang();
-                $partnerContent[$lang->id] = '';
             }
         }
 
-        $formPartners = new PartnersForm($partners);
+        $form = new PartnersForm($items);
         $this->view->perEdit = $perEdit ? 1 : "";
         $this->view->perView = $perView ? 1 : "";
         $this->view->languages = $languages;
-        $this->view->partnerContent = $partnerContent;
         $this->view->formsLang = $formsLang;
-        $this->view->formPartners = $formPartners;
-        $this->view->partners = $partners;
-        $this->view->partnersLang = $partnersLang;
+        $this->view->form = $form;
+        $this->view->items = $items;
         $this->view->title = $title;
-        $this->assets->addJs('/elfinder/js/require.min.js');
-        $this->getJsCss();
+        $this->view->btitle = $this->title;
+        $this->view->cler = $this->cler;
+        $this->assets->addJs(WEB_URI.'/elfinder/js/require.min.js');
+        $this->assets->addJs(WEB_URI.'/assets/backend/js/modules/admins/templates/views.js');
+        return $this->view->pick('templates/views');
     }
 
     // =================================
@@ -109,7 +104,7 @@ class PartnersController  extends \BackendController {
     // =================================
     // Get data
     public function ajaxgetdataAction(){
-        if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('partners', 'index')) {
+        if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted($this->cler, 'index')) {
             $this->helper->responseJson($this, ["error" => "Truy cập không được phép"]);
         }
         $columns = [
@@ -139,7 +134,7 @@ class PartnersController  extends \BackendController {
         $data = \FilterSetting::getDataFilter($this,$data,\Partners::arrayFilter(),['s',['sl'=>['title']]]);
 
         $array_row = [
-            'u' => $this->master::checkPermission('partners', 'update', 1)
+            'u' => $this->master::checkPermission($this->cler, 'update', 1)
         ];
 
         $search = '';
@@ -156,7 +151,7 @@ class PartnersController  extends \BackendController {
             $this->helper->responseJson($this, $data);
         }
         $data['token'] = ['key' => $this->security->getTokenKey(), 'value' => $this->security->getToken()];
-        if(!$this->request->isAjax() || !$this->request->isPost() || !$perL = $this->master::checkPermissionDepted('partners','update')){
+        if(!$this->request->isAjax() || !$this->request->isPost() || !$perL = $this->master::checkPermissionDepted($this->cler,'update')){
             $data['error'] = ['Truy cập không được phép'];
             $this->helper->responseJson($this, $data);
         }
@@ -239,7 +234,7 @@ class PartnersController  extends \BackendController {
     }
 
     public function deleteAction(){
-        if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('partners', 'delete')) {
+        if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted($this->cler, 'delete')) {
             $this->helper->responseJson($this, ["error" => ["Truy cập không được phép"]]);
         }
 

@@ -13,7 +13,7 @@ if ( CKEDITOR.env.ie && CKEDITOR.env.version < 9 )
 CKEDITOR.config.height = 150;
 CKEDITOR.config.width = 'auto';
 
-var getCkeditor1 = ( function(editor = 'ckEditor1') {
+var getCkeditor1 = ( function(editor = 'content1') {
 	var wysiwygareaAvailable = isWysiwygareaAvailable(),
 		isBBCodeBuiltIn = !!CKEDITOR.plugins.get( 'bbcode' );
 
@@ -48,7 +48,7 @@ var getCkeditor1 = ( function(editor = 'ckEditor1') {
 	}
 } )();
 
-var getCkeditor2 = ( function(editor = 'ckEditor2') {
+var getCkeditor2 = ( function(editor = 'content2') {
 	var wysiwygareaAvailable = isWysiwygareaAvailable(),
 		isBBCodeBuiltIn = !!CKEDITOR.plugins.get( 'bbcode' );
 

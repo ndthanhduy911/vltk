@@ -20,7 +20,7 @@
     width: 135px;
 }
 
-.card-header {
+.card-header,.card-footer {
     padding: .75rem 1rem;
     align-items: center!important;
     display: flex;

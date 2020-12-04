@@ -6,6 +6,10 @@ use Backend\Modules\Admins\Forms\SearchPagesForm;
 
 class PagesController  extends \BackendController {
 
+    private $title = "Trang thông tin";
+
+    private $cler = "pages";
+
     public function indexAction(){
         if($this->request->get('singlePage') && $this->request->isAjax()){
             $this->view->setRenderLevel(
@@ -17,7 +21,7 @@ class PagesController  extends \BackendController {
         $tables = \Pages::findTables();
         $fFilters = ['title','status','createdat'];
         $fTables = ['image','title','excerpt','authorname','createdat','slug','status'];
-        if($fSetting = \FilterSetting::findFirstKey('pages')){
+        if($fSetting = \FilterSetting::findFirstKey($this->cler)){
             $fFilters = $fSetting->filters ? json_decode($fSetting->filters) : $fFilters;
             $fTables = $fSetting->tables ? json_decode($fSetting->tables) : $fTables;   
         }
@@ -26,10 +30,9 @@ class PagesController  extends \BackendController {
         $fFilters = array_intersect($fFilters,$filters);
         $fTables = array_intersect($fTables,$tables);
 
-        $title = "Trang";
         $this->getJsCss();
         $this->view->searchForm = new SearchPagesForm();
-        $this->view->title = $title;
+        $this->view->title = $this->title;
         $this->view->filters = $filters;
         $this->view->tables = $tables;
         $this->view->fFilters = $fFilters;
@@ -44,8 +47,8 @@ class PagesController  extends \BackendController {
             );
         }
 
-        $perEdit = $this->master::checkPermissionDepted('posts', 'update',1);
-        $perView = $this->master::checkPermissionDepted('posts', 'index');
+        $perEdit = $this->master::checkPermissionDepted($this->cler, 'update',1);
+        $perView = $this->master::checkPermissionDepted($this->cler, 'index');
         $perL = $perView ? $perView : ($perEdit? $perEdit :false);
         if(!$perL){
             require ERROR_FILE; die;
@@ -57,52 +60,45 @@ class PagesController  extends \BackendController {
         }
 
         $formsLang = [];
-        $pagesLang = [];
-        $pageContent = [];
         $languages = \Language::find(['status = 1']);
         if($id){
-            if(!$pages = \Pages::findFirstId($id)){
+            if(!$items = \Pages::findFirstId($id)){
                 echo 'Không tìm thấy dữ liệu'; die;
             }         
             foreach ($languages as $key => $lang) {
                 $v = ($key == 0 ? true : false);
-                $pageLang = \PagesLang::findFirst(['pageid = :id: AND langid = :langid:','bind' => ['id' => $page->id, 'langid' => $lang->id]]);
-                if($pageLang){
-                    $formLang = new PagesLangForm($pageLang, [$lang->id,$v]);
-                    $pagesLang[$lang->id] = $pageLang;
+                $itemsLang = \PagesLang::findFirst(['pageid = :id: AND langid = :langid:','bind' => ['id' => $page->id, 'langid' => $lang->id]]);
+                if($itemsLang){
+                    $formLang = new PagesLangForm($itemsLang, [$lang->id,$v]);
                     $formsLang[$lang->id] = $formLang;
-                    $pageContent[$lang->id] = $pageLang->content;
                 }else{
                     $formsLang[$lang->id] = new PagesLangForm(null, [$lang->id,$v]);
-                    $pagesLang[$lang->id] = new \PagesLang();
-                    $pageContent[$lang->id] = '';
                 }
             }
             $title = 'Chỉnh sửa';
         }else{
-            $pages = new \Pages();
+            $items = new \Pages();
             $title = 'Thêm mới';
             foreach ($languages as $key => $lang) {
                 $v = $key == 0 ? true : false;
                 $formsLang[$lang->id] = new PagesLangForm(null, [$lang->id,$v]);
-                $pagesLang[$lang->id] = new \PagesLang();
-                $pageContent[$lang->id] = '';
             }
         }
 
-        $formPages = new PagesForm($pages);
+        $form = new PagesForm($items);
 
         $this->view->perEdit = $perEdit ? 1 : "";
         $this->view->perView = $perView ? 1 : "";
         $this->view->languages = $languages;
-        $this->view->pageContent = $pageContent;
         $this->view->formsLang = $formsLang;
-        $this->view->formPages = $formPages;
-        $this->view->pages = $pages;
-        $this->view->pagesLang = $pagesLang;
+        $this->view->form = $form;
+        $this->view->items = $items;
         $this->view->title = $title;
-        $this->assets->addJs('/elfinder/js/require.min.js');
-        $this->getJsCss();
+        $this->view->btitle = $this->title;
+        $this->view->cler = $this->cler;
+        $this->assets->addJs(WEB_URI.'/elfinder/js/require.min.js');
+        $this->assets->addJs(WEB_URI.'/assets/backend/js/modules/admins/templates/views.js');
+        return $this->view->pick('templates/views');
     }
 
     // =================================
@@ -110,7 +106,7 @@ class PagesController  extends \BackendController {
     // =================================
     // Get data
     public function ajaxgetdataAction(){
-        if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('pages', 'index')) {
+        if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted($this->cler, 'index')) {
             $this->helper->responseJson($this, ["error" => "Truy cập không được phép"]);
         }
         $columns = [
@@ -145,7 +141,7 @@ class PagesController  extends \BackendController {
         $data = \FilterSetting::getDataFilter($this,$data,\Pages::arrayFilter(),['p',['pl'=>['title']]]);
 
         $array_row = [
-            'u' => $this->master::checkPermission('pages', 'update', 1)
+            'u' => $this->master::checkPermission($this->cler, 'update', 1)
         ];
 
         $search = '';
@@ -161,7 +157,7 @@ class PagesController  extends \BackendController {
             $this->helper->responseJson($this, $data);
         }
         $data['token'] = ['key' => $this->security->getTokenKey(), 'value' => $this->security->getToken()];
-        if(!$this->request->isAjax() || !$this->request->isPost() || !$perL = $this->master::checkPermissionDepted('pages','update')){
+        if(!$this->request->isAjax() || !$this->request->isPost() || !$perL = $this->master::checkPermissionDepted($this->cler,'update')){
             $data['error'] = ['Truy cập không được phép'];
             $this->helper->responseJson($this, $data);
         }
@@ -244,7 +240,7 @@ class PagesController  extends \BackendController {
     }
 
     public function deleteAction(){
-        if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('pages', 'delete')) {
+        if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted($this->cler, 'delete')) {
             $this->helper->responseJson($this, ["error" => ["Truy cập không được phép"]]);
         }
 

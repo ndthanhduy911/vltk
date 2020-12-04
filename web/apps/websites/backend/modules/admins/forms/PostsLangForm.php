@@ -8,7 +8,7 @@ class PostsLangForm extends \Phalcon\Forms\Form
     public function initialize($entity = null, $lang = null)
     {
         $title = new Text('title');
-        $title->setLabel('Tiêu đề');
+        $title->setLabel('<i class="fas fa-book mr-1"></i>Tiêu đề');
         $titleAttr = [
             'class' => "form-control form-control-sm",
             'placeholder' => 'Tiêu đề',
@@ -28,7 +28,7 @@ class PostsLangForm extends \Phalcon\Forms\Form
         $this->add($title);
 
         $excerpt = new Textarea('excerpt');
-        $excerpt->setLabel('Tóm tắt');
+        $excerpt->setLabel('<i class="fas fa-tags mr-1"></i>Tóm tắt');
         $excerptAttr = [
             'class' => 'form-control form-control-sm',
             'placeholder' => 'Tóm tắt',
@@ -45,5 +45,23 @@ class PostsLangForm extends \Phalcon\Forms\Form
         }
         $excerpt->setAttributes($excerptAttr);
         $this->add($excerpt);
+
+        //content
+        $content = new Textarea('content');
+        $content->setLabel('<i class="fas fa-newspaper mr-1"></i> Nội dung');
+        $contentAttr = [
+            'class' => 'form-control form-control-sm',
+            'placeholder' => 'Nội dung',
+            'data-error' => "Thông tin chưa hợp lệ"
+        ];
+        if(!empty($lang)){
+            $contentAttr['name'] = "content[$lang[0]]";
+            $contentAttr['id'] = 'content'.$lang[0];
+            if(!$lang[1]){
+                $contentAttr['class'] = $contentAttr['class'].' nvali';
+            }
+        }
+        $content->setAttributes($contentAttr);
+        $this->add($content);
     }
 }

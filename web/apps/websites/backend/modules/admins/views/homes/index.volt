@@ -30,7 +30,7 @@
                     <div class="col-md-6">
                         <div class="card card-primary card-outline">
                             <div class="card-header">
-                                <h3 class="card-title">Tin tức</h3>
+                                <h3 class="card-title text-primary"><i class="fas fa-newspaper mr-1"></i>Tin tức</h3>
                             </div>
                             <div class="card-body">
                                 <div class="form-group label-floating w-100">
@@ -51,7 +51,7 @@
                         </div>
                         <div class="card card-primary card-outline">
                             <div class="card-header">
-                                <h3 class="card-title">Lãnh đạo</h3>
+                                <h3 class="card-title text-primary"><i class="fas fa-graduation-cap mr-1"></i>Lãnh đạo</h3>
                             </div>
                             <div class="card-body">
                                 <div class="card card-primary card-outline card-outline-tabs">
@@ -93,7 +93,7 @@
                         </div>
                         <div class="card card-primary card-outline">
                             <div class="card-header">
-                                <h3 class="card-title">Liên hệ</h3>
+                                <h3 class="card-title text-primary"><i class="fas fa-book mr-1"></i>Liên hệ</h3>
                             </div>
                             <div class="card-body">
                                 <div class="card card-primary card-outline card-outline-tabs">
@@ -137,7 +137,7 @@
                     <div class="col-md-6">
                         <div class="card card-primary card-outline">
                             <div class="card-header">
-                                <h3 class="card-title">Danh sách Bộ môn</h3>
+                                <h3 class="card-title text-primary"><i class="fas fa-building mr-1"></i>Danh sách Bộ môn</h3>
                             </div>
                             <div class="card-body">
                                 <div class="card card-primary card-outline card-outline-tabs">
@@ -189,7 +189,7 @@
                         </div>
                         <div class="card card-primary card-outline">
                             <div class="card-header">
-                                <h3 class="card-title">Liên kết/ đối tác</h3>
+                                <h3 class="card-title text-primary"><i class="fas fa-handshake mr-1"></i>Liên kết/ đối tác</h3>
                             </div>
                             <div class="card-body">
                                 <div class="card card-primary card-outline card-outline-tabs">

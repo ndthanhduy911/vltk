@@ -9,9 +9,25 @@ class PostsForm extends \Phalcon\Forms\Form
 {
     public function initialize($entity = null, $options = null)
     {
+        //status
+        $status = new Select('status', [
+            1 => "Hoạt động",
+            0 => "Khóa",
+        ], [
+            'useEmpty' => true,
+            'emptyText' => 'Chọn trạng thái',
+            'emptyValue' => '',
+            'class' => 'form-control form-control-sm',
+            'required' => '',
+            'data-required-error' => 'Vui lòng nhập thông tin',
+            'data-error' => "Thông tin chưa hợp lệ"
+        ]);
+        $status->setLabel('<i class="fas fa-check-circle mr-1"></i>Trạng thái');
+        $this->add($status);
+
         //calendar
         $calendar = new Text('calendar');
-        $calendar->setLabel('Ngày đăng');
+        $calendar->setLabel('<i class="fas fa-calendar mr-1"></i>Ngày đăng');
         $calendar->setAttributes(array(
             'class' => 'form-control form-control-sm singleDateTimePicker',
             'maxlength' => "16",
@@ -25,7 +41,7 @@ class PostsForm extends \Phalcon\Forms\Form
         
         //slug
         $slug = new Text('slug');
-        $slug->setLabel('Slug');
+        $slug->setLabel('<i class="fas fa-globe mr-1"></i>Slug');
         $slug->setAttributes(array(
             'class' => 'form-control form-control-sm',
             'placeholder' => 'Slug',
@@ -53,7 +69,7 @@ class PostsForm extends \Phalcon\Forms\Form
             'class' => 'form-control form-control-sm',
             'data-error' => "Thông tin chưa hợp lệ"
         ));
-        $catid->setLabel('Chuyên mục');
+        $catid->setLabel('<i class="fas fa-list mr-1"></i>Chuyên mục');
         $this->add($catid);
 
         //tags
@@ -65,26 +81,11 @@ class PostsForm extends \Phalcon\Forms\Form
         // ));
         // $tags->setLabel('Thẻ');
         // $this->add($tags);
-
-
-        //status
-        $status = new Select('status', [
-            1 => "Hoạt động",
-            0 => "Khóa",
-        ], [
-            'useEmpty' => true,
-            'emptyText' => 'Chọn trạng thái',
-            'emptyValue' => '',
-            'class' => 'form-control form-control-sm',
-            'required' => '',
-            'data-required-error' => 'Vui lòng nhập thông tin',
-            'data-error' => "Thông tin chưa hợp lệ"
-        ]);
-        $status->setLabel('Trạng thái');
-        $this->add($status);
         
         //image
         $image = new Hidden('image');
+        $image->setLabel('<i class="fas fa-image mr-1"></i>Ảnh đại diện');
+        $image->setUserOption('attr','image');
         $this->add($image);
     }
 }

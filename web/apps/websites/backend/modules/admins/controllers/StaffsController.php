@@ -6,6 +6,10 @@ use Backend\Modules\Admins\Forms\SearchStaffsForm;
 
 class StaffsController  extends \BackendController {
 
+    private $title = "Tổ chức Cán bộ";
+
+    private $cler = "staffs";
+
     public function indexAction(){
         if($this->request->get('singlePage') && $this->request->isAjax()){
             $this->view->setRenderLevel(
@@ -17,7 +21,7 @@ class StaffsController  extends \BackendController {
         $tables = \Staffs::findTables();
         $fFilters = ['title','email','status','createdat'];
         $fTables = ['image','title','email','dean','dept_position','createdat','slug','status'];
-        if($fSetting = \FilterSetting::findFirstKey('staffs')){
+        if($fSetting = \FilterSetting::findFirstKey($this->cler)){
             $fFilters = $fSetting->filters ? json_decode($fSetting->filters) : $fFilters;
             $fTables = $fSetting->tables ? json_decode($fSetting->tables) : $fTables;   
         }
@@ -26,10 +30,9 @@ class StaffsController  extends \BackendController {
         $fFilters = array_intersect($fFilters,$filters);
         $fTables = array_intersect($fTables,$tables);
 
-        $title = "Tổ chức Cán bộ";
         $this->getJsCss();
         $this->view->searchForm = new SearchStaffsForm();
-        $this->view->title = $title;
+        $this->view->title = $this->title;
         $this->view->filters = $filters;
         $this->view->tables = $tables;
         $this->view->fFilters = $fFilters;
@@ -44,8 +47,8 @@ class StaffsController  extends \BackendController {
             );
         }
 
-        $perEdit = $this->master::checkPermissionDepted('staffs', 'update',1);
-        $perView = $this->master::checkPermissionDepted('staffs', 'index');
+        $perEdit = $this->master::checkPermissionDepted($this->cler, 'update',1);
+        $perView = $this->master::checkPermissionDepted($this->cler, 'index');
         $perL = $perView ? $perView : ($perEdit? $perEdit :false);
         if(!$perL){
             require ERROR_FILE; die;
@@ -57,51 +60,44 @@ class StaffsController  extends \BackendController {
         }
 
         $formsLang = [];
-        $staffsLang = [];
-        $staffContent = [];
         $languages = \Language::find(['status = 1']);
         if($id){
-            if(!$staffs = \Staffs::findFirstId($id)){
+            if(!$items = \Staffs::findFirstId($id)){
                 echo 'Không tìm thấy dữ liệu'; die;
             }         
             foreach ($languages as $key => $lang) {
                 $v = ($key == 0 ? true : false);
-                $staffLang = \StaffsLang::findFirst(['staffid = :id: AND langid = :langid:','bind' => ['id' => $staffs->id, 'langid' => $lang->id]]);
-                if($staffLang){
-                    $formLang = new StaffsLangForm($staffLang, [$lang->id,$v]);
-                    $staffsLang[$lang->id] = $staffLang;
+                $itemsLang = \StaffsLang::findFirst(['staffid = :id: AND langid = :langid:','bind' => ['id' => $items->id, 'langid' => $lang->id]]);
+                if($itemsLang){
+                    $formLang = new StaffsLangForm($itemsLang, [$lang->id,$v]);
                     $formsLang[$lang->id] = $formLang;
-                    $staffContent[$lang->id] = $staffLang->content;
                 }else{
                     $formsLang[$lang->id] = new StaffsLangForm(null, [$lang->id,$v]);
-                    $staffsLang[$lang->id] = new \StaffsLang();
-                    $staffContent[$lang->id] = '';
                 }
             }
             $title = 'Chỉnh sửa';
         }else{
-            $staffs = new \Staffs();
+            $items = new \Staffs();
             $title = 'Thêm mới';
             foreach ($languages as $key => $lang) {
                 $v = $key == 0 ? true : false;
                 $formsLang[$lang->id] = new StaffsLangForm(null, [$lang->id,$v]);
-                $staffsLang[$lang->id] = new \StaffsLang();
-                $staffContent[$lang->id] = '';
             }
         }
 
-        $formStaffs = new StaffsForm($staffs);
+        $form = new StaffsForm($items);
         $this->view->perEdit = $perEdit ? 1 : "";
         $this->view->perView = $perView ? 1 : "";
         $this->view->languages = $languages;
-        $this->view->staffContent = $staffContent;
         $this->view->formsLang = $formsLang;
-        $this->view->formStaffs = $formStaffs;
-        $this->view->staffs = $staffs;
-        $this->view->staffsLang = $staffsLang;
+        $this->view->form = $form;
+        $this->view->items = $items;
         $this->view->title = $title;
-        $this->assets->addJs('/elfinder/js/require.min.js');
-        $this->getJsCss();
+        $this->view->btitle = $this->title;
+        $this->view->cler = $this->cler;
+        $this->assets->addJs(WEB_URI.'/elfinder/js/require.min.js');
+        $this->assets->addJs(WEB_URI.'/assets/backend/js/modules/admins/templates/views.js');
+        return $this->view->pick('templates/views');
     }
 
     // =================================
@@ -109,7 +105,7 @@ class StaffsController  extends \BackendController {
     // =================================
     // Get data
     public function ajaxgetdataAction(){
-        if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('staffs', 'index')) {
+        if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted($this->cler, 'index')) {
             $this->helper->responseJson($this, ["error" => "Truy cập không được phép"]);
         }
         $columns = [
@@ -142,7 +138,7 @@ class StaffsController  extends \BackendController {
         $data = \FilterSetting::getDataFilter($this,$data,\Staffs::arrayFilter(),['s',['sl'=>['title']]]);
 
         $array_row = [
-            'u' => $this->master::checkPermission('staffs', 'update', 1)
+            'u' => $this->master::checkPermission($this->cler, 'update', 1)
         ];
 
         $search = '';
@@ -159,7 +155,7 @@ class StaffsController  extends \BackendController {
             $this->helper->responseJson($this, $data);
         }
         $data['token'] = ['key' => $this->security->getTokenKey(), 'value' => $this->security->getToken()];
-        if(!$this->request->isAjax() || !$this->request->isPost() || !$perL = $this->master::checkPermissionDepted('staffs','update')){
+        if(!$this->request->isAjax() || !$this->request->isPost() || !$perL = $this->master::checkPermissionDepted($this->cler,'update')){
             $data['error'] = ['Truy cập không được phép'];
             $this->helper->responseJson($this, $data);
         }
@@ -242,7 +238,7 @@ class StaffsController  extends \BackendController {
     }
 
     public function deleteAction(){
-        if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('staffs', 'delete')) {
+        if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted($this->cler, 'delete')) {
             $this->helper->responseJson($this, ["error" => ["Truy cập không được phép"]]);
         }
 
