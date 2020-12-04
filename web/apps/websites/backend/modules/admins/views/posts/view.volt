@@ -114,6 +114,12 @@
                                             <div class="invalid-feedback"></div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card card-primary card-outline">
+                            <div class="card-body">
+                                <div class="row">
                                     <div class="form-group label-floating col-md-12">
                                         <div class="col-md-12 p-0">
                                             <img id="showImg" class="w-100 d-block" src="<?= !empty($posts->image) ? $posts->image : '' ?>"

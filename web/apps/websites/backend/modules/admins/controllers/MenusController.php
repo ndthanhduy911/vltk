@@ -1,6 +1,8 @@
 <?php
 namespace Backend\Modules\Admins\Controllers;
 
+use Backend\Modules\Admins\Forms\MenusForm;
+
 class MenusController  extends \BackendController {
 
     public function indexAction(){
@@ -16,6 +18,8 @@ class MenusController  extends \BackendController {
         $this->getJsCss();
         $this->view->headId = \MenuLocation::getId($deptid,1);
         $this->view->footId = \MenuLocation::getId($deptid,2);
+        $this->view->languages = \Language::find(['status = 1']);
+        $this->view->formMenus = new MenusForm();
         $this->view->title = $title;
     }
 

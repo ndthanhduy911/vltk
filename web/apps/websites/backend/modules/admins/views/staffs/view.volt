@@ -1,19 +1,19 @@
-<form id="frmSubjects" action="<?= WEB_ADMIN_URI ?>/subjects/update<?= !empty($subjects->id) ? '/'.$subjects->id : '' ?>" method="post" enctype="multipart/form-data" data-toggle="validator" role="form">
+<form id="frmStaffs" action="<?= WEB_ADMIN_URI ?>/staffs/update<?= !empty($staffs->id) ? '/'.$staffs->id : '' ?>" method="post" enctype="multipart/form-data" data-toggle="validator" role="form">
     <div class="content-header">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-6 d-flex align-items-center">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="<?= WEB_ADMIN_URL ?>"><i class="fas fa-home"></i></a></li>
-                        <li class="breadcrumb-item"><a href="<?= WEB_ADMIN_URL ?>/subjects">Môn học</a></li>
+                        <li class="breadcrumb-item"><a href="<?= WEB_ADMIN_URL ?>/staffs">Môn học</a></li>
                         <li class="breadcrumb-item active">{{ title }}</li>
                     </ol>
                 </div>
                 <div class="col-sm-6">
                     <div class="float-right">
-                        <a id="btnBackPost" href="<?= WEB_ADMIN_URI.'/subjects' ?>" class="btn btn-hnn btn-hnn-default" title="Trở về"><span><i class="fas fa-reply"></i></span></a>
+                        <a id="btnBackPost" href="<?= WEB_ADMIN_URI.'/staffs' ?>" class="btn btn-hnn btn-hnn-default" title="Trở về"><span><i class="fas fa-reply"></i></span></a>
                     </div>
-                    {% if master.checkPermission('subjects', 'update','1') %}
+                    {% if master.checkPermission('staffs', 'update','1') %}
                     <div class="float-right">
                         <button type="submit" class="btn btn-hnn btn-hnn-success mr-2" title="Lưu thông tin"><span>Lưu</span></button>
                     </div>
@@ -71,7 +71,7 @@
                                         <div class="form-group label-floating">
                                             <div class="input-group">
                                                 <textarea id="ckEditor{{lang.id}}" name="content[{{lang.id}}]" class="rounded">
-                                                    <?= isset($subjectsContent[$lang->id]) ? $subjectsContent[$lang->id]: '' ?>
+                                                    <?= isset($staffsContent[$lang->id]) ? $staffsContent[$lang->id]: '' ?>
                                                 </textarea>
                                                 <div class="invalid-tooltip"></div>
                                             </div>
@@ -88,41 +88,53 @@
                                 <div class="row">
                                     <div class="form-group label-floating col-md-12">
                                         <div class="input-group">
-                                            <label class="control-label">{{formSubjects.getLabel('status')}}</label>
-                                            {{formSubjects.render('status')}}
+                                            <label class="control-label">{{formStaffs.getLabel('status')}}</label>
+                                            {{formStaffs.render('status')}}
                                             <div class="invalid-feedback"></div>
                                         </div>
                                     </div>
                                     <div class="form-group label-floating col-md-12">
                                         <div class="input-group">
-                                            <label class="control-label">{{formSubjects.getLabel('slug')}}</label>
-                                            {{formSubjects.render('slug')}}
+                                            <label class="control-label">{{formStaffs.getLabel('slug')}}</label>
+                                            {{formStaffs.render('slug')}}
                                             <div class="invalid-feedback"></div>
                                         </div>
                                     </div>
                                     <div class="form-group label-floating col-md-12">
                                         <div class="input-group">
-                                            <label class="control-label">{{formSubjects.getLabel('code')}}</label>
-                                            {{formSubjects.render('code')}}
+                                            <label class="control-label">{{formStaffs.getLabel('code')}}</label>
+                                            {{formStaffs.render('code')}}
                                             <div class="invalid-feedback"></div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card card-primary card-outline">
+                            <div class="card-body">
+                                <div class="row">
                                     <div class="form-group label-floating col-md-12">
                                         <div class="col-md-12 p-0">
-                                            <img id="showImg" class="w-100 d-block" src="<?= !empty($subjects->image) ? $subjects->image : '' ?>"
-                                            alt="<?= !empty($subjects->image) ? $subjects->image : '' ?>">
-                                            {{formSubjects.render('image')}}
+                                            <img id="showImg" class="w-100 d-block" src="<?= !empty($staffs->image) ? $staffs->image : '' ?>"
+                                            alt="<?= !empty($staffs->image) ? $staffs->image : '' ?>">
+                                            {{formStaffs.render('image')}}
                                             <a id="uploadImage" href="#" class="link">Đặt ảnh đại diện</a>
-                                            <a id="removeImage" href="#" class="link text-danger <?= !empty($subjects->image) ? '' : 'hidden' ?>">Xóa</a>
+                                            <a id="removeImage" href="#" class="link text-danger <?= !empty($staffs->image) ? '' : 'hidden' ?>">Xóa</a>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card card-primary card-outline">
+                            <div class="card-body">
+                                <div class="row">
                                     <div class="form-group label-floating col-md-12">
                                         <div class="col-md-12 p-0">
-                                            <img id="showBgImg" class="w-100 d-block" src="<?= !empty($subjects->bgimage) ? $subjects->bgimage : '' ?>"
-                                            alt="<?= !empty($subjects->bgimage) ? $subjects->bgimage : '' ?>">
-                                            {{formSubjects.render('bgimage')}}
+                                            <img id="showBgImg" class="w-100 d-block" src="<?= !empty($staffs->bgimage) ? $staffs->bgimage : '' ?>"
+                                            alt="<?= !empty($staffs->bgimage) ? $staffs->bgimage : '' ?>">
+                                            {{formStaffs.render('bgimage')}}
                                             <a id="uploadBgImage" href="#" class="link">Đặt hình nền</a>
-                                            <a id="removeBgImage" href="#" class="link text-danger <?= !empty($subjects->bgimage) ? '' : 'hidden' ?>">Xóa</a>
+                                            <a id="removeBgImage" href="#" class="link text-danger <?= !empty($staffs->bgimage) ? '' : 'hidden' ?>">Xóa</a>
                                         </div>
                                     </div>
                                 </div>

@@ -153,7 +153,6 @@ class PagesController  extends \BackendController {
     }
 
     // Update data
-
     public function updateAction($id = 0){
         $this->view->disable();
         if (!$this->security->checkToken()) {

@@ -113,19 +113,6 @@ $router->add(WEB_ADMIN_URI . '/homes/:action/:int', array(
     'id' => 2
 ));
 
-/***********************DeptsController***********************/
-$router->add(WEB_ADMIN_URI . '/departments/:action', array(
-    'module' => 'backend_admins',
-    'controller' => 'departments',
-    'action' => 1,
-));
-$router->add(WEB_ADMIN_URI . '/departments/:action/:int', array(
-    'module' => 'backend_admins',
-    'controller' => 'departments',
-    'action'  => 1,
-    'id' => 2
-));
-
 
 /***********************CategoriesController***********************/
 
@@ -243,4 +230,21 @@ $router->add(WEB_ADMIN_URI . '/menus/:action/:int', array(
     'id' => 2
 ));
 
+/***********************OptionsController***********************/
+$router->add(WEB_ADMIN_URI . '/options', array(
+    'module' => 'backend_admins',
+    'controller' => 'options',
+    'action' => 'index',
+));
 
+$router->add(WEB_ADMIN_URI . '/options/:action', array(
+    'module' => 'backend_admins',
+    'controller' => 'options',
+    'action' => 1,
+));
+$router->add(WEB_ADMIN_URI . '/options/:action/:int', array(
+    'module' => 'backend_admins',
+    'controller' => 'options',
+    'action'  => 1,
+    'id' => 2
+));

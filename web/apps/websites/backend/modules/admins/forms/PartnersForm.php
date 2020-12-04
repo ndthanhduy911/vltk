@@ -5,20 +5,30 @@ use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\Select;
 use Phalcon\Forms\Element\Hidden;
 
-class PagesForm extends \Phalcon\Forms\Form
+class PartnersForm extends Form
 {
     public function initialize($entity = null, $options = null)
     {
-        //slug
-        $slug = new Text('slug');
-        $slug->setLabel('Slug');
-        $slug->setAttributes(array(
+        //link
+        $link = new Text('link');
+        $link->setLabel('Links');
+        $link->setAttributes(array(
             'class' => 'form-control form-control-sm',
-            'placeholder' => 'Slug',
+            'placeholder' => 'Ví dụ: https://phys.hcmus.edu.vn',
             'maxlength' => "200",
             'data-error' => "Thông tin chưa hợp lệ"
         ));
-        $this->add($slug);
+        $this->add($link);
+
+        //sort
+        $sort = new Numeric('sort');
+        $sort->setLabel('Sắp xếp');
+        $sort->setAttributes(array(
+            'class' => 'form-control',
+            'placeholder' => 'Sắp xếp',
+            'maxlength' => "999",
+        ));
+        $this->add($sort);
 
         //status
         $status = new Select('status', [
@@ -35,25 +45,9 @@ class PagesForm extends \Phalcon\Forms\Form
         ]);
         $status->setLabel('Trạng thái');
         $this->add($status);
-
-        //attrid
-        $attrid = new Select('attrid', \Attributes::find(['status = 1']), array(
-            'using' => ['id', 'name'],
-            'useEmpty' => true,
-            'emptyText' => 'Mặc định',
-            'emptyValue' => '0',
-            'class' => 'form-control form-control-sm',
-            'data-error' => "Thông tin chưa hợp lệ"
-        ));
-        $attrid->setLabel('Giao diện');
-        $this->add($attrid);
-
+        
         //image
         $image = new Hidden('image');
         $this->add($image);
-
-        //bgimage
-        $bgimage = new Hidden('bgimage');
-        $this->add($bgimage);
     }
 }

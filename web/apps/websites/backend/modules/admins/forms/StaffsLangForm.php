@@ -17,7 +17,7 @@ class StaffsLangForm extends Form
             'required' => '',
             'maxlength' => "255",
             'data-required-error' => "Vui lòng nhập thông tin",
-            'data-error' => "Họ & tên không đúng quy định."
+            'data-error' => "Thông tin chưa hợp lệ"
         ];
         if(!empty($lang)){
             $titleAttr['name'] = "title[$lang[0]]";

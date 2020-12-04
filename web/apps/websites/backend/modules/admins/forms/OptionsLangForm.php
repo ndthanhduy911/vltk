@@ -3,7 +3,7 @@ namespace Backend\Modules\Admins\Forms;
 use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\Textarea;
 
-class SlideshowsLangForm extends \Phalcon\Forms\Form
+class OptionsLangForm extends \Phalcon\Forms\Form
 {
     public function initialize($entity = null, $lang = null)
     {
@@ -15,7 +15,7 @@ class SlideshowsLangForm extends \Phalcon\Forms\Form
             'required' => '',
             'maxlength' => "255",
             'data-required-error' => "Vui lòng nhập thông tin",
-            'data-error' => "Thông tin chưa hợp lệ"
+            'data-error' => "Thông tin không hợp lệ"
         ];
         if(!empty($lang)){
             $nameAttr['name'] = "name[$lang[0]]";
@@ -27,23 +27,23 @@ class SlideshowsLangForm extends \Phalcon\Forms\Form
         $name->setAttributes($nameAttr);
         $this->add($name);
 
-        $description = new Textarea('description');
-        $description->setLabel('Mô tả');
-        $descriptionAttr = [
+        $address = new Textarea('address');
+        $address->setLabel('Địa chỉ');
+        $addressAttr = [
             'class' => 'form-control form-control-sm',
-            'placeholder' => 'Mô tả',
+            'placeholder' => 'Địa chỉ',
             'maxlength' => "255",
-            'rows' => 4,
-            'data-error' => "Thông tin chưa hợp lệ"
+            'data-error' => "Thông tin không hợp lệ",
+            'rows' => 4
         ];
         if(!empty($lang)){
-            $descriptionAttr['name'] = "description[$lang[0]]";
-            $descriptionAttr['id'] = 'description'.$lang[0];
+            $addressAttr['name'] = "address[$lang[0]]";
+            $addressAttr['id'] = 'address'.$lang[0];
             if(!$lang[1]){
-                $descriptionAttr['class'] = $descriptionAttr['class'].' nvali';
+                $addressAttr['class'] = $addressAttr['class'].' nvali';
             }
         }
-        $description->setAttributes($descriptionAttr);
-        $this->add($description);
+        $address->setAttributes($addressAttr);
+        $this->add($address);
     }
 }

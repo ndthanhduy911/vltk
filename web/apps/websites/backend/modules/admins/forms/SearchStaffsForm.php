@@ -12,9 +12,10 @@ class SearchStaffsForm extends Form
         $titleSearch = new Text('titleSearch');
         $titleSearch->setLabel('Họ & tên');
         $titleSearch->setAttributes(array(
-            'class' => 'form-control form-control-sm',
-            'placeholder' => 'Ví dụ: GS.TS. CHÂU VĂN TẠO',
-            'maxlength' => "100",
+            'class'         => 'form-control form-control-sm',
+            'placeholder'   => 'Ví dụ: GS.TS. CHÂU VĂN TẠO',
+            'maxlength'     => "100",
+            'data-error'    => "Thông tin chưa hợp lệ"
         ));
         $this->add($titleSearch);
 
@@ -23,8 +24,9 @@ class SearchStaffsForm extends Form
         $emailSearch->setLabel('E-mail');
         $emailSearch->setAttributes(array(
             'class' => 'form-control form-control-sm',
-            'placeholder' => 'Ví dụ: cvtao@hcmus.edu.vn',
-            'maxlength' => "100"
+            'placeholder'   => 'Ví dụ: cvtao@hcmus.edu.vn',
+            'maxlength'     => "100",
+            'data-error'    => "Thông tin chưa hợp lệ"
         ));
         $this->add($emailSearch);
 
@@ -35,7 +37,7 @@ class SearchStaffsForm extends Form
             'class' => 'form-control form-control-sm date-format singleDatePicker',
             'maxlength' => "10",
             'placeholder' => 'Ví dụ: 20/11/2020',
-            'data-error' => "Ngày đăng chưa hợp lệ",
+            'data-error' => "Thông tin chưa hợp lệ"
         ));
         $this->add($createdatSearch);
 
@@ -48,6 +50,7 @@ class SearchStaffsForm extends Form
             'useEmpty'      => true,
             'emptyValue'    => 'all',
             'emptyText'     => 'Tất cả',
+            'data-error'    => "Thông tin chưa hợp lệ"
         ]);
         $statusSearch->setLabel('Trạng thái');
         $this->add($statusSearch);

@@ -15,6 +15,7 @@ class SearchPostsForm extends Form
             'class' => 'form-control form-control-sm',
             'placeholder' => 'Ví dụ: Lịch thi mới nhất',
             'maxlength' => "100",
+            'data-error' => "Thông tin chưa hợp lệ"
         ));
         $this->add($titleSearch);
 
@@ -36,7 +37,8 @@ class SearchPostsForm extends Form
             'using' => ['id','name'],
             'useEmpty'      => true,
             'emptyValue'    => 'all',
-            'emptyText'     => 'Tất cả'
+            'emptyText'     => 'Tất cả',
+            'data-error' => "Thông tin chưa hợp lệ"
         ));
         $catidSearch->setLabel('Chuyên mục');
         $this->add($catidSearch);
@@ -48,7 +50,8 @@ class SearchPostsForm extends Form
             'class' => 'form-control form-control-sm date-format singleDatePicker',
             'maxlength' => "10",
             'data-error' => "Ngày tạo chưa hợp lệ",
-            'placeholder' => 'Ví dụ: 20/11/2020'
+            'placeholder' => 'Ví dụ: 20/11/2020',
+            'data-error' => "Thông tin chưa hợp lệ"
         ));
         $this->add($calendarSearch);
 
@@ -61,6 +64,7 @@ class SearchPostsForm extends Form
             'useEmpty'      => true,
             'emptyValue'    => 'all',
             'emptyText'     => 'Tất cả',
+            'data-error' => "Thông tin chưa hợp lệ"
         ]);
         $statusSearch->setLabel('Trạng thái');
         $this->add($statusSearch);

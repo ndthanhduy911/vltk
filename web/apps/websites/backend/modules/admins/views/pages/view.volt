@@ -28,8 +28,7 @@
             {{flashSession.output()}}
         </div>
     </div>
-
-
+    
     <section class="content">
         <div class="container-fluid">
             <div class="col-md-12">
@@ -107,6 +106,12 @@
                                             <div class="invalid-feedback"></div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card card-primary card-outline">
+                            <div class="card-body">
+                                <div class="row">
                                     <div class="form-group label-floating col-md-12">
                                         <div class="col-md-12 p-0">
                                             <img id="showImg" class="w-100 d-block" src="<?= !empty($pages->image) ? $pages->image : '' ?>"
@@ -116,12 +121,18 @@
                                             <a id="removeImage" href="#" class="link text-danger <?= !empty($pages->image) ? '' : 'hidden' ?>">Xóa</a>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card card-primary card-outline">
+                            <div class="card-body">
+                                <div class="row">
                                     <div class="form-group label-floating col-md-12">
                                         <div class="col-md-12 p-0">
                                             <img id="showBgImg" class="w-100 d-block" src="<?= !empty($pages->bgimage) ? $pages->bgimage : '' ?>"
                                             alt="<?= !empty($pages->bgimage) ? $pages->bgimage : '' ?>">
                                             {{formPages.render('bgimage')}}
-                                            <a id="uploadBgImage" href="#" class="link">Đặt ảnh hình nền</a>
+                                            <a id="uploadBgImage" href="#" class="link">Đặt hình nền</a>
                                             <a id="removeBgImage" href="#" class="link text-danger <?= !empty($pages->bgimage) ? '' : 'hidden' ?>">Xóa</a>
                                         </div>
                                     </div>

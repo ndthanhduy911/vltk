@@ -45,7 +45,7 @@ class CategoriesForm extends \Phalcon\Forms\Form
             'class' => 'form-control form-control-sm',
             'placeholder' => 'Slug',
             'maxlength' => "200",
-            'data-error' => "Thông tin chưa hợp lệ",
+            'data-error' => "Thông tin chưa hợp lệ"
         ));
         $this->add($slug);
 

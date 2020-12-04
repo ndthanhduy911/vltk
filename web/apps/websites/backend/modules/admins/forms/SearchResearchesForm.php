@@ -15,6 +15,7 @@ class SearchResearchesForm extends Form
             'class' => 'form-control form-control-sm',
             'placeholder' => 'Ví dụ: Xử lý hình ảnh',
             'maxlength' => "100",
+            'data-error' => "Thông tin chưa hợp lệ"
         ));
         $this->add($titleSearch);
 
@@ -24,8 +25,8 @@ class SearchResearchesForm extends Form
         $createdatSearch->setAttributes(array(
             'class' => 'form-control form-control-sm date-format singleDatePicker',
             'maxlength' => "10",
-            'data-error' => "Ngày đăng chưa hợp lệ",
-            'placeholder' => 'Ví dụ: 20/11/2020'
+            'placeholder' => 'Ví dụ: 20/11/2020',
+            'data-error' => "Thông tin chưa hợp lệ"
         ));
         $this->add($createdatSearch);
 
@@ -38,6 +39,7 @@ class SearchResearchesForm extends Form
             'useEmpty'      => true,
             'emptyValue'    => 'all',
             'emptyText'     => 'Tất cả',
+            'data-error' => "Thông tin chưa hợp lệ"
         ]);
         $statusSearch->setLabel('Trạng thái');
         $this->add($statusSearch);

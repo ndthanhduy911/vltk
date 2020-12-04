@@ -16,7 +16,7 @@ class SlideshowsForm extends \Phalcon\Forms\Form
             'class' => 'form-control form-control-sm',
             'placeholder' => 'Ví dụ: https://phys.hcmus.edu.vn',
             'maxlength' => "200",
-            'data-error' => "Thông tin chưa hợp lệ",
+            'data-error' => "Thông tin chưa hợp lệ"
         ));
         $this->add($buttonlink);
 

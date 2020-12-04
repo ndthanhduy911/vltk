@@ -87,7 +87,128 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body bg-eee">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card card-primary card-outline card-outline-tabs">
+                            <div class="card-header p-0 border-bottom-0">
+                                <ul class="nav nav-tabs w-100">
+                                    {% for key, lang in languages %}
+                                    <li class="nav-item">
+                                        <a class="nav-link {{ !key ? 'active' : '' }}" href="#lang{{lang.id}}" data-toggle="tab" data-tab="{{lang.id}}">
+                                            {{lang.name}}
+                                        </a>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <div class="card-body">
+                                <div class="tab-content">
+                                    {% for key, lang in languages %}
+                                    <div class="tab-pane fade {{ !key ? 'active show' : '' }}" id="lang{{lang.id}}">
+                                        <div class="form-group label-floating">
+                                            <div class="input-group">
+                                                <label class="control-label">{{formMenus.getLabel('name')}}</label>
+                                                {{formMenus.render('name',['name':'name'~lang.id])}}
+                                                <div class="invalid-feedback"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor  %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card card-primary card-outline">
+                            <div class="card-body">
+                                <div class="form-group label-floating">
+                                    <div class="input-group">
+                                        <label class="control-label">{{formMenus.getLabel('parentid')}}</label>
+                                        {{formMenus.render('parentid')}}
+                                        <div class="invalid-feedback"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group label-floating">
+                                    <div class="input-group">
+                                        <label class="control-label">{{formMenus.getLabel('type')}}</label>
+                                        {{formMenus.render('type')}}
+                                        <div class="invalid-feedback"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group label-floating hidden">
+                                    <div class="input-group">
+                                        <label class="control-label">{{formMenus.getLabel('postid')}}</label>
+                                        {{formMenus.render('postid')}}
+                                        <div class="invalid-feedback"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group label-floating hidden">
+                                    <div class="input-group">
+                                        <label class="control-label">{{formMenus.getLabel('pageid')}}</label>
+                                        {{formMenus.render('pageid')}}
+                                        <div class="invalid-feedback"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group label-floating hidden">
+                                    <div class="input-group">
+                                        <label class="control-label">{{formMenus.getLabel('catid')}}</label>
+                                        {{formMenus.render('catid')}}
+                                        <div class="invalid-feedback"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group label-floating hidden">
+                                    <div class="input-group">
+                                        <label class="control-label">{{formMenus.getLabel('dept')}}</label>
+                                        {{formMenus.render('dept')}}
+                                        <div class="invalid-feedback"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group label-floating hidden">
+                                    <div class="input-group">
+                                        <label class="control-label">{{formMenus.getLabel('links')}}</label>
+                                        {{formMenus.render('links')}}
+                                        <div class="invalid-feedback"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card card-primary card-outline">
+                            <div class="card-body">
+                                <div class="form-group label-floating">
+                                    <div class="input-group">
+                                        <label class="control-label">{{formMenus.getLabel('status')}}</label>
+                                        {{formMenus.render('status')}}
+                                        <div class="invalid-feedback"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group label-floating">
+                                    <div class="input-group">
+                                        <label class="control-label">{{formMenus.getLabel('icon')}}</label>
+                                        {{formMenus.render('icon')}}
+                                        <div class="invalid-feedback"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group label-floating">
+                                    <div class="input-group">
+                                        <label class="control-label">{{formMenus.getLabel('target')}}</label>
+                                        {{formMenus.render('target')}}
+                                        <div class="invalid-feedback"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group label-floating">
+                                    <div class="input-group">
+                                        <label class="control-label">{{formMenus.getLabel('sort')}}</label>
+                                        {{formMenus.render('sort')}}
+                                        <div class="invalid-feedback"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <input class="tokenCSRF" type='hidden' name='<?php echo $this->security->getTokenKey() ?>'
                     value='<?php echo $this->security->getToken() ?>' />

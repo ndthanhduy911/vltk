@@ -16,6 +16,7 @@ class ClassesForm extends Form
             'class' => 'form-control',
             'placeholder' => 'Slug',
             'maxlength' => "200",
+            'data-error' => "Thông tin chưa hợp lệ"
         ));
         $slug->addValidators(array(
             new StringLength([
@@ -30,6 +31,7 @@ class ClassesForm extends Form
             'class' => 'form-control',
             'placeholder' => 'Mã lớp',
             'maxlength' => "200",
+            'data-error' => "Thông tin chưa hợp lệ"
         ));
         $code->addValidators(array(
             new StringLength([
@@ -49,6 +51,7 @@ class ClassesForm extends Form
             'class' => 'form-control pull-right w-100',
             'required' => '',
             'data-required-error' => 'Vui lòng điền đầy đủ thông tin.',
+            'data-error' => "Thông tin chưa hợp lệ"
         ]);
         $status->addValidators(array(
             new PresenceOf(array(

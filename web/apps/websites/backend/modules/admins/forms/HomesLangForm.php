@@ -16,7 +16,7 @@ class HomesLangForm extends Form
             'maxlength' => "255",
             'required' => '',
             'data-required-error' => "Vui lòng nhập tiêu đề",
-            'data-error' => "Tiêu đề không đúng quy định.",
+            'data-error' => "Thông tin chưa hợp lệ"
         ];
         if(!empty($lang)){
             $specializedtitleAttr['name'] = "specializedtitle[$lang[0]]";
@@ -37,7 +37,7 @@ class HomesLangForm extends Form
             'maxlength' => "255",
             'required' => '',
             'data-required-error' => "Vui lòng nhập tiêu đề",
-            'data-error' => "Tiêu đề không đúng quy định.",
+            'data-error' => "Thông tin chưa hợp lệ"
         ];
         if(!empty($lang)){
             $stafftitleAttr['name'] = "stafftitle[$lang[0]]";
@@ -56,7 +56,7 @@ class HomesLangForm extends Form
             'placeholder' => 'Slug',
             'maxlength' => "255",
             'rows' => 4,
-            'data-error' => "Tiêu đề không đúng quy định.",
+            'data-error' => "Thông tin chưa hợp lệ"
         ];
         if(!empty($lang)){
             $staffdesAttr['name'] = "staffdes[$lang[0]]";
@@ -76,7 +76,7 @@ class HomesLangForm extends Form
             'maxlength' => "255",
             'required' => '',
             'data-required-error' => "Vui lòng nhập tiêu đề",
-            'data-error' => "Tiêu đề không đúng quy định.",
+            'data-error' => "Thông tin chưa hợp lệ"
         ];
         if(!empty($lang)){
             $partnertitleAttr['name'] = "partnertitle[$lang[0]]";
@@ -96,7 +96,7 @@ class HomesLangForm extends Form
             'placeholder' => 'Slug',
             'maxlength' => "255",
             'rows' => 4,
-            'data-error' => "Tiêu đề không đúng quy định.",
+            'data-error' => "Thông tin chưa hợp lệ"
         ];
         if(!empty($lang)){
             $partnerdesAttr['name'] = "partnerdes[$lang[0]]";
@@ -116,7 +116,7 @@ class HomesLangForm extends Form
             'maxlength' => "255",
             'required' => '',
             'data-required-error' => "Vui lòng nhập tiêu đề",
-            'data-error' => "Tiêu đề không đúng quy định.",
+            'data-error' => "Thông tin chưa hợp lệ"
         ];
         if(!empty($lang)){
             $contacttitleAttr['name'] = "contacttitle[$lang[0]]";
@@ -135,7 +135,7 @@ class HomesLangForm extends Form
             'placeholder' => 'Slug',
             'maxlength' => "255",
             'rows' => 4,
-            'data-error' => "Tiêu đề không đúng quy định.",
+            'data-error' => "Thông tin chưa hợp lệ"
         ];
         if(!empty($lang)){
             $contactdesAttr['name'] = "contactdes[$lang[0]]";

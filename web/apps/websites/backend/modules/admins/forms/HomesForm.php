@@ -20,7 +20,7 @@ class HomesForm extends Form
             'multiple' => "",
             'name' => "catlist[]",
             'class' => 'form-control form-control-sm',
-            'data-error' => "Thông tin chưa hợp lệ",
+            'data-error' => "Thông tin chưa hợp lệ"
         ));
         $catlist->setLabel('Chuyên mục');
         $this->add($catlist);
@@ -31,7 +31,7 @@ class HomesForm extends Form
             'class' => 'form-control form-control-sm',
             'placeholder' => 'Slug',
             'maxlength' => "200",
-            'data-error' => "Thông tin chưa hợp lệ",
+            'data-error' => "Thông tin chưa hợp lệ"
         ));
         $this->add($postnumber);
 

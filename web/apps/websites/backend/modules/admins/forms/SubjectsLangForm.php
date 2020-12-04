@@ -17,7 +17,7 @@ class SubjectsLangForm extends Form
             'required' => '',
             'maxlength' => "255",
             'data-required-error' => "Vui lòng nhập thông tin",
-            'data-error' => "Tiêu đề không đúng quy định."
+            'data-error' => "Thông tin chưa hợp lệ"
         ];
         if(!empty($lang)){
             $titleAttr['name'] = "title[$lang[0]]";
@@ -35,7 +35,7 @@ class SubjectsLangForm extends Form
             'class' => 'form-control form-control-sm',
             'placeholder' => 'Tóm tắt',
             'maxlength' => "255",
-            'data-error' => "Tóm tắt không đúng quy định.",
+            'data-error' => "Thông tin chưa hợp lệ",
             'rows' => 4
         ];
         if(!empty($lang)){

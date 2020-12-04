@@ -15,7 +15,7 @@ class StaffsForm extends Form
             'class' => 'form-control form-control-sm',
             'placeholder' => 'Slug',
             'maxlength' => "200",
-            'data-error' => "Thông tin chưa hợp lệ",
+            'data-error' => "Thông tin chưa hợp lệ"
         ));
         $this->add($slug);
 
@@ -25,7 +25,7 @@ class StaffsForm extends Form
             'class' => 'form-control form-control-sm',
             'placeholder' => 'Ví dụ: cvtao@hcmus.edu.vn',
             'maxlength' => "100",
-            'data-error' => "Thông tin chưa hợp lệ",
+            'data-error' => "Thông tin chưa hợp lệ"
         ));
         $this->add($email);
 
@@ -37,7 +37,7 @@ class StaffsForm extends Form
             'useEmpty' => true,
             'emptyText' => 'Không có',
             'emptyValue' => '',
-            'data-error' => "Thông tin chưa hợp lệ",
+            'data-error' => "Thông tin chưa hợp lệ"
         ]);
         $dean->setLabel('Chức vụ Khoa');
         $this->add($dean);
@@ -54,7 +54,7 @@ class StaffsForm extends Form
             'useEmpty' => true,
             'emptyText' => 'Chọn chức vụ',
             'emptyValue' => '',
-            'data-error' => "Thông tin chưa hợp lệ",
+            'data-error' => "Thông tin chưa hợp lệ"
         ]);
         $dept_position->setLabel('Chức vụ Bộ môn');
         $this->add($dept_position);

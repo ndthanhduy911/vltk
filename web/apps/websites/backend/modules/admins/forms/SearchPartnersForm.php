@@ -15,6 +15,7 @@ class SearchPartnersForm extends Form
             'class' => 'form-control form-control-sm',
             'placeholder' => 'Ví dụ: Vật lý đại cương',
             'maxlength' => "100",
+            'data-error' => "Thông tin chưa hợp lệ"
         ));
         $this->add($titleSearch);
 
@@ -24,7 +25,8 @@ class SearchPartnersForm extends Form
         $codeSearch->setAttributes(array(
             'class' => 'form-control form-control-sm',
             'placeholder' => 'Ví dụ: VLTH00001',
-            'maxlength' => "20"
+            'maxlength' => "20",
+            'data-error' => "Thông tin chưa hợp lệ"
         ));
         $this->add($codeSearch);
 
@@ -35,7 +37,7 @@ class SearchPartnersForm extends Form
             'class' => 'form-control form-control-sm date-format singleDatePicker',
             'maxlength' => "10",
             'placeholder' => 'Ví dụ: 20/11/2020',
-            'data-error' => "Ngày đăng chưa hợp lệ",
+            'data-error' => "Thông tin chưa hợp lệ"
         ));
         $this->add($createdatSearch);
 
@@ -48,6 +50,7 @@ class SearchPartnersForm extends Form
             'useEmpty'      => true,
             'emptyValue'    => 'all',
             'emptyText'     => 'Tất cả',
+            'data-error' => "Thông tin chưa hợp lệ"
         ]);
         $statusSearch->setLabel('Trạng thái');
         $this->add($statusSearch);

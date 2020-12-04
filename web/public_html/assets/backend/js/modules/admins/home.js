@@ -1,7 +1,7 @@
-showSelectImage('#uploadImageSpecializedBg','#showImgSpecializedBg','#specialized_bg');
+showSelectImage('#uploadImageSpecializedBg','#showImgSpecializedBg','#specializedbg');
 
-showSelectImage('#uploadImagePartnerBg','#showImgPartnerBg','#partner_bg');
+showSelectImage('#uploadImagePartnerBg','#showImgPartnerBg','#partnerbg');
 
-$("#cat_list").select2({
+$("#catlist").select2({
     placeholder: "Danh mục hiển thị",
 });

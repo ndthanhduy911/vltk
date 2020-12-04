@@ -3,10 +3,11 @@ namespace Backend\Modules\Admins\Forms;
 use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\Textarea;
 
-class PostsLangForm extends \Phalcon\Forms\Form
+class PartnersLangForm extends Form
 {
     public function initialize($entity = null, $lang = null)
     {
+        //title
         $title = new Text('title');
         $title->setLabel('Tiêu đề');
         $titleAttr = [
@@ -15,7 +16,7 @@ class PostsLangForm extends \Phalcon\Forms\Form
             'required' => '',
             'maxlength' => "255",
             'data-required-error' => "Vui lòng nhập thông tin",
-            'data-error' => "Thông tin chưa hợp lệ"
+            'data-error' => "Thông tin không hợp lệ"
         ];
         if(!empty($lang)){
             $titleAttr['name'] = "title[$lang[0]]";
@@ -27,6 +28,7 @@ class PostsLangForm extends \Phalcon\Forms\Form
         $title->setAttributes($titleAttr);
         $this->add($title);
 
+        //excerpt
         $excerpt = new Textarea('excerpt');
         $excerpt->setLabel('Tóm tắt');
         $excerptAttr = [

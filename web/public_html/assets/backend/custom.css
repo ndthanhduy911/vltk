@@ -69,6 +69,10 @@ a.text-primary:focus, a.text-primary:hover{
     color: #FE777B !important;
 }
 
+.bg-eee{
+    background-color: #F4F6F9 !important;
+}
+
 img.object-fit-fill{
     object-fit: contain;
 }

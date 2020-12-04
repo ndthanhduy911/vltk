@@ -15,7 +15,7 @@ class SubjectsForm extends Form
             'class' => 'form-control form-control-sm',
             'placeholder' => 'Slug',
             'maxlength' => "200",
-            'data-error' => "Thông tin chưa hợp lệ",
+            'data-error' => "Thông tin chưa hợp lệ"
         ));
         $this->add($slug);
 
@@ -25,7 +25,7 @@ class SubjectsForm extends Form
             'class' => 'form-control form-control-sm',
             'placeholder' => 'Ví dụ: VLKT00001',
             'maxlength' => "20",
-            'data-error' => "Thông tin chưa hợp lệ",
+            'data-error' => "Thông tin chưa hợp lệ"
         ));
         $this->add($code);
 

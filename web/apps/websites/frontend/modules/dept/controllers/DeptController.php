@@ -12,21 +12,21 @@ class DeptController extends \FrontendController
         ->columns(array(
             'h.id',
             'h.deptid',
-            'h.cat_list',
-            'h.post_number',
-            'h.specialized_bg',
-            'h.partner_bg',
-            'hl.specialized_title specialized_title',
-            'hl.staff_title staff_title',
-            'hl.staff_des staff_des',
-            'hl.partner_title partner_title',
-            'hl.partner_des partner_des',
-            'hl.contact_title contact_title',
-            'hl.contact_des contact_des'
+            'h.catlist',
+            'h.postnumber',
+            'h.specializedbg',
+            'h.partnerbg',
+            'hl.specializedtitle specializedtitle',
+            'hl.stafftitle stafftitle',
+            'hl.staffdes staffdes',
+            'hl.partnertitle partnertitle',
+            'hl.partnerdes partnerdes',
+            'hl.contacttitle contacttitle',
+            'hl.contactdes contactdes'
         ))
-        ->from(['h'=>'Home'])
+        ->from(['h'=>'Homes'])
         ->where("h.deptid = $dept->id")
-        ->leftJoin('HomeLang', "hl.home_id = h.id AND hl.langid = $langid",'hl')
+        ->leftJoin('HomesLang', "hl.homeid = h.id AND hl.langid = $langid",'hl')
         ->limit(1)
         ->getQuery()
         ->execute();
@@ -54,7 +54,7 @@ class DeptController extends \FrontendController
         ->execute();
         
         $cats = [];
-        $listCats = json_decode($home['cat_list']);
+        $listCats = json_decode($home['catlist']);
         if($listCats){
             $cats = $this->modelsManager->createBuilder()
             ->columns(array(
@@ -115,9 +115,9 @@ class DeptController extends \FrontendController
             'p.image',
             'pl.title title',
         ))
-        ->from(['p' => 'Partner'])
+        ->from(['p' => 'Partners'])
         ->where("p.status = 1 AND p.deleted = 0 AND p.deptid = $dept->id")
-        ->leftJoin('PartnerLang', "pl.partnerid = p.id AND pl.langid = $langid",'pl')
+        ->leftJoin('PartnersLang', "pl.partnerid = p.id AND pl.langid = $langid",'pl')
         ->getQuery()
         ->execute();
         

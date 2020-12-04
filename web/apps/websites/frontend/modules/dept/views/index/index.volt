@@ -107,12 +107,12 @@
 {% endif %}
 
 {% if depts %}
-<section class="pt-5 pb-5 section dark-translucent-bg fixed-bg" style="background-position: 50% 42%; background-image: url({{ helper.getLinkImage(home['specialized_bg'], './assets/frontend/images/education.jpg') }})">
-    {% if home['specialized_title'] %}
+<section class="pt-5 pb-5 section dark-translucent-bg fixed-bg" style="background-position: 50% 42%; background-image: url({{ helper.getLinkImage(home['specializedbg'], './assets/frontend/images/education.jpg') }})">
+    {% if home['specializedtitle'] %}
     <div class="container mt-4">
         <div class="row justify-content-lg-center">
             <div class="col-lg-8 text-center">
-                <h2 class="page-title text-center"><strong>{{ home['specialized_title'] }}</strong></h2>
+                <h2 class="page-title text-center"><strong>{{ home['specializedtitle'] }}</strong></h2>
                 <div class="separator"></div>
             </div>
         </div>
@@ -143,12 +143,12 @@
 {% if staffs %}
 <section class="clearfix pt-5 pb-5">
     <div class="container">
-        {% if home['staff_title'] %}
+        {% if home['stafftitle'] %}
         <div class="row justify-content-lg-center pv-20">
             <div class="col-lg-8">
-                <h2 class="page-title text-center"><strong>{{ home['staff_title'] }}</strong></h2>
+                <h2 class="page-title text-center"><strong>{{ home['stafftitle'] }}</strong></h2>
                 <div class="separator"></div>
-                <p class="lead text-center">{{ home['staff_des'] }}</p>
+                <p class="lead text-center">{{ home['staffdes'] }}</p>
             </div>
         </div>
         {% endif %}
@@ -180,14 +180,14 @@
 {% endif %}
 
 {% if partners %}
-<section class="pt-5 pb-5 section dark-translucent-bg fixed-bg" style="background-position: 50% 42%; background-image: url({{ helper.getLinkImage(home['partner_bg'], './assets/frontend/images/education.jpg') }})">
-    {% if home['partner_title'] %}
+<section class="pt-5 pb-5 section dark-translucent-bg fixed-bg" style="background-position: 50% 42%; background-image: url({{ helper.getLinkImage(home['partnerbg'], './assets/frontend/images/education.jpg') }})">
+    {% if home['partnertitle'] %}
     <div class="container pv-20">
         <div class="row justify-content-lg-center">
             <div class="col-lg-8">
-                <h2 class="text-center"> <strong>{{ home['partner_title'] }}</strong></h2>
+                <h2 class="text-center"> <strong>{{ home['partnertitle'] }}</strong></h2>
                 <div class="separator"></div>
-                <p class="large text-center">{{ home['partner_des'] }}</p>
+                <p class="large text-center">{{ home['partnerdes'] }}</p>
             </div>
         </div>
     </div>
@@ -212,10 +212,10 @@
     <div class="container">
         <div class="row justify-content-lg-center">
             <div class="col-lg-8 text-center pv-20">
-                {% if home['contact_title'] %}
-                <h2 class="text-center">{{ home['contact_title'] }}</h2>
+                {% if home['contacttitle'] %}
+                <h2 class="text-center">{{ home['contacttitle'] }}</h2>
                 <div class="separator"></div>
-                <p class="large text-center">{{ home['contact_des'] }}</p>
+                <p class="large text-center">{{ home['contactdes'] }}</p>
                 {% endif %}
                 <ul class="list-inline mb-20 text-center">
                     <li class="list-inline-item"><i class="text-default fa fa-map-marker pr-1"></i>{{ deptlang.address }}</li>

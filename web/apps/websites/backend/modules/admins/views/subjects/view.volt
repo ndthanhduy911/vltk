@@ -107,6 +107,12 @@
                                             <div class="invalid-feedback"></div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card card-primary card-outline">
+                            <div class="card-body">
+                                <div class="row">
                                     <div class="form-group label-floating col-md-12">
                                         <div class="col-md-12 p-0">
                                             <img id="showImg" class="w-100 d-block" src="<?= !empty($subjects->image) ? $subjects->image : '' ?>"
@@ -116,6 +122,12 @@
                                             <a id="removeImage" href="#" class="link text-danger <?= !empty($subjects->image) ? '' : 'hidden' ?>">Xóa</a>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card card-primary card-outline">
+                            <div class="card-body">
+                                <div class="row">
                                     <div class="form-group label-floating col-md-12">
                                         <div class="col-md-12 p-0">
                                             <img id="showBgImg" class="w-100 d-block" src="<?= !empty($subjects->bgimage) ? $subjects->bgimage : '' ?>"

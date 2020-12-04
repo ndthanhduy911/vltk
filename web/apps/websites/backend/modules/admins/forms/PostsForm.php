@@ -30,7 +30,7 @@ class PostsForm extends \Phalcon\Forms\Form
             'class' => 'form-control form-control-sm',
             'placeholder' => 'Slug',
             'maxlength' => "200",
-            'data-error' => "Thông tin chưa hợp lệ",
+            'data-error' => "Thông tin chưa hợp lệ"
         ));
         $this->add($slug);
 
@@ -51,7 +51,7 @@ class PostsForm extends \Phalcon\Forms\Form
         $catid = new Select('catid', $cats, array(
             'using' => ['id', 'name'],
             'class' => 'form-control form-control-sm',
-            'data-error' => "Thông tin chưa hợp lệ",
+            'data-error' => "Thông tin chưa hợp lệ"
         ));
         $catid->setLabel('Chuyên mục');
         $this->add($catid);

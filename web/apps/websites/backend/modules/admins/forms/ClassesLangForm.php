@@ -20,7 +20,7 @@ class ClassesLangForm extends Form
             'required' => '',
             'data-required-error' => "Vui lòng nhập tiêu đề.",
             'maxlength' => "255",
-            'data-error' => "Tiêu đề không đúng quy định.",
+            'data-error' => "Thông tin chưa hợp lệ"
         ));
         $title->addValidators(array(
             new PresenceOf(array(
@@ -38,7 +38,7 @@ class ClassesLangForm extends Form
             'class' => 'form-control',
             'placeholder' => 'Tóm tắt',
             'maxlength' => "255",
-            'data-error' => "Tóm tắt không đúng quy định.",
+            'data-error' => "Thông tin chưa hợp lệ",
             'rows' => 4
         ));
 

@@ -1,19 +1,18 @@
-<form id="frmSubjects" action="<?= WEB_ADMIN_URI ?>/subjects/update<?= !empty($subjects->id) ? '/'.$subjects->id : '' ?>" method="post" enctype="multipart/form-data" data-toggle="validator" role="form">
+<form id="frmOptions" action="<?= WEB_ADMIN_URI ?>/options/update<?= !empty($options->id) ? '/'.$options->id : '' ?>" method="post" enctype="multipart/form-data" data-toggle="validator" role="form">
     <div class="content-header">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-6 d-flex align-items-center">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="<?= WEB_ADMIN_URL ?>"><i class="fas fa-home"></i></a></li>
-                        <li class="breadcrumb-item"><a href="<?= WEB_ADMIN_URL ?>/subjects">Môn học</a></li>
                         <li class="breadcrumb-item active">{{ title }}</li>
                     </ol>
                 </div>
                 <div class="col-sm-6">
                     <div class="float-right">
-                        <a id="btnBackPost" href="<?= WEB_ADMIN_URI.'/subjects' ?>" class="btn btn-hnn btn-hnn-default" title="Trở về"><span><i class="fas fa-reply"></i></span></a>
+                        <a id="btnBackPost" href="<?= WEB_ADMIN_URI.'/options' ?>" class="btn btn-hnn btn-hnn-default" title="Trở về"><span><i class="fas fa-reply"></i></span></a>
                     </div>
-                    {% if master.checkPermission('subjects', 'update','1') %}
+                    {% if master.checkPermission('options', 'update','1') %}
                     <div class="float-right">
                         <button type="submit" class="btn btn-hnn btn-hnn-success mr-2" title="Lưu thông tin"><span>Lưu</span></button>
                     </div>
@@ -28,8 +27,7 @@
             {{flashSession.output()}}
         </div>
     </div>
-
-
+    
     <section class="content">
         <div class="container-fluid">
             <div class="col-md-12">
@@ -54,8 +52,8 @@
                                         <div class="row">
                                             <div class="form-group label-floating col-md-12">
                                                 <div class="input-group">
-                                                    <label class="control-label">{{formsLang[lang.id].getLabel('title')}}</label>
-                                                    {{formsLang[lang.id].render('title')}}
+                                                    <label class="control-label">{{formsLang[lang.id].getLabel('name')}}</label>
+                                                    {{formsLang[lang.id].render('name')}}
                                                     <div class="invalid-feedback"></div>
                                                 </div>
                                             </div>
@@ -66,14 +64,12 @@
                                                     <div class="invalid-feedback"></div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <p class="mb-0">Nội dung</p>
-                                        <div class="form-group label-floating">
-                                            <div class="input-group">
-                                                <textarea id="ckEditor{{lang.id}}" name="content[{{lang.id}}]" class="rounded">
-                                                    <?= isset($subjectsContent[$lang->id]) ? $subjectsContent[$lang->id]: '' ?>
-                                                </textarea>
-                                                <div class="invalid-tooltip"></div>
+                                            <div class="form-group label-floating col-md-12">
+                                                <div class="input-group">
+                                                    <label class="control-label">{{formsLang[lang.id].getLabel('address')}}</label>
+                                                    {{formsLang[lang.id].render('address')}}
+                                                    <div class="invalid-feedback"></div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -88,41 +84,48 @@
                                 <div class="row">
                                     <div class="form-group label-floating col-md-12">
                                         <div class="input-group">
-                                            <label class="control-label">{{formSubjects.getLabel('status')}}</label>
-                                            {{formSubjects.render('status')}}
+                                            <label class="control-label">{{formOptions.getLabel('dcode')}}</label>
+                                            {{formOptions.render('dcode')}}
                                             <div class="invalid-feedback"></div>
                                         </div>
                                     </div>
                                     <div class="form-group label-floating col-md-12">
                                         <div class="input-group">
-                                            <label class="control-label">{{formSubjects.getLabel('slug')}}</label>
-                                            {{formSubjects.render('slug')}}
+                                            <label class="control-label">{{formOptions.getLabel('phone')}}</label>
+                                            {{formOptions.render('phone')}}
                                             <div class="invalid-feedback"></div>
                                         </div>
                                     </div>
                                     <div class="form-group label-floating col-md-12">
                                         <div class="input-group">
-                                            <label class="control-label">{{formSubjects.getLabel('code')}}</label>
-                                            {{formSubjects.render('code')}}
+                                            <label class="control-label">{{formOptions.getLabel('email')}}</label>
+                                            {{formOptions.render('email')}}
+                                            <div class="invalid-feedback"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group label-floating col-md-12">
+                                        <div class="input-group">
+                                            <label class="control-label">{{formOptions.getLabel('link')}}</label>
+                                            {{formOptions.render('link')}}
                                             <div class="invalid-feedback"></div>
                                         </div>
                                     </div>
                                     <div class="form-group label-floating col-md-12">
                                         <div class="col-md-12 p-0">
-                                            <img id="showImg" class="w-100 d-block" src="<?= !empty($subjects->image) ? $subjects->image : '' ?>"
-                                            alt="<?= !empty($subjects->image) ? $subjects->image : '' ?>">
-                                            {{formSubjects.render('image')}}
-                                            <a id="uploadImage" href="#" class="link">Đặt ảnh đại diện</a>
-                                            <a id="removeImage" href="#" class="link text-danger <?= !empty($subjects->image) ? '' : 'hidden' ?>">Xóa</a>
+                                            <img id="showImg" class="w-100 d-block" src="<?= !empty($options->logo) ? $options->logo : '' ?>"
+                                            alt="<?= !empty($options->logo) ? $options->logo : '' ?>">
+                                            {{formOptions.render('logo')}}
+                                            <a id="uploadImage" href="#" class="link">Đặt ảnh logo</a>
+                                            <a id="removeImage" href="#" class="link text-danger <?= !empty($options->logo) ? '' : 'hidden' ?>">Xóa</a>
                                         </div>
                                     </div>
                                     <div class="form-group label-floating col-md-12">
                                         <div class="col-md-12 p-0">
-                                            <img id="showBgImg" class="w-100 d-block" src="<?= !empty($subjects->bgimage) ? $subjects->bgimage : '' ?>"
-                                            alt="<?= !empty($subjects->bgimage) ? $subjects->bgimage : '' ?>">
-                                            {{formSubjects.render('bgimage')}}
-                                            <a id="uploadBgImage" href="#" class="link">Đặt hình nền</a>
-                                            <a id="removeBgImage" href="#" class="link text-danger <?= !empty($subjects->bgimage) ? '' : 'hidden' ?>">Xóa</a>
+                                            <img id="showBgImg" class="w-100 d-block" src="<?= !empty($options->bgimage) ? $options->bgimage : '' ?>"
+                                            alt="<?= !empty($options->bgimage) ? $options->bgimage : '' ?>">
+                                            {{formOptions.render('bgimage')}}
+                                            <a id="uploadBgImage" href="#" class="link">Đặt ảnh hình nền</a>
+                                            <a id="removeBgImage" href="#" class="link text-danger <?= !empty($options->bgimage) ? '' : 'hidden' ?>">Xóa</a>
                                         </div>
                                     </div>
                                 </div>

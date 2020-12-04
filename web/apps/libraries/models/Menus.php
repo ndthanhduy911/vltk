@@ -161,4 +161,14 @@ class Menus extends \ModelCore
         }
         return $data;
     }
+
+    public static function findParents($deptid){
+        return parent::find([
+            "deptid = :did: AND deleted = 0 AND parentid = 0",
+            "columns" => "Menus.*, (SELECT ml.name FROM MenusLang AS ml WHERE ml.menuid = Menus.id AND ml.langid = 1) AS name",
+            'bind' => [
+                'did' => $deptid
+            ]
+        ]);
+    }
 }
