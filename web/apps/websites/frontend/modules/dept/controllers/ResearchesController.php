@@ -14,7 +14,7 @@ class ResearchesController extends \FrontendController
             $this->view->title = '404';
             return $this->view->pick('templates/404');
         }
-        if(!$researchlang = \ResearchesLang::findFirst(["langid = $langid AND research_id = $research->id"])){
+        if(!$researchlang = \ResearchesLang::findFirst(["langid = $langid AND researchid = $research->id"])){
             $this->view->title = '404';
             return $this->view->pick('templates/404');
         }

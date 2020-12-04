@@ -9,19 +9,19 @@
             </div>
             <div class="col-sm-6">
                 <div class="btn-group float-right">
-                    <a id="settingPages" data-href="<?= WEB_ADMIN_URL ?>/setting/filters" data-get="<?= WEB_ADMIN_URL ?>/setting/getsinglefilter?fkey=pages" title="Thiết lập giao diện"
+                    <a id="settingItems" data-href="<?= WEB_ADMIN_URL ?>/setting/filters" data-get="<?= WEB_ADMIN_URL ?>/setting/getsinglefilter?fkey={{cler}}" title="Thiết lập giao diện"
                         class="ml-2 btn btn-hnn btn-hnn-default"><span><i class="fas fa-cog"></i></span></a>
                 </div>
 
-                {% if master.checkPermission('pages', 'delete') %}
+                {% if master.checkPermission(cler,'delete') %}
                 <div class="btn-group float-right">
-                    <a id="deletePages" data-href="<?= WEB_ADMIN_URL ?>/pages/delete" title="Xóa"
+                    <a id="deleteItems" data-href="<?= WEB_ADMIN_URL ?>/{{cler}}/delete" title="Xóa dữ liệu"
                         class="ml-2 btn btn-hnn btn-hnn-danger"><span><i class="fas fa-trash"></i></span></a>
                 </div>
                 {% endif %}
-                {% if master.checkPermission('pages', 'update') %}
+                {% if master.checkPermission(cler, 'update') %}
                 <div class="btn-group float-right">
-                    <a id="addPages" href="<?= WEB_ADMIN_URL ?>/pages/view" title="Tạo mới"
+                    <a id="addItems" href="<?= WEB_ADMIN_URL ?>/{{cler}}/view" title="Tạo mới dữ liệu"
                         class="ml-2 btn btn-hnn btn-hnn-success"><span><i class="fas fa-plus"></i></span></a>
                 </div>
                 {% endif %}
@@ -42,7 +42,7 @@
             <div class="col-md-12">
                 <div class="card card-primary card-outline">
                     <div class="card-body">
-                        <form action="" id="searchPages" class="searchForm">
+                        <form action="" id="searchItems" class="searchForm">
                             <div class="row d-md-flex align-items-md-center">
                                 <span class="col-auto mt-2">Tìm kiếm</span>
                                 <div class="flex-1 col-auto row pr-0">
@@ -69,18 +69,18 @@
                             </div>
                         </form>
                         <div class="table-responsive">
-                            <table id="pages" class="table table-bordered table-hover rounded">
+                            <table id="items" class="table table-bordered table-hover rounded">
                                 <thead>
                                     <tr>
                                         <th data-col="no" class="align-middle text-center" style="width: 20px;">
-                                            <input id="pagesCheckboxAll" type="checkbox" value="1">
+                                            <input id="{{cler}}CheckboxAll" type="checkbox" value="1">
                                         </th>
                                         <th data-col="no" class="align-middle text-center" style="width: 20px;">STT</th>
                                         {% if session.get('roleid') == 1 %}
                                         <th data-col="deptname" class="align-middle text-center">Khoa/ bộ môn</th>
                                         {% endif %}
                                         {% for key,table in fTables %}
-                                        <th data-col="{{table}}" class="align-middle text-center"><?= $this->helper->showSort($table,$this,'pages',\Pages::filedName($table)) ?></th>
+                                        <th data-col="{{table}}" class="align-middle text-center"><?= $this->helper->showSort($table,$this,$cler,($className)::filedName($table)) ?></th>
                                         {% endfor %}
                                         <th data-col="no" class="align-middle text-center">Thao tác</th>
                                     </tr>
@@ -98,10 +98,10 @@
     </div>
 </section>
 
-<div class="modal fade" id="modalSettingPages">
+<div class="modal fade" id="modalSettingItems">
     <div class="modal-dialog" style="min-width: 1300px;">
         <div class="modal-content">
-            <form id="frmSettingPages" action="" method="POST" enctype="multipart/form-data" data-toggle="validator" class="customForm">
+            <form id="frmSettingItems" action="" method="POST" enctype="multipart/form-data" data-toggle="validator" class="customForm">
                 <div class="modal-header">
                     <h4 class="modal-title">Thiết lập giao diện</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -127,7 +127,7 @@
                                             <input class="" type="checkbox" id="filters-{{value}}"
                                                 name="filters[]" value="{{value}}">
                                             <label for="filters-{{value}}"
-                                                class="font-weight-normal mb-0 ml-2"><?= \Pages::filedName($value) ?></label>
+                                                class="font-weight-normal mb-0 ml-2"><?= ($className)::filedName($value) ?></label>
                                         </div>
                                     </div>
                                 </div>
@@ -154,7 +154,7 @@
                                             <input class="" type="checkbox" id="tables-{{value}}"
                                                 name="tables[]" value="{{value}}">
                                             <label for="tables-{{value}}"
-                                                class="font-weight-normal mb-0 ml-2"><?= \Pages::filedName($value) ?></label>
+                                                class="font-weight-normal mb-0 ml-2"><?= ($className)::filedName($value) ?></label>
                                         </div>
                                     </div>
                                 </div>
@@ -162,7 +162,7 @@
                             </div>
                         </div>
                     </div>
-                    <input type="hidden" name="fkey" value="pages">
+                    <input type="hidden" name="fkey" value="{{cler}}">
                     <input class="tokenCSRF" type='hidden' name="{{security.getTokenKey()}}" value="{{security.getToken()}}" />
                 </div>
                 <div class="modal-footer justify-content-between">

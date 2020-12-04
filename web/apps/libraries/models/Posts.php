@@ -166,7 +166,7 @@ class Posts extends \ModelCore
 
     public static function filedName($key){
         $feilds = [
-            'slug' => 'Liên kết',
+            'slug' => 'Xem',
             'catid' => 'Chuyên mục',
             'catname' => 'Chuyên mục',
             'status' => 'Trạng thái',

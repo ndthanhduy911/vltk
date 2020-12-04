@@ -23,7 +23,7 @@
         ))
         ->from(['r'=>'Researches'])
         ->where("r.deptid = $dept->id AND r.status = 1 AND r.deleted = 0")
-        ->leftJoin('ResearchesLang', "rl.research_id = r.id AND rl.langid = $langid",'rl')
+        ->leftJoin('ResearchesLang', "rl.researchid = r.id AND rl.langid = $langid",'rl')
         ->getQuery()
         ->execute();
     }

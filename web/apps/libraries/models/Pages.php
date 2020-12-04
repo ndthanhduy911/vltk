@@ -62,7 +62,7 @@ class Pages extends \ModelCore
 
     public static function filedName($key){
         $feilds = [
-            'slug' => 'Liên kết',
+            'slug' => 'Xem',
             'status' => 'Trạng thái',
             'image' => 'Hình đại diện',
             'author' => 'Tác giả',

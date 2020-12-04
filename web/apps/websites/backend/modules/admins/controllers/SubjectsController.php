@@ -10,6 +10,8 @@ class SubjectsController  extends \BackendController {
 
     private $cler = "subjects";
 
+    private $className = \Subjects::class;
+
     public function indexAction(){
         if($this->request->get('singlePage') && $this->request->isAjax()){
             $this->view->setRenderLevel(
@@ -17,8 +19,8 @@ class SubjectsController  extends \BackendController {
             );
         }
 
-        $filters = \Subjects::findFilters();
-        $tables = \Subjects::findTables();
+        $filters = ($this->className)::findFilters();
+        $tables = ($this->className)::findTables();
         $fFilters = ['title','code','status','createdat'];
         $fTables = ['image','code','title','excerpt','createdat','slug','status'];
         if($fSetting = \FilterSetting::findFirstKey($this->cler)){
@@ -30,13 +32,17 @@ class SubjectsController  extends \BackendController {
         $fFilters = array_intersect($fFilters,$filters);
         $fTables = array_intersect($fTables,$tables);
 
-        $this->getJsCss();
         $this->view->searchForm = new SearchSubjectsForm();
         $this->view->title = $this->title;
         $this->view->filters = $filters;
         $this->view->tables = $tables;
         $this->view->fFilters = $fFilters;
         $this->view->fTables = $fTables;
+        $this->view->cler = $this->cler;
+        $this->view->className = $this->className;
+        $this->assets->addJs(WEB_URI.'/assets/backend/js/modules/admins/templates/indexs.js');
+        $this->getJsCss();
+        return $this->view->pick('templates/indexs');
     }
 
     public function viewAction($id = 0){
@@ -62,7 +68,7 @@ class SubjectsController  extends \BackendController {
         $formsLang = [];
         $languages = \Language::find(['status = 1']);
         if($id){
-            if(!$items = \Subjects::findFirstId($id)){
+            if(!$items = ($this->className)::findFirstId($id)){
                 echo 'Không tìm thấy dữ liệu'; die;
             }         
             foreach ($languages as $key => $lang) {
@@ -133,8 +139,8 @@ class SubjectsController  extends \BackendController {
         ->orderBy('s.deptid ASC,s.id DESC');
 
         $data = $this->master::builderPermission($data,$perL,'p');
-        $data = \FilterSetting::getDataOrder($this,$data,\Subjects::findFirst(),'s',['sl'=>'title']);
-        $data = \FilterSetting::getDataFilter($this,$data,\Subjects::arrayFilter(),['s',['sl'=>['title']]]);
+        $data = \FilterSetting::getDataOrder($this,$data,($this->className)::findFirst(),'s',['sl'=>'title']);
+        $data = \FilterSetting::getDataFilter($this,$data,($this->className)::arrayFilter(),['s',['sl'=>['title']]]);
 
         $array_row = [
             'u' => $this->master::checkPermission($this->cler, 'update', 1)
@@ -165,7 +171,7 @@ class SubjectsController  extends \BackendController {
         $pContent = $this->request->getPost('content',['trim']);
         $pExcerpt = $this->request->getPost('excerpt',['string','trim']);
         if($id){
-            if(!$subjects = \Subjects::findFirstIdPermission($id,$perL)){
+            if(!$subjects = ($this->className)::findFirstIdPermission($id,$perL)){
                 $data['error'] = ['Không tìm thấy môn học'];
                 $this->helper->responseJson($this, $data);
             }
@@ -206,7 +212,7 @@ class SubjectsController  extends \BackendController {
         $subjects->image = $this->request->getPost('image',['trim','string']);
         $subjects->bgimage = $this->request->getPost('bgimage',['trim','string']);
 
-        if(\Subjects::findFirst(["slug = :slug: AND id != :id:","bind" => ["slug" => $subjects->slug,'id'=> $id]])){
+        if(($this->className)::findFirst(["slug = :slug: AND id != :id:","bind" => ["slug" => $subjects->slug,'id'=> $id]])){
             $reqPost['slug'] = $subjects->slug .'-'. strtotime('now');
         }
 
@@ -249,7 +255,7 @@ class SubjectsController  extends \BackendController {
         $listId = $this->helper->filterListIds($listId);
         $strIds = implode(',', $listId);
 
-        $data = \Subjects::findPermission($perL,"*",['deleted = 0 AND id IN (' . $strIds . ')']);
+        $data = ($this->className)::findPermission($perL,"*",['deleted = 0 AND id IN (' . $strIds . ')']);
 
         try {
             $this->db->begin();

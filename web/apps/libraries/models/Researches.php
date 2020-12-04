@@ -20,7 +20,7 @@ class Researches extends \ModelCore
 
     public static function getTitleById($id = null)
     {
-        if($research = ResearchesLang::findFirst(['research_id = :research_id:','bind' => ['research_id' => $id]])){
+        if($research = ResearchesLang::findFirst(['researchid = :researchid:','bind' => ['researchid' => $id]])){
             return $research->name;
         }else{
             return null;
@@ -72,7 +72,7 @@ class Researches extends \ModelCore
 
     public static function filedName($key){
         $feilds = [
-            'slug' => 'Liên kết',
+            'slug' => 'Xem',
             'status' => 'Trạng thái',
             'image' => 'Hình đại diện',
             'deptid' => 'Bộ môn',

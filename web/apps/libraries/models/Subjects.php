@@ -73,7 +73,7 @@ class Subjects extends \ModelCore
 
     public static function filedName($key){
         $feilds = [
-            'slug' => 'Liên kết',
+            'slug' => 'Xem',
             'code' => 'Mã môn học',
             'status' => 'Trạng thái',
             'image' => 'Hình đại diện',

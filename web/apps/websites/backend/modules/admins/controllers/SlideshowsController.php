@@ -9,6 +9,8 @@ class SlideshowsController  extends \BackendController {
 
     private $cler = "slideshows";
 
+    private $className = \Slideshows::class;
+
     public function indexAction(){
         if($this->request->get('singlePage') && $this->request->isAjax()){
             $this->view->setRenderLevel(
@@ -16,8 +18,8 @@ class SlideshowsController  extends \BackendController {
             );
         }
 
-        $filters = \Slideshows::findFilters();
-        $tables = \Slideshows::findTables();
+        $filters = ($this->className)::findFilters();
+        $tables = ($this->className)::findTables();
         $fFilters = ['name','status','createdat'];
         $fTables = ['image','name','description','createdat','status'];
         if($fSetting = \FilterSetting::findFirstKey($this->cler)){
@@ -29,13 +31,17 @@ class SlideshowsController  extends \BackendController {
         $fFilters = array_intersect($fFilters,$filters);
         $fTables = array_intersect($fTables,$tables);
 
-        $this->getJsCss();
         $this->view->searchForm = new SearchSlideshowsForm();
         $this->view->title = $this->title;
         $this->view->filters = $filters;
         $this->view->tables = $tables;
         $this->view->fFilters = $fFilters;
         $this->view->fTables = $fTables;
+        $this->view->cler = $this->cler;
+        $this->view->className = $this->className;
+        $this->assets->addJs(WEB_URI.'/assets/backend/js/modules/admins/templates/indexs.js');
+        $this->getJsCss();
+        return $this->view->pick('templates/indexs');
     }
 
     public function viewAction($id = 0){
@@ -61,7 +67,7 @@ class SlideshowsController  extends \BackendController {
         $formsLang = [];
         $languages = \Language::find(['status = 1']);
         if($id){
-            if(!$items = \Slideshows::findFirstId($id)){
+            if(!$items = ($this->className)::findFirstId($id)){
                 echo 'Không tìm thấy dữ liệu'; die;
             }         
             foreach ($languages as $key => $lang) {
@@ -132,8 +138,8 @@ class SlideshowsController  extends \BackendController {
         ->orderBy('b.deptid ASC, b.sort ASC, b.id ASC');
 
         $data = $this->master::builderPermission($data,$perL,'b');
-        $data = \FilterSetting::getDataOrder($this,$data,\Slideshows::findFirst(),'b',['bl'=>'name']);
-        $data = \FilterSetting::getDataFilter($this,$data,\Slideshows::arrayFilter(),['b',['bl'=>['name']]]);
+        $data = \FilterSetting::getDataOrder($this,$data,($this->className)::findFirst(),'b',['bl'=>'name']);
+        $data = \FilterSetting::getDataFilter($this,$data,($this->className)::arrayFilter(),['b',['bl'=>['name']]]);
 
         $array_row = [
             'u' => $this->master::checkPermission($this->cler, 'update', 1)
@@ -162,7 +168,7 @@ class SlideshowsController  extends \BackendController {
         $pName = $this->request->getPost('name',['string','trim']);
         $pDes = $this->request->getPost('description',['string','trim']);
         if($id){
-            if(!$slideshows = \Slideshows::findFirstIdPermission($id,$perL)){
+            if(!$slideshows = ($this->className)::findFirstIdPermission($id,$perL)){
                 $data['error'] = ['Không tìm thấy banner'];
                 $this->helper->responseJson($this, $data);
             }
@@ -236,7 +242,7 @@ class SlideshowsController  extends \BackendController {
         $listId = $this->helper->filterListIds($listId);
         $strIds = implode(',', $listId);
 
-        $data = \Slideshows::findPermission($perL,"*",['deleted = 0 AND id IN (' . $strIds . ')']);
+        $data = ($this->className)::findPermission($perL,"*",['deleted = 0 AND id IN (' . $strIds . ')']);
 
         try {
             $this->db->begin();

@@ -45,7 +45,7 @@ class Partners extends \ModelCore
 
     public static function filedName($key){
         $feilds = [
-            'link' => 'Liên kết',
+            'link' => 'Xem',
             'status' => 'Trạng thái',
             'image' => 'Hình đại diện',
             'deptid' => 'Bộ môn',

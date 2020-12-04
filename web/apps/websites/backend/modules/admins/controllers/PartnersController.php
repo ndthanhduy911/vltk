@@ -9,6 +9,8 @@ class PartnersController  extends \BackendController {
 
     private $cler = "partners";
 
+    private $className = \Partners::class;
+
     public function indexAction(){
         if($this->request->get('singlePage') && $this->request->isAjax()){
             $this->view->setRenderLevel(
@@ -16,8 +18,8 @@ class PartnersController  extends \BackendController {
             );
         }
 
-        $filters = \Partners::findFilters();
-        $tables = \Partners::findTables();
+        $filters = ($this->className)::findFilters();
+        $tables = ($this->className)::findTables();
         $fFilters = ['title','status','createdat'];
         $fTables = ['image','title','excerpt','createdat','link','status'];
         if($fSetting = \FilterSetting::findFirstKey($this->cler)){
@@ -29,13 +31,17 @@ class PartnersController  extends \BackendController {
         $fFilters = array_intersect($fFilters,$filters);
         $fTables = array_intersect($fTables,$tables);
 
-        $this->getJsCss();
         $this->view->searchForm = new SearchPartnersForm();
         $this->view->title = $this->title;
         $this->view->filters = $filters;
         $this->view->tables = $tables;
         $this->view->fFilters = $fFilters;
         $this->view->fTables = $fTables;
+        $this->view->cler = $this->cler;
+        $this->view->className = $this->className;
+        $this->assets->addJs(WEB_URI.'/assets/backend/js/modules/admins/templates/indexs.js');
+        $this->getJsCss();
+        return $this->view->pick('templates/indexs');
     }
 
     public function viewAction($id = 0){
@@ -61,7 +67,7 @@ class PartnersController  extends \BackendController {
         $formsLang = [];
         $languages = \Language::find(['status = 1']);
         if($id){
-            if(!$items = \Partners::findFirstId($id)){
+            if(!$items = ($this->className)::findFirstId($id)){
                 echo 'Không tìm thấy dữ liệu'; die;
             }         
             foreach ($languages as $key => $lang) {
@@ -130,8 +136,8 @@ class PartnersController  extends \BackendController {
         ->orderBy('s.deptid ASC,s.id DESC');
 
         $data = $this->master::builderPermission($data,$perL,'p');
-        $data = \FilterSetting::getDataOrder($this,$data,\Partners::findFirst(),'s',['sl'=>'title']);
-        $data = \FilterSetting::getDataFilter($this,$data,\Partners::arrayFilter(),['s',['sl'=>['title']]]);
+        $data = \FilterSetting::getDataOrder($this,$data,($this->className)::findFirst(),'s',['sl'=>'title']);
+        $data = \FilterSetting::getDataFilter($this,$data,($this->className)::arrayFilter(),['s',['sl'=>['title']]]);
 
         $array_row = [
             'u' => $this->master::checkPermission($this->cler, 'update', 1)
@@ -162,7 +168,7 @@ class PartnersController  extends \BackendController {
         $pContent = $this->request->getPost('content',['trim']);
         $pExcerpt = $this->request->getPost('excerpt',['string','trim']);
         if($id){
-            if(!$partners = \Partners::findFirstIdPermission($id,$perL)){
+            if(!$partners = ($this->className)::findFirstIdPermission($id,$perL)){
                 $data['error'] = ['Không tìm thấy liên kết/ đối tác'];
                 $this->helper->responseJson($this, $data);
             }
@@ -203,7 +209,7 @@ class PartnersController  extends \BackendController {
         $partners->image = $this->request->getPost('image',['trim','string']);
         $partners->bgimage = $this->request->getPost('bgimage',['trim','string']);
 
-        if(\Partners::findFirst(["slug = :slug: AND id != :id:","bind" => ["slug" => $partners->slug,'id'=> $id]])){
+        if(($this->className)::findFirst(["slug = :slug: AND id != :id:","bind" => ["slug" => $partners->slug,'id'=> $id]])){
             $reqPost['slug'] = $partners->slug .'-'. strtotime('now');
         }
 
@@ -246,7 +252,7 @@ class PartnersController  extends \BackendController {
         $listId = $this->helper->filterListIds($listId);
         $strIds = implode(',', $listId);
 
-        $data = \Partners::findPermission($perL,"*",['deleted = 0 AND id IN (' . $strIds . ')']);
+        $data = ($this->className)::findPermission($perL,"*",['deleted = 0 AND id IN (' . $strIds . ')']);
 
         try {
             $this->db->begin();
