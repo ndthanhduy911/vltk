@@ -119,14 +119,14 @@ class SlideshowsController  extends \BackendController {
             'b.id',
             'b.deptid',
             'b.image',
-            'b.buttonlink',
+            'b.link',
             'b.status',
             'b.sort',
             'b.createdat',
             'bl.name',
-            'bl.description',
+            'bl.except',
             'd.slug dslug',
-            '(SELECT dl.name FROM DeptsLang AS dl WHERE dl.deptid = b.deptid AND dl.langid = 1) AS deptname',
+            '(SELECT dl.title FROM DeptsLang AS dl WHERE dl.deptid = b.deptid AND dl.langid = 1) AS deptname',
         ];
 
         $data = $this->modelsManager->createBuilder()
@@ -201,7 +201,7 @@ class SlideshowsController  extends \BackendController {
         $slideshows->status = $this->request->getPost('status',['int']);
         $slideshows->image = $this->request->getPost('image',['trim','string']);
         $slideshows->sort = $this->request->getPost('sort',['int']);
-        $slideshows->buttonlink = $this->request->getPost('buttonlink',['trim','string']);
+        $slideshows->link = $this->request->getPost('link',['trim','string']);
 
         try {
             $this->db->begin();

@@ -17,7 +17,7 @@
                                     {% if staff.dean %}
                                     <p class="margin-clear text-uppercase">{{ helper.getDean(staff.dean) }}</p>
                                     {% endif %}
-                                    <p class="margin-clear text-uppercase">{{ helper.getPosition(staff.dept_position) }}</p>
+                                    <p class="margin-clear text-uppercase">{{ helper.getPosition(staff.deptposition) }}</p>
                                 </div>
                                 </div>
                             </div>

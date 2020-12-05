@@ -52,12 +52,12 @@ class PostsForm extends \Phalcon\Forms\Form
         $cats = $this->modelsManager->createBuilder()
         ->columns([
             'c.id',
-            'cl.name name'
+            'cl.title name'
         ])
         ->from(['c'=>"Categories"])
         ->leftJoin('CategoriesLang', "cl.catid = c.id AND cl.langid = 1",'cl')
         ->where("c.deleted = 0")
-        ->orderBy('cl.name ASC');
+        ->orderBy('cl.title ASC');
         $cats = \Library\Master\Master::builderPermission($cats,$perL,'c');
         $cats = $cats->getQuery()
         ->execute();

@@ -135,28 +135,28 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview mt-1">
-                        {% if master.checkPermission('setting', 'depts') %}
+                        {% if master.checkPermission('options', 'index') %}
                         <li class="nav-item">
-                            <a href="<?= WEB_ADMIN_URL ?>/setting/depts"
-                                class="nav-link {% if dispatcher.getControllerName()=='setting' AND dispatcher.getActionName()=='depts' %} {{ 'active' }} {% endif %}">
+                            <a href="<?= WEB_ADMIN_URL ?>/options"
+                                class="nav-link {% if dispatcher.getControllerName()=='options' AND dispatcher.getActionName()=='index' %} {{ 'active' }} {% endif %}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Thông tin chung</p>
                             </a>
                         </li>
                         {% endif %}
-                        {% if master.checkPermission('setting', 'socials') %}
+                        {% if master.checkPermission('options', 'socials') %}
                         <li class="nav-item">
-                            <a href="<?= WEB_ADMIN_URL ?>/setting/socials"
-                                class="nav-link {% if dispatcher.getControllerName()=='setting' AND dispatcher.getActionName()=='socials' %} {{ 'active' }} {% endif %}">
+                            <a href="<?= WEB_ADMIN_URL ?>/options/socials"
+                                class="nav-link {% if dispatcher.getControllerName()=='options' AND dispatcher.getActionName()=='socials' %} {{ 'active' }} {% endif %}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Biểu tượng</p>
                             </a>
                         </li>
                         {% endif %}
-                        {% if master.checkPermission('setting', 'links') %}
+                        {% if master.checkPermission('options', 'links') %}
                         <li class="nav-item">
-                            <a href="<?= WEB_ADMIN_URL ?>/setting/links"
-                                class="nav-link {% if dispatcher.getControllerName()=='setting' AND dispatcher.getActionName()=='links' %} {{ 'active' }} {% endif %}">
+                            <a href="<?= WEB_ADMIN_URL ?>/options/links"
+                                class="nav-link {% if dispatcher.getControllerName()=='options' AND dispatcher.getActionName()=='links' %} {{ 'active' }} {% endif %}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Links</p>
                             </a>

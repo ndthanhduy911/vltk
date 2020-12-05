@@ -22,7 +22,7 @@ class StaffsController  extends \BackendController {
         $filters = ($this->className)::findFilters();
         $tables = ($this->className)::findTables();
         $fFilters = ['title','email','status','createdat'];
-        $fTables = ['image','title','email','dean','dept_position','createdat','slug','status'];
+        $fTables = ['image','title','email','dean','deptposition','createdat','slug','status'];
         if($fSetting = \FilterSetting::findFirstKey($this->cler)){
             $fFilters = $fSetting->filters ? json_decode($fSetting->filters) : $fFilters;
             $fTables = $fSetting->tables ? json_decode($fSetting->tables) : $fTables;   
@@ -120,7 +120,7 @@ class StaffsController  extends \BackendController {
             's.image',
             's.email',
             's.dean',
-            's.dept_position',
+            's.deptposition',
             's.createdat',
             's.deptid',
             's.status',
@@ -128,7 +128,7 @@ class StaffsController  extends \BackendController {
             'sl.title',
             'sl.content',
             'd.slug dslug',
-            '(SELECT dl.name FROM DeptsLang AS dl WHERE dl.deptid = s.deptid AND dl.langid = 1) AS deptname',
+            '(SELECT dl.title FROM DeptsLang AS dl WHERE dl.deptid = s.deptid AND dl.langid = 1) AS deptname',
         ];
 
         $data = $this->modelsManager->createBuilder()

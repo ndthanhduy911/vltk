@@ -22,27 +22,21 @@ class SlideshowsForm extends \Phalcon\Forms\Form
         $status->setLabel('<i class="fas fa-check-circle mr-1"></i>Trạng thái');
         $this->add($status);
 
-        //buttonlink
-        $buttonlink = new Text('buttonlink');
-        $buttonlink->setLabel('<i class="fas fa-globe mr-1"></i>Liên kết');
-        $buttonlink->setAttributes(array(
+        //link
+        $link = new Text('link');
+        $link->setLabel('<i class="fas fa-globe mr-1"></i>Liên kết');
+        $link->setAttributes(array(
             'class' => 'form-control form-control-sm',
             'placeholder' => 'Ví dụ: https://phys.hcmus.edu.vn',
             'maxlength' => "200",
             'data-error' => "Thông tin chưa hợp lệ"
         ));
-        $this->add($buttonlink);
+        $this->add($link);
 
         //image
         $image = new Hidden('image');
         $image->setLabel('<i class="fas fa-image mr-1"></i>Ảnh đại diện');
         $image->setUserOption('attr','image');
         $this->add($image);
-
-        //bgimage
-        $bgimage = new Hidden('bgimage');
-        $bgimage->setLabel('<i class="fas fa-image mr-1"></i>Ảnh nền');
-        $bgimage->setUserOption('attr','image');
-        $this->add($bgimage);
     }
 }

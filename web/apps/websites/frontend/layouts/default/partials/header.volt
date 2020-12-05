@@ -1,9 +1,9 @@
 <?php 
-    $socials = \Social::find(["deleted = 0 AND status = 1 AND deptid = $dept->id", "order" => "sort ASC"]);
-    $links = \Link::find(["deleted = 0 AND status = 1 AND deptid = $dept->id", "order" => "sort ASC"]);
+    $socials = \Socials::find(["deleted = 0 AND status = 1 AND deptid = {$dept->id}", "order" => "sort ASC"]);
+    $links = \Links::find(["deleted = 0 AND status = 1 AND deptid = {$dept->id}", "order" => "sort ASC"]);
     $menuParents = [];
-    if($menuLocation = \MenuLocation::findFirst(["status =  1 AND deptid = $dept->id AND type = 1"])) {
-        $menuParents = \Menus::find(["deleted = 0 AND status = 1 AND deptid = $dept->id AND menu_location_id = {$menuLocation->id} AND parentid is NULL",'order' => 'sort ASC']);
+    if($menuLocation = \MenuLocation::findFirst(["status =  1 AND deptid = {$dept->id} AND type = 1"])) {
+        $menuParents = \Menus::find(["deleted = 0 AND status = 1 AND deptid = {$dept->id} AND locationid = {$menuLocation->id} AND parentid is NULL",'order' => 'sort ASC']);
     }
 ?>
 <div class="header-container">
@@ -44,7 +44,7 @@
                                         <i class="fa {{ link.icon }} pr-1"></i>
                                         {% endif %}
 
-                                        <?= \Link::getName($link->id, $langid) ?>
+                                        <?= \Links::getName($link->id, $langid) ?>
 
                                         {% if link.link %}
                                         </a>
@@ -67,7 +67,7 @@
                         <div id="logo" class="logo" dept-id = "{{ dept.id }}">
                             <a href="<?php echo WEB_URL ?>/{{ dept.id != 1 ? dept.slug : ''}}">
                                 {% if dept.logo %}
-                                <img height="30px" src="{{ helper.getLinkImage(dept.logo) }}" alt="{{ deptlang.name }}">
+                                <img height="30px" src="{{ helper.getLinkImage(dept.logo) }}" alt="{{ deptlang.title }}">
                                 {% else %}
                                 <h3 class="title text-default mb-0">{{ dept.dcode }}</h3>
                                 {% endif %}
@@ -75,7 +75,7 @@
                         </div>
                         {% if !dept.logo %}
                         <div class="site-slogan font-weight-bold">
-                            {{deptlang.name}}
+                            {{deptlang.title}}
                         </div>
                         {% endif %}
                     </div>
@@ -96,7 +96,7 @@
                                     </div>
                                     {% if !dept.logo %}
                                     <div class="site-slogan logo-font">
-                                        {{deptlang.name}}
+                                        {{deptlang.title}}
                                     </div>
                                     {% endif %}
 
@@ -111,13 +111,13 @@
                                 <div class="collapse navbar-collapse" id="navbar-collapse-1">
                                     <ul class="navbar-nav ml-xl-auto">
                                         {%for menu in menuParents%}
-                                        <?php $slug_now = isset($slug_now) ? $slug_now : ''; $menuP = \Menus::getItem($menu, $dept->slug, $slug_now); $menuChild = \Menus::find(['deleted = 0 AND parentid = :parentid:','bind' => ['parentid' => $menu->id]]); ?>
+                                        <?php $slugNow = isset($slugNow) ? $slugNow : ''; $menuP = \Menus::getItem($menu, $dept->slug, $slugNow); $menuChild = \Menus::find(['deleted = 0 AND parentid = :parentid:','bind' => ['parentid' => $menu->id]]); ?>
                                         <li class="nav-item dropdown {{ menuP['actived'] ? 'active' : '' }}">
                                             <a target="{{ helper.getTarget(menu.target)}}" rel="noopener" href="{{ menuP['link'] }}" class="{{ menuP['actived'] ? 'active' : '' }} nav-link {{ menuChild.count() ? 'dropdown-toggle' : '' }}" {{ menuChild.count() ? 'data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"' : '' }}><?= \Menus::getName($menu->id, $langid) ?></a>
                                             <?php if($menuChild->count()){ ?>
                                                 <ul class="dropdown-menu">
                                                 {% for child in menuChild %}
-                                                    <?php $menuItem = \Menus::getItem($child, $dept->slug, $slug_now); ?>
+                                                    <?php $menuItem = \Menus::getItem($child, $dept->slug, $slugNow); ?>
                                                     <li><a target="{{ helper.getTarget(child.target)}}" rel="noopener" href="{{ menuItem['link'] }}" class="{{ menuItem['actived'] ? 'active' : '' }}"><?= \Menus::getName($child->id, $langid) ?></a></li>
                                                 {% endfor %}
                                                 </ul>

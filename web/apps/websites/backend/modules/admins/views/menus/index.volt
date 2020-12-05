@@ -28,9 +28,9 @@
                             <a id="addHeadMenu" data-href="<?= WEB_ADMIN_URL ?>/meuns/add/{{headId}}" class="btn btn-sm btn-hnn btn-hnn-success"><span><i class="fas fa-plus"></i></span></a>
                         </div>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body bg-eee">
                         <div class="table-responsive">
-                            <table id="headMenus" class="table table-bordered table-hover rounded" locationid="{{headId}}">
+                            <table id="headMenus" class="table bg-white table-bordered table-hover rounded" locationid="{{headId}}">
                                 <thead>
                                     <tr>
                                         <th data-col="name" class="align-middle">Tiêu đề</th>
@@ -54,9 +54,9 @@
                             <a id="addFootMenu" data-href="<?= WEB_ADMIN_URL ?>/meuns/add/{{footId}}" class="btn btn-sm btn-hnn btn-hnn-success"><span><i class="fas fa-plus"></i></span></a>
                         </div>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body bg-eee">
                         <div class="table-responsive">
-                            <table id="footMenus" class="table table-bordered table-hover rounded" locationid="{{footId}}">
+                            <table id="footMenus" class="table bg-white table-bordered table-hover rounded" locationid="{{footId}}">
                                 <thead>
                                     <tr>
                                         <th data-col="no" class="align-middle text-center">Tiêu đề</th>

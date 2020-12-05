@@ -11,8 +11,8 @@ const showStatus = (id = '') => {
 }
 
 const loadTableMenuLocation = () => {
-    if ($('#menulocation').length) {
-        let dt = $('#menulocation').DataTable({
+    if ($('#menuslocation').length) {
+        let dt = $('#menuslocation').DataTable({
             "scrollX": true,
             "ordering": false,
             "processing": true,
@@ -110,7 +110,7 @@ const loadTableMenu = () => {
                 }
                 $('td:eq(1)', row).html(showStatus(item.status));
                 $('td:eq(2)', row).html(`
-                    <a href="${backendUrl}/menu/update/${item.menu_location_id}?id=${item.id}" class="fa fa-pencil btn btn-info btn-sm editMenu" title="Cập nhật"></a>
+                    <a href="${backendUrl}/menu/update/${item.locationid}?id=${item.id}" class="fa fa-pencil btn btn-info btn-sm editMenu" title="Cập nhật"></a>
                 `);
 
                 $('td:eq(2)', row).append(`<a href="#" data-href="${backendUrl}/menu/delete/${item.id}" class="fa fa-trash btn btn-danger btn-sm deleteMenu" title="Xóa"></a>`);
@@ -127,7 +127,7 @@ const loadTableMenu = () => {
                             $(newRow).removeClass('bg-warning text-white');
                             $('td:eq(1)', newRow).html(showStatus(menu.status));
                             $('td:eq(2)', newRow).html(`
-                                <a href="${backendUrl}/menu/update/${menu.menu_location_id}?id=${menu.id}" class="fa fa-pencil btn btn-info btn-sm editMenu" title="Cập nhật"></a>
+                                <a href="${backendUrl}/menu/update/${menu.locationid}?id=${menu.id}" class="fa fa-pencil btn btn-info btn-sm editMenu" title="Cập nhật"></a>
                             `);
                             $('td:eq(0)', newRow).html('---'+menu.menu_name);
             

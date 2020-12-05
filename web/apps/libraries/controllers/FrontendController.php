@@ -32,7 +32,7 @@ class FrontendController extends Controller
                 $this->session->set('langid', 1);
             }
             if($language = \Language::findFirstId($this->session->get('langid'))){
-                $this->session->set('short_name', strtolower($language->short_name));
+                $this->session->set('shortname', strtolower($language->shortname));
             }
             $langid = $this->session->get('langid');
             $dept_slug = $dispatcher->getParam('dept');

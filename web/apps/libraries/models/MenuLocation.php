@@ -4,7 +4,7 @@ class MenuLocation extends \ModelCore
     public function initialize()
     {
         $this->setSchema(SCHEMADB);
-        $this->setSource("menulocation");
+        $this->setSource("menuslocation");
     }
 
     public static function getId($deptid, $type){

@@ -29,7 +29,7 @@ class PostsController extends \FrontendController
                     'p.createdat',
                     'p.calendar',
                     'p.image',
-                    'cl.name cat_name',
+                    'cl.title cat_name',
                 ))
                 ->from(['p'=>'Posts'])
                 ->leftJoin('CategoriesLang', 'cl.catid = p.catid AND cl.langid = '.$this->session->get('langid'),'cl')
@@ -54,7 +54,7 @@ class PostsController extends \FrontendController
                     'p.createdat',
                     'p.calendar',
                     'p.image',
-                    'cl.name cat_name',
+                    'cl.title cat_name',
                 ))
                 ->from(['p'=>'Posts'])
                 ->leftJoin('CategoriesLang', 'cl.catid = p.catid AND cl.langid = 1','cl')

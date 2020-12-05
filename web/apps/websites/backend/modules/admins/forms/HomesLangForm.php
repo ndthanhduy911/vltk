@@ -8,8 +8,8 @@ class HomesLangForm extends Form
 {
     public function initialize($entity = null, $lang = null)
     {
-        $specializedtitle = new Text('specializedtitle');
-        $specializedtitle->setLabel('Tiêu đề');
+        $szedtitle = new Text('szedtitle');
+        $szedtitle->setLabel('Tiêu đề');
         $attr = [
             'class' => 'form-control form-control-sm',
             'placeholder' => 'Slug',
@@ -18,9 +18,9 @@ class HomesLangForm extends Form
             'data-required-error' => "Vui lòng nhập tiêu đề",
             'data-error' => "Thông tin chưa hợp lệ"
         ];
-        $attr = cFL($attr,$lang,'specializedtitle');
-        $specializedtitle->setAttributes($attr);
-        $this->add($specializedtitle);
+        $attr = cFL($attr,$lang,'szedtitle');
+        $szedtitle->setAttributes($attr);
+        $this->add($szedtitle);
 
 
         $stafftitle = new Text('stafftitle');

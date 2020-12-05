@@ -24,11 +24,11 @@ class SearchPostsForm extends Form
         $cats = $this->modelsManager->createBuilder()
         ->columns(array(
             'c.id',
-            'cl.name name',
+            'cl.title name',
         ))
         ->from(['c'=>"Categories"])
         ->leftJoin('CategoriesLang', "cl.catid = c.id AND cl.langid = 1",'cl')
-        ->orderBy('cl.name ASC')
+        ->orderBy('cl.title ASC')
         ->where("c.deptid = {$deptid}")
         ->getQuery()
         ->execute();

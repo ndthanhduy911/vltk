@@ -3,7 +3,7 @@
     ->columns(array(
         'c.id',
         'c.slug',
-        'cl.name cat_name',
+        'cl.title cat_name',
     ))
     ->from(['c'=>'Categories'])
     ->where("c.status = 1 AND c.deleted = 0 AND c.deptid = $dept->id AND c.id != 1")

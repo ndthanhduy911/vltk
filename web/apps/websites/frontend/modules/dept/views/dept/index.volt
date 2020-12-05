@@ -33,7 +33,7 @@
                             <h2 class="title slider-title">{{ banner.name }}</h2>
                             <div class="separator-2 clearfix"></div>
                             <p class="slider-content">{{ banner.description }}</p>
-                            <div class="text-right"><a class="btn btn-small btn-default margin-clear" href="{{ banner.buttonlink }}">{{ banner.button_text }}</a></div>
+                            <div class="text-right"><a class="btn btn-small btn-default margin-clear" href="{{ banner.link }}">{{ banner.button_text }}</a></div>
                         </div>
                     </li>
                     {% endfor %}
@@ -105,12 +105,12 @@
 {% endif %}
 
 {% if researches.count() %}
-<section class="pt-5 pb-5 section dark-translucent-bg fixed-bg" style="background-position: 50% 42%; background-image: url({{ helper.getLinkImage(home['specializedbg'], './assets/frontend/images/education.jpg') }})">
-    {% if home['specializedtitle'] %}
+<section class="pt-5 pb-5 section dark-translucent-bg fixed-bg" style="background-position: 50% 42%; background-image: url({{ helper.getLinkImage(home['szedbg'], './assets/frontend/images/education.jpg') }})">
+    {% if home['szedtitle'] %}
     <div class="container mt-4">
         <div class="row justify-content-lg-center">
             <div class="col-lg-8 text-center">
-                <h2 class="page-title text-center"><strong>{{ home['specializedtitle'] }}</strong></h2>
+                <h2 class="page-title text-center"><strong>{{ home['szedtitle'] }}</strong></h2>
                 <div class="separator"></div>
             </div>
         </div>

@@ -5,7 +5,7 @@ class PartnersLang extends \Phalcon\Mvc\Model
     public function initialize()
     {
         $this->setSchema(SCHEMADB);
-        $this->setSource("partnerLang");
+        $this->setSource("partnerslang");
     }
 
     public function vdUpdate($try = false){

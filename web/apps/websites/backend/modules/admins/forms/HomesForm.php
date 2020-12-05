@@ -13,7 +13,7 @@ class HomesForm extends Form
         $deptid = $this->session->get('deptid');
         $cats = \Categories::find([
             "deptid = {$deptid} AND deleted = 0",
-            "columns" => "Categories.id, (SELECT cl.name FROM CategoriesLang AS cl WHERE cl.catid = Categories.id AND cl.langid = 1) AS catname"
+            "columns" => "Categories.id, (SELECT cl.title FROM CategoriesLang AS cl WHERE cl.catid = Categories.id AND cl.langid = 1) AS catname"
         ]);
         $catlist = new Select('catlist', $cats, array(
             'using' => ['id','catname'],
@@ -35,9 +35,9 @@ class HomesForm extends Form
         ));
         $this->add($postnumber);
 
-        //specializedbg
-        $specializedbg = new Hidden('specializedbg');
-        $this->add($specializedbg);
+        //szedbg
+        $szedbg = new Hidden('szedbg');
+        $this->add($szedbg);
 
         //partnerbg
         $partnerbg = new Hidden('partnerbg');

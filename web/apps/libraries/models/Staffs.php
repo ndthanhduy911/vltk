@@ -4,7 +4,7 @@ class Staffs extends \ModelCore
     public function initialize()
     {
         $this->setSchema(SCHEMADB);
-        $this->setSource("staff");
+        $this->setSource("staffs");
     }
 
     public static function getUrl($dept, $staff = NULL)
@@ -56,7 +56,7 @@ class Staffs extends \ModelCore
             'status' => 'Trạng thái',
             'image' => 'Hình đại diện',
             'dean' => 'Chức vụ Khoa',
-            'dept_position' => 'Chức vụ Bộ môn',
+            'deptposition' => 'Chức vụ Bộ môn',
             'email' => 'E-mail',
             'deptid' => 'Bộ môn',
             'deptname' => 'Bộ môn',
@@ -76,7 +76,7 @@ class Staffs extends \ModelCore
     }
 
     public static function findTables () {
-        return ['image','title','email','dean','dept_position','createdat','slug','status'];
+        return ['image','title','email','dean','deptposition','createdat','slug','status'];
     }
 
     public static function arrayOrder () {

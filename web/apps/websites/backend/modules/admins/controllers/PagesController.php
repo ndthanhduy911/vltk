@@ -130,7 +130,7 @@ class PagesController  extends \BackendController {
             'pl.excerpt',
             'u.fullname authorname',
             'd.slug dslug',
-            '(SELECT dl.name FROM DeptsLang AS dl WHERE dl.deptid = p.deptid AND dl.langid = 1) AS deptname',
+            '(SELECT dl.title FROM DeptsLang AS dl WHERE dl.deptid = p.deptid AND dl.langid = 1) AS deptname',
         ];
 
         $data = $this->modelsManager->createBuilder()

@@ -6,7 +6,7 @@
             's.slug',
             's.image',
             's.dean',
-            's.dept_position',
+            's.deptposition',
             's.email',
             's.deptid',
             'sl.title title',
@@ -26,7 +26,7 @@
             's.slug',
             's.image',
             's.dean',
-            's.dept_position',
+            's.deptposition',
             's.email',
             's.deptid',
             'sl.title title',
@@ -35,8 +35,8 @@
         ->from(['s'=>'Staff'])
         ->leftJoin("StaffLang", "sl.staffid = s.id AND sl.langid = $langid",'sl')
         ->where("s.status = 1")
-        ->inWhere("s.dept_position", [1,2])
-        ->orderBy("s.deptid ASC, s.dept_position ASC, s.sort ASC")
+        ->inWhere("s.deptposition", [1,2])
+        ->orderBy("s.deptid ASC, s.deptposition ASC, s.sort ASC")
         ->getQuery()
         ->execute();
     }else{
@@ -46,16 +46,16 @@
             's.slug',
             's.image',
             's.dean',
-            's.dept_position',
+            's.deptposition',
             's.email',
             's.deptid',
             'sl.title title',
             'sl.content content'
         ))
         ->from(['s'=>'Staff'])
-        ->where("s.deleted = 0 AND s.status = 1 AND s.dept_position != 5 AND s.deptid = $dept->id")
+        ->where("s.deleted = 0 AND s.status = 1 AND s.deptposition != 5 AND s.deptid = $dept->id")
         ->leftJoin("StaffLang", "sl.staffid = s.id AND sl.langid = $langid",'sl')
-        ->orderBy("s.dept_position ASC")
+        ->orderBy("s.deptposition ASC")
         ->getQuery()
         ->execute();
         
@@ -65,16 +65,16 @@
             's.slug',
             's.image',
             's.dean',
-            's.dept_position',
+            's.deptposition',
             's.email',
             's.deptid',
             'sl.title title',
             'sl.content content'
         ))
         ->from(['s'=>'Staff'])
-        ->where("s.deleted = 0 AND s.status = 1 AND s.dept_position = 5 AND s.deptid = $dept->id")
+        ->where("s.deleted = 0 AND s.status = 1 AND s.deptposition = 5 AND s.deptid = $dept->id")
         ->leftJoin("StaffLang", "sl.staffid = s.id AND sl.langid = $langid",'sl')
-        ->orderBy("s.dept_position ASC")
+        ->orderBy("s.deptposition ASC")
         ->getQuery()
         ->execute();
     } 
@@ -149,7 +149,7 @@
                                         <div class="body mt-3">
                                             <h5 class="title margin-clear"><a href="<?= \Staff::getUrl($dept, $staff) ?>" title="{{ staff.title }}">{{ staff.title }}</a></h5>
                                             <div class="separator-2 mt-2"></div>
-                                            <h5 class="m-0 text-uppercase">{{ helper.getPosition(staff.dept_position) }}</h5>
+                                            <h5 class="m-0 text-uppercase">{{ helper.getPosition(staff.deptposition) }}</h5>
                                             {% if staff.email %}
                                             <a href="mailto:{{staff.email}}" class="btn btn-link pl-0 text-left"><i class="pr-10 margin-clear fa fa-envelope-o"></i>{{staff.email}}</a>
                                             {% endif %}
@@ -179,7 +179,7 @@
                             </div>
                             <div class="col-md-9 col-lg-9">
                                 <div class="body">
-                                <h3 class="title margin-clear">{{ staff.title }} - <small>{{ helper.getPosition(staff.dept_position) }}</small></h3>
+                                <h3 class="title margin-clear">{{ staff.title }} - <small>{{ helper.getPosition(staff.deptposition) }}</small></h3>
                                 <div class="separator-2 mt-10"></div>
                                 {#{ helper.getExcerpt(staff.content,0,400) }#}
                                 {% if staff.email %}

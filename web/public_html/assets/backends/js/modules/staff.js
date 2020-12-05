@@ -81,7 +81,7 @@ const loadTablePages = () => {
                 let image = `<img src="${getPathImage(item.image, '/assets/frontend/images/defaut_img.png')}" width="50px">`;
                 $('td:eq(1)', row).html(image);
                 $('td', row).addClass('align-middle');
-                $('td:eq(5)', row).html(showDean(item.dean)+showPosition(item.dept_position))
+                $('td:eq(5)', row).html(showDean(item.dean)+showPosition(item.deptposition))
                 $('td:eq(5)', row).html(vi_moment(item.createdat, 'DD/MM/YYYY HH:mm'));
                 $('td:eq(6)', row).html(showStatus(item.status));
                 $('td:eq(7)', row).html(`

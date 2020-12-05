@@ -127,7 +127,7 @@ class ResearchesController  extends \BackendController {
             'rl.content',
             'rl.excerpt',
             'd.slug dslug',
-            '(SELECT dl.name FROM DeptsLang AS dl WHERE dl.deptid = r.deptid AND dl.langid = 1) AS deptname'
+            '(SELECT dl.title FROM DeptsLang AS dl WHERE dl.deptid = r.deptid AND dl.langid = 1) AS deptname'
         ];
 
         $data = $this->modelsManager->createBuilder()

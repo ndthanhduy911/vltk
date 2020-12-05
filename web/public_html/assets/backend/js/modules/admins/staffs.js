@@ -33,7 +33,7 @@ const loadTableItems = (table = '#items', cb = () => {}) => {
         let router = {
             co:'staffs',aj:'ajaxgetdata',fo:'#searchItems',cl:'Items',ti:'cán bộ',
             ff:['title','email','status','createdat'],
-            tf:['image','title','email','dean','dept_position','createdat','slug','status']
+            tf:['image','title','email','dean','deptposition','createdat','slug','status']
         };
         let paramsUrl = getParams();
         let columns = [];
@@ -62,7 +62,7 @@ const loadTableItems = (table = '#items', cb = () => {}) => {
                 $(`td:eq(${fkeys.indexOf('image')})`, row).html(image);
                 $(`td:eq(${fkeys.indexOf('slug')})`, row).html(getItemsLink(5,item));
                 $(`td:eq(${fkeys.indexOf('dean')})`, row).html(showDean(item.dean));
-                $(`td:eq(${fkeys.indexOf('dept_position')})`, row).html(showPosition(item.dept_position));
+                $(`td:eq(${fkeys.indexOf('deptposition')})`, row).html(showPosition(item.deptposition));
                 $(`td:eq(${fkeys.indexOf('createdat')})`, row).html(vi_moment(item.createdat, 'DD/MM/YYYY HH:mm'));
                 $(`td:eq(${fkeys.indexOf('status')})`, row).html(showStatus(item.status));
                 $('td:last', row).addClass('text-nowrap').html(showButtonEdit(item,router.co,router.cl));

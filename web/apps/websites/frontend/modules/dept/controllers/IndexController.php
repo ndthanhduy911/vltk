@@ -12,9 +12,9 @@ class IndexController extends \FrontendController
             'h.deptid',
             'h.catlist',
             'h.postnumber',
-            'h.specializedbg',
+            'h.szedbg',
             'h.partnerbg',
-            'hl.specializedtitle',
+            'hl.szedtitle',
             'hl.stafftitle',
             'hl.staffdes',
             'hl.partnertitle',
@@ -38,11 +38,11 @@ class IndexController extends \FrontendController
         ->columns(array(
             'b.id',
             'b.image',
-            'b.buttonlink',
+            'b.link',
             'b.sort',
             'bl.name name',
-            'bl.description description',
-            'bl.button_text button_text'
+            'bl.except description',
+            'bl.btntext button_text'
         ))
         ->from(['b'=>'Slideshows'])
         ->where("b.deleted = 0 AND b.status = 1 AND b.deptid = 1")
@@ -58,7 +58,7 @@ class IndexController extends \FrontendController
             ->columns(array(
                 'c.id',
                 'c.slug',
-                'cl.name cat_name',
+                'cl.title cat_name',
             ))
             ->from(['c'=>'Categories'])
             ->leftJoin('CategoriesLang', 'cl.catid = c.id','cl')
@@ -74,7 +74,7 @@ class IndexController extends \FrontendController
             'd.slug',
             'd.links',
             'd.image',
-            'dl.name dept_name',
+            'dl.title dept_name',
         ))
         ->from(['d'=>'Depts'])
         ->leftJoin('DeptsLang', 'dl.deptid = d.id','dl')
@@ -88,7 +88,7 @@ class IndexController extends \FrontendController
             's.slug',
             's.image',
             's.dean',
-            's.dept_position',
+            's.deptposition',
             's.email',
             's.deptid',
             'sl.title title',
@@ -117,7 +117,7 @@ class IndexController extends \FrontendController
         ->getQuery()
         ->execute();
         $this->view->home = $home;
-        $this->view->socials = \Social::find(["status = 1 AND deptid = 1", "order" => "sort ASC"]);
+        $this->view->socials = \Socials::find(["status = 1 AND deptid = 1", "order" => "sort ASC"]);
         $this->view->banners = $banners->count() ? $banners : [] ;
         $this->view->cats = $cats;
         $this->view->depts = $depts->count() ? $depts : [];

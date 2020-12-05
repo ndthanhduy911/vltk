@@ -1,4 +1,4 @@
-showSelectImage('#uploadImageSpecializedBg','#showImgSpecializedBg','#specializedbg');
+showSelectImage('#uploadImageSpecializedBg','#showImgSpecializedBg','#szedbg');
 
 showSelectImage('#uploadImagePartnerBg','#showImgPartnerBg','#partnerbg');
 

@@ -23,16 +23,6 @@ class StaffsForm extends Form
         $status->setLabel('<i class="fas fa-check-circle mr-1"></i>Trạng thái');
         $this->add($status);
 
-        $email = new Text('email');
-        $email->setLabel('<i class="fas fa-envelope mr-1"></i>E-mail');
-        $email->setAttributes(array(
-            'class' => 'form-control form-control-sm',
-            'placeholder' => 'Ví dụ: cvtao@hcmus.edu.vn',
-            'maxlength' => "100",
-            'data-error' => "Thông tin chưa hợp lệ"
-        ));
-        $this->add($email);
-
         //deptid
         $deptid = new Select('deptid', [], [
             'class' => 'form-control form-control-sm',
@@ -57,7 +47,7 @@ class StaffsForm extends Form
         $dean->setLabel('<i class="fas fa-school mr-1"></i>Chức vụ Khoa');
         $this->add($dean);
 
-        $dept_position = new Select('dept_position', [
+        $deptposition = new Select('deptposition', [
             1 => "Trưởng bộ môn",
             2 => "Phó bộ môn",
             3 => "Giáo vụ bộ môn",
@@ -71,8 +61,18 @@ class StaffsForm extends Form
             'emptyValue' => '',
             'data-error' => "Thông tin chưa hợp lệ"
         ]);
-        $dept_position->setLabel('<i class="fas fa-graduation-cap mr-1"></i>Chức vụ Bộ môn');
-        $this->add($dept_position);
+        $deptposition->setLabel('<i class="fas fa-graduation-cap mr-1"></i>Chức vụ Bộ môn');
+        $this->add($deptposition);
+
+        $email = new Text('email');
+        $email->setLabel('<i class="fas fa-envelope mr-1"></i>E-mail');
+        $email->setAttributes(array(
+            'class' => 'form-control form-control-sm',
+            'placeholder' => 'Ví dụ: cvtao@hcmus.edu.vn',
+            'maxlength' => "100",
+            'data-error' => "Thông tin chưa hợp lệ"
+        ));
+        $this->add($email);
 
         $slug = new Text('slug');
         $slug->setLabel('<i class="fas fa-globe mr-1"></i>Slug');
@@ -100,11 +100,5 @@ class StaffsForm extends Form
         $image->setLabel('<i class="fas fa-image mr-1"></i>Ảnh đại diện');
         $image->setUserOption('attr','image');
         $this->add($image);
-
-        //bgimage
-        $bgimage = new Hidden('bgimage');
-        $bgimage->setLabel('<i class="fas fa-image mr-1"></i>Ảnh nền');
-        $bgimage->setUserOption('attr','image');
-        $this->add($bgimage);
     }
 }

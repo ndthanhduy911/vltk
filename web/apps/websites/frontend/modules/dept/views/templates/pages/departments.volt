@@ -6,7 +6,7 @@
             'd.id',
             'd.slug',
             'd.image',
-            'dl.name dept_name',
+            'dl.title dept_name',
         ))
         ->from(['d'=>'Depts'])
         ->leftJoin('DeptsLang', 'dl.deptid = d.id','dl')

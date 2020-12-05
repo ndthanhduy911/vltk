@@ -1,7 +1,7 @@
 <?php 
 $menuParents = [];
 if($menuLocation = MenuLocation::findFirst(["status =  1 AND deptid = $dept->id AND type = 2"])) {
-    $menuParents = Menus::find(["status = 1 AND deptid = $dept->id AND menu_location_id = {$menuLocation->id} AND parentid is NULL",'order' => 'sort ASC','limit' => 3]);
+    $menuParents = Menus::find(["status = 1 AND deptid = $dept->id AND locationid = {$menuLocation->id} AND parentid is NULL",'order' => 'sort ASC','limit' => 3]);
 }
 ?>
 
@@ -16,9 +16,9 @@ if($menuLocation = MenuLocation::findFirst(["status =  1 AND deptid = $dept->id 
                                 <h3 class="title text-default mb-0">{{ dept.dcode }}</h3>
                                 <a href="<?php echo WEB_URL ?>/">
                                     {% if dept.logo %}
-                                    <img src="{{ helper.getLinkImage(dept.logo) }}" alt="{{ deptlang.name }}">
+                                    <img src="{{ helper.getLinkImage(dept.logo) }}" alt="{{ deptlang.title }}">
                                     {% else %}
-                                    <h3 class="title text-default">{{deptlang.name}}</h3>
+                                    <h3 class="title text-default">{{deptlang.title}}</h3>
                                     {% endif %}
                                 </a>
                             </div>

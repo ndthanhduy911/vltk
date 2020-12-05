@@ -22,5 +22,17 @@ class StaffsLangForm extends Form
         $attr = cFL($attr,$lang,'title');
         $title->setAttributes($attr);
         $this->add($title);
+
+        //content
+        $content = new Textarea('content');
+        $content->setLabel('<i class="fas fa-newspaper mr-1"></i> Nội dung');
+        $attr = [
+            'class' => 'form-control form-control-sm',
+            'placeholder' => 'Nội dung',
+            'data-error' => "Thông tin chưa hợp lệ"
+        ];
+        $attr = cFL($attr,$lang,'content');
+        $content->setAttributes($attr);
+        $this->add($content);
     }
 }

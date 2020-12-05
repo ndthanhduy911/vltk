@@ -14,9 +14,9 @@ class DeptController extends \FrontendController
             'h.deptid',
             'h.catlist',
             'h.postnumber',
-            'h.specializedbg',
+            'h.szedbg',
             'h.partnerbg',
-            'hl.specializedtitle specializedtitle',
+            'hl.szedtitle szedtitle',
             'hl.stafftitle stafftitle',
             'hl.staffdes staffdes',
             'hl.partnertitle partnertitle',
@@ -42,10 +42,10 @@ class DeptController extends \FrontendController
         ->columns(array(
             'b.id',
             'b.image',
-            'b.buttonlink',
+            'b.link',
             'bl.name name',
-            'bl.description description',
-            'bl.button_text button_text'
+            'bl.except description',
+            'bl.btntext button_text'
         ))
         ->from(['b'=>'Slideshows'])
         ->where("b.status = 1 AND b.deleted = 0 AND b.deptid = $dept->id")
@@ -60,7 +60,7 @@ class DeptController extends \FrontendController
             ->columns(array(
                 'c.id',
                 'c.slug',
-                'cl.name cat_name',
+                'cl.title cat_name',
             ))
             ->from(['c'=>'Categories'])
             ->where("c.status = 1")
@@ -93,14 +93,14 @@ class DeptController extends \FrontendController
             's.slug',
             's.image',
             's.dean',
-            's.dept_position',
+            's.deptposition',
             's.email',
             's.deptid',
             'sl.title title',
             'sl.content content'
         ))
         ->from(['s'=>'Staff'])
-        ->where("s.deptid = $dept->id AND s.status = 1 AND s.deleted = 0 AND (s.dept_position = 1 OR s.dept_position = 2)")
+        ->where("s.deptid = $dept->id AND s.status = 1 AND s.deleted = 0 AND (s.deptposition = 1 OR s.deptposition = 2)")
         ->leftJoin("StaffLang", "sl.staffid = s.id AND sl.langid = $langid",'sl')
         ->orderBy("s.dean ASC")
         ->limit(3)
@@ -123,7 +123,7 @@ class DeptController extends \FrontendController
         
         
         $this->view->home = $home;
-        $this->view->socials = \Social::find(["status = 1 AND deptid = $dept->id", "order" => "sort ASC"]);
+        $this->view->socials = \Socials::find(["status = 1 AND deptid = $dept->id", "order" => "sort ASC"]);
         $this->view->banners = $banners;
         $this->view->cats = $cats;
         $this->view->researches = $researches;

@@ -53,8 +53,8 @@
                             <div class="card-header">
                                 <h3 class="card-title text-primary"><i class="fas fa-graduation-cap mr-1"></i>Lãnh đạo</h3>
                             </div>
-                            <div class="card-body">
-                                <div class="card card-primary card-outline card-outline-tabs">
+                            <div class="card-body bg-eee">
+                                <div class="card card-primary card-outline card-outline-tabs mb-0">
                                     <div class="card-header p-0 border-bottom-0">
                                         <ul class="nav nav-tabs w-100">
                                             {% for key, lang in languages %}
@@ -95,8 +95,8 @@
                             <div class="card-header">
                                 <h3 class="card-title text-primary"><i class="fas fa-book mr-1"></i>Liên hệ</h3>
                             </div>
-                            <div class="card-body">
-                                <div class="card card-primary card-outline card-outline-tabs">
+                            <div class="card-body bg-eee">
+                                <div class="card card-primary card-outline card-outline-tabs mb-0">
                                     <div class="card-header p-0 border-bottom-0">
                                         <ul class="nav nav-tabs w-100">
                                             {% for key, lang in languages %}
@@ -139,7 +139,7 @@
                             <div class="card-header">
                                 <h3 class="card-title text-primary"><i class="fas fa-building mr-1"></i>Danh sách Bộ môn</h3>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body bg-eee">
                                 <div class="card card-primary card-outline card-outline-tabs">
                                     <div class="card-header p-0 border-bottom-0">
                                         <ul class="nav nav-tabs w-100">
@@ -156,10 +156,10 @@
                                         <div class="tab-content">
                                             {% for key, lang in languages %}
                                             <div class="tab-pane fade {{ !key ? 'active show' : '' }}" id="alang{{lang.id}}">
-                                                <div class="form-group label-floating w-100">
+                                                <div class="form-group label-floating w-100 pb-0">
                                                     <div class="input-group">
-                                                        <label class="control-label">{{formsLang[lang.id].getLabel('specializedtitle')}}</label>
-                                                        {{formsLang[lang.id].render('specializedtitle')}}
+                                                        <label class="control-label">{{formsLang[lang.id].getLabel('szedtitle')}}</label>
+                                                        {{formsLang[lang.id].render('szedtitle')}}
                                                         <div class="invalid-feedback"></div>
                                                     </div>
                                                 </div>
@@ -168,21 +168,18 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card">
+                                <div class="card mb-0">
+                                    <div class="card-header">
+                                        <h3 class="card-title text-primary">Ảnh nền</h3>
+                                    </div>
                                     <div class="card-body">
-                                        <img id="showImg" class="w-100 d-block object-fit-fill" style="height: 150px;" src="<?= !empty($homes->image) ? $homes->specializedbg : '' ?>"
-                                        alt="<?= !empty($homes->specializedbg) ? $homes->specializedbg : '' ?>">
+                                        <img id="showImg" class="w-100 d-block object-fit-fill" style="height: 150px;" src="<?= !empty($homes->image) ? $homes->szedbg : '' ?>"
+                                        alt="<?= !empty($homes->szedbg) ? $homes->szedbg : '' ?>">
                                     </div>
                                     <div class="card-footer">
-                                        {{formHomes.render('specializedbg')}}
-                                        <a id="uploadImage" href="#" class="link">Đặt ảnh nền bộ môn</a>
-                                        <a id="removeImage" href="#" class="float-right link text-danger <?= !empty($homes->specializedbg) ? '' : 'hidden' ?>">Xóa</a>
-                                    </div>
-                                </div>
-                                <div class="form-group label-floating col-md-12">
-                                    <div class="col-md-12 p-0">
-
-
+                                        {{formHomes.render('szedbg')}}
+                                        <a id="uploadImage" href="#" class="link">Tải ảnh</a>
+                                        <a id="removeImage" href="#" class="ml-auto link text-danger <?= !empty($homes->szedbg) ? '' : 'hidden' ?>">Xóa</a>
                                     </div>
                                 </div>
                             </div>
@@ -191,7 +188,7 @@
                             <div class="card-header">
                                 <h3 class="card-title text-primary"><i class="fas fa-handshake mr-1"></i>Liên kết/ đối tác</h3>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body bg-eee">
                                 <div class="card card-primary card-outline card-outline-tabs">
                                     <div class="card-header p-0 border-bottom-0">
                                         <ul class="nav nav-tabs w-100">
@@ -227,18 +224,20 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card">
+                                <div class="card mb-0">
+                                    <div class="card-header">
+                                        <h3 class="card-title text-primary">Ảnh nền</h3>
+                                    </div>
                                     <div class="card-body">
                                         <img id="showPgImg" style="height: 150px;" class="w-100 d-block object-fit-fill" src="<?= !empty($homes->partnerbg) ? $homes->partnerbg : '' ?>"
                                         alt="<?= !empty($homes->partnerbg) ? $homes->partnerbg : '' ?>">
                                     </div>
                                     <div class="card-footer">
                                         {{formHomes.render('partnerbg')}}
-                                        <a id="uploadPgImage" href="#" class="link">Đặt ảnh nền liến kết/ đối tác</a>
-                                        <a id="removePgImage" href="#" class="link text-danger <?= !empty($homes->partnerbg) ? '' : 'hidden' ?> float-right">Xóa</a>
+                                        <a id="uploadPgImage" href="#" class="link">Tải ảnh</a>
+                                        <a id="removePgImage" href="#" class="ml-auto link text-danger <?= !empty($homes->partnerbg) ? '' : 'hidden' ?> float-right">Xóa</a>
                                     </div>
                                 </div>
-    
                             </div>
                         </div>
                     </div>

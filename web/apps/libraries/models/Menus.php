@@ -79,23 +79,9 @@ class Menus extends \ModelCore
 
     public static function getName($menuid, $langid = 1){
         $menulang = \MenusLang::findFirst(['langid =:langid: AND menuid = :menuid:', 'bind'=>['langid' => $langid, 'menuid' => $menuid]]);
-        return $menulang ? $menulang->name : '';
+        return $menulang ? $menulang->title : '';
     }
 
-    public static function getChild($id , $data = [], $levelTag = '', $level = 0){
-        $deptChild = Menus::find(["parentid = :id: AND deleted = 0", 'columns' => "id, name, dcode,qhns,address, description", 'bind' => ['id' => $id]]);
-        if($deptChild->count()){
-            $levelTag .= '&#151;' ;
-            $level ++;
-            foreach ($deptChild as $value) {
-                $value->levelTag = $levelTag;
-                $value->level = $level;
-                array_push($data, $value);
-                $data = Menus::getChild($value->id, $data, $levelTag, $level);
-            }
-        }
-        return $data;
-    }
 
     public static function getArrayChild($id , $data = []){
         $deptChild = Menus::find(["parentid = :id: AND deleted = 0", 'columns' => "id", 'bind' => ['id' => $id]]);
@@ -139,8 +125,8 @@ class Menus extends \ModelCore
             $level .=  $id != 0 ? $symbol: '' ;
             foreach ($deptChild as $value) {
                 $value->level = $level;
-                $value->name = $value->level.' '.\Menus::getName($value->id);
-                $data[$value->id] = trim($value->name);
+                $value->title = $value->level.' '.\Menus::getName($value->id);
+                $data[$value->id] = trim($value->title);
                 $data = Menus::getTreeName($value->id, $data, $level,$symbol);
             }
         }
@@ -148,14 +134,14 @@ class Menus extends \ModelCore
     }
 
     public static function getTreeDataTable($lid, $id, $data = [], $level = '',$symbol = '&#151;'){
-        $deptChild = Menus::find(["parentid = :id: AND deleted = 0 AND menu_location_id = :lid:", 'columns' => "id,status,parentid", 'bind' => ['id' => $id,'lid' => $lid],'order' => 'sort ASC']);
+        $deptChild = Menus::find(["parentid = :id: AND deleted = 0 AND locationid = :lid:", 'columns' => "id,status,parentid", 'bind' => ['id' => $id,'lid' => $lid],'order' => 'sort ASC']);
         if($deptChild->count()){
             $level .=  $id != 0 ? $symbol: '' ;
             foreach ($deptChild as $value) {
                 $value->level = $level;
-                $value->name = $value->level.' '.\Menus::getName($value->id);
-                array_push($data,['id' => $value->id,'name' => trim($value->name),'status' => $value->status,'parentid' => $value->parentid]);
-                // $data[$value->id] = trim($value->name);
+                $value->title = $value->level.' '.\Menus::getName($value->id);
+                array_push($data,['id' => $value->id,'name' => trim($value->title),'status' => $value->status,'parentid' => $value->parentid]);
+                // $data[$value->id] = trim($value->title);
                 $data = Menus::getTreeDataTable($lid,$value->id, $data, $level,$symbol);
             }
         }
@@ -165,7 +151,7 @@ class Menus extends \ModelCore
     public static function findParents($deptid){
         return parent::find([
             "deptid = :did: AND deleted = 0 AND parentid = 0",
-            "columns" => "Menus.*, (SELECT ml.name FROM MenusLang AS ml WHERE ml.menuid = Menus.id AND ml.langid = 1) AS name",
+            "columns" => "Menus.*, (SELECT ml.title FROM MenusLang AS ml WHERE ml.menuid = Menus.id AND ml.langid = 1) AS title",
             'bind' => [
                 'did' => $deptid
             ]

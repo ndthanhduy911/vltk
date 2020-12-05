@@ -5,7 +5,7 @@ class Partners extends \ModelCore
     public function initialize()
     {
         $this->setSchema(SCHEMADB);
-        $this->setSource("partner");
+        $this->setSource("partners");
     }
 
     public function vdUpdate($try = false){
