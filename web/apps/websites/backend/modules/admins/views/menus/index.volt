@@ -33,7 +33,7 @@
                             <table id="headMenus" class="table bg-white table-bordered table-hover rounded" locationid="{{headId}}">
                                 <thead>
                                     <tr>
-                                        <th data-col="name" class="align-middle">Tiêu đề</th>
+                                        <th data-col="title" class="align-middle">Tiêu đề</th>
                                         <th data-col="status" class="align-middle text-center">Trạng thái</th>
                                         <th data-col="id" class="align-middle text-center">Thao tác</th>
                                     </tr>
@@ -59,9 +59,9 @@
                             <table id="footMenus" class="table bg-white table-bordered table-hover rounded" locationid="{{footId}}">
                                 <thead>
                                     <tr>
-                                        <th data-col="no" class="align-middle text-center">Tiêu đề</th>
-                                        <th data-col="no" class="align-middle text-center">Trạng thái</th>
-                                        <th data-col="no" class="align-middle text-center">Thao tác</th>
+                                        <th data-col="title" class="align-middle text-center">Tiêu đề</th>
+                                        <th data-col="status" class="align-middle text-center">Trạng thái</th>
+                                        <th data-col="id" class="align-middle text-center">Thao tác</th>
                                     </tr>
                                 </thead>
                                 <tbody>

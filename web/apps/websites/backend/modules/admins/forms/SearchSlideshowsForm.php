@@ -8,16 +8,16 @@ class SearchSlideshowsForm extends Form
 {
     public function initialize($entity = null, $options = null){
 
-        //nameSearch
-        $nameSearch = new Text('nameSearch');
-        $nameSearch->setLabel('Tiêu đề');
-        $nameSearch->setAttributes(array(
+        //titleSearch
+        $titleSearch = new Text('titleSearch');
+        $titleSearch->setLabel('Tiêu đề');
+        $titleSearch->setAttributes(array(
             'class' => 'form-control form-control-sm',
             'placeholder' => 'Ví dụ: Ngày hội chuyên ngành',
             'maxlength' => "255",
             'data-error' => "Thông tin chưa hợp lệ"
         ));
-        $this->add($nameSearch);
+        $this->add($titleSearch);
 
         //createdatSearch
         $createdatSearch = new Text('createdatSearch');

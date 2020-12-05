@@ -43,9 +43,9 @@ class DeptController extends \FrontendController
             'b.id',
             'b.image',
             'b.link',
-            'bl.name name',
-            'bl.except description',
-            'bl.btntext button_text'
+            'bl.title',
+            'bl.excerpt',
+            'bl.btntext'
         ))
         ->from(['b'=>'Slideshows'])
         ->where("b.status = 1 AND b.deleted = 0 AND b.deptid = $dept->id")

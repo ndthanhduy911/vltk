@@ -65,8 +65,13 @@ class Depts extends \ModelCore
         return $this->validate($validator);
     }
 
+    public static function getName($deptid, $langid = 1){
+        $lang = parent::findFirst(['langid =:langid: AND deptid = :deptid:', 'bind'=>['langid' => $langid, 'deptid' => $deptid]]);
+        return $lang ? $lang->title : '';
+    }
+
     public static function getChild($id , $data = [], $levelTag = '', $level = 0){
-        $deptChild = Depts::find(["parentid = :id: AND deleted = 0", 'columns' => "id, name, dcode,qhns,address, description", 'bind' => ['id' => $id]]);
+        $deptChild = Depts::find(["parentid = :id: AND deleted = 0", 'columns' => "id, dcode,address, phone", 'bind' => ['id' => $id]]);
         if($deptChild->count()){
             $levelTag .= '&#151;' ;
             $level ++;
@@ -132,13 +137,13 @@ class Depts extends \ModelCore
     }
 
     public static function getTreeName($id, $data = [], $level = '',$symbol = '&#151;'){
-        $deptChild = Depts::find(["parentid = :id: AND deleted = 0", 'columns' => "id, name", 'bind' => ['id' => $id]]);
+        $deptChild = Depts::find(["parentid = :id: AND deleted = 0", 'columns' => "id", 'bind' => ['id' => $id]]);
         if($deptChild->count()){
             $level .=  $id != 0 ? $symbol: '' ;
             foreach ($deptChild as $value) {
                 $value->level = $level;
-                $value->name = $value->level.' '.$value->name;
-                $data[$value->id] = trim($value->name);
+                $value->title = $value->level.' '.\Depts::getName($value->id,1);
+                $data[$value->id] = trim($value->title);
                 $data = Depts::getTreeName($value->id, $data, $level,$symbol);
             }
         }
@@ -148,13 +153,13 @@ class Depts extends \ModelCore
     public static function getTreeNamePermission($perL,$data = [], $level = '',$symbol = '&#151;'){
         $deptType = [];
         $deptid = isset($_SESSION['deptid']) ? $_SESSION['deptid'] : 0;
-        if($depts = \Depts::findFirstIdNoDelete($deptid, 'id, name')){
+        if($depts = \Depts::findFirstIdNoDelete($deptid, 'id')){
             if($perL->depted == 0){
                 $deptType = \Depts::getTreeName(0,$data,$level,$symbol);
             }elseif($perL->depted == 1 || $perL->depted == 2 ){
-                $deptType = \Depts::getTreeName($deptid, ["$depts->id" => $depts->name],$level,$symbol);
+                $deptType = \Depts::getTreeName($deptid, ["$depts->id" => \Depts::getName($depts->id,1)],$level,$symbol);
             }elseif($perL->depted == 3){
-                $deptType = [$depts->id => $depts->name];
+                $deptType = [$depts->id => \Depts::getName($depts->id,1)];
             }
         }
         return $deptType;
@@ -267,8 +272,7 @@ class Depts extends \ModelCore
         return \Depts::findFirstPermission($perL,$columns,$params);
     }
 
-    public static function getUrlById($id = null)
-    {
+    public static function getUrlById($id = null){
         if($dept = parent::findFirst($id)){
             return WEB_URL.'/'.$dept->slug;
         }else{
@@ -276,8 +280,7 @@ class Depts extends \ModelCore
         }
     }
 
-    public static function getBySlug($slug = null)
-    {
+    public static function getBySlug($slug = null){
         if($dept = parent::findFirst(['slug = :slug: AND status = 1','bind' => ['slug' => $slug]])){
             return $dept;
         }else{
@@ -285,11 +288,10 @@ class Depts extends \ModelCore
         }
     }
 
-    public static function getTitleById($id = null, $langid = 1)
-    {
+    public static function getTitleById($id = null, $langid = 1){
         if($dept = parent::findFirst($id)){
-            $deptlang = DepartmentsLang::findFirst(["langid = $langid AND deptid = $dept->id"]);
-            return $deptlang->name;
+            $deptlang = \DeptsLang::findFirst(["langid = $langid AND deptid = $dept->id"]);
+            return $deptlang->title;
         }else{
             return null;
         }

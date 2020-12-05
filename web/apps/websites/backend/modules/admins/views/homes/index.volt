@@ -173,7 +173,7 @@
                                         <h3 class="card-title text-primary">Ảnh nền</h3>
                                     </div>
                                     <div class="card-body">
-                                        <img id="showImg" class="w-100 d-block object-fit-fill" style="height: 150px;" src="<?= !empty($homes->image) ? $homes->szedbg : '' ?>"
+                                        <img id="showImg" class="w-100 d-block object-fit-fill" style="height: 150px;" src="<?= !empty($homes->szedbg) ? $homes->szedbg : '' ?>"
                                         alt="<?= !empty($homes->szedbg) ? $homes->szedbg : '' ?>">
                                     </div>
                                     <div class="card-footer">

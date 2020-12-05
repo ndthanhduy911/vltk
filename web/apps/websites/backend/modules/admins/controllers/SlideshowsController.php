@@ -20,8 +20,8 @@ class SlideshowsController  extends \BackendController {
 
         $filters = ($this->className)::findFilters();
         $tables = ($this->className)::findTables();
-        $fFilters = ['name','status','createdat'];
-        $fTables = ['image','name','description','createdat','status'];
+        $fFilters = ['title','status','createdat'];
+        $fTables = ['image','title','excerpt','createdat','status'];
         if($fSetting = \FilterSetting::findFirstKey($this->cler)){
             $fFilters = $fSetting->filters ? json_decode($fSetting->filters) : $fFilters;
             $fTables = $fSetting->tables ? json_decode($fSetting->tables) : $fTables;   
@@ -123,8 +123,8 @@ class SlideshowsController  extends \BackendController {
             'b.status',
             'b.sort',
             'b.createdat',
-            'bl.name',
-            'bl.except',
+            'bl.title',
+            'bl.excerpt',
             'd.slug dslug',
             '(SELECT dl.title FROM DeptsLang AS dl WHERE dl.deptid = b.deptid AND dl.langid = 1) AS deptname',
         ];

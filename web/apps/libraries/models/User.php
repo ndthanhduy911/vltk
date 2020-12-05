@@ -11,7 +11,7 @@ class User extends \ModelCore
     public function initialize()
     {
         $this->setSchema(SCHEMADB);
-        $this->setSource("user");
+        $this->setSource("users");
     }
 
     public function vdUpdate($try=false)

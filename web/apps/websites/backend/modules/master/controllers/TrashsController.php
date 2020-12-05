@@ -103,9 +103,9 @@ class TrashsController extends \BackendController
         'pages'=> ['Pages','pageid',['t.id','t.updatedat','tl.title','tl.excerpt des']],
         'subjects'=> ['Subjects','subjectid',['t.id','t.updatedat','tl.title','tl.excerpt des']],
         'researches'=> ['Researches','researchid',['t.id','t.updatedat','tl.title','tl.excerpt des']],
-        'slideshows'=> ['Slideshows','slideshowid',['t.id','t.updatedat','tl.title','tl.description des']],
-        'staffs'=> ['Staffs','staffid',['t.id','t.updatedat','tl.title','tl.excerpt des']],
-        'partners'=> ['Partners','partnerid',['t.id','t.updatedat','tl.title','tl.excerpt des']]
+        'slideshows'=> ['Slideshows','slideshowid',['t.id','t.updatedat','tl.title','tl.excerpt des']],
+        'staffs'=> ['Staffs','staffid',['t.id','t.updatedat','tl.title','tl.content des']],
+        'partners'=> ['Partners','partnerid',['t.id','t.updatedat','tl.title','t.link des']]
     ];
 
     private function getJsCss (){

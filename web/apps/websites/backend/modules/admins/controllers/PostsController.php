@@ -131,7 +131,7 @@ class PostsController  extends \BackendController {
             'pl.content',
             'pl.excerpt',
             'u.fullname authorname',
-            'c.name catname',
+            'c.title catname',
             'd.slug dslug',
             '(SELECT dl.title FROM DeptsLang AS dl WHERE dl.deptid = p.deptid AND dl.langid = 1) AS deptname',
         ];

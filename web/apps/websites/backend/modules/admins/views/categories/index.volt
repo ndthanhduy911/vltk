@@ -81,8 +81,8 @@
                                         </th>
                                         <th data-col="no" class="align-middle text-center" style="width: 20px;">STT</th>
                                         <th data-col="image" class="align-middle text-center">Ảnh đại diện</th>
-                                        <th data-col="name" class="align-middle text-center">Tiêu đề</th>
-                                        <th data-col="description" class="align-middle text-center">Mô tả</th>
+                                        <th data-col="title" class="align-middle text-center">Tiêu đề</th>
+                                        <th data-col="excerpt" class="align-middle text-center">Mô tả</th>
                                         <th data-col="createdat" class="align-middle text-center">Ngày đăng</th>
                                         <th data-col="status" class="align-middle text-center">Trạng thái</th>
                                         <th data-col="no" class="align-middle text-center">Thao tác</th>

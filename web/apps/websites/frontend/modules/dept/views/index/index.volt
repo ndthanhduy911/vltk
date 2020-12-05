@@ -31,10 +31,10 @@
                             data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;"
                             data-mask_in="x:0px;y:[100%];s:inherit;e:inherit;"
                             data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;">
-                            <h2 class="title slider-title">{{ banner.name }}</h2>
+                            <h2 class="title slider-title">{{ banner.title }}</h2>
                             <div class="separator-2 clearfix m-0"></div>
-                            <p class="slider-content">{{ banner.description }}</p>
-                            <div class="text-right"><a class="btn btn-small btn-default margin-clear" href="{{ banner.link }}">{{ banner.button_text }}</a></div>
+                            <p class="slider-content">{{ banner.excerpt }}</p>
+                            <div class="text-right"><a class="btn btn-small btn-default margin-clear" href="{{ banner.link }}">{{ml._ml_system('detail',"Chi tiết")}}</a></div>
                         </div>
                     </li>
                     {% endfor %}

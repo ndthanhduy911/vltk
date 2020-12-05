@@ -96,7 +96,7 @@ class CategoriesController  extends \BackendController {
             'c.createdat',
             'c.image',
             'cl.title',
-            'cl.description',
+            'cl.excerpt',
             'd.slug dslug',
         ];
 

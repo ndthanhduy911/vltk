@@ -140,7 +140,7 @@ class Menus extends \ModelCore
             foreach ($deptChild as $value) {
                 $value->level = $level;
                 $value->title = $value->level.' '.\Menus::getName($value->id);
-                array_push($data,['id' => $value->id,'name' => trim($value->title),'status' => $value->status,'parentid' => $value->parentid]);
+                array_push($data,['id' => $value->id,'title' => trim($value->title),'status' => $value->status,'parentid' => $value->parentid]);
                 // $data[$value->id] = trim($value->title);
                 $data = Menus::getTreeDataTable($lid,$value->id, $data, $level,$symbol);
             }

@@ -50,26 +50,26 @@ class Slideshows extends \ModelCore
             'deptid' => 'Bộ môn',
             'deptname' => 'Bộ môn',
             'createdat' => 'Ngày tạo',
-            'name' => 'Tiêu đề',
-            'description' => 'Mô tả'
+            'title' => 'Tiêu đề',
+            'excerpt' => 'Mô tả'
         ];
         return isset($feilds[$key]) ? $feilds[$key] : '';
     }
 
     public static function arrayFilter(){
         return [
-            ['name'],
+            ['title'],
             ['status'],
             ['createdat']
         ];
     }
 
     public static function findTables () {
-        return ['image','name','description','createdat','slug','status'];
+        return ['image','title','excerpt','createdat','slug','status'];
     }
 
     public static function arrayOrder () {
-        return ['name','status','createdat'];
+        return ['title','status','createdat'];
     }
     
     public static function findFilters () {

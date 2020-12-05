@@ -2,8 +2,8 @@ const loadTableItems = (table = '#items', cb = () => {}) => {
     if ($(table).length) {
         let router = {
             co:'slideshows',aj:'ajaxgetdata',fo:'#searchItems',cl:'Items',ti:'banners',
-            ff:['name', 'status', 'createdat'],
-            tf:['image','name','description','createdat','status'],
+            ff:['title', 'status', 'createdat'],
+            tf:['image','title','excerpt','createdat','status'],
         };
         let paramsUrl = getParams();
         let columns = [];
@@ -28,8 +28,8 @@ const loadTableItems = (table = '#items', cb = () => {}) => {
                 let pageLength = pageInfo.length;
                 $('td:eq(1)', row).html((dataIndex+1)+(page*pageLength));
                 let image = `<img src="${getPathImage(item.image, '/assets/frontend/images/defaut_img.png')}" height="30px">`;
-                $(`td:eq(${fkeys.indexOf('name')})`, row).html(showTitle(item.name,30));
-                $(`td:eq(${fkeys.indexOf('description')})`, row).html(showTitle(item.description,30));
+                $(`td:eq(${fkeys.indexOf('title')})`, row).html(showTitle(item.name,30));
+                $(`td:eq(${fkeys.indexOf('excerpt')})`, row).html(showTitle(item.description,30));
                 $(`td:eq(${fkeys.indexOf('image')})`, row).html(image);
                 $(`td:eq(${fkeys.indexOf('createdat')})`, row).html(vi_moment(item.createdat, 'DD/MM/YYYY HH:mm'));
                 $(`td:eq(${fkeys.indexOf('status')})`, row).html(showStatus(item.status));

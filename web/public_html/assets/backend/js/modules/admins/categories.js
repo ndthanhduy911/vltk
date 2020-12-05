@@ -33,11 +33,6 @@ const loadTableCategories = (table = '#categories', cb = () => {}) => {
         $(`${table} thead th`).each((key,element) => {
             let fkey = $(element).data('col');
             fkeys.push(fkey);
-            // if(['ddcosts'].indexOf(fkey) === -1){
-            //     columns.push({data : $(element).data('col')})
-            // }else{
-            //     columns.push({data : 'no'})
-            // }
             columns.push({data : $(element).data('col')})
         });
 
@@ -55,8 +50,8 @@ const loadTableCategories = (table = '#categories', cb = () => {}) => {
                 let pageLength = pageInfo.length;
                 $('td:eq(1)', row).html((dataIndex+1)+(page*pageLength));
                 let image = `<img src="${getPathImage(item.image, '/assets/frontend/images/defaut_img.png')}" height="30px">`;
-                $(`td:eq(${fkeys.indexOf('name')})`, row).html(showTitle(item.name,30));
-                $(`td:eq(${fkeys.indexOf('description')})`, row).html(showTitle(item.description,30));
+                $(`td:eq(${fkeys.indexOf('title')})`, row).html(showTitle(item.title,30));
+                $(`td:eq(${fkeys.indexOf('excerpt')})`, row).html(showTitle(item.excerpt,30));
                 $(`td:eq(${fkeys.indexOf('image')})`, row).html(image);
                 $(`td:eq(${fkeys.indexOf('slug')})`, row).html(getPostLink(item));
                 $(`td:eq(${fkeys.indexOf('createdat')})`, row).html(vi_moment(item.createdat, 'DD/MM/YYYY HH:mm'));

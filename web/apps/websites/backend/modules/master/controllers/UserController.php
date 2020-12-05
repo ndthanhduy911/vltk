@@ -390,7 +390,7 @@ class UserController extends \BackendController
             'u.status',
             'u.createdat',
             'R.name rolename',
-            '(SELECT d.name FROM Depts AS d WHERE d.id = u.deptid) AS deptname'
+            '(SELECT d.title FROM Depts AS d WHERE d.id = u.deptid) AS deptname'
         ))
         ->from(['u' => 'User'])
         ->where("u.deleted = 0 AND u.id != 1 AND u.id != $userid")
