@@ -5,7 +5,7 @@
         <div class="row">
             <div class="main col-md-9">
                 <article>
-                    {{ subject_lang.content }}
+                    {{ subjectslang.content }}
                 </article>
             </div>
 

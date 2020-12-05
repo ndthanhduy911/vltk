@@ -9,11 +9,11 @@
             's.deptposition',
             's.email',
             's.deptid',
-            'sl.title title',
-            'sl.content content'
+            'sl.title',
+            'sl.content'
         ))
-        ->from(['s'=>'Staff'])
-        ->leftJoin("StaffLang", "sl.staffid = s.id AND sl.langid = $langid",'sl')
+        ->from(['s'=>'Staffs'])
+        ->leftJoin("StaffsLang", "sl.staffid = s.id AND sl.langid = $langid",'sl')
         ->where("s.status = 1 AND (s.dean = 1 OR s.dean = 2)")
         ->orderBy("s.sort ASC, s.dean ASC")
         ->limit(3)
@@ -32,8 +32,8 @@
             'sl.title title',
             'sl.content content'
         ))
-        ->from(['s'=>'Staff'])
-        ->leftJoin("StaffLang", "sl.staffid = s.id AND sl.langid = $langid",'sl')
+        ->from(['s'=>'Staffs'])
+        ->leftJoin("StaffsLang", "sl.staffid = s.id AND sl.langid = {$langid}",'sl')
         ->where("s.status = 1")
         ->inWhere("s.deptposition", [1,2])
         ->orderBy("s.deptid ASC, s.deptposition ASC, s.sort ASC")
@@ -52,9 +52,9 @@
             'sl.title title',
             'sl.content content'
         ))
-        ->from(['s'=>'Staff'])
+        ->from(['s'=>'Staffs'])
         ->where("s.deleted = 0 AND s.status = 1 AND s.deptposition != 5 AND s.deptid = $dept->id")
-        ->leftJoin("StaffLang", "sl.staffid = s.id AND sl.langid = $langid",'sl')
+        ->leftJoin("StaffsLang", "sl.staffid = s.id AND sl.langid = $langid",'sl')
         ->orderBy("s.deptposition ASC")
         ->getQuery()
         ->execute();
@@ -71,9 +71,9 @@
             'sl.title title',
             'sl.content content'
         ))
-        ->from(['s'=>'Staff'])
+        ->from(['s'=>'Staffs'])
         ->where("s.deleted = 0 AND s.status = 1 AND s.deptposition = 5 AND s.deptid = $dept->id")
-        ->leftJoin("StaffLang", "sl.staffid = s.id AND sl.langid = $langid",'sl')
+        ->leftJoin("StaffsLang", "sl.staffid = s.id AND sl.langid = $langid",'sl')
         ->orderBy("s.deptposition ASC")
         ->getQuery()
         ->execute();
@@ -90,11 +90,11 @@
     <div class="container">
         <div class="row justify-content-lg-center">
             <div class="col-lg-8 text-center pv-20">
-                <h1 class="title object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100"><span class="text-white text-uppercase">{{ page_lang.title }}</span></h1>
-                {% if page_lang.excerpt %}
-                <div class="separator object-non-visible mt-10" data-animation-effect="fadeIn" data-effect-delay="100">
+                <h1 class="title"><span class="text-white text-uppercase">{{ pageslang.title }}</span></h1>
+                {% if pageslang.excerpt %}
+                <div class="separator mt-10">
                 </div>
-                <p class="text-center object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">{{ page_lang.excerpt }}</p>
+                <p class="text-center">{{ pageslang.excerpt }}</p>
                 {% endif %}
             </div>
         </div>
@@ -117,7 +117,7 @@
                                     <img src="{{ helper.getLinkImage(staff.image,'/assets/frontend/images/teams.jpg') }}" alt="{{ staff.title }}" width="100%">
                                 </div>
                                 <div class="body">
-                                    <h5 class="margin-clear text-uppercase"><a href="<?= \Staff::getUrl($dept,$staff) ?>" title="{{ staff.title }}">{{ staff.title }}</a></h5>
+                                    <h5 class="margin-clear text-uppercase"><a href="<?= \Staffs::getUrl($dept,$staff) ?>" title="{{ staff.title }}">{{ staff.title }}</a></h5>
                                     <small class="text-uppercase">{{ helper.getDean(staff.dean) }}</small>
                                     <div class="separator mt-10"></div>
                                     {% if staff.email %}
@@ -147,14 +147,14 @@
                                     </div>
                                     <div class="col-md-9 p-sm-0">
                                         <div class="body mt-3">
-                                            <h5 class="title margin-clear"><a href="<?= \Staff::getUrl($dept, $staff) ?>" title="{{ staff.title }}">{{ staff.title }}</a></h5>
+                                            <h5 class="title margin-clear"><a href="<?= \Staffs::getUrl($dept, $staff) ?>" title="{{ staff.title }}">{{ staff.title }}</a></h5>
                                             <div class="separator-2 mt-2"></div>
                                             <h5 class="m-0 text-uppercase">{{ helper.getPosition(staff.deptposition) }}</h5>
                                             {% if staff.email %}
                                             <a href="mailto:{{staff.email}}" class="btn btn-link pl-0 text-left"><i class="pr-10 margin-clear fa fa-envelope-o"></i>{{staff.email}}</a>
                                             {% endif %}
                                             <div class="w-100">
-                                                <a href="<?= \Staff::getUrl($dept, $staff) ?>" class="btn btn-default btn-sm btn-animated radius-50">{{ ml._ml_system('more', 'Xem thêm') }} <i class="fa fa-arrow-right"></i></a>
+                                                <a href="<?= \Staffs::getUrl($dept, $staff) ?>" class="btn btn-default btn-sm btn-animated radius-50">{{ ml._ml_system('more', 'Xem thêm') }} <i class="fa fa-arrow-right"></i></a>
                                             </div>
                                         </div>
                                     </div>
@@ -188,7 +188,7 @@
                                     <li><a href="mailto:{{ staff.email }}" class="text-info"><i class="fa fa-envelope-o pr-10"></i>{{ staff.email }}</a></li>
                                 {% endif %}
                                 <div class="w-100">
-                                    <a href="<?= \Staff::getUrl($dept, $staff) ?>" class="btn btn-default btn-sm btn-animated radius-50">{{ ml._ml_system('more', 'Xem thêm') }} <i class="fa fa-arrow-right"></i></a>
+                                    <a href="<?= \Staffs::getUrl($dept, $staff) ?>" class="btn btn-default btn-sm btn-animated radius-50">{{ ml._ml_system('more', 'Xem thêm') }} <i class="fa fa-arrow-right"></i></a>
                                 </div>
                                 </div>
                             </div>
@@ -219,7 +219,7 @@
                                     </ul>
                                     {% endif %}
                                     <div class="w-100">
-                                        <a href="<?= \Staff::getUrl($dept, $staff) ?>" class="btn btn-default btn-sm btn-animated radius-50">{{ ml._ml_system('more', 'Xem thêm') }} <i class="fa fa-arrow-right"></i></a>
+                                        <a href="<?= \Staffs::getUrl($dept, $staff) ?>" class="btn btn-default btn-sm btn-animated radius-50">{{ ml._ml_system('more', 'Xem thêm') }} <i class="fa fa-arrow-right"></i></a>
                                     </div>
                                 </div>
                             </div>

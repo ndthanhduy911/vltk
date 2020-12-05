@@ -1,4 +1,4 @@
-{% if banners %}
+{% if banners.count() %}
 <div class="banner clearfix">
     <!-- slideshow start -->
     <!-- ================ -->
@@ -47,11 +47,10 @@
     </div>
     <!-- slideshow end -->
 </div>
-
 {% endif %}
 
 <div id="page-start"></div>
-{% if cats %}
+{% if cats.count() %}
 <section id="section1" class="section clearfix pt-5">
     <div class="container mt-4">
         <div class="row">
@@ -106,7 +105,7 @@
 </section>
 {% endif %}
 
-{% if depts %}
+{% if depts.count() %}
 <section class="pt-5 pb-5 section dark-translucent-bg fixed-bg" style="background-position: 50% 42%; background-image: url({{ helper.getLinkImage(home['szedbg'], './assets/frontend/images/education.jpg') }})">
     {% if home['szedtitle'] %}
     <div class="container mt-4">
@@ -140,7 +139,7 @@
 </section>
 {% endif %}
 
-{% if staffs %}
+{% if staffs.count() %}
 <section class="clearfix pt-5 pb-5">
     <div class="container">
         {% if home['stafftitle'] %}
@@ -179,7 +178,7 @@
 </section>
 {% endif %}
 
-{% if partners %}
+{% if partners.count() %}
 <section class="pt-5 pb-5 section dark-translucent-bg fixed-bg" style="background-position: 50% 42%; background-image: url({{ helper.getLinkImage(home['partnerbg'], './assets/frontend/images/education.jpg') }})">
     {% if home['partnertitle'] %}
     <div class="container pv-20">
@@ -196,7 +195,7 @@
         <div class="slick-carousel carousel-5">
             {% for partner in partners %}
             <div class="col-lg-3 col-md-6">
-                <div class="ph-20 feature-box text-center object-non-visible" data-animation-effect="fadeInDownSmall"
+                <div class="ph-20 feature-box text-center"
                     data-effect-delay="100">
                     <span class="icon large circle"><img class="rounded-circle" alt="{{partner.title}}" src="{{ helper.getLinkImage(partner.image,'/assets/frontend/images/beauty.jpg') }}"></span>
                     <h3>{{partner.title}}</h3>

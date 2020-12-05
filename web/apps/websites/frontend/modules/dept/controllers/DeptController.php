@@ -65,7 +65,7 @@ class DeptController extends \FrontendController
             ->from(['c'=>'Categories'])
             ->where("c.status = 1")
             ->inWhere("c.id", $listCats);
-            if(!(int)$dept->post_connect) {
+            if(!(int)$dept->postconnect) {
                 $cats = $cats->andWhere("c.deptid = $dept->id");
             }
             $cats = $cats->leftJoin('CategoriesLang', "cl.catid = c.id AND cl.langid = $langid",'cl')
@@ -96,32 +96,30 @@ class DeptController extends \FrontendController
             's.deptposition',
             's.email',
             's.deptid',
-            'sl.title title',
-            'sl.content content'
+            'sl.title',
+            'sl.content'
         ))
-        ->from(['s'=>'Staff'])
-        ->where("s.deptid = $dept->id AND s.status = 1 AND s.deleted = 0 AND (s.deptposition = 1 OR s.deptposition = 2)")
-        ->leftJoin("StaffLang", "sl.staffid = s.id AND sl.langid = $langid",'sl')
+        ->from(['s'=>'Staffs'])
+        ->where("s.deptid = {$dept->id} AND s.status = 1 AND s.deleted = 0 AND (s.deptposition = 1 OR s.deptposition = 2)")
+        ->leftJoin("StaffsLang", "sl.staffid = s.id AND sl.langid = {$langid}",'sl')
         ->orderBy("s.dean ASC")
         ->limit(3)
         ->getQuery()
         ->execute();
-        
 
         $partners = $this->modelsManager->createBuilder()
         ->columns(array(
             'p.id',
             'p.link',
             'p.image',
-            'pl.title title',
+            'pl.title',
         ))
         ->from(['p' => 'Partners'])
-        ->where("p.status = 1 AND p.deleted = 0 AND p.deptid = $dept->id")
-        ->leftJoin('PartnersLang', "pl.partnerid = p.id AND pl.langid = $langid",'pl')
+        ->where("p.status = 1 AND p.deleted = 0 AND p.deptid = {$dept->id}")
+        ->leftJoin('PartnersLang', "pl.partnerid = p.id AND pl.langid = {$langid}",'pl')
         ->getQuery()
         ->execute();
-        
-        
+
         $this->view->home = $home;
         $this->view->socials = \Socials::find(["status = 1 AND deptid = $dept->id", "order" => "sort ASC"]);
         $this->view->banners = $banners;
@@ -129,7 +127,6 @@ class DeptController extends \FrontendController
         $this->view->researches = $researches;
         $this->view->staffs = $staffs;
         $this->view->partners = $partners;
-        $this->view->researchModel = new \Researches();
         $this->get_js_css();
     }
 

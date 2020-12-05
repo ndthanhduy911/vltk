@@ -180,7 +180,7 @@
 {% endif %}
 
 
-{% if partners %}
+{% if partners.count() %}
 <section class="pt-5 pb-5 section dark-translucent-bg fixed-bg" style="background-position: 50% 42%; background-image: url({{ helper.getLinkImage(home['partnerbg'], './assets/frontend/images/education.jpg') }})">
     {% if home['partnertitle'] %}
     <div class="container pv-20">
@@ -197,8 +197,7 @@
         <div class="slick-carousel carousel-5">
             {% for partner in partners %}
             <div class="col-lg-3 col-md-6">
-                <div class="ph-20 feature-box text-center object-non-visible" data-animation-effect="fadeInDownSmall"
-                    data-effect-delay="100">
+                <div class="ph-20 feature-box text-center">
                     <span class="icon large circle"><img class="rounded-circle" alt="{{partner.title}}" src="{{ helper.getLinkImage(partner.image,'/assets/frontend/images/beauty.jpg') }}"></span>
                     <h3>{{partner.title}}</h3>
                 </div>

@@ -42,8 +42,7 @@
                 <div class="masonry-grid row">
                     {% for key, post in posts %}
                     <div class="masonry-grid-item col-md-6">
-                        <article class="blogpost shadow-2 light-gray-bg bordered object-non-visible"
-                            data-animation-effect="fadeInUpSmall" data-effect-delay="100">
+                        <article class="blogpost shadow-2 light-gray-bg bordered">
                             {% if post.image %}
                             <div class="overlay-container">
                                 <img class="ml-auto mr-auto grow" src="{{ helper.getLinkImage(post.image) }}" alt="{{ post.title }}">

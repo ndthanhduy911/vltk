@@ -10,18 +10,18 @@ class PagesController extends \FrontendController
         $dept = $this->dispatcher->getReturnedValue();
         $langid = $this->session->get('langid');
         $slug = (int)$dept->id === 1 ? $slug1 : $slug2;
-        if(!$page = \Pages::findFirst(["slug = :slug: AND status = 1 AND deptid = $dept->id", 'bind' => ['slug' => $slug]])){
+        if(!$page = \Pages::findFirst(["slug = :slug: AND status = 1 AND deptid = {$dept->id}", 'bind' => ['slug' => $slug]])){
             $this->view->title = '404';
             return $this->view->pick('templates/404');
         }
-        if(!$pagelang = \PagesLang::findFirst(["langid = $langid AND pageid = $page->id"])){
+        if(!$pageslang = \PagesLang::findFirst(["langid = {$langid} AND pageid = {$page->id}"])){
             $this->view->title = '404';
             return $this->view->pick('templates/404');
         }
-        $this->view->title = $pagelang->title;
+        $this->view->title = $pageslang->title;
         $this->view->page = $page;
         $this->view->slug_now = $page->slug;
-        $this->view->pagelang = $pagelang;
+        $this->view->pageslang = $pageslang;
         if(!$page->attrid){
             return $this->view->pick('templates/pages/default');
         }

@@ -37,7 +37,7 @@ class Menus extends \ModelCore
         }
     }
 
-    public static function getItem($menu , $slug = '', $slug_now = false){
+    public static function getItem($menu , $slug = '', $slugNow = false){
         $item = [
             'actived' => false,
             'link' => ''
@@ -46,22 +46,22 @@ class Menus extends \ModelCore
         switch ((int)$menu->type) {
             case 1: {
                 $item['link'] = ($post = \Posts::findFirstId($menu->postid)) ? WEB_URL.($slug != '/' ? '/'.$slug : '')."/news/".$post->slug : '#';
-                $item['actived'] = (isset($post->slug) ? $post->slug : '#4')  == $slug_now ? true : false;
+                $item['actived'] = (isset($post->slug) ? $post->slug : '#4')  == $slugNow ? true : false;
                 break;
             }    
             case 2: {
                 $item['link'] = ($page = \Pages::findFirstId($menu->pageid)) ? WEB_URL.($slug != '/' ? '/'.$slug : '').'/'.$page->slug.'.html' : '#';
-                $item['actived'] = (isset($page->slug) ? $page->slug : '#4') == $slug_now ? true : false;
+                $item['actived'] = (isset($page->slug) ? $page->slug : '#4') == $slugNow ? true : false;
                 break;
             } 
             case 3: {
                 $item['link'] = ($cat = \Categories::findFirstId($menu->catid)) ? WEB_URL.($slug != '/' ? '/'.$slug : '').'/category/'.$cat->slug : '#';
-                $item['actived'] = (isset($cat->slug) ? $cat->slug : '#4') == $slug_now ? true : false;
+                $item['actived'] = (isset($cat->slug) ? $cat->slug : '#4') == $slugNow ? true : false;
                 break;
             }   
             case 4: {
-                $item['link'] = ($dept = \Menus::findFirstId($menu->dept)) ? ($dept->links?$dept->links:WEB_URL.($slug != '/' ? '/'.$slug : '').'/'.$dept->slug) : '#';
-                $item['actived'] = (isset($dept->slug) ? $dept->slug : '#4') == $slug_now ? true : false;
+                $item['link'] = ($dept = \Depts::findFirstId($menu->dept)) ? ($dept->links?$dept->links:WEB_URL.($slug != '/' ? '/'.$slug : '').'/'.$dept->slug) : '#';
+                $item['actived'] = (isset($dept->slug) ? $dept->slug : '#4') == $slugNow ? true : false;
                 break;
             } 
             case 5: {
