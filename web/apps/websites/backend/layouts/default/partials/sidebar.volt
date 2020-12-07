@@ -146,12 +146,13 @@
                         {% if master.checkPermission('options', 'index') %}
                         <li class="nav-item">
                             <a href="<?= WEB_ADMIN_URL ?>/options"
-                                class="nav-link {% if dispatcher.getControllerName()=='options' AND dispatcher.getActionName()=='index' %} {{ 'active' }} {% endif %}">
+                                class="nav-link {% if dispatcher.getControllerName()=='options' %} {{ 'active' }} {% endif %}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Thông tin chung</p>
                             </a>
                         </li>
                         {% endif %}
+                        {#
                         {% if master.checkPermission('options', 'socials') %}
                         <li class="nav-item">
                             <a href="<?= WEB_ADMIN_URL ?>/options/socials"
@@ -161,6 +162,7 @@
                             </a>
                         </li>
                         {% endif %}
+                        #}
                         {% if master.checkPermission('links', 'index') %}
                         <li class="nav-item">
                             <a href="<?= WEB_ADMIN_URL ?>/links"
