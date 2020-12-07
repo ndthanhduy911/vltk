@@ -125,9 +125,9 @@
                     </a>
                 </li>
                 <li
-                    class="nav-item has-treeview {% if dispatcher.getControllerName() in ['setting'] %} {{ 'menu-open' }} {% endif %}">
+                    class="nav-item has-treeview {% if dispatcher.getControllerName() in ['options'] %} {{ 'menu-open' }} {% endif %}">
                     <a href="#"
-                        class="nav-link {% if dispatcher.getControllerName() in ['setting'] %} {{ 'active' }} {% endif %}">
+                        class="nav-link {% if dispatcher.getControllerName() in ['options'] %} {{ 'active' }} {% endif %}">
                         <i class="nav-icon fas fa-cog"></i>
                         <p>
                             Thiết lập chung

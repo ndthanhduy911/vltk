@@ -238,7 +238,7 @@ class AdminsCore extends \BackendController{
                 throw new \Exception($message->getMessage());
             }
         }
-        \Logs::saveLogs($this, 3, "Xóa tạm ".mb_strtolower($this->title,'UTF-8')." ID: {$item->id}", ['table' => get_class($this->className),'id' => $item->id]);
+        \Logs::saveLogs($this, 3, "Xóa tạm ".mb_strtolower($this->title,'UTF-8')." ID: {$item->id}", ['table' => $this->className,'id' => $item->id]);
     }
 
     private function getJsCss(){

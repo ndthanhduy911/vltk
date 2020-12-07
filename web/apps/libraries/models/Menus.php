@@ -77,7 +77,7 @@ class Menus extends \ModelCore
         return $item;
     }
 
-    public static function getName($menuid, $langid = 1){
+    public static function getLName($menuid, $langid = 1){
         $menulang = \MenusLang::findFirst(['langid =:langid: AND menuid = :menuid:', 'bind'=>['langid' => $langid, 'menuid' => $menuid]]);
         return $menulang ? $menulang->title : '';
     }
@@ -125,7 +125,7 @@ class Menus extends \ModelCore
             $level .=  $id != 0 ? $symbol: '' ;
             foreach ($deptChild as $value) {
                 $value->level = $level;
-                $value->title = $value->level.' '.\Menus::getName($value->id);
+                $value->title = $value->level.' '.\Menus::getLName($value->id);
                 $data[$value->id] = trim($value->title);
                 $data = Menus::getTreeName($value->id, $data, $level,$symbol);
             }
@@ -139,7 +139,7 @@ class Menus extends \ModelCore
             $level .=  $id != 0 ? $symbol: '' ;
             foreach ($deptChild as $value) {
                 $value->level = $level;
-                $value->title = $value->level.' '.\Menus::getName($value->id);
+                $value->title = $value->level.' '.\Menus::getLName($value->id);
                 array_push($data,['id' => $value->id,'title' => trim($value->title),'status' => $value->status,'parentid' => $value->parentid]);
                 // $data[$value->id] = trim($value->title);
                 $data = Menus::getTreeDataTable($lid,$value->id, $data, $level,$symbol);

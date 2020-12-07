@@ -44,7 +44,7 @@
                                         <i class="fa {{ link.icon }} pr-1"></i>
                                         {% endif %}
 
-                                        <?= \Links::getName($link->id, $langid) ?>
+                                        <?= \Links::getLName($link->id, $langid) ?>
 
                                         {% if link.link %}
                                         </a>
@@ -113,12 +113,12 @@
                                         {% for menu in menuParents %}
                                         <?php $slugNow = isset($slugNow) ? $slugNow : ''; $menuP = \Menus::getItem($menu, $dept->slug, $slugNow); $menuChild = \Menus::find(['deleted = 0 AND parentid = :parentid:','bind' => ['parentid' => $menu->id]]); ?>
                                         <li class="nav-item dropdown {{ menuP['actived'] ? 'active' : '' }}">
-                                            <a target="{{ helper.getTarget(menu.target)}}" rel="noopener" href="{{ menuP['link'] }}" class="{{ menuP['actived'] ? 'active' : '' }} nav-link {{ menuChild.count() ? 'dropdown-toggle' : '' }}" {{ menuChild.count() ? 'data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"' : '' }}><?= \Menus::getName($menu->id, $langid) ?></a>
+                                            <a target="{{ helper.getTarget(menu.target)}}" rel="noopener" href="{{ menuP['link'] }}" class="{{ menuP['actived'] ? 'active' : '' }} nav-link {{ menuChild.count() ? 'dropdown-toggle' : '' }}" {{ menuChild.count() ? 'data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"' : '' }}><?= \Menus::getLName($menu->id, $langid) ?></a>
                                             <?php if($menuChild->count()){ ?>
                                                 <ul class="dropdown-menu">
                                                 {% for child in menuChild %}
                                                     <?php $menuItem = \Menus::getItem($child, $dept->slug, $slugNow); ?>
-                                                    <li><a target="{{ helper.getTarget(child.target)}}" rel="noopener" href="{{ menuItem['link'] }}" class="{{ menuItem['actived'] ? 'active' : '' }}"><?= \Menus::getName($child->id, $langid) ?></a></li>
+                                                    <li><a target="{{ helper.getTarget(child.target)}}" rel="noopener" href="{{ menuItem['link'] }}" class="{{ menuItem['actived'] ? 'active' : '' }}"><?= \Menus::getLName($child->id, $langid) ?></a></li>
                                                 {% endfor %}
                                                 </ul>
                                             <?php } ?>

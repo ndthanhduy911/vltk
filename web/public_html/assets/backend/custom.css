@@ -20,6 +20,11 @@
     width: 135px;
 }
 
+.h-150px{
+    height: 150px !important;
+    object-fit: contain;
+}
+
 .card-header,.card-footer {
     padding: .75rem 1rem;
     align-items: center!important;
@@ -404,9 +409,9 @@ table .form-control, table .form-group .form-control {
     padding-bottom: 0;
 }
 
-/* .alert-warning {
-    color: #fff;
-} */
+.alert {
+    padding: 10px 15px;
+}
 
 .form-control-sm {
     padding-left: 0;

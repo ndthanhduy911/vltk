@@ -1,9 +1,19 @@
 <?php
 namespace Backend\Modules\Admins\Controllers;
-use Backend\Modules\Admins\Forms\OptionsForm;
-use Backend\Modules\Admins\Forms\OptionsLangForm;
 
 class OptionsController  extends \BackendController {
+
+    public $title = "Trang thông tin";
+
+    public $cler = "options";
+
+    public $className = \Depts::class;
+
+    public $classNameLang = \DeptsLang::class;
+
+    public $itemsForm = \Backend\Modules\Admins\Forms\OptionsForm::class;
+
+    public $itemsLangFrom = \Backend\Modules\Admins\Forms\OptionsLangForm::class;
 
     public function indexAction(){
 
@@ -12,9 +22,8 @@ class OptionsController  extends \BackendController {
                 \Phalcon\Mvc\View::LEVEL_ACTION_VIEW
             );
         }
-
-        $perEdit = $this->master::checkPermissionDepted('options', 'update',1);
-        $perView = $this->master::checkPermissionDepted('options', 'index');
+        $perEdit = $this->master::checkPermissionDepted($this->cler, 'update',1);
+        $perView = $this->master::checkPermissionDepted($this->cler, 'index');
         $perL = $perView ? $perView : ($perEdit? $perEdit :false);
         if(!$perL){
             require ERROR_FILE; die;
@@ -26,51 +35,36 @@ class OptionsController  extends \BackendController {
         }
 
         $formsLang = [];
-        $optionsLang = [];
-        $pageContent = [];
         $languages = \Language::find(['status = 1']);
-        if($id){
-            if(!$options = \Options::findFirstId($id)){
-                echo 'Không tìm thấy dữ liệu'; die;
-            }         
-            foreach ($languages as $key => $lang) {
-                $v = ($key == 0 ? true : false);
-                $pageLang = \OptionsLang::findFirst(['pageid = :id: AND langid = :langid:','bind' => ['id' => $page->id, 'langid' => $lang->id]]);
-                if($pageLang){
-                    $formLang = new OptionsLangForm($pageLang, [$lang->id,$v]);
-                    $optionsLang[$lang->id] = $pageLang;
-                    $formsLang[$lang->id] = $formLang;
-                    $pageContent[$lang->id] = $pageLang->content;
-                }else{
-                    $formsLang[$lang->id] = new OptionsLangForm(null, [$lang->id,$v]);
-                    $optionsLang[$lang->id] = new \OptionsLang();
-                    $pageContent[$lang->id] = '';
-                }
-            }
-            $title = 'Chỉnh sửa';
-        }else{
-            $options = new \Options();
-            $title = 'Thêm mới';
-            foreach ($languages as $key => $lang) {
-                $v = $key == 0 ? true : false;
-                $formsLang[$lang->id] = new OptionsLangForm(null, [$lang->id,$v]);
-                $optionsLang[$lang->id] = new \OptionsLang();
-                $pageContent[$lang->id] = '';
+        $id = $this->session->get('deptid');
+
+        if(!$items = ($this->className)::findFirstId($id)){
+            echo 'Không tìm thấy dữ liệu'; die;
+        }         
+        foreach ($languages as $key => $lang) {
+            $v = ($key == 0 ? true : false);
+            $itemsLang = ($this->classNameLang)::findFirst(["deptid = :id: AND langid = :langid:",'bind' => ['id' => $items->id, 'langid' => $lang->id]]);
+            if($itemsLang){
+                $formLang = new $this->itemsLangFrom($itemsLang, [$lang->id,$v]);
+                $formsLang[$lang->id] = $formLang;
+            }else{
+                $formsLang[$lang->id] = new $this->itemsLangFrom(null, [$lang->id,$v]);
             }
         }
 
-        $formOptions = new OptionsForm($options);
+        $form = new $this->itemsForm($items);
 
         $this->view->perEdit = $perEdit ? 1 : "";
         $this->view->perView = $perView ? 1 : "";
         $this->view->languages = $languages;
-        $this->view->pageContent = $pageContent;
         $this->view->formsLang = $formsLang;
-        $this->view->formOptions = $formOptions;
-        $this->view->options = $options;
-        $this->view->optionsLang = $optionsLang;
-        $this->view->title = $title;
-        $this->getJsCss();
+        $this->view->form = $form;
+        $this->view->items = $items;
+        $this->view->title = 'Thiết lập chung';
+        $this->view->cler = $this->cler;
+        $this->assets->addJs(WEB_URI.'/elfinder/js/require.min.js');
+        $this->assets->addJs(WEB_URI.'/assets/backend/js/modules/admins/templates/views.js');
+        return $this->view->pick('templates/views');
     }
 
     // =================================
@@ -87,93 +81,71 @@ class OptionsController  extends \BackendController {
             $this->helper->responseJson($this, $data);
         }
         $data['token'] = ['key' => $this->security->getTokenKey(), 'value' => $this->security->getToken()];
-        if(!$this->request->isAjax() || !$this->request->isPost() || !$perL = $this->master::checkPermissionDepted('options','update')){
+        if(!$this->request->isAjax() || !$this->request->isPost() || !$perL = $this->master::checkPermissionDepted($this->cler,'update',1)){
             $data['error'] = ['Truy cập không được phép'];
             $this->helper->responseJson($this, $data);
         }
 
         $userid = $this->session->get('userid');
+        $id = $this->session->get('deptid');
+        if(!$items = ($this->className)::findFirstIdPermission($id,$perL)){
+            $data['error'] = ["Không tìm thấy {}"];
+            $this->helper->responseJson($this, $data);
+        }
+        $items->updatedat = date('Y-m-d H:i:s');
+        $items->updatedby = $userid;
+
+        $itemsLangs = [];
         $languages = \Language::find(['status = 1']);
         $pTitle = $this->request->getPost('title',['string','trim']);
-        $pContent = $this->request->getPost('content',['trim']);
         $pExcerpt = $this->request->getPost('excerpt',['string','trim']);
-        if($id){
-            if(!$page = \Options::findFirstIdPermission($id,$perL)){
-                $data['error'] = ['Không tìm thấy trang'];
-                $this->helper->responseJson($this, $data);
-            }
-            $page->updatedat = date('Y-m-d H:i:s');
-            $page->updatedby = $userid;
-        }else{
-            $page = new \Options();
-            $page->author = $this->session->get('userid');
-            $page->deptid = $this->session->get('deptid');
-            $page->createdat = date('Y-m-d H:i:s');
-            $page->updatedat = $page->createdat;
-            $page->createdby = $userid;
-            $page->updatedby = $userid;
-        }
-        $pageLangs = [];
-
+        $pAddress = $this->request->getPost('address',['string','trim']);
         foreach ($languages as $key => $lang) {
-
-            if(!$id || !$pageLang = \OptionsLang::findFirst(["pageid = :id: AND langid = :langid:",'bind' => ['id' => (int)$id,'langid' => $lang->id]])){
-                $pageLang = new \OptionsLang();
+            if(!$items->id || !$itemsLang = ($this->classNameLang)::findFirst(["deptid = :id: AND langid = :langid:",'bind' => ['id' => $id,'langid' => $lang->id]])){
+                $itemsLang = new $this->classNameLang;
             }
-
             if($key == 0){
                 $lId = $lang->id;
             }
-
-            $pageLang->title = !empty($pTitle[$lang->id]) ? $pTitle[$lang->id] : $pTitle[$lId];
-            $pageLang->content = !empty($pContent[$lang->id]) ? $pContent[$lang->id] : $pContent[$lId];
-            $pageLang->excerpt = !empty($pExcerpt[$lang->id]) ? $pExcerpt[$lang->id] : $pExcerpt[$lId];
-            $pageLang->langid = $lang->id;
-            array_push($pageLangs,$pageLang);
+            $itemsLang->title = !empty($pTitle[$lang->id]) ? $pTitle[$lang->id] : $pTitle[$lId];
+            $itemsLang->address = !empty($pAddress[$lang->id]) ? $pAddress[$lang->id] : $pAddress[$lId];
+            $itemsLang->excerpt = !empty($pExcerpt[$lang->id]) ? $pExcerpt[$lang->id] : $pExcerpt[$lId];
+            $itemsLang->langid = $lang->id;
+            array_push($itemsLangs,$itemsLang);
         }
 
-        $plug = $this->request->getPost('slug',['string','trim']);
-        $page->attrid = $this->request->getPost('attrid',['int']);
-        $page->status = $this->request->getPost('status',['int']);
-        $page->slug = $plug ? $plug : $this->helper->slugify($pTitle[1]);
-        $page->image = $this->request->getPost('image',['trim','string']);
-        $page->bgimage = $this->request->getPost('bgimage',['trim','string']);
-
-        if(\Options::findFirst(["slug = :slug: AND id != :id:","bind" => ["slug" => $page->slug,'id'=> $id]])){
-            $reqPost['slug'] = $page->slug .'-'. strtotime('now');
-        }
+        $items->dcode = $this->request->getPost('dcode',['trim','string']);
+        $items->phone = $this->request->getPost('phone',['trim','string']);
+        $items->email = $this->request->getPost('email',['trim','string']);
+        $items->link = $this->request->getPost('link',['trim','string']);
+        $items->image = $this->request->getPost('image',['trim','string']);
+        $items->logo = $this->request->getPost('logo',['trim','string']);
+        $items->icon = $this->request->getPost('icon',['trim','string']);
 
         try {
             $this->db->begin();
-            $page->vdUpdate(true);
-            if (!$page->save()) {
-                foreach ($page->getMessages() as $message) {
+            $items->vdUpdate(true);
+            if (!$items->save()) {
+                foreach ($items->getMessages() as $message) {
                     throw new \Exception($message->getMessage());
                 }
             }
-            foreach ($pageLangs as $pageLang) {
-                $pageLang->pageid = $page->id;
-                $pageLang->vdUpdate(true);
-                if (!$pageLang->save()) {
-                    foreach ($pageLang->getMessages() as $message) {
+            foreach ($itemsLangs as $itemsLang) {
+                $itemsLang->postid = $items->id;
+                $itemsLang->vdUpdate(true);
+                if (!$itemsLang->save()) {
+                    foreach ($itemsLang->getMessages() as $message) {
                         throw new \Exception($message->getMessage());
                     }
                 }
             }
             $this->db->commit();
-            $this->flashSession->success(($id ? 'Chỉnh sửa' : 'Thêm mới').' trang thành công');
+            \Logs::saveLogs($this, 2, "Thiết lập chung khoa/ bộ môn ", ['table' => $this->className,'id' => $items->id]);
+            $this->flashSession->success("Chỉnh sửa thành công");
         } catch (\Throwable $e) {
             $this->db->rollback();
             $data['error'] = [$e->getMessage()];
         }
         $this->helper->responseJson($this, $data);
-    }
-
-    // =================================
-    // FUNCTION
-    // =================================
-
-    private function getJsCss(){
-        $this->assets->addJs(WEB_URI.'/assets/backend/js/modules/admins/setting.js');
     }
 }

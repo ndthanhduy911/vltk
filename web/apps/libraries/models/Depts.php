@@ -15,41 +15,46 @@ class Depts extends \ModelCore
     public function vdUpdate($try=false){
         $validator = new Validation();
 
+        //dcode
         $validator->add(
-            'name',
+            'dcode',
+            new StringLength([
+                "max"            => 20,
+                "messageMaximum" => "Tên viết tắt không được quá 20 ký tự",
+            ])
+        );
+        //dcode
+        $validator->add(
+            'dcode',
+            new PresenceOf([
+                'message'   => 'Tên viết tắt không được để trống'
+            ])
+        );
+
+        //phone
+        $validator->add(
+            'phone',
+            new StringLength([
+                "max"            => 20,
+                "messageMaximum" => "Số điện thoại không được quá 20 ký tự",
+            ])
+        );
+
+        //email
+        $validator->add(
+            'email',
             new StringLength([
                 "max"            => 100,
-                "messageMaximum" => "Tên bộ môn không được quá 100 ký tự",
+                "messageMaximum" => "Số điện thoại không được quá 100 ký tự",
             ])
         );
-        //name
+
+        //link
         $validator->add(
-            'name',
-            new PresenceOf([
-                'message'   => 'Tên bộ môn không được để trống'
-            ])
-        );
-        //dcode
-        $validator->add(
-            'dcode',
+            'link',
             new StringLength([
-                "max"            => 13,
-                "messageMaximum" => "Mã bộ môn không được quá 13 ký tự",
-            ])
-        );
-        //dcode
-        $validator->add(
-            'dcode',
-            new PresenceOf([
-                'message'   => 'Mã bộ môn không được để trống'
-            ])
-        );
-        //qhns
-        $validator->add(
-            'qhns',
-            new StringLength([
-                "max"            => 13,
-                "messageMaximum" => "Mã QHNS không được quá 13 ký tự",
+                "max"            => 250,
+                "messageMaximum" => "Links không được quá 250 ký tự",
             ])
         );
 
@@ -65,7 +70,7 @@ class Depts extends \ModelCore
         return $this->validate($validator);
     }
 
-    public static function getName($deptid, $langid = 1){
+    public static function getLName($deptid, $langid = 1){
         $lang = parent::findFirst(['langid =:langid: AND deptid = :deptid:', 'bind'=>['langid' => $langid, 'deptid' => $deptid]]);
         return $lang ? $lang->title : '';
     }
@@ -142,7 +147,7 @@ class Depts extends \ModelCore
             $level .=  $id != 0 ? $symbol: '' ;
             foreach ($deptChild as $value) {
                 $value->level = $level;
-                $value->title = $value->level.' '.\Depts::getName($value->id,1);
+                $value->title = $value->level.' '.\Depts::getLName($value->id,1);
                 $data[$value->id] = trim($value->title);
                 $data = Depts::getTreeName($value->id, $data, $level,$symbol);
             }
@@ -157,9 +162,9 @@ class Depts extends \ModelCore
             if($perL->depted == 0){
                 $deptType = \Depts::getTreeName(0,$data,$level,$symbol);
             }elseif($perL->depted == 1 || $perL->depted == 2 ){
-                $deptType = \Depts::getTreeName($deptid, ["$depts->id" => \Depts::getName($depts->id,1)],$level,$symbol);
+                $deptType = \Depts::getTreeName($deptid, ["$depts->id" => \Depts::getLName($depts->id,1)],$level,$symbol);
             }elseif($perL->depted == 3){
-                $deptType = [$depts->id => \Depts::getName($depts->id,1)];
+                $deptType = [$depts->id => \Depts::getLName($depts->id,1)];
             }
         }
         return $deptType;

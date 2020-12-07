@@ -5,9 +5,9 @@
                 <div class="col-sm-6 d-flex align-items-center">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="<?= WEB_ADMIN_URL ?>"><i class="fas fa-home"></i></a></li>
-                        {% if btitle %}
+                        <?php if (!empty($btitle)) { ?>
                         <li class="breadcrumb-item"><a href="<?= WEB_ADMIN_URL ?>/{{cler}}">{{btitle}}</a></li>
-                        {% endif %}
+                        <?php } ?>
                         <li class="breadcrumb-item active">{{ title }}</li>
                     </ol>
                 </div>
@@ -82,7 +82,7 @@
                                 </div>
                                 <div class="card-body <?= !empty($items->{$filed->getName()}) ? '' : 'p-0' ?>">
                                     <div class="col-md-12">
-                                        <img class="w-100 d-block showImg" src="<?= !empty($items->{$filed->getName()}) ? $items->{$filed->getName()} : '' ?>">
+                                        <img class="w-100 d-block showImg <?= !empty($items->{$filed->getName()}) ? 'h-150px' : 'p-0' ?>" src="<?= !empty($items->{$filed->getName()}) ? $items->{$filed->getName()} : '' ?>">
                                     </div>
                                 </div>
                                 <div class="card-footer">
