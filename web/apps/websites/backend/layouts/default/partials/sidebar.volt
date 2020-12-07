@@ -89,6 +89,7 @@
                         {% endif %}
                     </ul>
                 </li>
+                {% if master.checkPermission('slideshows', 'index') %}
                 <li class="nav-item">
                     <a href="<?= WEB_ADMIN_URL ?>/slideshows"
                         class="nav-link {% if dispatcher.getControllerName()=='slideshows' %} {{ 'active' }} {% endif %}">
@@ -96,6 +97,8 @@
                         <p>Banners</p>
                     </a>
                 </li>
+                {% endif %}
+                {% if master.checkPermission('staffs', 'index') %}
                 <li class="nav-item">
                     <a href="<?= WEB_ADMIN_URL ?>/staffs"
                         class="nav-link {% if dispatcher.getControllerName()=='staffs' %} {{ 'active' }} {% endif %}">
@@ -103,6 +106,8 @@
                         <p>Tổ chức Cán bộ</p>
                     </a>
                 </li>
+                {% endif %}
+                {% if master.checkPermission('partners', 'index') %}
                 <li class="nav-item">
                     <a href="<?= WEB_ADMIN_URL ?>/partners"
                         class="nav-link {% if dispatcher.getControllerName()=='partners' %} {{ 'active' }} {% endif %}">
@@ -110,6 +115,8 @@
                         <p>Liên kết/ đối tác</p>
                     </a>
                 </li>
+                {% endif %}
+                {% if master.checkPermission('homes', 'index') %}
                 <li class="nav-item">
                     <a href="<?= WEB_ADMIN_URL ?>/homes"
                         class="nav-link {% if dispatcher.getControllerName()=='homes' %} {{ 'active' }} {% endif %}">
@@ -117,6 +124,7 @@
                         <p>Trang chủ</p>
                     </a>
                 </li>
+                {% endif %}
                 <li class="nav-item">
                     <a href="<?= WEB_ADMIN_URL ?>/menus"
                         class="nav-link {% if dispatcher.getControllerName()=='menus' %} {{ 'active' }} {% endif %}">
