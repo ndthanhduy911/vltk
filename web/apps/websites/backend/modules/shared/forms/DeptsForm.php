@@ -68,7 +68,7 @@ class DeptsForm extends Form
 
         $phone = new Text('phone');
         $phone->setAttributes(array(
-            'class' => 'form-control',
+            'class' => 'form-control form-control-sm',
             'placeholder' => 'Ví dụ: 01234567890',
             'maxlength' => "30",
             'size' => '30',

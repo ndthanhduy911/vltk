@@ -39,7 +39,7 @@ class CalendarsForm extends Form
 
         $classid = new Select('classid', $classes, array(
             'using' => array('id', 'title'),
-            'class' => 'form-control',
+            'class' => 'form-control form-control-sm',
             'data-error' => "Chưa đúng định dạng",
             'required' => '',
             'data-required-error' => 'Vui lòng điền đầy đủ thông tin',
@@ -53,7 +53,7 @@ class CalendarsForm extends Form
 
         $subjectid = new Select('subjectid', $subjects, array(
             'using' => array('id', 'title'),
-            'class' => 'form-control',
+            'class' => 'form-control form-control-sm',
             'data-error' => "Chưa đúng định dạng",
             'required' => '',
             'data-required-error' => 'Vui lòng điền đầy đủ thông tin',
@@ -100,7 +100,7 @@ class CalendarsForm extends Form
             'useEmpty' => true,
             'emptyText' => 'Chọn thứ',
             'emptyValue' => '',
-            'class' => 'form-control',
+            'class' => 'form-control form-control-sm',
             'required' => '',
             'data-required-error' => 'Vui lòng điền đầy đủ thông tin.',
         ]);
@@ -219,7 +219,7 @@ class CalendarsForm extends Form
 
         $room = new Text('room');
         $room->setAttributes(array(
-            'class' => 'form-control',
+            'class' => 'form-control form-control-sm',
             'placeholder' => 'Phòng học',
             'maxlength' => "200",
         ));

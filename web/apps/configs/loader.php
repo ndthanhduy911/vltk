@@ -14,6 +14,7 @@ $loader->registerClasses(
     array(
         "BackendController"         => LIB_DIR . '/controllers/BackendController.php',
         "FrontendController"        => LIB_DIR . '/controllers/FrontendController.php',
+        "AdminsLangCore"        => LIB_DIR . '/controllers/AdminsLangCore.php',
         "AdminsCore"        => LIB_DIR . '/controllers/AdminsCore.php'
     )
 );

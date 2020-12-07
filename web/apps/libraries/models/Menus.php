@@ -150,8 +150,8 @@ class Menus extends \ModelCore
 
     public static function findParents($deptid){
         return parent::find([
-            "deptid = :did: AND deleted = 0 AND parentid = 0",
-            "columns" => "Menus.*, (SELECT ml.title FROM MenusLang AS ml WHERE ml.menuid = Menus.id AND ml.langid = 1) AS title",
+            "deptid = :did: AND deleted = 0 AND parentid = 0 AND status = 1",
+            "columns" => "Menus.id,(SELECT ml.title FROM MenusLang AS ml WHERE ml.menuid = Menus.id AND ml.langid = 1) AS title",
             'bind' => [
                 'did' => $deptid
             ]

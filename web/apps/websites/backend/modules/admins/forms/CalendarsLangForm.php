@@ -16,7 +16,7 @@ class CalendarsLangForm extends Form
 
         $excerpt = new Textarea('excerpt');
         $excerpt->setAttributes(array(
-            'class' => 'form-control',
+            'class' => 'form-control form-control-sm',
             'placeholder' => 'Mô tả/ Chú thích',
             'maxlength' => "255",
             'data-error' => "Mô tả/ Chú thích không đúng quy định.",

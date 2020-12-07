@@ -15,7 +15,7 @@ class ClassesLangForm extends Form
     {
         $title = new Text('title');
         $title->setAttributes(array(
-            'class' => 'form-control',
+            'class' => 'form-control form-control-sm',
             'placeholder' => 'Tiêu đề',
             'required' => '',
             'data-required-error' => "Vui lòng nhập tiêu đề.",
@@ -35,7 +35,7 @@ class ClassesLangForm extends Form
 
         $excerpt = new Textarea('excerpt');
         $excerpt->setAttributes(array(
-            'class' => 'form-control',
+            'class' => 'form-control form-control-sm',
             'placeholder' => 'Tóm tắt',
             'maxlength' => "255",
             'data-error' => "Thông tin chưa hợp lệ",

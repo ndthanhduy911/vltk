@@ -1,7 +1,7 @@
 <?php
 namespace Backend\Modules\Admins\Controllers;
 
-class PagesController  extends \AdminsCore {
+class PagesController  extends \AdminsLangCore {
     public $title = "Trang thông tin";
 
     public $cler = "pages";

@@ -38,7 +38,7 @@ class PartnersForm extends Form
         $sort = new Numeric('sort');
         $sort->setLabel('<i class="fas fa-sort mr-1"></i>Sắp xếp');
         $sort->setAttributes(array(
-            'class' => 'form-control',
+            'class' => 'form-control form-control-sm',
             'placeholder' => 'Sắp xếp',
             'maxlength' => "999",
         ));

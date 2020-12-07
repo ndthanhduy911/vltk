@@ -13,7 +13,7 @@ class ClassesForm extends Form
     {
         $slug = new Text('slug');
         $slug->setAttributes(array(
-            'class' => 'form-control',
+            'class' => 'form-control form-control-sm',
             'placeholder' => 'Slug',
             'maxlength' => "200",
             'data-error' => "Thông tin chưa hợp lệ"
@@ -28,7 +28,7 @@ class ClassesForm extends Form
 
         $code = new Text('code');
         $code->setAttributes(array(
-            'class' => 'form-control',
+            'class' => 'form-control form-control-sm',
             'placeholder' => 'Mã lớp',
             'maxlength' => "200",
             'data-error' => "Thông tin chưa hợp lệ"

@@ -1,7 +1,7 @@
 <?php
 namespace Backend\Modules\Admins\Controllers;
 
-class PostsController  extends \AdminsCore {
+class PostsController  extends \AdminsLangCore {
     public $title = "Bài viết";
 
     public $cler = "posts";

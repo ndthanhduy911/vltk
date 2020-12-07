@@ -3,7 +3,7 @@ namespace Backend\Modules\Admins\Controllers;
 
 use PartnersLang;
 
-class PartnersController  extends \AdminsCore {
+class PartnersController  extends \AdminsLangCore {
     public $title = "Liên kết/ đối tác";
 
     public $cler = "partners";

@@ -1,7 +1,7 @@
 <?php
 namespace Backend\Modules\Admins\Controllers;
 
-class SlideshowsController  extends \AdminsCore {
+class SlideshowsController  extends \AdminsLangCore {
     public $title = "Banners";
 
     public $cler = "slideshows";

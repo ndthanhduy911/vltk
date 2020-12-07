@@ -9,7 +9,42 @@ const showStatus = (id = '') => {
     }
 }
 
-const loadTableHeadMenus = (table = '#headMenus', cb = () => {}) => {
+const changeTypeMenu = (type) => {
+    
+    switch (parseInt(type)) {
+        case 1:{
+            $('#modalMenus .boxtype').addClass('hidden').find('input,select').prop('disabled',true).prop('required',false);
+            $('#modalMenus .boxtype[data-type=1]').removeClass('hidden').find('#postid').prop('disabled',false).prop('required',true);
+            break;
+        }
+        case 2:{
+            $('#modalMenus .boxtype').addClass('hidden').find('input,select').prop('disabled',true).prop('required',false);
+            $('#modalMenus .boxtype[data-type=2]').removeClass('hidden').find('#pageid').prop('disabled',false).prop('required',true);
+            break;
+        }
+        case 3:{
+            $('#modalMenus .boxtype').addClass('hidden').find('input,select').prop('disabled',true).prop('required',false);
+            $('#modalMenus .boxtype[data-type=3]').removeClass('hidden').find('#catid').prop('disabled',false).prop('required',true);
+            break;
+        }
+        case 4:{
+            $('#modalMenus .boxtype').addClass('hidden').find('input,select').prop('disabled',true).prop('required',false);
+            $('#modalMenus .boxtype[data-type=4]').removeClass('hidden').find('#dept').prop('disabled',false).prop('required',true);
+            break;
+        }
+        case 5:{
+            $('#modalMenus .boxtype').addClass('hidden').find('input,select').prop('disabled',true).prop('required',false);
+            $('#modalMenus .boxtype[data-type=5]').removeClass('hidden').find('#links').prop('disabled',false).prop('required',true);
+            break;
+        }
+        default:{
+            $('#modalMenus .boxtype').addClass('hidden').find('input,select').prop('disabled',true).prop('required',false);
+            break;
+        }
+    }
+}
+
+const loadTableMenus = (table = '#headMenus', cb = () => {}) => {
     if ($(table).length) {
         let lId = $(table).attr('locationid');
         let router = {
@@ -48,10 +83,14 @@ const loadTableHeadMenus = (table = '#headMenus', cb = () => {}) => {
     }
 }
 
-loadTableHeadMenus('#headMenus',(dt)=>{
+loadTableMenus('#headMenus',(dt)=>{
     showModalForm('#addHeadMenu', '#modalMenus', 'GET', () => {
         $('#modalMenus .modal-title').html('Thêm mới');
         $('.btnSummitMenus span').html('Thêm mới');
+        $('#modalMenus').off('change','#type').on('change','#type', function (e) {
+            e.preventDefault();
+            changeTypeMenu($(this).val());
+        });
     },(data,row)=>{
         dt.draw();
         Swal.fire({
@@ -62,9 +101,17 @@ loadTableHeadMenus('#headMenus',(dt)=>{
         })
     });
 
-    showModalForm('#headMenus .editMenus', '#modalMenus', 'GET', () => {
+    showModalForm('#headMenus .editMenus', '#modalMenus', 'GET', (data) => {
         $('#modalMenus .modal-title').html('Cập nhật');
         $('.btnSummitMenus span').html('Cập nhật');
+        data.lang.forEach(lang => {
+            $(`#modalMenus input[name="title${lang.langid}"]`).val(lang.title);
+        });
+        changeTypeMenu(data.type);
+        $('#modalMenus').off('change','#type').on('change','#type', function (e) {
+            e.preventDefault();
+            changeTypeMenu($(this).val());
+        });
     },(data,row)=>{
         dt.draw();
         Swal.fire({
@@ -76,7 +123,7 @@ loadTableHeadMenus('#headMenus',(dt)=>{
     });
 })
 
-loadTableHeadMenus('#footMenus',(dt)=>{
+loadTableMenus('#footMenus',(dt)=>{
     showModalForm('#addFootMenu', '#modalMenus', 'GET', () => {
         $('#modalMenus .modal-title').html('Thêm mới');
         $('.btnSummitMenus span').html('Thêm mới');

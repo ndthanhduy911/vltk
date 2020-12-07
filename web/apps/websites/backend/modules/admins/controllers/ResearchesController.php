@@ -1,7 +1,7 @@
 <?php
 namespace Backend\Modules\Admins\Controllers;
 
-class ResearchesController  extends \AdminsCore {
+class ResearchesController  extends \AdminsLangCore {
     public $title = "Hướng nghiên cứu";
 
     public $cler = "researches";

@@ -108,8 +108,8 @@
                                     <div class="tab-pane fade {{ !key ? 'active show' : '' }}" id="lang{{lang.id}}">
                                         <div class="form-group label-floating">
                                             <div class="input-group">
-                                                <label class="control-label">{{formMenus.getLabel('name')}}</label>
-                                                {{formMenus.render('name',['name':'name'~lang.id])}}
+                                                <label class="control-label">{{formMenus.getLabel('title')}}</label>
+                                                {{formMenus.render('title',['name':'title'~lang.id,'id':'title'~lang.id])}}
                                                 <div class="invalid-feedback"></div>
                                             </div>
                                         </div>
@@ -136,35 +136,35 @@
                                         <div class="invalid-feedback"></div>
                                     </div>
                                 </div>
-                                <div class="form-group label-floating hidden">
+                                <div class="form-group label-floating hidden boxtype" data-type=1>
                                     <div class="input-group">
                                         <label class="control-label">{{formMenus.getLabel('postid')}}</label>
                                         {{formMenus.render('postid')}}
                                         <div class="invalid-feedback"></div>
                                     </div>
                                 </div>
-                                <div class="form-group label-floating hidden">
+                                <div class="form-group label-floating hidden boxtype" data-type=2>
                                     <div class="input-group">
                                         <label class="control-label">{{formMenus.getLabel('pageid')}}</label>
                                         {{formMenus.render('pageid')}}
                                         <div class="invalid-feedback"></div>
                                     </div>
                                 </div>
-                                <div class="form-group label-floating hidden">
+                                <div class="form-group label-floating hidden boxtype" data-type=3>
                                     <div class="input-group">
                                         <label class="control-label">{{formMenus.getLabel('catid')}}</label>
                                         {{formMenus.render('catid')}}
                                         <div class="invalid-feedback"></div>
                                     </div>
                                 </div>
-                                <div class="form-group label-floating hidden">
+                                <div class="form-group label-floating hidden boxtype" data-type=4>
                                     <div class="input-group">
                                         <label class="control-label">{{formMenus.getLabel('dept')}}</label>
                                         {{formMenus.render('dept')}}
                                         <div class="invalid-feedback"></div>
                                     </div>
                                 </div>
-                                <div class="form-group label-floating hidden">
+                                <div class="form-group label-floating hidden boxtype" data-type=5>
                                     <div class="input-group">
                                         <label class="control-label">{{formMenus.getLabel('links')}}</label>
                                         {{formMenus.render('links')}}
@@ -184,6 +184,7 @@
                                         <div class="invalid-feedback"></div>
                                     </div>
                                 </div>
+                                {#
                                 <div class="form-group label-floating">
                                     <div class="input-group">
                                         <label class="control-label">{{formMenus.getLabel('icon')}}</label>
@@ -191,6 +192,7 @@
                                         <div class="invalid-feedback"></div>
                                     </div>
                                 </div>
+                                #}
                                 <div class="form-group label-floating">
                                     <div class="input-group">
                                         <label class="control-label">{{formMenus.getLabel('target')}}</label>

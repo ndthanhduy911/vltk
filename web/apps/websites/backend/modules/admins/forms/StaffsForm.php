@@ -55,7 +55,7 @@ class StaffsForm extends Form
             5 => "Cán bộ thỉnh giảng",
             6 => "Nhân viên",
         ], [
-            'class' => 'form-control',
+            'class' => 'form-control form-control-sm',
             'useEmpty' => true,
             'emptyText' => 'Chọn chức vụ',
             'emptyValue' => '',

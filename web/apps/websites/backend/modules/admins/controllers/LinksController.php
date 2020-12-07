@@ -1,7 +1,7 @@
 <?php
 namespace Backend\Modules\Admins\Controllers;
 
-class LinksController  extends \AdminsCore {
+class LinksController  extends \AdminsLangCore {
     public $title = "Links";
 
     public $cler = "links";

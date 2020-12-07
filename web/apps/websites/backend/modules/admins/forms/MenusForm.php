@@ -9,24 +9,23 @@ class MenusForm extends Form
 {
     public function initialize($entity = null, $options = null)
     {
-
-        //name
-        $name = new Text('name');
-        $name->setLabel('Tiêu đề');
-        $name->setAttributes(array(
+        //title
+        $title = new Text('title');
+        $title->setLabel('Tiêu đề');
+        $title->setAttributes(array(
             'class' => 'form-control form-control-sm',
             'placeholder' => 'Ví du: Tin tức',
             'maxlength' => "200",
             'data-required-error' => 'Vui lòng nhập thông tin',
             'data-error' => "Thông tin chưa hợp lệ",
         ));
-        $this->add($name);
+        $this->add($title);
 
         $deptid = isset($_SESSION['deptid']) ? $_SESSION['deptid'] : 0;
-        $menus = \Menus::findParents($deptid);
+        $menus = \Menus::findParents($deptid); 
         //parentid
         $parentid = new Select('parentid', $menus, [
-            'using' => ['id','name'],
+            'using' => ['id','title'],
             'useEmpty' => true,
             'emptyText' => 'Không',
             'emptyValue' => 0,
@@ -40,7 +39,7 @@ class MenusForm extends Form
         $type = new Select('type', [
             1 => "Bài viết",
             2 => "Trang",
-            3 => "Danh mục",
+            3 => "Chuyên mục",
             4 => "Bộ môn",
             5 => "Link",
         ], [
@@ -55,7 +54,9 @@ class MenusForm extends Form
         $this->add($type);
 
         //postid
-        $postid = new Select('postid', [], [
+        $posts = \Posts::find(["deleted = 0 AND status = 1 AND deptid = {$deptid}","columns" => "id, (SELECT pl.title FROM PostsLang AS pl WHERE pl.postid = Posts.id AND pl.langid = 1) AS title"]);
+        $postid = new Select('postid', $posts, [
+            'using' => ['id','title'],
             'useEmpty' => true,
             'emptyText' => 'Chọn',
             'emptyValue' => '',
@@ -68,7 +69,9 @@ class MenusForm extends Form
         $this->add($postid);
 
         //pageid
-        $pageid = new Select('pageid', [], [
+        $pages = \Pages::find(["deleted = 0 AND status = 1 AND deptid = {$deptid}","columns" => "id, (SELECT pl.title FROM PagesLang AS pl WHERE pl.pageid = Pages.id AND pl.langid = 1) AS title"]);
+        $pageid = new Select('pageid', $pages, [
+            'using' => ['id','title'],
             'useEmpty' => true,
             'emptyText' => 'Chọn',
             'emptyValue' => '',
@@ -81,7 +84,9 @@ class MenusForm extends Form
         $this->add($pageid);
 
         //catid
-        $catid = new Select('catid', [], [
+        $cats = \Categories::find(["deleted = 0 AND status = 1 AND deptid = {$deptid}","columns" => "id, (SELECT pl.title FROM CategoriesLang AS pl WHERE pl.catid = Categories.id AND pl.langid = 1) AS title"]);
+        $catid = new Select('catid', $cats, [
+            'using' => ['id','title'],
             'useEmpty' => true,
             'emptyText' => 'Chọn',
             'emptyValue' => '',
@@ -94,7 +99,9 @@ class MenusForm extends Form
         $this->add($catid);
 
         //dept
-        $dept = new Select('dept', [], [
+        $depts = \Depts::find(["deleted = 0 AND status = 1 AND id > 1","columns" => "id, (SELECT pl.title FROM DeptsLang AS pl WHERE pl.deptid = Depts.id AND pl.langid = 1) AS title"]);
+        $dept = new Select('dept', $depts, [
+            'using' => ['id','title'],
             'useEmpty' => true,
             'emptyText' => 'Chọn',
             'emptyValue' => '',
@@ -161,7 +168,7 @@ class MenusForm extends Form
         $sort = new Numeric('sort');
         $sort->setLabel('Sắp xếp');
         $sort->setAttributes(array(
-            'class' => 'form-control',
+            'class' => 'form-control form-control-sm',
             'placeholder' => 'Sắp xếp',
             'maxlength' => "999",
         ));

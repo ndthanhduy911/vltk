@@ -46,7 +46,7 @@ class MenusController  extends \BackendController {
 
     public function getsingleAction($id = null)
     {
-        if (!$this->request->isAjax() || !$this->master::checkPermission('role', ['update','index'],[0,1])) {
+        if (!$this->request->isAjax() || !$this->master::checkPermission('menus', ['update','index'],[0,1])) {
             $this->helper->responseJson($this, ["error" => "Truy cập không được phép"]);
         }
         if ($data = \Menus::findFirstIdNoDelete($id)) {

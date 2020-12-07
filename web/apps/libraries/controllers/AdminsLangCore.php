@@ -1,5 +1,5 @@
 <?php
-class AdminsCore extends \BackendController{
+class AdminsLangCore extends \BackendController{
     public $title = NULL;
 
     public $cler = NULL;
@@ -227,7 +227,8 @@ class AdminsCore extends \BackendController{
         return [$items,$itemsLangs];
     }
 
-    private function deleteOne($item){
+    private function deleteOne($item)
+    {
         $userid = $this->session->get('userid');
         $item->updatedat = date('Y-m-d H:i:s');
         $item->updatedby = $userid;
