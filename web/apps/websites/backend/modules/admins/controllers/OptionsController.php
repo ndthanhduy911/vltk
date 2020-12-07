@@ -22,8 +22,8 @@ class OptionsController  extends \BackendController {
                 \Phalcon\Mvc\View::LEVEL_ACTION_VIEW
             );
         }
-        $perEdit = $this->master::checkPermissionDepted($this->cler, 'update',1);
-        $perView = $this->master::checkPermissionDepted($this->cler, 'index');
+        $perEdit = $this->master::checkPermissionDepted("depts", 'update',1);
+        $perView = $this->master::checkPermissionDepted("depts", 'index');
         $perL = $perView ? $perView : ($perEdit? $perEdit :false);
         if(!$perL){
             require ERROR_FILE; die;
@@ -61,7 +61,7 @@ class OptionsController  extends \BackendController {
         $this->view->form = $form;
         $this->view->items = $items;
         $this->view->title = 'Thiết lập chung';
-        $this->view->cler = $this->cler;
+        $this->view->cler = "depts";
         $this->assets->addJs(WEB_URI.'/elfinder/js/require.min.js');
         $this->assets->addJs(WEB_URI.'/assets/backend/js/modules/admins/templates/views.js');
         return $this->view->pick('templates/views');
@@ -81,7 +81,7 @@ class OptionsController  extends \BackendController {
             $this->helper->responseJson($this, $data);
         }
         $data['token'] = ['key' => $this->security->getTokenKey(), 'value' => $this->security->getToken()];
-        if(!$this->request->isAjax() || !$this->request->isPost() || !$perL = $this->master::checkPermissionDepted($this->cler,'update',1)){
+        if(!$this->request->isAjax() || !$this->request->isPost() || !$perL = $this->master::checkPermissionDepted("depts",'update',1)){
             $data['error'] = ['Truy cập không được phép'];
             $this->helper->responseJson($this, $data);
         }

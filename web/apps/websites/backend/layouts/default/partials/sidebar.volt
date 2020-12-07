@@ -125,7 +125,7 @@
                     </a>
                 </li>
                 <li
-                    class="nav-item has-treeview {% if dispatcher.getControllerName() in ['options'] %} {{ 'menu-open' }} {% endif %}">
+                    class="nav-item has-treeview {% if dispatcher.getControllerName() in ['options','links'] %} {{ 'menu-open' }} {% endif %}">
                     <a href="#"
                         class="nav-link {% if dispatcher.getControllerName() in ['options'] %} {{ 'active' }} {% endif %}">
                         <i class="nav-icon fas fa-cog"></i>
@@ -153,10 +153,10 @@
                             </a>
                         </li>
                         {% endif %}
-                        {% if master.checkPermission('options', 'links') %}
+                        {% if master.checkPermission('links', 'index') %}
                         <li class="nav-item">
-                            <a href="<?= WEB_ADMIN_URL ?>/options/links"
-                                class="nav-link {% if dispatcher.getControllerName()=='options' AND dispatcher.getActionName()=='links' %} {{ 'active' }} {% endif %}">
+                            <a href="<?= WEB_ADMIN_URL ?>/links"
+                                class="nav-link {% if dispatcher.getControllerName()=='links' %} {{ 'active' }} {% endif %}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Links</p>
                             </a>

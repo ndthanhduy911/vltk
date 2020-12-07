@@ -301,4 +301,43 @@ class Depts extends \ModelCore
             return null;
         }
     }
+
+    public static function filedName($key){
+        $feilds = [
+            'dcode' => 'Xem',
+            'image' => 'Trạng thái',
+            'icon' => 'Ảnh favicon',
+            'logo' => 'Ảnh logo',
+            'phone' => 'Số điện thoại',
+            'email' => 'E-mail',
+            'status' => 'Trạng thái',
+            'links' => 'Links',
+            'createdat' => 'Thời gian tạo',
+            'createdby' => 'Tác giả',
+            'excerpt' => 'Mô tả',
+            'address' => 'Địa chỉ'
+        ];
+        return isset($feilds[$key]) ? $feilds[$key] : '';
+    }
+
+    public static function arrayFilter(){
+        return [
+            ['title'],
+            ['status'],
+            ['createdat']
+        ];
+    }
+
+    public static function findTables () {
+        return ['image','title','excerpt','createdby','createdat','slug','status'];
+    }
+
+    public static function arrayOrder () {
+        return ['title','status','createdat'];
+    }
+    
+    public static function findFilters () {
+        $filters = \Depts::arrayFilter();
+        return array_merge($filters[0],$filters[1],$filters[2]);
+    }
 }

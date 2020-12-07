@@ -28,7 +28,9 @@ class FilterSetting extends \ModelCore
             'researches' => \Researches::findFilters(),
             'slideshows' => \Slideshows::findFilters(),
             'staffs' => \Staffs::findFilters(),
-            'partners' => \Partners::findFilters()
+            'partners' => \Partners::findFilters(),
+            'links' => \Links::findFilters(),
+            'depts' => \Depts::findFilters()
         ];
         if($fkey && isset($fkeys[$fkey])){
             $groupField = \FieldGroup::findDataArrayKey($fkey);
@@ -69,7 +71,9 @@ class FilterSetting extends \ModelCore
             'researches' => \Researches::findTables(),
             'slideshows' => \Slideshows::findTables(),
             'staffs' => \Staffs::findTables(),
-            'partners' => \Partners::findTables()
+            'partners' => \Partners::findTables(),
+            'links' => \Partners::findTables(),
+            'depts' => \Depts::findTables()
         ];
 
         if($fkey && isset($fkeys[$fkey])){
@@ -98,7 +102,9 @@ class FilterSetting extends \ModelCore
             'researches' => \Researches::arrayOrder(),
             'slideshows' => \Slideshows::arrayOrder(),
             'staffs' => \Staffs::arrayOrder(),
-            'partners' => \Partners::arrayOrder()
+            'partners' => \Partners::arrayOrder(),
+            'links' => \Links::arrayOrder(),
+            'depts' => \Depts::arrayOrder()
         ];
         if($fkey && isset($fkeys[$fkey])){
             return $fkeys[$fkey];

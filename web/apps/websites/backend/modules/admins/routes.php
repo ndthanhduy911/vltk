@@ -248,3 +248,22 @@ $router->add(WEB_ADMIN_URI . '/options/:action/:int', array(
     'action'  => 1,
     'id' => 2
 ));
+
+/***********************LinksController***********************/
+$router->add(WEB_ADMIN_URI . '/links', array(
+    'module' => 'backend_admins',
+    'controller' => 'links',
+    'action' => 'index',
+));
+
+$router->add(WEB_ADMIN_URI . '/links/:action', array(
+    'module' => 'backend_admins',
+    'controller' => 'links',
+    'action' => 1,
+));
+$router->add(WEB_ADMIN_URI . '/links/:action/:int', array(
+    'module' => 'backend_admins',
+    'controller' => 'links',
+    'action'  => 1,
+    'id' => 2
+));
