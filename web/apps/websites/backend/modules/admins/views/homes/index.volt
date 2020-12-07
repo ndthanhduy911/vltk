@@ -1,4 +1,4 @@
-<form id="frmHomes" action="<?= WEB_ADMIN_URI ?>/homes/update<?= !empty($homes->id) ? '/'.$homes->id : '' ?>" method="post" enctype="multipart/form-data" data-toggle="validator" role="form">
+<form id="frmHomes" action="<?= WEB_ADMIN_URI ?>/homes/update" method="post" enctype="multipart/form-data" data-toggle="validator" role="form">
     <div class="content-header">
         <div class="container-fluid">
             <div class="row">

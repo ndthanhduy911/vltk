@@ -12,7 +12,7 @@ class HomesLangForm extends Form
         $szedtitle->setLabel('Tiêu đề');
         $attr = [
             'class' => 'form-control form-control-sm',
-            'placeholder' => 'Slug',
+            'placeholder' => 'Ví du: ',
             'maxlength' => "255",
             'required' => '',
             'data-required-error' => "Vui lòng nhập tiêu đề",
@@ -27,7 +27,7 @@ class HomesLangForm extends Form
         $stafftitle->setLabel('Tiêu đề');
         $attr = [
             'class' => 'form-control form-control-sm',
-            'placeholder' => 'Slug',
+            'placeholder' => 'Ví du: Lãnh đạo',
             'maxlength' => "255",
             'required' => '',
             'data-required-error' => "Vui lòng nhập tiêu đề",
@@ -41,7 +41,7 @@ class HomesLangForm extends Form
         $staffdes->setLabel('Tiêu đề');
         $attr = [
             'class' => 'form-control form-control-sm',
-            'placeholder' => 'Slug',
+            'placeholder' => 'Ví du: Thông tin lãnh đạo',
             'maxlength' => "255",
             'rows' => 4,
             'data-error' => "Thông tin chưa hợp lệ"
@@ -54,7 +54,7 @@ class HomesLangForm extends Form
         $partnertitle->setLabel('Tiêu đề');
         $attr = [
             'class' => 'form-control form-control-sm',
-            'placeholder' => 'Slug',
+            'placeholder' => 'Ví du: ',
             'maxlength' => "255",
             'required' => '',
             'data-required-error' => "Vui lòng nhập tiêu đề",
@@ -69,7 +69,7 @@ class HomesLangForm extends Form
         $partnerdes->setLabel('Tiêu đề');
         $attr = [
             'class' => 'form-control form-control-sm',
-            'placeholder' => 'Slug',
+            'placeholder' => 'Ví du: Liên kết thông tin',
             'maxlength' => "255",
             'rows' => 4,
             'data-error' => "Thông tin chưa hợp lệ"
@@ -82,7 +82,7 @@ class HomesLangForm extends Form
         $contacttitle->setLabel('Tiêu đề');
         $attr = [
             'class' => 'form-control form-control-sm',
-            'placeholder' => 'Slug',
+            'placeholder' => 'Ví du: Liên hệ',
             'maxlength' => "255",
             'required' => '',
             'data-required-error' => "Vui lòng nhập tiêu đề",
@@ -96,7 +96,7 @@ class HomesLangForm extends Form
         $contactdes->setLabel('Tiêu đề');
         $attr = [
             'class' => 'form-control form-control-sm',
-            'placeholder' => 'Slug',
+            'placeholder' => 'Ví du: Liên hệ thông tin',
             'maxlength' => "255",
             'rows' => 4,
             'data-error' => "Thông tin chưa hợp lệ"
