@@ -148,12 +148,13 @@ class Menus extends \ModelCore
         return $data;
     }
 
-    public static function findParents($deptid){
+    public static function findS2Parents($deptid,$locationId){
         return parent::find([
-            "deptid = :did: AND deleted = 0 AND parentid = 0 AND status = 1",
-            "columns" => "Menus.id,(SELECT ml.title FROM MenusLang AS ml WHERE ml.menuid = Menus.id AND ml.langid = 1) AS title",
+            "deptid = :did: AND deleted = 0 AND parentid = 0 AND status = 1 AND locationid = :lid:",
+            "columns" => "Menus.id,(SELECT ml.title FROM MenusLang AS ml WHERE ml.menuid = Menus.id AND ml.langid = 1) AS text",
             'bind' => [
-                'did' => $deptid
+                'did' => $deptid,
+                'lid' => $locationId
             ]
         ]);
     }

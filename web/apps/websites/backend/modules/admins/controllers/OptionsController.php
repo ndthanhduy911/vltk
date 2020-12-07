@@ -141,7 +141,7 @@ class OptionsController  extends \BackendController {
             }
             $this->db->commit();
             \Logs::saveLogs($this, 2, "Thiết lập chung khoa/ bộ môn ", ['table' => $this->className,'id' => $items->id]);
-            $this->flashSession->success("Chỉnh sửa thành công");
+            $this->flashSession->success("Cập nhật thành công");
         } catch (\Throwable $e) {
             $this->db->rollback();
             $data['error'] = [$e->getMessage()];

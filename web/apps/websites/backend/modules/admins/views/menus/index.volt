@@ -109,7 +109,7 @@
                                         <div class="form-group label-floating">
                                             <div class="input-group">
                                                 <label class="control-label">{{formMenus.getLabel('title')}}</label>
-                                                {{formMenus.render('title',['name':'title'~lang.id,'id':'title'~lang.id])}}
+                                                {{formMenus.render('title',['name':'title['~lang.id~']','id':'title'~lang.id])}}
                                                 <div class="invalid-feedback"></div>
                                             </div>
                                         </div>
@@ -214,6 +214,8 @@
 
                 <input class="tokenCSRF" type='hidden' name='<?php echo $this->security->getTokenKey() ?>'
                     value='<?php echo $this->security->getToken() ?>' />
+
+                <input id="locationid" type="hidden" name="locationid" value="">
             </div>
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-hnn btn-hnn-default"

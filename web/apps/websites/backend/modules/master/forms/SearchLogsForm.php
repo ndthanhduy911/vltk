@@ -23,7 +23,7 @@ class SearchLogsForm extends Form{
         $typeidSearch = new Select('typeidSearch',[
             "all"              => "Tất cả",
             1              => "Thêm mới",
-            2              => "Chỉnh sửa",
+            2              => "Cập nhật",
             3              => "Xóa",
             4              => "Đăng nhập",
         ], [

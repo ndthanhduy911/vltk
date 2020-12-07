@@ -397,7 +397,7 @@ const loadTableEstimateDetailMore = (table = '#estimateDetailMore', deptId = 0, 
 
                     $('td:eq(8)', row).html(`
                         <div class="btn-group btn-group-sm">
-                            <a href="#" data-href="#" class="btn btn-hnn btn-hnn-info editDetailMore" data-toggle="tooltip" title="Chỉnh sửa"><span><i class="fas fa-save"></i></span></a>
+                            <a href="#" data-href="#" class="btn btn-hnn btn-hnn-info editDetailMore" data-toggle="tooltip" title="Cập nhật"><span><i class="fas fa-save"></i></span></a>
                             <a href="#" data-href="#" class="btn btn-hnn btn-hnn-danger rmDetailMore" data-toggle="tooltip" title="Xóa"><span><i class="fas fa-ban"></i></span></a>
                         </div>
                     `);

@@ -60,7 +60,7 @@ class CategoriesController  extends \BackendController {
                     $formsLang[$lang->id] = new CategoriesLangForm(null, [$lang->id,$v]);
                 }
             }
-            $title = 'Chỉnh sửa';
+            $title = 'Cập nhật';
         }else{
             $items = new \Categories();
             $title = 'Thêm mới';
@@ -199,7 +199,7 @@ class CategoriesController  extends \BackendController {
                 }
             }
             $this->db->commit();
-            $this->flashSession->success(($id ? 'Chỉnh sửa' : 'Thêm mới').' chuyên mục thành công');
+            $this->flashSession->success(($id ? 'Cập nhật' : 'Thêm mới').' thành công');
         } catch (\Throwable $e) {
             $this->db->rollback();
             $data['error'] = [$e->getMessage()];

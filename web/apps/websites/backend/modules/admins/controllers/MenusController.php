@@ -52,6 +52,7 @@ class MenusController  extends \BackendController {
         if ($data = \Menus::findFirstIdNoDelete($id)) {
             $data = $data->toArray();
             $data['lang'] = [];
+            $data['parents'] = \Menus::findS2Parents($this->session->get('deptid'),$data['locationid'])->toArray();
             $languages = \Language::find(['status = 1']);
             foreach ($languages as $lang) {
                 if($menulang = \MenusLang::findFirst(["menuid =:id: AND langid = :langid:",'bind'=>['id' => $data['id'],'langid' => $lang->id]])){
@@ -64,6 +65,15 @@ class MenusController  extends \BackendController {
         }
     }
 
+    public function gets2menulocationAction($id = null)
+    {
+        if (!$this->request->isAjax() || !$this->master::checkPermission('menus', ['update','index'],[0,1])) {
+            $this->helper->responseJson($this, ["error" => "Truy cập không được phép"]);
+        }
+        $data = \Menus::findS2Parents($this->session->get('deptid'),$id)->toArray();
+        $this->helper->responseJson($this, $data);
+    }
+
     // Update data
     public function updateAction($id = 0){
         $this->view->disable();
@@ -73,81 +83,72 @@ class MenusController  extends \BackendController {
             $this->helper->responseJson($this, $data);
         }
         $data['token'] = ['key' => $this->security->getTokenKey(), 'value' => $this->security->getToken()];
-        if(!$this->request->isAjax() || !$this->request->isPost() || !$perL = $this->master::checkPermissionDepted('staffs','update')){
+        if(!$this->request->isAjax() || !$this->request->isPost() || !$perL = $this->master::checkPermissionDepted($this->cler,'update')){
             $data['error'] = ['Truy cập không được phép'];
             $this->helper->responseJson($this, $data);
         }
 
         $userid = $this->session->get('userid');
-        $languages = \Language::find(['status = 1']);
-        $pTitle = $this->request->getPost('title',['string','trim']);
-        $pContent = $this->request->getPost('content',['trim']);
-        $pExcerpt = $this->request->getPost('excerpt',['string','trim']);
+        $locationId = $this->request->getPost('locationid',['int']);
         if($id){
-            if(!$staffs = \Menus::findFirstIdPermission($id,$perL)){
-                $data['error'] = ['Không tìm thấy môn học'];
+            if(!$items = \Menus::findFirstIdPermission($id,$perL,['locationid = :id:',['id' => $locationId]])){
+                $data['error'] = ["Không tìm thấy {}"];
                 $this->helper->responseJson($this, $data);
             }
-            $staffs->updatedat = date('Y-m-d H:i:s');
-            $staffs->updatedby = $userid;
+            $items->updatedat = date('Y-m-d H:i:s');
+            $items->updatedby = $userid;
         }else{
-            $staffs = new \Menus();
-            $staffs->author = $this->session->get('userid');
-            $staffs->deptid = $this->session->get('deptid');
-            $staffs->createdat = date('Y-m-d H:i:s');
-            $staffs->updatedat = $staffs->createdat;
-            $staffs->createdby = $userid;
-            $staffs->updatedby = $userid;
+            $items = new $this->className();
+            $items->deptid = $this->session->get('deptid');
+            $items->createdat = date('Y-m-d H:i:s');
+            $items->updatedat = $items->createdat;
+            $items->createdby = $userid;
+            $items->updatedby = $userid;
         }
-        $staffLangs = [];
+        $itemsLangs = [];
 
+        $languages = \Language::find(['status = 1']);
+        $pTitle = $this->request->getPost('title',['string','trim']);
         foreach ($languages as $key => $lang) {
-
-            if(!$id || !$staffLang = \MenusLang::findFirst(["staffid = :id: AND langid = :langid:",'bind' => ['id' => (int)$id,'langid' => $lang->id]])){
-                $staffLang = new \MenusLang();
+            if(!$items->id || !$itemsLang = ($this->classNameLang)::findFirst(["menuid = :id: AND langid = :langid:",'bind' => ['id' => $id,'langid' => $lang->id]])){
+                $itemsLang = new $this->classNameLang;
             }
-
             if($key == 0){
                 $lId = $lang->id;
             }
-
-            $staffLang->title = !empty($pTitle[$lang->id]) ? $pTitle[$lang->id] : $pTitle[$lId];
-            $staffLang->content = !empty($pContent[$lang->id]) ? $pContent[$lang->id] : $pContent[$lId];
-            $staffLang->excerpt = !empty($pExcerpt[$lang->id]) ? $pExcerpt[$lang->id] : $pExcerpt[$lId];
-            $staffLang->langid = $lang->id;
-            array_push($staffLangs,$staffLang);
+            $itemsLang->title = !empty($pTitle[$lang->id]) ? $pTitle[$lang->id] : $pTitle[$lId];
+            $itemsLang->langid = $lang->id;
+            array_push($itemsLangs,$itemsLang);
         }
 
-        $plug = $this->request->getPost('slug',['string','trim']);
-        $staffs->attrid = $this->request->getPost('attrid',['int']);
-        $staffs->status = $this->request->getPost('status',['int']);
-        $staffs->slug = $plug ? $plug : $this->helper->slugify($pTitle[1]);
-        $staffs->image = $this->request->getPost('image',['trim','string']);
-        $staffs->bgimage = $this->request->getPost('bgimage',['trim','string']);
-
-        if(\Menus::findFirst(["slug = :slug: AND id != :id:","bind" => ["slug" => $staffs->slug,'id'=> $id]])){
-            $reqPost['slug'] = $staffs->slug .'-'. strtotime('now');
-        }
+        $items->dcode = $this->request->getPost('dcode',['trim','string']);
+        $items->phone = $this->request->getPost('phone',['trim','string']);
+        $items->email = $this->request->getPost('email',['trim','string']);
+        $items->link = $this->request->getPost('link',['trim','string']);
+        $items->image = $this->request->getPost('image',['trim','string']);
+        $items->logo = $this->request->getPost('logo',['trim','string']);
+        $items->icon = $this->request->getPost('icon',['trim','string']);
 
         try {
             $this->db->begin();
-            $staffs->vdUpdate(true);
-            if (!$staffs->save()) {
-                foreach ($staffs->getMessages() as $message) {
+            $items->vdUpdate(true);
+            if (!$items->save()) {
+                foreach ($items->getMessages() as $message) {
                     throw new \Exception($message->getMessage());
                 }
             }
-            foreach ($staffLangs as $staffLang) {
-                $staffLang->staffid = $staffs->id;
-                $staffLang->vdUpdate(true);
-                if (!$staffLang->save()) {
-                    foreach ($staffLang->getMessages() as $message) {
+            foreach ($itemsLangs as $itemsLang) {
+                $itemsLang->postid = $items->id;
+                $itemsLang->vdUpdate(true);
+                if (!$itemsLang->save()) {
+                    foreach ($itemsLang->getMessages() as $message) {
                         throw new \Exception($message->getMessage());
                     }
                 }
             }
             $this->db->commit();
-            $this->flashSession->success(($id ? 'Chỉnh sửa' : 'Thêm mới').' môn học thành công');
+            \Logs::saveLogs($this, ($id ? 2: 1), ($id ? 'Cập nhật ' : 'Thêm mới ').mb_strtolower($this->title,'UTF-8')." ID: {$items->id}", ['table' => $this->className,'id' => $items->id]);
+            $this->flashSession->success(($id ? 'Cập nhật ' : 'Thêm mới ')." thành công");
         } catch (\Throwable $e) {
             $this->db->rollback();
             $data['error'] = [$e->getMessage()];

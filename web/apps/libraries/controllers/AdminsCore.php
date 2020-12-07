@@ -90,7 +90,7 @@ class AdminsCore extends \BackendController{
                     $formsLang[$lang->id] = new $this->itemsLangFrom(null, [$lang->id,$v]);
                 }
             }
-            $title = 'Chỉnh sửa';
+            $title = 'Cập nhật';
         }else{
             $items = new \Posts();
             $title = 'Thêm mới';
@@ -179,8 +179,8 @@ class AdminsCore extends \BackendController{
                 }
             }
             $this->db->commit();
-            \Logs::saveLogs($this, ($id ? 2: 1), ($id ? 'Chỉnh sửa ' : 'Thêm mới ').mb_strtolower($this->title,'UTF-8')." ID: {$items->id}", ['table' => $this->className,'id' => $items->id]);
-            $this->flashSession->success(($id ? 'Chỉnh sửa ' : 'Thêm mới ')." thành công");
+            \Logs::saveLogs($this, ($id ? 2: 1), ($id ? 'Cập nhật ' : 'Thêm mới ').mb_strtolower($this->title,'UTF-8')." ID: {$items->id}", ['table' => $this->className,'id' => $items->id]);
+            $this->flashSession->success(($id ? 'Cập nhật ' : 'Thêm mới ')." thành công");
         } catch (\Throwable $e) {
             $this->db->rollback();
             $data['error'] = [$e->getMessage()];

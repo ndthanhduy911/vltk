@@ -853,7 +853,7 @@ const createButton = (types = ["","","",""], item,controller, className) => {
             action = 'edit';
             color = 'info';
             icon = 'pencil-alt';
-            title = "Chỉnh sửa"
+            title = "Cập nhật"
             break;            
         }
         case 3 : {

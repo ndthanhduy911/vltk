@@ -353,7 +353,7 @@ class SyncController extends \BackendController
             $this->helper->responseJson($this, $data);
         }
         
-        $this->flashSession->success(($id ? 'Chỉnh sửa' : 'Thêm mới').' dữ liệu thành công');
+        $this->flashSession->success(($id ? 'Cập nhật' : 'Thêm mới').' dữ liệu thành công');
         $data['data'] = $sync->toArray();
         $this->helper->responseJson($this, $data);
         

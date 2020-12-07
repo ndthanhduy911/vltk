@@ -22,10 +22,9 @@ class MenusForm extends Form
         $this->add($title);
 
         $deptid = isset($_SESSION['deptid']) ? $_SESSION['deptid'] : 0;
-        $menus = \Menus::findParents($deptid); 
+        $menus = [];
         //parentid
         $parentid = new Select('parentid', $menus, [
-            'using' => ['id','title'],
             'useEmpty' => true,
             'emptyText' => 'Không',
             'emptyValue' => 0,

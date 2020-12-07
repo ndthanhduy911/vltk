@@ -78,12 +78,12 @@ const loadTableMenus = (table = '#headMenus', cb = () => {}) => {
             }
         }
         dataTableCt(table,options,router).then((dt)=>{
-            cb(dt);
+            cb(dt,lId);
         });
     }
 }
 
-loadTableMenus('#headMenus',(dt)=>{
+loadTableMenus('#headMenus',(dt,lId)=>{
     showModalForm('#addHeadMenu', '#modalMenus', 'GET', () => {
         $('#modalMenus .modal-title').html('Thêm mới');
         $('.btnSummitMenus span').html('Thêm mới');
@@ -91,6 +91,10 @@ loadTableMenus('#headMenus',(dt)=>{
             e.preventDefault();
             changeTypeMenu($(this).val());
         });
+        apiS2MenusLocation(lId).then((data)=>{
+            // console.log(data);
+            $('#modalMenus #parentid').select2({data: data});
+        })
     },(data,row)=>{
         dt.draw();
         Swal.fire({
@@ -105,7 +109,7 @@ loadTableMenus('#headMenus',(dt)=>{
         $('#modalMenus .modal-title').html('Cập nhật');
         $('.btnSummitMenus span').html('Cập nhật');
         data.lang.forEach(lang => {
-            $(`#modalMenus input[name="title${lang.langid}"]`).val(lang.title);
+            $(`#modalMenus #title${lang.langid}`).val(lang.title);
         });
         changeTypeMenu(data.type);
         $('#modalMenus').off('change','#type').on('change','#type', function (e) {
@@ -127,6 +131,10 @@ loadTableMenus('#footMenus',(dt)=>{
     showModalForm('#addFootMenu', '#modalMenus', 'GET', () => {
         $('#modalMenus .modal-title').html('Thêm mới');
         $('.btnSummitMenus span').html('Thêm mới');
+        $('#modalMenus').off('change','#type').on('change','#type', function (e) {
+            e.preventDefault();
+            changeTypeMenu($(this).val());
+        });
     },(data,row)=>{
         dt.draw();
         Swal.fire({
@@ -137,9 +145,19 @@ loadTableMenus('#footMenus',(dt)=>{
         })
     });
 
-    showModalForm('#footMenus .editMenus', '#modalMenus', 'GET', () => {
+    showModalForm('#footMenus .editMenus', '#modalMenus', 'GET', (data) => {
         $('#modalMenus .modal-title').html('Cập nhật');
         $('.btnSummitMenus span').html('Cập nhật');
+        $('#modalMenus .modal-title').html('Cập nhật');
+        $('.btnSummitMenus span').html('Cập nhật');
+        data.lang.forEach(lang => {
+            $(`#modalMenus #title${lang.langid}`).val(lang.title);
+        });
+        changeTypeMenu(data.type);
+        $('#modalMenus').off('change','#type').on('change','#type', function (e) {
+            e.preventDefault();
+            changeTypeMenu($(this).val());
+        });
     },(data,row)=>{
         dt.draw();
         Swal.fire({

@@ -53,7 +53,7 @@ class Logs extends \ModelCore
             case 1:
                 return 'Thêm mới';
             case 2:
-                return 'Chỉnh sửa';
+                return 'Cập nhật';
             case 3:
                 return 'Xóa';
             case 4:
