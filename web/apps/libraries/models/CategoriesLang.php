@@ -11,13 +11,13 @@ class CategoriesLang extends \Phalcon\Mvc\Model
 
     public function vdUpdate($try = false){
         $helper = new HelperValidation();
-        //name
+        //title
         $helper->setValidation('required', [
-            'name' => 'name',
+            'name' => 'title',
             'msg' => 'Tiêu đề không được để trống'
         ]);
         $helper->setValidation('max', [
-            'name' => 'name',
+            'name' => 'title',
             'len' => 255,
             'msg' => 'Tiêu đề không được quá 255 ký tự'
         ]);

@@ -7,8 +7,8 @@ class CategoriesLangForm extends \Phalcon\Forms\Form
 {
     public function initialize($entity = null, $lang = null)
     {
-        $name = new Text('name');
-        $name->setLabel('<i class="fas fa-book mr-1"></i>Tiêu đề');
+        $title = new Text('title');
+        $title->setLabel('<i class="fas fa-book mr-1"></i>Tiêu đề');
         $attr = [
             'class' => "form-control form-control-sm",
             'placeholder' => 'Tiêu đề',
@@ -17,12 +17,12 @@ class CategoriesLangForm extends \Phalcon\Forms\Form
             'data-required-error' => "Vui lòng nhập thông tin",
             'data-error' => "Thông tin chưa hợp lệ",
         ];
-        $attr = cFL($attr,$lang,'name');
-        $name->setAttributes($attr);
-        $this->add($name);
+        $attr = cFL($attr,$lang,'title');
+        $title->setAttributes($attr);
+        $this->add($title);
 
-        $description = new Textarea('description');
-        $description->setLabel('<i class="fas fa-tags mr-1"></i>Tóm tắt');
+        $excerpt = new Textarea('excerpt');
+        $excerpt->setLabel('<i class="fas fa-tags mr-1"></i>Tóm tắt');
         $attr = [
             'class' => 'form-control form-control-sm',
             'placeholder' => 'Tóm tắt',
@@ -30,8 +30,8 @@ class CategoriesLangForm extends \Phalcon\Forms\Form
             'data-error' => "Thông tin chưa hợp lệ",
             'rows' => 4
         ];
-        $attr = cFL($attr,$lang,'description');
-        $description->setAttributes($attr);
-        $this->add($description);
+        $attr = cFL($attr,$lang,'excerpt');
+        $excerpt->setAttributes($attr);
+        $this->add($excerpt);
     }
 }

@@ -138,7 +138,7 @@ class SubjectsController  extends \BackendController {
         ->leftJoin('Depts', 'd.id = s.deptid','d')
         ->orderBy('s.deptid ASC,s.id DESC');
 
-        $data = $this->master::builderPermission($data,$perL,'p');
+        $data = $this->master::builderPermission($data,$perL,'s');
         $data = \FilterSetting::getDataOrder($this,$data,($this->className)::findFirst(),'s',['sl'=>'title']);
         $data = \FilterSetting::getDataFilter($this,$data,($this->className)::arrayFilter(),['s',['sl'=>['title']]]);
 

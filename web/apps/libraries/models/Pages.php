@@ -38,10 +38,10 @@ class Pages extends \ModelCore
             'len' => 255,
             'msg' => 'Slug không được dài quá 255 ký tự'
         ]);
-        //catid
+        //attrid
         $helper->setValidation('required', [
-            'name' => 'catid',
-            'msg' => 'Chuyên mục không được để trống'
+            'name' => 'attrid',
+            'msg' => 'Giao diện không được để trống'
         ]);
         //status
         $helper->setValidation('required', [
@@ -65,8 +65,7 @@ class Pages extends \ModelCore
             'slug' => 'Xem',
             'status' => 'Trạng thái',
             'image' => 'Hình đại diện',
-            'author' => 'Tác giả',
-            'authorname' => 'Tác giả',
+            'createdby' => 'Tác giả',
             'deptid' => 'Bộ môn',
             'deptname' => 'Bộ môn',
             'createdat' => 'Ngày tạo',
@@ -85,7 +84,7 @@ class Pages extends \ModelCore
     }
 
     public static function findTables () {
-        return ['image','title','excerpt','authorname','createdat','slug','status'];
+        return ['image','title','excerpt','createdby','createdat','slug','status'];
     }
 
     public static function arrayOrder () {

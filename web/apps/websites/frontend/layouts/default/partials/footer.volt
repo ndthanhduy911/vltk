@@ -1,7 +1,7 @@
 <?php 
 $menuParents = [];
 if($menuLocation = MenuLocation::findFirst(["status =  1 AND deptid = $dept->id AND type = 2"])) {
-    $menuParents = Menus::find(["status = 1 AND deptid = $dept->id AND locationid = {$menuLocation->id} AND parentid is NULL",'order' => 'sort ASC','limit' => 3]);
+    $menuParents = Menus::find(["status = 1 AND deptid = $dept->id AND locationid = {$menuLocation->id} AND parentid = 0",'order' => 'sort ASC','limit' => 3]);
 }
 ?>
 

@@ -22,7 +22,7 @@ class PostsController  extends \BackendController {
         $filters = ($this->className)::findFilters();
         $tables = ($this->className)::findTables();
         $fFilters = ['title','catid','status','calendar'];
-        $fTables = ['image','title','excerpt','catid','authorname','calendar','slug','status'];
+        $fTables = ['image','title','excerpt','catid','createdby','calendar','slug','status'];
         if($fSetting = \FilterSetting::findFirstKey($this->cler)){
             $fFilters = $fSetting->filters ? json_decode($fSetting->filters) : $fFilters;
             $fTables = $fSetting->tables ? json_decode($fSetting->tables) : $fTables;   
@@ -123,14 +123,14 @@ class PostsController  extends \BackendController {
             'p.catid',
             'p.status',
             'p.image',
-            'p.author',
+            'p.createdby',
             'p.deptid',
             'p.calendar',
             'p.createdat',
             'pl.title',
             'pl.content',
             'pl.excerpt',
-            'u.fullname authorname',
+            'u.fullname createdby',
             'c.title catname',
             'd.slug dslug',
             '(SELECT dl.title FROM DeptsLang AS dl WHERE dl.deptid = p.deptid AND dl.langid = 1) AS deptname',
@@ -140,7 +140,7 @@ class PostsController  extends \BackendController {
         ->columns($columns)
         ->from(['p' => "Posts"])
         ->where("p.deleted = 0")
-        ->leftJoin('User', 'u.id = p.author','u')
+        ->leftJoin('User', 'u.id = p.createdby','u')
         ->leftJoin('CategoriesLang', 'c.catid = p.catid AND c.langid = 1','c')
         ->leftJoin('PostsLang', 'pl.postid = p.id AND pl.langid = 1','pl')
         ->leftJoin('Depts', 'd.id = p.deptid','d')

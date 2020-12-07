@@ -4,7 +4,7 @@ const loadTableItems = (table = '#items', cb = () => {}) => {
         let router = {
             co:'pages',aj:'ajaxgetdata',fo:'#searchItems',cl:'Items',ti:'trang',
             ff:['title', 'status', 'createdat'],
-            tf:['image','title','excerpt','authorname','createdat','slug','status'],
+            tf:['image','title','excerpt','createdby','createdat','slug','status'],
         };
         let paramsUrl = getParams();
         let columns = [];

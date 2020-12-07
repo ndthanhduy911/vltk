@@ -22,7 +22,7 @@ class PagesController  extends \BackendController {
         $filters = ($this->className)::findFilters();
         $tables = ($this->className)::findTables();
         $fFilters = ['title','status','createdat'];
-        $fTables = ['image','title','excerpt','authorname','createdat','slug','status'];
+        $fTables = ['image','title','excerpt','createdby','createdat','slug','status'];
         if($fSetting = \FilterSetting::findFirstKey($this->cler)){
             $fFilters = $fSetting->filters ? json_decode($fSetting->filters) : $fFilters;
             $fTables = $fSetting->tables ? json_decode($fSetting->tables) : $fTables;   
@@ -73,7 +73,7 @@ class PagesController  extends \BackendController {
             }         
             foreach ($languages as $key => $lang) {
                 $v = ($key == 0 ? true : false);
-                $itemsLang = \PagesLang::findFirst(['pageid = :id: AND langid = :langid:','bind' => ['id' => $page->id, 'langid' => $lang->id]]);
+                $itemsLang = \PagesLang::findFirst(['pageid = :id: AND langid = :langid:','bind' => ['id' => $items->id, 'langid' => $lang->id]]);
                 if($itemsLang){
                     $formLang = new PagesLangForm($itemsLang, [$lang->id,$v]);
                     $formsLang[$lang->id] = $formLang;
@@ -120,7 +120,6 @@ class PagesController  extends \BackendController {
             'p.slug',
             'p.attrid',
             'p.status',
-            'p.author',
             'p.deptid',
             'p.image',
             'p.bgimage',
@@ -128,7 +127,7 @@ class PagesController  extends \BackendController {
             'pl.title',
             'pl.content',
             'pl.excerpt',
-            'u.fullname authorname',
+            'u.fullname createdby',
             'd.slug dslug',
             '(SELECT dl.title FROM DeptsLang AS dl WHERE dl.deptid = p.deptid AND dl.langid = 1) AS deptname',
         ];
@@ -137,7 +136,7 @@ class PagesController  extends \BackendController {
         ->columns($columns)
         ->from(['p' => "Pages"])
         ->where("p.deleted = 0")
-        ->leftJoin('User', 'u.id = p.author','u')
+        ->leftJoin('User', 'u.id = p.createdby','u')
         ->leftJoin('PagesLang', 'pl.pageid = p.id AND pl.langid = 1','pl')
         ->leftJoin('Depts', 'd.id = p.deptid','d')
         ->orderBy('p.deptid ASC, p.id DESC');
@@ -182,7 +181,6 @@ class PagesController  extends \BackendController {
             $page->updatedby = $userid;
         }else{
             $page = new \Pages();
-            $page->author = $this->session->get('userid');
             $page->deptid = $this->session->get('deptid');
             $page->createdat = date('Y-m-d H:i:s');
             $page->updatedat = $page->createdat;

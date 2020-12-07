@@ -3,7 +3,7 @@ const loadTableItems = (table = '#items', cb = () => {}) => {
         let router = {
             co:'posts',aj:'ajaxgetdata',fo:'#searchItems',cl:'Items',ti:'bài viết',
             ff:['title', 'catid', 'status', 'calendar'],
-            tf:['image','title','excerpt','catid','authorname','calendar','slug','status'],
+            tf:['image','title','excerpt','catid','createdby','calendar','slug','status'],
         };
         let paramsUrl = getParams();
         let columns = [];

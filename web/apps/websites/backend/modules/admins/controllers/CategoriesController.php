@@ -10,6 +10,10 @@ class CategoriesController  extends \BackendController {
 
     private $cler = "categories";
 
+    private $className = \Categories::class;
+
+    private $classNameLang = \CategoriesLang::class;
+
     public function indexAction(){
         if($this->request->get('singlePage') && $this->request->isAjax()){
             $this->view->setRenderLevel(
@@ -43,12 +47,12 @@ class CategoriesController  extends \BackendController {
         $formsLang = [];
         $languages = \Language::find(['status = 1']);
         if($id){
-            if(!$cat = \Categories::findFirstId($id)){
+            if(!$items = ($this->className)::findFirstId($id)){
                 echo 'Không tìm thấy dữ liệu'; die;
             }         
             foreach ($languages as $key => $lang) {
                 $v = ($key == 0 ? true : false);
-                $catLang = \CategoriesLang::findFirst(['catid = :id: AND langid = :langid:','bind' => ['id' => $cat->id, 'langid' => $lang->id]]);
+                $catLang = ($this->classNameLang)::findFirst(['catid = :id: AND langid = :langid:','bind' => ['id' => $items->id, 'langid' => $lang->id]]);
                 if($catLang){
                     $formLang = new CategoriesLangForm($catLang, [$lang->id,$v]);
                     $formsLang[$lang->id] = $formLang;
@@ -58,7 +62,7 @@ class CategoriesController  extends \BackendController {
             }
             $title = 'Chỉnh sửa';
         }else{
-            $cat = new \Categories();
+            $items = new \Categories();
             $title = 'Thêm mới';
             foreach ($languages as $key => $lang) {
                 $v = $key == 0 ? true : false;
@@ -67,7 +71,7 @@ class CategoriesController  extends \BackendController {
         }
 
         $form = new CategoriesForm($items);
-
+        // var_dump($formsLang);die;
         $this->view->perEdit = $perEdit ? 1 : "";
         $this->view->perView = $perView ? 1 : "";
         $this->view->languages = $languages;
@@ -108,9 +112,9 @@ class CategoriesController  extends \BackendController {
         ->leftJoin('Depts', 'd.id = c.deptid','d')
         ->orderBy('c.deptid ASC');
 
-        $data = $this->master::builderPermission($data,$perL,'p');
-        $data = \FilterSetting::getDataOrder($this,$data,\Categories::findFirst(),'c',['cl'=>'name']);
-        $data = \FilterSetting::getDataFilter($this,$data,\Categories::arrayFilter(),['c',['cl'=>['name']]]);
+        $data = $this->master::builderPermission($data,$perL,'c');
+        $data = \FilterSetting::getDataOrder($this,$data,($this->className)::findFirst(),'c',['cl'=>'name']);
+        $data = \FilterSetting::getDataFilter($this,$data,($this->className)::arrayFilter(),['c',['cl'=>['name']]]);
 
         $array_row = [
             'u' => $this->master::checkPermission($this->cler, 'update', 1)
@@ -137,10 +141,10 @@ class CategoriesController  extends \BackendController {
 
         $userid = $this->session->get('userid');
         $languages = \Language::find(['status = 1']);
-        $pName = $this->request->getPost('name',['string','trim']);
-        $pDes = $this->request->getPost('description',['string','trim']);
+        $pTitle = $this->request->getPost('title',['string','trim']);
+        $pDes = $this->request->getPost('excerpt',['string','trim']);
         if($id){
-            if(!$categories = \Categories::findFirstIdPermission($id,$perL)){
+            if(!$categories = ($this->className)::findFirstIdPermission($id,$perL)){
                 $data['error'] = ['Không tìm thấy chuyên mục'];
                 $this->helper->responseJson($this, $data);
             }
@@ -156,24 +160,24 @@ class CategoriesController  extends \BackendController {
         }
         $categoriesLangs = [];
         foreach ($languages as $key => $lang) {
-            if(!$id || !$categoriesLang = \CategoriesLang::findFirst(["catid = :id: AND langid = :langid:",'bind' => ['id' => (int)$id,'langid' => $lang->id]])){
+            if(!$id || !$categoriesLang = ($this->classNameLang)::findFirst(["catid = :id: AND langid = :langid:",'bind' => ['id' => (int)$id,'langid' => $lang->id]])){
                 $categoriesLang = new \CategoriesLang();
             }
             if($key == 0){
                 $lId = $lang->id;
             }
-            $categoriesLang->name = !empty($pName[$lang->id]) ? $pName[$lang->id] : $pName[$lId];
-            $categoriesLang->description = !empty($pDes[$lang->id]) ? $pDes[$lang->id] : $pDes[$lId];
+            $categoriesLang->title = !empty($pTitle[$lang->id]) ? $pTitle[$lang->id] : $pTitle[$lId];
+            $categoriesLang->excerpt = !empty($pDes[$lang->id]) ? $pDes[$lang->id] : $pDes[$lId];
             $categoriesLang->langid = $lang->id;
             array_push($categoriesLangs,$categoriesLang);
         }
 
         $clug = $this->request->getPost('slug',['string','trim']);
         $categories->status = $this->request->getPost('status',['int']);
-        $categories->slug = $clug ? $clug : $this->helper->slugify($pName[1]);
+        $categories->slug = $clug ? $clug : $this->helper->slugify($pTitle[1]);
         $categories->image = $this->request->getPost('image',['trim','string']);
 
-        if(\Categories::findFirst(["slug = :slug: AND id != :id:","bind" => ["slug" => $categories->slug,'id'=> $id]])){
+        if(($this->className)::findFirst(["slug = :slug: AND id != :id:","bind" => ["slug" => $categories->slug,'id'=> $id]])){
             $reqPost['slug'] = $categories->slug .'-'. strtotime('now');
         }
 
@@ -215,7 +219,7 @@ class CategoriesController  extends \BackendController {
         $listId = $this->helper->filterListIds($listId);
         $strIds = implode(',', $listId);
 
-        $data = \Categories::findPermission($perL,"*",['id IN (' . $strIds . ')']);
+        $data = ($this->className)::findPermission($perL,"*",['id IN (' . $strIds . ')']);
         try {
             $this->db->begin();
             foreach ($data as $item) {
@@ -238,7 +242,7 @@ class CategoriesController  extends \BackendController {
                 throw new \Exception($message->getMessage());
             }
         }
-        $data = \CategoriesLang::find([
+        $data = ($this->classNameLang)::find([
             'catid = :catid:',
             'bind' => ['catid' => $itemOld['id']]
         ]);

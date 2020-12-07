@@ -22,7 +22,7 @@ class PagesController  extends \BackendController {
         $filters = ($this->className)::findFilters();
         $tables = ($this->className)::findTables();
         $fFilters = ['title','status','createdat'];
-        $fTables = ['image','title','excerpt','authorname','createdat','slug','status'];
+        $fTables = ['image','title','excerpt','createdby','createdat','slug','status'];
         if($fSetting = \FilterSetting::findFirstKey($this->cler)){
             $fFilters = $fSetting->filters ? json_decode($fSetting->filters) : $fFilters;
             $fTables = $fSetting->tables ? json_decode($fSetting->tables) : $fTables;   
@@ -128,7 +128,7 @@ class PagesController  extends \BackendController {
             'pl.title',
             'pl.content',
             'pl.excerpt',
-            'u.fullname authorname',
+            'u.fullname createdby',
             'd.slug dslug',
             '(SELECT dl.title FROM DeptsLang AS dl WHERE dl.deptid = p.deptid AND dl.langid = 1) AS deptname',
         ];
@@ -137,7 +137,7 @@ class PagesController  extends \BackendController {
         ->columns($columns)
         ->from(['p' => "Pages"])
         ->where("p.deleted = 0")
-        ->leftJoin('User', 'u.id = p.author','u')
+        ->leftJoin('User', 'u.id = p.createdby','u')
         ->leftJoin('PagesLang', 'pl.pageid = p.id AND pl.langid = 1','pl')
         ->leftJoin('Depts', 'd.id = p.deptid','d')
         ->orderBy('p.deptid ASC, p.id DESC');
