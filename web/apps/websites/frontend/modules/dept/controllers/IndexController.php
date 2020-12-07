@@ -41,8 +41,7 @@ class IndexController extends \FrontendController
             'b.link',
             'b.sort',
             'bl.title',
-            'bl.excerpt',
-            'bl.btntext'
+            'bl.excerpt'
         ))
         ->from(['b'=>'Slideshows'])
         ->where("b.deleted = 0 AND b.status = 1 AND b.deptid = 1")
