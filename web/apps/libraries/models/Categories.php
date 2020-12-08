@@ -10,7 +10,7 @@ class Categories extends \ModelCore
     }
     
     public static function getChild($id , $data = [], $levelTag = '', $level = 0){
-        $deptChild = Categories::find(["parentid = :id: AND deleted = 0", 'columns' => "id, id", 'bind' => ['id' => $id]]);
+        $deptChild = Categories::find(["parentid = :id: AND deleted = 0", 'columns' => "id", 'bind' => ['id' => $id]]);
         if($deptChild->count()){
             $levelTag .= '&#151;' ;
             $level ++;

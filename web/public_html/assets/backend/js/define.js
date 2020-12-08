@@ -183,6 +183,11 @@ const dataTableCt = (table, opCT = false,router={co:'',fo:'',aj:'ajaxgetdata',cl
                 dt.draw()
             });
 
+            deleteAll(`#restore${router.cl}`, `.${router.co}Checkbox`,(data) => {
+                showSweetAlertOk('Khôi phục thành công');
+                dt.draw()
+            });
+
             showConfrim(`${table} .delete${router.cl}`,()=>{
                 showSweetAlertOk('Xóa thành công');
                 dt.draw()

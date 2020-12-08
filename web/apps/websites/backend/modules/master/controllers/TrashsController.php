@@ -50,7 +50,7 @@ class TrashsController extends \BackendController
         $listId = $this->helper->filterListIds($listId);
         $strIds = implode(',', $listId);
 
-        $data = ("\\".$this->arraTypes[$type][0])::findPermission($perL,"*",['deleted = 1 AND id IN (' . $strIds . ')']);
+        $data = ("\\".$this->arraTypes[$type][0])::findTrashPermission($perL,"*",['id IN (' . $strIds . ')']);
 
         try {
             $this->db->begin();
@@ -80,8 +80,7 @@ class TrashsController extends \BackendController
         $listId = $this->helper->filterListIds($listId);
         $strIds = implode(',', $listId);
 
-        $data = ("\\".$this->arraTypes[$type][0])::findPermission($perL,"*",['deleted = 1 AND id IN (' . $strIds . ')']);
-
+        $data = ("\\".$this->arraTypes[$type][0])::findTrashPermission($perL,"*",['id IN (' . $strIds . ')']);
         try {
             $this->db->begin();
             foreach ($data as $item) {
@@ -99,13 +98,13 @@ class TrashsController extends \BackendController
     // FUNCTION
     // ===============================
     private $arraTypes = [
-        'posts' => ['Posts','postid',['t.id','t.updatedat','tl.title','tl.excerpt des']],
-        'pages'=> ['Pages','pageid',['t.id','t.updatedat','tl.title','tl.excerpt des']],
-        'subjects'=> ['Subjects','subjectid',['t.id','t.updatedat','tl.title','tl.excerpt des']],
-        'researches'=> ['Researches','researchid',['t.id','t.updatedat','tl.title','tl.excerpt des']],
-        'slideshows'=> ['Slideshows','slideshowid',['t.id','t.updatedat','tl.title','tl.excerpt des']],
-        'staffs'=> ['Staffs','staffid',['t.id','t.updatedat','tl.title','tl.content des']],
-        'partners'=> ['Partners','partnerid',['t.id','t.updatedat','tl.title','t.link des']]
+        'posts' => ['Posts','postid',['t.id','t.deptid','t.updatedat','tl.title','tl.excerpt des']],
+        'pages'=> ['Pages','pageid',['t.id','t.deptid','t.updatedat','tl.title','tl.excerpt des']],
+        'subjects'=> ['Subjects','subjectid',['t.id','t.deptid','t.updatedat','tl.title','tl.excerpt des']],
+        'researches'=> ['Researches','researchid',['t.id','t.deptid','t.updatedat','tl.title','tl.excerpt des']],
+        'slideshows'=> ['Slideshows','slideshowid',['t.id','t.deptid','t.updatedat','tl.title','tl.excerpt des']],
+        'staffs'=> ['Staffs','staffid',['t.id','t.deptid','t.updatedat','tl.title','tl.content des']],
+        'partners'=> ['Partners','partnerid',['t.id','t.deptid','t.updatedat','tl.title','t.link des']]
     ];
 
     private function getJsCss (){
@@ -159,6 +158,6 @@ class TrashsController extends \BackendController
                 }
             }
         }
-        \Logs::saveLogs($this, 4, "Xóa bài viết ID: {$itemOld['id']}", ['table' => 'Posts','id' => $itemOld['id']]);
+        \Logs::saveLogs($this, 4, "Xóa dữ liệu ID: {$itemOld['id']}", ['table' => $this->arraTypes[$type][0],'id' => $itemOld['id']]);
     }
 }

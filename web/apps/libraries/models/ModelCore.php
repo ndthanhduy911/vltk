@@ -167,6 +167,51 @@ class ModelCore extends \Phalcon\Mvc\Model
         return parent::find($params);
     }
 
+    public static function findTrashPermission($perL,$columns = "*", $andWhere = "", $order = ""){
+        if(!isset($perL->depted)){
+            throw new \Exception("Lỗi truy cập phân quyền");
+        }
+        $deptid = isset($_SESSION['deptid']) ? $_SESSION['deptid'] : 0 ;
+        if($perL->depted == 1){
+            $deptArray = \Depts::getArrayChild($deptid,[$deptid]);
+            $params = [
+                "deleted = 1 AND deptid IN (".implode(',',$deptArray).")",
+                'columns' => $columns
+            ];
+        }elseif($perL->depted == 2){
+            $userid = isset($_SESSION['userid']) ? $_SESSION['userid'] : 0 ;
+            $deptArray = \Depts::getArrayChild($deptid,[$deptid]);
+            $params = [
+                "deleted = 1 AND createdby = $userid AND deptid IN (".implode(',',$deptArray).")",
+                'columns' => $columns
+            ];
+        }elseif($perL->depted == 3){
+            $params = [
+                "deleted = 1 AND deptid = $deptid",
+                'columns' => $columns
+            ];
+        }elseif($perL->depted == 0){
+            $params = [
+                "deleted = 1",
+                "columns" => $columns
+            ];
+        }else{
+            throw new \Exception("Lỗi truy cập phân quyền");
+        }
+        if(isset($andWhere[0])){
+            $params[0] .= " AND ".$andWhere[0];
+        }
+        if(isset($andWhere[1])){
+            $params['bind'] = $andWhere[1];
+        }
+
+        if($order){
+            $params['order'] = $order;
+        }
+
+        return parent::find($params);
+    }
+
     public static function findFirstIdPermission($id,$perL,$columns = "*", $andWhere = "",$order = ""){
         if(!isset($perL->depted)){
             throw new \Exception("Lỗi truy cập phân quyền");

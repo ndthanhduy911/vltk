@@ -9,11 +9,11 @@
             </div>
             <div class="col-sm-6">
                 <div class="btn-group float-right">
-                    <a id="deletePosts" href="<?= WEB_ADMIN_URL ?>/trashs/delete" title="Xóa vĩnh viễn"
+                    <a id="deleteTrashs" href="<?= WEB_ADMIN_URL ?>/trashs/delete?type={{request.get('type')}}" title="Xóa vĩnh viễn"
                         class="ml-2 btn btn-hnn btn-hnn-danger"><span><i class="fas fa-trash"></i></span></a>
                 </div>
                 <div class="btn-group float-right">
-                    <a id="restorePosts" href="<?= WEB_ADMIN_URL ?>/trashs/restore" title="Khôi phục"
+                    <a id="restoreTrashs" href="<?= WEB_ADMIN_URL ?>/trashs/restore?type={{request.get('type')}}" title="Khôi phục"
                         class="ml-2 btn btn-hnn btn-hnn-info"><span><i class="fas fa-sync"></i></span></a>
                 </div>
             </div>
@@ -44,7 +44,6 @@
                                         <th data-col="title" class="align-middle text-center">Tiêu đề</th>
                                         <th data-col="des" class="align-middle text-center">Mô tả</th>
                                         <th data-col="updatedat" class="align-middle text-center">Thời gian xóa</th>
-                                        <th data-col="no" class="align-middle text-center">Thao tác</th>
                                     </tr>
                                 </thead>
                                 <tbody>

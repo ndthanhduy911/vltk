@@ -32,11 +32,11 @@ const loadTableTrashs = (table = '#trashs', cb = () => {}) => {
                 let pageInfo = $(table).DataTable().page.info();
                 let page = pageInfo.page;
                 let pageLength = pageInfo.length;
+                let type = getParams('type');
                 $('td:eq(1)', row).html((dataIndex+1)+(page*pageLength));
                 $(`td:eq(${fkeys.indexOf('title')})`, row).html(showTitle(item.title,100));
                 $(`td:eq(${fkeys.indexOf('des')})`, row).html(showTitle(item.des,100));
                 $(`td:eq(${fkeys.indexOf('updatedat')})`, row).html(vi_moment(item.updatedat));
-                $('td:last', row).addClass('text-nowrap').html(showButtonRestore(item,router.co,router.cl));
             }
         }
         dataTableCt(table,options,router).then(()=>{
