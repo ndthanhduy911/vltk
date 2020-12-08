@@ -45,11 +45,12 @@ class MenusForm extends Form
             'useEmpty' => true,
             'emptyText' => 'Chọn',
             'emptyValue' => '',
+            'required' => '',
             'class' => 'form-control form-control-sm',
             'data-required-error' => 'Vui lòng nhập thông tin',
             'data-error' => "Thông tin chưa hợp lệ"
         ]);
-        $type->setLabel('Trạng thái');
+        $type->setLabel('Loại menus');
         $this->add($type);
 
         //postid

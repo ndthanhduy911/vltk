@@ -162,26 +162,18 @@ class MenusController  extends \BackendController {
         $this->helper->responseJson($this, $data);
     }
 
-    public function deleteAction(){
+    public function deleteAction($id = 0){
         if (!$this->request->isAjax() || !$perL = $this->master::checkPermissionDepted('staffs', 'delete')) {
             $this->helper->responseJson($this, ["error" => ["Truy cập không được phép"]]);
         }
 
-        $listId = $this->request->getPost('dataId');
-        if (!is_array($listId)) {
-            $this->helper->responseJson($this, ["error" => ["Dữ liệu không hợp lệ"]]);
+        if(!$item = \Menus::findFirstIdPermission($id,$perL)){
+            $this->helper->responseJson($this, ["error" => ["Không tìm thấy menus"]]);
         }
-
-        $listId = $this->helper->filterListIds($listId);
-        $strIds = implode(',', $listId);
-
-        $data = \Menus::findPermission($perL,"*",['deleted = 0 AND id IN (' . $strIds . ')']);
 
         try {
             $this->db->begin();
-            foreach ($data as $item) {
-                $this->deleteOne($item);
-            }
+            $this->deleteOne($item);
             $this->db->commit();
         } catch (\Throwable $e) {
             $this->db->rollback();

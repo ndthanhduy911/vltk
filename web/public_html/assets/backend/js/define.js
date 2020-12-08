@@ -183,6 +183,11 @@ const dataTableCt = (table, opCT = false,router={co:'',fo:'',aj:'ajaxgetdata',cl
                 dt.draw()
             });
 
+            showConfrim(`${table} .delete${router.cl}`,()=>{
+                showSweetAlertOk('Xóa thành công');
+                dt.draw()
+            })
+
             if(router.ff && router.tf){
                 updateSetting(table,router.cl,router.ff,router.tf,()=>{
                     dataTableCt(table,opCT,router);
@@ -821,20 +826,6 @@ const showTextArea = (button, cb = () => {}, title = "Bạn có chắc muốn th
         }, title);
     })
 }
-// Show Modal confirm delete
-const showModalDelete = (button, cb = () => {}) => {
-    $('.content-wrapper').off('clcik').on('click', button, function (e) {
-        e.preventDefault();
-        let modalConfirm = $('#modal-confirm');
-        showConfirmModal(modalConfirm).then((result) => {
-            alert('Đang cập nhật...');
-            modalConfirm.modal('hide');
-            cb();
-        }).catch((err) => {
-
-        });
-    })
-}
 //Create button
 const createButton = (types = ["","","",""], item,controller, className) => {
     let action = "";
@@ -882,6 +873,13 @@ const createButton = (types = ["","","",""], item,controller, className) => {
             color = 'info';
             icon = 'sync';
             title = "Khôi phục dữ liệu"
+            break;            
+        }
+        case 7 : {
+            action = 'delete';
+            color = 'danger';
+            icon = 'trash';
+            title = "Xóa dữ liệu"
             break;            
         }
             
@@ -1266,49 +1264,6 @@ const btnViewImg = (path = "", filename = "", m = false) => {
     }else{
         return filename ? `<a class="btn btn-hnn btn-hnn-purple" target="_blank" href="/files/display/${path}/${filename}"><span data-toggle="tooltip" title="" data-original-title="Xem mẫu"><i class="fas fa-eye"></i></span></a>` : '';
     }
-}
-//Print file pdf
-const printDocument = (documentId) => {
-    let doc = document.getElementById(documentId);
-}
-//Generate Barcode
-const showGenerateBarcode = (inputBc,element,btype='code39', renderer='css',optionsCustom = false) => {
-    let options = {
-        output: renderer,
-        bgColor: '#FFFFFF',
-        color: '#000000',
-        barWidth: 1,
-        barHeight: 35,
-        moduleSize: 5,
-        posX: 10,
-        posY: 20,
-        addQuietZone: 1
-    };
-    let settings = optionsCustom ? $.extend(options,optionsCustom) : options;
-    $(singleCore).off('input',inputBc).on('input', inputBc,function (e) {
-        e.preventDefault();
-        let code = $(this).val();
-        $(element).html("").barcode(code, btype, settings);
-    });
-}
-//Generate Barcode
-const generateBarcode = (element, optionsCustom = false,btype='code39', renderer='css') => {
-    let options = {
-        output: renderer,
-        bgColor: '#FFFFFF',
-        color: '#000000',
-        barWidth: 1,
-        barHeight: 35,
-        moduleSize: 5,
-        posX: 10,
-        posY: 20,
-        addQuietZone: 1
-    };
-    if(element.text()){
-        let settings = optionsCustom ? $.extend(options,optionsCustom) : options;
-        element.barcode(element.text(), btype, settings);
-    }
-
 }
 
 const dttbPermission = (table,row,number,cb = ()=>{}) => {

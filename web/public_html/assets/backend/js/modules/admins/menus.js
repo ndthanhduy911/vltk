@@ -71,7 +71,7 @@ const loadTableMenus = (table = '#headMenus', btnAdd = '',cb = () => {}) => {
                 $('td', row).addClass('align-middle');
                 $('td:not(:eq(0))', row).addClass('align-middle text-center')
                 $(`td:eq(${fkeys.indexOf('status')})`, row).html(showStatus(item.status));
-                $('td:last', row).addClass('text-nowrap').html(createButton([2, 'update' ,'getsingle'],item,'menus','Menus'));
+                $('td:last', row).addClass('text-nowrap').html(`<div class="btn-group btn-group-sm">`+createButton([2, 'update' ,'getsingle'],item,'menus','Menus')+createButton([7, 'delete' ,false],item,'menus','Menus')+`</div>`);
                 if(!parseInt(item.parentid)){
                     $(row).addClass('font-weight-bold');
                 }
@@ -125,6 +125,7 @@ const loadTableMenus = (table = '#headMenus', btnAdd = '',cb = () => {}) => {
                     timer: 1500
                 })
             });
+
             cb(dt,lId);
         });
     }
