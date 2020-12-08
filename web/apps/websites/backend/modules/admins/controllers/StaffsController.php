@@ -50,7 +50,7 @@ class StaffsController  extends \AdminsLangCore {
         $items->slug = $plug ? $plug : $this->helper->slugify($pTitle[1]);
         $items->image = $this->request->getPost('image',['trim','string']);
 
-        if($this->className::findFirst(['slug = :slug:','bind' => ['slug' => $items->slug]])){
+        if($this->className::findFirst(['slug = :slug: AND id != :id:','bind' => ['slug' => $items->slug,'id' => (!empty($items->id) ? $items->id : 0)]])){
             $items->slug .= strtotime('now');
         }
 

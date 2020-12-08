@@ -50,7 +50,7 @@ class SubjectsController  extends \AdminsLangCore {
         $items->image = $this->request->getPost('image',['trim','string']);
         $items->bgimage = $this->request->getPost('bgimage',['trim','string']);
 
-        if($this->className::findFirst(['slug = :slug:','bind' => ['slug' => $items->slug]])){
+        if($this->className::findFirst(['slug = :slug: AND id != :id:','bind' => ['slug' => $items->slug,'id' => (!empty($items->id) ? $items->id : 0)]])){
             $items->slug .= strtotime('now');
         }
 
