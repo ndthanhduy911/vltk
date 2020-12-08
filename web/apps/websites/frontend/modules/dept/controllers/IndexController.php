@@ -127,10 +127,16 @@ class IndexController extends \FrontendController
     }
 
     public function changelanguageAction($langid = 1){
-        $this->session->set("lang_new", $langid);
-        $this->response->setStatusCode(200, 'OK');
-        $this->response->setJsonContent(['langid' => $langid]);
-        return $this->response->send();
+        if($this->request->isAjax()){
+            $this->session->set("lang_new", $langid);
+            $this->response->setStatusCode(200, 'OK');
+            $this->response->setJsonContent(['langid' => $langid]);
+            return $this->response->send();
+        }else{
+            $this->session->set("lang_new", $langid);
+            header('Location: /');
+            exit;
+        }
     }
 
     // =================================
