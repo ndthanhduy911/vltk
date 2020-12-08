@@ -130,7 +130,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-auto hidden-md-down p-0">
+                <div class="col-auto hidden-md-down p-0 ml-2">
                     <div class="header-dropdown-buttons" id="langid" data-lang="{{ langid }}">
                         <a href="<?= WEB_URL ?>/api/changelanguage/{{ langid == 1 ? 2 : 1  }}" data-id="{{ langid == 1 ? 2 : 1  }}" class="d-flex align-items-center">
                             <img src="<?= WEB_URL ?><?= $language->id == 1 ? '/language_file/eng' : '/language_file/vie' ?>/<?= $language->id == 1 ? 'united-states.png' : 'vietnam.png' ?>" class="user-image" alt="{{ language.name }}" width="36px">
