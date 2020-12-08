@@ -11,7 +11,7 @@ class MediaController  extends \BackendController {
 
     public function connectorAction(){
         require LIB_DIR . '/elfinder/php/autoload.php';
-
+        $roleid = $this->session->get('roleid');
         $d_id = isset($_GET['deptid']) ? $_GET['deptid'] : 0;
         if($roleid != 1 && !$depts = \Depts::findFirstId($d_id)){
             die;
@@ -19,7 +19,7 @@ class MediaController  extends \BackendController {
         if($roleid == 1){
             $slug = "";
         }else{
-            $slug = $depts->slug;
+            $slug = ($depts->slug == "/" ? "" : "/{$depts->slug}");
         }
         $opts = array(
             // 'debug' => true,
