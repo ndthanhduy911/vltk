@@ -17,9 +17,9 @@ class MediaController  extends \BackendController {
             die;
         }
         if($roleid == 1){
-            $slug = "";
+            $fpath = "";
         }else{
-            $slug = ($depts->slug == "/" ? "" : "/{$depts->slug}");
+            $fpath = $depts->fpath;
         }
         $opts = array(
             // 'debug' => true,
@@ -27,8 +27,8 @@ class MediaController  extends \BackendController {
                 // Items volume
                 array(
                     'driver'        => 'LocalFileSystem',           // driver for accessing file system (REQUIRED)
-                    'path'          => PUBLIC_DIR."/uploads{$slug}",                 // path to files (REQUIRED)
-                    'URL'           => "/uploads{$slug}", // URL to files (REQUIRED)
+                    'path'          => PUBLIC_DIR."/uploads{$fpath}",                 // path to files (REQUIRED)
+                    'URL'           => "/uploads{$fpath}", // URL to files (REQUIRED)
                     'trashHash'     => 't1_Lw',                     // elFinder's hash of trash folder
                     'winHashFix'    => DIRECTORY_SEPARATOR !== '/', // to make hash same to Linux one on windows too
                     'uploadDeny'    => array('all'),                // All Mimetypes not allowed to upload
@@ -41,8 +41,8 @@ class MediaController  extends \BackendController {
                 array(
                     'id'            => '1',
                     'driver'        => 'Trash',
-                    'path'          => PUBLIC_DIR."/uploads{$slug}"."/.trash/",
-                    'tmbURL'        => "/uploads{$slug}".'/.trash/.tmb/',
+                    'path'          => PUBLIC_DIR."/uploads{$fpath}"."/.trash/",
+                    'tmbURL'        => "/uploads{$fpath}".'/.trash/.tmb/',
                     'winHashFix'    => DIRECTORY_SEPARATOR !== '/', // to make hash same to Linux one on windows too
                     'uploadDeny'    => array('all'),                // Recomend the same settings as the original volume that uses the trash
                     'uploadAllow'   => array('image/x-ms-bmp', 'image/gif', 'image/jpeg', 'image/png', 'image/x-icon', 'text/plain'), // Same as above
