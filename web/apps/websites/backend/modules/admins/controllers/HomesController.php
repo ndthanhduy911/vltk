@@ -36,14 +36,14 @@ class HomesController  extends \BackendController {
             );
         }
         $deptid = $this->session->get('deptid');
-        if(!$homes = ($this->className)::findFirstPermission($perL,"*",["deptid = :id:",['id'=>$deptid]])){
+        if(!$homes = ($this->className)::findFirstPermission($perL,"*",["deptid = :did:",['did'=>$deptid]])){
             require ERROR_FILE; die;
         } 
         $formsLang = [];
         $languages = \Language::find(['status = 1']);
         foreach ($languages as $key => $lang) {
             $v = ($key == 0 ? true : false);
-            $homeLang = \HomesLang::findFirst(['homeid = :id: AND langid = :langid:','bind' => ['id' => $homes->id, 'langid' => $lang->id]]);
+            $homeLang = \HomesLang::findFirst(['homeid = :hid: AND langid = :langid:','bind' => ['hid' => $homes->id, 'langid' => $lang->id]]);
             if($homeLang){
                 $formLang = new HomesLangForm($homeLang, [$lang->id,$v]);
                 $formsLang[$lang->id] = $formLang;
@@ -85,7 +85,7 @@ class HomesController  extends \BackendController {
 
         $userid = $this->session->get('userid');
         $deptid = $this->session->get('deptid');
-        if(!$items = ($this->className)::findFirstPermission($perL,"*",["deptid = :id:",['id'=>$deptid]])){
+        if(!$items = ($this->className)::findFirstPermission($perL,"*",["deptid = :did:",['did'=>$deptid]])){
             $data['error'] = ["Không tìm thấy dữ liệu"];
             $this->helper->responseJson($this, $data);
         }
@@ -102,7 +102,7 @@ class HomesController  extends \BackendController {
         $pContactTitle = $this->request->getPost('contacttitle',['string','trim']);
         $pContactDes	 = $this->request->getPost('contactdes',['string','trim']);
         foreach ($languages as $key => $lang) {
-            if(empty($items->id) || !$itemsLang = ($this->classNameLang)::findFirst(["homeid = :id: AND langid = :langid:",'bind' => ['id' => $items->id,'langid' => $lang->id]])){
+            if(empty($items->id) || !$itemsLang = ($this->classNameLang)::findFirst(["homeid = :hid: AND langid = :langid:",'bind' => ['hid' => $items->id,'langid' => $lang->id]])){
                 $itemsLang = new $this->classNameLang;
             }
             if($key == 0){

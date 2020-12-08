@@ -12,19 +12,19 @@ class Menus extends \ModelCore
     public static function getLink($menu , $slug = ''){
         switch ((int)$menu->type) {
             case 1: {
-                return ($post = \Posts::findFirstId($menu->postid)) ? WEB_URL.($slug != '/' ? '/'.$slug : '')."/news/".$post->slug : '#';
+                return ($post = \Posts::findFirstId((int)$menu->postid)) ? WEB_URL.($slug != '/' ? '/'.$slug : '')."/news/".$post->slug : '#';
                 break;
             }    
             case 2: {
-                return ($page = \Pages::findFirstId($menu->pageid)) ? WEB_URL.($slug != '/' ? '/'.$slug : '').'/'.$page->slug.'.html' : '#';
+                return ($page = \Pages::findFirstId((int)$menu->pageid)) ? WEB_URL.($slug != '/' ? '/'.$slug : '').'/'.$page->slug.'.html' : '#';
                 break;
             } 
             case 3: {
-                return ($cat = \Categories::findFirstId($menu->catid)) ? WEB_URL.($slug != '/' ? '/'.$slug : '').'/category/'.$cat->slug : '#';
+                return ($cat = \Categories::findFirstId((int)$menu->catid)) ? WEB_URL.($slug != '/' ? '/'.$slug : '').'/category/'.$cat->slug : '#';
                 break;
             }   
             case 4: {
-                return ($dept = \Menus::findFirstId($menu->dept)) ? WEB_URL.($slug != '/' ? '/'.$slug : '').'/'.$dept->slug : '#';
+                return ($dept = \Menus::findFirstId((int)$menu->dept)) ? WEB_URL.($slug != '/' ? '/'.$slug : '').'/'.$dept->slug : '#';
                 break;
             } 
             case 5: {
@@ -82,7 +82,6 @@ class Menus extends \ModelCore
         $menulang = \MenusLang::findFirst(['langid =:langid: AND menuid = :menuid:', 'bind'=>['langid' => $langid, 'menuid' => $menuid]]);
         return $menulang ? $menulang->title : '';
     }
-
 
     public static function getArrayChild($id , $data = []){
         $deptChild = Menus::find(["parentid = :id: AND deleted = 0", 'columns' => "id", 'bind' => ['id' => $id]]);

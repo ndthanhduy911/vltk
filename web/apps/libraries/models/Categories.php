@@ -25,7 +25,7 @@ class Categories extends \ModelCore
     }
 
     public static function getArrayChild($id , $data = []){
-        $deptChild = Categories::find(["parentid = :id: AND deleted = 0", 'columns' => "id", 'bind' => ['id' => $id]]);
+        $deptChild = Categories::find(["parentid = :pid: AND deleted = 0", 'columns' => "id", 'bind' => ['pid' => $id]]);
         if($deptChild->count()){
             foreach ($deptChild as $value) {
                 array_push($data, $value->id);

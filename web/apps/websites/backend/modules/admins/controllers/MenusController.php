@@ -52,7 +52,6 @@ class MenusController  extends \BackendController {
         if ($data = \Menus::findFirstIdNoDelete($id)) {
             $data = $data->toArray();
             $data['lang'] = [];
-            $data['parents'] = \Menus::findS2Parents($this->session->get('deptid'),$data['locationid'])->toArray();
             $languages = \Language::find(['status = 1']);
             foreach ($languages as $lang) {
                 if($menulang = \MenusLang::findFirst(["menuid =:id: AND langid = :langid:",'bind'=>['id' => $data['id'],'langid' => $lang->id]])){
@@ -95,68 +94,67 @@ class MenusController  extends \BackendController {
             $this->helper->responseJson($this, $data);
         }
         if($id){
-            if(!$items = \Menus::findFirstIdPermission($id,$perL,"*",['locationid = :id:',['id' => $locations->id]])){
+            if(!$menus = \Menus::findFirstIdPermission($id,$perL,"*",['locationid = :lid:',['lid' => $locations->id]])){
                 $data['error'] = ["Menus không hợp lệ"];
                 $this->helper->responseJson($this, $data);
             }
-            $items->updatedat = date('Y-m-d H:i:s');
-            $items->updatedby = $userid;
+            $menus->updatedat = date('Y-m-d H:i:s');
+            $menus->updatedby = $userid;
         }else{
-            $items = new \Menus;
-            $items->deptid = $this->session->get('deptid');
-            $items->locationid = $locationId;
-            $items->createdat = date('Y-m-d H:i:s');
-            $items->updatedat = $items->createdat;
-            $items->createdby = $userid;
-            $items->updatedby = $userid;
+            $menus = new \Menus();
+            $menus->deptid = $this->session->get('deptid');
+            $menus->locationid = $locationId;
+            $menus->createdat = date('Y-m-d H:i:s');
+            $menus->updatedat = $menus->createdat;
+            $menus->createdby = $userid;
+            $menus->updatedby = $userid;
         }
-        $itemsLangs = [];
-
+        $menusLangs = [];
         $languages = \Language::find(['status = 1']);
         $pTitle = $this->request->getPost('title',['string','trim']);
         foreach ($languages as $key => $lang) {
-            if(empty($items->id) || !$itemsLang = \MenusLang::findFirst(["menuid = :id: AND langid = :langid:",'bind' => ['id' => $id,'langid' => $lang->id]])){
-                $itemsLang = new \MenusLang();
+            if(empty($menus->id) || !$menusLang = \MenusLang::findFirst(["menuid = :id: AND langid = :langid:",'bind' => ['id' => $id,'langid' => $lang->id]])){
+                $menusLang = new \MenusLang();
             }
             if($key == 0){
                 $lId = $lang->id;
             }
-            $itemsLang->title = !empty($pTitle[$lang->id]) ? $pTitle[$lang->id] : $pTitle[$lId];
-            $itemsLang->langid = $lang->id;
-            array_push($itemsLangs,$itemsLang);
+            $menusLang->title = !empty($pTitle[$lang->id]) ? $pTitle[$lang->id] : $pTitle[$lId];
+            $menusLang->langid = $lang->id;
+            array_push($menusLangs,$menusLang);
         }
 
-        $items->type = $this->request->getPost('type',['int']);
-        $items->postid = $this->request->getPost('postid',['int']);
-        $items->pageid = $this->request->getPost('pageid',['int']);
-        $items->catid = $this->request->getPost('catid',['int']);
-        $items->dept = $this->request->getPost('dept',['int']);
-        $items->links = $this->request->getPost('links',['trim','string']);
-        $items->icon = $this->request->getPost('icon',['trim','string']);
-        $items->parentid = $this->request->getPost('parentid',['int']);
-        $items->sort = $this->request->getPost('sort',['int']);
-        $items->target = $this->request->getPost('target',['int']);
-        $items->status = $this->request->getPost('status',['int']);
+        $menus->type = $this->request->getPost('type',['int']);
+        $menus->postid = $this->request->getPost('postid',['int']);
+        $menus->pageid = $this->request->getPost('pageid',['int']);
+        $menus->catid = $this->request->getPost('catid',['int']);
+        $menus->dept = $this->request->getPost('dept',['int']);
+        $menus->links = $this->request->getPost('links',['trim','string']);
+        // $menus->icon = $this->request->getPost('icon',['trim','string']);
+        $menus->parentid = $this->request->getPost('parentid',['int']);
+        $menus->sort = (int)$this->request->getPost('sort',['int']);
+        $menus->target = $this->request->getPost('target',['int']);
+        $menus->status = $this->request->getPost('status',['int']);
 
         try {
             $this->db->begin();
-            $items->vdUpdate(true);
-            if (!$items->save()) {
-                foreach ($items->getMessages() as $message) {
+            $menus->vdUpdate(true);
+            if (!$menus->save()) {
+                foreach ($menus->getMessages() as $message) {
                     throw new \Exception($message->getMessage());
                 }
             }
-            foreach ($itemsLangs as $itemsLang) {
-                $itemsLang->postid = $items->id;
-                $itemsLang->vdUpdate(true);
-                if (!$itemsLang->save()) {
-                    foreach ($itemsLang->getMessages() as $message) {
+            foreach ($menusLangs as $menusLang) {
+                $menusLang->menuid = $menus->id;
+                $menusLang->vdUpdate(true);
+                if (!$menusLang->save()) {
+                    foreach ($menusLang->getMessages() as $message) {
                         throw new \Exception($message->getMessage());
                     }
                 }
             }
             $this->db->commit();
-            \Logs::saveLogs($this, ($id ? 2: 1), ($id ? 'Cập nhật ' : 'Thêm mới ').mb_strtolower('Menus','UTF-8')." ID: {$items->id}", ['table' => "Menus",'id' => $items->id]);
+            \Logs::saveLogs($this, ($id ? 2: 1), ($id ? 'Cập nhật ' : 'Thêm mới ').mb_strtolower('Menus','UTF-8')." ID: {$menus->id}", ['table' => "Menus",'id' => $menus->id]);
         } catch (\Throwable $e) {
             $this->db->rollback();
             $data['error'] = [$e->getMessage()];

@@ -44,7 +44,7 @@ const changeTypeMenu = (type) => {
     }
 }
 
-const loadTableMenus = (table = '#headMenus', cb = () => {}) => {
+const loadTableMenus = (table = '#headMenus', btnAdd = '',cb = () => {}) => {
     if ($(table).length) {
         let lId = $(table).attr('locationid');
         let router = {
@@ -78,98 +78,57 @@ const loadTableMenus = (table = '#headMenus', cb = () => {}) => {
             }
         }
         dataTableCt(table,options,router).then((dt)=>{
+            showModalForm(btnAdd, '#modalMenus', 'GET', () => {
+                $('#modalMenus .modal-title').html('Thêm mới');
+                $('.btnSummitMenus span').html('Thêm mới');
+                $('#modalMenus #parentid option:not([value="0"])').remove();
+                $('#modalMenus').off('change','#type').on('change','#type', function (e) {
+                    e.preventDefault();
+                    changeTypeMenu($(this).val());
+                });
+                apiS2MenusLocation(lId).then((data)=>{
+                    $('#modalMenus #parentid').find
+                    $('#modalMenus #parentid').select2({data: data});
+                })
+            },(data,row)=>{
+                dt.draw();
+                Swal.fire({
+                    type: 'success',
+                    title: 'Thêm mới thành công',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            });
+        
+            showModalForm(`${table} .editMenus`, '#modalMenus', 'GET', (data) => {
+                $('#modalMenus .modal-title').html('Cập nhật');
+                $('.btnSummitMenus span').html('Cập nhật');
+                data.lang.forEach(lang => {
+                    $(`#modalMenus #title${lang.langid}`).val(lang.title);
+                });
+                changeTypeMenu(data.type);
+                $('#modalMenus').off('change','#type').on('change','#type', function (e) {
+                    e.preventDefault();
+                    changeTypeMenu($(this).val());
+                });
+                $('#modalMenus #parentid option:not([value="0"])').remove();
+                apiS2MenusLocation(lId).then((menus)=>{
+                    $('#modalMenus #parentid').select2({data: menus}).val(data.parentid).trigger('change');
+                })
+            },(data,row)=>{
+                dt.draw();
+                Swal.fire({
+                    type: 'success',
+                    title: 'Cập nhật thành công',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            });
             cb(dt,lId);
         });
     }
 }
 
-loadTableMenus('#headMenus',(dt,lId)=>{
-    showModalForm('#addHeadMenu', '#modalMenus', 'GET', () => {
-        $('#modalMenus .modal-title').html('Thêm mới');
-        $('.btnSummitMenus span').html('Thêm mới');
-        $('#modalMenus #parentid option:not([value="0"])').remove();
-        $('#modalMenus').off('change','#type').on('change','#type', function (e) {
-            e.preventDefault();
-            changeTypeMenu($(this).val());
-        });
-        apiS2MenusLocation(lId).then((data)=>{
-            $('#modalMenus #parentid').find
-            $('#modalMenus #parentid').select2({data: data});
-        })
-    },(data,row)=>{
-        dt.draw();
-        Swal.fire({
-            type: 'success',
-            title: 'Thêm mới thành công',
-            showConfirmButton: false,
-            timer: 1500
-        })
-    });
+loadTableMenus('#headMenus','#addHeadMenu');
 
-    showModalForm('#headMenus .editMenus', '#modalMenus', 'GET', (data) => {
-        $('#modalMenus .modal-title').html('Cập nhật');
-        $('.btnSummitMenus span').html('Cập nhật');
-        data.lang.forEach(lang => {
-            $(`#modalMenus #title${lang.langid}`).val(lang.title);
-        });
-        changeTypeMenu(data.type);
-        $('#modalMenus').off('change','#type').on('change','#type', function (e) {
-            e.preventDefault();
-            changeTypeMenu($(this).val());
-        });
-        $('#modalMenus #parentid option:not([value="0"])').remove();
-        apiS2MenusLocation(lId).then((menus)=>{
-            $('#modalMenus #parentid').select2({data: menus}).val(data.parentid).trigger('change');
-        })
-    },(data,row)=>{
-        dt.draw();
-        Swal.fire({
-            type: 'success',
-            title: 'Cập nhật thành công',
-            showConfirmButton: false,
-            timer: 1500
-        })
-    });
-})
-
-loadTableMenus('#footMenus',(dt)=>{
-    showModalForm('#addFootMenu', '#modalMenus', 'GET', () => {
-        $('#modalMenus .modal-title').html('Thêm mới');
-        $('.btnSummitMenus span').html('Thêm mới');
-        $('#modalMenus').off('change','#type').on('change','#type', function (e) {
-            e.preventDefault();
-            changeTypeMenu($(this).val());
-        });
-    },(data,row)=>{
-        dt.draw();
-        Swal.fire({
-            type: 'success',
-            title: 'Thêm mới thành công',
-            showConfirmButton: false,
-            timer: 1500
-        })
-    });
-
-    showModalForm('#footMenus .editMenus', '#modalMenus', 'GET', (data) => {
-        $('#modalMenus .modal-title').html('Cập nhật');
-        $('.btnSummitMenus span').html('Cập nhật');
-        $('#modalMenus .modal-title').html('Cập nhật');
-        $('.btnSummitMenus span').html('Cập nhật');
-        data.lang.forEach(lang => {
-            $(`#modalMenus #title${lang.langid}`).val(lang.title);
-        });
-        changeTypeMenu(data.type);
-        $('#modalMenus').off('change','#type').on('change','#type', function (e) {
-            e.preventDefault();
-            changeTypeMenu($(this).val());
-        });
-    },(data,row)=>{
-        dt.draw();
-        Swal.fire({
-            type: 'success',
-            title: 'Cập nhật thành công',
-            showConfirmButton: false,
-            timer: 1500
-        })
-    });
-});
+loadTableMenus('#footMenus','#addFootMenu');
