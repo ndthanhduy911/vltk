@@ -102,7 +102,7 @@ class HomesController  extends \BackendController {
         $pContactTitle = $this->request->getPost('contacttitle',['string','trim']);
         $pContactDes	 = $this->request->getPost('contactdes',['string','trim']);
         foreach ($languages as $key => $lang) {
-            if(!$items->id || !$itemsLang = ($this->classNameLang)::findFirst(["homeid = :id: AND langid = :langid:",'bind' => ['id' => $items->id,'langid' => $lang->id]])){
+            if(empty($items->id) || !$itemsLang = ($this->classNameLang)::findFirst(["homeid = :id: AND langid = :langid:",'bind' => ['id' => $items->id,'langid' => $lang->id]])){
                 $itemsLang = new $this->classNameLang;
             }
             if($key == 0){

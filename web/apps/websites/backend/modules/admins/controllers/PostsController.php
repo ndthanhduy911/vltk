@@ -39,7 +39,7 @@ class PostsController  extends \AdminsLangCore {
         $pContent = $this->request->getPost('content',['trim']);
         $pExcerpt = $this->request->getPost('excerpt',['string','trim']);
         foreach ($languages as $key => $lang) {
-            if(!$items->id || !$itemsLang = ($this->classNameLang)::findFirst(["postid = :id: AND langid = :langid:",'bind' => ['id' => ($items->id ? $items->id : 0),'langid' => $lang->id]])){
+            if(empty($items->id) || !$itemsLang = ($this->classNameLang)::findFirst(["postid = :id: AND langid = :langid:",'bind' => ['id' => (!empty($items->id) ? $items->id : 0),'langid' => $lang->id]])){
                 $itemsLang = new \PostsLang();
             }
             if($key == 0){

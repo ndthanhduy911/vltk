@@ -101,7 +101,7 @@ class OptionsController  extends \BackendController {
         $pExcerpt = $this->request->getPost('excerpt',['string','trim']);
         $pAddress = $this->request->getPost('address',['string','trim']);
         foreach ($languages as $key => $lang) {
-            if(!$items->id || !$itemsLang = ($this->classNameLang)::findFirst(["deptid = :id: AND langid = :langid:",'bind' => ['id' => $id,'langid' => $lang->id]])){
+            if(empty($items->id) || !$itemsLang = ($this->classNameLang)::findFirst(["deptid = :id: AND langid = :langid:",'bind' => ['id' => $id,'langid' => $lang->id]])){
                 $itemsLang = new $this->classNameLang;
             }
             if($key == 0){

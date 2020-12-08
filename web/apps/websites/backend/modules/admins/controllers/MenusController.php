@@ -83,23 +83,28 @@ class MenusController  extends \BackendController {
             $this->helper->responseJson($this, $data);
         }
         $data['token'] = ['key' => $this->security->getTokenKey(), 'value' => $this->security->getToken()];
-        if(!$this->request->isAjax() || !$this->request->isPost() || !$perL = $this->master::checkPermissionDepted($this->cler,'update')){
+        if(!$this->request->isAjax() || !$this->request->isPost() || !$perL = $this->master::checkPermissionDepted('menus','update',[0,1])){
             $data['error'] = ['Truy cập không được phép'];
             $this->helper->responseJson($this, $data);
         }
 
         $userid = $this->session->get('userid');
         $locationId = $this->request->getPost('locationid',['int']);
+        if(!$locations = \MenuLocation::findFirstIdPermission($locationId,$perL)){
+            $data['error'] = ['Ví trí menus không hợp lệ'];
+            $this->helper->responseJson($this, $data);
+        }
         if($id){
-            if(!$items = \Menus::findFirstIdPermission($id,$perL,['locationid = :id:',['id' => $locationId]])){
-                $data['error'] = ["Không tìm thấy {}"];
+            if(!$items = \Menus::findFirstIdPermission($id,$perL,"*",['locationid = :id:',['id' => $locations->id]])){
+                $data['error'] = ["Menus không hợp lệ"];
                 $this->helper->responseJson($this, $data);
             }
             $items->updatedat = date('Y-m-d H:i:s');
             $items->updatedby = $userid;
         }else{
-            $items = new $this->className();
+            $items = new \Menus;
             $items->deptid = $this->session->get('deptid');
+            $items->locationid = $locationId;
             $items->createdat = date('Y-m-d H:i:s');
             $items->updatedat = $items->createdat;
             $items->createdby = $userid;
@@ -110,8 +115,8 @@ class MenusController  extends \BackendController {
         $languages = \Language::find(['status = 1']);
         $pTitle = $this->request->getPost('title',['string','trim']);
         foreach ($languages as $key => $lang) {
-            if(!$items->id || !$itemsLang = ($this->classNameLang)::findFirst(["menuid = :id: AND langid = :langid:",'bind' => ['id' => $id,'langid' => $lang->id]])){
-                $itemsLang = new $this->classNameLang;
+            if(empty($items->id) || !$itemsLang = \MenusLang::findFirst(["menuid = :id: AND langid = :langid:",'bind' => ['id' => $id,'langid' => $lang->id]])){
+                $itemsLang = new \MenusLang();
             }
             if($key == 0){
                 $lId = $lang->id;
@@ -121,13 +126,17 @@ class MenusController  extends \BackendController {
             array_push($itemsLangs,$itemsLang);
         }
 
-        $items->dcode = $this->request->getPost('dcode',['trim','string']);
-        $items->phone = $this->request->getPost('phone',['trim','string']);
-        $items->email = $this->request->getPost('email',['trim','string']);
-        $items->link = $this->request->getPost('link',['trim','string']);
-        $items->image = $this->request->getPost('image',['trim','string']);
-        $items->logo = $this->request->getPost('logo',['trim','string']);
+        $items->type = $this->request->getPost('type',['int']);
+        $items->postid = $this->request->getPost('postid',['int']);
+        $items->pageid = $this->request->getPost('pageid',['int']);
+        $items->catid = $this->request->getPost('catid',['int']);
+        $items->dept = $this->request->getPost('dept',['int']);
+        $items->links = $this->request->getPost('links',['trim','string']);
         $items->icon = $this->request->getPost('icon',['trim','string']);
+        $items->parentid = $this->request->getPost('parentid',['int']);
+        $items->sort = $this->request->getPost('sort',['int']);
+        $items->target = $this->request->getPost('target',['int']);
+        $items->status = $this->request->getPost('status',['int']);
 
         try {
             $this->db->begin();
@@ -147,8 +156,7 @@ class MenusController  extends \BackendController {
                 }
             }
             $this->db->commit();
-            \Logs::saveLogs($this, ($id ? 2: 1), ($id ? 'Cập nhật ' : 'Thêm mới ').mb_strtolower($this->title,'UTF-8')." ID: {$items->id}", ['table' => $this->className,'id' => $items->id]);
-            $this->flashSession->success(($id ? 'Cập nhật ' : 'Thêm mới ')." thành công");
+            \Logs::saveLogs($this, ($id ? 2: 1), ($id ? 'Cập nhật ' : 'Thêm mới ').mb_strtolower('Menus','UTF-8')." ID: {$items->id}", ['table' => "Menus",'id' => $items->id]);
         } catch (\Throwable $e) {
             $this->db->rollback();
             $data['error'] = [$e->getMessage()];

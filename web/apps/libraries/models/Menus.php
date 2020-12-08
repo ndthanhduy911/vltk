@@ -1,4 +1,5 @@
 <?php
+use Library\Helper\HelperValidation;
 
 class Menus extends \ModelCore
 {
@@ -152,10 +153,46 @@ class Menus extends \ModelCore
         return parent::find([
             "deptid = :did: AND deleted = 0 AND parentid = 0 AND status = 1 AND locationid = :lid:",
             "columns" => "Menus.id,(SELECT ml.title FROM MenusLang AS ml WHERE ml.menuid = Menus.id AND ml.langid = 1) AS text",
+            'order' => 'sort ASC, id DESC',
             'bind' => [
                 'did' => $deptid,
                 'lid' => $locationId
             ]
         ]);
+    }
+
+    public function vdUpdate($try = false){
+        $helper = new HelperValidation();
+        $helper->setValidation('required', [
+            'name' => 'deptid',
+            'msg' => 'Bộ môn không được để trống'
+        ]);
+        //icon
+        $helper->setValidation('max', [
+            'name' => 'icon',
+            'len' => 30,
+            'msg' => 'Biểu tượng không được dài quá 30 ký tự'
+        ]);
+        //links
+        $helper->setValidation('max', [
+            'name' => 'links',
+            'len' => 250,
+            'msg' => 'Links không được dài quá 250 ký tự'
+        ]);
+        //status
+        $helper->setValidation('required', [
+            'name' => 'status',
+            'msg' => 'Trạng thái không được để trống'
+        ]);
+
+        if($try){
+            if(!$this->validate($helper->getValidation())){
+                foreach ($this->getMessages() as $message) {
+                    throw new \Exception($message->getMessage());
+                }
+            }
+        }
+
+        return $this->validate($helper->getValidation());
     }
 }

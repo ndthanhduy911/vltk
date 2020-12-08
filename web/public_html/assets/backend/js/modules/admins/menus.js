@@ -87,12 +87,13 @@ loadTableMenus('#headMenus',(dt,lId)=>{
     showModalForm('#addHeadMenu', '#modalMenus', 'GET', () => {
         $('#modalMenus .modal-title').html('Thêm mới');
         $('.btnSummitMenus span').html('Thêm mới');
+        $('#modalMenus #parentid option:not([value="0"])').remove();
         $('#modalMenus').off('change','#type').on('change','#type', function (e) {
             e.preventDefault();
             changeTypeMenu($(this).val());
         });
         apiS2MenusLocation(lId).then((data)=>{
-            // console.log(data);
+            $('#modalMenus #parentid').find
             $('#modalMenus #parentid').select2({data: data});
         })
     },(data,row)=>{
@@ -116,6 +117,10 @@ loadTableMenus('#headMenus',(dt,lId)=>{
             e.preventDefault();
             changeTypeMenu($(this).val());
         });
+        $('#modalMenus #parentid option:not([value="0"])').remove();
+        apiS2MenusLocation(lId).then((menus)=>{
+            $('#modalMenus #parentid').select2({data: menus}).val(data.parentid).trigger('change');
+        })
     },(data,row)=>{
         dt.draw();
         Swal.fire({
