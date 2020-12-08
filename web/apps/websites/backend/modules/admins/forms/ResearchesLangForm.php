@@ -45,6 +45,7 @@ class ResearchesLangForm extends Form
             'data-error' => "Thông tin chưa hợp lệ"
         ];
         $attr = cFL($attr,$lang,'content');
+        $content->setUserOption('attr','editor');
         $content->setAttributes($attr);
         $this->add($content);
     }

@@ -57,7 +57,7 @@
                                     <div class="card-header">
                                         <h3 class="card-title text-primary">{{lform.getLabel()}} &#151; {{lang.name}}</h3>
                                     </div>
-                                    <div class="card-body">
+                                    <div class="card-body {{lform.getUserOption('attr') == 'editor' ? 'p-0' : ''}}" >
                                         <div class="row">
                                             <div class="form-group label-floating col-md-12 mt-0 pb-0">
                                                 <div class="input-group">

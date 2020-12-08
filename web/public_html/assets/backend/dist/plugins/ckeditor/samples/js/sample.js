@@ -35,6 +35,10 @@ var getCkeditor1 = ( function(editor = 'content1') {
 			// TODO we can consider displaying some info box that
 			// without wysiwygarea the classic editor may not work.
 		}
+
+		CKEDITOR.instances[editor].on('change', function() { 
+			CKEDITOR.instances[editor].updateElement()
+		});
 	};
 
 	function isWysiwygareaAvailable() {
@@ -70,7 +74,12 @@ var getCkeditor2 = ( function(editor = 'content2') {
 			// TODO we can consider displaying some info box that
 			// without wysiwygarea the classic editor may not work.
 		}
+
+		CKEDITOR.instances[editor].on('change', function() { 
+			CKEDITOR.instances[editor].updateElement()
+		});
 	};
+	
 
 	function isWysiwygareaAvailable() {
 		// If in development mode, then the wysiwygarea must be available.
