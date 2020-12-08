@@ -73,7 +73,7 @@ class IndexController extends \FrontendController
             'd.slug',
             'd.links',
             'd.image',
-            'dl.title dept_name',
+            'dl.title',
         ))
         ->from(['d'=>'Depts'])
         ->leftJoin('DeptsLang', 'dl.deptid = d.id','dl')

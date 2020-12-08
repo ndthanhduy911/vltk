@@ -6,7 +6,7 @@
             'd.id',
             'd.slug',
             'd.image',
-            'dl.title dept_name',
+            'dl.title',
         ))
         ->from(['d'=>'Depts'])
         ->leftJoin('DeptsLang', 'dl.deptid = d.id','dl')
@@ -19,7 +19,7 @@
             'r.id',
             'r.slug',
             'r.image',
-            'rl.title research_name',
+            'rl.title',
         ))
         ->from(['r'=>'Researches'])
         ->where("r.deptid = $dept->id AND r.status = 1 AND r.deleted = 0")
@@ -55,12 +55,12 @@
                     <div class="image-box shadow-2 bordered text-center mb-20">
                         <div class="overlay-container rounded overlay-visible">
                             <img src="{{ helper.getLinkImage(dept_item.image) }}"
-                                alt="{{ dept_item.dept_name }}">
+                                alt="{{ dept_item.title }}">
                             <a href="{{ constant('WEB_URL')~'/'~dept_item.slug }}" class="overlay-link"><i
                                     class="fa fa-graduation-cap"></i></a>
                             <div class="overlay-bottom hidden-xs">
                                 <div class="text">
-                                    {{ dept_item.dept_name }}
+                                    {{ dept_item.title }}
                                 </div>
                             </div>
                         </div>
@@ -75,12 +75,12 @@
                     <div class="image-box shadow-2 bordered text-center mb-20">
                         <div class="overlay-container rounded overlay-visible">
                             <img src="{{ helper.getLinkImage(research.image) }}"
-                                alt="{{ dept_item.dept_name }}">
+                                alt="{{ dept_item.title }}">
                             <a href="<?php \Researches::getUrl($dept, $research) ?>" class="overlay-link"><i
                                     class="fa fa-graduation-cap"></i></a>
                             <div class="overlay-bottom hidden-xs">
                                 <div class="text">
-                                    {{ research.research_name }}
+                                    {{ research.title }}
                                 </div>
                             </div>
                         </div>

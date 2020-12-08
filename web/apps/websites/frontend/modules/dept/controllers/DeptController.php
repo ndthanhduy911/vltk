@@ -77,7 +77,7 @@ class DeptController extends \FrontendController
             'r.id',
             'r.slug',
             'r.image',
-            'rl.title research_name',
+            'rl.title',
         ))
         ->from(['r'=>'Researches'])
         ->where("r.deptid = $dept->id AND r.status = 1 AND r.deleted = 0")

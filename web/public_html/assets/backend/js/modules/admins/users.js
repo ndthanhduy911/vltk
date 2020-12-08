@@ -40,10 +40,10 @@ const loadTableUsers = () => {
                     "data": "phone"
                 },
                 {
-                    "data": "dept_name"
+                    "data": "deptname"
                 },
                 {
-                    "data": "role_name",
+                    "data": "rolename",
                 },
                 {
                     "data": "status",

@@ -12,8 +12,8 @@
                 data-version="5.0">
                 <ul class="slides">
                     {% for key, banner in banners %}
-                    <li data-transition="random" data-slotamount="default" data-masterspeed="default" data-title="{{ banner.name }}">
-                        <img src="{{ helper.getLinkImage(banner.image,'/assets/frontend/images/banner1.png') }}" alt="{{ banner.name }}" data-bgposition="center center"
+                    <li data-transition="random" data-slotamount="default" data-masterspeed="default" data-title="{{ banner.title }}">
+                        <img src="{{ helper.getLinkImage(banner.image,'/assets/frontend/images/banner1.png') }}" alt="{{ banner.title }}" data-bgposition="center center"
                             data-bgrepeat="no-repeat" data-bgfit="cover" class="rev-slidebg">
 
                         <!-- Transparent Background -->
@@ -123,11 +123,11 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="image-box shadow-2 bordered text-center mb-20">
                         <div class="overlay-container rounded overlay-visible">
-                            <img class="grow" src="{{ helper.getLinkImage(research.image) }}" alt="{{ research.research_name }}">
+                            <img class="grow" src="{{ helper.getLinkImage(research.image) }}" alt="{{ research.title }}">
                             <a href="<?= Researches::getUrl($dept,$research) ?>" class="overlay-link"><i class="fa fa-graduation-cap"></i></a>
                             <div class="overlay-bottom hidden-xs">
                                 <div class="text">
-                                    {{ research.research_name }}
+                                    {{ research.title }}
                                 </div>
                             </div>
                         </div>

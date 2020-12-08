@@ -10,9 +10,9 @@
             <div id="slider-banner-fullwidth" class="slider-banner-fullwidth rev_slider" data-version="5.0">
                 <ul class="slides">
                     {% for key, banner in banners %}
-                    <li data-transition="random" data-slotamount="default" data-masterspeed="default" data-title="{{ banner.name }}">
+                    <li data-transition="random" data-slotamount="default" data-masterspeed="default" data-title="{{ banner.title }}">
 
-                        <img src="{{ helper.getLinkImage(banner.image,'/assets/frontend/images/banner1.png') }}" alt="{{ banner.name }}"
+                        <img src="{{ helper.getLinkImage(banner.image,'/assets/frontend/images/banner1.png') }}" alt="{{ banner.title }}"
                             data-bgposition="center center" data-bgrepeat="no-repeat" data-bgfit="cover"
                             class="rev-slidebg">
 
@@ -84,7 +84,7 @@
                         {% for post in posts %}
                         <div class="media mb-3">
                             <div class="overlay-container rounded">
-                                <img class="media-object" src="{{ helper.getLinkImage(post.image) }}" alt="{{ post.title }}">
+                                <img class="media-object border rounded" src="{{ helper.getLinkImage(post.image) }}" alt="{{ post.title }}">
                                 <a href="<?= Posts::getUrl($dept, $post) ?>" class="overlay-link small"><i class="fa fa-graduation-cap"></i></a>
                             </div>
                             <div class="media-body">
@@ -123,12 +123,12 @@
             <div class="image-box shadow-2 bordered text-center mb-20">
                 <div class="overlay-container rounded overlay-visible">
                     <img src="{{ helper.getLinkImage(dept_item.image) }}"
-                        alt="{{ dept_item.dept_name }}">
+                        alt="{{ dept_item.title }}">
                     <a href="{{ dept_item.links ? dept_item.links : constant('WEB_URL')~'/'~dept_item.slug }}" class="overlay-link"><i
                             class="fa fa-graduation-cap"></i></a>
                     <div class="overlay-bottom hidden-xs">
                         <div class="text">
-                            {{ dept_item.dept_name }}
+                            {{ dept_item.title }}
                         </div>
                     </div>
                 </div>

@@ -88,7 +88,7 @@
                                     <div id="logo-mobile" class="logo">
                                         <a href="<?php echo WEB_URL ?>/">
                                             {% if dept.logo %}
-                                            <img id="logo-img-mobile" src="{{ helper.getLinkImage(dept.logo) }}" alt="{{ deptlang.name }}">
+                                            <img id="logo-img-mobile" src="{{ helper.getLinkImage(dept.logo) }}" alt="{{ deptlang.title }}">
                                             {% else %}
                                             <h3 class="title text-default mb-0">{{ dept.dcode }}</h3>
                                             {% endif %}
