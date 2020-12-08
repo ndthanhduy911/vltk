@@ -89,7 +89,8 @@ const loadTableMenus = (table = '#headMenus', btnAdd = '',cb = () => {}) => {
                 apiS2MenusLocation(lId).then((data)=>{
                     $('#modalMenus #parentid').find
                     $('#modalMenus #parentid').select2({data: data});
-                })
+                });
+                $(`#modalMenus #locationid`).val(lId);
             },(data,row)=>{
                 dt.draw();
                 Swal.fire({

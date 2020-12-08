@@ -169,7 +169,6 @@ class MenusForm extends Form
         $sort->setAttributes(array(
             'class' => 'form-control form-control-sm',
             'placeholder' => 'Sắp xếp',
-            'min' => 1,
             'max' => '999'
         ));
         $this->add($sort);

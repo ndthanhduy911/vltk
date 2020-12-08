@@ -25,7 +25,7 @@
                     <div class="card-header">
                         <h3 class="card-title">Menu Đầu trang</h3>
                         <div class="card-tools">
-                            <a id="addHeadMenu" data-href="<?= WEB_ADMIN_URL ?>/meuns/add/{{headId}}" class="btn btn-sm btn-hnn btn-hnn-success"><span><i class="fas fa-plus"></i></span></a>
+                            <a id="addHeadMenu" data-href="<?= WEB_ADMIN_URI ?>/menus/update" class="btn btn-sm btn-hnn btn-hnn-success"><span><i class="fas fa-plus"></i></span></a>
                         </div>
                     </div>
                     <div class="card-body bg-eee">
@@ -51,7 +51,7 @@
                     <div class="card-header">
                         <h3 class="card-title">Menu Cuối trang</h3>
                         <div class="card-tools">
-                            <a id="addFootMenu" data-href="<?= WEB_ADMIN_URL ?>/meuns/add/{{footId}}" class="btn btn-sm btn-hnn btn-hnn-success"><span><i class="fas fa-plus"></i></span></a>
+                            <a id="addFootMenu" data-href="<?= WEB_ADMIN_URI ?>/menus/update" class="btn btn-sm btn-hnn btn-hnn-success"><span><i class="fas fa-plus"></i></span></a>
                         </div>
                     </div>
                     <div class="card-body bg-eee">
