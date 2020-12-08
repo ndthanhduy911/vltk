@@ -9,7 +9,7 @@
 
                 <div class="masonry-grid row">
                     {% for key, post in posts %}
-                    <div class="masonry-grid-item col-md-6">
+                    <div class="masonry-grid-item col-md-6" data-aos="fade-up">
                         <article class="blogpost shadow-2 light-gray-bg bordered">
                             {% if post.image %}
                             <div class="overlay-container">

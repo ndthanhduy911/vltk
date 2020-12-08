@@ -177,7 +177,6 @@ ul.dropdown-menu > li:last-of-type > a
 #section1 .media {
     min-height: 65px;
     display: flex;
-    align-items: center;
 }
 
 .media-object {

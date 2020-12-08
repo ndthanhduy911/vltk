@@ -59,7 +59,7 @@
         </div>
     </div>
     {% endif %}
-    <header class="header fixed fixed-desktop clearfix">
+    <header class="header fixed fixed-desktop clearfix object-visible">
         <div class="container">
             <div class="d-flex">
                 <div class="col-md-auto hidden-md-down pl-md-0">

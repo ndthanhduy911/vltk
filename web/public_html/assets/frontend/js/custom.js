@@ -60,17 +60,18 @@
 			$('.os-viewport:eq(0)').scroll(function(e){
 				e.preventDefault();
 				let crollHeight = $(this).scrollTop();
-				let scHeight = $(window).height();
 				if(crollHeight > 120){
 					$('.submenu').addClass('fixed-top');
 					$('#main').css('margin-top',120);
 					$(".scrollToTop").addClass("fadeToTop");
 					$(".scrollToTop").removeClass("fadeToBottom");
+					$('body').addClass('fixed-header-on');
 				}else{
 					$('.submenu').removeClass('fixed-top');
 					$('#main').css('margin-top',0);
 					$(".scrollToTop").removeClass("fadeToTop");
 					$(".scrollToTop").addClass("fadeToBottom");
+					$('body').removeClass('fixed-header-on');
 				}
 			});
 		}

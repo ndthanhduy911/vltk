@@ -75,35 +75,6 @@ class Categories extends \ModelCore
         return $data;
     }
 
-    public static function getTreeName($id, $data = [], $level = '',$symbol = '&#151;'){
-        $deptChild = \Categories::find(["parentid = :id: AND deleted = 0", 'columns' => "id, name", 'bind' => ['id' => $id]]);
-        if($deptChild->count()){
-            $level .=  $id != 0 ? $symbol: '' ;
-            foreach ($deptChild as $value) {
-                $value->level = $level;
-                $value->name = $value->level.' '.$value->name;
-                $data[$value->id] = trim($value->name);
-                $data = \Categories::getTreeName($value->id, $data, $level,$symbol);
-            }
-        }
-        return $data;
-    }
-
-    public static function getTreeNamePermission($perL,$data = [], $level = '',$symbol = '&#151;'){
-        $deptType = [];
-        $deptid = isset($_SESSION['deptid']) ? $_SESSION['deptid'] : 0;
-        if($depts = \Categories::findFirstIdNoDelete($deptid, 'id, name')){
-            if($perL->depted == 0){
-                $deptType = \Categories::getTreeName(0,$data,$level,$symbol);
-            }elseif($perL->depted == 1 || $perL->depted == 2 ){
-                $deptType = \Categories::getTreeName($deptid, ["$depts->id" => $depts->name],$level,$symbol);
-            }elseif($perL->depted == 3){
-                $deptType = [$depts->id => $depts->name];
-            }
-        }
-        return $deptType;
-    }
-
     public static function getUrlById($id = null){
         if($cat = parent::findFirst($id)){
             return WEB_URL.'/category/'.$cat->slug;
@@ -130,7 +101,7 @@ class Categories extends \ModelCore
     
     public static function getTitleById($catid = null){
         if($cat = \CategoriesLang::findFirst(['catid = :catid: AND langid = :langid:','bind' => ['catid' => $catid, 'langid' => $_SESSION['langid']]])){
-            return $cat->name;
+            return $cat->title;
         }else{
             return false;
         }
@@ -169,18 +140,18 @@ class Categories extends \ModelCore
 
     public static function arrayFilter(){
         return [
-            ['name'],
+            ['title'],
             ['status'],
             ['createdat']
         ];
     }
 
     public static function findTables () {
-        return ['image','name','description','createdat','slug','status'];
+        return ['image','title','description','createdat','slug','status'];
     }
 
     public static function arrayOrder () {
-        return ['name','status','createdat'];
+        return ['title','status','createdat'];
     }
     
     public static function findFilters () {

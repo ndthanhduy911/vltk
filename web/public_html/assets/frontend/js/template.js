@@ -105,78 +105,6 @@
 			});
 		};
 
-		//Mega menu fixed width
-		if ($('html[dir="ltr"] .container .mega-menu--wide').length>0 && $(window).width() > 971) {
-			(function(){
-				var headerSecondLeft = parseInt($('.main-navigation--mega-menu').closest('.header-second').parent().offset().left + 15),
-				headerFirstLeft = parseInt($('.header-first').offset().left),
-				megaMenuLeftPosition = headerFirstLeft - headerSecondLeft;
-				$('.mega-menu--wide > .dropdown-menu').css('left', megaMenuLeftPosition + 'px');
-				$(window).resize(function() {
-					var headerSecondLeft = parseInt($('.main-navigation--mega-menu').closest('.header-second').parent().offset().left + 15),
-					headerFirstLeft = parseInt($('.header-first').offset().left),
-					megaMenuLeftPosition = headerFirstLeft - headerSecondLeft;
-					$('.mega-menu--wide > .dropdown-menu').css('left', megaMenuLeftPosition + 'px');
-				});
-			})();
-		}
-		if ($('html[dir="rtl"] .container .mega-menu--wide').length>0 && $(window).width() > 971) {
-			(function(){
-				var headerSecond = $('.main-navigation--mega-menu').closest('.header-second').parent(),
-				headerSecondRight = parseInt(headerSecond.offset().left + headerSecond.outerWidth()),
-				headerFirstRight = parseInt($('.header-first').offset().left + $('.header-first').outerWidth() + 15),
-				megaMenuRightPosition = headerSecondRight - headerFirstRight;
-				$('.mega-menu--wide > .dropdown-menu').css('right', megaMenuRightPosition + 'px');
-				$(window).resize(function() {
-					var headerSecond = $('.main-navigation--mega-menu').closest('.header-second').parent(),
-					headerSecondRight = parseInt(headerSecond.offset().left + headerSecond.outerWidth()),
-					headerFirstRight = parseInt($('.header-first').offset().left + $('.header-first').outerWidth() + 15),
-					megaMenuRightPosition = headerSecondRight - headerFirstRight;
-					$('.mega-menu--wide > .dropdown-menu').css('right', megaMenuRightPosition + 'px');
-				});
-			})();
-		}
-
-		//Mega menu full width
-		if ($('html[dir="ltr"] .container-fluid .mega-menu--wide').length>0 && $(window).width() > 971) {
-			(function(){
-				var headerSecondLeft = parseInt($('.main-navigation--mega-menu').closest('.header-second').parent().offset().left + 15),
-				headerFirstLeft = parseInt($('.header-first').offset().left),
-				megaMenuLeftPosition = headerFirstLeft - headerSecondLeft,
-				megaMenuWidth = parseInt($('.header .container-fluid').width());
-				$('.mega-menu--wide > .dropdown-menu').css('left', megaMenuLeftPosition + 'px');
-				$('.mega-menu--wide > .dropdown-menu').css('width', megaMenuWidth + 'px');
-				$(window).resize(function() {
-					var headerSecondLeft = parseInt($('.main-navigation--mega-menu').closest('.header-second').parent().offset().left + 15),
-					headerFirstLeft = parseInt($('.header-first').offset().left),
-					megaMenuLeftPosition = headerFirstLeft - headerSecondLeft,
-					megaMenuWidth = parseInt($('.header .container-fluid').width());
-					$('.mega-menu--wide > .dropdown-menu').css('left', megaMenuLeftPosition + 'px');
-					$('.mega-menu--wide > .dropdown-menu').css('width', megaMenuWidth + 'px');
-				});
-			})();
-		}
-		if ($('html[dir="rtl"] .container-fluid .mega-menu--wide').length>0 && $(window).width() > 971) {
-			(function(){
-				var headerSecond = $('.main-navigation--mega-menu').closest('.header-second').parent(),
-				headerSecondRight = parseInt(headerSecond.offset().left + headerSecond.outerWidth()),
-				headerFirstRight = parseInt($('.header-first').offset().left + $('.header-first').outerWidth() + 15),
-				megaMenuRightPosition = headerSecondRight - headerFirstRight;
-				megaMenuWidth = parseInt($('.header .container-fluid').width());
-				$('.mega-menu--wide > .dropdown-menu').css('right', megaMenuRightPosition + 'px');
-				$('.mega-menu--wide > .dropdown-menu').css('width', megaMenuWidth + 'px');
-				$(window).resize(function() {
-					var headerSecond = $('.main-navigation--mega-menu').closest('.header-second').parent(),
-					headerSecondRight = parseInt(headerSecond.offset().left + headerSecond.outerWidth()),
-					headerFirstRight = parseInt($('.header-first').offset().left + $('.header-first').outerWidth() + 15),
-					megaMenuRightPosition = headerSecondRight - headerFirstRight;
-					megaMenuWidth = parseInt($('.header .container-fluid').width());
-					$('.mega-menu--wide > .dropdown-menu').css('right', megaMenuRightPosition + 'px');
-					$('.mega-menu--wide > .dropdown-menu').css('width', megaMenuWidth + 'px');
-				});
-			})();
-		}
-
 		//Revolution Slider 5
 		if ($(".slider-revolution-5-container").length>0) {
 			$(".tp-bannertimer").show();
@@ -259,31 +187,6 @@
 						v_offset:20
 					}
 				}
-			});
-		};
-
-		//Full Page
-		if ($(".fullpage-site").length>0) {
-			$('.fullpage-site').fullpage({
-				anchors: ['firstPage', 'secondPage', 'thirdPage', 'fourthPage', 'fifthPage'],
-				navigation: true,
-				navigationPosition: 'right',
-				navigationTooltips: ['Intro', 'About', 'Portfolio', 'Clients', 'Contact Us'],
-				fixedElements: '.header-container, .subfooter',
-				responsiveWidth: 992,
-				responsiveHeight: 600
-			});
-		}
-		if ($(".fullpage-site-with-menu").length>0) {
-			$('.fullpage-site-with-menu').fullpage({
-				anchors: ['firstPage', 'secondPage', 'thirdPage', 'fourthPage', 'fifthPage'],
-				navigation: true,
-				navigationPosition: 'right',
-				navigationTooltips: ['Intro', 'About', 'Menu', 'Reviews', 'Contact Us'],
-				fixedElements: '.header-container, .subfooter',
-				responsiveWidth: 992,
-				responsiveHeight: 600,
-				menu: '#fullpage-menu',
 			});
 		};
 
@@ -499,188 +402,6 @@
 			}
 		};
 
-		// Fixed header
-		//-----------------------------------------------
-		if (($(".header.fixed.fixed-desktop").length > 0) && ($(window).width() > 1000)) {
-			(function(){
-				var sticky = new Waypoint.Sticky({
-					element: $('.header-container .header.fixed'),
-					stuckClass: 'object-visible',
-					handler: function(direction) {
-						$('body').toggleClass('fixed-header-on');
-					},
-					offset: -1
-				});
-			})();
-		};
-		if ($(".header.fixed.fixed-all").length > 0) {
-			(function(){
-				var sticky = new Waypoint.Sticky({
-					element: $('.header-container .header.fixed'),
-					stuckClass: 'object-visible',
-					handler: function(direction) {
-						$('body').toggleClass('fixed-header-on');
-					},
-					offset: -1
-				});
-			})();
-		};
-
-		// Charts
-		//-----------------------------------------------
-		if ($(".graph").length>0) {
-			// Creates random numbers you don't need this for real graphs
-			var randomScalingFactor = function(){ return Math.round(Math.random()*500)};
-
-			if ($(".graph.line").length>0) {
-				(function(){
-					// Data for line charts
-					var lineChartData = {
-						labels: ["January", "February", "March", "April", "May", "June", "July"],
-						datasets: [
-						{
-							label: "My First dataset",
-							fill: false,
-							lineTension: 0.1,
-							backgroundColor: "rgba(75,192,192,0.4)",
-							borderColor: "rgba(75,192,192,1)",
-							borderCapStyle: 'butt',
-							borderDash: [],
-							borderDashOffset: 0.0,
-							borderJoinStyle: 'miter',
-							pointBorderColor: "rgba(75,192,192,1)",
-							pointBackgroundColor: "#fff",
-							pointBorderWidth: 1,
-							pointHoverRadius: 5,
-							pointHoverBackgroundColor: "rgba(75,192,192,1)",
-							pointHoverBorderColor: "rgba(220,220,220,1)",
-							pointHoverBorderWidth: 2,
-							pointRadius: 1,
-							pointHitRadius: 10,
-							data: [65, 59, 80, 81, 56, 55, 40],
-							spanGaps: false,
-						}
-						]
-					};
-
-					// Line Charts Initialization
-					var ctx = document.getElementById("lines-graph").getContext("2d");
-					var LineChart = new Chart(ctx, {
-						type: 'line',
-						data: lineChartData,
-						responsive: true,
-						bezierCurve : false
-					});
-				})();
-			}
-			if ($(".graph.bar").length>0) {
-				(function(){
-					// Data for bar charts
-					var barChartData = {
-						labels: ["January", "February", "March", "April", "May", "June", "July"],
-						datasets: [
-						{
-							label: "My First dataset",
-							backgroundColor: [
-							'rgba(255, 99, 132, 0.2)',
-							'rgba(54, 162, 235, 0.2)',
-							'rgba(255, 206, 86, 0.2)',
-							'rgba(75, 192, 192, 0.2)',
-							'rgba(153, 102, 255, 0.2)',
-							'rgba(255, 159, 64, 0.2)'
-							],
-							borderColor: [
-							'rgba(255,99,132,1)',
-							'rgba(54, 162, 235, 1)',
-							'rgba(255, 206, 86, 1)',
-							'rgba(75, 192, 192, 1)',
-							'rgba(153, 102, 255, 1)',
-							'rgba(255, 159, 64, 1)'
-							],
-							borderWidth: 1,
-							data: [65, 59, 80, 81, 56, 55, 40],
-						}
-						]
-					};
-
-					// Bar Charts Initialization
-					var ctx = document.getElementById("bars-graph").getContext("2d");
-					var BarChart = new Chart(ctx, {
-						type: 'bar',
-						data: barChartData,
-						responsive : true
-					});
-				})();
-			}
-			if ($(".graph.pie").length>0) {
-				(function(){
-					// Data for pie chart
-					var pieData = {
-						labels: [
-						"Red",
-						"Blue",
-						"Yellow"
-						],
-						datasets: [
-						{
-							data: [300, 50, 100],
-							backgroundColor: [
-							"#FF6384",
-							"#36A2EB",
-							"#FFCE56"
-							],
-							hoverBackgroundColor: [
-							"#FF6384",
-							"#36A2EB",
-							"#FFCE56"
-							]
-						}]
-					};
-
-					// Pie Chart Initialization
-					var ctx = document.getElementById("pie-graph").getContext("2d");
-					var PieChart = new Chart(ctx,{
-						type: 'pie',
-						data: pieData
-					});
-				})();
-			}
-			if ($(".graph.doughnut").length>0) {
-				(function(){
-					// Data for doughnut chart
-					var doughnutData = {
-						labels: [
-						"Red",
-						"Blue",
-						"Yellow"
-						],
-						datasets: [
-						{
-							data: [300, 50, 100],
-							backgroundColor: [
-							"#FF6384",
-							"#36A2EB",
-							"#FFCE56"
-							],
-							hoverBackgroundColor: [
-							"#FF6384",
-							"#36A2EB",
-							"#FFCE56"
-							]
-						}]
-					};
-
-					// Doughnut Chart Initialization
-					var ctx = document.getElementById("doughnut-graph").getContext("2d");
-					var DoughnutChart = new Chart(ctx, {
-						type: 'doughnut',
-						data: doughnutData,
-						responsive : true
-					});
-				})();
-			}
-		};
-
 		// Magnific popup
 		//-----------------------------------------------
 		if (($(".popup-img").length > 0) || ($(".popup-iframe").length > 0) || ($(".popup-img-single").length > 0) || $(".slick-carousel--popup-img").length > 0) {
@@ -714,21 +435,6 @@
 			});
 		};
 
-		// Animations
-		//-----------------------------------------------
-		if ($("[data-animation-effect]").length>0) {
-			$("[data-animation-effect]").each(function() {
-				var waypoints = $(this).waypoint(function(direction) {
-					var animatedObject;
-					animatedObject = $(this.element);
-					animatedObject.addClass('animated object-visible ' + animatedObject.attr("data-animation-effect"));
-					this.destroy();
-				},{
-					offset: '90%'
-				});
-			});
-		};
-
 		// Slider animations
 		//-----------------------------------------------
 		if ($("[data-caption-effect]").length>0) {
@@ -747,21 +453,6 @@
 				backDelay: 4000,
 				smartBackspace: true,
 				loop: true
-			});
-		};
-
-		// Stats Count To
-		//-----------------------------------------------
-		if ($(".stats [data-to]").length>0) {
-			$(".stats [data-to]").each(function() {
-				var waypoints = $(this).waypoint(function(direction) {
-					var countingObject;
-					countingObject = $(this.element);
-					countingObject.countTo();
-					this.destroy();
-				},{
-					offset: '95%'
-				});
 			});
 		};
 
@@ -810,35 +501,6 @@
 				});
 			});
 		};
-
-		// Animated Progress Bars
-		//-----------------------------------------------
-		if ($("[data-animate-width]").length>0) {
-			$("[data-animate-width]").each(function() {
-				var waypoints = $(this).waypoint(function(direction) {
-					$(this.element).animate({width: parseInt($(this.element).attr("data-animate-width")) + '%'}, 800 );
-					this.destroy();
-				},{
-					offset: '90%'
-				});
-			});
-		};
-
-		//Scroll totop
-		//-----------------------------------------------
-		$(window).scroll(function() {
-			if($(this).scrollTop() != 0) {
-				$(".scrollToTop").addClass("fadeToTop");
-				$(".scrollToTop").removeClass("fadeToBottom");
-			} else {
-				$(".scrollToTop").removeClass("fadeToTop");
-				$(".scrollToTop").addClass("fadeToBottom");
-			}
-		});
-
-		$(".scrollToTop").click(function() {
-			$("body,html").animate({scrollTop:0},800);
-		});
 
 		//Modal
 		//-----------------------------------------------
