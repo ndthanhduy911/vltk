@@ -170,7 +170,7 @@ class AdminsLangCore extends \BackendController{
                 }
             }
             foreach ($itemsLangs as $itemsLang) {
-                $itemsLang->postid = $items->id;
+                $itemsLang->{$this->itemsid} = $items->id;
                 $itemsLang->vdUpdate(true);
                 if (!$itemsLang->save()) {
                     foreach ($itemsLang->getMessages() as $message) {
