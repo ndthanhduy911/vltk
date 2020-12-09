@@ -125,11 +125,11 @@
                 <div class="tile p-3 mb-3">
                     <div class="row m-0">
                         <div class="col-md-12 p-0">
-                            <img id="showBackgroundImg" class="w-100 d-block" src="{{ class.background_image ? class.background_image : '' }}"
-                                alt="{{ class.background_image ? class.background_image : '' }}">
-                            {{form_class.render('background_image')}}
+                            <img id="showBackgroundImg" class="w-100 d-block" src="{{ class.bgimage ? class.bgimage : '' }}"
+                                alt="{{ class.bgimage ? class.bgimage : '' }}">
+                            {{form_class.render('bgimage')}}
                             <a id="uploadBackgroundImage" href="#" class="link">Đặt ảnh nền</a>
-                            <a id="removeBackgroundImage" href="#" class="link text-danger {{ class.background_image ? '' : 'hidden' }}">Xóa</a>
+                            <a id="removeBackgroundImage" href="#" class="link text-danger {{ class.bgimage ? '' : 'hidden' }}">Xóa</a>
                         </div>
                     </div>
                 </div>

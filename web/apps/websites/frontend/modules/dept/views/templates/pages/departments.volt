@@ -29,7 +29,7 @@
     }
 
 ?>
-<div class="banner dark-translucent-bg fixed-bg"style="background-image:url('{{helper.getLinkImage(page.background_image, '/assets/frontend/images/page-about-banner-1.jpg') }}'); background-position: 50% 27%;">
+<div class="banner dark-translucent-bg fixed-bg"style="background-image:url('{{helper.getLinkImage(page.bgimage, '/assets/frontend/images/page-about-banner-1.jpg') }}'); background-position: 50% 27%;">
     {{ partial('breadcrumb') }}
     <div class="container">
         <div class="row justify-content-lg-center">

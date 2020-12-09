@@ -187,11 +187,11 @@
                 <div class="tile p-3 mb-3">
                     <div class="row m-0">
                         <div class="col-md-12 p-0">
-                            <img id="showBackgroundImg" class="w-100 d-block" src="{{ calendar.background_image ? calendar.background_image : '' }}"
-                                alt="{{ calendar.background_image ? calendar.background_image : '' }}">
-                            {{form_calendar.render('background_image')}}
+                            <img id="showBackgroundImg" class="w-100 d-block" src="{{ calendar.bgimage ? calendar.bgimage : '' }}"
+                                alt="{{ calendar.bgimage ? calendar.bgimage : '' }}">
+                            {{form_calendar.render('bgimage')}}
                             <a id="uploadBackgroundImage" href="#" class="link">Đặt ảnh nền</a>
-                            <a id="removeBackgroundImage" href="#" class="link text-danger {{ calendar.background_image ? '' : 'hidden' }}">Xóa</a>
+                            <a id="removeBackgroundImage" href="#" class="link text-danger {{ calendar.bgimage ? '' : 'hidden' }}">Xóa</a>
                         </div>
                     </div>
                 </div>

@@ -60,8 +60,8 @@ class ClassesForm extends Form
         $image = new Hidden('image');
         $this->add($image);
 
-        $background_image = new Hidden('background_image');
-        $this->add($background_image);
+        $bgimage = new Hidden('bgimage');
+        $this->add($bgimage);
 
         $deleted = new Hidden('deleted');
         $this->add($deleted);

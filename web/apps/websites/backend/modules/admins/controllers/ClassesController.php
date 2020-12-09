@@ -56,7 +56,7 @@ class ClassesController  extends \BackendController {
                 $req_class = [
                     'status' => $this->request->getPost('status',['string','trim']),
                     'slug' => $p_slug ? $p_slug : $this->helper->slugify($p_title[1]),
-                    'background_image' => $this->request->getPost('background_image',['string','trim']),
+                    'bgimage' => $this->request->getPost('bgimage',['string','trim']),
                     'code' => $this->request->getPost('code',['string','trim']),
                     
                 ];

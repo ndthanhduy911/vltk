@@ -54,7 +54,7 @@ class CalendarsController  extends \BackendController {
                 $req_calendar = [
                     'status' => $this->request->getPost('status'),
                     'image' => $this->request->getPost('image',['string','trim']),
-                    'background_image' => $this->request->getPost('background_image',['string','trim']),
+                    'bgimage' => $this->request->getPost('bgimage',['string','trim']),
                     'classid' => $this->request->getPost('classid',['int']),
                     'subjectid' => $this->request->getPost('subjectid',['int']),
                     'year' => $this->request->getPost('year',['int']),

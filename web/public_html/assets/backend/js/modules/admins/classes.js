@@ -81,4 +81,4 @@ changeTitleToSlug('#title', '#slug');
 
 showSelectImage('#uploadImage','#showImg','#image', '#removeImage');
 
-showSelectImage('#uploadBackgroundImage','#showBackgroundImg','#background_image', '#removeBackgroundImage');
+showSelectImage('#uploadBackgroundImage','#showBackgroundImg','#bgimage', '#removeBackgroundImage');

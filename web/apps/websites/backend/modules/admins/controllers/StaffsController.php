@@ -27,7 +27,7 @@ class StaffsController  extends \AdminsLangCore {
     public function updateC($items,$itemsLangs){
         $languages = \Language::find(['status = 1']);
         $pTitle = $this->request->getPost('title',['string','trim']);
-        $pContent = $this->request->getPost('content',['string','trim']);
+        $pContent = $this->request->getPost('content',['trim']);
         foreach ($languages as $key => $lang) {
             if(empty($items->id) || !$itemsLang = ($this->classNameLang)::findFirst(["{$this->itemsid} = :id: AND langid = :langid:",'bind' => ['id' => (int)(!empty($items->id) ? $items->id : 0),'langid' => $lang->id]])){
                 $itemsLang = new $this->classNameLang;

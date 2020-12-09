@@ -20,11 +20,6 @@ class Slideshows extends \ModelCore
             'len' => 255,
             'msg' => 'Slug không được dài quá 255 ký tự'
         ]);
-        //catid
-        $helper->setValidation('required', [
-            'name' => 'catid',
-            'msg' => 'Chuyên mục không được để trống'
-        ]);
         //status
         $helper->setValidation('required', [
             'name' => 'status',
