@@ -28,6 +28,7 @@ class StaffsController  extends \AdminsLangCore {
         $languages = \Language::find(['status = 1']);
         $pTitle = $this->request->getPost('title',['string','trim']);
         $pContent = $this->request->getPost('content',['trim']);
+        $deptid = $this->session->get('deptid');
         foreach ($languages as $key => $lang) {
             if(empty($items->id) || !$itemsLang = ($this->classNameLang)::findFirst(["{$this->itemsid} = :id: AND langid = :langid:",'bind' => ['id' => (int)(!empty($items->id) ? $items->id : 0),'langid' => $lang->id]])){
                 $itemsLang = new $this->classNameLang;
@@ -41,10 +42,16 @@ class StaffsController  extends \AdminsLangCore {
             array_push($itemsLangs,$itemsLang);
         }
 
+        if($deptid == 1){
+            $items->deptid = $this->request->getPost('deptid',['int']);
+            $items->dean = $this->request->getPost('dean',['int']);
+        }else{
+            $items->deptid = $items->deptid ? $items->deptid : $this->request->getPost('deptid',['int']);
+        }
+
         $plug = $this->request->getPost('slug',['string','trim']);
         $items->status = $this->request->getPost('status',['int']);
         $items->sort = $this->request->getPost('sort',['int']);
-        $items->dean = $this->request->getPost('dean',['int']);
         $items->deptposition = $this->request->getPost('deptposition',['int']);
         $items->email = $this->request->getPost('email',['trim','string']);
         $items->slug = $plug ? $plug : $this->helper->slugify($pTitle[1]);
@@ -84,7 +91,7 @@ class StaffsController  extends \AdminsLangCore {
         ->where("s.deleted = 0")
         ->leftJoin('StaffsLang', 'sl.staffid = s.id AND sl.langid = 1','sl')
         ->leftJoin('Depts', 'd.id = s.deptid','d')
-        ->orderBy('s.deptid ASC,s.id DESC');
+        ->orderBy('(s.dean = 0),s.dean ASC,(s.deptposition = 0),s.deptposition ASC,s.deptid ASC,s.id DESC');
 
         $data = $this->master::builderPermission($data,$perL,'s');
         $data = \FilterSetting::getDataOrder($this,$data,($this->className)::findFirst(),'s',['sl'=>'title']);

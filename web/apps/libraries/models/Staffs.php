@@ -1,4 +1,6 @@
 <?php
+use Library\Helper\HelperValidation;
+
 class Staffs extends \ModelCore
 {
     public function initialize()

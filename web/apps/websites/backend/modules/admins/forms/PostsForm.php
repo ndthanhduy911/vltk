@@ -52,7 +52,7 @@ class PostsForm extends \Phalcon\Forms\Form
         $cats = $this->modelsManager->createBuilder()
         ->columns([
             'c.id',
-            'cl.title name'
+            'cl.title'
         ])
         ->from(['c'=>"Categories"])
         ->leftJoin('CategoriesLang', "cl.catid = c.id AND cl.langid = 1",'cl')
@@ -63,7 +63,7 @@ class PostsForm extends \Phalcon\Forms\Form
         ->execute();
 
         $catid = new Select('catid', $cats, array(
-            'using' => ['id', 'name'],
+            'using' => ['id', 'title'],
             'class' => 'form-control form-control-sm',
             'data-error' => "Thông tin chưa hợp lệ"
         ));

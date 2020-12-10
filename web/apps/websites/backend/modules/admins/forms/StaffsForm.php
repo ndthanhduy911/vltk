@@ -24,14 +24,21 @@ class StaffsForm extends Form
         $this->add($status);
 
         //deptid
-        $deptid = new Select('deptid', [], [
+        $sdeptid = isset($_SESSION['deptid']) ? $_SESSION['deptid'] : 0;
+        $depts = \Depts::getTreeName(0);
+        $deptid = new Select('deptid', $depts, [
             'class' => 'form-control form-control-sm',
             'useEmpty' => true,
             'emptyText' => 'Không có',
             'emptyValue' => '',
+            'required' => '',
+            'data-required-error' => 'Vui lòng nhập thông tin',
             'data-error' => "Thông tin chưa hợp lệ"
         ]);
         $deptid->setLabel('<i class="fas fa-building mr-1"></i>Khoa/ bộ môn');
+        if($sdeptid != 1){
+            $deptid->setUserOption('attr','disabled');
+        }
         $this->add($deptid);
 
         $dean = new Select('dean', [
@@ -45,6 +52,9 @@ class StaffsForm extends Form
             'data-error' => "Thông tin chưa hợp lệ"
         ]);
         $dean->setLabel('<i class="fas fa-school mr-1"></i>Chức vụ Khoa');
+        if($sdeptid != 1){
+            $dean->setUserOption('attr','disabled');
+        }
         $this->add($dean);
 
         $deptposition = new Select('deptposition', [

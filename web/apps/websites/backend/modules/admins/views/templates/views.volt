@@ -75,38 +75,40 @@
                     </div>
                     <div class="col-md-3">
                         {% for filed in form %}
-                            {% if filed.getUserOption('attr') == 'image' %}
-                            <div class="card boxImg">
-                                <div class="card-header">
-                                    <h3 class="card-title text-primary">{{filed.getLabel()}}</h3>
-                                </div>
-                                <div class="card-body <?= !empty($items->{$filed->getName()}) ? '' : 'p-0' ?>">
-                                    <div class="col-md-12">
-                                        <img class="w-100 d-block showImg <?= !empty($items->{$filed->getName()}) ? 'h-150px' : 'p-0' ?>" src="<?= !empty($items->{$filed->getName()}) ? $items->{$filed->getName()} : '' ?>">
+                            {% if filed.getUserOption('attr') != 'disabled' %}
+                                {% if filed.getUserOption('attr') == 'image' %}
+                                <div class="card boxImg">
+                                    <div class="card-header">
+                                        <h3 class="card-title text-primary">{{filed.getLabel()}}</h3>
+                                    </div>
+                                    <div class="card-body <?= !empty($items->{$filed->getName()}) ? '' : 'p-0' ?>">
+                                        <div class="col-md-12">
+                                            <img class="w-100 d-block showImg <?= !empty($items->{$filed->getName()}) ? 'h-150px' : 'p-0' ?>" src="<?= !empty($items->{$filed->getName()}) ? $items->{$filed->getName()} : '' ?>">
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        {{filed.render()}}
+                                        <a href="#" class="link upImage">Tải ảnh</a>
+                                        <a href="#" class="rmImage ml-auto link text-danger <?= !empty($items->{$filed->getName()}) ? '' : 'hidden' ?>">Xóa</a>
                                     </div>
                                 </div>
-                                <div class="card-footer">
-                                    {{filed.render()}}
-                                    <a href="#" class="link upImage">Tải ảnh</a>
-                                    <a href="#" class="rmImage ml-auto link text-danger <?= !empty($items->{$filed->getName()}) ? '' : 'hidden' ?>">Xóa</a>
-                                </div>
-                            </div>
-                            {% else %}
-                            <div class="card">
-                                <div class="card-header">
-                                    <h3 class="card-title text-primary">{{filed.getLabel()}}</h3>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="form-group label-floating col-md-12 mt-0 pb-0">
-                                            <div class="input-group">
-                                                {{filed.render()}}
-                                                <div class="invalid-feedback"></div>
+                                {% else %}
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title text-primary">{{filed.getLabel()}}</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="form-group label-floating col-md-12 mt-0 pb-0">
+                                                <div class="input-group">
+                                                    {{filed.render()}}
+                                                    <div class="invalid-feedback"></div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                                {% endif %}
                             {% endif %}
                         {% endfor %}
                     </div>

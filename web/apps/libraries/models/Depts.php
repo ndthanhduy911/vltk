@@ -71,7 +71,7 @@ class Depts extends \ModelCore
     }
 
     public static function getLName($deptid, $langid = 1){
-        $lang = parent::findFirst(['langid =:langid: AND deptid = :deptid:', 'bind'=>['langid' => $langid, 'deptid' => $deptid]]);
+        $lang = \DeptsLang::findFirst(['langid =:langid: AND deptid = :deptid:', 'bind'=>['langid' => $langid, 'deptid' => $deptid]]);
         return $lang ? $lang->title : '';
     }
 

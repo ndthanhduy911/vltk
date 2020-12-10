@@ -56,7 +56,7 @@ class DeptsController extends \BackendController
         if($parentSearch && $parentSearch != 'all'){
             $data = $data->andWhere('Depts.parentid = :parentSearch:', ['parentSearch' => $parentSearch]);
         }else{
-            $data = $data->andWhere('Depts.parentid = 0 OR Depts.parentid IS NULL');
+            $data = $data->andWhere('Depts.parentid = 0');
         }
 
         if($nameSearch){
