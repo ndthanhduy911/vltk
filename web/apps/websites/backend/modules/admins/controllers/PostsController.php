@@ -25,7 +25,7 @@ class PostsController  extends \AdminsLangCore {
     public $itemsid = 'postid' ;
 
     public function viewC($items){
-        if($items->id){
+        if(!empty($items->id)){
             $items->calendar = $this->helper->dateVn($items->calendar,'d/m/Y H:i');
         }else{
             $items->calendar = date('d/m/Y H:i');

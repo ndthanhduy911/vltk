@@ -49,9 +49,7 @@ class IndexController extends \BackendController
         $this->view->newestPost = $newestPost;
         $this->view->countCWeb = $countCWeb;
         $this->view->countCPost = $countCPost;
-
-
-
+        $this->view->depts = \Depts::findFirstId($deptid);
         $this->getJsCss();
     }
 

@@ -143,7 +143,7 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview mt-1">
-                        {% if master.checkPermission('options', 'index') %}
+                        {% if master.checkPermission('depts', 'update',1) %}
                         <li class="nav-item">
                             <a href="<?= WEB_ADMIN_URL ?>/options"
                                 class="nav-link {% if dispatcher.getControllerName()=='options' %} {{ 'active' }} {% endif %}">

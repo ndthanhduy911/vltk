@@ -22,6 +22,7 @@ class OptionsController  extends \BackendController {
                 \Phalcon\Mvc\View::LEVEL_ACTION_VIEW
             );
         }
+
         $perEdit = $this->master::checkPermissionDepted("depts", 'update',1);
         $perView = $this->master::checkPermissionDepted("depts", 'index');
         $perL = $perView ? $perView : ($perEdit? $perEdit :false);
@@ -33,7 +34,6 @@ class OptionsController  extends \BackendController {
                 \Phalcon\Mvc\View::LEVEL_ACTION_VIEW
             );
         }
-
         $formsLang = [];
         $languages = \Language::find(['status = 1']);
         $id = $this->session->get('deptid');

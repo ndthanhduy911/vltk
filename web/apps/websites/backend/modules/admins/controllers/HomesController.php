@@ -60,7 +60,6 @@ class HomesController  extends \BackendController {
         $this->view->formsLang = $formsLang;
         $this->view->formHomes = $formHomes;
         $this->view->homes = $homes;
-        $this->view->homesLang = $homesLang;
         $this->view->title = $title;
         $this->getJsCss();
     }
