@@ -118,7 +118,7 @@
                                 </div>
                                 <div class="body">
                                     <h5 class="margin-clear text-uppercase"><a href="<?= \Staffs::getUrl($dept,$staff) ?>" title="{{ staff.title }}">{{ staff.title }}</a></h5>
-                                    <small class="text-uppercase">{{ helper.getDean(staff.dean) }}</small>
+                                    <small class="text-uppercase"><?= \Staffs::getDean($staff->dean) ?></small>
                                     <div class="separator mt-10"></div>
                                     {% if staff.email %}
                                     <a href="mailto:{{ staff.email }}" class="margin-clear btn btn-md-link link-light"><i class="pr-10 fa fa-envelope-o"></i>{{ staff.email }}</a>
@@ -149,7 +149,7 @@
                                         <div class="body mt-3">
                                             <h5 class="title margin-clear"><a href="<?= \Staffs::getUrl($dept, $staff) ?>" title="{{ staff.title }}">{{ staff.title }}</a></h5>
                                             <div class="separator-2 mt-2"></div>
-                                            <h5 class="m-0 text-uppercase">{{ helper.getPosition(staff.deptposition) }}</h5>
+                                            <h5 class="m-0 text-uppercase"><?= \Staffs::getPosition($staff->deptposition) ?></h5>
                                             {% if staff.email %}
                                             <a href="mailto:{{staff.email}}" class="btn btn-link pl-0 text-left"><i class="pr-10 margin-clear fa fa-envelope-o"></i>{{staff.email}}</a>
                                             {% endif %}
@@ -179,7 +179,7 @@
                             </div>
                             <div class="col-md-9 col-lg-9">
                                 <div class="body">
-                                <h3 class="title margin-clear">{{ staff.title }} - <small>{{ helper.getPosition(staff.deptposition) }}</small></h3>
+                                <h3 class="title margin-clear">{{ staff.title }} - <small><?= \Staffs::getPosition($staff->deptposition) ?></small></h3>
                                 <div class="separator-2 mt-10"></div>
                                 {#{ helper.getExcerpt(staff.content,0,400) }#}
                                 {% if staff.email %}

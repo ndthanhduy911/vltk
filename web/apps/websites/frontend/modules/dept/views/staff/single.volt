@@ -15,9 +15,9 @@
                                 <div class="overlay-bottom">
                                 <div class="text">
                                     {% if staff.dean %}
-                                    <p class="margin-clear text-uppercase">{{ helper.getDean(staff.dean) }}</p>
+                                    <p class="margin-clear text-uppercase"><?= \Staffs::getDean($staff->dean) ?></p>
                                     {% endif %}
-                                    <p class="margin-clear text-uppercase">{{ helper.getPosition(staff.deptposition) }}</p>
+                                    <p class="margin-clear text-uppercase"><?= \Staffs::getPosition($staff->deptposition) ?></p>
                                 </div>
                                 </div>
                             </div>

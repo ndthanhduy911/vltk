@@ -47,6 +47,38 @@ class Staffs extends \ModelCore
         return $this->validate($helper->getValidation());
     }
 
+    public static function getDean($dean = ""){
+        switch ((int)$dean) {
+            case 1: 
+                return MLML::_ml_system('dean',"Trưởng khoa");
+            case 2: 
+                return MLML::_ml_system('vice_dean',"Phó trưởng khoa");            
+            default:
+                return "";
+                break;
+        }
+    }
+
+    public static function getPosition($pos = ""){
+        switch ((int)$pos) {
+            case 1: 
+                return  MLML::_ml_system('dean_dept',"Trưởng bộ môn") ;
+            case 2: 
+                return MLML::_ml_system('vice_dean_dept',"Phó bộ môn");       
+            case 3: 
+                return MLML::_ml_system('managing_lecturer',"Giáo vụ");      
+            case 4: 
+                return MLML::_ml_system('lecturer',"Giảng viên");  
+            case 5: 
+                return MLML::_ml_system('visiting_lecturer',"Cán bộ thỉnh giảng");  
+            case 6: 
+                return MLML::_ml_system('staff',"Nhân viên");  
+            default:
+                return "";
+                break;
+        }
+    }
+
     public static function filedName($key){
         $feilds = [
             'slug' => 'Xem',
