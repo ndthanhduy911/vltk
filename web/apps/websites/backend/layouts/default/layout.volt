@@ -11,7 +11,6 @@
     <link rel="shortcut icon" href="<?= WEB_URI ?>/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="<?= WEB_URI ?>/logo.png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Font Awesome -->
     <style>
         @font-face {
             font-family: "Roboto";
@@ -41,11 +40,7 @@
     <link rel="stylesheet" href="<?= WEB_URI.'/assets/backend/' ?>material-dashboard.css?v=<?= VS_SCRIPT ?>">
     <!-- custom -->
     <link rel="stylesheet" href="<?= WEB_URI.'/assets/backend/' ?>custom.css?v=<?= VS_SCRIPT ?>">
-    <!-- Google Font: Roboto -->
-    <!-- <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700&display=swap" rel="stylesheet"> -->
-    <?php $this->assets->outputCss(); ?>
-
-    
+    <?php $this->assets->outputCss(); ?>    
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed text-sm navbar-white navbar-light" dept="{{session.get('deptid')}}">
