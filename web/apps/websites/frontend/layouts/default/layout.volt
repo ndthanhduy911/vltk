@@ -20,27 +20,27 @@
     <meta property="fb:app_id" content="1234567890">
     <meta property="og:title" content="{{ deptlang.title }}" />
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="<?= WEB_URL ?>/" />
+    <meta property="og:url" content="<?= WEB_URI ?>/" />
     <meta property="og:image" content="{{ helper.getLinkImage(dept.logo, '/logo.png') }}" />
     <meta property="og:description" content="{{ deptlang.title }}" />
     <meta property="og:site_name" content="{{ deptlang.title }}" />
     <link rel="apple-touch-icon" sizes="76x76" href="{{ helper.getLinkImage(dept.icon, '/favicon.ico') }}" />
     <link rel="icon" type="image/png" href="{{ helper.getLinkImage(dept.icon, '/favicon.ico') }}" />
-    <link rel="canonical" href="<?= WEB_URL ?>/" />
+    <link rel="canonical" href="<?= WEB_URI ?>/" />
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i" rel="stylesheet">
-    <link href="<?= WEB_URL ?>/assets/frontend/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?= WEB_URI ?>/assets/frontend/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?= WEB_URL.'/assets/backend/dist/' ?>plugins/overlayScrollbars/css/OverlayScrollbars.min.css" rel="stylesheet"/>
-    <link href="<?= WEB_URL ?>/assets/frontend/fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
-    <link href="<?= WEB_URL ?>/assets/frontend/plugins/magnific-popup/magnific-popup.css" rel="stylesheet">
-    <link href="<?= WEB_URL ?>/assets/frontend/plugins/rs-plugin-5/css/settings.css" rel="stylesheet">
-    <link href="<?= WEB_URL ?>/assets/frontend/plugins/rs-plugin-5/css/layers.css" rel="stylesheet">
-    <link href="<?= WEB_URL ?>/assets/frontend/plugins/rs-plugin-5/css/navigation.css" rel="stylesheet">
-    <link href="<?= WEB_URL ?>/assets/frontend/css/animations.css" rel="stylesheet">
-    <link href="<?= WEB_URL ?>/assets/frontend/plugins/slick/slick.css" rel="stylesheet">
-    <link href="<?= WEB_URL ?>/assets/frontend/css/style.css" rel="stylesheet">
-    <link href="<?= WEB_URL ?>/assets/frontend/css/typography-default.css" rel="stylesheet">
-    <link href="<?= WEB_URL ?>/assets/frontend/css/skins/light_blue.css" rel="stylesheet">
-    <link href="<?= WEB_URL ?>/assets/frontend/css/custom.css" rel="stylesheet">
+    <link href="<?= WEB_URI ?>/assets/frontend/fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="<?= WEB_URI ?>/assets/frontend/plugins/magnific-popup/magnific-popup.css" rel="stylesheet">
+    <link href="<?= WEB_URI ?>/assets/frontend/plugins/rs-plugin-5/css/settings.css" rel="stylesheet">
+    <link href="<?= WEB_URI ?>/assets/frontend/plugins/rs-plugin-5/css/layers.css" rel="stylesheet">
+    <link href="<?= WEB_URI ?>/assets/frontend/plugins/rs-plugin-5/css/navigation.css" rel="stylesheet">
+    <link href="<?= WEB_URI ?>/assets/frontend/css/animations.css" rel="stylesheet">
+    <link href="<?= WEB_URI ?>/assets/frontend/plugins/slick/slick.css" rel="stylesheet">
+    <link href="<?= WEB_URI ?>/assets/frontend/css/style.css" rel="stylesheet">
+    <link href="<?= WEB_URI ?>/assets/frontend/css/typography-default.css" rel="stylesheet">
+    <link href="<?= WEB_URI ?>/assets/frontend/css/skins/light_blue.css" rel="stylesheet">
+    <link href="<?= WEB_URI ?>/assets/frontend/css/custom.css" rel="stylesheet">
 </head>
 
 <body class="front-page">
@@ -51,25 +51,25 @@
         {{ partial('footer') }}
     </div>
 </body>
-<script src="<?= WEB_URL ?>/assets/frontend/plugins/jquery.min.js"></script>
-<script src="<?= WEB_URL ?>/assets/frontend/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="<?= WEB_URI ?>/assets/frontend/plugins/jquery.min.js"></script>
+<script src="<?= WEB_URI ?>/assets/frontend/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="<?= WEB_URL.'/assets/backend/dist/' ?>plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-<script src="<?= WEB_URL ?>/assets/frontend/plugins/rs-plugin-5/js/jquery.themepunch.tools.min.js"></script>
-<script src="<?= WEB_URL ?>/assets/frontend/plugins/rs-plugin-5/js/jquery.themepunch.revolution.min.js"></script>
-<script src="<?= WEB_URL ?>/assets/frontend/plugins/rs-plugin-5/js/extensions/revolution.extension.slideanims.min.js"></script>
-<script src="<?= WEB_URL ?>/assets/frontend/plugins/rs-plugin-5/js/extensions/revolution.extension.layeranimation.min.js"></script>
-<script src="<?= WEB_URL ?>/assets/frontend/plugins/rs-plugin-5/js/extensions/revolution.extension.navigation.min.js"></script>
-<script src="<?= WEB_URL ?>/assets/frontend/plugins/isotope/imagesloaded.pkgd.min.js"></script>
-<script src="<?= WEB_URL ?>/assets/frontend/plugins/isotope/isotope.pkgd.min.js"></script>
-<script src="<?= WEB_URL ?>/assets/frontend/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
-<script src="<?= WEB_URL ?>/assets/frontend/plugins/countTo/jquery.countTo.js"></script>
-<script src="<?= WEB_URL ?>/assets/frontend/plugins/slick/slick.min.js"></script>
-<script src="<?= WEB_URL ?>/assets/frontend/plugins/moment.min.js"></script>
-<script src="<?= WEB_URL ?>/assets/frontend/js/define.js"></script>
-<script src="<?= WEB_URL ?>/assets/frontend/js/apicall.js"></script>
-<script src="<?= WEB_URL ?>/assets/frontend/js/template.js"></script>
+<script src="<?= WEB_URI ?>/assets/frontend/plugins/rs-plugin-5/js/jquery.themepunch.tools.min.js"></script>
+<script src="<?= WEB_URI ?>/assets/frontend/plugins/rs-plugin-5/js/jquery.themepunch.revolution.min.js"></script>
+<script src="<?= WEB_URI ?>/assets/frontend/plugins/rs-plugin-5/js/extensions/revolution.extension.slideanims.min.js"></script>
+<script src="<?= WEB_URI ?>/assets/frontend/plugins/rs-plugin-5/js/extensions/revolution.extension.layeranimation.min.js"></script>
+<script src="<?= WEB_URI ?>/assets/frontend/plugins/rs-plugin-5/js/extensions/revolution.extension.navigation.min.js"></script>
+<script src="<?= WEB_URI ?>/assets/frontend/plugins/isotope/imagesloaded.pkgd.min.js"></script>
+<script src="<?= WEB_URI ?>/assets/frontend/plugins/isotope/isotope.pkgd.min.js"></script>
+<script src="<?= WEB_URI ?>/assets/frontend/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+<script src="<?= WEB_URI ?>/assets/frontend/plugins/countTo/jquery.countTo.js"></script>
+<script src="<?= WEB_URI ?>/assets/frontend/plugins/slick/slick.min.js"></script>
+<script src="<?= WEB_URI ?>/assets/frontend/plugins/moment.min.js"></script>
+<script src="<?= WEB_URI ?>/assets/frontend/js/define.js"></script>
+<script src="<?= WEB_URI ?>/assets/frontend/js/apicall.js"></script>
+<script src="<?= WEB_URI ?>/assets/frontend/js/template.js"></script>
 {{ assets.outputJs() }}
-<script src="<?= WEB_URL ?>/assets/frontend/js/custom.js"></script>
-<script src="<?= WEB_URL ?>/assets/frontend/plugins/pace/pace.min.js"></script>
+<script src="<?= WEB_URI ?>/assets/frontend/js/custom.js"></script>
+<script src="<?= WEB_URI ?>/assets/frontend/plugins/pace/pace.min.js"></script>
 
 </html>
