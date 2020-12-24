@@ -3,7 +3,7 @@
 // DEPT
 // ======================================
 /***********************PostsController***********************/
-$router->add($config->application->frontendUri."/{dept:[a-zA-Z0-9_-]+}/news/{post:[a-zA-Z0-9_-]+}", array(
+$router->add(WEB_URI."/{dept:[a-zA-Z0-9_-]+}/news/{post:[a-zA-Z0-9_-]+}", array(
     'module' => 'frontend_dept',
     'controller' => 'posts',
     'action' => 'single',
@@ -11,7 +11,7 @@ $router->add($config->application->frontendUri."/{dept:[a-zA-Z0-9_-]+}/news/{pos
     'post' => 2,
 ));
 
-$router->add($config->application->frontendUri."/{dept:[a-zA-Z0-9_-]+}/category/{cat:[a-zA-Z0-9_-]+}", array(
+$router->add(WEB_URI."/{dept:[a-zA-Z0-9_-]+}/category/{cat:[a-zA-Z0-9_-]+}", array(
     'module' => 'frontend_dept',
     'controller' => 'posts',
     'action' => 'category',
@@ -19,7 +19,7 @@ $router->add($config->application->frontendUri."/{dept:[a-zA-Z0-9_-]+}/category/
     'cat' => 2,
 ));
 
-$router->add($config->application->frontendUri."/{dept:[a-zA-Z0-9_-]+}/blog", array(
+$router->add(WEB_URI."/{dept:[a-zA-Z0-9_-]+}/blog", array(
     'module' => 'frontend_dept',
     'controller' => 'posts',
     'action' => 'blog',
@@ -27,7 +27,7 @@ $router->add($config->application->frontendUri."/{dept:[a-zA-Z0-9_-]+}/blog", ar
 ));
 
 /***********************DeptController***********************/
-$router->add($config->application->frontendUri."/{dept:[a-zA-Z0-9_-]+}", array(
+$router->add(WEB_URI."/{dept:[a-zA-Z0-9_-]+}", array(
     'module' => 'frontend_dept',
     'controller' => 'dept',
     'action' => 'index',
@@ -35,7 +35,7 @@ $router->add($config->application->frontendUri."/{dept:[a-zA-Z0-9_-]+}", array(
 ));
 
 /***********************PagesController***********************/
-$router->add($config->application->frontendUri."/{dept:[a-zA-Z0-9_-]+}/{page:[a-zA-Z0-9_-]+}.html", array(
+$router->add(WEB_URI."/{dept:[a-zA-Z0-9_-]+}/{page:[a-zA-Z0-9_-]+}.html", array(
     'module' => 'frontend_dept',
     'controller' => 'pages',
     'action' => 'index',
@@ -45,7 +45,7 @@ $router->add($config->application->frontendUri."/{dept:[a-zA-Z0-9_-]+}/{page:[a-
 
 /***********************StaffsController***********************/
 
-$router->add($config->application->frontendUri."/{dept:[a-zA-Z0-9_-]+}/staffs/{staff:[a-zA-Z0-9_-]+}", array(
+$router->add(WEB_URI."/{dept:[a-zA-Z0-9_-]+}/staffs/{staff:[a-zA-Z0-9_-]+}", array(
     'module' => 'frontend_dept',
     'controller' => 'staffs',
     'action' => 'single',
@@ -53,7 +53,7 @@ $router->add($config->application->frontendUri."/{dept:[a-zA-Z0-9_-]+}/staffs/{s
     'staff' => 2,
 ));
 
-$router->add($config->application->frontendUri."/{dept:[a-zA-Z0-9_-]+}/staffs", array(
+$router->add(WEB_URI."/{dept:[a-zA-Z0-9_-]+}/staffs", array(
     'module' => 'frontend_dept',
     'controller' => 'staffs',
     'action' => 'index',
@@ -64,7 +64,7 @@ $router->add($config->application->frontendUri."/{dept:[a-zA-Z0-9_-]+}/staffs", 
 // HOMEPAGE
 // ======================================
 /***********************PagesController***********************/
-$router->add($config->application->frontendUri."/{page:[a-zA-Z0-9_-]+}.html", array(
+$router->add(WEB_URI."/{page:[a-zA-Z0-9_-]+}.html", array(
     'module' => 'frontend_dept',
     'controller' => 'pages',
     'action' => 'index',
@@ -72,20 +72,20 @@ $router->add($config->application->frontendUri."/{page:[a-zA-Z0-9_-]+}.html", ar
 ));
 
 /***********************PostsController***********************/
-$router->add($config->application->frontendUri."/category/{cat:[a-zA-Z0-9_-]+}", array(
+$router->add(WEB_URI."/category/{cat:[a-zA-Z0-9_-]+}", array(
     'module' => 'frontend_dept',
     'controller' => 'posts',
     'action' => 'category',
     'cat' => 1,
 ));
 
-$router->add($config->application->frontendUri."/blog", array(
+$router->add(WEB_URI."/blog", array(
     'module' => 'frontend_dept',
     'controller' => 'posts',
     'action' => 'blog'
 ));
 
-$router->add($config->application->frontendUri."/news/{post:[a-zA-Z0-9_-]+}", array(
+$router->add(WEB_URI."/news/{post:[a-zA-Z0-9_-]+}", array(
     'module' => 'frontend_dept',
     'controller' => 'posts',
     'action' => 'single',
@@ -93,14 +93,14 @@ $router->add($config->application->frontendUri."/news/{post:[a-zA-Z0-9_-]+}", ar
 ));
 
 /***********************IndexController***********************/
-$router->add($config->application->frontendUri.'/', array(
+$router->add(WEB_URI.'/', array(
     'module' => 'frontend_dept',
     'controller' => 'index',
     'action' => 'index',
 ));
 
 /***********************LangController***********************/
-$router->add($config->application->frontendUri.'/api/changelanguage/:int', array(
+$router->add(WEB_URI.'/api/changelanguage/:int', array(
     'module' => 'frontend_dept',
     'controller' => 'index',
     'action' => 'changelanguage',
@@ -108,21 +108,21 @@ $router->add($config->application->frontendUri.'/api/changelanguage/:int', array
 ));
 
 /***********************StaffController***********************/
-$router->add($config->application->frontendUri."/staff/{staff:[a-zA-Z0-9_-]+}", array(
+$router->add(WEB_URI."/staffs/{staff:[a-zA-Z0-9_-]+}", array(
     'module' => 'frontend_dept',
-    'controller' => 'staff',
+    'controller' => 'staffs',
     'action' => 'single',
     'staff' => 1,
 ));
 
-$router->add($config->application->frontendUri."/staff", array(
+$router->add(WEB_URI."/staffs", array(
     'module' => 'frontend_dept',
-    'controller' => 'staff',
+    'controller' => 'staffs',
     'action' => 'index'
 ));
 
 /***********************ResearchesController***********************/
-$router->add($config->application->frontendUri."/{dept:[a-zA-Z0-9_-]+}/research/{research:[a-zA-Z0-9_-]+}", array(
+$router->add(WEB_URI."/{dept:[a-zA-Z0-9_-]+}/research/{research:[a-zA-Z0-9_-]+}", array(
     'module' => 'frontend_dept',
     'controller' => 'researches',
     'action' => 'index',
@@ -131,7 +131,7 @@ $router->add($config->application->frontendUri."/{dept:[a-zA-Z0-9_-]+}/research/
 ));
 
 /***********************SubjectsController***********************/
-$router->add($config->application->frontendUri."/subjects/{subject:[a-zA-Z0-9_-]+}", array(
+$router->add(WEB_URI."/subjects/{subject:[a-zA-Z0-9_-]+}", array(
     'module' => 'frontend_dept',
     'controller' => 'subjects',
     'action' => 'single',

@@ -1,5 +1,6 @@
 <?php
 use Library\Helper\HelperValidation;
+use Library\ML\ML as MLML;
 
 class Staffs extends \ModelCore
 {
@@ -12,9 +13,9 @@ class Staffs extends \ModelCore
     public static function getUrl($dept, $staff = NULL)
     {
         if($dept->id == 1){
-            return WEB_URL.'/staff/'.$staff->slug;
+            return WEB_URL.'/staffs/'.$staff->slug;
         }else{
-            return WEB_URL."/$dept->slug".'/staff/'.$staff->slug;
+            return WEB_URL."/$dept->slug".'/staffs/'.$staff->slug;
         }
     }
 

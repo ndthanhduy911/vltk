@@ -11,13 +11,13 @@ class StaffsController extends \FrontendController
             $this->view->title = '404';
             return $this->view->pick('templates/404');
         }
-        if(!$pagelang = \PagesLang::findFirst(["langid = {$langid} AND pageid = {$page->id}"])){
+        if(!$pageslang = \PagesLang::findFirst(["langid = {$langid} AND pageid = {$page->id}"])){
             $this->view->title = '404';
             return $this->view->pick('templates/404');
         }
-        $this->view->title = $pagelang->title;
+        $this->view->title = $pageslang->title;
         $this->view->page = $page;
-        $this->view->pagelang = $pagelang;
+        $this->view->pageslang = $pageslang;
         return $this->view->pick('templates/pages/teams');
     }
 
