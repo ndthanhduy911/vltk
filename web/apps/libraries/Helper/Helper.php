@@ -288,7 +288,7 @@ class Helper
     }
 
     public function getLinkImage($path, $path_default = '/assets/frontend/images/defaut_img.png'){
-        return ($path && file_exists(dirname(PUBLIC_DIR.$path))) ? WEB_URL.$path : WEB_URL.$path_default;
+        return $path ? WEB_URL.$path : WEB_URL.$path_default;
     }
 
     public function getExcerpt($str, $startPos=0, $maxLength=100) {
