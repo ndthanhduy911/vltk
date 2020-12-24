@@ -157,7 +157,7 @@
                 <div class="image-box team-member shadow-2 mb-20">
                     <div class="overlay-container rounded overlay-visible">
                         <img width="100%" class="object-fit-fill" src="{{ helper.getLinkImage(staff.image,'/assets/frontend/images/education.jpg') }}" alt="{{staff.title}}">
-                        <a href="{{ constant('WEB_URL')~'/staff/'~staff.slug }}" class="overlay-link" title="{{staff.title}}"><i class="fa fa-graduation-cap"></i></a>
+                        <a href="<?= \Staffs::getUrl($dept, $staff) ?>" class="overlay-link" title="{{staff.title}}"><i class="fa fa-graduation-cap"></i></a>
                         <div class="overlay-bottom">
                             <div class="text p-0">
                                 <h4 class="title text-white text-uppercase">{{staff.title}}</h4>
@@ -171,7 +171,7 @@
             {% endfor %}
         </div>
         <div class="col-lg-12 text-center">
-            <?php $staff_link = $dept->slug !== '/' ? WEB_URL.$dept->slug.'/staff' : WEB_URL.'/staff'; ?>
+            <?php $staff_link = $dept->slug !== '/' ? WEB_URL.$dept->slug.'/staffs' : WEB_URL.'/staffs'; ?>
             <a href="{{staff_link}}" class="btn btn-default btn-lg btn-animated radius-50">{{ ml._ml_system('more', 'Xem thêm') }} <i class="fa fa-arrow-right"></i></a>
         </div>
     </div>
