@@ -21,8 +21,8 @@ class SlideshowsLangForm extends \Phalcon\Forms\Form
         $title->setAttributes($attr);
         $this->add($title);
 
-        $description = new Textarea('description');
-        $description->setLabel('<i class="fas fa-tags mr-1"></i>Mô tả');
+        $excerpt = new Textarea('excerpt');
+        $excerpt->setLabel('<i class="fas fa-tags mr-1"></i>Mô tả');
         $attr = [
             'class' => 'form-control form-control-sm',
             'placeholder' => 'Mô tả',
@@ -30,8 +30,8 @@ class SlideshowsLangForm extends \Phalcon\Forms\Form
             'rows' => 4,
             'data-error' => "Thông tin chưa hợp lệ"
         ];
-        $attr = cFL($attr,$lang,'description');
-        $description->setAttributes($attr);
-        $this->add($description);
+        $attr = cFL($attr,$lang,'excerpt');
+        $excerpt->setAttributes($attr);
+        $this->add($excerpt);
     }
 }
