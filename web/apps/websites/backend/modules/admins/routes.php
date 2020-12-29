@@ -154,25 +154,6 @@ $router->add(WEB_ADMIN_URI . '/subjects/:action/:int', array(
     'id' => 2
 ));
 
-/***********************CalendarsController***********************/
-$router->add(WEB_ADMIN_URI . '/calendars', array(
-    'module' => 'backend_admins',
-    'controller' => 'calendars',
-    'action' => 'index',
-));
-
-$router->add(WEB_ADMIN_URI . '/calendars/:action', array(
-    'module' => 'backend_admins',
-    'controller' => 'calendars',
-    'action' => 1,
-));
-$router->add(WEB_ADMIN_URI . '/calendars/:action/:int', array(
-    'module' => 'backend_admins',
-    'controller' => 'calendars',
-    'action'  => 1,
-    'id' => 2
-));
-
 /***********************ResearchesController***********************/
 $router->add(WEB_ADMIN_URI . '/researches', array(
     'module' => 'backend_admins',
@@ -188,25 +169,6 @@ $router->add(WEB_ADMIN_URI . '/researches/:action', array(
 $router->add(WEB_ADMIN_URI . '/researches/:action/:int', array(
     'module' => 'backend_admins',
     'controller' => 'researches',
-    'action'  => 1,
-    'id' => 2
-));
-
-/***********************ClassesController***********************/
-$router->add(WEB_ADMIN_URI . '/classes', array(
-    'module' => 'backend_admins',
-    'controller' => 'classes',
-    'action' => 'index',
-));
-
-$router->add(WEB_ADMIN_URI . '/classes/:action', array(
-    'module' => 'backend_admins',
-    'controller' => 'classes',
-    'action' => 1,
-));
-$router->add(WEB_ADMIN_URI . '/classes/:action/:int', array(
-    'module' => 'backend_admins',
-    'controller' => 'classes',
     'action'  => 1,
     'id' => 2
 ));
