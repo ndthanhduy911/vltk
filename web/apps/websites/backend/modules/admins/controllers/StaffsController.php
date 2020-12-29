@@ -54,7 +54,7 @@ class StaffsController  extends \AdminsLangCore {
         $items->sort = $this->request->getPost('sort',['int']);
         $items->deptposition = $this->request->getPost('deptposition',['int']);
         $items->email = $this->request->getPost('email',['trim','string']);
-        $items->slug = $plug ? $plug : $this->helper->slugify($pTitle[1]);
+        $items->slug = $plug ? $this->helper->slugify($plug) : $this->helper->slugify($pTitle[1]);
         $items->image = $this->request->getPost('image',['trim','string']);
 
         if($this->className::findFirst(['slug = :slug: AND id != :id:','bind' => ['slug' => $items->slug,'id' => (!empty($items->id) ? $items->id : 0)]])){

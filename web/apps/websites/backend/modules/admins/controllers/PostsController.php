@@ -55,7 +55,7 @@ class PostsController  extends \AdminsLangCore {
         $plug = $this->request->getPost('slug',['string','trim']);
         $items->catid = $this->request->getPost('catid',['int']);
         $items->status = $this->request->getPost('status',['int']);
-        $items->slug = $plug ? $plug : $this->helper->slugify($pTitle[1]);
+        $items->slug = $plug ? $this->helper->slugify($plug) : $this->helper->slugify($pTitle[1]);
         $items->calendar = $this->helper->dateMysql($this->request->getPost('calendar', ['string', 'trim']),'Y-m-d H:i:s');
         $items->image = $this->request->getPost('image',['trim','string']);
 

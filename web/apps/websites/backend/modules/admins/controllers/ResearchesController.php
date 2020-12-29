@@ -45,7 +45,7 @@ class ResearchesController  extends \AdminsLangCore {
 
         $plug = $this->request->getPost('slug',['string','trim']);
         $items->status = $this->request->getPost('status',['int']);
-        $items->slug = $plug ? $plug : $this->helper->slugify($pTitle[1]);
+        $items->slug = $plug ? $this->helper->slugify($plug) : $this->helper->slugify($pTitle[1]);
         $items->image = $this->request->getPost('image',['trim','string']);
         $items->bgimage = $this->request->getPost('bgimage',['trim','string']);
 

@@ -174,7 +174,7 @@ class SocialsController  extends \BackendController {
 
         $clug = $this->request->getPost('slug',['string','trim']);
         $categories->status = $this->request->getPost('status',['int']);
-        $categories->slug = $clug ? $clug : $this->helper->slugify($pTitle[1]);
+        $categories->slug = $clug ? $this->helper->slugify($clug) : $this->helper->slugify($pTitle[1]);
         $categories->image = $this->request->getPost('image',['trim','string']);
 
         if(($this->className)::findFirst(["slug = :slug: AND id != :id:","bind" => ["slug" => $categories->slug,'id'=> $id]])){
