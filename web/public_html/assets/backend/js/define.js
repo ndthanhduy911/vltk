@@ -281,9 +281,14 @@ const changeToSlug = (title) =>
     
     return slug;
 }
-const showSelectImage = (button, showImg, uploadImageValue, buttonRemoveImg) => {
+
+const showSelectImage = (button) => {
     if($(button).length){
         $('body').on('click', button ,function (e) {
+            let pr = $(this).parents('.boxImg')
+            let showImg = pr.find('.showImg');
+            let uploadImageValue = pr.find('input');
+            let buttonRemoveImg = pr.find('.rmImage');
             e.preventDefault();
             let elfNode = $('<div \>');
             elfNode.dialog({
@@ -305,12 +310,12 @@ const showSelectImage = (button, showImg, uploadImageValue, buttonRemoveImg) => 
                             console.log(file.url);
                             file.url = file.url.replace("/elfinder/php/../../", '/');
                             let url = file.url;
-                            if($(buttonRemoveImg).length){
-                                $(buttonRemoveImg).removeClass('hidden');
+                            if(buttonRemoveImg.length){
+                                buttonRemoveImg.removeClass('hidden');
                             }
-                            $(showImg).attr('src' , url);
-                            $(showImg).attr('alt' , url);
-                            $(uploadImageValue).val(url);
+                            showImg.attr('src' , url);
+                            showImg.attr('alt' , url);
+                            uploadImageValue.val(url);
                             elfNode.dialog('close');
                             elfInsrance.disable();
                         }
@@ -318,19 +323,27 @@ const showSelectImage = (button, showImg, uploadImageValue, buttonRemoveImg) => 
                 }
             }).parent().css({'zIndex':'11000','top':'100px', 'position' : 'fixed'});
         });
-        if($(buttonRemoveImg).length){
-            $('body').on('click', buttonRemoveImg ,function (e) {
-                e.preventDefault();
-                showSweetAlert(()=>{
-                    $(showImg).attr('src' , '');
-                    $(showImg).attr('alt' , '');
-                    $(uploadImageValue).val('');
-                    $(buttonRemoveImg).addClass('hidden');
-                })
-            });
-        }
+
     }
 }
+
+const rmSelectImage = (button) => {
+    if(button.length){
+        $('body').on('click', button ,function (e) {
+            e.preventDefault();
+            let pr = $(this).parents('.boxImg')
+            let showImg = pr.find('.showImg');
+            let uploadImageValue = pr.find('input');
+            showSweetAlert(()=>{
+                showImg.attr('src' , '');
+                showImg.attr('alt' , '');
+                uploadImageValue.val('');
+                $(button).addClass('hidden');
+            })
+        });
+    }
+}
+
 const getPathImage = (path = null, iamgeDefault = '') => {
     return path ? path : iamgeDefault
 }

@@ -12,7 +12,8 @@ const updateViews = (form = '#frmViews') => {
             window.location.reload();
         });
     
-        showSelectImage(".boxImg .upImage",'.boxImg .showImg','.boxImg input', '.boxImg .rmImage');
+        showSelectImage(".upImage");
+        rmSelectImage('.rmImage')
         changeTitleToSlug('#title1', '#slug');
     }
 }
