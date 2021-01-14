@@ -121,6 +121,7 @@ class OptionsController  extends \BackendController {
         $items->image = $this->request->getPost('image',['trim','string']);
         $items->logo = $this->request->getPost('logo',['trim','string']);
         $items->icon = $this->request->getPost('icon',['trim','string']);
+        $items->parentid = 0;
 
         try {
             $this->db->begin();

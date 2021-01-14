@@ -48,7 +48,7 @@ class StaffsController  extends \AdminsLangCore {
         }else{
             $items->deptid = $items->deptid ? $items->deptid : $this->request->getPost('deptid',['int']);
         }
-        $dsort = $this->request->getPost('sort',['int']);
+        $dsort = $this->request->getPost('dsort',['int']);
         $sort = $this->request->getPost('sort',['int']);
         $plug = $this->request->getPost('slug',['string','trim']);
         $items->status = $this->request->getPost('status',['int']);
