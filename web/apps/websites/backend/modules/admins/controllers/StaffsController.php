@@ -94,7 +94,7 @@ class StaffsController  extends \AdminsLangCore {
         ->leftJoin('StaffsLang', 'sl.staffid = s.id AND sl.langid = 1','sl')
         ->leftJoin('Depts', 'd.id = s.deptid','d');
         if($this->session->get('deptid') == 1){
-            $data = $data->orderBy('s.sort ASC,(s.dean = 0),s.dean ASC,(s.deptposition = 0),s.deptposition ASC,s.deptid ASC');
+            $data = $data->orderBy('(s.dean = 0),s.dean ASC,(s.deptposition = 0),s.deptposition ASC,s.sort ASC,s.deptid ASC');
         }else{
             $data = $data->orderBy('s.dsort ASC');
         }
