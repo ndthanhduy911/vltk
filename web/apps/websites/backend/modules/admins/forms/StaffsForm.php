@@ -94,17 +94,28 @@ class StaffsForm extends Form
         ));
         $this->add($slug);
 
-
-        $sort = new Numeric('sort');
-        $sort->setAttributes(array(
-            'class' => 'form-control form-control-sm',
-            'placeholder' => 'Sắp xếp',
-            'maxlength' => "999",
-            'data-error' => "Thông tin chưa hợp lệ"
-        ));
-        $sort->setLabel('<i class="fas fa-sort mr-1"></i>Sắp xếp');
-        $this->add($sort);
-
+        if($_SESSION['deptid'] == 1){
+            $sort = new Numeric('sort');
+            $sort->setAttributes(array(
+                'class' => 'form-control form-control-sm',
+                'placeholder' => 'Sắp xếp',
+                'maxlength' => "999",
+                'data-error' => "Thông tin chưa hợp lệ"
+            ));
+            $sort->setLabel('<i class="fas fa-sort mr-1"></i>Sắp xếp');
+            $this->add($sort);
+        }else{
+            $dsort = new Numeric('dsort');
+            $dsort->setAttributes(array(
+                'class' => 'form-control form-control-sm',
+                'placeholder' => 'Sắp xếp',
+                'maxlength' => "999",
+                'data-error' => "Thông tin chưa hợp lệ"
+            ));
+            $dsort->setLabel('<i class="fas fa-sort mr-1"></i>Sắp xếp');
+            $this->add($dsort);
+        }
+        
         //image
         $image = new Hidden('image');
         $image->setLabel('<i class="fas fa-image mr-1"></i>Ảnh đại diện');
