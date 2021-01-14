@@ -52,8 +52,8 @@ class StaffsController  extends \AdminsLangCore {
         $sort = $this->request->getPost('sort',['int']);
         $plug = $this->request->getPost('slug',['string','trim']);
         $items->status = $this->request->getPost('status',['int']);
-        $items->sort = $sort ? $sort : 1;
-        $items->dsort = $dsort ? $dsort : 1;
+        $items->sort = $sort ? $sort : 99;
+        $items->dsort = $dsort ? $dsort : 99;
         $items->deptposition = $this->request->getPost('deptposition',['int']);
         $items->email = $this->request->getPost('email',['trim','string']);
         $items->slug = $plug ? $this->helper->slugify($plug) : $this->helper->slugify($pTitle[1]);
