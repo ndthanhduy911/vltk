@@ -55,7 +55,7 @@
         ->from(['s'=>'Staffs'])
         ->where("s.deleted = 0 AND s.status = 1 AND s.deptposition != 5 AND s.deptid = $dept->id")
         ->leftJoin("StaffsLang", "sl.staffid = s.id AND sl.langid = $langid",'sl')
-        ->orderBy("s.deptposition ASC")
+        ->orderBy("s.dsort ASC,s.deptposition ASC")
         ->getQuery()
         ->execute();
         
@@ -74,7 +74,7 @@
         ->from(['s'=>'Staffs'])
         ->where("s.deleted = 0 AND s.status = 1 AND s.deptposition = 5 AND s.deptid = $dept->id")
         ->leftJoin("StaffsLang", "sl.staffid = s.id AND sl.langid = $langid",'sl')
-        ->orderBy("s.deptposition ASC")
+        ->orderBy("s.dsort ASC,s.deptposition ASC")
         ->getQuery()
         ->execute();
     } 

@@ -48,11 +48,12 @@ class StaffsController  extends \AdminsLangCore {
         }else{
             $items->deptid = $items->deptid ? $items->deptid : $this->request->getPost('deptid',['int']);
         }
-
+        $dsort = $this->request->getPost('sort',['int']);
+        $sort = $this->request->getPost('sort',['int']);
         $plug = $this->request->getPost('slug',['string','trim']);
         $items->status = $this->request->getPost('status',['int']);
-        $items->sort = $this->request->getPost('sort',['int']);
-        $items->dsort = $this->request->getPost('dsort',['int']);
+        $items->sort = $sort ? $sort : 1;
+        $items->dsort = $dsort ? $dsort : 1;
         $items->deptposition = $this->request->getPost('deptposition',['int']);
         $items->email = $this->request->getPost('email',['trim','string']);
         $items->slug = $plug ? $this->helper->slugify($plug) : $this->helper->slugify($pTitle[1]);
@@ -93,7 +94,7 @@ class StaffsController  extends \AdminsLangCore {
         ->leftJoin('StaffsLang', 'sl.staffid = s.id AND sl.langid = 1','sl')
         ->leftJoin('Depts', 'd.id = s.deptid','d');
         if($this->session->get('deptid') == 1){
-            $data = $data->orderBy('s.sort ASC');
+            $data = $data->orderBy('(s.dean = 0),s.dean ASC,(s.deptposition = 0),s.deptposition ASC,s.deptid ASC,s.sort ASC');
         }else{
             $data = $data->orderBy('s.dsort ASC');
         }
