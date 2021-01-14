@@ -91,8 +91,13 @@ class StaffsController  extends \AdminsLangCore {
         ->from(['s' => "Staffs"])
         ->where("s.deleted = 0")
         ->leftJoin('StaffsLang', 'sl.staffid = s.id AND sl.langid = 1','sl')
-        ->leftJoin('Depts', 'd.id = s.deptid','d')
-        ->orderBy('s.dsort ASC,(s.dean = 0),s.dean ASC,(s.deptposition = 0),s.deptposition ASC,s.deptid ASC,s.id DESC');
+        ->leftJoin('Depts', 'd.id = s.deptid','d');
+        if($this->session->get('deptid') == 1){
+            $data = $data->orderBy('s.sort ASC');
+        }else{
+            $data = $data->orderBy('s.dsort ASC');
+        }
+
 
         $data = $this->master::builderPermission($data,$perL,'s');
         $data = \FilterSetting::getDataOrder($this,$data,($this->className)::findFirst(),'s',['sl'=>'title']);
