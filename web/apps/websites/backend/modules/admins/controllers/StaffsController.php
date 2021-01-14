@@ -14,7 +14,7 @@ class StaffsController  extends \AdminsLangCore {
 
     public $itemsLangFrom = \Backend\Modules\Admins\Forms\StaffsLangForm::class;
 
-    public $fTables = ['image','title','email','dean','deptposition','createdat','slug','status'];
+    public $fTables = ['image','title','email','regency','deptposition','createdat','slug','status'];
 
     public $fFilters = ['title','email','status','createdat'];
 
@@ -44,7 +44,7 @@ class StaffsController  extends \AdminsLangCore {
 
         if($deptid == 1){
             $items->deptid = $this->request->getPost('deptid',['int']);
-            $items->dean = $this->request->getPost('dean',['int']);
+            $items->regency = $this->request->getPost('regency',['int']);
         }else{
             $items->deptid = $items->deptid ? $items->deptid : $this->request->getPost('deptid',['int']);
         }
@@ -75,7 +75,7 @@ class StaffsController  extends \AdminsLangCore {
             's.slug',
             's.image',
             's.email',
-            's.dean',
+            's.regency',
             's.deptposition',
             's.createdat',
             's.deptid',
@@ -94,7 +94,7 @@ class StaffsController  extends \AdminsLangCore {
         ->leftJoin('StaffsLang', 'sl.staffid = s.id AND sl.langid = 1','sl')
         ->leftJoin('Depts', 'd.id = s.deptid','d');
         if($this->session->get('deptid') == 1){
-            $data = $data->orderBy('(s.dean = 0),s.dean ASC,(s.deptposition = 0),s.deptposition ASC,s.sort ASC,s.deptid ASC');
+            $data = $data->orderBy('(s.regency = 0),s.regency ASC,(s.deptposition = 0),s.deptposition ASC,s.sort ASC,s.deptid ASC');
         }else{
             $data = $data->orderBy('s.dsort ASC');
         }

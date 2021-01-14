@@ -14,8 +14,8 @@
                                 <a href="{{ helper.getLinkImage(staff.image, '/assets/frontend/images/teams.jpg') }}" class="popup-img overlay-link" title="{{stafflang.title}}"><i class="fa fa-plus"></i></a>
                                 <div class="overlay-bottom">
                                 <div class="text">
-                                    {% if staff.dean %}
-                                    <p class="margin-clear text-uppercase"><?= \Staffs::getDean($staff->dean) ?></p>
+                                    {% if staff.regency %}
+                                    <p class="margin-clear text-uppercase"><?= \Staffs::getDean($staff->regency) ?></p>
                                     {% endif %}
                                     <p class="margin-clear text-uppercase"><?= \Staffs::getPosition($staff->deptposition) ?></p>
                                 </div>

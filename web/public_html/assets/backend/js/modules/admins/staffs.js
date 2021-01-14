@@ -1,5 +1,5 @@
-const showDean = (dean = '') => {
-    switch (parseInt(dean)) {
+const showDean = (regency = '') => {
+    switch (parseInt(regency)) {
         case 1:
             return `<span class="badge badge-primary p-1">Trưởng khoa</span>`;
         case 2:
@@ -33,7 +33,7 @@ const loadTableItems = (table = '#items', cb = () => {}) => {
         let router = {
             co:'staffs',aj:'ajaxgetdata',fo:'#searchItems',cl:'Items',ti:'cán bộ',
             ff:['title','email','status','createdat'],
-            tf:['image','title','email','dean','deptposition','createdat','slug','status']
+            tf:['image','title','email','regency','deptposition','createdat','slug','status']
         };
         let paramsUrl = getParams();
         let columns = [];
@@ -61,7 +61,7 @@ const loadTableItems = (table = '#items', cb = () => {}) => {
                 $(`td:eq(${fkeys.indexOf('title')})`, row).html(showTitle(item.title,30));
                 $(`td:eq(${fkeys.indexOf('image')})`, row).html(image);
                 $(`td:eq(${fkeys.indexOf('slug')})`, row).html(getItemsLink(5,item));
-                $(`td:eq(${fkeys.indexOf('dean')})`, row).html(showDean(item.dean));
+                $(`td:eq(${fkeys.indexOf('regency')})`, row).html(showDean(item.regency));
                 $(`td:eq(${fkeys.indexOf('deptposition')})`, row).html(showPosition(item.deptposition));
                 $(`td:eq(${fkeys.indexOf('createdat')})`, row).html(vi_moment(item.createdat, 'DD/MM/YYYY HH:mm'));
                 $(`td:eq(${fkeys.indexOf('status')})`, row).html(showStatus(item.status));

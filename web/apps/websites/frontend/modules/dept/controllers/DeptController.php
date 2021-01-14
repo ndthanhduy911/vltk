@@ -91,7 +91,7 @@ class DeptController extends \FrontendController
             's.id',
             's.slug',
             's.image',
-            's.dean',
+            's.regency',
             's.deptposition',
             's.email',
             's.deptid',
@@ -101,7 +101,7 @@ class DeptController extends \FrontendController
         ->from(['s'=>'Staffs'])
         ->where("s.deptid = {$dept->id} AND s.status = 1 AND s.deleted = 0 AND (s.deptposition = 1 OR s.deptposition = 2)")
         ->leftJoin("StaffsLang", "sl.staffid = s.id AND sl.langid = {$langid}",'sl')
-        ->orderBy("s.dsort ASC,s.dean ASC")
+        ->orderBy("s.dsort ASC,s.regency ASC")
         ->limit(3)
         ->getQuery()
         ->execute();

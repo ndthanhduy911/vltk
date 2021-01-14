@@ -74,6 +74,7 @@
                         </div>
                     </div>
                     <div class="col-md-3">
+                        
                         {% for filed in form %}
                             {% if filed.getUserOption('attr') != 'disabled' %}
                                 {% if filed.getUserOption('attr') == 'image' %}

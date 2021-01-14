@@ -86,7 +86,7 @@ class IndexController extends \FrontendController
             's.id',
             's.slug',
             's.image',
-            's.dean',
+            's.regency',
             's.deptposition',
             's.email',
             's.deptid',
@@ -94,9 +94,9 @@ class IndexController extends \FrontendController
             'sl.content content'
         ))
         ->from(['s'=>'Staffs'])
-        ->where("s.status = 1 AND s.deleted = 0 AND (s.dean = 1 OR s.dean = 2)")
+        ->where("s.status = 1 AND s.deleted = 0 AND (s.regency = 1 OR s.regency = 2)")
         ->leftJoin("StaffsLang", "sl.staffid = s.id AND sl.langid = $langid",'sl')
-        ->orderBy("s.sort ASC, s.dean ASC")
+        ->orderBy("s.sort ASC, s.regency ASC")
         ->limit(3)
         ->getQuery()
         ->execute();

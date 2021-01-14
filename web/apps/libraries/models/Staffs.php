@@ -48,8 +48,8 @@ class Staffs extends \ModelCore
         return $this->validate($helper->getValidation());
     }
 
-    public static function getDean($dean = ""){
-        switch ((int)$dean) {
+    public static function getDean($regency = ""){
+        switch ((int)$regency) {
             case 1: 
                 return MLML::_ml_system('dean',"Trưởng khoa");
             case 2: 
@@ -85,7 +85,7 @@ class Staffs extends \ModelCore
             'slug' => 'Xem',
             'status' => 'Trạng thái',
             'image' => 'Hình đại diện',
-            'dean' => 'Chức vụ Khoa',
+            'regency' => 'Chức vụ Khoa',
             'deptposition' => 'Chức vụ Bộ môn',
             'email' => 'E-mail',
             'deptid' => 'Bộ môn',

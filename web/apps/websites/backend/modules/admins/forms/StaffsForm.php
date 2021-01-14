@@ -41,21 +41,21 @@ class StaffsForm extends Form
         }
         $this->add($deptid);
 
-        $dean = new Select('dean', [
-            1 => "Trưởng khoa",
-            2 => "Phó trưởng khoa",
+        $regency = new Select('regency', [
+            '1' => "Trưởng khoa",
+            '2' => "Phó trưởng khoa",
         ], [
             'class' => 'form-control form-control-sm',
             'useEmpty' => true,
-            'emptyText' => 'Không có',
+            'emptyText' => 'Chọn chức vụ',
             'emptyValue' => '',
             'data-error' => "Thông tin chưa hợp lệ"
         ]);
-        $dean->setLabel('<i class="fas fa-school mr-1"></i>Chức vụ Khoa');
         if($sdeptid != 1){
-            $dean->setUserOption('attr','disabled');
+            $regency->setUserOption('attr','disabled');
         }
-        $this->add($dean);
+        $regency->setLabel('<i class="fas fa-school mr-1"></i>Chức vụ Khoa');
+        $this->add($regency);
 
         $deptposition = new Select('deptposition', [
             1 => "Trưởng bộ môn",

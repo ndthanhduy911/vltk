@@ -1,6 +1,6 @@
 $(document).ready(function () {
 	inputFilterLoader();
-	select2Loader();
+	// select2Loader();
 	dateRangePickerLoader();
 	numberLoaderList();
 	viewGallery('.viewGallery');

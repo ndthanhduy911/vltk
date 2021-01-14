@@ -162,7 +162,7 @@
                             <div class="text p-0">
                                 <h4 class="title text-white text-uppercase">{{staff.title}}</h4>
                                 <div class="separator light"></div>
-                                <p class="small margin-clear"><em><?= \Staffs::getDean($staff->dean) ?></em></p>
+                                <p class="small margin-clear"><em><?= \Staffs::getDean($staff->regency) ?></em></p>
                             </div>
                         </div>
                     </div>

@@ -1,11 +1,11 @@
 <?php
     if($dept->id == 1){
-        $deanStaffs = $this->modelsManager->createBuilder()
+        $regencyStaffs = $this->modelsManager->createBuilder()
         ->columns(array(
             's.id',
             's.slug',
             's.image',
-            's.dean',
+            's.regency',
             's.deptposition',
             's.email',
             's.deptid',
@@ -14,8 +14,8 @@
         ))
         ->from(['s'=>'Staffs'])
         ->leftJoin("StaffsLang", "sl.staffid = s.id AND sl.langid = $langid",'sl')
-        ->where("s.status = 1 AND (s.dean = 1 OR s.dean = 2)")
-        ->orderBy("s.sort ASC, s.dean ASC")
+        ->where("s.status = 1 AND (s.regency = 1 OR s.regency = 2)")
+        ->orderBy("s.sort ASC, s.regency ASC")
         ->limit(3)
         ->getQuery()
         ->execute();
@@ -25,7 +25,7 @@
             's.id',
             's.slug',
             's.image',
-            's.dean',
+            's.regency',
             's.deptposition',
             's.email',
             's.deptid',
@@ -45,7 +45,7 @@
             's.id',
             's.slug',
             's.image',
-            's.dean',
+            's.regency',
             's.deptposition',
             's.email',
             's.deptid',
@@ -64,7 +64,7 @@
             's.id',
             's.slug',
             's.image',
-            's.dean',
+            's.regency',
             's.deptposition',
             's.email',
             's.deptid',
@@ -110,7 +110,7 @@
                     <h3 class="text-primary">{{ ml._ml_system('main_staff', 'BAN CHỦ NHIỆM') }}</h3>
                     <div class="separator-2"></div>
                     <div class="row grid-space-10">
-                        {% for key,staff in deanStaffs %}
+                        {% for key,staff in regencyStaffs %}
                         <div class="w-{{ key === 1 ? '40' : '30' }} pl-1 pr-1 mt-3">
                             <div class="team-member image-box style-2 dark-bg text-center">
                                 <div class="overlay-container overlay-visible">
@@ -118,7 +118,7 @@
                                 </div>
                                 <div class="body">
                                     <h5 class="margin-clear text-uppercase"><a href="<?= \Staffs::getUrl($dept,$staff) ?>" title="{{ staff.title }}">{{ staff.title }}</a></h5>
-                                    <small class="text-uppercase"><?= \Staffs::getDean($staff->dean) ?></small>
+                                    <small class="text-uppercase"><?= \Staffs::getDean($staff->regency) ?></small>
                                     <div class="separator mt-10"></div>
                                     {% if staff.email %}
                                     <a href="mailto:{{ staff.email }}" class="margin-clear btn btn-md-link link-light"><i class="pr-10 fa fa-envelope-o"></i>{{ staff.email }}</a>
