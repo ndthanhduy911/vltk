@@ -22,10 +22,10 @@
                                 </div>
                             </div>
                         </div>
-                        <h3 class="title">{{ ml._ml_system('department', 'Đơn vị') }}</h3>
+                        <h3 class="title">{{ ml._ml('department', 'Đơn vị') }}</h3>
                         <a href="<?= WEB_URL ?>/{{ dept_info.slug }}" class="text-info">{{ deptlanginfo.title }}</a>
 
-                        <h3 class="title mt-3">{{ ml._ml_system('contact', 'Liên hệ') }}</h3>
+                        <h3 class="title mt-3">{{ ml._ml('contact', 'Liên hệ') }}</h3>
                         <ul class="list-icons">
                             <li><a href="mailto:{{ staff.email }}" class="text-info"><i class="fa fa-envelope-o pr-10"></i>{{ staff.email }}</a></li>
                         </ul>

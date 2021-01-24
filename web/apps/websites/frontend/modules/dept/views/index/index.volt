@@ -34,7 +34,7 @@
                             <h2 class="title slider-title">{{ banner.title }}</h2>
                             <div class="separator-2 clearfix m-0"></div>
                             <p class="slider-content">{{ banner.excerpt }}</p>
-                            <div class="text-right"><a class="btn btn-small btn-default margin-clear" href="{{ banner.link }}">{{ml._ml_system('detail',"Chi tiết")}}</a></div>
+                            <div class="text-right"><a class="btn btn-small btn-default margin-clear" href="{{ banner.link }}">{{ml._ml('detail',"Chi tiết")}}</a></div>
                         </div>
                     </li>
                     {% endfor %}
@@ -95,7 +95,7 @@
                         {% endfor %}
                     </div>
                     <footer class="clearfix">
-                        <div class="link pull-right small"><i class="fa fa-link pr-1"></i><a href="<?= Categories::getUrl($dept, $cat) ?>">{{ ml._ml_system('more', 'Xem thêm') }}</a></div>
+                        <div class="link pull-right small"><i class="fa fa-link pr-1"></i><a href="<?= Categories::getUrl($dept, $cat) ?>">{{ ml._ml('more', 'Xem thêm') }}</a></div>
                     </footer>
                 </div>
             </div>
@@ -172,7 +172,7 @@
         </div>
         <div class="col-lg-12 text-center">
             <?php $staff_link = $dept->slug !== '/' ? WEB_URL.$dept->slug.'/staffs' : WEB_URL.'/staffs'; ?>
-            <a href="{{staff_link}}" class="btn btn-default btn-lg btn-animated radius-50">{{ ml._ml_system('more', 'Xem thêm') }} <i class="fa fa-arrow-right"></i></a>
+            <a href="{{staff_link}}" class="btn btn-default btn-lg btn-animated radius-50">{{ ml._ml('more', 'Xem thêm') }} <i class="fa fa-arrow-right"></i></a>
         </div>
     </div>
 </section>

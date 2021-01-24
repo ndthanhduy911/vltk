@@ -20,7 +20,7 @@
     <div class="container">
         <div class="row">
             <div class="main col-12">
-                <h3 class="title">{{ ml._ml_system('contact', 'Liên hệ') }}</h3>
+                <h3 class="title">{{ ml._ml('contact', 'Liên hệ') }}</h3>
                 <div class="separator-2"></div>
                 <div class="row">
                     <div class="col-lg-12">

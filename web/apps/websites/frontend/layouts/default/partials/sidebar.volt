@@ -31,7 +31,7 @@
 <div class="sidebar">
     {% if cats.count() %}
     <div class="block clearfix">
-        <h3 class="title"> {{ ml._ml_system('categories', 'Danh mục') }}</h3>
+        <h3 class="title"> {{ ml._ml('categories', 'Danh mục') }}</h3>
         <div class="separator-2"></div>
         <nav>
             <ul class="nav flex-column">
@@ -44,7 +44,7 @@
     {% endif %}
     {% if posts.count() %}
     <div class="block clearfix">
-        <h3 class="title">{{ ml._ml_system('latest_news', 'Tin mới nhất') }}</h3>
+        <h3 class="title">{{ ml._ml('latest_news', 'Tin mới nhất') }}</h3>
         <div class="separator-2"></div>
         {% for key, post in posts %}
         {{ key == 0 ? '' : "<hr>"  }}
@@ -64,7 +64,7 @@
         {% endfor %}
         {#
         <div class="text-right space-top">
-            <a href="<?= \Categories::getUrl($dept) ?>" class="link-dark"><i class="fa fa-plus-circle pl-1 pr-1"></i>{{ ml._ml_system('more', 'Xem thêm') }}</a>
+            <a href="<?= \Categories::getUrl($dept) ?>" class="link-dark"><i class="fa fa-plus-circle pl-1 pr-1"></i>{{ ml._ml('more', 'Xem thêm') }}</a>
         </div>
         #}
     </div>

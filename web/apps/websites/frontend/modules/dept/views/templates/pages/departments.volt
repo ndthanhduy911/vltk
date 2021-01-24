@@ -76,7 +76,7 @@
                         <div class="overlay-container rounded overlay-visible">
                             <img src="{{ helper.getLinkImage(research.image) }}"
                                 alt="{{ dept_item.title }}">
-                            <a href="<?php \Researches::getUrl($dept, $research) ?>" class="overlay-link"><i
+                            <a href="<?= \Researches::getUrl($dept, $research) ?>" class="overlay-link"><i
                                     class="fa fa-graduation-cap"></i></a>
                             <div class="overlay-bottom hidden-xs">
                                 <div class="text">

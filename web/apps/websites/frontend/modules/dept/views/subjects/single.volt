@@ -1,5 +1,4 @@
 {{ partial('breadcrumb') }}
-
 <section class="main-container pt-5">
     <div class="container">
         <div class="row">

@@ -51,9 +51,9 @@ class Staffs extends \ModelCore
     public static function getDean($regency = ""){
         switch ((int)$regency) {
             case 1: 
-                return MLML::_ml_system('dean',"Trưởng khoa");
+                return MLML::_ml('dean',"Trưởng khoa");
             case 2: 
-                return MLML::_ml_system('vice_dean',"Phó trưởng khoa");            
+                return MLML::_ml('vice_dean',"Phó trưởng khoa");            
             default:
                 return "";
                 break;
@@ -63,17 +63,17 @@ class Staffs extends \ModelCore
     public static function getPosition($pos = ""){
         switch ((int)$pos) {
             case 1: 
-                return  MLML::_ml_system('dean_dept',"Trưởng bộ môn") ;
+                return  MLML::_ml('dean_dept',"Trưởng bộ môn") ;
             case 2: 
-                return MLML::_ml_system('vice_dean_dept',"Phó bộ môn");       
+                return MLML::_ml('vice_dean_dept',"Phó bộ môn");       
             case 3: 
-                return MLML::_ml_system('managing_lecturer',"Giáo vụ");      
+                return MLML::_ml('managing_lecturer',"Giáo vụ");      
             case 4: 
-                return MLML::_ml_system('lecturer',"Giảng viên");  
+                return MLML::_ml('lecturer',"Giảng viên");  
             case 5: 
-                return MLML::_ml_system('visiting_lecturer',"Cán bộ thỉnh giảng");  
+                return MLML::_ml('visiting_lecturer',"Cán bộ thỉnh giảng");  
             case 6: 
-                return MLML::_ml_system('staff',"Nhân viên");  
+                return MLML::_ml('staff',"Nhân viên");  
             default:
                 return "";
                 break;

@@ -32,7 +32,7 @@ const loadTableItems = (table = '#items', cb = () => {}) => {
                 $(`td:eq(${fkeys.indexOf('title')})`, row).html(showTitle(item.title,30));
                 $(`td:eq(${fkeys.indexOf('excerpt')})`, row).html(showTitle(item.excerpt,30));
                 $(`td:eq(${fkeys.indexOf('image')})`, row).html(image);
-                $(`td:eq(${fkeys.indexOf('slug')})`, row).html(getItemsLink(2,item));
+                $(`td:eq(${fkeys.indexOf('slug')})`, row).html(getItemsLink(6,item));
                 $(`td:eq(${fkeys.indexOf('createdat')})`, row).html(vi_moment(item.createdat, 'DD/MM/YYYY HH:mm'));
                 $(`td:eq(${fkeys.indexOf('status')})`, row).html(showStatus(item.status));
                 $('td:last', row).addClass('text-nowrap').html(showButtonEdit(item,router.co,router.cl));

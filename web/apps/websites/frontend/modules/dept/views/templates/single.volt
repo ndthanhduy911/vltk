@@ -2,19 +2,14 @@
 <section class="main-container">
     <div class="container">
         <div class="row">
-
-            <!-- main start -->
-            <!-- ================ -->
             <div class="main col-lg-9">
-                <!-- blogpost start -->
-                <!-- ================ -->
                 <article class="blogpost full">
                     <header>
                         <h3>{{title}}</h3>
                         <div class="post-info">
                             <span class="post-date">
                                 <i class="fa fa-calendar-o pr-1"></i>
-                                <span class="day">{{helper.getWVN(post.calendar)}}, {{ ml._ml_system('day', 'ngày') }} {{ helper.datetimeVn(post.calendar) }}</span>
+                                <span class="day">{{helper.getWVN(post.calendar)}}, {{ ml._ml('day', 'ngày') }} {{ helper.datetimeVn(post.calendar) }}</span>
                             </span>
                         </div>
                     </header>

@@ -61,7 +61,7 @@
                                 <p>{{post.excerpt}}</p>
                             </div>
                             <footer class="clearfix">
-                                <div class="link pull-right"><i class="fa fa-link pr-1"></i><a href="<?= \Posts::getUrl($dept, $post) ?>">{{ ml._ml_system('more', 'Xem thêm') }}</a></div>
+                                <div class="link pull-right"><i class="fa fa-link pr-1"></i><a href="<?= \Posts::getUrl($dept, $post) ?>">{{ ml._ml('more', 'Xem thêm') }}</a></div>
                             </footer>
                         </article>
                     </div>

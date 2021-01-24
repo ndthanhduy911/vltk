@@ -21,7 +21,7 @@
                                 <div class="post-info">
                                     <span class="post-date">
                                         <i class="fa fa-calendar-o pr-1"></i>
-                                        <span class="day">{{helper.getWVN(post.calendar)}}, {{ ml._ml_system('day', 'ngày') }} {{ helper.datetimeVn(post.calendar) }}</span>
+                                        <span class="day">{{helper.getWVN(post.calendar)}}, {{ ml._ml('day', 'ngày') }} {{ helper.datetimeVn(post.calendar) }}</span>
                                         
                                     </span>
                                 </div>
@@ -32,7 +32,7 @@
                             <footer class="clearfix">
                                 <!-- <div class="tags pull-left"><i class="fa fa-tags pr-1"></i> <a href="#">tag 1</a>,
                                     <a href="#">tag 2</a>, <a href="#">long tag 3</a></div> -->
-                                <div class="link pull-right"><i class="fa fa-link pr-1"></i><a href="<?= \Posts::getUrl($dept, $post) ?>">{{ ml._ml_system('more', 'Xem thêm') }}</a></div>
+                                <div class="link pull-right"><i class="fa fa-link pr-1"></i><a href="<?= \Posts::getUrl($dept, $post) ?>">{{ ml._ml('more', 'Xem thêm') }}</a></div>
                             </footer>
                         </article>
                     </div>

@@ -107,7 +107,7 @@
         <div class="row">
             <div class="main col-md-9">
                 {% if dept.id == 1 %}
-                    <h3 class="text-primary">{{ ml._ml_system('main_staff', 'BAN CHỦ NHIỆM') }}</h3>
+                    <h3 class="text-primary">{{ ml._ml('main_staff', 'BAN CHỦ NHIỆM') }}</h3>
                     <div class="separator-2"></div>
                     <div class="row grid-space-10">
                         {% for key,staff in regencyStaffs %}
@@ -134,7 +134,7 @@
                     {% set dept_o_id = 0 %}
                     {% for key, staff in otherStaffs %}
                         {% if dept_o_id != staff.deptid %}
-                            <h3 class="text-primary text-uppercase">{{ ml._ml_system('subject', 'Bộ môn') }} <?= Depts::getTitleById($staff->deptid, $langid) ?></h3>
+                            <h3 class="text-primary text-uppercase">{{ ml._ml('subject', 'Bộ môn') }} <?= Depts::getTitleById($staff->deptid, $langid) ?></h3>
                             <div class="separator-2"></div>
                             <div class="w-100">
                         {% endif %}
@@ -154,7 +154,7 @@
                                             <a href="mailto:{{staff.email}}" class="btn btn-link pl-0 text-left"><i class="pr-10 margin-clear fa fa-envelope-o"></i>{{staff.email}}</a>
                                             {% endif %}
                                             <div class="w-100">
-                                                <a href="<?= \Staffs::getUrl($dept, $staff) ?>" class="btn btn-default btn-sm btn-animated radius-50">{{ ml._ml_system('more', 'Xem thêm') }} <i class="fa fa-arrow-right"></i></a>
+                                                <a href="<?= \Staffs::getUrl($dept, $staff) ?>" class="btn btn-default btn-sm btn-animated radius-50">{{ ml._ml('more', 'Xem thêm') }} <i class="fa fa-arrow-right"></i></a>
                                             </div>
                                         </div>
                                     </div>
@@ -166,7 +166,7 @@
                         {% endif %}
                     {% endfor %}
                 {% else %}
-                    <h2 class="page-title">{{ ml._ml_system('main_staff', 'Cán bộ cơ hữu') }}</h2>
+                    <h2 class="page-title">{{ ml._ml('main_staff', 'Cán bộ cơ hữu') }}</h2>
                     <div class="separator-2"></div>
                     {% for staff in mainStaffs %}
                     <div class="image-box team-member style-3-b">
@@ -183,12 +183,12 @@
                                 <div class="separator-2 mt-10"></div>
                                 {#{ helper.getExcerpt(staff.content,0,400) }#}
                                 {% if staff.email %}
-                                <h4 class="title mt-3">{{ ml._ml_system('contact', 'Liên hệ') }}</h4>
+                                <h4 class="title mt-3">{{ ml._ml('contact', 'Liên hệ') }}</h4>
                                 <ul class="list-icons">
                                     <li><a href="mailto:{{ staff.email }}" class="text-info"><i class="fa fa-envelope-o pr-10"></i>{{ staff.email }}</a></li>
                                 {% endif %}
                                 <div class="w-100">
-                                    <a href="<?= \Staffs::getUrl($dept, $staff) ?>" class="btn btn-default btn-sm btn-animated radius-50">{{ ml._ml_system('more', 'Xem thêm') }} <i class="fa fa-arrow-right"></i></a>
+                                    <a href="<?= \Staffs::getUrl($dept, $staff) ?>" class="btn btn-default btn-sm btn-animated radius-50">{{ ml._ml('more', 'Xem thêm') }} <i class="fa fa-arrow-right"></i></a>
                                 </div>
                                 </div>
                             </div>
@@ -196,7 +196,7 @@
                     </div>
                     {% endfor %}
 
-                    <h2 class="page-title">{{ ml._ml_system('employ_staff', 'Cán bộ thỉnh giảng') }}</h2>
+                    <h2 class="page-title">{{ ml._ml('employ_staff', 'Cán bộ thỉnh giảng') }}</h2>
                     <div class="separator-2"></div>
                     {% for staff in employStaff %}
                     <div class="image-box team-member style-3-b">
@@ -213,13 +213,13 @@
                                     <div class="separator-2 mt-10"></div>
                                     {#{ helper.getExcerpt(staff.content,0,400) }#}
                                     {% if staff.email %}
-                                    <h4 class="title mt-3">{{ ml._ml_system('contact', 'Liên hệ') }}</h4>
+                                    <h4 class="title mt-3">{{ ml._ml('contact', 'Liên hệ') }}</h4>
                                     <ul class="list-icons">
                                         <li><a href="mailto:{{ staff.email }}" class="text-info"><i class="fa fa-envelope-o pr-10"></i>{{ staff.email }}</a></li>
                                     </ul>
                                     {% endif %}
                                     <div class="w-100">
-                                        <a href="<?= \Staffs::getUrl($dept, $staff) ?>" class="btn btn-default btn-sm btn-animated radius-50">{{ ml._ml_system('more', 'Xem thêm') }} <i class="fa fa-arrow-right"></i></a>
+                                        <a href="<?= \Staffs::getUrl($dept, $staff) ?>" class="btn btn-default btn-sm btn-animated radius-50">{{ ml._ml('more', 'Xem thêm') }} <i class="fa fa-arrow-right"></i></a>
                                     </div>
                                 </div>
                             </div>

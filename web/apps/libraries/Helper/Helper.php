@@ -267,19 +267,19 @@ class Helper
 
         switch ((int)date('w', strtotime($date))) {
             case 0: 
-                return MLML::_ml_system('sunday',"Chủ Nhật");
+                return MLML::_ml('sunday',"Chủ Nhật");
             case 1: 
-                return MLML::_ml_system('monday',"Thứ Hai");
+                return MLML::_ml('monday',"Thứ Hai");
             case 2: 
-                return MLML::_ml_system('tuesday',"Thứ Ba");
+                return MLML::_ml('tuesday',"Thứ Ba");
             case 3: 
-                return MLML::_ml_system('wednesday',"Thứ Tư");
+                return MLML::_ml('wednesday',"Thứ Tư");
             case 4: 
-                return MLML::_ml_system('thursday',"Thứ Năm");
+                return MLML::_ml('thursday',"Thứ Năm");
             case 5: 
-                return MLML::_ml_system('friday',"Thứ Sáu");
+                return MLML::_ml('friday',"Thứ Sáu");
             case 6: 
-                return MLML::_ml_system('saturday',"Thứ Bảy");
+                return MLML::_ml('saturday',"Thứ Bảy");
         
             default:
                 return "";

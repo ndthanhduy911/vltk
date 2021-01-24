@@ -115,7 +115,7 @@ class PostsController extends \FrontendController
         ->getQuery()
         ->execute();
 
-        $this->view->title = $this->ml->_ml_system('news', "Tin tức");
+        $this->view->title = $this->ml->_ml('news', "Tin tức");
         $this->view->pagination = \Posts::createPaging($paged,$postCount);
         $this->view->posts = $posts;
         $this->view->pick('templates/blog');   

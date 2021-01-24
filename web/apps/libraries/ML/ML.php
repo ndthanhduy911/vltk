@@ -30,7 +30,7 @@ namespace Library\ML;
 // }
 
 class ML {
-    static function _ml_system($id = null, $sentence = ""){
+    static function _ml($id = null, $sentence = ""){
         $lang_de = isset($_SESSION['shortname']) ? $_SESSION['shortname'] : 'vie';
         $path =  PUBLIC_DIR.'/language_file'.'/'.$lang_de.'/'.$lang_de.'.json';
         if(!file_exists($path)){
