@@ -116,12 +116,12 @@ class CategoriesController  extends \BackendController {
         $data = \FilterSetting::getDataOrder($this,$data,($this->className)::findFirst(),'c',['cl'=>'name']);
         $data = \FilterSetting::getDataFilter($this,$data,($this->className)::arrayFilter(),['c',['cl'=>['name']]]);
 
-        $array_row = [
+        $arrayRow = [
             'u' => $this->master::checkPermission($this->cler, 'update', 1)
         ];
 
         $search = '';
-        $this->helper->responseJson($this, $this->ssp->dataOutput($this, $data,$search, $array_row));
+        $this->helper->responseJson($this, $this->ssp->dataOutput($this, $data,$search, $arrayRow));
     }
     // ===================================
     // Update data

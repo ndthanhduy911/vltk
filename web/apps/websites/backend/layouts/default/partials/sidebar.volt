@@ -58,8 +58,7 @@
                         <p>Trang thông tin</p>
                     </a>
                 </li>
-                <li
-                    class="nav-item has-treeview {% if dispatcher.getControllerName() in ['subjects','researches'] %} {{ 'menu-open' }} {% endif %}">
+                <li class="nav-item has-treeview {% if dispatcher.getControllerName() in ['subjects','researches'] %} {{ 'menu-open' }} {% endif %}">
                     <a href="#"
                         class="nav-link {% if dispatcher.getControllerName() in ['subjects','researches'] %} {{ 'active' }} {% endif %}">
                         <i class="nav-icon fas fa-list"></i>
@@ -84,6 +83,24 @@
                                 class="nav-link {% if dispatcher.getControllerName()=='researches' %} {{ 'active' }} {% endif %}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Hướng nghiên cứu</p>
+                            </a>
+                        </li>
+                        {% endif %}
+                        {% if master.checkPermission('gmajors', 'index') %}
+                        <li class="nav-item">
+                            <a href="<?= WEB_ADMIN_URL ?>/gmajors"
+                                class="nav-link {% if dispatcher.getControllerName()=='gmajors' %} {{ 'active' }} {% endif %}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Môn học</p>
+                            </a>
+                        </li>
+                        {% endif %}
+                        {% if master.checkPermission('majors', 'index') %}
+                        <li class="nav-item">
+                            <a href="<?= WEB_ADMIN_URL ?>/majors"
+                                class="nav-link {% if dispatcher.getControllerName()=='majors' %} {{ 'active' }} {% endif %}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Môn học</p>
                             </a>
                         </li>
                         {% endif %}

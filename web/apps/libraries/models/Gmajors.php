@@ -1,17 +1,26 @@
 <?php
 use Library\Helper\HelperValidation;
-class Pages extends \ModelCore
+class Majors extends \ModelCore
 {
     public function initialize()
     {
         $this->setSchema(SCHEMADB);
-        $this->setSource("pages");
+        $this->setSource("gmajors");
+    }
+
+    public static function getUrl($dept, $gmajor = NULL)
+    {
+        if($dept->id == 1){
+            return WEB_URL.'/gmajors/'.$gmajor->slug;
+        }else{
+            return WEB_URL."/$dept->slug".'/gmajors/'.$gmajor->slug;
+        }
     }
 
     public static function getTitleById($id = null)
     {
-        if($page = PagesLang::findFirst(['pageid = :pageid:','bind' => ['pageid' => $id]])){
-            return $page->name;
+        if($gmajors = GmajorsLang::findFirst(['gmajorid = :gmajorid:','bind' => ['gmajorid' => $id]])){
+            return $gmajors->name;
         }else{
             return null;
         }
@@ -83,7 +92,7 @@ class Pages extends \ModelCore
     }
     
     public static function findFilters () {
-        $filters = \Pages::arrayFilter();
+        $filters = \Majors::arrayFilter();
         return array_merge($filters[0],$filters[1],$filters[2]);
     }
 }

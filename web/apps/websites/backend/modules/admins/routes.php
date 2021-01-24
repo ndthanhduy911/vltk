@@ -229,3 +229,41 @@ $router->add(WEB_ADMIN_URI . '/links/:action/:int', array(
     'action'  => 1,
     'id' => 2
 ));
+
+/***********************MajorsController***********************/
+$router->add(WEB_ADMIN_URI . '/majors', array(
+    'module' => 'backend_admins',
+    'controller' => 'majors',
+    'action' => 'index',
+));
+
+$router->add(WEB_ADMIN_URI . '/majors/:action', array(
+    'module' => 'backend_admins',
+    'controller' => 'majors',
+    'action' => 1,
+));
+$router->add(WEB_ADMIN_URI . '/majors/:action/:int', array(
+    'module' => 'backend_admins',
+    'controller' => 'majors',
+    'action'  => 1,
+    'id' => 2
+));
+
+/***********************GmajorsController***********************/
+$router->add(WEB_ADMIN_URI . '/gmajors', array(
+    'module' => 'backend_admins',
+    'controller' => 'gmajors',
+    'action' => 'index',
+));
+
+$router->add(WEB_ADMIN_URI . '/gmajors/:action', array(
+    'module' => 'backend_admins',
+    'controller' => 'gmajors',
+    'action' => 1,
+));
+$router->add(WEB_ADMIN_URI . '/gmajors/:action/:int', array(
+    'module' => 'backend_admins',
+    'controller' => 'gmajors',
+    'action'  => 1,
+    'id' => 2
+));

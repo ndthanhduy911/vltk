@@ -48,7 +48,7 @@ class DeptsController extends \BackendController
         ->where("Depts.deleted = 0")
         ->orderBy('Depts.id ASC');
 
-        $array_row = [
+        $arrayRow = [
             'u' => $this->master::checkPermission('depts', 'update', '1'),
             'd' => $this->master::checkPermission('depts', 'delete')
         ];
@@ -67,7 +67,7 @@ class DeptsController extends \BackendController
             $data = $data->andWhere('Depts.id LIKE :idSearch:',['idSearch' => $idSearch]);
         }
 
-        $this->helper->responseJson($this, $this->ssp->dataOutput($this, $data, false, $array_row));
+        $this->helper->responseJson($this, $this->ssp->dataOutput($this, $data, false, $arrayRow));
     }
 
     public function getsingleAction($id = null){

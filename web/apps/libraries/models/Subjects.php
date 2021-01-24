@@ -8,15 +8,6 @@ class Subjects extends \ModelCore
         $this->setSource("subjects");
     }
 
-    public static function getUrlById($id = null)
-    {
-        
-        if($subject = parent::findFirst($id)){
-            return WEB_URL.'/'.$subject->slug;
-        }else{
-            return null;
-        }
-    }
 
     public static function getTitleById($id = null)
     {

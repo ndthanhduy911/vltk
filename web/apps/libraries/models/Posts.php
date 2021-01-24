@@ -9,15 +9,6 @@ class Posts extends \ModelCore
         $this->setSource("posts");
     }
 
-    public static function getUrlById($id = null)
-    {
-        if($post = parent::findFirst($id)){
-            return WEB_URL.'/'.$post->slug;
-        }else{
-            return false;
-        }
-    }
-
     public static function getLang($postid =  null){
         if($post = PostsLang::findFirst(['postid = :postid: AND langid = :langid:','bind' => ['postid' => $postid, 'langid' => $_SESSION['langid']]])){
             return $post;

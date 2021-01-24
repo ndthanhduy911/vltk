@@ -3,7 +3,7 @@ namespace Library\SSP;
 
 class SSP
 {     
-    public function dataOutput($_this, $input, $search_text, $array_row = [], $options = [])
+    public function dataOutput($_this, $input, $search_text, $arrayRow = [], $options = [])
     {
         $start = (int)$_this->request->get('start','int');
         $length = $_this->request->get('length','int');
@@ -38,8 +38,8 @@ class SSP
         foreach ($data as $key => $item) {
             $res[$key] = $item->toArray();
             $res[$key]['no'] = $no + $key;
-            if(count($array_row)){
-                $res[$key]['private'] = $array_row;
+            if(count($arrayRow)){
+                $res[$key]['private'] = $arrayRow;
             }
             if (isset($selectExtra)) {
                 foreach ($selectExtra as $kse => $valse) {

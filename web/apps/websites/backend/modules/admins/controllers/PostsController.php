@@ -108,11 +108,11 @@ class PostsController  extends \AdminsLangCore {
         $data = \FilterSetting::getDataOrder($this,$data,($this->className)::findFirst(),'p',['pl'=>'title']);
         $data = \FilterSetting::getDataFilter($this,$data,($this->className)::arrayFilter(),['p',['pl'=>['title']]]);
 
-        $array_row = [
+        $arrayRow = [
             'u' => $this->master::checkPermission($this->cler, 'update', 1)
         ];
 
         $search = '';
-        $this->helper->responseJson($this, $this->ssp->dataOutput($this, $data,$search, $array_row));
+        $this->helper->responseJson($this, $this->ssp->dataOutput($this, $data,$search, $arrayRow));
     }
 }

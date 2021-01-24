@@ -43,7 +43,7 @@ class RoleController extends \BackendController
         ->where("Role.deleted = 0 AND Role.id != 1")
         ->orderBy('Role.id DESC');
 
-        $array_row = [
+        $arrayRow = [
             'u' => $this->master::checkPermission('role', 'update', '1'),
             'd' => $this->master::checkPermission('role', 'delete'),
         ];
@@ -61,7 +61,7 @@ class RoleController extends \BackendController
         }
 
         $search = 'Role.name LIKE :search:';
-        $this->helper->responseJson($this, $this->ssp->dataOutput($this, $data,$search, $array_row));
+        $this->helper->responseJson($this, $this->ssp->dataOutput($this, $data,$search, $arrayRow));
     }
 
     public function getsingleAction($id = null)

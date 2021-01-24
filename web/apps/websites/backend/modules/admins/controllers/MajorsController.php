@@ -1,28 +1,28 @@
 <?php
 namespace Backend\Modules\Admins\Controllers;
 
-class PagesController  extends \AdminsLangCore {
-    public $title = "Trang thông tin";
+class MajorsController  extends \AdminsLangCore {
+    public $title = "Ngành học";
 
-    public $cler = "pages";
+    public $cler = "majors";
 
-    public $className = \Pages::class;
+    public $className = \Majors::class;
 
-    public $classNameLang = \PagesLang::class;
+    public $classNameLang = \MajorsLang::class;
 
-    public $itemsForm = \Backend\Modules\Admins\Forms\PagesForm::class;
+    public $itemsForm = \Backend\Modules\Admins\Forms\MajorsForm::class;
 
-    public $itemsLangFrom = \Backend\Modules\Admins\Forms\PagesLangForm::class;
+    public $itemsLangFrom = \Backend\Modules\Admins\Forms\MajorsLangForm::class;
 
     public $fTables = ['image','title','excerpt','createdby','createdat','slug','status'];
 
     public $fFilters = ['title','status','createdat'];
 
-    public $searchForm = \Backend\Modules\Admins\Forms\SearchPagesForm::class;
+    public $searchForm = \Backend\Modules\Admins\Forms\SearchMajorsForm::class;
 
-    public $jS = WEB_URI.'/assets/backend/js/modules/admins/pages.js';
+    public $jS = WEB_URI.'/assets/backend/js/modules/admins/majors.js';
 
-    public $itemsid = 'pageid' ;
+    public $itemsid = 'majorid' ;
 
     public function updateC($items,$itemsLangs){
         $languages = \Language::find(['status = 1']);
@@ -30,25 +30,22 @@ class PagesController  extends \AdminsLangCore {
         $pContent = $this->request->getPost('content',['trim']);
         $pExcerpt = $this->request->getPost('excerpt',['string','trim']);
         foreach ($languages as $key => $lang) {
-            if(empty($items->id) || !$itemsLang = \PagesLang::findFirst(["pageid = :id: AND langid = :langid:",'bind' => ['id' => (!empty($items->id) ? $items->id : 0),'langid' => $lang->id]])){
-                $itemsLang = new \PagesLang();
+            if(empty($items->id) || !$itemsLang = \MajorsLang::findFirst(["majorid = :id: AND langid = :langid:",'bind' => ['id' => (!empty($items->id) ? $items->id : 0),'langid' => $lang->id]])){
+                $itemsLang = new \MajorsLang();
             }
             if($key == 0){
                 $lId = $lang->id;
             }
             $itemsLang->title = !empty($pTitle[$lang->id]) ? $pTitle[$lang->id] : $pTitle[$lId];
-            $itemsLang->content = !empty($pContent[$lang->id]) ? $pContent[$lang->id] : $pContent[$lId];
             $itemsLang->excerpt = !empty($pExcerpt[$lang->id]) ? $pExcerpt[$lang->id] : $pExcerpt[$lId];
             $itemsLang->langid = $lang->id;
             array_push($itemsLangs,$itemsLang);
         }
 
         $plug = $this->request->getPost('slug',['string','trim']);
-        $items->attrid = $this->request->getPost('attrid',['int']);
         $items->status = $this->request->getPost('status',['int']);
         $items->slug = $plug ? $this->helper->slugify($plug) : $this->helper->slugify($pTitle[1]);
         $items->image = $this->request->getPost('image',['trim','string']);
-        $items->bgimage = $this->request->getPost('bgimage',['trim','string']);
         if($this->className::findFirst(['slug = :slug: AND id != :id:','bind' => ['slug' => $items->slug,'id' => (!empty($items->id) ? $items->id : 0)]])){
             $items->slug .= strtotime('now');
         }
@@ -63,14 +60,11 @@ class PagesController  extends \AdminsLangCore {
         $columns = [
             'p.id',
             'p.slug',
-            'p.attrid',
             'p.status',
             'p.deptid',
             'p.image',
-            'p.bgimage',
             'p.createdat',
             'pl.title',
-            'pl.content',
             'pl.excerpt',
             'u.fullname createdby',
             'd.slug dslug',
@@ -79,10 +73,10 @@ class PagesController  extends \AdminsLangCore {
 
         $data = $this->modelsManager->createBuilder()
         ->columns($columns)
-        ->from(['p' => "Pages"])
+        ->from(['p' => "Majors"])
         ->where("p.deleted = 0")
         ->leftJoin('User', 'u.id = p.createdby','u')
-        ->leftJoin('PagesLang', 'pl.pageid = p.id AND pl.langid = 1','pl')
+        ->leftJoin('MajorsLang', 'pl.majorid = p.id AND pl.langid = 1','pl')
         ->leftJoin('Depts', 'd.id = p.deptid','d')
         ->orderBy('p.deptid ASC, p.id DESC');
 

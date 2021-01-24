@@ -8,16 +8,6 @@ class Researches extends \ModelCore
         $this->setSource("researches");
     }
 
-    public static function getUrlById($id = null)
-    {
-        
-        if($research = parent::findFirst($id)){
-            return WEB_URL.'/'.$research->slug;
-        }else{
-            return null;
-        }
-    }
-
     public static function getTitleById($id = null)
     {
         if($research = ResearchesLang::findFirst(['researchid = :researchid:','bind' => ['researchid' => $id]])){

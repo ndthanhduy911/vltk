@@ -75,14 +75,6 @@ class Categories extends \ModelCore
         return $data;
     }
 
-    public static function getUrlById($id = null){
-        if($cat = parent::findFirst($id)){
-            return WEB_URL.'/category/'.$cat->slug;
-        }else{
-            return null;
-        }
-    }
-
     public static function getUrl($dept = NULL, $cat = NULL){
         if($cat && $dept){
             return WEB_URL.($dept->id != 1 ? "/$dept->slug" : '' ).'/category/'.$cat->slug;
@@ -136,7 +128,6 @@ class Categories extends \ModelCore
 
         return $this->validate($helper->getValidation());
     }
-
 
     public static function arrayFilter(){
         return [

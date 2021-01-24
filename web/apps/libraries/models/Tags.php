@@ -8,16 +8,6 @@ class Tags extends \ModelCore{
         $this->setSource("tags");
     }
 
-    public static function getUrlById($id = null)
-    {
-        
-        if($class = parent::findFirst($id)){
-            return WEB_URL.'/'.$class->slug;
-        }else{
-            return null;
-        }
-    }
-
     public static function getTitleById($id = null)
     {
         if($class = ClassesLang::findFirst(['classid = :classid:','bind' => ['classid' => $id]])){

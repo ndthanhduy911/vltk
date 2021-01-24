@@ -277,14 +277,6 @@ class Depts extends \ModelCore
         return \Depts::findFirstPermission($perL,$columns,$params);
     }
 
-    public static function getUrlById($id = null){
-        if($dept = parent::findFirst($id)){
-            return WEB_URL.'/'.$dept->slug;
-        }else{
-            return null;
-        }
-    }
-
     public static function getBySlug($slug = null){
         if($dept = parent::findFirst(['slug = :slug: AND status = 1','bind' => ['slug' => $slug]])){
             return $dept;

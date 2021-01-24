@@ -94,7 +94,7 @@ class UserController extends \BackendController
 
         $data = $this->master::builderPermission($data,$perL,'u');
 
-        $array_row = [
+        $arrayRow = [
             'u' => $this->master::checkPermission('user', 'update', '1'),
             'd' => $this->master::checkPermission('user', 'delete'),
         ];
@@ -116,7 +116,7 @@ class UserController extends \BackendController
         }
 
         $search = '';
-        $this->helper->responseJson($this, $this->ssp->dataOutput($this, $data,$search, $array_row));
+        $this->helper->responseJson($this, $this->ssp->dataOutput($this, $data,$search, $arrayRow));
     }
 
     public function getsingleAction($id = 0){
