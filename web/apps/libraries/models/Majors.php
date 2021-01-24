@@ -38,11 +38,6 @@ class Majors extends \ModelCore
             'len' => 255,
             'msg' => 'Slug không được dài quá 255 ký tự'
         ]);
-        //attrid
-        $helper->setValidation('required', [
-            'name' => 'attrid',
-            'msg' => 'Giao diện không được để trống'
-        ]);
         //status
         $helper->setValidation('required', [
             'name' => 'status',
@@ -70,7 +65,7 @@ class Majors extends \ModelCore
             'deptname' => 'Bộ môn',
             'createdat' => 'Ngày tạo',
             'title' => 'Tiêu đề',
-            'excerpt' => 'Tóm tắt'
+            'content' => 'Giới thiệu chung'
         ];
         return isset($feilds[$key]) ? $feilds[$key] : '';
     }

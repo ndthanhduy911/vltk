@@ -33,18 +33,5 @@ class GmajorsLangForm extends \Phalcon\Forms\Form
         $attr = cFL($attr,$lang,'excerpt');
         $excerpt->setAttributes($attr);
         $this->add($excerpt);
-        
-        //content
-        $content = new Textarea('content');
-        $content->setLabel('<i class="fas fa-newspaper mr-1"></i> Nội dung');
-        $attr = [
-            'class' => 'form-control form-control-sm',
-            'placeholder' => 'Nội dung',
-            'data-error' => "Thông tin chưa hợp lệ"
-        ];
-        $attr = cFL($attr,$lang,'content');
-        $content->setUserOption('attr','editor');
-        $content->setAttributes($attr);
-        $this->add($content);
     }
 }

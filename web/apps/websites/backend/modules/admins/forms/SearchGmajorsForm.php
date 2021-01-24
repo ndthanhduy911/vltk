@@ -7,13 +7,12 @@ use Phalcon\Forms\Element\Select;
 class SearchGmajorsForm extends Form
 {
     public function initialize($entity = null, $options = null){
-
         //titleSearch
         $titleSearch = new Text('titleSearch');
         $titleSearch->setLabel('Tiêu đề');
         $titleSearch->setAttributes(array(
             'class' => 'form-control form-control-sm',
-            'placeholder' => 'Ví dụ: Trang tin tức',
+            'placeholder' => 'Ví dụ: Những ngành đào tạo mới',
             'maxlength' => "255",
             'data-error' => "Thông tin chưa hợp lệ"
         ));

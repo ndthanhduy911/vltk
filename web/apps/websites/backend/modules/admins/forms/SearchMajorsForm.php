@@ -13,7 +13,7 @@ class SearchMajorsForm extends Form
         $titleSearch->setLabel('Tiêu đề');
         $titleSearch->setAttributes(array(
             'class' => 'form-control form-control-sm',
-            'placeholder' => 'Ví dụ: Trang tin tức',
+            'placeholder' => 'Ví dụ: Kỹ thuật điện tử và tin học',
             'maxlength' => "255",
             'data-error' => "Thông tin chưa hợp lệ"
         ));

@@ -5,7 +5,7 @@ use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\Select;
 use Phalcon\Forms\Element\Hidden;
 
-class PagesForm extends \Phalcon\Forms\Form
+class MajorsForm extends \Phalcon\Forms\Form
 {
     public function initialize($entity = null, $options = null)
     {
@@ -22,6 +22,21 @@ class PagesForm extends \Phalcon\Forms\Form
         $status->setLabel('<i class="fas fa-check-circle mr-1"></i>Trạng thái');
         $this->add($status);
 
+        //gmajorid
+        $perL = \Library\Master\Master::checkPermissionDepted('majors', 'update',[0,1]);
+        $gmajorid = new Select('gmajorid', \Gmajors::findPermission($perL,"id,(SELECT gl.title FROM GmajorsLang as gl WHERE gl.langid = 1 AND gl.gmajorid = Gmajors.id) as name",['status = 1']), array(
+            'using' => ['id', 'name'],
+            'useEmpty' => true,
+            'emptyText' => 'Chọn',
+            'emptyValue' => '',
+            'class' => 'form-control form-control-sm',
+            'required' => '',
+            'data-required-error' => 'Vui lòng nhập thông tin',
+            'data-error' => "Thông tin chưa hợp lệ"
+        ));
+        $gmajorid->setLabel('<i class="fas fa-columns mr-1"></i>Nhóm ngành học');
+        $this->add($gmajorid);
+
         //slug
         $slug = new Text('slug');
         $slug->setLabel('<i class="fas fa-globe mr-1"></i>Slug');
@@ -33,28 +48,11 @@ class PagesForm extends \Phalcon\Forms\Form
         ));
         $this->add($slug);
 
-        //attrid
-        $attrid = new Select('attrid', \Attributes::find(['status = 1']), array(
-            'using' => ['id', 'name'],
-            'useEmpty' => true,
-            'emptyText' => 'Mặc định',
-            'emptyValue' => '0',
-            'class' => 'form-control form-control-sm',
-            'data-error' => "Thông tin chưa hợp lệ"
-        ));
-        $attrid->setLabel('<i class="fas fa-columns mr-1"></i>Giao diện');
-        $this->add($attrid);
-
         //image
         $image = new Hidden('image');
         $image->setLabel('<i class="fas fa-image mr-1"></i>Ảnh đại diện');
         $image->setUserOption('attr','image');
         $this->add($image);
-
-        //bgimage
-        $bgimage = new Hidden('bgimage');
-        $bgimage->setLabel('<i class="fas fa-image mr-1"></i>Ảnh nền');
-        $bgimage->setUserOption('attr','image');
-        $this->add($bgimage);
+        
     }
 }

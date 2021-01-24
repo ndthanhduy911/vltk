@@ -1,6 +1,6 @@
 <?php
 use Library\Helper\HelperValidation;
-class Majors extends \ModelCore
+class Gmajors extends \ModelCore
 {
     public function initialize()
     {
@@ -37,11 +37,6 @@ class Majors extends \ModelCore
             'name' => 'slug',
             'len' => 255,
             'msg' => 'Slug không được dài quá 255 ký tự'
-        ]);
-        //attrid
-        $helper->setValidation('required', [
-            'name' => 'attrid',
-            'msg' => 'Giao diện không được để trống'
         ]);
         //status
         $helper->setValidation('required', [

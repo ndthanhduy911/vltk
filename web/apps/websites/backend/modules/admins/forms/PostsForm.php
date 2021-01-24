@@ -48,7 +48,7 @@ class PostsForm extends \Phalcon\Forms\Form
         $this->add($slug);
 
         //catid
-        $perL = \Library\Master\Master::checkPermissionDepted('posts', 'update');
+        $perL = \Library\Master\Master::checkPermissionDepted('posts', 'update',[0,1]);
         $cats = $this->modelsManager->createBuilder()
         ->columns([
             'c.id',

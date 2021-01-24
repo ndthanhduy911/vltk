@@ -5,7 +5,7 @@ use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\Select;
 use Phalcon\Forms\Element\Hidden;
 
-class MajorsForm extends \Phalcon\Forms\Form
+class PagesForm extends \Phalcon\Forms\Form
 {
     public function initialize($entity = null, $options = null)
     {

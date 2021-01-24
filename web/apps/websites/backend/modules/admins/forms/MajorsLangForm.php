@@ -21,18 +21,18 @@ class MajorsLangForm extends \Phalcon\Forms\Form
         $title->setAttributes($attr);
         $this->add($title);
 
-        //excerpt
-        $excerpt = new Textarea('excerpt');
-        $excerpt->setLabel('<i class="fas fa-newspaper mr-1"></i> Giới thiệu chung');
+        //content
+        $content = new Textarea('content');
+        $content->setLabel('<i class="fas fa-newspaper mr-1"></i> Giới thiệu chung');
         $attr = [
             'class' => 'form-control form-control-sm',
             'placeholder' => 'Giới thiệu chung',
             'data-error' => "Thông tin chưa hợp lệ"
         ];
-        $attr = cFL($attr,$lang,'excerpt');
-        $excerpt->setUserOption('attr','editor');
-        $excerpt->setAttributes($attr);
-        $this->add($excerpt);
+        $attr = cFL($attr,$lang,'content');
+        $content->setUserOption('attr','editor');
+        $content->setAttributes($attr);
+        $this->add($content);
         
         //stdout
         $stdout = new Textarea('stdout');

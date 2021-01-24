@@ -24,6 +24,8 @@ class FilterSetting extends \ModelCore
         $fkeys = [
             'posts' => \Posts::findFilters(),
             'pages' => \Pages::findFilters(),
+            'majors' => \Majors::findFilters(),
+            'gmajors' => \Gmajors::findFilters(),
             'subjects' => \Subjects::findFilters(),
             'researches' => \Researches::findFilters(),
             'slideshows' => \Slideshows::findFilters(),
@@ -67,6 +69,8 @@ class FilterSetting extends \ModelCore
         $fkeys = [
             'posts' => \Posts::findTables(),
             'pages' => \Pages::findTables(),
+            'majors' => \Majors::findTables(),
+            'gmajors' => \Gmajors::findTables(),
             'subjects' => \Subjects::findTables(),
             'researches' => \Researches::findTables(),
             'slideshows' => \Slideshows::findTables(),
@@ -97,6 +101,8 @@ class FilterSetting extends \ModelCore
     public static function getOrderKeys($fkey = false){
         $fkeys = [
             'posts' => \Posts::arrayOrder(),
+            'majors' => \Majors::arrayOrder(),
+            'gmajors' => \Gmajors::arrayOrder(),
             'pages' => \Pages::arrayOrder(),
             'subjects' => \Subjects::arrayOrder(),
             'researches' => \Researches::arrayOrder(),
@@ -104,7 +110,7 @@ class FilterSetting extends \ModelCore
             'staffs' => \Staffs::arrayOrder(),
             'partners' => \Partners::arrayOrder(),
             'links' => \Links::arrayOrder(),
-            'depts' => \Depts::arrayOrder()
+            'depts' => \Depts::arrayOrder(),
         ];
         if($fkey && isset($fkeys[$fkey])){
             return $fkeys[$fkey];

@@ -33,28 +33,10 @@ class GmajorsForm extends \Phalcon\Forms\Form
         ));
         $this->add($slug);
 
-        //attrid
-        $attrid = new Select('attrid', \Attributes::find(['status = 1']), array(
-            'using' => ['id', 'name'],
-            'useEmpty' => true,
-            'emptyText' => 'Mặc định',
-            'emptyValue' => '0',
-            'class' => 'form-control form-control-sm',
-            'data-error' => "Thông tin chưa hợp lệ"
-        ));
-        $attrid->setLabel('<i class="fas fa-columns mr-1"></i>Giao diện');
-        $this->add($attrid);
-
         //image
         $image = new Hidden('image');
         $image->setLabel('<i class="fas fa-image mr-1"></i>Ảnh đại diện');
         $image->setUserOption('attr','image');
         $this->add($image);
-
-        //bgimage
-        $bgimage = new Hidden('bgimage');
-        $bgimage->setLabel('<i class="fas fa-image mr-1"></i>Ảnh nền');
-        $bgimage->setUserOption('attr','image');
-        $this->add($bgimage);
     }
 }

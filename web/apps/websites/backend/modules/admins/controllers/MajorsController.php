@@ -14,7 +14,7 @@ class MajorsController  extends \AdminsLangCore {
 
     public $itemsLangFrom = \Backend\Modules\Admins\Forms\MajorsLangForm::class;
 
-    public $fTables = ['image','title','excerpt','createdby','createdat','slug','status'];
+    public $fTables = ['image','title','content','createdby','createdat','slug','status'];
 
     public $fFilters = ['title','status','createdat'];
 
@@ -28,7 +28,14 @@ class MajorsController  extends \AdminsLangCore {
         $languages = \Language::find(['status = 1']);
         $pTitle = $this->request->getPost('title',['string','trim']);
         $pContent = $this->request->getPost('content',['trim']);
-        $pExcerpt = $this->request->getPost('excerpt',['string','trim']);
+        $pStdout = $this->request->getPost('stdout',['trim']);
+        $pCurriculum = $this->request->getPost('curriculum',['trim']);
+        $pProspects = $this->request->getPost('prospects',['trim']);
+        $pFee = $this->request->getPost('fee',['trim']);
+        $pResearches = $this->request->getPost('researches',['trim']);
+        $pStudents = $this->request->getPost('students',['trim']);
+        $pRpartners = $this->request->getPost('rpartners',['trim']);
+
         foreach ($languages as $key => $lang) {
             if(empty($items->id) || !$itemsLang = \MajorsLang::findFirst(["majorid = :id: AND langid = :langid:",'bind' => ['id' => (!empty($items->id) ? $items->id : 0),'langid' => $lang->id]])){
                 $itemsLang = new \MajorsLang();
@@ -37,7 +44,14 @@ class MajorsController  extends \AdminsLangCore {
                 $lId = $lang->id;
             }
             $itemsLang->title = !empty($pTitle[$lang->id]) ? $pTitle[$lang->id] : $pTitle[$lId];
-            $itemsLang->excerpt = !empty($pExcerpt[$lang->id]) ? $pExcerpt[$lang->id] : $pExcerpt[$lId];
+            $itemsLang->content = !empty($pContent[$lang->id]) ? $pContent[$lang->id] : $pContent[$lId];
+            $itemsLang->stdout = !empty($pStdout[$lang->id]) ? $pStdout[$lang->id] : $pStdout[$lId];
+            $itemsLang->curriculum = !empty($pCurriculum[$lang->id]) ? $pCurriculum[$lang->id] : $pCurriculum[$lId];
+            $itemsLang->prospects = !empty($pProspects[$lang->id]) ? $pProspects[$lang->id] : $pProspects[$lId];
+            $itemsLang->fee = !empty($pFee[$lang->id]) ? $pFee[$lang->id] : $pFee[$lId];
+            $itemsLang->researches = !empty($pResearches[$lang->id]) ? $pResearches[$lang->id] : $pResearches[$lId];
+            $itemsLang->students = !empty($pStudents[$lang->id]) ? $pStudents[$lang->id] : $pStudents[$lId];
+            $itemsLang->rpartners = !empty($pRpartners[$lang->id]) ? $pRpartners[$lang->id] : $pRpartners[$lId];
             $itemsLang->langid = $lang->id;
             array_push($itemsLangs,$itemsLang);
         }
@@ -65,7 +79,7 @@ class MajorsController  extends \AdminsLangCore {
             'p.image',
             'p.createdat',
             'pl.title',
-            'pl.excerpt',
+            'pl.content',
             'u.fullname createdby',
             'd.slug dslug',
             '(SELECT dl.title FROM DeptsLang AS dl WHERE dl.deptid = p.deptid AND dl.langid = 1) AS deptname',
