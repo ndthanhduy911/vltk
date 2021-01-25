@@ -44,15 +44,15 @@ const getItemsLink = (type,item) => {
         }
         case 6:{
             if(item.dslug != '/'){
-                return `<a target="_blank" href="${webUri}/${item.dslug}/nganh-hoc/${item.slug}">Link</a>`;
+                return `<a target="_blank" href="${webUri}/${item.dslug}/nhom-nganh-hoc/${item.slug}">Link</a>`;
             }
-            return `<a target="_blank" href="${webUri}/nganh-hoc/${item.slug}">Link</a>`;
+            return `<a target="_blank" href="${webUri}/nhom-nganh-hoc/${item.slug}">Link</a>`;
         }
         case 7:{
             if(item.dslug != '/'){
-                return `<a target="_blank" href="${webUri}/${item.dslug}/majors/${item.slug}">Link</a>`;
+                return `<a target="_blank" href="${webUri}/${item.dslug}/nganh-hoc/${item.slug}">Link</a>`;
             }
-            return `<a target="_blank" href="${webUri}/majors/${item.slug}">Link</a>`;
+            return `<a target="_blank" href="${webUri}/nganh-hoc/${item.slug}">Link</a>`;
         }
         default:{
             return "";

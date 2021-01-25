@@ -11,16 +11,16 @@ class Gmajors extends \ModelCore
     public static function getUrl($dept, $gmajor = NULL)
     {
         if($dept->id == 1){
-            return WEB_URL.'/gmajors/'.$gmajor->slug;
+            return WEB_URL.'/nhom-nganh-hoc/'.$gmajor->slug;
         }else{
-            return WEB_URL."/$dept->slug".'/gmajors/'.$gmajor->slug;
+            return WEB_URL."/$dept->slug".'/nhom-nganh-hoc/'.$gmajor->slug;
         }
     }
 
     public static function getTitleById($id = null)
     {
         if($gmajors = GmajorsLang::findFirst(['gmajorid = :gmajorid:','bind' => ['gmajorid' => $id]])){
-            return $gmajors->name;
+            return $gmajors->title;
         }else{
             return null;
         }

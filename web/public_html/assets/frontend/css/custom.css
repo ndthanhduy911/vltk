@@ -253,3 +253,73 @@ ul.dropdown-menu > li:last-of-type > a
 .main table:not(.table) tbody tr:last-of-type{
     border-bottom: 2px solid #009879;
 }
+/* =======================
+SLICK
+======================= */
+/* the slides */
+.slick-slide {
+    margin: 0 10px;
+}
+/* the parent */
+.slick-list {
+    margin: 0 -10px;
+}
+
+.slick-carousel .slick-arrow{
+    width: 30px;
+    height: 30px;
+    top: 50%;
+    margin-top: -15px;
+    z-index: 10;
+    display: inline-block;
+    font-size: 14px;
+    position: absolute;
+    text-transform: capitalize;
+    font-weight: 300;
+    color: transparent;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 5px 5px;
+    border: 0;
+    cursor: pointer;
+    -webkit-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+.slick-carousel .slick-arrow::after {
+    font-family: "FontAwesome";
+    position: absolute;
+    font-size: 16px;
+    line-height: 1;
+    top: 50%;
+    margin-top: -8px;
+}
+
+.slick-carousel .slick-prev{
+    left: 0;
+    padding-left: 0px;
+}
+
+.slick-carousel .slick-prev::after{
+    content: "\f104";
+    left: 12px;
+    color: #ffffff;
+    -webkit-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+.slick-carousel .slick-next{
+    right: 0px;
+    left: auto;
+    padding-right: 0px;
+}
+
+.slick-carousel .slick-next::after{
+    content: "\f105";
+    right: 11px;
+    color: #ffffff;
+    -webkit-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}

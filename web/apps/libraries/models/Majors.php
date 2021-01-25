@@ -11,9 +11,9 @@ class Majors extends \ModelCore
     public static function getUrl($dept, $major = NULL)
     {
         if($dept->id == 1){
-            return WEB_URL.'/majors/'.$major->slug;
+            return WEB_URL.'/nganh-hoc/'.$major->slug;
         }else{
-            return WEB_URL."/$dept->slug".'/majors/'.$major->slug;
+            return WEB_URL."/$dept->slug".'/nganh-hoc/'.$major->slug;
         }
     }
 

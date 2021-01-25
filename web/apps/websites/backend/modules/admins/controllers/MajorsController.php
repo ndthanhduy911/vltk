@@ -34,6 +34,7 @@ class MajorsController  extends \AdminsLangCore {
         $pFee = $this->request->getPost('fee',['trim']);
         $pResearches = $this->request->getPost('researches',['trim']);
         $pStudents = $this->request->getPost('students',['trim']);
+        $pAlumni = $this->request->getPost('alumni',['trim']);
         $pRpartners = $this->request->getPost('rpartners',['trim']);
 
         foreach ($languages as $key => $lang) {
@@ -51,6 +52,7 @@ class MajorsController  extends \AdminsLangCore {
             $itemsLang->fee = !empty($pFee[$lang->id]) ? $pFee[$lang->id] : $pFee[$lId];
             $itemsLang->researches = !empty($pResearches[$lang->id]) ? $pResearches[$lang->id] : $pResearches[$lId];
             $itemsLang->students = !empty($pStudents[$lang->id]) ? $pStudents[$lang->id] : $pStudents[$lId];
+            $itemsLang->alumni = !empty($pAlumni[$lang->id]) ? $pAlumni[$lang->id] : $pAlumni[$lId];
             $itemsLang->rpartners = !empty($pRpartners[$lang->id]) ? $pRpartners[$lang->id] : $pRpartners[$lId];
             $itemsLang->langid = $lang->id;
             array_push($itemsLangs,$itemsLang);
@@ -58,6 +60,7 @@ class MajorsController  extends \AdminsLangCore {
 
         $plug = $this->request->getPost('slug',['string','trim']);
         $items->status = $this->request->getPost('status',['int']);
+        $items->gmajorid = $this->request->getPost('gmajorid',['int']);
         $items->slug = $plug ? $this->helper->slugify($plug) : $this->helper->slugify($pTitle[1]);
         $items->image = $this->request->getPost('image',['trim','string']);
         if($this->className::findFirst(['slug = :slug: AND id != :id:','bind' => ['slug' => $items->slug,'id' => (!empty($items->id) ? $items->id : 0)]])){

@@ -1,7 +1,7 @@
 <?php $socials = \Socials::find(["status = 1 AND deptid = $dept->id", "order" => "sort ASC"]) ?>
+{{ partial('breadcrumb') }}
 <div class="banner dark-translucent-bg fixed-bg"
-    style="background-image:url('<?php echo WEB_URL ?>/assets/frontend/images/page-about-banner-1.jpg'); background-position: 50% 27%;">
-    {{ partial('breadcrumb') }}
+    style="background-image:url('<?php echo WEB_URL ?>/assets/frontend/images/banner-page.jpg'); background-position: 50% 27%;">
     <div class="container">
         <div class="row justify-content-lg-center">
             <div class="col-lg-8 text-center pv-20">

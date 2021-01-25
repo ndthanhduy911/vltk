@@ -213,8 +213,7 @@ tbody {
 .banner.light-translucent-bg,
 .banner.dark-translucent-bg,
 .banner.default-translucent-bg {
-  min-height: 250px;
-  padding-top: 60px;
+  padding-top: 30px;
   padding-bottom: 20px;
 }
 

@@ -60,12 +60,27 @@ $router->add(WEB_URI."/{dept:[a-zA-Z0-9_-]+}/staffs", array(
 ));
 
 /***********************GmajorsController***********************/
-$router->add(WEB_URI."/{dept:[a-zA-Z0-9_-]+}/nganh-hoc/{gmajor:[a-zA-Z0-9_-]+}", array(
+$router->add(WEB_URI."/{dept:[a-zA-Z0-9_-]+}/nhom-nganh-hoc", array(
+    'module' => 'frontend_dept',
+    'controller' => 'gmajors',
+    'action' => 'index',
+    'dept' => 1,
+));
+$router->add(WEB_URI."/{dept:[a-zA-Z0-9_-]+}/nhom-nganh-hoc/{gmajor:[a-zA-Z0-9_-]+}", array(
     'module' => 'frontend_dept',
     'controller' => 'gmajors',
     'action' => 'single',
     'dept' => 1,
     'gmajor' => 2,
+));
+
+/***********************MajorsController***********************/
+$router->add(WEB_URI."/{dept:[a-zA-Z0-9_-]+}/nganh-hoc/{major:[a-zA-Z0-9_-]+}", array(
+    'module' => 'frontend_dept',
+    'controller' => 'majors',
+    'action' => 'single',
+    'dept' => 1,
+    'major' => 2,
 ));
 
 // ======================================
@@ -147,9 +162,22 @@ $router->add(WEB_URI."/subjects/{subject:[a-zA-Z0-9_-]+}", array(
 ));
 
 /***********************GmajorsController***********************/
-$router->add(WEB_URI."/nganh-hoc/{gmajor:[a-zA-Z0-9_-]+}", array(
+$router->add(WEB_URI."/nhom-nganh-hoc", array(
+    'module' => 'frontend_dept',
+    'controller' => 'gmajors',
+    'action' => 'index',
+));
+$router->add(WEB_URI."/nhom-nganh-hoc/{gmajor:[a-zA-Z0-9_-]+}", array(
     'module' => 'frontend_dept',
     'controller' => 'gmajors',
     'action' => 'single',
     'gmajor' => 1,
+));
+
+/***********************MajorsController***********************/
+$router->add(WEB_URI."/nganh-hoc/{major:[a-zA-Z0-9_-]+}", array(
+    'module' => 'frontend_dept',
+    'controller' => 'majors',
+    'action' => 'single',
+    'major' => 1,
 ));

@@ -80,13 +80,8 @@
     } 
 ?>
 
-<!-- banner start -->
-<!-- ================ -->
-<div class="banner dark-translucent-bg fixed-bg"style="background-image:url('{{helper.getLinkImage(page.bgimage, '/assets/frontend/images/page-about-banner-1.jpg') }}'); background-position: 50% 27%;">
-    <!-- breadcrumb start -->
-    <!-- ================ -->
-    {{ partial('breadcrumb') }}
-    <!-- breadcrumb end -->
+{{ partial('breadcrumb') }}
+<div class="banner dark-translucent-bg fixed-bg"style="background-image:url('{{helper.getLinkImage(page.bgimage, '/assets/frontend/images/banner-page.jpg') }}'); background-position: 50% 27%;">
     <div class="container">
         <div class="row justify-content-lg-center">
             <div class="col-lg-8 text-center pv-20">
@@ -100,7 +95,6 @@
         </div>
     </div>
 </div>
-<!-- banner end -->
 
 <section class="main-container pt-4">
     <div class="container">
