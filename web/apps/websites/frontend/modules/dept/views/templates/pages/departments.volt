@@ -48,49 +48,50 @@
 <section class="main-container pt-5">
     <div class="container">
         <div class="row">
-            <div class="main col-md-9 row">
-                <?php if(!empty($depts)): ?>
-                {% for dept_item in depts %}
-                <div class="col-lg-6 col-md-6 isotope-item">
-                    <div class="image-box shadow-2 bordered text-center mb-20">
-                        <div class="overlay-container rounded overlay-visible">
-                            <img src="{{ helper.getLinkImage(dept_item.image) }}"
-                                alt="{{ dept_item.title }}">
-                            <a href="{{ constant('WEB_URL')~'/'~dept_item.slug }}" class="overlay-link"><i
-                                    class="fa fa-graduation-cap"></i></a>
-                            <div class="overlay-bottom hidden-xs">
-                                <div class="text">
-                                    {{ dept_item.title }}
+            <div class="main col-md-9">
+                <div class="row">
+                    <?php if(!empty($depts)): ?>
+                    {% for dept_item in depts %}
+                    <div class="col-lg-6 col-md-6 isotope-item">
+                        <div class="image-box shadow-2 bordered text-center mb-20">
+                            <div class="overlay-container rounded overlay-visible">
+                                <img src="{{ helper.getLinkImage(dept_item.image) }}"
+                                    alt="{{ dept_item.title }}">
+                                <a href="{{ constant('WEB_URL')~'/'~dept_item.slug }}" class="overlay-link"><i
+                                        class="fa fa-graduation-cap"></i></a>
+                                <div class="overlay-bottom hidden-xs">
+                                    <div class="text">
+                                        {{ dept_item.title }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                {% endfor %}
-                <?php endif ?>
-
-                <?php if(!empty($researches)): ?>
-                {% for research in researches %}
-                <div class="col-lg-3 col-md-6 isotope-item">
-                    <div class="image-box shadow-2 bordered text-center mb-20">
-                        <div class="overlay-container rounded overlay-visible">
-                            <img src="{{ helper.getLinkImage(research.image) }}"
-                                alt="{{ dept_item.title }}">
-                            <a href="<?= \Researches::getUrl($dept, $research) ?>" class="overlay-link"><i
-                                    class="fa fa-graduation-cap"></i></a>
-                            <div class="overlay-bottom hidden-xs">
-                                <div class="text">
-                                    {{ research.title }}
+                    {% endfor %}
+                    <?php endif ?>
+    
+                    <?php if(!empty($researches)): ?>
+                    {% for research in researches %}
+                    <div class="col-lg-3 col-md-6 isotope-item">
+                        <div class="image-box shadow-2 bordered text-center mb-20">
+                            <div class="overlay-container rounded overlay-visible">
+                                <img src="{{ helper.getLinkImage(research.image) }}"
+                                    alt="{{ dept_item.title }}">
+                                <a href="<?= \Researches::getUrl($dept, $research) ?>" class="overlay-link"><i
+                                        class="fa fa-graduation-cap"></i></a>
+                                <div class="overlay-bottom hidden-xs">
+                                    <div class="text">
+                                        {{ research.title }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    {% endfor %}
+                    <?php endif ?>
+    
                 </div>
-                {% endfor %}
-                <?php endif ?>
-
             </div>
-
             <div class="col-md-3">
                 {{ partial('sidebar') }}
             </div>
