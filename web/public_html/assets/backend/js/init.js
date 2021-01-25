@@ -1,9 +1,8 @@
 $(document).ready(function () {
 	inputFilterLoader();
-	// select2Loader();
+	select2Loader();
 	dateRangePickerLoader();
 	numberLoaderList();
-	viewGallery('.viewGallery');
 	bsCustomFileInput.init();
 
 	$('.nav-sidebar li.nav-item.has-treeview').each((index, elemnt) => {

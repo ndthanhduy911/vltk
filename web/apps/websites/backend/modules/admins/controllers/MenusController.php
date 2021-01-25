@@ -130,6 +130,8 @@ class MenusController  extends \BackendController {
         $menus->catid = $this->request->getPost('catid',['int']);
         $menus->dept = $this->request->getPost('dept',['int']);
         $menus->links = $this->request->getPost('links',['trim','string']);
+        $menus->majorid = $this->request->getPost('majorid',['int']);
+        $menus->gmajorid = $this->request->getPost('gmajorid',['int']);
         // $menus->icon = $this->request->getPost('icon',['trim','string']);
         $menus->parentid = $this->request->getPost('parentid',['int']);
         $menus->sort = (int)$this->request->getPost('sort',['int']);

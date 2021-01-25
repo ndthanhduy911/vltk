@@ -41,6 +41,8 @@ class MenusForm extends Form
             3 => "Chuyên mục",
             4 => "Bộ môn",
             5 => "Link",
+            6 => "Nhóm ngành học",
+            7 => "Ngành học",
         ], [
             'useEmpty' => true,
             'emptyText' => 'Chọn',
@@ -112,6 +114,36 @@ class MenusForm extends Form
         ]);
         $dept->setLabel('Bộ môn');
         $this->add($dept);
+
+        //gmajorid
+        $gmajors = \Gmajors::find(["deleted = 0 AND status = 1 AND deptid = {$deptid}","columns" => "id, (SELECT pl.title FROM GmajorsLang AS pl WHERE pl.gmajorid = Gmajors.id AND pl.langid = 1) AS title"]);
+        $gmajorid = new Select('gmajorid', $gmajors, [
+            'using' => ['id','title'],
+            'useEmpty' => true,
+            'emptyText' => 'Chọn',
+            'emptyValue' => '',
+            'disabled' => "",
+            'class' => 'form-control form-control-sm',
+            'data-required-error' => 'Vui lòng nhập thông tin',
+            'data-error' => "Thông tin chưa hợp lệ"
+        ]);
+        $gmajorid->setLabel('Nhóm ngành học');
+        $this->add($gmajorid);
+
+        //majorid
+        $majors = \Majors::find(["deleted = 0 AND status = 1 AND deptid = {$deptid}","columns" => "id, (SELECT pl.title FROM MajorsLang AS pl WHERE pl.majorid = Majors.id AND pl.langid = 1) AS title"]);
+        $majorid = new Select('majorid', $majors, [
+            'using' => ['id','title'],
+            'useEmpty' => true,
+            'emptyText' => 'Chọn',
+            'emptyValue' => '',
+            'disabled' => "",
+            'class' => 'form-control form-control-sm',
+            'data-required-error' => 'Vui lòng nhập thông tin',
+            'data-error' => "Thông tin chưa hợp lệ"
+        ]);
+        $majorid->setLabel('Ngành học');
+        $this->add($majorid);
 
         //links
         $links = new Text('links');
