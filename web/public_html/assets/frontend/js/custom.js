@@ -79,6 +79,10 @@
 		$(".scrollToTop").click(function() {
 			$('.os-viewport:eq(0)').animate({scrollTop:0},500);
 		}); 
+
+		if($('#tabMajors').length){
+			$('.os-viewport:eq(0)').animate({scrollTop:700},500);
+		}
 	});
 
 })(jQuery);

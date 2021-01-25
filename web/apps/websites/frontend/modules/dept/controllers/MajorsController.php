@@ -25,8 +25,22 @@ class MajorsController extends \FrontendController
             return $this->view->pick('templates/404');
         }
 
+        $majorList = $this->modelsManager->createBuilder()
+        ->columns(array(
+            'r.id',
+            'r.slug',
+            'r.image',
+            'rl.title',
+        ))
+        ->from(['r'=>'Majors'])
+        ->where("r.deptid = {$dept->id} AND r.status = 1 AND r.deleted = 0 AND gmajorid = {$gmajors->id}")
+        ->leftJoin('MajorsLang', "rl.majorid = r.id AND rl.langid = {$langid}",'rl')
+        ->getQuery()
+        ->execute();
+
         $this->view->title = $majorslang->title;
         $this->view->majors = $majors;
+        $this->view->majorList = $majorList;
         $this->view->majorslang = $majorslang;
         $this->view->gmajors = $gmajors;
         $this->view->gtitle = \Gmajors::getTitleById($gmajors->id);

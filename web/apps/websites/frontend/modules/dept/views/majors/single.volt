@@ -27,6 +27,34 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 main">
+                <div class="row mb-5 justify-content-center">
+                    {% for key,major in majorList %}
+                    <a href="<?= \Majors::getUrl($dept,$major) ?>" class="btn btn-default-transparent radius-50 ml-2 mr-2">{{major.title}}</a>
+                    {% endfor %}
+                </div>
+                <div class="slick-carousel carousel-3">
+                    {% for key,major in majorList %}
+                    <div class="image-box shadow-2 bordered text-center mb-20">
+                        <div class="overlay-container rounded overlay-visible">
+                            <img class="grow" src="{{helper.getLinkImage(major.image,'/assets/frontend/images/default2.jpg')}}" alt="{{major.title}}">
+                            <div class="overlay-bottom hidden-xs">
+                                <div class="text">
+                                    <a href="<?= \Majors::getUrl($dept,$major) ?>" title="{{major.title}}">{{major.title}}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="main-container pv-45" id="tabMajors">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 main">
                 <div class="vertical">
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="nav-item">
