@@ -7,7 +7,7 @@ class GmajorsController extends \FrontendController
     public function indexAction(){
         $dept = $this->dispatcher->getReturnedValue();
         $langid = $this->session->get('langid');
-        if(!$page = \Pages::findFirst(["status = 1 AND deptid = {$dept->id} AND attrid = 2"])){
+        if(!$page = \Pages::findFirst(["status = 1 AND deptid = {$dept->id} AND attrid = 6"])){
             $this->view->title = '404';
             return $this->view->pick('templates/404');
         }

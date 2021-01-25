@@ -81,7 +81,7 @@
 		}); 
 
 		if($('#tabMajors').length){
-			$('.os-viewport:eq(0)').animate({scrollTop:700},500);
+			$('.os-viewport:eq(0)').animate({scrollTop:600},500);
 		}
 	});
 
