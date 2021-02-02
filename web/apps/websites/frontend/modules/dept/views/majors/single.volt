@@ -6,8 +6,6 @@
             <li class="breadcrumb-item"><a class="link-dark"
                     href="<?= WEB_URL ?>/{{ dept.id != 1? dept.slug : '' }}nhom-nganh-hoc">{{ ml._ml('home', 'Ngành học') }}</a>
             </li>
-            <li class="breadcrumb-item"><a class="link-dark"
-                    href="<?= \Gmajors::getUrl($dept,$gmajors) ?>">{{gtitle}}</a></li>
             <li class="breadcrumb-item active">{{title}}</li>
         </ol>
     </div>

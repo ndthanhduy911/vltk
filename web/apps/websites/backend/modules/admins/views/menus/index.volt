@@ -171,13 +171,6 @@
                                         <div class="invalid-feedback"></div>
                                     </div>
                                 </div>
-                                <div class="form-group label-floating hidden boxtype" data-type=6>
-                                    <div class="input-group">
-                                        <label class="control-label">{{formMenus.getLabel('gmajorid')}}</label>
-                                        {{formMenus.render('gmajorid')}}
-                                        <div class="invalid-feedback"></div>
-                                    </div>
-                                </div>
                                 <div class="form-group label-floating hidden boxtype" data-type=7>
                                     <div class="input-group">
                                         <label class="control-label">{{formMenus.getLabel('majorid')}}</label>

@@ -60,7 +60,6 @@ class MajorsController  extends \AdminsLangCore {
 
         $plug = $this->request->getPost('slug',['string','trim']);
         $items->status = $this->request->getPost('status',['int']);
-        $items->gmajorid = $this->request->getPost('gmajorid',['int']);
         $items->slug = $plug ? $this->helper->slugify($plug) : $this->helper->slugify($pTitle[1]);
         $items->image = $this->request->getPost('image',['trim','string']);
         if($this->className::findFirst(['slug = :slug: AND id != :id:','bind' => ['slug' => $items->slug,'id' => (!empty($items->id) ? $items->id : 0)]])){

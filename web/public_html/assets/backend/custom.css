@@ -77,6 +77,15 @@ a.text-primary:focus, a.text-primary:hover{
 .bg-eee{
     background-color: #F4F6F9 !important;
 }
+.bg-manager{
+    background-color: #F4F6F9 !important;
+}
+.bg-board{
+    background-color: #F4F6F9 !important;
+}
+.bg-it{
+    background-color: #fafafa !important;
+}
 
 img.object-fit-fill{
     object-fit: contain;

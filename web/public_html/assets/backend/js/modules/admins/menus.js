@@ -37,11 +37,6 @@ const changeTypeMenu = (type) => {
             $('#modalMenus .boxtype[data-type=5]').removeClass('hidden').find('#links').prop('disabled',false).prop('required',true);
             break;
         }
-        case 6:{
-            $('#modalMenus .boxtype').addClass('hidden').find('input,select').prop('disabled',true).prop('required',false);
-            $('#modalMenus .boxtype[data-type=6]').removeClass('hidden').find('#gmajorid').prop('disabled',false).prop('required',true);
-            break;
-        }
         case 7:{
             $('#modalMenus .boxtype').addClass('hidden').find('input,select').prop('disabled',true).prop('required',false);
             $('#modalMenus .boxtype[data-type=7]').removeClass('hidden').find('#majorid').prop('disabled',false).prop('required',true);

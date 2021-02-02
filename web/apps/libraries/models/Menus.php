@@ -33,11 +33,7 @@ class Menus extends \ModelCore
             case 5: {
                 return $menu->links;
                 break;
-            }  
-            case 6: {
-                return ($gmajor = \Gmajors::findFirstId($menu->gmajorid)) ? WEB_URL.($slug != '/' ? '/'.$slug : '').'/nhom-nganh-hoc/'.$gmajor->slug : '#';
-                break;
-            } 
+            }
             case 7: {
                 return ($major = \Majors::findFirstId($menu->majorid)) ? WEB_URL.($slug != '/' ? '/'.$slug : '').'/nganh-hoc/'.$major->slug : '#';
                 break;
@@ -80,11 +76,7 @@ class Menus extends \ModelCore
                 $item['link'] = $menu->links;
                 break;
             }   
-            case 6: {
-                $item['link'] = ($gmajor = \Gmajors::findFirstId($menu->gmajorid)) ? WEB_URL.($slug != '/' ? '/'.$slug : '').'/nhom-nganh-hoc/'.$gmajor->slug : '#';
-                $item['actived'] = (isset($gmajor->slug) ? $gmajor->slug : '#4') == $slugNow ? true : false;
-                break;
-            } 
+
             case 7: {
                 $item['link'] = ($major = \Majors::findFirstId($menu->majorid)) ? WEB_URL.($slug != '/' ? '/'.$slug : '').'/nganh-hoc/'.$major->slug : '#';
                 $item['actived'] = (isset($major->slug) ? $major->slug : '#4') == $slugNow ? true : false;

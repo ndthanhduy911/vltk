@@ -22,21 +22,6 @@ class MajorsForm extends \Phalcon\Forms\Form
         $status->setLabel('<i class="fas fa-check-circle mr-1"></i>Trạng thái');
         $this->add($status);
 
-        //gmajorid
-        $perL = \Library\Master\Master::checkPermissionDepted('majors', 'update',[0,1]);
-        $gmajorid = new Select('gmajorid', \Gmajors::findPermission($perL,"id,(SELECT gl.title FROM GmajorsLang as gl WHERE gl.langid = 1 AND gl.gmajorid = Gmajors.id) as name",['status = 1']), array(
-            'using' => ['id', 'name'],
-            'useEmpty' => true,
-            'emptyText' => 'Chọn',
-            'emptyValue' => '',
-            'class' => 'form-control form-control-sm',
-            'required' => '',
-            'data-required-error' => 'Vui lòng nhập thông tin',
-            'data-error' => "Thông tin chưa hợp lệ"
-        ));
-        $gmajorid->setLabel('<i class="fas fa-columns mr-1"></i>Nhóm ngành học');
-        $this->add($gmajorid);
-
         //slug
         $slug = new Text('slug');
         $slug->setLabel('<i class="fas fa-globe mr-1"></i>Slug');

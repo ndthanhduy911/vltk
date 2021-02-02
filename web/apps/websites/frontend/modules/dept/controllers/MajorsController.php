@@ -20,11 +20,6 @@ class MajorsController extends \FrontendController
             return $this->view->pick('templates/404');
         }
 
-        if(!$gmajors = \Gmajors::findFirst(["status = 1 AND id = {$majors->gmajorid}"])){
-            $this->view->title = '404';
-            return $this->view->pick('templates/404');
-        }
-
         $majorList = $this->modelsManager->createBuilder()
         ->columns(array(
             'r.id',
@@ -33,7 +28,7 @@ class MajorsController extends \FrontendController
             'rl.title',
         ))
         ->from(['r'=>'Majors'])
-        ->where("r.deptid = {$dept->id} AND r.status = 1 AND r.deleted = 0 AND gmajorid = {$gmajors->id}")
+        ->where("r.deptid = {$dept->id} AND r.status = 1 AND r.deleted = 0")
         ->leftJoin('MajorsLang', "rl.majorid = r.id AND rl.langid = {$langid}",'rl')
         ->getQuery()
         ->execute();
@@ -42,7 +37,5 @@ class MajorsController extends \FrontendController
         $this->view->majors = $majors;
         $this->view->majorList = $majorList;
         $this->view->majorslang = $majorslang;
-        $this->view->gmajors = $gmajors;
-        $this->view->gtitle = \Gmajors::getTitleById($gmajors->id);
     }
 }

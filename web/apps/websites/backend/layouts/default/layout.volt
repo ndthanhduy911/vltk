@@ -7,7 +7,7 @@
     <title><?= WEB_TITLE ?></title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Quản lý tài sản | Honeynet">
+    <meta name="description" content="<?= WEB_TITLE ?>">
     <link rel="shortcut icon" href="<?= WEB_URI ?>/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="<?= WEB_URI ?>/logo.png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
