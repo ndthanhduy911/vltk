@@ -58,9 +58,9 @@
                         <p>Trang thông tin</p>
                     </a>
                 </li>
-                <li class="nav-item has-treeview {% if dispatcher.getControllerName() in ['subjects','researches','majors'] %} {{ 'menu-open' }} {% endif %}">
+                <li class="nav-item has-treeview {% if dispatcher.getControllerName() in ['subjects','classes','researches','majors'] %} {{ 'menu-open' }} {% endif %}">
                     <a href="#"
-                        class="nav-link {% if dispatcher.getControllerName() in ['subjects','researches','majors'] %} {{ 'active' }} {% endif %}">
+                        class="nav-link {% if dispatcher.getControllerName() in ['subjects','classes','researches','majors'] %} {{ 'active' }} {% endif %}">
                         <i class="nav-icon fas fa-list"></i>
                         <p>
                             Đào tạo
@@ -68,6 +68,15 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview mt-1">
+                        {% if master.checkPermission('classes', 'index') %}
+                        <li class="nav-item">
+                            <a href="<?= WEB_ADMIN_URL ?>/classes"
+                                class="nav-link {% if dispatcher.getControllerName()=='classes' %} {{ 'active' }} {% endif %}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Danh sách lớp</p>
+                            </a>
+                        </li>
+                        {% endif %}
                         {% if master.checkPermission('subjects', 'index') %}
                         <li class="nav-item">
                             <a href="<?= WEB_ADMIN_URL ?>/subjects"

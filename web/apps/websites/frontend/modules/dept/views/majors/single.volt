@@ -1,17 +1,6 @@
-<div class="breadcrumb-container">
-    <div class="container">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><i class="fa fa-home pr-2"></i><a class="link-dark"
-                    href="<?= WEB_URL ?>/{{ dept.id != 1? dept.slug : '' }}">{{ ml._ml('home', 'Trang chủ') }}</a></li>
-            <li class="breadcrumb-item"><a class="link-dark"
-                    href="<?= WEB_URL ?>/{{ dept.id != 1? dept.slug : '' }}nhom-nganh-hoc">{{ ml._ml('home', 'Ngành học') }}</a>
-            </li>
-            <li class="breadcrumb-item active">{{title}}</li>
-        </ol>
-    </div>
-</div>
+{{ partial('breadcrumb') }}
 <div class="banner dark-translucent-bg fixed-bg"
-    style="background-image:url('<?= WEB_URL ?>/assets/frontend/images/banner-page.jpg'); background-position: 50% 27%;">
+    style="background-image:url('<?= WEB_URL ?>/img/banner-page.jpg'); background-position: 50% 27%;">
     <div class="container">
         <div class="row justify-content-lg-center">
             <div class="col-lg-8 text-center pv-20">
@@ -95,39 +84,39 @@
                     <div class="tab-content w-100">
                         <div class="tab-pane fade show active" id="contentTab" role="tabpanel">
                             <h3 class="title">{{ ml._ml('general-introduction', 'Giới thiệu chung') }}</h3>
-                            <article>{{ majorslang.content }}</article>
+                            <article>{{ itemslang.content }}</article>
                         </div>
                         <div class="tab-pane fade" id="stdoutTab" role="tabpanel">
                             <h3 class="title">{{ ml._ml('graduation-standard', 'Chuẩn đầu ra') }}</h3>
-                            <article>{{ majorslang.stdout }}</article>
+                            <article>{{ itemslang.stdout }}</article>
                         </div>
                         <div class="tab-pane fade" id="curriculumTab" role="tabpanel">
                             <h3 class="title">{{ ml._ml('curriculum', 'Khung chương trình đào tạo') }}</h3>
-                            <article>{{ majorslang.curriculum }}</article>
+                            <article>{{ itemslang.curriculum }}</article>
                         </div>
                         <div class="tab-pane fade" id="prospectsTab" role="tabpanel">
                             <h3 class="title">{{ ml._ml('career-prospects', 'Triển vọng nghề nghiệp') }}</h3>
-                            <article>{{ majorslang.prospects }}</article>
+                            <article>{{ itemslang.prospects }}</article>
                         </div>
                         <div class="tab-pane fade" id="feeTab" role="tabpanel">
                             <h3 class="title">{{ ml._ml('tuition-fees-scholarships-and-environment', 'Học phí, học bổng và môi trường học') }}</h3>
-                            <article>{{ majorslang.fee }}</article>
+                            <article>{{ itemslang.fee }}</article>
                         </div>
                         <div class="tab-pane fade" id="researchesTab" role="tabpanel">
                             <h3 class="title">{{ ml._ml('applied-research', 'Nghiên cứu ứng dụng') }}</h3>
-                            <article>{{ majorslang.researches }}</article>
+                            <article>{{ itemslang.researches }}</article>
                         </div>
                         <div class="tab-pane fade" id="studentsTab" role="tabpanel">
                             <h3 class="title">{{ ml._ml('student-activities', 'Hoạt động sinh viên') }}</h3>
-                            <article>{{ majorslang.students }}</article>
+                            <article>{{ itemslang.students }}</article>
                         </div>
                         <div class="tab-pane fade" id="alumniTab" role="tabpanel">
                             <h3 class="title">{{ ml._ml('typical-students-and-alumni', 'Sinh viên và cựu sinh viên tiêu biểu') }}</h3>
-                            <article>{{ majorslang.alumni }}</article>
+                            <article>{{ itemslang.alumni }}</article>
                         </div>
                         <div class="tab-pane fade" id="rpartnersTab" role="tabpanel">
                             <h3 class="title">{{ ml._ml('reviews-of-the-employer', 'Đánh giá của nhà tuyển dụng') }}</h3>
-                            <article>{{ majorslang.rpartners }}</article>
+                            <article>{{ itemslang.rpartners }}</article>
                         </div>
                     </div>
                 </div>

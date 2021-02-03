@@ -38,7 +38,6 @@
             <div class="main col-lg-9">
                 <h1 class="page-title">{{title}}</h1>
                 <div class="separator-2"></div>
-
                 <div class="masonry-grid row">
                     {% for key, post in posts %}
                     <div class="masonry-grid-item col-md-6">

@@ -81,15 +81,16 @@
 ?>
 
 {{ partial('breadcrumb') }}
-<div class="banner dark-translucent-bg fixed-bg"style="background-image:url('{{helper.getLinkImage(page.bgimage, '/assets/frontend/images/banner-page.jpg') }}'); background-position: 50% 27%;">
+
+<div class="banner dark-translucent-bg fixed-bg"style="background-image:url('{{helper.getLinkImage(items.bgimage, '/img/banner-page.jpg') }}'); background-position: 50% 27%;">
     <div class="container">
         <div class="row justify-content-lg-center">
             <div class="col-lg-8 text-center pv-20">
-                <h1 class="title"><span class="text-white text-uppercase">{{ pageslang.title }}</span></h1>
-                {% if pageslang.excerpt %}
+                <h1 class="title"><span class="text-white text-uppercase">{{ itemslang.title }}</span></h1>
+                {% if itemslang.excerpt %}
                 <div class="separator mt-10">
                 </div>
-                <p class="text-center">{{ pageslang.excerpt }}</p>
+                <p class="text-center">{{ itemslang.excerpt }}</p>
                 {% endif %}
             </div>
         </div>
@@ -108,7 +109,7 @@
                         <div class="w-{{ key === 1 ? '40' : '30' }} pl-1 pr-1 mt-3">
                             <div class="team-member image-box style-2 dark-bg text-center">
                                 <div class="overlay-container overlay-visible">
-                                    <img src="{{ helper.getLinkImage(staff.image,'/assets/frontend/images/teams.jpg') }}" alt="{{ staff.title }}" width="100%">
+                                    <img class="grow" src="{{ helper.getLinkImage(staff.image,'/img/default3.jpg') }}" alt="{{ staff.title }}" width="100%">
                                 </div>
                                 <div class="body">
                                     <h5 class="margin-clear text-uppercase"><a href="<?= \Staffs::getUrl($dept,$staff) ?>" title="{{ staff.title }}">{{ staff.title }}</a></h5>
@@ -136,7 +137,7 @@
                                 <div class="row">
                                     <div class="col-md-3 col-lg-3 col-xl-3">
                                         <div class="overlay-container overlay-visible">
-                                            <img src="{{ helper.getLinkImage(staff.image,'/assets/frontend/images/teams.jpg') }}" alt="{{staff.title}}" width="100%">
+                                            <img class="grow" src="{{ helper.getLinkImage(staff.image,'/img/default3.jpg') }}" alt="{{staff.title}}" width="100%">
                                         </div>
                                     </div>
                                     <div class="col-md-9 p-sm-0">
@@ -167,8 +168,7 @@
                         <div class="row">
                             <div class="col-md-3 col-lg-3">
                                 <div class="overlay-container overlay-visible">
-                                <img width="100%" src="{{ helper.getLinkImage(staff.image,'/assets/frontend/images/teams.jpg') }}" alt="{{ staff.title }}">
-                                <a href="{{ helper.getLinkImage(staff.image,'/assets/frontend/images/teams.jpg') }}" class="popup-img overlay-link" title="{{ staff.title }}"><i class="fa fa-plus"></i></a>
+                                    <img class="grow" width="100%" src="{{ helper.getLinkImage(staff.image,'/img/default3.jpg') }}" alt="{{ staff.title }}">
                                 </div>
                             </div>
                             <div class="col-md-9 col-lg-9">
@@ -197,8 +197,7 @@
                         <div class="row">
                             <div class="col-md-3 col-lg-3">
                                 <div class="overlay-container overlay-visible">
-                                <img width="100%" src="{{ helper.getLinkImage(staff.image,'/assets/frontend/images/teams.jpg') }}" alt="{{ staff.title }}">
-                                <a href="{{ helper.getLinkImage(staff.image,'/assets/frontend/images/teams.jpg') }}" class="popup-img overlay-link" title="{{ staff.title }}"><i class="fa fa-plus"></i></a>
+                                    <img class="grow" width="100%" src="{{ helper.getLinkImage(staff.image,'/assets/frontend/images/teams.jpg') }}" alt="{{ staff.title }}">
                                 </div>
                             </div>
                             <div class="col-md-9 col-lg-9">

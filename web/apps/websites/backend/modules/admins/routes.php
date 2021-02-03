@@ -248,3 +248,22 @@ $router->add(WEB_ADMIN_URI . '/majors/:action/:int', array(
     'action'  => 1,
     'id' => 2
 ));
+
+/***********************ClassesController***********************/
+$router->add(WEB_ADMIN_URI . '/classes', array(
+    'module' => 'backend_admins',
+    'controller' => 'classes',
+    'action' => 'index',
+));
+
+$router->add(WEB_ADMIN_URI . '/classes/:action', array(
+    'module' => 'backend_admins',
+    'controller' => 'classes',
+    'action' => 1,
+));
+$router->add(WEB_ADMIN_URI . '/classes/:action/:int', array(
+    'module' => 'backend_admins',
+    'controller' => 'classes',
+    'action'  => 1,
+    'id' => 2
+));

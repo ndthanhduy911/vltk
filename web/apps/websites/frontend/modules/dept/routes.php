@@ -38,7 +38,7 @@ $router->add(WEB_URI."/{dept:[a-zA-Z0-9_-]+}", array(
 $router->add(WEB_URI."/{dept:[a-zA-Z0-9_-]+}/{page:[a-zA-Z0-9_-]+}.html", array(
     'module' => 'frontend_dept',
     'controller' => 'pages',
-    'action' => 'index',
+    'action' => 'temp',
     'dept' => 1,
     'page' => 2,
 ));
@@ -68,6 +68,22 @@ $router->add(WEB_URI."/{dept:[a-zA-Z0-9_-]+}/nganh-hoc/{major:[a-zA-Z0-9_-]+}", 
     'major' => 2,
 ));
 
+/***********************ClassesController***********************/
+$router->add(WEB_URI."/{dept:[a-zA-Z0-9_-]+}/lop-hoc/{class:[a-zA-Z0-9_-]+}", array(
+    'module' => 'frontend_dept',
+    'controller' => 'classes',
+    'action' => 'single',
+    'dept' => 1,
+    'class' => 2,
+));
+
+$router->add(WEB_URI."/{dept:[a-zA-Z0-9_-]+}/lop-hoc", array(
+    'module' => 'frontend_dept',
+    'controller' => 'classes',
+    'action' => 'index',
+    'dept' => 1,
+));
+
 // ======================================
 // HOMEPAGE
 // ======================================
@@ -75,7 +91,7 @@ $router->add(WEB_URI."/{dept:[a-zA-Z0-9_-]+}/nganh-hoc/{major:[a-zA-Z0-9_-]+}", 
 $router->add(WEB_URI."/{page:[a-zA-Z0-9_-]+}.html", array(
     'module' => 'frontend_dept',
     'controller' => 'pages',
-    'action' => 'index',
+    'action' => 'temp',
     'page' => 1,
 ));
 
@@ -152,4 +168,18 @@ $router->add(WEB_URI."/nganh-hoc/{major:[a-zA-Z0-9_-]+}", array(
     'controller' => 'majors',
     'action' => 'single',
     'major' => 1,
+));
+
+/***********************ClassesController***********************/
+$router->add(WEB_URI."/lop-hoc/{class:[a-zA-Z0-9_-]+}", array(
+    'module' => 'frontend_dept',
+    'controller' => 'classes',
+    'action' => 'single',
+    'class' => 1,
+));
+
+$router->add(WEB_URI."/lop-hoc", array(
+    'module' => 'frontend_dept',
+    'controller' => 'classes',
+    'action' => 'index',
 ));

@@ -1,27 +1,29 @@
 <?php
 use Library\Helper\HelperValidation;
-class Pages extends \ModelCore
+class Classes extends \ModelCore
 {
     public function initialize()
     {
         $this->setSchema(SCHEMADB);
-        $this->setSource("pages");
+        $this->setSource("classes");
     }
 
-    public static function getUrl($dept = NULL, $page = NULL)
+
+    public static function getTitleById($id = null)
     {
-        if($page && $dept){
-            return WEB_URL.($dept->id != 1 ? "/$dept->slug" : '' ).'/'.$page->slug.'.html';
+        if($class = ClassesLang::findFirst(['classid = :classid:','bind' => ['classid' => $id]])){
+            return $class->name;
         }else{
-            return '';
+            return null;
         }
     }
 
-    public static function getTitleById($id = null){
-        if($page = PagesLang::findFirst(['pageid = :pageid:','bind' => ['pageid' => $id]])){
-            return $page->name;
+    public static function getUrl($dept = NULL, $class = NULL)
+    {
+        if($class && $dept){
+            return WEB_URL.($dept->id != 1 ? "/$dept->slug" : '' ).'/class/'.$class->slug;
         }else{
-            return null;
+            return '';
         }
     }
 
@@ -31,16 +33,17 @@ class Pages extends \ModelCore
             'name' => 'deptid',
             'msg' => 'Bộ môn không được để trống'
         ]);
+        //code
+        $helper->setValidation('max', [
+            'name' => 'code',
+            'len' => 20,
+            'msg' => 'Mã lớp không được dài quá 20 ký tự'
+        ]);
         //slug
         $helper->setValidation('max', [
             'name' => 'slug',
             'len' => 255,
             'msg' => 'Slug không được dài quá 255 ký tự'
-        ]);
-        //attrid
-        $helper->setValidation('required', [
-            'name' => 'attrid',
-            'msg' => 'Giao diện không được để trống'
         ]);
         //status
         $helper->setValidation('required', [
@@ -62,9 +65,9 @@ class Pages extends \ModelCore
     public static function filedName($key){
         $feilds = [
             'slug' => 'Xem',
+            'code' => 'Mã lớp',
             'status' => 'Trạng thái',
             'image' => 'Hình đại diện',
-            'createdby' => 'Tác giả',
             'deptid' => 'Bộ môn',
             'deptname' => 'Bộ môn',
             'createdat' => 'Ngày tạo',
@@ -76,22 +79,22 @@ class Pages extends \ModelCore
 
     public static function arrayFilter(){
         return [
-            ['title'],
+            ['title','code'],
             ['status'],
             ['createdat']
         ];
     }
 
     public static function findTables () {
-        return ['image','title','excerpt','createdby','createdat','slug','status'];
+        return ['image','code','title','excerpt','createdat','slug','status'];
     }
 
     public static function arrayOrder () {
-        return ['title','status','createdat'];
+        return ['title','code','status','createdat'];
     }
     
     public static function findFilters () {
-        $filters = \Pages::arrayFilter();
+        $filters = \Classes::arrayFilter();
         return array_merge($filters[0],$filters[1],$filters[2]);
     }
 }

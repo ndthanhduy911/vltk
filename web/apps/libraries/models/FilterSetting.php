@@ -25,6 +25,7 @@ class FilterSetting extends \ModelCore
             'posts' => \Posts::findFilters(),
             'pages' => \Pages::findFilters(),
             'majors' => \Majors::findFilters(),
+            'classes' => \Classes::findFilters(),
             'subjects' => \Subjects::findFilters(),
             'researches' => \Researches::findFilters(),
             'slideshows' => \Slideshows::findFilters(),
@@ -69,6 +70,7 @@ class FilterSetting extends \ModelCore
             'posts' => \Posts::findTables(),
             'pages' => \Pages::findTables(),
             'majors' => \Majors::findTables(),
+            'classes' => \Classes::findTables(),
             'subjects' => \Subjects::findTables(),
             'researches' => \Researches::findTables(),
             'slideshows' => \Slideshows::findTables(),
@@ -100,6 +102,7 @@ class FilterSetting extends \ModelCore
         $fkeys = [
             'posts' => \Posts::arrayOrder(),
             'majors' => \Majors::arrayOrder(),
+            'classes' => \Classes::arrayOrder(),
             'pages' => \Pages::arrayOrder(),
             'subjects' => \Subjects::arrayOrder(),
             'researches' => \Researches::arrayOrder(),

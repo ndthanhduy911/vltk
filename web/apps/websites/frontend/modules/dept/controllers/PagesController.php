@@ -2,34 +2,40 @@
 
 namespace Frontend\Modules\Dept\Controllers;
 
-class PagesController extends \FrontendController
+class PagesController extends \LayoutsController
 {
-    public function indexAction($slug1 = null, $slug2 = null){
+    public $className = \Pages::class;
+
+    public $classNameLang = \PagesLang::class;
+
+    public $itemid = 'pageid';
+
+    public function tempAction($slug1 = null, $slug2 = null){
+        $dept = $this->dept;
         $slug1 = $this->helper->slugify($slug1);
         $slug2 = $this->helper->slugify($slug2);
-        $dept = $this->dispatcher->getReturnedValue();
-        $langid = $this->session->get('langid');
-        $slug = (int)$dept->id === 1 ? $slug1 : $slug2;
-        if(!$page = \Pages::findFirst(["slug = :slug: AND status = 1 AND deptid = {$dept->id}", 'bind' => ['slug' => $slug]])){
+        $slug = $dept->id == 1 ? $slug1 : $slug2;
+        if(!$items = $this->className::findFirst(["slug = :slug: AND status = 1 AND deptid = {$dept->id}", 'bind' => ['slug' => $slug]])){
             $this->view->title = '404';
             return $this->view->pick('templates/404');
         }
-        if(!$pageslang = \PagesLang::findFirst(["langid = {$langid} AND pageid = {$page->id}"])){
+        if(!$itemslang = $this->classNameLang::findFirst(["langid = {$this->langid} AND {$this->itemid} = {$items->id}"])){
             $this->view->title = '404';
             return $this->view->pick('templates/404');
         }
-        $this->view->title = $pageslang->title;
-        $this->view->page = $page;
-        $this->view->slug_now = $page->slug;
-        $this->view->pageslang = $pageslang;
-        if(!$page->attrid){
-            return $this->view->pick('templates/pages/default');
-        }
+        $this->items = $items;
+        $this->itemslang = $itemslang;
 
-        if(($attribute = \Attributes::findFirst($page->attrid))){
-        return $this->view->pick('templates/pages/'.$attribute->path);
+        $this->view->title = $itemslang->title;
+        $this->view->slug = $items->slug;
+        $this->view->ltitle = null;
+        $this->view->lslug = null;
+        $this->view->items = $this->items;
+        $this->view->itemslang = $this->itemslang;
+        if($attr = \Attributes::findFirst($this->items->attrid)){
+            $this->view->pick('templates/pages/'.$attr->path);
+        }else{
+            $this->view->pick('templates/pages/default');
         }
-
-        return $this->view->pick('templates/pages/default');
     }
 }

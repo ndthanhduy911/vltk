@@ -30,7 +30,7 @@
 
 ?>
 {{ partial('breadcrumb') }}
-<div class="banner dark-translucent-bg fixed-bg"style="background-image:url('{{helper.getLinkImage(page.bgimage, '/assets/frontend/images/banner-page.jpg') }}'); background-position: 50% 27%;">
+<div class="banner dark-translucent-bg fixed-bg"style="background-image:url('{{helper.getLinkImage(page.bgimage, '/img/banner-page.jpg') }}'); background-position: 50% 27%;">
     <div class="container">
         <div class="row justify-content-lg-center">
             <div class="col-lg-8 text-center pv-20">
@@ -52,13 +52,10 @@
                 <div class="row">
                     <?php if(!empty($depts)): ?>
                     {% for dept_item in depts %}
-                    <div class="col-lg-6 col-md-6 isotope-item">
+                    <div class="col-md-6 isotope-item">
                         <div class="image-box shadow-2 bordered text-center mb-20">
                             <div class="overlay-container rounded overlay-visible">
-                                <img src="{{ helper.getLinkImage(dept_item.image) }}"
-                                    alt="{{ dept_item.title }}">
-                                <a href="{{ constant('WEB_URL')~'/'~dept_item.slug }}" class="overlay-link"><i
-                                        class="fa fa-graduation-cap"></i></a>
+                                <img src="{{ helper.getLinkImage(dept_item.image) }}" alt="{{ dept_item.title }}" class="grow">
                                 <div class="overlay-bottom hidden-xs">
                                     <div class="text">
                                         {{ dept_item.title }}
@@ -75,10 +72,7 @@
                     <div class="col-lg-3 col-md-6 isotope-item">
                         <div class="image-box shadow-2 bordered text-center mb-20">
                             <div class="overlay-container rounded overlay-visible">
-                                <img src="{{ helper.getLinkImage(research.image) }}"
-                                    alt="{{ dept_item.title }}">
-                                <a href="<?= \Researches::getUrl($dept, $research) ?>" class="overlay-link"><i
-                                        class="fa fa-graduation-cap"></i></a>
+                                <img src="{{ helper.getLinkImage(research.image) }}" alt="{{ dept_item.title }}" class="grow">
                                 <div class="overlay-bottom hidden-xs">
                                     <div class="text">
                                         {{ research.title }}

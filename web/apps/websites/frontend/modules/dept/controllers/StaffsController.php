@@ -2,50 +2,22 @@
 
 namespace Frontend\Modules\Dept\Controllers;
 
-class StaffsController extends \FrontendController
+class StaffsController extends \LayoutsController
 {
-    public function indexAction(){
-        $dept = $this->dispatcher->getReturnedValue();
-        $langid = $this->session->get('langid');
-        if(!$page = \Pages::findFirst(["status = 1 AND deptid = {$dept->id} AND attrid = 2"])){
-            $this->view->title = '404';
-            return $this->view->pick('templates/404');
-        }
-        if(!$pageslang = \PagesLang::findFirst(["langid = {$langid} AND pageid = {$page->id}"])){
-            $this->view->title = '404';
-            return $this->view->pick('templates/404');
-        }
-        $this->view->title = $pageslang->title;
-        $this->view->page = $page;
-        $this->view->pageslang = $pageslang;
-        return $this->view->pick('templates/pages/teams');
+    public $className = \Staffs::class;
+
+    public $classNameLang = \StaffsLang::class;
+
+    public $itemid = 'staffid';
+
+    public $attrid = 2;
+
+    public function indexC($view){
+        $view->pick('templates/pages/staffs');
+        return $view;
     }
 
-    public function singleAction($slug1 = null, $slug2 = null){
-        $slug1 = $this->helper->slugify($slug1);
-        $slug2 = $this->helper->slugify($slug2);
-        $dept = $this->dispatcher->getReturnedValue();
-        $langid = $this->session->get('langid');
-        $slug = (int)$dept->id === 1 ? $slug1 : $slug2;
-        if(!$staff = \Staffs::findFirst(["status = 1 AND slug = :slug:", 'bind' => ['slug' => $slug]])){
-            $this->view->title = '404';
-            return $this->view->pick('templates/404');
-        }
-
-        if($stafflang = \StaffsLang::findFirst(["langid = {$langid} AND staffid = {$staff->id}"])){
-            $this->view->title = $stafflang->title;
-            $this->view->staff = $staff;
-            $this->view->stafflang = $stafflang;
-        }
-
-        if($deptinfo = \Depts::findFirstId($staff->deptid)){
-            $this->view->deptinfo = $deptinfo;
-            $this->view->deptlanginfo = \DeptsLang::findFirst(["langid = {$langid} AND deptid = {$deptinfo->id}"]);
-        }
-
-        if($page = \Pages::findFirst(["attrid = 2 AND deptid = $staff->deptid"])){
-            $this->view->title2 = \PagesLang::findFirst(["langid = $langid AND pageid = $page->id"]);
-            $this->view->slug2 = $page->slug;
-        }
+    public function singleC($view){
+        return $view;
     }
 }

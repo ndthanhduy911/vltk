@@ -19,11 +19,36 @@
         }
     </style>
     <style>
-        body {
-            overflow-x: hidden;
+
+        #particles-js {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100vw;
+            /* min-height: 661px; */
             height: 100%;
-            background-color: #B0BEC5 !important;
-            background-repeat: no-repeat
+            background-image: url("");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: 50% 50%;
+            background: #2196F2;
+            /* Old browsers */
+            background: -moz-linear-gradient(left, #2196F2 0%, #2196F2 35%, #2196F2 68%, #2196F2 100%);
+            /* FF3.6-15 */
+            background: -webkit-linear-gradient(left, #2196F2 0%, #2196F2 35%, #2196F2 68%, #2196F2 100%);
+            /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(to right, #2196F2 0%, #2196F2 35%, #2196F2 68%, #2196F2 100%);
+            /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#6819e8', endColorstr='#6980f2', GradientType=1);
+            /* IE6-9 */
+        }
+
+        #boxLogin {
+            padding: 40px 15px;
+        }
+
+        .logoImage{
+            height: 70px;
         }
 
         .btn-hnn {
@@ -36,7 +61,7 @@
 
         .logo {
             width: 80px;
-            /* height: 100px; */
+            height: 80px;
             margin-top: 20px;
             margin-left: 35px
         }
@@ -59,12 +84,14 @@
         }
 
         .input-group-append {
-            margin-left: -35px;
+            margin-left: -30px;
         }
 
         .input-group-text {
             background-color: transparent;
             border: none;
+            padding-left: 8px;
+            padding-right: 8px;
         }
 
         .f-s-14 {
@@ -84,25 +111,47 @@
             .border-line {
                 border-right: none
             }
-}
+        }
+
+        @media screen and (max-width: 480px) {
+            #imageBlock{
+                display: none;
+            }
+            .pv-0 {
+                padding: 0 !important;
+            }
+            .card.rounded.mt-5 {
+                margin-top: 15px !important;
+            }
+            #boxLogin{
+                padding: 30px 15px;
+            }
+            .login-title {
+                font-size: 36px;
+            }
+            .logoImage{
+                height: 60px;
+            }
+        }
     </style>
 </head>
 
 <body>
+    <div id="particles-js"><canvas class="particles-js-canvas-el"></canvas></div>
     <div class="container">
-        <div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
-            <div class="card rounded">
-                <div class="row d-flex p-3">
-                    <div class="col-lg-6">
+        <div class="container-fluid">
+            <div class="card rounded mt-5">
+                <div class="row d-flex p-3 pv-0">
+                    <div class="col-md-7" id="imageBlock">
                         <div class="card1 pb-5">
-                            <div class="row"><img src="/logo.png" class="logo"> </div>
+                            <div class="row"><img src="<?= LOGO ?>" class="logo" width="80px"> </div>
                             <div class="row px-3 justify-content-center mt-4 mb-5"> <img src="/assets/images/it.png" class="image"> </div>
                         </div>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-md-5">
                         <form action="<?= WEB_ADMIN_URL ?>/login" id="frmLogin" data-toggle="validator" role="form" method="POST">
-                            <div class="card border-0 px-4 py-5">
-                                <h1 class="text-center font-weight-bold text-primary">ĐĂNG NHẬP</h1>
+                            <div class="card border-0 mb-0" id="boxLogin">
+                                <h2 class="text-center font-weight-bold text-primary login-title mt-3 mb-4"><?= WEB_TITLE ?></h2>
                                 <div class="row mb-4">
                                     <div class="col-md-12 d-flex">
                                         <div class="line"></div> <small class="or text-center"><i class="fas fa-graduation-cap" aria-hidden="true"></i></small>
@@ -158,79 +207,17 @@
                         </form>
                     </div>
                 </div>
-                <div class="bg-primary rounded-bottom">
-                    <div class="row p-3"> <span class="m-auto f-s-14">Bản quyền &copy; 2020. Khoa Vật Lý - Vật Lý Kỹ Thuật.</span></div>
+                <hr class="mb-0">
+                <div class="bg-eee rounded-bottom border-0">
+                    <div class="row p-3"> <span class="m-auto f-s-14">&copy;<?= date('Y') ?> - Phát triển bởi <a href="https://honeynet.vn" class="text-danger font-weight-bold"><?= DEPTDEV ?></a></span></div>
                 </div>
             </div>
         </div>
     </div>
-
-    {#
-    <div class="jumbotron jumbotron-main" id="home">
-        <div id="particles-js"><canvas class="particles-js-canvas-el"></canvas></div>
-        <div id="loginForm" class="d-flex align-content-center justify-content-center">
-            <form action="<?= WEB_URL ?>" id="frmLogin" data-toggle="validator" role="form" method="POST" class="col-md-4 bg-white card"
-                style="max-width: 450px !important">
-                <div class="card-header d-flex justify-content-center mt-3">
-                    <a target="_blank" href="<?= WEB_ADMIN_URL ?>">
-                        <h1 class="mb-0 text-center text-primary font-weight-bold"><?= WEB_TITLE ?></h1>
-                    </a>
-                </div>
-                <div class="card-body pb-4">
-                    <div class="form-group label-floating is-empty">
-                        <div class="input-group">
-                            <label class="control-label">{{form.getLabel('username')}}</label>
-                            {{form.render('username')}}
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-envelope"></span>
-                                </div>
-                            </div>
-                        <div class="invalid-feedback"></div>
-                        </div>
-                    </div>
-
-                    <div class="form-group label-floating is-empty">
-                        <div class="input-group">
-                            <label class="control-label">{{form.getLabel('password')}}</label>
-                            {{form.render('password')}}
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-lock"></span>
-                                </div>
-                            </div>
-                            <div class="invalid-feedback"></div>
-                        </div>
-                    </div>
-                    <div class="form-group label-floating is-empty">
-                        <div class="input-group">
-                            <img class="mb-3 border rounded" src="<?= WEB_ADMIN_URL ?>/login/captcha" alt="captcha" width="100%">
-                        </div>
-                        <div class="input-group mt-3">
-                            <label class="control-label">{{form.getLabel('captcha')}}</label>
-                            {{form.render('captcha')}}
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-lock"></span>
-                                </div>
-                            </div>
-                            <div class="invalid-feedback"></div>
-                        </div>
-                    </div>
-                    <input class="tokenCSRF" type='hidden' name='<?php echo $this->security->getTokenKey() ?>'
-                    value='<?php echo $this->security->getToken() ?>' />
-                    <div class="bg-white">
-                        <?php echo $this->flashSession->output(); ?>
-                    </div>
-                    <button type="submit" class="btn btn-block btn-hnn btn-hnn-primary"><span>Đăng Nhập <i class="fas fa-sign-in-alt ml-2"></i></span></button>
-                </div>
-            </form>
-        </div>
-    </div>
-    #}
     <script src="<?= WEB_URL.'/assets/backend/dist/' ?>plugins/jquery/jquery.min.js"></script>
     <script src="<?= WEB_URL.'/assets/backend/dist/' ?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="<?= WEB_URL ?>/js/validator.min.js"></script>
+    <script src="<?= WEB_URL ?>/assets/js/particles.min.js"></script>
+    <script src="<?= WEB_URL ?>/assets/js/validator.min.js"></script>
     <script>
         const loaderHtml = `
         <div class="block-loader">
@@ -261,7 +248,7 @@
                                 showErrorAjax(response);
                             }
                         }
-                        $('[data-toggle="tooltip"]').tooltip()
+                        $('[data-tooltip="tooltip"]').tooltip()
                     },
                     error: function (error) {
                         $('body .block-loader').remove();
@@ -324,6 +311,117 @@
                 showConfirmButton: false,
             });
         }
+
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 80,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#ffffff"
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    },
+                    "polygon": {
+                        "nb_sides": 5
+                    },
+                    "image": {
+                        "src": "img/github.svg",
+                        "width": 100,
+                        "height": 100
+                    }
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": false,
+                    "anim": {
+                        "enable": false,
+                        "speed": 1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 3,
+                    "random": true,
+                    "anim": {
+                        "enable": false,
+                        "speed": 40,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#ffffff",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 6,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": false,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "grab"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 140,
+                        "line_linked": {
+                            "opacity": 1
+                        }
+                    },
+                    "bubble": {
+                        "distance": 400,
+                        "size": 40,
+                        "duration": 2,
+                        "opacity": 8,
+                        "speed": 3
+                    },
+                    "repulse": {
+                        "distance": 200,
+                        "duration": 0.4
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                    "remove": {
+                        "particles_nb": 2
+                    }
+                }
+            },
+            "retina_detect": true
+        });
     </script>
 </body>
 

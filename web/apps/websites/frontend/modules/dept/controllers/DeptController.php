@@ -5,8 +5,7 @@ class DeptController extends \FrontendController
 {
     public function indexAction($slug = null){
         $slug = $this->helper->slugify($slug);
-        $dept = $this->dispatcher->getReturnedValue();
-        $langid = $this->session->get('langid');
+        $dept = $this->dept;
 
         $homeSetting = $this->modelsManager->createBuilder()
         ->columns(array(
@@ -25,8 +24,8 @@ class DeptController extends \FrontendController
             'hl.contactdes contactdes'
         ))
         ->from(['h'=>'Homes'])
-        ->where("h.deptid = $dept->id")
-        ->leftJoin('HomesLang', "hl.homeid = h.id AND hl.langid = $langid",'hl')
+        ->where("h.deptid = {$dept->id}")
+        ->leftJoin('HomesLang', "hl.homeid = h.id AND hl.langid = {$this->langid}",'hl')
         ->limit(1)
         ->getQuery()
         ->execute();
@@ -47,8 +46,8 @@ class DeptController extends \FrontendController
             'bl.excerpt'
         ))
         ->from(['b'=>'Slideshows'])
-        ->where("b.status = 1 AND b.deleted = 0 AND b.deptid = $dept->id")
-        ->leftJoin('SlideshowsLang', "bl.slideshowid = b.id AND bl.langid = $langid",'bl')
+        ->where("b.status = 1 AND b.deleted = 0 AND b.deptid = {$dept->id}")
+        ->leftJoin('SlideshowsLang', "bl.slideshowid = b.id AND bl.langid = {$this->langid}",'bl')
         ->getQuery()
         ->execute();
         
@@ -65,9 +64,9 @@ class DeptController extends \FrontendController
             ->where("c.status = 1")
             ->inWhere("c.id", $listCats);
             if(!(int)$dept->postconnect) {
-                $cats = $cats->andWhere("c.deptid = $dept->id");
+                $cats = $cats->andWhere("c.deptid = {$dept->id}");
             }
-            $cats = $cats->leftJoin('CategoriesLang', "cl.catid = c.id AND cl.langid = $langid",'cl')
+            $cats = $cats->leftJoin('CategoriesLang', "cl.catid = c.id AND cl.langid = {$this->langid}",'cl')
             ->getQuery()
             ->execute();
         }
@@ -81,7 +80,7 @@ class DeptController extends \FrontendController
         ))
         ->from(['r'=>'Researches'])
         ->where("r.deptid = $dept->id AND r.status = 1 AND r.deleted = 0")
-        ->leftJoin('ResearchesLang', "rl.researchid = r.id AND rl.langid = $langid",'rl')
+        ->leftJoin('ResearchesLang', "rl.researchid = r.id AND rl.langid = {$this->langid}",'rl')
         ->getQuery()
         ->execute();
 
@@ -100,7 +99,7 @@ class DeptController extends \FrontendController
         ))
         ->from(['s'=>'Staffs'])
         ->where("s.deptid = {$dept->id} AND s.status = 1 AND s.deleted = 0 AND (s.deptposition = 1 OR s.deptposition = 2)")
-        ->leftJoin("StaffsLang", "sl.staffid = s.id AND sl.langid = {$langid}",'sl')
+        ->leftJoin("StaffsLang", "sl.staffid = s.id AND sl.langid = {$this->langid}",'sl')
         ->orderBy("s.dsort ASC,s.regency ASC")
         ->limit(3)
         ->getQuery()
@@ -115,12 +114,12 @@ class DeptController extends \FrontendController
         ))
         ->from(['p' => 'Partners'])
         ->where("p.status = 1 AND p.deleted = 0 AND p.deptid = {$dept->id}")
-        ->leftJoin('PartnersLang', "pl.partnerid = p.id AND pl.langid = {$langid}",'pl')
+        ->leftJoin('PartnersLang', "pl.partnerid = p.id AND pl.langid = {$this->langid}",'pl')
         ->getQuery()
         ->execute();
 
         $this->view->home = $home;
-        $this->view->socials = \Socials::find(["status = 1 AND deptid = $dept->id", "order" => "sort ASC"]);
+        $this->view->socials = \Socials::find(["status = 1 AND deptid = {$dept->id}", "order" => "sort ASC"]);
         $this->view->banners = $banners;
         $this->view->cats = $cats;
         $this->view->researches = $researches;

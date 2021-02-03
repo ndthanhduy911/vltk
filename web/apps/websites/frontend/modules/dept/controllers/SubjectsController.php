@@ -2,23 +2,20 @@
 
 namespace Frontend\Modules\Dept\Controllers;
 
-class SubjectsController extends \FrontendController
+class SubjectsController extends \LayoutsController
 {
-    public function indexAction(){
+    public $className = \Subjects::class;
 
-    }
+    public $classNameLang = \SubjectsLang::class;
 
-    public function singleAction($slug = null){
-        $slug = $this->helper->slugify($slug);
-        $langid = $this->session->get('langid');
-        if(!$subjects = \Subjects::findFirst(["status = 1 AND slug = :slug: AND deleted = 0", 'bind' => ['slug' => $slug]])){
-            $this->view->title = '404';
-            return $this->view->pick('templates/404');
-        }
+    public $itemid = 'subjectid';
 
-        $subjectslang = \SubjectsLang::findFirst(["langid = $langid AND subjectid = $subjects->id"]);
-        $this->view->title = $subjectslang->title;
-        $this->view->subject = $subjects;
-        $this->view->subjectslang = $subjectslang;
+    public $attrid = 8;
+
+    public $title = 'Danh sách môn học';
+
+    public function indexC($view){
+        $view->pick('templates/pages/subjects');
+        return $view;
     }
 }

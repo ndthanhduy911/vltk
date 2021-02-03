@@ -2,38 +2,28 @@
 
 namespace Frontend\Modules\Dept\Controllers;
 
-class PostsController extends \FrontendController
+class PostsController extends \LayoutsController
 {
-    public function indexAction(){
+    public $className = \Posts::class;
 
-    }
+    public $classNameLang = \PostsLang::class;
 
-    public function singleAction($slug1 = null, $slug2 = null){
-        $slug1 = $this->helper->slugify($slug1);
-        $slug2 = $this->helper->slugify($slug2);
-        $dept = $this->dispatcher->getReturnedValue();
-        $langid = $this->session->get('langid');
-        $slug = (int)$dept->id === 1 ? $slug1 : $slug2;
-        \ConectionSystem::plus(2, $dept->id);
-        if(!$post = \Posts::findFirst(["status = 1 AND slug = :slug: AND deptid = $dept->id", 'bind' => ['slug' => $slug]])){
-            $this->view->title = '404';
-            return $this->view->pick('templates/404');
+    public $itemid = 'postid';
+
+    public function singleC($view){
+        \ConectionSystem::plus(2, $this->dept->id);
+        if($cats = \Categories::findFirstIdNoDelete($this->items->catid,'*')){
+            $view->ltitle = \Categories::getTitleById($this->items->catid,$this->langid);
+            $view->lslug = \Categories::getUrl($this->dept,$cats);
         }
-
-        if($postslang = \PostsLang::findFirst(["langid = $langid AND postid = $post->id"])){
-            $this->view->title = $postslang->title;
-            $post->content = $postslang->content;
-            $post->excerpt = $postslang->excerpt;
-            $this->view->post = $post;
-            return $this->view->pick('templates/single');
-        }
+        $view->pick('templates/posts/single');
+        return $view;
     }
 
     public function categoryAction($slug1 = null, $slug2 = null){
         $slug1 = $this->helper->slugify($slug1);
         $slug2 = $this->helper->slugify($slug2);
-        $dept = $this->dispatcher->getReturnedValue();
-        $langid = $this->session->get('langid');
+        $dept = $this->dept;
         $slug = (int)$dept->id === 1 ? $slug1 : $slug2;
         if(!$dept->id){
             $this->view->title = '404';
@@ -41,7 +31,7 @@ class PostsController extends \FrontendController
         }
         $slug = (int)$dept->id === 1 ? $slug1 : $slug2;
 
-        if(!$category = \Categories::findFirst(["slug = :slug: AND status = 1 AND deptid = $dept->id", 'bind' => ['slug' => $slug]])){
+        if(!$cat = \Categories::findFirst(["slug = :slug: AND status = 1 AND deptid = $dept->id", 'bind' => ['slug' => $slug]])){
             $this->view->title = '404';
             return $this->view->pick('templates/404');
         }
@@ -62,8 +52,8 @@ class PostsController extends \FrontendController
             'p.image',
         ))
         ->from(['p'=>'Posts'])
-        ->where("p.deleted = 0 AND p.status = 1 AND p.catid = $category->id AND p.deptid = $dept->id")
-        ->leftJoin('PostsLang', "pl.postid = p.id AND pl.langid = $langid",'pl')
+        ->where("p.deleted = 0 AND p.status = 1 AND p.catid = $cat->id AND p.deptid = $dept->id")
+        ->leftJoin('PostsLang', "pl.postid = p.id AND pl.langid = {$this->langid}",'pl')
         ->orderBy("p.calendar DESC");
         $postCount = $posts->getQuery()
         ->execute()
@@ -74,11 +64,12 @@ class PostsController extends \FrontendController
         ->getQuery()
         ->execute();
 
-        $this->view->title = \Categories::getTitleById($category->id);
+        $this->view->title = \Categories::getTitleById($cat->id,$this->langid);
+        $this->view->ltitle = NULL;
         $this->view->posts = $posts;
         $this->view->pagination = \Posts::createPaging($paged,$postCount);
-        $this->view->slug_now = $category->slug;
-        $this->view->pick('templates/blog');   
+        $this->view->slug_now = $cat->slug;
+        $this->view->pick('templates/posts/blog');   
     }
 
     public function blogAction($slug = null){

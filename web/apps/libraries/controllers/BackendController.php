@@ -39,4 +39,18 @@ class BackendController extends \Phalcon\Mvc\Controller
         $result = $this->db->fetchAll("SELECT {$columns} FROM {$from} {$where} {$group} {$order}", \Phalcon\Db::FETCH_BOTH, $bind);
         return $result;
     }
+
+    public function response($_this = null, $data = null, $status = 200){   
+        $_this->view->disable();
+        http_response_code($status);
+        echo $data;
+        die;
+    }
+
+    public function responseJson($_this = null, $data = null, $status = 200){
+        $_this->view->disable();
+        http_response_code($status);
+        echo json_encode($data);
+        die;
+    }
 }

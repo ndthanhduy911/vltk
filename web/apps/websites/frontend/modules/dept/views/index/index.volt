@@ -39,7 +39,7 @@
 
 <div id="page-start"></div>
 {% if cats.count() %}
-<section id="section1" class="section clearfix pt-5">
+<section class="section clearfix pt-5">
     <div class="container mt-4">
         <div class="row">
             {% for cat in cats %}
@@ -73,10 +73,10 @@
                         <div class="media mb-3">
                             <div class="overlay-container rounded">
                                 <img class="media-object border rounded" src="{{ helper.getLinkImage(post.image) }}" alt="{{ post.title }}">
-                                <a href="<?= Posts::getUrl($dept, $post) ?>" class="overlay-link small"><i class="fa fa-graduation-cap"></i></a>
+                                <a href="<?= \Posts::getUrl($dept, $post) ?>" class="overlay-link small"><i class="fa fa-graduation-cap"></i></a>
                             </div>
                             <div class="media-body">
-                                <h5 class="media-heading"><a href="<?= Posts::getUrl($dept, $post) ?>" title="{{ post.title }}">{{ post.title }}</a></h5>
+                                <h5 class="media-heading"><a href="<?= \Posts::getUrl($dept, $post) ?>" title="{{ post.title }}">{{ post.title }}</a></h5>
                                 <div class="small"><i class="fa fa-calendar pr-10"></i>{{ helper.datetimeVn(post.calendar, 'd/m/Y') }}</div>
                             </div>
                         </div>
@@ -94,7 +94,7 @@
 {% endif %}
 
 {% if depts.count() %}
-<section class="pt-5 pb-5 section dark-translucent-bg fixed-bg" style="background-position: 50% 42%; background-image: url({{ helper.getLinkImage(home['szedbg'], './assets/frontend/images/education.jpg') }})">
+<section class="pt-5 pb-5 section dark-translucent-bg fixed-bg" style="background-position: 50% 42%; background-image: url({{ helper.getLinkImage(home['szedbg'], '/img/banner-page.jpg') }})">
     {% if home['szedtitle'] %}
     <div class="container mt-4">
         <div class="row justify-content-lg-center">
@@ -110,10 +110,7 @@
         <div class="col-lg-3 col-md-6 isotope-item">
             <div class="image-box shadow-2 bordered text-center mb-20">
                 <div class="overlay-container rounded overlay-visible">
-                    <img src="{{ helper.getLinkImage(dept_item.image) }}"
-                        alt="{{ dept_item.title }}">
-                    <a href="{{ dept_item.links ? dept_item.links : constant('WEB_URL')~'/'~dept_item.slug }}" class="overlay-link"><i
-                            class="fa fa-graduation-cap"></i></a>
+                    <img src="{{ helper.getLinkImage(dept_item.image,'/img/default2.jpg') }}" class="grow" alt="{{ dept_item.title }}">
                     <div class="overlay-bottom hidden-xs">
                         <div class="text">
                             {{ dept_item.title }}
@@ -144,8 +141,7 @@
             <div class="col-md-4">
                 <div class="image-box team-member shadow-2 mb-20">
                     <div class="overlay-container rounded overlay-visible">
-                        <img width="100%" class="object-fit-fill" src="{{ helper.getLinkImage(staff.image,'/assets/frontend/images/education.jpg') }}" alt="{{staff.title}}">
-                        <a href="<?= \Staffs::getUrl($dept, $staff) ?>" class="overlay-link" title="{{staff.title}}"><i class="fa fa-graduation-cap"></i></a>
+                        <img width="100%" class="object-fit-fill grow" src="{{ helper.getLinkImage(staff.image,'/img/default3.jpg') }}" alt="{{staff.title}}">
                         <div class="overlay-bottom">
                             <div class="text p-0">
                                 <h4 class="title text-white text-uppercase">{{staff.title}}</h4>
@@ -167,7 +163,7 @@
 {% endif %}
 
 {% if partners.count() %}
-<section class="pt-5 pb-5 section dark-translucent-bg fixed-bg" style="background-position: 50% 42%; background-image: url({{ helper.getLinkImage(home['partnerbg'], './assets/frontend/images/education.jpg') }})">
+<section class="pt-5 pb-5 section dark-translucent-bg fixed-bg" style="background-position: 50% 42%; background-image: url({{ helper.getLinkImage(home['partnerbg'], '/img/banner-page.jpg') }})">
     {% if home['partnertitle'] %}
     <div class="container pv-20">
         <div class="row justify-content-lg-center">
@@ -182,7 +178,7 @@
     <div class="col-md-12 pv-20">
         <div class="slick-carousel carousel-5">
             {% for partner in partners %}
-            <div class="col-lg-3 col-md-6">
+            <div class="col-auto">
                 <div class="ph-20 feature-box text-center">
                     <span class="icon large circle"><img class="rounded-circle" alt="{{partner.title}}" src="{{ helper.getLinkImage(partner.image,'/assets/frontend/images/beauty.jpg') }}"></span>
                     <h3>{{partner.title}}</h3>
@@ -194,7 +190,7 @@
 </section>
 {% endif %}
 
-<section id="section-5" class="section pv-40 stats padding-bottom-clear hovered">
+<section class="section pv-40 stats padding-bottom-clear hovered">
     <div class="container">
         <div class="row justify-content-lg-center">
             <div class="col-lg-8 text-center pv-20">

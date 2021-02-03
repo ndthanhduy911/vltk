@@ -5,7 +5,6 @@ namespace Frontend\Modules\Dept\Controllers;
 class IndexController extends \FrontendController
 {
     public function indexAction(){
-        $langid = $this->session->get('langid');
         $homeSetting = $this->modelsManager->createBuilder()
         ->columns(array(
             'h.id',
@@ -24,7 +23,7 @@ class IndexController extends \FrontendController
         ))
         ->from(['h'=>'Homes'])
         ->where("h.deptid = 1")
-        ->leftJoin('HomesLang', "hl.homeid = h.id AND hl.langid = $langid",'hl')
+        ->leftJoin('HomesLang', "hl.homeid = h.id AND hl.langid = {$this->langid}",'hl')
         ->limit(1)
         ->getQuery()
         ->execute();
@@ -45,7 +44,7 @@ class IndexController extends \FrontendController
         ))
         ->from(['b'=>'Slideshows'])
         ->where("b.deleted = 0 AND b.status = 1 AND b.deptid = 1")
-        ->leftJoin('SlideshowsLang', "bl.slideshowid = b.id AND bl.langid = $langid",'bl')
+        ->leftJoin('SlideshowsLang', "bl.slideshowid = b.id AND bl.langid = {$this->langid}",'bl')
         ->orderBy("b.sort = 0 ASC")
         ->getQuery()
         ->execute();
@@ -61,7 +60,7 @@ class IndexController extends \FrontendController
             ))
             ->from(['c'=>'Categories'])
             ->leftJoin('CategoriesLang', 'cl.catid = c.id','cl')
-            ->where('cl.langid = :langid: AND status = 1 AND deptid = 1',['langid' => $langid])
+            ->where('cl.langid = :langid: AND status = 1 AND deptid = 1',['langid' => $this->langid])
             ->inWhere("c.id", $listCats)
             ->getQuery()
             ->execute();
@@ -77,7 +76,7 @@ class IndexController extends \FrontendController
         ))
         ->from(['d'=>'Depts'])
         ->leftJoin('DeptsLang', 'dl.deptid = d.id','dl')
-        ->where('dl.langid = :langid: AND status = 1 AND d.id != 1',['langid' => $langid])
+        ->where('dl.langid = :langid: AND status = 1 AND d.id != 1',['langid' => $this->langid])
         ->getQuery()
         ->execute();
 
@@ -95,7 +94,7 @@ class IndexController extends \FrontendController
         ))
         ->from(['s'=>'Staffs'])
         ->where("s.status = 1 AND s.deleted = 0 AND (s.regency = 1 OR s.regency = 2)")
-        ->leftJoin("StaffsLang", "sl.staffid = s.id AND sl.langid = $langid",'sl')
+        ->leftJoin("StaffsLang", "sl.staffid = s.id AND sl.langid = {$this->langid}",'sl')
         ->orderBy("s.sort ASC, s.regency ASC")
         ->limit(3)
         ->getQuery()
@@ -111,7 +110,7 @@ class IndexController extends \FrontendController
         ))
         ->from(['p'=>'Partners'])
         ->where("p.status = 1 AND p.deleted = 0 AND p.deptid = 1")
-        ->leftJoin('PartnersLang', "pl.partnerid = p.id AND pl.langid = {$langid}",'pl')
+        ->leftJoin('PartnersLang', "pl.partnerid = p.id AND pl.langid = {$this->langid}",'pl')
         ->orderBy("p.sort ASC")
         ->getQuery()
         ->execute();
