@@ -12,6 +12,8 @@ class StaffsController extends \LayoutsController
 
     public $attrid = 2;
 
+    public $title = 'Tổ chức Nhân sự';
+
     public function indexC($view){
         $view->pick('templates/pages/staffs');
         return $view;

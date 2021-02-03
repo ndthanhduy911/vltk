@@ -13,9 +13,9 @@ class Staffs extends \ModelCore
     public static function getUrl($dept, $staff = NULL)
     {
         if($dept->id == 1){
-            return WEB_URL.'/staffs/'.$staff->slug;
+            return WEB_URL.'/nhan-su/'.$staff->slug;
         }else{
-            return WEB_URL."/$dept->slug".'/staffs/'.$staff->slug;
+            return WEB_URL."/$dept->slug".'/nhan-su/'.$staff->slug;
         }
     }
 

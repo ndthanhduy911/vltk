@@ -29,7 +29,7 @@ const showBlog = (blogId,pagingId,cpaged = false) => {
 }
 
 const createNewsLink = (id) => {
-    return id ? `${webUrl}/news/${id}` : "#";
+    return id ? `${webUrl}/tin-tuc/${id}` : "#";
 }
 
 const createBlog = (blogId,data) => {
@@ -157,7 +157,7 @@ const ajaxPaging = (blogId,pagingId,button) =>{
         showBlog(blogId,pagingId,cpaged).then(()=>{
             $("body,html").animate({scrollTop:0},0);
             let paramsUrl = setParam('paged',cpaged);
-            window.history.pushState({}, "Search news", `${webUrl}/news?${paramsUrl}`);
+            window.history.pushState({}, "Search news", `${webUrl}/tin-tuc?${paramsUrl}`);
         });
 
     })

@@ -3,7 +3,7 @@
 // DEPT
 // ======================================
 /***********************PostsController***********************/
-$router->add(WEB_URI."/{dept:[a-zA-Z0-9_-]+}/news/{post:[a-zA-Z0-9_-]+}", array(
+$router->add(WEB_URI."/{dept:[a-zA-Z0-9_-]+}/tin-tuc/{post:[a-zA-Z0-9_-]+}", array(
     'module' => 'frontend_dept',
     'controller' => 'posts',
     'action' => 'single',
@@ -44,7 +44,7 @@ $router->add(WEB_URI."/{dept:[a-zA-Z0-9_-]+}/{page:[a-zA-Z0-9_-]+}.html", array(
 ));
 
 /***********************StaffsController***********************/
-$router->add(WEB_URI."/{dept:[a-zA-Z0-9_-]+}/staffs/{staff:[a-zA-Z0-9_-]+}", array(
+$router->add(WEB_URI."/{dept:[a-zA-Z0-9_-]+}/nhan-su/{staff:[a-zA-Z0-9_-]+}", array(
     'module' => 'frontend_dept',
     'controller' => 'staffs',
     'action' => 'single',
@@ -52,7 +52,7 @@ $router->add(WEB_URI."/{dept:[a-zA-Z0-9_-]+}/staffs/{staff:[a-zA-Z0-9_-]+}", arr
     'staff' => 2,
 ));
 
-$router->add(WEB_URI."/{dept:[a-zA-Z0-9_-]+}/staffs", array(
+$router->add(WEB_URI."/{dept:[a-zA-Z0-9_-]+}/nhan-su", array(
     'module' => 'frontend_dept',
     'controller' => 'staffs',
     'action' => 'index',
@@ -109,7 +109,7 @@ $router->add(WEB_URI."/blog", array(
     'action' => 'blog'
 ));
 
-$router->add(WEB_URI."/news/{post:[a-zA-Z0-9_-]+}", array(
+$router->add(WEB_URI."/tin-tuc/{post:[a-zA-Z0-9_-]+}", array(
     'module' => 'frontend_dept',
     'controller' => 'posts',
     'action' => 'single',
@@ -132,14 +132,14 @@ $router->add(WEB_URI.'/api/changelanguage/:int', array(
 ));
 
 /***********************StaffController***********************/
-$router->add(WEB_URI."/staffs/{staff:[a-zA-Z0-9_-]+}", array(
+$router->add(WEB_URI."/nhan-su/{staff:[a-zA-Z0-9_-]+}", array(
     'module' => 'frontend_dept',
     'controller' => 'staffs',
     'action' => 'single',
     'staff' => 1,
 ));
 
-$router->add(WEB_URI."/staffs", array(
+$router->add(WEB_URI."/nhan-su", array(
     'module' => 'frontend_dept',
     'controller' => 'staffs',
     'action' => 'index'

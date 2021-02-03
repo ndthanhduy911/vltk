@@ -24,7 +24,7 @@ const vi_moment = (date, type) => {
 }
 
 const getLinkPostBySlug = ($slug = null) => {
-    return window.location.origin+'/news/' + $slug;
+    return window.location.origin+'/tin-tuc/' + $slug;
 }
 
 const getDatePost = ($date = null, calendar = null) => {

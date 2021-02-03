@@ -83,6 +83,8 @@
 		if($('#tabMajors').length){
 			$('.os-viewport:eq(0)').animate({scrollTop:600},500);
 		}
+
+		$('#tabMajors .card-body').overlayScrollbars({});
 	});
 
 })(jQuery);

@@ -72,10 +72,9 @@
                         {% for post in posts %}
                         <div class="media mb-3">
                             <div class="overlay-container rounded">
-                                <img class="media-object border rounded" src="{{ helper.getLinkImage(post.image) }}" alt="{{ post.title }}">
-                                <a href="<?= \Posts::getUrl($dept, $post) ?>" class="overlay-link small"><i class="fa fa-graduation-cap"></i></a>
+                                <img class="media-object border rounded grow" src="{{ helper.getLinkImage(post.image) }}" alt="{{ post.title }}">
                             </div>
-                            <div class="media-body">
+                            <div class="media-body ml-3">
                                 <h5 class="media-heading"><a href="<?= \Posts::getUrl($dept, $post) ?>" title="{{ post.title }}">{{ post.title }}</a></h5>
                                 <div class="small"><i class="fa fa-calendar pr-10"></i>{{ helper.datetimeVn(post.calendar, 'd/m/Y') }}</div>
                             </div>
@@ -113,7 +112,7 @@
                     <img src="{{ helper.getLinkImage(dept_item.image,'/img/default2.jpg') }}" class="grow" alt="{{ dept_item.title }}">
                     <div class="overlay-bottom hidden-xs">
                         <div class="text">
-                            {{ dept_item.title }}
+                            <a href="{{ constant('WEB_URL')~'/'~dept_item.slug }}">{{ dept_item.title }}</a>
                         </div>
                     </div>
                 </div>
@@ -144,7 +143,7 @@
                         <img width="100%" class="object-fit-fill grow" src="{{ helper.getLinkImage(staff.image,'/img/default3.jpg') }}" alt="{{staff.title}}">
                         <div class="overlay-bottom">
                             <div class="text p-0">
-                                <h4 class="title text-white text-uppercase">{{staff.title}}</h4>
+                                <a href="<?= \Staffs::getUrl($dept,$staff) ?>"><h4 class="title text-white text-uppercase">{{staff.title}}</h4></a>
                                 <div class="separator light"></div>
                                 <p class="small margin-clear"><em><?= \Staffs::getDean($staff->regency) ?></em></p>
                             </div>
@@ -155,7 +154,7 @@
             {% endfor %}
         </div>
         <div class="col-lg-12 text-center">
-            <?php $staff_link = $dept->slug !== '/' ? WEB_URL.$dept->slug.'/staffs' : WEB_URL.'/staffs'; ?>
+            <?php $staff_link = $dept->slug !== '/' ? WEB_URL.$dept->slug.'/nhan-su' : WEB_URL.'/nhan-su'; ?>
             <a href="{{staff_link}}" class="btn btn-default btn-lg btn-animated radius-50">{{ ml._ml('more', 'Xem thêm') }} <i class="fa fa-arrow-right"></i></a>
         </div>
     </div>

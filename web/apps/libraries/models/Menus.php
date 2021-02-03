@@ -12,7 +12,7 @@ class Menus extends \ModelCore
     public static function getLink($menu , $slug = ''){
         switch ((int)$menu->type) {
             case 1: {
-                return ($post = \Posts::findFirstId($menu->postid)) ? WEB_URL.($slug != '/' ? '/'.$slug : '')."/news/".$post->slug : '#';
+                return ($post = \Posts::findFirstId($menu->postid)) ? WEB_URL.($slug != '/' ? '/'.$slug : '')."/tin-tuc/".$post->slug : '#';
                 break;
             }    
             case 2: {
@@ -53,7 +53,7 @@ class Menus extends \ModelCore
 
         switch ((int)$menu->type) {
             case 1: {
-                $item['link'] = ($post = \Posts::findFirstId($menu->postid)) ? WEB_URL.($slug != '/' ? '/'.$slug : '')."/news/".$post->slug : '#';
+                $item['link'] = ($post = \Posts::findFirstId($menu->postid)) ? WEB_URL.($slug != '/' ? '/'.$slug : '')."/tin-tuc/".$post->slug : '#';
                 $item['actived'] = (isset($post->slug) ? $post->slug : '#4')  == $slugNow ? true : false;
                 break;
             }    

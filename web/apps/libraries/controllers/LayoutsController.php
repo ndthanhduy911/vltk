@@ -22,8 +22,12 @@ class LayoutsController extends \FrontendController
             $itemslang = \PagesLang::findFirst(["langid = {$this->langid} AND pageid = {$items->id}"]);
         }
         $this->items = $items;
+        $this->itemslang = $itemslang;
         $this->view->title = $itemslang ? $itemslang->title : $this->title;
+        $this->view->ltitle = NULL;
+        $this->view->lslug = NULL;
         $this->view->items = $this->items;
+        $this->view->itemslang = $this->itemslang;
         $this->view = $this->indexC($this->view);
     }
 

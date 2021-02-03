@@ -15,9 +15,9 @@ const showTitle = (text,length = 100) => {
 
 const getPostLink = (item) => {
     if(item.dslug != '/'){
-        return `<a target="_blank" href="${webUri}/${item.dslug}/news/${item.slug}">Link</a>`;
+        return `<a target="_blank" href="${webUri}/${item.dslug}/category/${item.slug}">Link</a>`;
     }
-    return `<a target="_blank" href="${webUri}/news/${item.slug}">Link</a>`;
+    return `<a target="_blank" href="${webUri}/category/${item.slug}">Link</a>`;
 }
 
 const loadTableCategories = (table = '#categories', cb = () => {}) => {

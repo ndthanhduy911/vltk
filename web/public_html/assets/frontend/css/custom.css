@@ -323,3 +323,41 @@ SLICK
     -o-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out;
 }
+/* ============================
+TABS
+============================ */
+
+#tabMajors .card-body {
+    height: 450px !important;
+}
+
+
+.nav-tabs.style-1 > li > a.active {
+    background-color: #003D7C !important
+}
+
+.nav-tabs.style-1 > li > a.active, .nav-tabs.style-1 > li > a.active:hover, .nav-tabs.style-1 > li > a.active:focus{
+    border-color: #003D7C;
+}
+
+.nav-tabs.style-1 > li > a.active:before {
+    border-color: transparent #003D7C transparent transparent;
+}
+
+.nav-tabs.style-1 > li > a.active:after {
+    border-color: transparent transparent transparent #003D7C
+}
+
+.nav-tabs.style-1 > li > a:hover{
+    border-color: #003D7C !important;
+    background-color: #003D7C !important;
+}
+
+.nav-tabs.style-1 > li > a:hover:before {
+    border-color: transparent #003D7C transparent transparent;
+}
+
+.nav-tabs.style-1 > li > a:hover:after {
+    border-color: transparent transparent transparent #003D7C
+}
+

@@ -17,9 +17,9 @@ const getItemsLink = (type,item) => {
     switch (parseInt(type)) {
         case 1:{
             if(item.dslug != '/'){
-                return `<a target="_blank" href="${webUri}/${item.dslug}/news/${item.slug}">Link</a>`;
+                return `<a target="_blank" href="${webUri}/${item.dslug}/tin-tuc/${item.slug}">Link</a>`;
             }
-            return `<a target="_blank" href="${webUri}/news/${item.slug}">Link</a>`;
+            return `<a target="_blank" href="${webUri}/tin-tuc/${item.slug}">Link</a>`;
         }
         case 2:{
             if(item.dslug != '/'){
@@ -38,9 +38,9 @@ const getItemsLink = (type,item) => {
         }
         case 5:{
             if(item.dslug != '/'){
-                return `<a target="_blank" href="${webUri}/${item.dslug}/staffs/${item.slug}">Link</a>`;
+                return `<a target="_blank" href="${webUri}/${item.dslug}/nhan-su/${item.slug}">Link</a>`;
             }
-            return `<a target="_blank" href="${webUri}/staffs/${item.slug}">Link</a>`;
+            return `<a target="_blank" href="${webUri}/nhan-su/${item.slug}">Link</a>`;
         }
         case 6:{
             if(item.dslug != '/'){

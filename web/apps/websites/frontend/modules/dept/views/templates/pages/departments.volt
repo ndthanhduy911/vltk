@@ -30,15 +30,15 @@
 
 ?>
 {{ partial('breadcrumb') }}
-<div class="banner dark-translucent-bg fixed-bg"style="background-image:url('{{helper.getLinkImage(page.bgimage, '/img/banner-page.jpg') }}'); background-position: 50% 27%;">
+<div class="banner dark-translucent-bg fixed-bg"style="background-image:url('{{helper.getLinkImage(items.bgimage, '/img/banner-page.jpg') }}'); background-position: 50% 27%;">
     <div class="container">
         <div class="row justify-content-lg-center">
             <div class="col-lg-8 text-center pv-20">
-                <h2 class="title"><span class="text-white text-uppercase">{{ pageslang.title }}</span></h2>
-                {% if pageslang.excerpt %}
+                <h2 class="title"><span class="text-white text-uppercase">{{ itemslang.title }}</span></h2>
+                {% if itemslang.excerpt %}
                 <div class="separator mt-10">
                 </div>
-                <p class="text-center">{{ pageslang.excerpt }}</p>
+                <p class="text-center">{{ itemslang.excerpt }}</p>
                 {% endif %}
             </div>
         </div>
@@ -58,7 +58,7 @@
                                 <img src="{{ helper.getLinkImage(dept_item.image) }}" alt="{{ dept_item.title }}" class="grow">
                                 <div class="overlay-bottom hidden-xs">
                                     <div class="text">
-                                        {{ dept_item.title }}
+                                        <a href="{{ constant('WEB_URL')~'/'~dept_item.slug }}">{{ dept_item.title }}</a>
                                     </div>
                                 </div>
                             </div>
@@ -75,7 +75,7 @@
                                 <img src="{{ helper.getLinkImage(research.image) }}" alt="{{ dept_item.title }}" class="grow">
                                 <div class="overlay-bottom hidden-xs">
                                     <div class="text">
-                                        {{ research.title }}
+                                        <a href="<?= \Researches::getUrl($dept, $research) ?>" >{{ research.title }}</a>
                                     </div>
                                 </div>
                             </div>

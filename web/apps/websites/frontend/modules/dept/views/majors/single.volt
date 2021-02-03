@@ -10,7 +10,7 @@
     </div>
 </div>
 
-<section class="main-container pv-45">
+<section class="main-container pv-45 bg-light">
     <div class="container">
         <div class="row">
             <div class="col-md-12 main">
@@ -42,81 +42,133 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 main">
-                <div class="vertical">
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#contentTab" role="tab" data-toggle="tab"><i
-                                    class="fa fa-magic pr-2"></i> {{ ml._ml('general-introduction', 'Giới thiệu chung') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#stdoutTab" role="tab" data-toggle="tab"><i
-                                    class="fa fa-life-saver pr-2"></i> {{ ml._ml('graduation-standard', 'Chuẩn đầu ra') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#curriculumTab" role="tab" data-toggle="tab"><i
-                                    class="fa fa-expand pr-2"></i> {{ ml._ml('curriculum', 'Khung chương trình đào tạo') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#prospectsTab" role="tab" data-toggle="tab"><i
-                                    class="fa fa-list pr-2"></i> {{ ml._ml('career-prospects', 'Triển vọng nghề nghiệp') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#feeTab" role="tab" data-toggle="tab"><i
-                                    class="fa fa-vcard pr-2"></i> {{ ml._ml('tuition-fees-scholarships-and-environment', 'Học phí, học bổng và môi trường học') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#researchesTab" role="tab" data-toggle="tab"><i
-                                    class="fa fa-th pr-2"></i> {{ ml._ml('applied-research', 'Nghiên cứu ứng dụng') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#studentsTab" role="tab" data-toggle="tab"><i
-                                    class="fa fa-child pr-2"></i> {{ ml._ml('student-activities', 'Hoạt động sinh viên') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#alumniTab" role="tab" data-toggle="tab"><i
-                                    class="fa fa-graduation-cap pr-2"></i> {{ ml._ml('typical-students-and-alumni', 'Sinh viên và cựu sinh viên tiêu biểu') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#rpartnersTab" role="tab" data-toggle="tab"><i
-                                    class="fa fa-star pr-2"></i> {{ ml._ml('reviews-of-the-employer', 'Đánh giá của nhà tuyển dụng') }}</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content w-100">
-                        <div class="tab-pane fade show active" id="contentTab" role="tabpanel">
-                            <h3 class="title">{{ ml._ml('general-introduction', 'Giới thiệu chung') }}</h3>
-                            <article>{{ itemslang.content }}</article>
+                <ul class="nav nav-tabs style-1" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#contentTab" role="tab" data-toggle="tab"><i
+                                class="fa fa-magic pr-2"></i> {{ ml._ml('general-introduction', 'Giới thiệu chung') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#stdoutTab" role="tab" data-toggle="tab"><i
+                                class="fa fa-life-saver pr-2"></i> {{ ml._ml('graduation-standard', 'Chuẩn đầu ra') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#curriculumTab" role="tab" data-toggle="tab"><i
+                                class="fa fa-expand pr-2"></i> {{ ml._ml('curriculum', 'Khung chương trình đào tạo') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#prospectsTab" role="tab" data-toggle="tab"><i
+                                class="fa fa-list pr-2"></i> {{ ml._ml('career-prospects', 'Triển vọng nghề nghiệp') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#feeTab" role="tab" data-toggle="tab"><i
+                                class="fa fa-vcard pr-2"></i> {{ ml._ml('tuition-fees-scholarships-and-environment', 'Học phí, học bổng và môi trường học') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#researchesTab" role="tab" data-toggle="tab"><i
+                                class="fa fa-th pr-2"></i> {{ ml._ml('applied-research', 'Nghiên cứu ứng dụng') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#studentsTab" role="tab" data-toggle="tab"><i
+                                class="fa fa-child pr-2"></i> {{ ml._ml('student-activities', 'Hoạt động sinh viên') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#alumniTab" role="tab" data-toggle="tab"><i
+                                class="fa fa-graduation-cap pr-2"></i> {{ ml._ml('typical-students-and-alumni', 'Sinh viên và cựu sinh viên tiêu biểu') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#rpartnersTab" role="tab" data-toggle="tab"><i
+                                class="fa fa-star pr-2"></i> {{ ml._ml('reviews-of-the-employer', 'Đánh giá của nhà tuyển dụng') }}</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="contentTab" role="tabpanel">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="header-title mb-0 text-default">{{ ml._ml('general-introduction', 'Giới thiệu chung') }}</h3>
+                            </div>
+                            <div class="card-body">
+                                <article>{{ itemslang.content }}</article>
+                            </div>
                         </div>
-                        <div class="tab-pane fade" id="stdoutTab" role="tabpanel">
-                            <h3 class="title">{{ ml._ml('graduation-standard', 'Chuẩn đầu ra') }}</h3>
-                            <article>{{ itemslang.stdout }}</article>
+                    </div>
+                    <div class="tab-pane fade" id="stdoutTab" role="tabpanel">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="header-title mb-0 text-default">{{ ml._ml('graduation-standard', 'Chuẩn đầu ra') }}</h3>
+                            </div>
+                            <div class="card-body">
+                                <article>{{ itemslang.stdout }}</article>
+                            </div>
                         </div>
-                        <div class="tab-pane fade" id="curriculumTab" role="tabpanel">
-                            <h3 class="title">{{ ml._ml('curriculum', 'Khung chương trình đào tạo') }}</h3>
-                            <article>{{ itemslang.curriculum }}</article>
+                    </div>
+                    <div class="tab-pane fade" id="curriculumTab" role="tabpanel">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="header-title mb-0 text-default">{{ ml._ml('curriculum', 'Khung chương trình đào tạo') }}</h3>
+                            </div>
+                            <div class="card-body">
+                                <article>{{ itemslang.curriculum }}</article>
+                            </div>
                         </div>
-                        <div class="tab-pane fade" id="prospectsTab" role="tabpanel">
-                            <h3 class="title">{{ ml._ml('career-prospects', 'Triển vọng nghề nghiệp') }}</h3>
-                            <article>{{ itemslang.prospects }}</article>
+                    </div>
+                    <div class="tab-pane fade" id="prospectsTab" role="tabpanel">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="header-title mb-0 text-default">{{ ml._ml('career-prospects', 'Triển vọng nghề nghiệp') }}</h3>
+                            </div>
+                            <div class="card-body">
+                                <article>{{ itemslang.prospects }}</article>
+                            </div>
                         </div>
-                        <div class="tab-pane fade" id="feeTab" role="tabpanel">
-                            <h3 class="title">{{ ml._ml('tuition-fees-scholarships-and-environment', 'Học phí, học bổng và môi trường học') }}</h3>
-                            <article>{{ itemslang.fee }}</article>
+                    </div>
+                    <div class="tab-pane fade" id="feeTab" role="tabpanel">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="header-title mb-0 text-default">{{ ml._ml('tuition-fees-scholarships-and-environment', 'Học phí, học bổng và môi trường học') }}</h3>
+                            </div>
+                            <div class="card-body">
+                                <article>{{ itemslang.fee }}</article>
+                            </div>
                         </div>
-                        <div class="tab-pane fade" id="researchesTab" role="tabpanel">
-                            <h3 class="title">{{ ml._ml('applied-research', 'Nghiên cứu ứng dụng') }}</h3>
-                            <article>{{ itemslang.researches }}</article>
+                    </div>
+                    <div class="tab-pane fade" id="researchesTab" role="tabpanel">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="header-title mb-0 text-default">{{ ml._ml('applied-research', 'Nghiên cứu ứng dụng') }}</h3>
+                            </div>
+                            <div class="card-body">
+                                <article>{{ itemslang.researches }}</article>
+                            </div>
                         </div>
-                        <div class="tab-pane fade" id="studentsTab" role="tabpanel">
-                            <h3 class="title">{{ ml._ml('student-activities', 'Hoạt động sinh viên') }}</h3>
-                            <article>{{ itemslang.students }}</article>
+                    </div>
+                    <div class="tab-pane fade" id="studentsTab" role="tabpanel">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="header-title mb-0 text-default">{{ ml._ml('student-activities', 'Hoạt động sinh viên') }}</h3>
+                            </div>
+                            <div class="card-body">
+                                <article>{{ itemslang.students }}</article>
+                            </div>
                         </div>
-                        <div class="tab-pane fade" id="alumniTab" role="tabpanel">
-                            <h3 class="title">{{ ml._ml('typical-students-and-alumni', 'Sinh viên và cựu sinh viên tiêu biểu') }}</h3>
-                            <article>{{ itemslang.alumni }}</article>
+                    </div>
+                    <div class="tab-pane fade" id="alumniTab" role="tabpanel">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="header-title mb-0 text-default">{{ ml._ml('typical-students-and-alumni', 'Sinh viên và cựu sinh viên tiêu biểu') }}</h3>
+                            </div>
+                            <div class="card-body">
+                                <article>{{ itemslang.alumni }}</article>
+                            </div>
                         </div>
-                        <div class="tab-pane fade" id="rpartnersTab" role="tabpanel">
-                            <h3 class="title">{{ ml._ml('reviews-of-the-employer', 'Đánh giá của nhà tuyển dụng') }}</h3>
-                            <article>{{ itemslang.rpartners }}</article>
+                    </div>
+                    <div class="tab-pane fade" id="rpartnersTab" role="tabpanel">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="header-title mb-0 text-default">{{ ml._ml('reviews-of-the-employer', 'Đánh giá của nhà tuyển dụng') }}</h3>
+                            </div>
+                            <div class="card-body">
+                                <article>{{ itemslang.rpartners }}</article>
+                            </div>
                         </div>
                     </div>
                 </div>

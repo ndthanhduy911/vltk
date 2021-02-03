@@ -41,7 +41,7 @@
                                 <img src="{{helper.getLinkImage(major.image, '/img/default2.jpg') }}" alt="{{ dept_item.title }}" class="grow">
                                 <div class="overlay-bottom hidden-xs">
                                     <div class="text">
-                                        {{ major.title }}
+                                        <a href="<?= \Majors::getUrl($dept, $major) ?>" >{{ major.title }}</a>
                                     </div>
                                 </div>
                             </div>

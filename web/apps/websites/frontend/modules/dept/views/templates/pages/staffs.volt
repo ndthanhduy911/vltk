@@ -86,7 +86,7 @@
     <div class="container">
         <div class="row justify-content-lg-center">
             <div class="col-lg-8 text-center pv-20">
-                <h1 class="title"><span class="text-white text-uppercase">{{ itemslang.title }}</span></h1>
+                <h1 class="title"><span class="text-white text-uppercase">{{ title }}</span></h1>
                 {% if itemslang.excerpt %}
                 <div class="separator mt-10">
                 </div>

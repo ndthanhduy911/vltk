@@ -124,10 +124,9 @@
                     <div class="image-box shadow-2 bordered text-center mb-20">
                         <div class="overlay-container rounded overlay-visible">
                             <img class="grow" src="{{ helper.getLinkImage(research.image) }}" alt="{{ research.title }}">
-                            <a href="<?= Researches::getUrl($dept,$research) ?>" class="overlay-link"><i class="fa fa-graduation-cap"></i></a>
                             <div class="overlay-bottom hidden-xs">
                                 <div class="text">
-                                    {{ research.title }}
+                                    <a href="<?= Researches::getUrl($dept,$research) ?>">{{ research.title }}</a>
                                 </div>
                             </div>
                         </div>
@@ -157,11 +156,10 @@
             <div class="col-md-4">
                 <div class="image-box team-member shadow-2 mb-20">
                     <div class="overlay-container rounded overlay-visible">
-                        <img width="100%" src="{{ helper.getLinkImage(staff.image,'/assets/frontend/images/education.jpg') }}" alt="{{staff.title}}">
-                        <a href="<?= \Staffs::getUrl($dept, $staff) ?>" class="overlay-link" title="{{staff.title}}"><i class="fa fa-graduation-cap"></i></a>
+                        <img class="grow" width="100%" src="{{ helper.getLinkImage(staff.image,'/assets/frontend/images/education.jpg') }}" alt="{{staff.title}}">
                         <div class="overlay-bottom">
                             <div class="text p-0">
-                                <h4 class="title text-white text-uppercase">{{staff.title}}</h4>
+                                <a href="<?= \Staffs::getUrl($dept,$staff) ?>"><h4 class="title text-white text-uppercase">{{staff.title}}</h4></a>
                                 <div class="separator light"></div>
                                 <p class="small margin-clear"><em><?= \Staffs::getDean($staff->regency) ?></em></p>
                             </div>
@@ -172,7 +170,7 @@
             {% endfor %}
         </div>
         <div class="col-lg-12 text-center">
-            <?php $staff_link = $dept->slug != '/' ? WEB_URL.'/'.$dept->slug.'/staffs' : WEB_URL.'/staffs'; ?>
+            <?php $staff_link = $dept->slug != '/' ? WEB_URL.'/'.$dept->slug.'/nhan-su' : WEB_URL.'/nhan-su'; ?>
             <a href="{{ staff_link }}" class="btn btn-default btn-lg btn-animated radius-50">{{ ml._ml('more', 'Xem thêm') }} <i class="fa fa-arrow-right"></i></a>
         </div>
     </div>
