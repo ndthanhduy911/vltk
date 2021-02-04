@@ -113,48 +113,6 @@ $router->add(WEB_ADMIN_URI . '/setting/:action/:int', array(
     'id' => 2
 ));
 
-/***********************UploadsController***********************/
-$router->add(WEB_URI . '/files/import/{filename:[a-zA-Z0-9\_\-]+}.xlsx', array(
-    'module' => 'backend_master',
-    'controller' => 'uploads',
-    'action'  => 'import',
-    'filename' => 1
-));
-
-$router->add(WEB_URI . '/files/display/{dir:[a-zA-Z0-9\_\-]+}/{file:[a-zA-Z0-9\_\-\.]+}', array(
-    'module' => 'backend_master',
-    'controller' => 'uploads',
-    'action'  => 'display',
-    'dir' => 1,
-    'file' => 2
-));
-
-// $router->add(WEB_URI . '/uploads/:action/{filename:[a-zA-Z0-9_-.]+}', array(
-//     'module' => 'backend_master',
-//     'controller' => 'uploads',
-//     'action'  => 1,
-//     'id' => 2
-// ));
-
-/***********************SyncController***********************/
-$router->add(WEB_ADMIN_URI . '/sync', array(
-    'module' => 'backend_master',
-    'controller' => 'sync',
-    'action' => 'index',
-));
-
-$router->add(WEB_ADMIN_URI . '/sync/:action', array(
-    'module' => 'backend_master',
-    'controller' => 'sync',
-    'action' => 1,
-));
-$router->add(WEB_ADMIN_URI . '/sync/:action/:int', array(
-    'module' => 'backend_master',
-    'controller' => 'sync',
-    'action'  => 1,
-    'id' => 2
-));
-
 /***********************TrashsController***********************/
 $router->add(WEB_ADMIN_URI . '/trashs', array(
     'module' => 'backend_master',

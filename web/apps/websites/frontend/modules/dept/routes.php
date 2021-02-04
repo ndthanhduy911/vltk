@@ -155,7 +155,7 @@ $router->add(WEB_URI."/{dept:[a-zA-Z0-9_-]+}/research/{research:[a-zA-Z0-9_-]+}"
 ));
 
 /***********************SubjectsController***********************/
-$router->add(WEB_URI."/subjects/{subject:[a-zA-Z0-9_-]+}", array(
+$router->add(WEB_URI."/mon-hoc/{subject:[a-zA-Z0-9_-]+}", array(
     'module' => 'frontend_dept',
     'controller' => 'subjects',
     'action' => 'single',

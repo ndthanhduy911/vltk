@@ -48,5 +48,10 @@ class ClassesLangForm extends Form
         $content->setUserOption('attr','editor');
         $content->setAttributes($attr);
         $this->add($content);
+
+        //files
+        $files = new Hidden('files');
+        $files->setUserOption('attr','import');
+        $this->add($files);
     }
 }

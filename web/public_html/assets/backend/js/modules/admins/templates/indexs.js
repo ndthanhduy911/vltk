@@ -54,6 +54,12 @@ const getItemsLink = (type,item) => {
             }
             return `<a target="_blank" href="${webUri}/lop-hoc/${item.slug}">Link</a>`;
         }
+        case 8:{
+            if(item.dslug != '/'){
+                return `<a target="_blank" href="${webUri}/${item.dslug}/mon-hoc/${item.slug}">Link</a>`;
+            }
+            return `<a target="_blank" href="${webUri}/mon-hoc/${item.slug}">Link</a>`;
+        }
         default:{
             return "";
         }

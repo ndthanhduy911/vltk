@@ -101,16 +101,29 @@ class MajorsLangForm extends \Phalcon\Forms\Form
 
         //students
         $students = new Textarea('students');
-        $students->setLabel('<i class="fas fa-newspaper mr-1"></i> Sinh viên và cựu sinh viên tiêu biểu');
+        $students->setLabel('<i class="fas fa-newspaper mr-1"></i> Hoạt động sinh viên');
         $attr = [
             'class' => 'form-control form-control-sm',
-            'placeholder' => 'Sinh viên và cựu sinh viên tiêu biểu',
+            'placeholder' => 'Hoạt động sinh viên',
             'data-error' => "Thông tin chưa hợp lệ"
         ];
         $attr = cFL($attr,$lang,'students');
         $students->setUserOption('attr','editor');
         $students->setAttributes($attr);
         $this->add($students);
+        
+        //alumni
+        $alumni = new Textarea('alumni');
+        $alumni->setLabel('<i class="fas fa-newspaper mr-1"></i> Sinh viên và cựu sinh viên tiêu biểu');
+        $attr = [
+            'class' => 'form-control form-control-sm',
+            'placeholder' => 'Sinh viên và cựu sinh viên tiêu biểu',
+            'data-error' => "Thông tin chưa hợp lệ"
+        ];
+        $attr = cFL($attr,$lang,'alumni');
+        $alumni->setUserOption('attr','editor');
+        $alumni->setAttributes($attr);
+        $this->add($alumni);
 
         //rpartners
         $rpartners = new Textarea('rpartners');
