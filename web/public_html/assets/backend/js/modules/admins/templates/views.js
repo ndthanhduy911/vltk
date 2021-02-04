@@ -56,13 +56,21 @@ const updateViews = (form = '#frmViews') => {
             getCkeditor14();
         }
 
-        
-        if($(`${form} #rpartners1`).length){
+        if($(`${form} #alumni1`).length){
             getCkeditor15();
         }
     
-        if($(`${form} #rpartners2`).length){
+        if($(`${form} #alumni2`).length){
             getCkeditor16();
+        }
+
+        
+        if($(`${form} #rpartners1`).length){
+            getCkeditor17();
+        }
+    
+        if($(`${form} #rpartners2`).length){
+            getCkeditor18();
         }
     
         sendAjax(form, "POST").then(() => {
