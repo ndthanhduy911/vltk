@@ -59,6 +59,16 @@ $router->add(WEB_URI."/{dept:[a-zA-Z0-9_-]+}/nhan-su", array(
     'dept' => 1,
 ));
 
+/***********************SubjectsController***********************/
+$router->add(WEB_URI."/{dept:[a-zA-Z0-9_-]+}/mon-hoc/{subject:[a-zA-Z0-9_-]+}", array(
+    'module' => 'frontend_dept',
+    'controller' => 'subjects',
+    'action' => 'single',
+    'dept' => 1,
+    'subject' => 2,
+));
+
+
 /***********************MajorsController***********************/
 $router->add(WEB_URI."/{dept:[a-zA-Z0-9_-]+}/nganh-hoc/{major:[a-zA-Z0-9_-]+}", array(
     'module' => 'frontend_dept',
