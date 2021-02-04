@@ -41,8 +41,7 @@ class MenusForm extends Form
             3 => "Chuyên mục",
             4 => "Bộ môn",
             5 => "Link",
-            6 => "Nhóm ngành học",
-            7 => "Ngành học",
+            6 => "Ngành học"
         ], [
             'useEmpty' => true,
             'emptyText' => 'Chọn',
