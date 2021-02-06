@@ -21,7 +21,7 @@ class Classes extends \ModelCore
     public static function getUrl($dept = NULL, $class = NULL)
     {
         if($class && $dept){
-            return WEB_URL.($dept->id != 1 ? "/$dept->slug" : '' ).'/class/'.$class->slug;
+            return WEB_URL.($dept->id != 1 ? "/$dept->slug" : '' ).'/lop-hoc/'.$class->slug;
         }else{
             return '';
         }

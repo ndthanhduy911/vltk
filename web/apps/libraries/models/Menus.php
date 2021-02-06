@@ -76,8 +76,7 @@ class Menus extends \ModelCore
                 $item['link'] = $menu->links;
                 break;
             }   
-
-            case 7: {
+            case 6: {
                 $item['link'] = ($major = \Majors::findFirstId($menu->majorid)) ? WEB_URL.($slug != '/' ? '/'.$slug : '').'/nganh-hoc/'.$major->slug : '#';
                 $item['actived'] = (isset($major->slug) ? $major->slug : '#4') == $slugNow ? true : false;
                 break;

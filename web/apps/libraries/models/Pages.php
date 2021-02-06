@@ -13,7 +13,7 @@ class Pages extends \ModelCore
         if($page && $dept){
             return WEB_URL.($dept->id != 1 ? "/$dept->slug" : '' ).'/'.$page->slug.'.html';
         }else{
-            return '';
+            return '#';
         }
     }
 

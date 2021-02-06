@@ -29,9 +29,9 @@ class Posts extends \ModelCore
     public static function getUrl($dept = NULL, $post = NULL)
     {
         if($post && $dept){
-            return WEB_URL.($dept->id != 1 ? "/$dept->slug" : '' ).'/tin-tuc/'.$post->slug;
+            return WEB_URL.($dept->id != 1 ? "/{$dept->slug}" : '' ).'/tin-tuc/'.$post->slug;
         }else{
-            return '';
+            return '#';
         }
     }
 

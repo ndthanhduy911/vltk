@@ -21,9 +21,9 @@ class Subjects extends \ModelCore
     public static function getUrl($dept = NULL, $subject = NULL)
     {
         if($subject && $dept){
-            return WEB_URL.($dept->id != 1 ? "/$dept->slug" : '' ).'/subject/'.$subject->slug;
+            return WEB_URL.($dept->id != 1 ? "/{$dept->slug}" : '' ).'/subject/'.$subject->slug;
         }else{
-            return '';
+            return '#';
         }
     }
 

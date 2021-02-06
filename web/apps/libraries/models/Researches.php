@@ -22,7 +22,7 @@ class Researches extends \ModelCore
         if($research && $dept){
             return WEB_URL.($dept->id != 1 ? "/$dept->slug" : '' ).'/research/'.$research->slug;
         }else{
-            return '';
+            return '#';
         }
     }
 

@@ -10,19 +10,19 @@ class Tags extends \ModelCore{
 
     public static function getTitleById($id = null)
     {
-        if($class = ClassesLang::findFirst(['classid = :classid:','bind' => ['classid' => $id]])){
-            return $class->name;
+        if($tags = \TagsLang::findFirst(['tagid = :tagid:','bind' => ['tagid' => $id]])){
+            return $tags->title;
         }else{
             return null;
         }
     }
 
-    public static function getUrl($dept = NULL, $class = NULL)
+    public static function getUrl($dept = NULL, $tag = NULL)
     {
-        if($class && $dept){
-            return WEB_URL.($dept->id != 1 ? "/$dept->slug" : '' ).'/class/'.$class->slug;
+        if($tag && $dept){
+            return WEB_URL.($dept->id != 1 ? "/{$dept->slug}" : '' ).'/the/'.$tag->slug;
         }else{
-            return '';
+            return '#';
         }
     }
 }
