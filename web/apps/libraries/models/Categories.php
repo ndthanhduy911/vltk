@@ -77,7 +77,7 @@ class Categories extends \ModelCore
 
     public static function getUrl($dept = NULL, $cat = NULL){
         if($cat && $dept){
-            return WEB_URL.($dept->slug != '/' ? "{$dept->slug}" : "/").'category/'.$cat->slug;
+            return WEB_URL.($dept->slug != '/' ? "/{$dept->slug}" : "").'/category/'.$cat->slug;
         }else{
             return '';
         }

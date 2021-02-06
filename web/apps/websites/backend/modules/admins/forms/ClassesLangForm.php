@@ -47,11 +47,6 @@ class ClassesLangForm extends Form
         $attr = cFL($attr,$lang,'content');
         $content->setUserOption('attr','editor');
         $content->setAttributes($attr);
-        $this->add($content);
-
-        //files
-        $files = new Hidden('files');
-        $files->setUserOption('attr','import');
-        $this->add($files);
+        $this->add($content);   
     }
 }

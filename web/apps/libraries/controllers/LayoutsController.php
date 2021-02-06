@@ -11,7 +11,7 @@ class LayoutsController extends \FrontendController
 
     public $itemid = null;
 
-    public $attrid = null;
+    public $attrid = 0;
 
     public $title = null;
 
@@ -53,7 +53,7 @@ class LayoutsController extends \FrontendController
         $this->view->items = $this->items;
         $this->view->ltitle = null;
         $this->view->lslug = null;
-        if($page = \Pages::findFirst(["status = 1 AND deptid = {$dept->id} AND attrid = {$this->attrid}"])){
+        if($this->attrid && $page = \Pages::findFirst(["status = 1 AND deptid = {$dept->id} AND attrid = {$this->attrid}"])){
             $pagelang = \PagesLang::findFirst(["langid = {$this->langid} AND pageid = {$page->id}"]);
             $this->view->lslug = \Pages::getUrl($dept,$page);
             $this->view->ltitle = $pagelang->title;
