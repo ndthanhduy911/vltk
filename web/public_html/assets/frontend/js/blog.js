@@ -40,7 +40,6 @@ const createBlog = (blogId,data) => {
                         <article class="blogpost shadow-2 light-gray-bg bordered">
                             <div class="overlay-container">
                                 <img src="${getUrlImg(news.content) }" alt="${news.name}">
-                                <a class="overlay-link" href="${createNewsLink(news.id)}"><i class="fa fa-link"></i></a>
                             </div>
                             <header>
                                 <h2><a title="${news.name}" href="${createNewsLink(news.id)}">${news.name}</a></h2>

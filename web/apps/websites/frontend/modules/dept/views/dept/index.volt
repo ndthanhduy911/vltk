@@ -82,9 +82,8 @@
                         ?>
                         {% for post in posts %}
                         <div class="media mb-3">
-                            <div class="overlay-container rounded">
+                            <div class="overlay-container border rounded">
                                 <img class="media-object" src="{{ helper.getLinkImage(post.image) }}" alt="{{ post.title }}">
-                                <a href="<?= Posts::getUrl($dept, $post) ?>" class="overlay-link small"><i class="fa fa-graduation-cap"></i></a>
                             </div>
                             <div class="media-body">
                                 <h5 class="media-heading"><a href="<?= Posts::getUrl($dept, $post) ?>" title="{{ post.title }}">{{ post.title }}</a></h5>

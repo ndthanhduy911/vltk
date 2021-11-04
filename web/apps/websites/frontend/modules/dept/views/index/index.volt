@@ -106,10 +106,10 @@
     {% endif %}
     <div class="row mb-4 mr-0 ml-0">
         {% for dept_item in depts %}
-        <div class="col-lg-3 col-md-6 isotope-item">
-            <div class="image-box shadow-2 bordered text-center mb-20">
-                <div class="overlay-container rounded overlay-visible">
-                    <img src="{{ helper.getLinkImage(dept_item.image,'/img/default2.jpg') }}" class="grow" alt="{{ dept_item.title }}">
+        <div class="col-lg-3 col-md-6 isotope-item mb-20">
+            <div class="image-box shadow-2 bordered text-center h-100">
+                <div class="overlay-container rounded overlay-visible h-100">
+                    <img src="{{ helper.getLinkImage(dept_item.image,'/img/default2.jpg') }}" class="grow h-100" alt="{{ dept_item.title }}">
                     <div class="overlay-bottom hidden-xs">
                         <div class="text">
                             <a href="{{ constant('WEB_URL')~'/'~dept_item.slug }}">{{ dept_item.title }}</a>

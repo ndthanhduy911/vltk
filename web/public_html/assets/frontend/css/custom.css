@@ -14,7 +14,7 @@
      text-decoration: none !important;
  }
 
-.overlay-container .grow { transition: all 2s ease-in-out; }
+.overlay-container .grow { transition: all 2s ease-in-out; object-fit: cover; }
 .overlay-container .grow:hover { transform: scale(1.1); }
 
  h1, h2, h3, h4, h5, h6, .navbar .navbar-nav {
@@ -82,7 +82,6 @@ ul.dropdown-menu > li:last-of-type > a
     color: #ffffff;
 }
 .product-title,.media-heading {
-    text-align: justify;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -216,8 +215,8 @@ ul.dropdown-menu > li:last-of-type > a
 } 
 
 .table td {
-    padding-top: 10px !important;
-    padding-bottom: 10px !important;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .table p {

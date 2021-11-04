@@ -52,10 +52,8 @@
             <div class="d-flex pr-2">
                 <div class="overlay-container rounded border">
                     <img class="media-object" src="{{ helper.getLinkImage(post.image, '/assets/frontend/images/defaut_img.png') }}" alt="{{ post.title }}">
-                    <a href="<?= \Posts::getUrl($dept, $post) ?>" class="overlay-link small"><i class="fa fa-link"></i></a>
                 </div>
             </div>
-
             <div class="media-body">
                 <h5 class="media-heading"><a href="<?= \Posts::getUrl($dept, $post) ?>" title="{{ post.title }}">{{ post.title }}</a></h5>
                 <p class="small margin-clear"><i class="fa fa-calendar pr-10"></i>{{ helper.datetimeVn(post.calendar) }}</p>

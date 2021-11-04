@@ -11,7 +11,6 @@
                         <div class="image-box team-member shadow mb-20">
                             <div class="overlay-container overlay-visible">
                                 <img width="100%" src="{{ helper.getLinkImage(items.image, '/img/default3.jpg') }}" alt="{{itemslang.title}}">
-                                <a href="{{ helper.getLinkImage(items.image, '/img/default3.jpg') }}" class="popup-img overlay-link" title="{{itemslang.title}}"><i class="fa fa-plus"></i></a>
                                 <div class="overlay-bottom">
                                 <div class="text">
                                     {% if items.regency %}
@@ -22,7 +21,7 @@
                                 </div>
                             </div>
                         </div>
-                        <h3 class="title">{{ ml._ml('department', 'Đơn vị') }}</h3>
+                        <h3 class="title">{{ ml._ml('department', 'Bộ môn') }}</h3>
                         <?php $depts = \Depts::findFirstId($items->deptid); ?>
                         <a href="<?= WEB_URL ?><?= $depts->id != 1 ? "/{$depts->slug}" : "" ?>" class="text-info"><?= \Depts::getTitleById($items->deptid) ?></a>
 

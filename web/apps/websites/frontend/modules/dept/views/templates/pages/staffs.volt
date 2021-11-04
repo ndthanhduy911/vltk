@@ -106,7 +106,7 @@
                     <div class="separator-2"></div>
                     <div class="row grid-space-10">
                         {% for key,staff in regencyStaffs %}
-                        <div class="w-{{ key === 1 ? '40' : '30' }} pl-1 pr-1 mt-3">
+                        <div class="col-md-4 pl-1 pr-1 mt-3">
                             <div class="team-member image-box style-2 dark-bg text-center">
                                 <div class="overlay-container overlay-visible">
                                     <img class="grow" src="{{ helper.getLinkImage(staff.image,'/img/default3.jpg') }}" alt="{{ staff.title }}" width="100%">
