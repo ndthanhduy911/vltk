@@ -21,7 +21,8 @@ $loader->registerClasses(
 );
 
 $loader->registerFiles([
-	LIB_DIR . '/vendor/autoload.php'
+	LIB_DIR . '/vendor/autoload.php',
+    LIB_DIR . '/elFinder/autoload.php'
 ]);
 
 $loader->register();

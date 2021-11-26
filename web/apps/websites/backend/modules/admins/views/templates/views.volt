@@ -60,10 +60,8 @@
                                     <div class="card-body {{lform.getUserOption('attr') == 'editor' ? 'p-0' : ''}}" >
                                         <div class="row">
                                             <div class="form-group label-floating col-md-12 mt-0 pb-0">
-                                                <div class="input-group">
-                                                    {{lform.render()}}
-                                                    <div class="invalid-feedback"></div>
-                                                </div>
+                                                {{lform.render()}}
+                                                <div class="invalid-feedback"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -101,10 +99,8 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="form-group label-floating col-md-12 mt-0 pb-0">
-                                                <div class="input-group">
-                                                    {{filed.render()}}
-                                                    <div class="invalid-feedback"></div>
-                                                </div>
+                                                {{filed.render()}}
+                                                <div class="invalid-feedback"></div>
                                             </div>
                                         </div>
                                     </div>

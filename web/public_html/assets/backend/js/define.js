@@ -1,12 +1,8 @@
-const webAdminUrl = '/admin';
-const webUrl = window.location.protocol+'://'+window.location.hostname;
-const webUri = "";
+const deptId = parseInt($('body').attr('dept'));
 const loaderHtml = `
 <div class="block-loader">
     <div class="loader mr-auto ml-auto"></div>
 </div>`;
-const singleCore = '#singleCore';
-const deptId = parseInt($('body').attr('dept'));
 // Random number integer
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
@@ -142,7 +138,7 @@ const dataTableCt = (table, opCT = false,router={co:'',fo:'',aj:'ajaxgetdata',cl
                 e.preventDefault();
                 let paged = dt.page.info().page;
                 let paramsUrl = setParam('paged',paged);
-                window.history.pushState({}, `Search ${router.co}`, `${webAdminUrl}/${router.co}?${paramsUrl}`);
+                window.history.pushState({}, `Search ${router.co}`, `${webAdminUri}/${router.co}?${paramsUrl}`);
             });
 
             $(table).on('click', '.orderby', function (e) {
@@ -156,10 +152,10 @@ const dataTableCt = (table, opCT = false,router={co:'',fo:'',aj:'ajaxgetdata',cl
                         textGet += `&${element.name}=${element.value}`
                     }
                 })
-                dt.ajax.url(`${webAdminUrl}/${router.co}/${router.aj}${textGet}&order=${orderBy}&dir=${orderDir}`).load();
+                dt.ajax.url(`${webAdminUri}/${router.co}/${router.aj}${textGet}&order=${orderBy}&dir=${orderDir}`).load();
                 $(table).find('thead th a i').removeClass(['fa-sort-up','fa-sort-down']).addClass('fa-sort');
                 changeSort(this,orderDir);
-                window.history.pushState({}, `Order ${router.co}`, `${webAdminUrl}/${router.co}${textGet}&order=${orderBy}&dir=${orderDir}`);
+                window.history.pushState({}, `Order ${router.co}`, `${webAdminUri}/${router.co}${textGet}&order=${orderBy}&dir=${orderDir}`);
             });
 
             if(router.fo){
@@ -172,8 +168,8 @@ const dataTableCt = (table, opCT = false,router={co:'',fo:'',aj:'ajaxgetdata',cl
                             textGetSearch += `&${element.name}=${element.value}`
                         }
                     })            
-                    dt.ajax.url( `${webAdminUrl}/${router.co}/${router.aj}${textGetSearch}` ).load();
-                    window.history.pushState({}, `Search ${router.co}`, `${webAdminUrl}/${router.co}${textGetSearch}`);
+                    dt.ajax.url( `${webAdminUri}/${router.co}/${router.aj}${textGetSearch}` ).load();
+                    window.history.pushState({}, `Search ${router.co}`, `${webAdminUri}/${router.co}${textGetSearch}`);
                 });
             }
 
@@ -243,14 +239,12 @@ const isJson = (str) => {
     }
     return true;
 }
-
 const changeTitleToSlug = (title, slug) => {
     $(title).change(function (e) { 
         e.preventDefault();
         $(slug).val(changeToSlug($(this).val()));
     });
 }
-
 const changeToSlug = (title) =>
 {
     //Đổi chữ hoa thành chữ thường
@@ -281,10 +275,9 @@ const changeToSlug = (title) =>
     
     return slug;
 }
-
 const showSelectImage = (button) => {
     if($(button).length){
-        $('body').on('click', button ,function (e) {
+        $('body').off('click',button).on('click', button ,function (e) {
             let pr = $(this).parents('.boxImg')
             let showImg = pr.find('.showImg');
             let uploadImageValue = pr.find('input');
@@ -299,7 +292,7 @@ const showSelectImage = (button) => {
                 create: function (event, ui) {
                     $(this).elfinder({
                         resizable: false,
-                        url: "/admin/media/connector?deptid="+deptId,
+                        url: webAdminUri+"/media/connector",
                         lang:'vi',
                         commandsOptions: {
                             getfile: {
@@ -307,43 +300,41 @@ const showSelectImage = (button) => {
                             }
                         },
                         getFileCallback: function (file) {
-                            console.log(file.url);
-                            file.url = file.url.replace("/elfinder/php/../../", '/');
-                            let url = file.url;
                             if(buttonRemoveImg.length){
                                 buttonRemoveImg.removeClass('hidden');
                             }
-                            showImg.attr('src' , url);
-                            showImg.attr('alt' , url);
-                            uploadImageValue.val(url);
+                            if(Array.isArray(file)){
+                                file = file[0]
+                            }
+
+                            showImg.attr('src' , file.url);
+                            let fileUrl = file.url.replace(webUrl, '');
+                            uploadImageValue.val(fileUrl);
                             elfNode.dialog('close');
                             elfInsrance.disable();
                         }
                     }).elfinder('instance')
                 }
-            }).parent().css({'zIndex':'11000','top':'100px', 'position' : 'fixed'});
+            }).parent().css({'zIndex':'1111111111'});
         });
-
     }
 }
-
 const rmSelectImage = (button) => {
     if(button.length){
         $('body').on('click', button ,function (e) {
             e.preventDefault();
-            let pr = $(this).parents('.boxImg')
+            let _this = $(this);
+            let pr = $(this).parents('.boxImg');
             let showImg = pr.find('.showImg');
             let uploadImageValue = pr.find('input');
             showSweetAlert(()=>{
                 showImg.attr('src' , '');
-                showImg.attr('alt' , '');
                 uploadImageValue.val('');
-                $(button).addClass('hidden');
+                _this.addClass('hidden');
             })
         });
     }
 }
-
 const getPathImage = (path = null, iamgeDefault = '') => {
     return path ? path : iamgeDefault
 }
@@ -363,7 +354,6 @@ const showS2ByS2 = (select1, select2, nameApi, empty = {id: '',text: 'Chọn'}) 
         }
     })
 }
-//
 //Call API
 const callApiForm = (href,data={},type = "GET",ctype='json') => {
     return new Promise((resolve) => {
@@ -438,7 +428,6 @@ const showS2ByS2Value = (values =[]) => {
     });
 
 }
-
 //focus input, textarea first
 const fousFirstForm = (form) => {
     $(form).find('input:not([type="file"]), textarea').first().focus();
@@ -738,7 +727,6 @@ const showSweetAlert = (cb = () => {}, text = "Bạn có chắc muốn thực hi
         }
     })
 }
-
 //Show popup sweetalert Textarea
 const showSweetAlertArea = (cb = () => {}, text = "Nội dung") => {
     Swal.fire({
@@ -904,7 +892,7 @@ const createButton = (types = ["","","",""], item,controller, className) => {
         default:
             break;
     }
-    return `<a ${types[3] ? types[3] :''} data-href="${webAdminUrl}/${controller}/${types[1]}/${item.id}" href="${webAdminUrl}/${controller}/${types[1]}/${item.id}" ${types[2] ? 'data-get="'+webAdminUrl+'/'+controller+'/'+types[2]+'/'+item.id+'"' : ''} class="btn btn-hnn btn-sm btn-hnn-${color} ${action}${className}"><span title="${title}" ><i class="fas fa-${icon}"></i></span></a>`
+    return `<a ${types[3] ? types[3] :''} data-href="${webAdminUri}/${controller}/${types[1]}/${item.id}" href="${webAdminUri}/${controller}/${types[1]}/${item.id}" ${types[2] ? 'data-get="'+webAdminUri+'/'+controller+'/'+types[2]+'/'+item.id+'"' : ''} class="btn btn-hnn btn-sm btn-hnn-${color} ${action}${className}"><span title="${title}" ><i class="fas fa-${icon}"></i></span></a>`
 }
 // Show button update
 const showActionButton = (item, controller, className, typeBtn = {
@@ -950,12 +938,10 @@ const showActionButton = (item, controller, className, typeBtn = {
 
     return btnAction;
 }
-
 // Show Button View
 const showButtonView = (item,controller,className) => {
     return createButton([1, 'view' ,'getsingle'],item,controller,className);
 }
-
 // Show Button Edit
 const showButtonEdit = (item,controller,className) => {
     return createButton([2, 'view' ,'getsingle'],item,controller,className);
@@ -964,8 +950,6 @@ const showButtonEdit = (item,controller,className) => {
 const showButtonRestore = (item,controller,className) => {
     return createButton([6, 'restore' ,''],item,controller,className);
 }
-
-
 // Show button updatedetail
 const showActionDetailButton = (item, controller, className, typeBtn = {
     u: true,
@@ -1538,6 +1522,80 @@ const changeSort = (_this,dir) => {
             $(_this).attr('dir',1).find('i').removeClass([ "fa-sort", "fa-sort-up" ]).addClass('fa-sort-down')
             break;
         }
+
+    }
+}
+
+const ckEditorLoader = (box = false) => {
+
+    if(box){
+        $(box).find('textarea.boxeditor').ckeditor(configCkedior);
+        $(box).find('textarea.boxeditor').each(function () {
+            let name = $(this).attr('name');
+            let isBBCodeBuiltIn = !!CKEDITOR.plugins.get( 'bbcode' );
+            let editorElement = CKEDITOR.instances[name];
+            if(editorElement){
+                if ( isBBCodeBuiltIn ) {
+                    editorElement.setHtml();
+                }
+                editorElement.on('change', function() { 
+                    CKEDITOR.instances[name].updateElement()
+                });
+            }
+        });
+
+        let desConfigCkedior = configCkedior;
+        desConfigCkedior.height = 200;
+
+        $(box).find('textarea.deseditor').ckeditor(desConfigCkedior);
+        $(box).find('textarea.deseditor').each(function () {
+            let name = $(this).attr('name');
+            let isBBCodeBuiltIn = !!CKEDITOR.plugins.get( 'bbcode' );
+            let editorElement = CKEDITOR.instances[name];
+            if(editorElement){
+                if ( isBBCodeBuiltIn ) {
+                    editorElement.setHtml();
+                }
+                editorElement.on('change', function() { 
+                    CKEDITOR.instances[name].updateElement()
+                });
+            }
+        })
+
+    }else{
+        $('textarea.boxeditor').ckeditor(configCkedior);
+        $('textarea.boxeditor').each(function () {
+            let name = $(this).attr('name');
+            let isBBCodeBuiltIn = !!CKEDITOR.plugins.get( 'bbcode' );
+            let editorElement = CKEDITOR.instances[name];
+            if(editorElement){
+                if ( isBBCodeBuiltIn ) {
+                    editorElement.setHtml();
+                }
+                editorElement.on('change', function() { 
+                    CKEDITOR.instances[name].updateElement()
+                });
+            }
+        });
+
+        let desConfigCkedior = configCkedior;
+        desConfigCkedior.height = 200;
+
+        $('textarea.deseditor').ckeditor(desConfigCkedior);
+        $('textarea.deseditor').each(function () {
+            let name = $(this).attr('name');
+            let isBBCodeBuiltIn = !!CKEDITOR.plugins.get( 'bbcode' );
+            let editorElement = CKEDITOR.instances[name];
+            if(editorElement){
+                if ( isBBCodeBuiltIn ) {
+                    editorElement.setHtml();
+                }
+                editorElement.on('change', function() { 
+                    CKEDITOR.instances[name].updateElement()
+                });
+            }
+        });
+
 
     }
 }

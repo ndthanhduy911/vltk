@@ -111,7 +111,6 @@ class AdminsLangCore extends \BackendController{
         $this->view->title = $title;
         $this->view->btitle = $this->title;
         $this->view->cler = $this->cler;
-        $this->assets->addJs(WEB_URI.'/elfinder/js/require.min.js');
         $this->assets->addJs(WEB_URI.'/assets/backend/js/modules/admins/templates/views.js');
         return $this->view->pick('templates/views');
     }

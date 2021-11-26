@@ -25,7 +25,7 @@ class MajorsLangForm extends \Phalcon\Forms\Form
         $content = new Textarea('content');
         $content->setLabel('<i class="fas fa-newspaper mr-1"></i> Giới thiệu chung');
         $attr = [
-            'class' => 'form-control form-control-sm',
+            'class' => 'form-control form-control-sm boxeditor',
             'placeholder' => 'Giới thiệu chung',
             'data-error' => "Thông tin chưa hợp lệ"
         ];
@@ -38,7 +38,7 @@ class MajorsLangForm extends \Phalcon\Forms\Form
         $stdout = new Textarea('stdout');
         $stdout->setLabel('<i class="fas fa-newspaper mr-1"></i> Chuẩn đầu ra');
         $attr = [
-            'class' => 'form-control form-control-sm',
+            'class' => 'form-control form-control-sm boxeditor',
             'placeholder' => 'Chuẩn đầu ra',
             'data-error' => "Thông tin chưa hợp lệ"
         ];
@@ -51,7 +51,7 @@ class MajorsLangForm extends \Phalcon\Forms\Form
         $curriculum = new Textarea('curriculum');
         $curriculum->setLabel('<i class="fas fa-newspaper mr-1"></i> Khung chương trình đào tạo');
         $attr = [
-            'class' => 'form-control form-control-sm',
+            'class' => 'form-control form-control-sm boxeditor',
             'placeholder' => 'Khung chương trình đào tạo',
             'data-error' => "Thông tin chưa hợp lệ"
         ];
@@ -64,7 +64,7 @@ class MajorsLangForm extends \Phalcon\Forms\Form
         $prospects = new Textarea('prospects');
         $prospects->setLabel('<i class="fas fa-newspaper mr-1"></i> Triển vọng nghề nghiệp');
         $attr = [
-            'class' => 'form-control form-control-sm',
+            'class' => 'form-control form-control-sm boxeditor',
             'placeholder' => 'Triển vọng nghề nghiệp',
             'data-error' => "Thông tin chưa hợp lệ"
         ];
@@ -77,7 +77,7 @@ class MajorsLangForm extends \Phalcon\Forms\Form
         $fee = new Textarea('fee');
         $fee->setLabel('<i class="fas fa-newspaper mr-1"></i> Học phí - Học bổng - Môi trường học');
         $attr = [
-            'class' => 'form-control form-control-sm',
+            'class' => 'form-control form-control-sm boxeditor',
             'placeholder' => 'Học phí - Học bổng - Môi trường học',
             'data-error' => "Thông tin chưa hợp lệ"
         ];
@@ -90,7 +90,7 @@ class MajorsLangForm extends \Phalcon\Forms\Form
         $researches = new Textarea('researches');
         $researches->setLabel('<i class="fas fa-newspaper mr-1"></i> Nghiên cứu ứng dụng');
         $attr = [
-            'class' => 'form-control form-control-sm',
+            'class' => 'form-control form-control-sm boxeditor',
             'placeholder' => 'Nghiên cứu ứng dụng',
             'data-error' => "Thông tin chưa hợp lệ"
         ];
@@ -103,7 +103,7 @@ class MajorsLangForm extends \Phalcon\Forms\Form
         $students = new Textarea('students');
         $students->setLabel('<i class="fas fa-newspaper mr-1"></i> Hoạt động sinh viên');
         $attr = [
-            'class' => 'form-control form-control-sm',
+            'class' => 'form-control form-control-sm boxeditor',
             'placeholder' => 'Hoạt động sinh viên',
             'data-error' => "Thông tin chưa hợp lệ"
         ];
@@ -116,7 +116,7 @@ class MajorsLangForm extends \Phalcon\Forms\Form
         $alumni = new Textarea('alumni');
         $alumni->setLabel('<i class="fas fa-newspaper mr-1"></i> Sinh viên và cựu sinh viên tiêu biểu');
         $attr = [
-            'class' => 'form-control form-control-sm',
+            'class' => 'form-control form-control-sm boxeditor',
             'placeholder' => 'Sinh viên và cựu sinh viên tiêu biểu',
             'data-error' => "Thông tin chưa hợp lệ"
         ];
@@ -129,7 +129,7 @@ class MajorsLangForm extends \Phalcon\Forms\Form
         $rpartners = new Textarea('rpartners');
         $rpartners->setLabel('<i class="fas fa-newspaper mr-1"></i> Đánh giá của nhà tuyển dụng');
         $attr = [
-            'class' => 'form-control form-control-sm',
+            'class' => 'form-control form-control-sm boxeditor',
             'placeholder' => 'Đánh giá của nhà tuyển dụng',
             'data-error' => "Thông tin chưa hợp lệ"
         ];

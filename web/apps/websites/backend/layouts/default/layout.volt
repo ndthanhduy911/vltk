@@ -24,6 +24,9 @@
     <link rel="stylesheet" href="<?= WEB_URI.'/assets/backend/dist/' ?>plugins/select2/css/select2.min.css">  
     <link rel="stylesheet" href="<?= WEB_URI.'/assets/backend/dist/' ?>plugins/smoothproducts/css/smoothproducts.css">  
     <link rel="stylesheet" href="<?= WEB_URI.'/assets/backend/dist/' ?>plugins/overlayScrollbars/css/OverlayScrollbars.min.css"/>
+    <link rel="stylesheet" href="<?= WEB_URI.'/assets/backend/dist/' ?>plugins/jquery-ui/jquery-ui.min.css">
+    <link rel="stylesheet" href="<?= WEB_URI.'/assets/backend/dist/' ?>plugins/elFinder/css/elfinder.min.css">
+    <link rel="stylesheet" href="<?= WEB_URI.'/assets/backend/dist/' ?>plugins/elFinder/css/theme.css">
     <link rel="stylesheet" href="<?= WEB_URI.'/assets/backend/dist/' ?>/css/adminlte.min.css">
     <link rel="stylesheet" href="<?= WEB_URI.'/assets/backend/' ?>material-dashboard.css?v=<?= VS_SCRIPT ?>">
     <link rel="stylesheet" href="<?= WEB_URI.'/assets/backend/' ?>custom.css?v=<?= VS_SCRIPT ?>">
@@ -41,6 +44,13 @@
         </div>
         {{ partial('footer') }}
     </div>
+    <script>
+        const webAdminUrl = "<?= WEB_ADMIN_URL; ?>";
+        const webAdminUri = "<?= WEB_ADMIN_URI; ?>";
+        const webUrl = window.location.origin;
+        const webUri = "";
+        const singleCore = '#singleCore';
+    </script>
     <script src="<?= WEB_URI.'/assets/backend/dist/' ?>plugins/jquery/jquery.min.js"></script>
     <script src="<?= WEB_URI.'/assets/backend/dist/' ?>plugins/jquery-ui/jquery-ui.min.js"></script>
     <script src="<?= WEB_URI.'/assets/backend/dist/' ?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -56,7 +66,10 @@
     <script src="<?= WEB_URI.'/assets/backend/dist/' ?>plugins/barcode/jquery-barcode.min.js"></script>
     <script src="<?= WEB_URI.'/assets/backend/dist/' ?>plugins/smoothproducts/js/smoothproducts.min.js"></script>
     <script src="<?= WEB_URI.'/assets/backend/dist/' ?>plugins/ckeditor/ckeditor.js"></script>
-    <script src="<?= WEB_URI.'/assets/backend/dist/' ?>plugins/ckeditor/samples/js/sample.js"></script>
+    <script src="<?= WEB_URI.'/assets/backend/dist/' ?>plugins/ckeditor/init.js"></script>
+    <script src="<?= WEB_URI.'/assets/backend/dist/' ?>plugins/ckeditor/adapters/jquery.js"></script>
+    <script src="<?= WEB_URI.'/assets/backend/dist/' ?>plugins/elFinder/js/elfinder.min.js"></script>
+    <script src="<?= WEB_URI.'/assets/backend/dist/' ?>plugins/elFinder/js/i18n/elfinder.vi.js"></script>    
     <script src="<?= WEB_URI.'/assets/backend/' ?>js/callapi.js?v=<?= VS_SCRIPT ?>"></script>
     <script src="<?= WEB_URI.'/assets/backend/' ?>js/define.js?v=<?= VS_SCRIPT ?>"></script>
     <script src="<?= WEB_URI.'/assets/backend/' ?>js/definechartjs.js?v=<?= VS_SCRIPT ?>"></script>

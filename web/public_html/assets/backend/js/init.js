@@ -3,6 +3,7 @@ $(document).ready(function () {
 	select2Loader();
 	dateRangePickerLoader();
 	numberLoaderList();
+	ckEditorLoader();
 	bsCustomFileInput.init();
 
 	$('.nav-sidebar li.nav-item.has-treeview').each((index, elemnt) => {

@@ -38,7 +38,7 @@ class PostsLangForm extends \Phalcon\Forms\Form
         $content = new Textarea('content');
         $content->setLabel('<i class="fas fa-newspaper mr-1"></i> Nội dung');
         $attr = [
-            'class' => 'form-control form-control-sm',
+            'class' => 'form-control form-control-sm boxeditor',
             'placeholder' => 'Nội dung',
             'data-error' => "Thông tin chưa hợp lệ"
         ];
