@@ -154,7 +154,7 @@
             {% for staff in staffs %}
             <div class="col-md-4">
                 <div class="image-box team-member shadow-2 mb-20">
-                    <div class="overlay-container rounded overlay-visible">
+                    <div class="overlay-container border rounded overlay-visible">
                         <img class="grow" width="100%" src="{{ helper.getLinkImage(staff.image,'/assets/frontend/images/education.jpg') }}" alt="{{staff.title}}">
                         <div class="overlay-bottom">
                             <div class="text p-0">

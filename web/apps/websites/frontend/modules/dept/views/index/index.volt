@@ -139,7 +139,7 @@
             {% for staff in staffs %}
             <div class="col-md-4">
                 <div class="image-box team-member shadow-2 mb-20">
-                    <div class="overlay-container rounded overlay-visible">
+                    <div class="overlay-container border rounded overlay-visible">
                         <img width="100%" class="object-fit-fill grow" src="{{ helper.getLinkImage(staff.image,'/img/default3.jpg') }}" alt="{{staff.title}}">
                         <div class="overlay-bottom">
                             <div class="text p-0">
