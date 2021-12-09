@@ -65,7 +65,7 @@
 <script src="<?= WEB_URI ?>/assets/frontend/plugins/countTo/jquery.countTo.js"></script>
 <script src="<?= WEB_URI ?>/assets/frontend/plugins/slick/slick.min.js"></script>
 <script src="<?= WEB_URI ?>/assets/frontend/plugins/moment.min.js"></script>
-<script src="<?= WEB_URI ?>/assets/frontend/js/define.js"></script>
+<script src="<?= WEB_URI ?>/assets/frontend/js/define.js?v=1.0.0"></script>
 <script src="<?= WEB_URI ?>/assets/frontend/js/apicall.js"></script>
 <script src="<?= WEB_URI ?>/assets/frontend/js/template.js"></script>
 {{ assets.outputJs() }}

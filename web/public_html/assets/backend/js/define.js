@@ -1527,11 +1527,11 @@ const changeSort = (_this,dir) => {
 }
 
 const ckEditorLoader = (box = false) => {
-
     if(box){
         $(box).find('textarea.boxeditor').ckeditor(configCkedior);
         $(box).find('textarea.boxeditor').each(function () {
-            let name = $(this).attr('name');
+            let name = $(this).attr('id');
+            name = name ? name : $(this).attr('name')
             let isBBCodeBuiltIn = !!CKEDITOR.plugins.get( 'bbcode' );
             let editorElement = CKEDITOR.instances[name];
             if(editorElement){
@@ -1549,7 +1549,8 @@ const ckEditorLoader = (box = false) => {
 
         $(box).find('textarea.deseditor').ckeditor(desConfigCkedior);
         $(box).find('textarea.deseditor').each(function () {
-            let name = $(this).attr('name');
+            let name = $(this).attr('id');
+            name = name ? name : $(this).attr('name')
             let isBBCodeBuiltIn = !!CKEDITOR.plugins.get( 'bbcode' );
             let editorElement = CKEDITOR.instances[name];
             if(editorElement){
@@ -1565,7 +1566,8 @@ const ckEditorLoader = (box = false) => {
     }else{
         $('textarea.boxeditor').ckeditor(configCkedior);
         $('textarea.boxeditor').each(function () {
-            let name = $(this).attr('name');
+            let name = $(this).attr('id');
+            name = name ? name : $(this).attr('name')
             let isBBCodeBuiltIn = !!CKEDITOR.plugins.get( 'bbcode' );
             let editorElement = CKEDITOR.instances[name];
             if(editorElement){
@@ -1583,7 +1585,8 @@ const ckEditorLoader = (box = false) => {
 
         $('textarea.deseditor').ckeditor(desConfigCkedior);
         $('textarea.deseditor').each(function () {
-            let name = $(this).attr('name');
+            let name = $(this).attr('id');
+            name = name ? name : $(this).attr('name')
             let isBBCodeBuiltIn = !!CKEDITOR.plugins.get( 'bbcode' );
             let editorElement = CKEDITOR.instances[name];
             if(editorElement){
@@ -1595,7 +1598,5 @@ const ckEditorLoader = (box = false) => {
                 });
             }
         });
-
-
     }
 }
