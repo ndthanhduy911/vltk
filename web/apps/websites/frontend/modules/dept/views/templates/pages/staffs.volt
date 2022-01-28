@@ -197,7 +197,7 @@
                         <div class="row">
                             <div class="col-md-3 col-lg-3">
                                 <div class="overlay-container overlay-visible">
-                                    <img class="grow" width="100%" src="{{ helper.getLinkImage(staff.image,'/assets/frontend/images/teams.jpg') }}" alt="{{ staff.title }}">
+                                    <img class="grow" width="100%" src="{{ helper.getLinkImage(staff.image,'/img/default3.jpg') }}" alt="{{ staff.title }}">
                                 </div>
                             </div>
                             <div class="col-md-9 col-lg-9">
