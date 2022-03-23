@@ -58,7 +58,7 @@ CKEDITOR.on('dialogDefinition', function (event) {
                             url: webAdminUri+'/media/connector',
                             lang:'vi',
                             getFileCallback: function (file) {
-                                var url = file.url.replace(window.location.origin+'/static/images/', staticImageUrl);
+                                var url = file.url.replace(window.location.origin+'/static/images/', staticUploadUrl);
                                 var dialog = CKEDITOR.dialog.getCurrent();
                                 if (dialogName == 'image') {
                                     var urlObj = 'txtUrl';

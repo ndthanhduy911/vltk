@@ -47,6 +47,7 @@
     <script>
         const webAdminUrl = "<?= WEB_ADMIN_URL; ?>";
         const webAdminUri = "<?= WEB_ADMIN_URI; ?>";
+        const staticUploadUrl = "<?= WEB_UPLOAD_URL; ?>";
         const webUrl = window.location.origin;
         const webUri = "";
         const singleCore = '#singleCore';

@@ -112,7 +112,7 @@
                     <img src="{{ helper.getLinkImage(dept_item.image,'/img/default2.jpg') }}" class="grow h-100" alt="{{ dept_item.title }}">
                     <div class="overlay-bottom hidden-xs">
                         <div class="text">
-                            <a href="{{ constant('WEB_URL')~'/'~dept_item.slug }}">{{ dept_item.title }}</a>
+                            <a href="{{ dept_item.links ? dept_item.links : constant('WEB_URL')~'/'~dept_item.slug }}">{{ dept_item.title }}</a>
                         </div>
                     </div>
                 </div>
